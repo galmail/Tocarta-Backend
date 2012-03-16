@@ -1,0 +1,20 @@
+# Some comments for testing
+
+comment1_plato1_aperitivos_main_menu_sushibar_demo_sushibar_chain:
+ dish_id: <%= ActiveRecord::Fixtures.identify(:plato1_aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
+ name: juan
+ description: Sushi excelente! me ha gustado mucho!
+ rating: 10
+ approved: true
+comment2_plato1_aperitivos_main_menu_sushibar_demo_sushibar_chain:
+ dish_id: <%= ActiveRecord::Fixtures.identify(:plato1_aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
+ name: maria
+ description: Interesante combinación de ingredientes. Lo recomiendo.
+ rating: 8
+ approved: true
+comment3_plato1_aperitivos_main_menu_sushibar_demo_sushibar_chain:
+ dish_id: <%= ActiveRecord::Fixtures.identify(:plato1_aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
+ name: lola
+ description: Sushi sencillo pero muy rico, aunque poca cantidad.
+ rating: 6
+ approved: true

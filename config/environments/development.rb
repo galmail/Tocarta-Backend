@@ -1,5 +1,14 @@
 TocartaAdmin::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
+  
+  Paperclip::Attachment.default_options.merge!({
+    :storage => :s3,
+    :bucket => ENV['S3_BUCKET'],
+    :s3_credentials => {
+      :access_key_id => ENV['S3_KEY'],
+      :secret_access_key => ENV['S3_SECRET']
+    }
+  })
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development

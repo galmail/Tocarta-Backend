@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame 
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title>Tocarta API Testing</title>
+  <meta name="description" content="" />
+  <meta name="author" content="tocarta" />
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+  <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+</head>
+
+<body>
+  <div>
+    <header>
+      <h1>API Testing</h1>
+    </header>
+    <div>
+    	
+    	<p>
+    		send_order_url: "services/order.json",<br>
+				validate_license_key: "services/validateLicenseKey.json",<br>
+				confirm_downloaded_images: "services/downloadedImages.json",<br>
+				get_images_to_download: "services/images.json",<br>
+				get_menu: "services/menu.json",<br>
+				get_sent_orders: "services/sent_orders.json",<br>
+				get_sent_order_items: "services/sent_order_items.json",<br>
+				request_bill: "services/request_bill.json",<br>
+				call_waiter: "services/call_waiter.json",<br>
+				checkin_table: "services/checkin_table.json",<br>
+				checkout_table: "services/checkout_table.json",<br>
+				get_survey_questions: "services/survey_questions.json",<br>
+				send_comments: "services/send_comments.json"<br>
+    	</p>
+    	
+    	<h4>Tocarta's Client Methods</h4>
+    	<ul>    		
+    		<li><a href="/cli/c/check_for_updates.json?key=k1t1r1sb">check_for_updates</a></li>
+    		<li><a href="/cli/c/supported_languages.json?key=k1t1r1sb">supported_languages</a></li>
+    		<li><a href="/cli/c/get_num_sections.json?key=k1t1r1sb">get_num_sections</a></li>
+    		<li><a href="/cli/c/load_settings.json?key=k1t1r1sb">load_settings</a></li>
+    		<li><a href="/cli/c/load_menu.json?key=k1t1r1sb">load_menu</a></li>
+    		<li><a href="/cli/c/load_menus.json?key=k1t1r1sb">load_menus</a></li>
+    		<li><a href="/cli/c/load_survey_questions.json?key=k1t1r1sb">load_survey_questions</a></li>
+    		<li><a href="/cli/c/load_sections.json?key=k1t1r1sb&menu_id=412988043">load_sections (menu_id=412988043)</a></li>
+    		<li><a href="/cli/c/load_subsections.json?key=k1t1r1sb">load_subsections</a></li>
+    		<li><a href="/cli/c/load_dishes.json?key=k1t1r1sb&section_id=663356687">load_dishes (section_id=663356687)</a></li>
+    		<li><a href="/cli/c/load_dish_types.json?key=k1t1r1sb">load_dish_types</a></li>
+    		<li><a href="/cli/c/load_comments.json?key=k1t1r1sb">load_comments</a></li>
+    		<li><a href="/cli/c/get_images.json?key=k1t1r1sb&new_images_only=false">get_images (new_images_only=false)</a></li>
+    		<li><a href="/cli/c/call_waiter.json?key=k1t1r1sb">call_waiter</a></li>
+    		<li><a href="/cli/c/request_bill.json?key=k1t1r1sb">request_bill</a></li>
+    		<li><a href="/cli/c/make_an_order.json?key=k1t1r1sb">make_an_order (missing params)</a></li>
+    		<li><a href="/cli/c/send_comment.json?key=k1t1r1sb">send_comment</a></li>
+    	</ul>
+    	<h4>Tocarta's Restaurant Methods</h4>
+    	<ul>
+    		<li><a href="/cli/r/load_tables.json?key=k1t1r1sb">load_tables</a></li>
+    		<li><a href="/cli/r/load_settings.json?key=k1t1r1sb">load_settings</a></li>
+    		<li><a href="/cli/r/get_last_activities.json?key=k1t1r1sb&num_activities=50">get_last_activities (num_activities=50)</a></li>
+    		<li><a href="/cli/r/ack_activity.json?key=k1t1r1sb&activity_id=222">ack_activity (activity_id=222)</a></li>
+    	</ul>
+    	<h4>Tocarta's Restaurant Analytics</h4>
+    	<ul>
+    		<li><a href="/cli/an/comments_rating.json?restaurant_id=111">comments_rating</a></li>
+    		<li><a href="/cli/an/waiters_ack_timing.json?restaurant_id=111">waiters_ack_timing</a></li>
+    		<li><a href="/cli/an/most_order_dishes.json?restaurant_id=111">most_order_dishes</a></li>
+    	</ul>
+    </div>
+
+    <footer>
+     <p>&copy; Copyright 2012 - Tocarta</p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+settings_sushibar_demo_sushibar_chain:
+ restaurant_id: <%= ActiveRecord::Fixtures.identify(:sushibar_demo_sushibar_chain) %>
+ name: SushiBar Demo
+ num_licenses: 4
+ default_language: en
+ 
+settings_sushidaki_vigo_sushidaki_chain:
+ restaurant_id: <%= ActiveRecord::Fixtures.identify(:sushidaki_vigo_sushidaki_chain) %>
+ name: SushiDaki Vigo
+ num_licenses: 6
+ default_language: es

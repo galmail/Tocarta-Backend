@@ -1,4 +1,14 @@
 TocartaAdmin::Application.configure do
+  
+  Paperclip::Attachment.default_options.merge!({
+    :storage => :s3,
+    :bucket => ENV['S3_BUCKET_PRO'],
+    :s3_credentials => {
+      :access_key_id => ENV['S3_KEY_PRO'],
+      :secret_access_key => ENV['S3_SECRET_PRO']
+    }
+  })
+  
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests

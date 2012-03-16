@@ -1,3 +1,8 @@
+This project is the whole backend of Tocarta and serves for 2 purposes:
+
+1. For administration purpose
+2. It gives APIs for all tablets
+
 Environments: Staging and Production
 
 Staging: http://tocarta-admin-staging.herokuapp.com
@@ -8,7 +13,9 @@ Pushing to environments:
 $ heroku push staging master
 $ heroku push production master
 
+If database model has changed:
 
+$ heroku rake db:migrate
 
-
+Also check APIs are working nice at: api.html
 

@@ -1,0 +1,220 @@
+########################################## SUSHI BAR ########################################
+############ SUSHI BAR MAIN MANU ############
+#### Spanish Translation ####
+es_maki_main_menu_restaurant2_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:maki_main_menu_restaurant2_japanese_chain) %>
+ name: Maki
+ locale: es
+
+es_aperitivos_main_menu_restaurant2_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:aperitivos_main_menu_restaurant2_japanese_chain) %>
+ name: Aperitivos
+ locale: es
+ 
+es_sashimi_main_menu_restaurant2_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:sashimi_main_menu_restaurant2_japanese_chain) %>
+ name: Sashimi y Nigiri
+ locale: es
+ 
+es_postres_main_menu_restaurant2_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:postres_main_menu_restaurant2_japanese_chain) %>
+ name: Postres
+ locale: es
+
+#### English Translation #### 
+en_maki_main_menu_restaurant2_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:maki_main_menu_restaurant2_japanese_chain) %>
+ name: Maki
+ locale: en
+
+en_aperitivos_main_menu_restaurant2_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:aperitivos_main_menu_restaurant2_japanese_chain) %>
+ name: Entrees
+ locale: en
+ 
+en_sashimi_main_menu_restaurant2_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:sashimi_main_menu_restaurant2_japanese_chain) %>
+ name: Sashimi and Nigiri
+ locale: en
+ 
+en_postres_main_menu_restaurant2_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:postres_main_menu_restaurant2_japanese_chain) %>
+ name: Desserts
+ locale: en
+ 
+############ SUSHI BAR DAILY MANU ############
+#### Spanish Translation ####
+es_primeros_daily_menu_restaurant2_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:primeros_daily_menu_restaurant2_japanese_chain) %>
+ name: Primeros
+ locale: es
+
+es_segundos_daily_menu_restaurant2_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:segundos_daily_menu_restaurant2_japanese_chain) %>
+ name: Segundos
+ locale: es
+ 
+es_postres_daily_menu_restaurant2_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:postres_daily_menu_restaurant2_japanese_chain) %>
+ name: Postres
+ locale: es
+
+#### English Translation #### 
+en_primeros_daily_menu_restaurant2_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:primeros_daily_menu_restaurant2_japanese_chain) %>
+ name: Firsts
+ locale: en
+
+en_segundos_daily_menu_restaurant2_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:segundos_daily_menu_restaurant2_japanese_chain) %>
+ name: Seconds
+ locale: en
+ 
+en_postres_daily_menu_restaurant2_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:postres_daily_menu_restaurant2_japanese_chain) %>
+ name: Desserts
+ locale: en
+
+
+############ JAPANESE BAR MAIN MANU ############
+
+es_bebidas_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:bebidas_main_menu_restaurant1_japanese_chain) %>
+ name: Bebidas
+ locale: es
+es_ensaladas_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:ensaladas_main_menu_restaurant1_japanese_chain) %>
+ name: Ensaladas
+ locale: es
+es_sopas_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:sopas_main_menu_restaurant1_japanese_chain) %>
+ name: Sopas
+ locale: es
+es_entrantes_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:entrantes_main_menu_restaurant1_japanese_chain) %>
+ name: Entrantes
+ locale: es
+es_sushi_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:sushi_main_menu_restaurant1_japanese_chain) %>
+ name: Sushi
+ locale: es
+ 
+#### English Translation #### 
+ 
+en_bebidas_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:bebidas_main_menu_restaurant1_japanese_chain) %>
+ name: Beverages
+ locale: en
+en_ensaladas_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:ensaladas_main_menu_restaurant1_japanese_chain) %>
+ name: Salads
+ locale: en
+en_sopas_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:sopas_main_menu_restaurant1_japanese_chain) %>
+ name: Soup
+ locale: en
+en_entrantes_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:entrantes_main_menu_restaurant1_japanese_chain) %>
+ name: Starters
+ locale: en
+en_sushi_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:sushi_main_menu_restaurant1_japanese_chain) %>
+ name: Sushi
+ locale: en
+
+#### Spanish Translation ####
+
+###### Spanish Main Menu ######
+
+es_bebidas_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:bebidas_main_menu_restaurant1_japanese_chain) %>
+ name: Bebidas
+ locale: es
+es_ensaladas_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:ensaladas_main_menu_restaurant1_japanese_chain) %>
+ name: Ensaladas
+ locale: es
+es_paellas_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:paellas_main_menu_restaurant1_japanese_chain) %>
+ name: Paellas
+ locale: es
+es_carnes_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:carnes_main_menu_restaurant1_japanese_chain) %>
+ name: Carnes
+ locale: es
+es_pastas_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:pastas_main_menu_restaurant1_japanese_chain) %>
+ name: Pastas
+ locale: es
+es_postres_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:postres_main_menu_restaurant1_japanese_chain) %>
+ name: Postres
+ locale: es
+ 
+###### Spanish Daily Menu ######
+
+es_bebidas_daily_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:bebidas_daily_menu_restaurant1_japanese_chain) %>
+ name: Bebidas
+ locale: es
+es_primeros_daily_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:primeros_daily_menu_restaurant1_japanese_chain) %>
+ name: Primeros
+ locale: es
+es_segundos_daily_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:segundos_daily_menu_restaurant1_japanese_chain) %>
+ name: Segundos
+ locale: es
+es_postres_daily_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:postres_daily_menu_restaurant1_japanese_chain) %>
+ name: Postres
+ locale: es
+
+#### English Translation ####
+
+###### Spanish Main Menu ######
+
+en_bebidas_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:bebidas_main_menu_restaurant1_japanese_chain) %>
+ name: Beverages
+ locale: en
+en_ensaladas_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:ensaladas_main_menu_restaurant1_japanese_chain) %>
+ name: Salads
+ locale: en
+en_paellas_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:paellas_main_menu_restaurant1_japanese_chain) %>
+ name: Paellas
+ locale: en
+en_carnes_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:carnes_main_menu_restaurant1_japanese_chain) %>
+ name: Steak
+ locale: en
+en_pastas_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:pastas_main_menu_restaurant1_japanese_chain) %>
+ name: Spaghettis
+ locale: en
+en_postres_main_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:postres_main_menu_restaurant1_japanese_chain) %>
+ name: Deserts
+ locale: en
+ 
+###### Spanish Daily Menu ######
+
+en_bebidas_daily_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:bebidas_daily_menu_restaurant1_japanese_chain) %>
+ name: Beverages
+ locale: en
+en_primeros_daily_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:primeros_daily_menu_restaurant1_japanese_chain) %>
+ name: Entrants
+ locale: en
+en_segundos_daily_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:segundos_daily_menu_restaurant1_japanese_chain) %>
+ name: Main Dishes
+ locale: en
+en_postres_daily_menu_restaurant1_japanese_chain:
+ section_id: <%= ActiveRecord::Fixtures.identify(:postres_daily_menu_restaurant1_japanese_chain) %>
+ name: Deserts
+ locale: en
+

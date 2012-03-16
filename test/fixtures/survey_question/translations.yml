@@ -1,0 +1,19 @@
+############ Japanese Main Menu ############
+
+#### Spanish Translation ####
+
+es_food_question_sushibar_chain:
+ survey_question_id: <%= ActiveRecord::Fixtures.identify(:food_question_sushibar_chain) %>
+ name: Food Question
+ description: ¿Qué te ha parecido la comida?
+ locale: es
+es_experience_question_sushibar_chain:
+ survey_question_id: <%= ActiveRecord::Fixtures.identify(:experience_question_sushibar_chain) %>
+ name: Experience Question
+ description: Tu experiencia en nuestro establecimiento
+ locale: es
+es_service_question_sushibar_chain:
+ survey_question_id: <%= ActiveRecord::Fixtures.identify(:service_question_sushibar_chain) %>
+ name: Service Question
+ description: Trato recibido por nuestro personal
+ locale: es

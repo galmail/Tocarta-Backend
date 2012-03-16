@@ -1,0 +1,7 @@
+sushibar_demo_sushibar_chain:
+ chain_id: <%= ActiveRecord::Fixtures.identify(:sushibar_chain) %>
+ name: SushiBar Demo
+
+sushidaki_vigo_sushidaki_chain:
+ chain_id: <%= ActiveRecord::Fixtures.identify(:sushidaki_chain) %>
+ name: SushiDaki Vigo

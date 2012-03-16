@@ -1,0 +1,19 @@
+###### SushiBar Menus ######
+
+main_menu_sushibar_demo_sushibar_chain:
+ restaurant_id: <%= ActiveRecord::Fixtures.identify(:sushibar_demo_sushibar_chain) %>
+ name: SushiBar Main Menu
+ menu_type: main
+
+daily_menu_sushibar_demo_sushibar_chain:
+ restaurant_id: <%= ActiveRecord::Fixtures.identify(:sushibar_demo_sushibar_chain) %>
+ name: SushiBar Daily Menu
+ menu_type: daily
+ price: 13.50
+ 
+###### Sushidaki Menus ######
+
+main_menu_sushidaki_vigo_sushidaki_chain:
+ restaurant_id: <%= ActiveRecord::Fixtures.identify(:sushidaki_vigo_sushidaki_chain) %>
+ name: SushiDaki Main Menu
+ menu_type: main

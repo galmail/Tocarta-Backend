@@ -3,9 +3,12 @@
 
 RailsAdmin.config do |config|
 
+  config.authorize_with :cancan
+
+
   # If your default_local is different from :en, uncomment the following 2 lines and set your default locale here:
-  # require 'i18n'
-  # I18n.default_locale = :de
+  require 'i18n'
+  I18n.default_locale = :es
 
   config.current_user_method { current_user } # auto-generated
 
@@ -16,7 +19,7 @@ RailsAdmin.config do |config|
   # config.audit_with :paper_trail, User
 
   # Set the admin name here (optional second array element will appear in a beautiful RailsAdmin red ©)
-  config.main_app_name = ['Tocarta Admin', 'Admin']
+  config.main_app_name = ['Tocarta', 'Admin']
   # or for a dynamic name:
   # config.main_app_name = Proc.new { |controller| [Rails.application.engine_name.titleize, controller.params['action'].titleize] }
 

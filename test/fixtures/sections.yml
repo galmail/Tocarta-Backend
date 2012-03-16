@@ -1,0 +1,77 @@
+
+######################## SushiBar Menus ########################
+
+###### Sushi Bar Main Menu ######
+
+aperitivos_main_menu_sushibar_demo_sushibar_chain:
+ menu_id: <%= ActiveRecord::Fixtures.identify(:main_menu_sushibar_demo_sushibar_chain) %>
+ name: Aperitivos
+ active: true
+ position: 1
+ 
+maki_main_menu_sushibar_demo_sushibar_chain:
+ menu_id: <%= ActiveRecord::Fixtures.identify(:main_menu_sushibar_demo_sushibar_chain) %>
+ name: Maki
+ active: true
+ position: 3
+
+sashimi_main_menu_sushibar_demo_sushibar_chain:
+ menu_id: <%= ActiveRecord::Fixtures.identify(:main_menu_sushibar_demo_sushibar_chain) %>
+ name: Sashimi y Nigiri
+ active: true
+ position: 2
+ 
+postres_main_menu_sushibar_demo_sushibar_chain:
+ menu_id: <%= ActiveRecord::Fixtures.identify(:main_menu_sushibar_demo_sushibar_chain) %>
+ name: Postres
+ active: true
+ position: 4
+
+###### Sushi Bar Daily Menu ######
+
+primeros_daily_menu_sushibar_demo_sushibar_chain:
+ menu_id: <%= ActiveRecord::Fixtures.identify(:daily_menu_sushibar_demo_sushibar_chain) %>
+ name: Primeros
+ active: true
+ position: 1
+segundos_daily_menu_sushibar_demo_sushibar_chain:
+ menu_id: <%= ActiveRecord::Fixtures.identify(:daily_menu_sushibar_demo_sushibar_chain) %>
+ name: Segundos
+ active: true
+ position: 2
+postres_daily_menu_sushibar_demo_sushibar_chain:
+ menu_id: <%= ActiveRecord::Fixtures.identify(:daily_menu_sushibar_demo_sushibar_chain) %>
+ name: Postres
+ active: true
+ position: 3
+ 
+######################## Sushidaki Menus ########################
+
+###### Sushidaki Main Menu ######
+
+entrantes_main_menu_sushidaki_vigo_sushidaki_chain:
+ menu_id: <%= ActiveRecord::Fixtures.identify(:main_menu_sushidaki_vigo_sushidaki_chain) %>
+ name: Entrantes
+ active: true
+ position: 1
+arroces_main_menu_sushidaki_vigo_sushidaki_chain:
+ menu_id: <%= ActiveRecord::Fixtures.identify(:main_menu_sushidaki_vigo_sushidaki_chain) %>
+ name: Arroces
+ active: true
+ position: 2
+brochetas_main_menu_sushidaki_vigo_sushidaki_chain:
+ menu_id: <%= ActiveRecord::Fixtures.identify(:main_menu_sushidaki_vigo_sushidaki_chain) %>
+ name: Brochetas
+ active: true
+ position: 3
+wokgrillpasta_main_menu_sushidaki_vigo_sushidaki_chain:
+ menu_id: <%= ActiveRecord::Fixtures.identify(:main_menu_sushidaki_vigo_sushidaki_chain) %>
+ name: Wok, Grill y Pasta
+ active: true
+ position: 4
+
+
+
+
+
+

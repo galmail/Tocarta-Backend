@@ -1,0 +1,29 @@
+##### Sushibar #####
+
+food_question_sushibar_chain:
+ chain_id: <%= ActiveRecord::Fixtures.identify(:sushibar_chain) %>
+ name: Food Question
+ description: Food Question Description
+experience_question_sushibar_chain:
+ chain_id: <%= ActiveRecord::Fixtures.identify(:sushibar_chain) %>
+ name: Experience Question
+ description: Experience Question Description
+service_question_sushibar_chain:
+ chain_id: <%= ActiveRecord::Fixtures.identify(:sushibar_chain) %>
+ name: Service Question
+ description: Service Question Description
+
+##### Sushidaki #####
+
+# food_question_sushidaki_chain:
+ # chain_id: <%= ActiveRecord::Fixtures.identify(:sushidaki_chain) %>
+ # name: Food Question
+ # description: Food Question Description
+# experience_question_sushidaki_chain:
+ # chain_id: <%= ActiveRecord::Fixtures.identify(:sushidaki_chain) %>
+ # name: Experience Question
+ # description: Experience Question Description
+# service_question_sushidaki_chain:
+ # chain_id: <%= ActiveRecord::Fixtures.identify(:sushidaki_chain) %>
+ # name: Service Question
+ # description: Service Question Description

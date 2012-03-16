@@ -1,0 +1,15 @@
+dish_type_vegetariano:
+ name: Vegetariano
+dish_type_picante:
+ name: Picante
+dish_type_nuevo:
+ name: Nuevo
+dish_type_sugerencia:
+ name: Sugerencia del Chef
+dish_type_light:
+ name: Light
+dish_type_apto_para_celiacos:
+ name: Apto para Celiacos
+dish_type_sin_frutos_secos:
+ name: No contiene frutos secos
+

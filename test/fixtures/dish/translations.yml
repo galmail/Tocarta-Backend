@@ -1,0 +1,72 @@
+
+######################## SUSHIBAR MAIN MANU ########################
+
+#### SPANISH ####
+
+#### Aperitivos ####
+
+es_plato1_aperitivos_main_menu_sushibar_demo_sushibar_chain:
+ dish_id: <%= ActiveRecord::Fixtures.identify(:plato1_aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
+ name: Atún Abrasado
+ description: Ruedas de atún abrasado a la pimienta
+ locale: es
+es_plato2_aperitivos_main_menu_sushibar_demo_sushibar_chain:
+ dish_id: <%= ActiveRecord::Fixtures.identify(:plato2_aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
+ name: Tori Karaage
+ description: Pollo frito marinado al estilo japonés
+ locale: es
+es_plato3_aperitivos_main_menu_sushibar_demo_sushibar_chain:
+ dish_id: <%= ActiveRecord::Fixtures.identify(:plato3_aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
+ name: Empanadillas 
+ description: Empanadillas de cerdo fritas
+ locale: es
+es_plato4_aperitivos_main_menu_sushibar_demo_sushibar_chain:
+ dish_id: <%= ActiveRecord::Fixtures.identify(:plato4_aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
+ name: Vieiras rebozadas
+ description: Vieiras rebozadas con un toque de soja
+ locale: es
+es_plato5_aperitivos_main_menu_sushibar_demo_sushibar_chain:
+ dish_id: <%= ActiveRecord::Fixtures.identify(:plato5_aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
+ name: Crispy Tofu
+ description: Delicados cuadritos de tofu crujiente
+ locale: es
+es_plato6_aperitivos_main_menu_sushibar_demo_sushibar_chain:
+ dish_id: <%= ActiveRecord::Fixtures.identify(:plato6_aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
+ name: Tarta de Salmón
+ description: En un bollo francés con queso crema y ensalada
+ locale: es
+
+#### Makis ####
+
+es_plato1_maki_main_menu_sushibar_demo_sushibar_chain:
+ dish_id: <%= ActiveRecord::Fixtures.identify(:plato1_maki_main_menu_sushibar_demo_sushibar_chain) %>
+ name: California
+ description: Roll de aguacate pepino y langostino
+ locale: es
+es_plato2_maki_main_menu_sushibar_demo_sushibar_chain:
+ dish_id: <%= ActiveRecord::Fixtures.identify(:plato2_maki_main_menu_sushibar_demo_sushibar_chain) %>
+ name: King Crab
+ description: Tempurizado de arroz relleno de cangrejo con topping picante
+ locale: es
+es_plato3_maki_main_menu_sushibar_demo_sushibar_chain:
+ dish_id: <%= ActiveRecord::Fixtures.identify(:plato3_maki_main_menu_sushibar_demo_sushibar_chain) %>
+ name: Las Vegas
+ description: Roll tempurizado de salmón y cangrejo adornado con jengibre crujiente
+ locale: es
+
+######################## Sushidaki MAIN MANU ########################
+
+#### SPANISH ####
+
+#### Entrantes ####
+
+es_plato1_entrantes_main_menu_sushidaki_vigo_sushidaki_chain:
+ dish_id: <%= ActiveRecord::Fixtures.identify(:plato1_entrantes_main_menu_sushidaki_vigo_sushidaki_chain) %>
+ name: Sopa Miso Shiru
+ description: Sopa de pasta de soja, cebolletas, algas y tofu.
+ locale: es
+es_plato2_entrantes_main_menu_sushidaki_vigo_sushidaki_chain:
+ dish_id: <%= ActiveRecord::Fixtures.identify(:plato2_entrantes_main_menu_sushidaki_vigo_sushidaki_chain) %>
+ name: Su No Mono
+ description: Ensalada de pepino y pescado.
+ locale: es

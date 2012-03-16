@@ -1,0 +1,8 @@
+# setting_main_menu_restaurant1_american_chain:
+ # menu_id: <%= ActiveRecord::Fixtures.identify(:main_menu_restaurant1_american_chain) %>
+ # name: american main menu settings
+ # priority: 1
+# setting_daily_menu_restaurant1_american_chain:
+ # menu_id: <%= ActiveRecord::Fixtures.identify(:daily_menu_restaurant1_american_chain) %>
+ # name: american daily menu settings
+ # priority: 2

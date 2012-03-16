@@ -53,6 +53,15 @@ TocartaAdmin::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
+  
+  # API for Tocartas
+  match 'cli/c/:action(.:format)', :controller => 'Api::Clients'
+  #match 'cli/r/:action(.:format)', :controller => 'Api::Restaurants'
+  #match 'cli/an/:action(.:format)', :controller => 'Api::Analytics'
+  
+  # Twitter and Facebook
+  #match '/cli/c/twitter/:action(.:format)', :controller => 'Twitter'
+  
 
   # See how all your routes lay out with "rake routes"
 

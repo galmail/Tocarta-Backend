@@ -1,0 +1,44 @@
+#### Sushibar ####
+
+tablet1_sushibar_demo_sushibar_chain:
+ table_id: <%= ActiveRecord::Fixtures.identify(:center_sushibar_demo_sushibar_chain) %>
+ name: tablet1
+ active: true
+ access_key: sushibar1
+ display_size: 1024x768
+ device_brand: Apple
+ device_name: iPad
+ device_os: iOS 4.2
+ 
+tablet2_sushibar_demo_sushibar_chain:
+ table_id: <%= ActiveRecord::Fixtures.identify(:center_sushibar_demo_sushibar_chain) %>
+ name: tablet2
+ active: true
+ access_key: sushibar2
+ display_size: 1024x768
+ device_brand: Apple
+ device_name: iPad2
+ device_os: iOS 5
+
+#### Sushidaki ####
+
+tablet1_sushidaki_vigo_sushidaki_chain:
+ table_id: <%= ActiveRecord::Fixtures.identify(:center_sushidaki_vigo_sushidaki_chain) %>
+ name: tablet1
+ active: true
+ access_key: sushidaki1
+ display_size: 1024x768
+ device_brand: Apple
+ device_name: iPad
+ device_os: iOS 5
+
+tablet2_sushidaki_vigo_sushidaki_chain:
+ table_id: <%= ActiveRecord::Fixtures.identify(:center_sushidaki_vigo_sushidaki_chain) %>
+ name: tablet2
+ active: true
+ access_key: sushidaki2
+ display_size: 1024x768
+ device_brand: Apple
+ device_name: iPad
+ device_os: iOS 5
+
