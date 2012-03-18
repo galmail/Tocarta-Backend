@@ -6,13 +6,13 @@ class Ability
     
     can :access, :rails_admin
     can :manage, :all
-    cannot [:update, :destroy], User, :email => 'username@example.com' #testing
+    #cannot [:update, :destroy], User, :email => 'username@example.com' #testing
     
-    if user.role == "admin"
-      # can :manage, :all
-    else
-      
-    end
+    # if user.role == "admin"
+      # # can :manage, :all
+    # else
+#       
+    # end
     
     
     # Define abilities for the passed in user here. For example:
