@@ -2,6 +2,8 @@ class AccessController < ApplicationController
 
   private
   
+  MAX_COMMENTS_PER_DISH = 10
+  
   def identify_tablet
     @tablet = Tablet.where("access_key = ? AND active = ?", params[:key], true).first
     #@tablet = Tablet.find(:first, :conditions => { :access_key => params[:key] , :active => true })
@@ -38,7 +40,7 @@ class AccessController < ApplicationController
       #activity[:date] = spanish_time if !spanish_time.nil?
   end
   
-  def sort_and_filter(items,sort_attr,filter_attr,reverse_sort)
+  def sort_and_filter(items,sort_attr,filter_attr,reverse_sort,limit)
     sort_attr = sort_attr || :position
     filter_attr = filter_attr || :active
     items.sort_by!{|item|
@@ -48,6 +50,9 @@ class AccessController < ApplicationController
     items.reject!{|item| !item[filter_attr]}
     if !reverse_sort.nil? and reverse_sort==true
       items.reverse!
+    end
+    if !limit.nil?
+      items.slice!(limit..-1)
     end
   end
   

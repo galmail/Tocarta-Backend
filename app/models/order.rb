@@ -4,5 +4,5 @@ class Order < ActiveRecord::Base
   belongs_to :client
 	has_many :order_items
 	has_many :restaurant_activities
-	attr_accessible :note
+	attr_accessible :name, :note, :total, :language, :table_id, :tablet_id, :client_id, :order_items
 end

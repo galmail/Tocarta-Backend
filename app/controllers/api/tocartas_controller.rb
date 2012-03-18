@@ -11,22 +11,22 @@ class Api::TocartasController < AccessController
     # show only active elements
     @menus.each { |menu|
       ##### sorting and filtering sections #####
-      sort_and_filter(menu.sections,nil,nil,nil)
+      sort_and_filter(menu.sections,nil,nil,nil,nil)
       menu.sections.each { |section|
         ##### sorting and filtering dishes of the sections #####
-        sort_and_filter(section.dishes,nil,nil,nil)
+        sort_and_filter(section.dishes,nil,nil,nil,nil)
         section.dishes.each { |dish|
           ##### sorting and filtering comments #####
-          sort_and_filter(dish.comments,:created_at,:approved,true)
+          sort_and_filter(dish.comments,:created_at,:approved,true,MAX_COMMENTS_PER_DISH)
         }
         ##### sorting and filtering subsections #####
-        sort_and_filter(section.subsections,nil,nil,nil)
+        sort_and_filter(section.subsections,nil,nil,nil,nil)
         section.subsections.each { |subsection|
           ##### sorting and filtering dishes of the subsections #####
-          sort_and_filter(subsection.dishes,nil,nil,nil)
+          sort_and_filter(subsection.dishes,nil,nil,nil,nil)
           subsection.dishes.each { |dish|
             ##### sorting and filtering comments #####
-            sort_and_filter(dish.comments,:created_at,:approved,true)
+            sort_and_filter(dish.comments,:created_at,:approved,true,MAX_COMMENTS_PER_DISH)
           }
         }
       }
@@ -40,17 +40,32 @@ class Api::TocartasController < AccessController
     if @tablet.last_menu_sync!=nil and !params[:all]
       last_update = @tablet.last_menu_sync
     end
-    # get all the photos of sections, subsections and dishes
+    # get all the photos of the restaurant, sections, subsections and dishes
+    if !@restaurant.chain.logo_file_name.nil? and @restaurant.chain.logo_updated_at > last_update
+      @images << @restaurant.chain.logo.url(:medium)
+    end
     @restaurant.menus.each { |menu|
       menu.sections.each { |section|
-        @images << section if !section.photo_file_name.nil? and section.photo_updated_at > last_update
+        if !section.photo_file_name.nil? and section.photo_updated_at > last_update
+          @images << section.photo.url(:mini)
+          @images << section.photo.url(:thumb)
+        end
         section.dishes.each { |dish|
-          @images << dish if !dish.photo_file_name.nil? and dish.photo_updated_at > last_update
+          if !dish.photo_file_name.nil? and dish.photo_updated_at > last_update
+            @images << dish.photo.url(:thumb)
+            @images << dish.photo.url(:large)
+          end
         }
         section.subsections.each { |subsection|
-          @images << subsection if !subsection.photo_file_name.nil? and subsection.photo_updated_at > last_update
+          if !subsection.photo_file_name.nil? and subsection.photo_updated_at > last_update
+            @images << subsection.photo.url(:mini)
+            @images << subsection.photo.url(:thumb)
+          end
           subsection.dishes.each { |dish|
-            @images << dish if !dish.photo_file_name.nil? and dish.photo_updated_at > last_update
+            if !dish.photo_file_name.nil? and dish.photo_updated_at > last_update
+              @images << dish.photo.url(:thumb)
+              @images << dish.photo.url(:large)
+            end
           }
         }
       }
@@ -102,10 +117,10 @@ class Api::TocartasController < AccessController
     @result = false
     validate_params(['table','dinners','language'])
     # this tablet now belongs to the new table
-    tables = @restaurant.tables.select { |table| table.number==params[:table].to_i }
-    return false if tables.empty?
+    table = @restaurant.tables.select { |table| table.number==params[:table].to_i }.first
+    return false if table.nil?
     
-    @tablet.table = tables.first
+    @tablet.table = table
     @tablet.save
     
     @table = @tablet.table
@@ -117,7 +132,7 @@ class Api::TocartasController < AccessController
     # insert new activity
     restaurant_activity = RestaurantActivity.new
     restaurant_activity.restaurant = @restaurant
-    restaurant_activity.name = "Checked In"
+    restaurant_activity.name = "checked" # as a check in
     restaurant_activity.table = @table
     @result = restaurant_activity.save
     Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', restaurant_activity.to_json)
@@ -127,12 +142,12 @@ class Api::TocartasController < AccessController
   
   def checkout_table
     @result = false
-    # insert new activity
-    restaurant_activity = RestaurantActivity.new
-    restaurant_activity.restaurant = @restaurant
-    restaurant_activity.name = "Checked Out"
-    restaurant_activity.table = @table
-    @result = restaurant_activity.save
+    # get last checkedin activity of this table
+    activity = RestaurantActivity.find(:first,:conditions => {:table_id => @table.id, :name => "checked"}, :order => "created_at DESC")
+    if activity != nil
+      activity.ack = DateTime.now
+      @result = activity.save
+    end
     Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', restaurant_activity.to_json)
     @table.status = restaurant_activity.name
     @table.save
@@ -141,6 +156,51 @@ class Api::TocartasController < AccessController
   def get_sent_order_items
     @order_items = @table.orders.collect { |order| order.order_items }.flatten
   end
+  
+  
+  
+  def make_order
+    @result = false
+    validate_params(['order'])
+    # create and save order
+    order = Order.new
+    order.tablet = @tablet
+    order.table = @table
+    # order.save
+    order = JSON.parse(params[:order])
+    puts order
+    @result = true
+    
+    
+    # params[:order_items].each{|order_item_str|
+      # order_item_obj = JSON.parse(order_item_str)
+      # order_item = OrderItem.new
+      # order_item.order = order
+      # order_item.dish = Dish.find(:first,:conditions => {:id => order_item_obj['dish_id']})
+      # order_item.combo_type = ComboType.find(:first,:conditions => {:id => order_item_obj['combo_type_id']})
+      # order_item.quantity = order_item_obj['quantity']
+      # order_item.save
+    # }
+    
+    # send it to the waiter
+    # restaurant_activity = RestaurantActivity.new
+    # restaurant_activity.restaurant = @restaurant
+    # restaurant_activity.name = "Submit Order"
+    # restaurant_activity.table = @table
+    # restaurant_activity.order = order
+    # resp[:result] = restaurant_activity.save
+    # setup_activity(restaurant_activity)
+    # # push activity to server
+    # Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', restaurant_activity.to_json)
+    # # update table status
+    # @table.status = restaurant_activity.name
+    # @table.save
+    # respond_to do |format|
+      # format.xml  { render :xml => resp.to_xml }
+      # format.json  { render :json => resp.to_json }
+    # end
+  end
+  
 
   # def check_for_updates
     # result = { :new_updates => false }
@@ -201,68 +261,9 @@ class Api::TocartasController < AccessController
     end
   end
   
-  def new_client_init
-    resp = {:result => false}
-    # insert new activity
-    restaurant_activity = RestaurantActivity.new
-    restaurant_activity.name = "Client Usage"
-    restaurant_activity.table = @table
-    restaurant_activity.restaurant = @restaurant
-    resp[:result] = restaurant_activity.save
-    respond_to do |format|
-      format.xml  { render :xml => resp.to_xml }
-      format.json  { render :json => resp.to_json }
-    end
-  end
+
   
-  def new_client_end
-    resp = {:result => false}
-    # update activity
-    activity = RestaurantActivity.find(:first,:conditions => {:table_id => @table.id, :name => "Client Usage"}, :order => "created_at DESC")
-    if activity != nil
-      activity.ack = DateTime.now
-      resp[:result] = activity.save
-    end
-    respond_to do |format|
-      format.xml  { render :xml => resp.to_xml }
-      format.json  { render :json => resp.to_json }
-    end
-  end
   
-  def make_an_order
-    resp = {:result => false}
-    validate_params(['order_items'])
-    # create and save order
-    order = Order.new
-    order.tablet = @tablet
-    order.save
-    params[:order_items].each{|order_item_str|
-      order_item_obj = JSON.parse(order_item_str)
-      order_item = OrderItem.new
-      order_item.order = order
-      order_item.dish = Dish.find(:first,:conditions => {:id => order_item_obj['dish_id']})
-      order_item.combo_type = ComboType.find(:first,:conditions => {:id => order_item_obj['combo_type_id']})
-      order_item.quantity = order_item_obj['quantity']
-      order_item.save
-    }
-    # send it to the waiter
-    restaurant_activity = RestaurantActivity.new
-    restaurant_activity.restaurant = @restaurant
-    restaurant_activity.name = "Submit Order"
-    restaurant_activity.table = @table
-    restaurant_activity.order = order
-    resp[:result] = restaurant_activity.save
-    setup_activity(restaurant_activity)
-    # push activity to server
-    Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', restaurant_activity.to_json)
-    # update table status
-    @table.status = restaurant_activity.name
-    @table.save
-    respond_to do |format|
-      format.xml  { render :xml => resp.to_xml }
-      format.json  { render :json => resp.to_json }
-    end
-  end
   
   def send_comment
     resp = {:result => false}

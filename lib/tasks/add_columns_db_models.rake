@@ -88,8 +88,8 @@ namespace :db do
     fix_model('ComboType',['translates :name, :description, :fallbacks_for_empty_translations => true','attr_accessible :active, :position, :price, :description'])
 		
 		# Order
-		sh "#{action} add_columns_to_order note:string"
-    fix_model('Order',['attr_accessible :note'])
+		sh "#{action} add_columns_to_order note:string total:decimal language:string"
+    fix_model('Order',['attr_accessible :name, :note, :total, :language'])
 		
 		# OrderItem
     sh "#{action} add_columns_to_order_item quantity:integer note:string"

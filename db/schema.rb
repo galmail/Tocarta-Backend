@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120318005310) do
+ActiveRecord::Schema.define(:version => 20120318101819) do
 
   create_table "chains", :force => true do |t|
     t.integer  "user_id"
@@ -206,6 +206,8 @@ ActiveRecord::Schema.define(:version => 20120318005310) do
     t.datetime "updated_at", :null => false
     t.string   "note"
     t.integer  "table_id"
+    t.decimal  "total"
+    t.string   "language"
   end
 
   add_index "orders", ["client_id"], :name => "index_orders_on_client_id"
