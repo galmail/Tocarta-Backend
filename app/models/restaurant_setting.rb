@@ -1,4 +1,4 @@
 class RestaurantSetting < ActiveRecord::Base
   belongs_to :restaurant
-	attr_accessible :num_licenses, :default_language, :last_menu_sync
+	attr_accessible :name, :num_licenses, :default_language, :last_menu_sync, :restaurant_id
 end
