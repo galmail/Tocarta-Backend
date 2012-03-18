@@ -1,110 +1,167 @@
 class Api::TocartasController < AccessController
   before_filter :identify_tablet, :setup_language, :setup_sencha_friendly_json
   
-  def check_for_updates
-    result = { :new_updates => false }
-    restaurant_setting = @restaurant.restaurant_setting
-    if restaurant_setting != nil
-      if @tablet.last_menu_sync.nil? or (@tablet.last_menu_sync < restaurant_setting.last_menu_sync)
-       result[:new_updates] = true
-      end
-    end
-    respond_to do |format|
-      format.xml  { render :xml => result.to_xml }
-      format.json { render :json => result.to_json }
-    end
+  def validate_license_key
+    @result = true
   end
-
-  def get_images
-    last_update = 10.years.ago
-    if @tablet.last_menu_sync!=nil and params[:new_images_only]
-      last_update = @tablet.last_menu_sync
-    end
-    images = []
-    # get all dishes where photo_updated_at > tablet.last_menu_sync
-    dishes = Dish.find(:all, :conditions => ["photo_updated_at > ?", last_update ])
-    # get all dish types where icon_updated_at > tablet.last_menu_sync
-    dish_types = DishType.find(:all, :conditions => ["icon_updated_at > ?", last_update ])
-    # get all dish variations where photo_updated_at > tablet.last_menu_sync
-    dish_variations = DishVariation.find(:all, :conditions => ["photo_updated_at > ?", last_update ])
-    # get all sections where photo_updated_at > tablet.last_menu_sync
-    sections = Section.find(:all, :conditions => ["photo_updated_at > ?", last_update ])
-    # finally collect all images
-    images << dishes.collect{|dish| dish.photo.to_s}
-    images << dish_types.collect{|dish_type| dish_type.icon.to_s}
-    images << dish_variations.collect{|dv| dv.photo.to_s}
-    images << sections.collect{|section| section.photo.to_s}
-    respond_to do |format|
-      format.xml  { render :xml => images.to_xml }
-      format.json { render :json => images.to_json }
-    end
-  end
-
-  def load_menu
-    menus = @restaurant.menus
-    respond_to do |format|
-      format.xml  { render :xml => menus.to_xml }
-      format.json { render :json => menus.to_json(
-        :include=>{
-          :sections=>{
-            :include=>{
-              :dishes=>{
-                :include=>:comments
-              }
-            }
+  
+  def get_restaurant_info
+    # TODO get restaurant menus in all languages
+    @menus = @restaurant.menus
+    # show only active elements
+    @menus.each { |menu|
+      ##### sorting and filtering sections #####
+      sort_and_filter(menu.sections,nil,nil,nil)
+      menu.sections.each { |section|
+        ##### sorting and filtering dishes of the sections #####
+        sort_and_filter(section.dishes,nil,nil,nil)
+        section.dishes.each { |dish|
+          ##### sorting and filtering comments #####
+          sort_and_filter(dish.comments,:created_at,:approved,true)
+        }
+        ##### sorting and filtering subsections #####
+        sort_and_filter(section.subsections,nil,nil,nil)
+        section.subsections.each { |subsection|
+          ##### sorting and filtering dishes of the subsections #####
+          sort_and_filter(subsection.dishes,nil,nil,nil)
+          subsection.dishes.each { |dish|
+            ##### sorting and filtering comments #####
+            sort_and_filter(dish.comments,:created_at,:approved,true)
           }
         }
-      )}
+      }
+    }
+  end
+  
+  
+  def get_images_to_download
+    @images = []
+    last_update = 10.years.ago
+    if @tablet.last_menu_sync!=nil and !params[:all]
+      last_update = @tablet.last_menu_sync
+    end
+    # get all the photos of sections, subsections and dishes
+    @restaurant.menus.each { |menu|
+      menu.sections.each { |section|
+        @images << section if !section.photo_file_name.nil? and section.photo_updated_at > last_update
+        section.dishes.each { |dish|
+          @images << dish if !dish.photo_file_name.nil? and dish.photo_updated_at > last_update
+        }
+        section.subsections.each { |subsection|
+          @images << subsection if !subsection.photo_file_name.nil? and subsection.photo_updated_at > last_update
+          subsection.dishes.each { |dish|
+            @images << dish if !dish.photo_file_name.nil? and dish.photo_updated_at > last_update
+          }
+        }
+      }
+    }
+  end
+  
+  def confirm_downloaded_images
+    @tablet.last_menu_sync = Time.now
+    if @tablet.save
+      @result = true
+    else
+      @result = false
     end
   end
   
-  def load_settings
-    settings = @restaurant.restaurant_setting
-    respond_to do |format|
-      format.xml  { render :xml => settings.to_xml }
-      format.json  { render :json => settings.to_json }
-    end
-  end
-
   def call_waiter
-    resp = {:result => false}
+    @result = false
     # insert new activity
     restaurant_activity = RestaurantActivity.new
     restaurant_activity.restaurant = @restaurant
     restaurant_activity.name = "Call Waiter"
     restaurant_activity.table = @table
-    resp[:result] = restaurant_activity.save
+    @result = restaurant_activity.save
     # push activity to server
-    setup_activity(restaurant_activity)
+    #setup_activity(restaurant_activity)
     Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', restaurant_activity.to_json)
     # update table status
     @table.status = restaurant_activity.name
     @table.save
-    respond_to do |format|
-      format.xml  { render :xml => resp.to_xml }
-      format.json  { render :json => resp.to_json }
-    end
   end
-
+  
   def request_bill
-    resp = {:result => false}
+    @result = false
     # insert new activity
     restaurant_activity = RestaurantActivity.new
     restaurant_activity.restaurant = @restaurant
     restaurant_activity.name = "Request Bill"
     restaurant_activity.table = @table
-    resp[:result] = restaurant_activity.save
+    @result = restaurant_activity.save
     # push activity to server
-    setup_activity(restaurant_activity)
+    #setup_activity(restaurant_activity)
     Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', restaurant_activity.to_json)
     # update table status
     @table.status = restaurant_activity.name
     @table.save
-    respond_to do |format|
-      format.xml  { render :xml => resp.to_xml }
-      format.json  { render :json => resp.to_json }
-    end
   end
+  
+  def checkin_table
+    @result = false
+    validate_params(['table','dinners','language'])
+    # this tablet now belongs to the new table
+    tables = @restaurant.tables.select { |table| table.number==params[:table].to_i }
+    return false if tables.empty?
+    
+    @tablet.table = tables.first
+    @tablet.save
+    
+    @table = @tablet.table
+    @table.dinners = params[:dinners]
+    @table.language = params[:language]
+    @table.orders = []
+    @table.save
+    
+    # insert new activity
+    restaurant_activity = RestaurantActivity.new
+    restaurant_activity.restaurant = @restaurant
+    restaurant_activity.name = "Checked In"
+    restaurant_activity.table = @table
+    @result = restaurant_activity.save
+    Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', restaurant_activity.to_json)
+    @table.status = restaurant_activity.name
+    @table.save
+  end
+  
+  def checkout_table
+    @result = false
+    # insert new activity
+    restaurant_activity = RestaurantActivity.new
+    restaurant_activity.restaurant = @restaurant
+    restaurant_activity.name = "Checked Out"
+    restaurant_activity.table = @table
+    @result = restaurant_activity.save
+    Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', restaurant_activity.to_json)
+    @table.status = restaurant_activity.name
+    @table.save
+  end
+  
+  def get_sent_order_items
+    @order_items = @table.orders.collect { |order| order.order_items }.flatten
+  end
+
+  # def check_for_updates
+    # result = { :new_updates => false }
+    # restaurant_setting = @restaurant.restaurant_setting
+    # if restaurant_setting != nil
+      # if @tablet.last_menu_sync.nil? or (@tablet.last_menu_sync < restaurant_setting.last_menu_sync)
+       # result[:new_updates] = true
+      # end
+    # end
+    # respond_to do |format|
+      # format.xml  { render :xml => result.to_xml }
+      # format.json { render :json => result.to_json }
+    # end
+  # end
+  
+  
+  
+
+  
+
+  
   
   def make_a_comment
     resp = {:result => false}

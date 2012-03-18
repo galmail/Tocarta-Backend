@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120315203042) do
+ActiveRecord::Schema.define(:version => 20120318005310) do
 
   create_table "chains", :force => true do |t|
     t.integer  "user_id"
@@ -80,6 +80,18 @@ ActiveRecord::Schema.define(:version => 20120315203042) do
   add_index "comments", ["restaurant_id"], :name => "index_comments_on_restaurant_id"
   add_index "comments", ["survey_question_id"], :name => "index_comments_on_survey_question_id"
 
+  create_table "dish_translations", :force => true do |t|
+    t.integer  "dish_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.text     "story"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "dish_translations", ["dish_id"], :name => "index_dish_translations_on_dish_id"
+
   create_table "dish_type_associations", :force => true do |t|
     t.integer  "dish_type_id"
     t.integer  "dish_id"
@@ -136,6 +148,7 @@ ActiveRecord::Schema.define(:version => 20120315203042) do
     t.text     "story"
     t.string   "video"
     t.string   "nutrition_facts"
+    t.string   "badge_name"
   end
 
   add_index "dishes", ["combo_id"], :name => "index_dishes_on_combo_id"
@@ -192,9 +205,11 @@ ActiveRecord::Schema.define(:version => 20120315203042) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "note"
+    t.integer  "table_id"
   end
 
   add_index "orders", ["client_id"], :name => "index_orders_on_client_id"
+  add_index "orders", ["table_id"], :name => "index_orders_on_table_id"
   add_index "orders", ["tablet_id"], :name => "index_orders_on_tablet_id"
 
   create_table "rails_admin_histories", :force => true do |t|
@@ -252,6 +267,16 @@ ActiveRecord::Schema.define(:version => 20120315203042) do
   add_index "restaurants", ["chain_id"], :name => "index_restaurants_on_chain_id"
   add_index "restaurants", ["user_id"], :name => "index_restaurants_on_user_id"
 
+  create_table "section_translations", :force => true do |t|
+    t.integer  "section_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "section_translations", ["section_id"], :name => "index_section_translations_on_section_id"
+
   create_table "sections", :force => true do |t|
     t.integer  "menu_id"
     t.string   "name"
@@ -267,6 +292,16 @@ ActiveRecord::Schema.define(:version => 20120315203042) do
 
   add_index "sections", ["menu_id"], :name => "index_sections_on_menu_id"
 
+  create_table "subsection_translations", :force => true do |t|
+    t.integer  "subsection_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "subsection_translations", ["subsection_id"], :name => "index_subsection_translations_on_subsection_id"
+
   create_table "subsections", :force => true do |t|
     t.integer  "section_id"
     t.string   "name"
@@ -281,6 +316,17 @@ ActiveRecord::Schema.define(:version => 20120315203042) do
   end
 
   add_index "subsections", ["section_id"], :name => "index_subsections_on_section_id"
+
+  create_table "survey_question_translations", :force => true do |t|
+    t.integer  "survey_question_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "survey_question_translations", ["survey_question_id"], :name => "index_310e069e62f38daa0fbaf3db7eb732365abc8120"
 
   create_table "survey_questions", :force => true do |t|
     t.integer  "chain_id"
@@ -299,6 +345,8 @@ ActiveRecord::Schema.define(:version => 20120315203042) do
     t.datetime "updated_at",    :null => false
     t.integer  "number"
     t.string   "status"
+    t.integer  "dinners"
+    t.string   "language"
   end
 
   add_index "tables", ["restaurant_id"], :name => "index_tables_on_restaurant_id"

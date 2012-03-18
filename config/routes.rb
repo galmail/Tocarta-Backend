@@ -53,9 +53,10 @@ TocartaAdmin::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
+  root :to => "rails_admin::Main#dashboard"
   
   # API for Tocartas
-  match 'cli/c/:action(.:format)', :controller => 'Api::Clients'
+  match 'cli/c/:action(.:format)', :controller => 'Api::Tocartas'
   #match 'cli/r/:action(.:format)', :controller => 'Api::Restaurants'
   #match 'cli/an/:action(.:format)', :controller => 'Api::Analytics'
   
@@ -68,4 +69,5 @@ TocartaAdmin::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+  match ':controller(/:action(/:id(.:format)))'
 end

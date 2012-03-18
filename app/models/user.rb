@@ -14,4 +14,5 @@ class User < ActiveRecord::Base
 	has_one :chain
 	has_one :restaurant
 	has_one :client
+	
 end

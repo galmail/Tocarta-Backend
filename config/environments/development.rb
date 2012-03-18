@@ -1,6 +1,7 @@
 TocartaAdmin::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
   
+  # Setting up Paperclip
   Paperclip::Attachment.default_options.merge!({
     :storage => :s3,
     :bucket => ENV['S3_BUCKET'],
@@ -9,6 +10,11 @@ TocartaAdmin::Application.configure do
       :secret_access_key => ENV['S3_SECRET']
     }
   })
+  
+  # Setting up Pusher in development
+  Pusher.app_id = '17050'
+  Pusher.key    = 'c9c649f5255c17685066'
+  Pusher.secret = '02fbd38ac9ef7d72457e'
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development

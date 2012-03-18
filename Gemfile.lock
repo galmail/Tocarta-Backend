@@ -129,6 +129,9 @@ GEM
       multi_json (~> 1.0)
       ruby-hmac (~> 0.4.0)
       signature (~> 0.1.2)
+    rabl (0.6.1)
+      activesupport (>= 2.3.14)
+      multi_json (~> 1.1.0)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -187,6 +190,7 @@ GEM
     uuidtools (2.1.2)
     warden (1.1.0)
       rack (>= 1.0)
+    yajl-ruby (1.1.0)
 
 PLATFORMS
   ruby
@@ -205,9 +209,11 @@ DEPENDENCIES
   paperclip (~> 2.7)
   pg
   pusher
+  rabl
   rails (= 3.2.1)
   rails_admin!
   sass-rails (~> 3.2.3)
   sqlite3
   twitter_oauth
   uglifier (>= 1.0.3)
+  yajl-ruby

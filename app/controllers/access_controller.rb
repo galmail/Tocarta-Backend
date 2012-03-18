@@ -3,7 +3,8 @@ class AccessController < ApplicationController
   private
   
   def identify_tablet
-    @tablet = Tablet.find(:first, :conditions => { :access_key => params[:key] , :active => true })
+    @tablet = Tablet.where("access_key = ? AND active = ?", params[:key], true).first
+    #@tablet = Tablet.find(:first, :conditions => { :access_key => params[:key] , :active => true })
     if @tablet.nil?
       render :text => "You dont have access with this license.", :status => :forbidden
     else
@@ -35,6 +36,19 @@ class AccessController < ApplicationController
       #activity[:date] = ChronicDuration.output(duration.to_i, :format => :long)
       #spanish_time = Chronic18n.parse(activity[:date], :es)
       #activity[:date] = spanish_time if !spanish_time.nil?
+  end
+  
+  def sort_and_filter(items,sort_attr,filter_attr,reverse_sort)
+    sort_attr = sort_attr || :position
+    filter_attr = filter_attr || :active
+    items.sort_by!{|item|
+      item_position = 0
+      item_position = item[sort_attr] if item[sort_attr].is_a?(Numeric)
+    }
+    items.reject!{|item| !item[filter_attr]}
+    if !reverse_sort.nil? and reverse_sort==true
+      items.reverse!
+    end
   end
   
 end

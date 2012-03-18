@@ -71,7 +71,7 @@ namespace :db do
     
     # Table
     sh "#{action} Table restaurant:references name:string"
-    fix_association('Table',['has_many :tablets','has_many :restaurant_activities'])
+    fix_association('Table',['has_many :orders','has_many :tablets','has_many :restaurant_activities'])
     
     # Tablet
     sh "#{action} Tablet table:references name:string"
@@ -97,7 +97,7 @@ namespace :db do
     fix_association('Subsection',['has_many :dishes'])
     
     # Order
-    sh "#{action} Order tablet:references client:references name:string"
+    sh "#{action} Order table:references tablet:references client:references name:string"
     fix_association('Order',['has_many :order_items','has_many :restaurant_activities'])
     
     # OrderItem
@@ -138,7 +138,7 @@ namespace :db do
     add_image_to_model('Section','photo','img/sections/section_:id.:extension')
     add_image_to_model('Subsection','photo','img/subsections/subsection_:id.:extension')
     add_image_to_model('Dish','photo','img/dishes/dish_:id.:extension')
-    add_image_to_model('DishType','icon','img/dish_types/dish_type_:id.:extension')   
+    add_image_to_model('DishType','icon','img/dish_types/dish_type_:id.:extension')
     add_image_to_model('DishVariation','photo','img/dish_variations/dish_variation_:id.:extension')
     #sh 'rake db:migrate'
     

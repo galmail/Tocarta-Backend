@@ -52,7 +52,7 @@ namespace :db do
     fix_model('RestaurantActivity',['attr_accessible :ack'])
     
     # Table
-    sh "#{action} add_columns_to_table number:integer status:string"
+    sh "#{action} add_columns_to_table number:integer status:string dinners:integer language:string"
     fix_model('Table',['attr_accessible :number,:status'])
     
     # Tablet
@@ -102,8 +102,8 @@ namespace :db do
     # DishTypeAssociation
 		
 		# Dish
-    sh "#{action} add_columns_to_dish active:boolean position:integer description:text price:decimal rating:integer reviews:integer story:text video:string nutrition_facts:string"
-    fix_model('Dish',['translates :name, :description, :story, :fallbacks_for_empty_translations => true','attr_accessible :active, :position, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts'])
+    sh "#{action} add_columns_to_dish active:boolean badge_name:string position:integer description:text price:decimal rating:integer reviews:integer story:text video:string nutrition_facts:string"
+    fix_model('Dish',['translates :name, :badge_name, :description, :story, :fallbacks_for_empty_translations => true','attr_accessible :active, :position, :badge_name, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts'])
 		
 		# Comment
 		sh "#{action} add_columns_to_comment description:text rating:integer approved:boolean"

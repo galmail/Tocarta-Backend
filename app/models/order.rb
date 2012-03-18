@@ -1,5 +1,6 @@
 class Order < ActiveRecord::Base
   belongs_to :tablet
+  belongs_to :table
   belongs_to :client
 	has_many :order_items
 	has_many :restaurant_activities

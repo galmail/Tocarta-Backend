@@ -7,9 +7,9 @@ require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
 
 # Amazon S3 Staging Settings
 
-ENV['S3_BUCKET'] ||= 'bucket_tocarta_staging'
-ENV['S3_KEY'] ||= 'AKIAJMUMLPY2TXXEPQEA'
-ENV['S3_SECRET'] ||= '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'
+ENV['S3_BUCKET'] ||= 'tocarta-test'
+ENV['S3_KEY'] ||= 'AKIAJCY5PI67O7THQ5MQ'
+ENV['S3_SECRET'] ||= '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'
 
 # Amazon S3 Pro Settings
 

@@ -4,6 +4,7 @@
 RailsAdmin.config do |config|
 
   config.authorize_with :cancan
+  config.authenticate_with {}
 
 
   # If your default_local is different from :en, uncomment the following 2 lines and set your default locale here:
@@ -43,17 +44,19 @@ RailsAdmin.config do |config|
   # config.label_methods << :description # Default is [:name, :title]
 
   #  ==> Global models configuration
-  # config.models do
-  #   # Configuration here will affect all included models in all scopes, handle with care!
-  #
-  #   list do
-  #     # Configuration here will affect all included models in list sections (same for show, export, edit, update, create)
-  #
-  #     fields_of_type :date do
-  #       # Configuration here will affect all date fields, in the list section, for all included models. See README for a comprehensive type list.
-  #     end
-  #   end
-  # end
+  config.models do
+    # Configuration here will affect all included models in all scopes, handle with care!
+  
+    list do
+      # Configuration here will affect all included models in list sections (same for show, export, edit, update, create)
+      exclude_fields :created_at, :updated_at
+      
+      fields_of_type :date do
+        # Configuration here will affect all date fields, in the list section, for all included models. See README for a comprehensive type list.
+      end
+    end
+  end
+  
   #
   #  ==> Model specific configuration
   # Keep in mind that *all* configuration blocks are optional.
