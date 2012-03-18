@@ -2,7 +2,7 @@ class SurveyQuestion < ActiveRecord::Base
   belongs_to :chain
 	has_many :comments
 	translates :name, :description, :fallbacks_for_empty_translations => true
-	attr_accessible :description
+	attr_accessible :name, :description, :chain_id
 end
 
 

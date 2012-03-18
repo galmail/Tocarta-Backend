@@ -3,5 +3,5 @@ class Table < ActiveRecord::Base
 	has_many :tablets
 	has_many :orders
 	has_many :restaurant_activities
-	attr_accessible :name, :number, :status, :dinners, :language
+	attr_accessible :name, :number, :status, :dinners, :language, :restaurant_id
 end
