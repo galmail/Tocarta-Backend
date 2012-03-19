@@ -37,7 +37,7 @@ class Api::TocartasController < AccessController
   def get_images_to_download
     @images = []
     last_update = 10.years.ago
-    if @tablet.last_menu_sync!=nil and !params[:all]
+    if @tablet.last_menu_sync!=nil and params[:all]!="yes"
       last_update = @tablet.last_menu_sync
     end
     # get all the photos of the restaurant, sections, subsections and dishes
