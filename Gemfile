@@ -25,6 +25,9 @@ gem 'aws-sdk', '~> 1.3.4'
 # Habilitando Push Notifications
 gem 'pusher'
 
+# Smart dates and times
+gem 'chronic_duration'
+
 # Debugger for development
 # group :development do
   # gem 'linecache19'

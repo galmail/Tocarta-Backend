@@ -57,7 +57,7 @@ TocartaAdmin::Application.routes.draw do
   
   # API for Tocartas
   match 'cli/c/:action(.:format)', :controller => 'Api::Tocartas'
-  #match 'cli/r/:action(.:format)', :controller => 'Api::Restaurants'
+  match 'cli/r/:action(.:format)', :controller => 'Api::CommandCenter'
   #match 'cli/an/:action(.:format)', :controller => 'Api::Analytics'
   
   # Twitter and Facebook

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120319210015) do
+ActiveRecord::Schema.define(:version => 20120320231053) do
 
   create_table "chains", :force => true do |t|
     t.integer  "user_id"
@@ -244,11 +244,18 @@ ActiveRecord::Schema.define(:version => 20120319210015) do
   create_table "restaurant_settings", :force => true do |t|
     t.integer  "restaurant_id"
     t.string   "name"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.integer  "num_licenses"
     t.string   "default_language"
     t.datetime "last_menu_sync"
+    t.boolean  "multilang_homepage",  :default => false
+    t.boolean  "games",               :default => false
+    t.boolean  "call_waiter_button",  :default => true
+    t.boolean  "order_button",        :default => true
+    t.boolean  "request_bill_button", :default => true
+    t.boolean  "show_help_button",    :default => true
+    t.boolean  "show_survey",         :default => true
   end
 
   add_index "restaurant_settings", ["restaurant_id"], :name => "index_restaurant_settings_on_restaurant_id"
@@ -282,14 +289,15 @@ ActiveRecord::Schema.define(:version => 20120319210015) do
   create_table "sections", :force => true do |t|
     t.integer  "menu_id"
     t.string   "name"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.boolean  "active"
     t.integer  "position"
+    t.boolean  "hasBigSubsections",  :default => false
   end
 
   add_index "sections", ["menu_id"], :name => "index_sections_on_menu_id"

@@ -2,8 +2,12 @@ object false
 
 ### restaurant setting ###
 
-node :name do @restaurant.restaurant_setting.name end
+node :name do @restaurant.name end
 node :logo do @restaurant.chain.logo.url(:medium).split(ENV['S3_BUCKET']).last end
+
+child @restaurant.restaurant_setting => :setting do
+  attributes :multilang_homepage, :games, :call_waiter_button, :order_button, :request_bill_button, :show_help_button, :show_survey
+end
 
 ### restaurant survey questions ###
 
@@ -18,7 +22,7 @@ child @menus do
   attributes :id, :name, :menu_type
   
   child :sections do
-    attributes :id, :name
+    attributes :id, :name, :hasBigSubsections
     node(:mini, :unless => lambda {|s| s.photo_file_name.nil? }) do |section|
       section.photo.url(:mini).split(ENV['S3_BUCKET']).last
     end

@@ -44,7 +44,7 @@ namespace :db do
     fix_model('Restaurant',['attr_accessible :manager, :email, :address, :phone, :note'])
 		
 		# RestaurantSetting
-		sh "#{action} add_columns_to_restaurant_setting num_licenses:integer default_language:string last_menu_sync:datetime"
+		sh "#{action} add_columns_to_restaurant_setting num_licenses:integer default_language:string last_menu_sync:datetime multilang_homepage:boolean games:boolean call_waiter_button:boolean order_button:boolean request_bill_button:boolean show_help_button:boolean show_survey:boolean"
 		fix_model('RestaurantSetting',['attr_accessible :num_licenses, :default_language, :last_menu_sync'])
 		
 		# RestaurantActivity
@@ -72,7 +72,7 @@ namespace :db do
     fix_model('Theme',['attr_accessible :css, :description'])
 		
 		# Section
-		sh "#{action} add_columns_to_section active:boolean position:integer"
+		sh "#{action} add_columns_to_section active:boolean position:integer hasBigSubsections:boolean"
     fix_model('Section',['translates :name, :fallbacks_for_empty_translations => true','attr_accessible :active, :position'])
     
     # Subsection

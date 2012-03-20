@@ -1,15 +1,10 @@
 class Api::CommandCenterController < AccessController
-  before_filter :identify_tablet, :setup_language, :setup_sencha_friendly_json
+  before_filter :identify_tablet, :setup_language
   
-  def get_last_activities
+  def get_restaurant_situation
     num_activities = params[:num_activities]
     num_activities = 50 if num_activities.nil?
-    activities = RestaurantActivity.where(:restaurant_id => @restaurant.id).order('created_at DESC').limit(num_activities)
-    activities.each {|activity| setup_activity(activity)}
-    respond_to do |format|
-      format.xml  { render :xml => activities.to_xml }
-      format.json  { render :json => activities.to_json }
-    end
+    @activities = RestaurantActivity.where(:restaurant_id => @restaurant.id).order('created_at DESC').limit(num_activities)
   end
   
   def ack_activity

@@ -1,9 +1,5 @@
 class Api::TocartasController < AccessController
-  before_filter :identify_tablet, :setup_language, :setup_sencha_friendly_json
-  
-  def validate_license_key
-    @result = true
-  end
+  before_filter :identify_tablet, :setup_language
   
   def get_restaurant_info
     # TODO get restaurant menus in all languages

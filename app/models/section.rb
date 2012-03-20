@@ -8,6 +8,6 @@ class Section < ActiveRecord::Base
 	 :styles => { :mini => TocartaAdmin::Application::IMAGE_MINI_SIZE, :thumb => TocartaAdmin::Application::IMAGE_THUMBNAIL_SIZE }
 	)
 	translates :name, :fallbacks_for_empty_translations => true
-	attr_accessible :name, :active, :position, :photo
+	attr_accessible :name, :active, :position, :photo, :hasBigSubsections
 	attr_accessible :menu_id
 end

@@ -1,5 +1,9 @@
 class AccessController < ApplicationController
 
+  def validate_license_key
+    @result = true
+  end
+
   private
   
   MAX_COMMENTS_PER_DISH = 10
