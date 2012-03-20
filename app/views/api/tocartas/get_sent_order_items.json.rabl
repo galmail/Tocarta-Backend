@@ -1,11 +1,8 @@
 collection @order_items
 attributes :quantity
-child :dish do |item|
-  attributes :id, :name, :price
-  node(:thumbnail, :unless => lambda {|d| d.photo_file_name.nil? }) do |dish|
-    dish.photo.url(:thumb)
-  end
-  node(:photo, :unless => lambda {|d| d.photo_file_name.nil? }) do |dish|
-    dish.photo.url(:medium)
+glue :dish do
+  attributes :id => :dish_id, :name => :item_name
+  node :thumbnail do |dish|
+    dish.photo.url(:thumb).split(ENV['S3_BUCKET']).last.split('?').first
   end
 end

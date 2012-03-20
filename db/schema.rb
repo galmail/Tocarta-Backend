@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120318101819) do
+ActiveRecord::Schema.define(:version => 20120319210015) do
 
   create_table "chains", :force => true do |t|
     t.integer  "user_id"
@@ -68,11 +68,11 @@ ActiveRecord::Schema.define(:version => 20120318101819) do
     t.integer  "client_id"
     t.integer  "survey_question_id"
     t.string   "name"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.text     "description"
     t.integer  "rating"
-    t.boolean  "approved"
+    t.boolean  "approved",           :default => true
   end
 
   add_index "comments", ["client_id"], :name => "index_comments_on_client_id"
@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(:version => 20120318101819) do
     t.integer  "position"
     t.text     "description"
     t.decimal  "price"
-    t.integer  "rating"
+    t.decimal  "rating"
     t.integer  "reviews"
     t.text     "story"
     t.string   "video"

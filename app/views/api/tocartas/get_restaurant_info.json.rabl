@@ -1,12 +1,15 @@
 object false
 
 ### restaurant setting ###
+
 node :name do @restaurant.restaurant_setting.name end
 node :logo do @restaurant.chain.logo.url(:medium).split(ENV['S3_BUCKET']).last end
 
-# child	@restaurant.restaurant_setting => :setting do
-	# attributes :name, :default_language
-# end
+### restaurant survey questions ###
+
+child	@restaurant.chain.survey_questions => :survey_questions do
+	attributes :id, :name, :description
+end
 
 ### restaurant menus ###
 
@@ -24,6 +27,7 @@ child @menus do
     end
     child :dishes do
       attributes :id, :name, :description, :price, :badge_name
+      node(:rating, :unless => lambda {|d| d.rating.nil? }) do |dish| dish.rating.round end
       node(:thumbnail, :unless => lambda {|d| d.photo_file_name.nil? }) do |dish|
         dish.photo.url(:thumb).split(ENV['S3_BUCKET']).last
       end
@@ -45,6 +49,7 @@ child @menus do
       end
       child :dishes do
         attributes :id, :name, :description, :price, :badge_name
+        node(:rating, :unless => lambda {|d| d.rating.nil? }) do |dish| dish.rating.round end
         node(:thumbnail, :unless => lambda {|d| d.photo_file_name.nil? }) do |dish|
           dish.photo.url(:thumb).split(ENV['S3_BUCKET']).last
         end

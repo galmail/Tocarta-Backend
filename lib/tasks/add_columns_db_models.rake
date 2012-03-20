@@ -102,7 +102,7 @@ namespace :db do
     # DishTypeAssociation
 		
 		# Dish
-    sh "#{action} add_columns_to_dish active:boolean badge_name:string position:integer description:text price:decimal rating:integer reviews:integer story:text video:string nutrition_facts:string"
+    sh "#{action} add_columns_to_dish active:boolean badge_name:string position:integer description:text price:decimal rating:decimal reviews:integer story:text video:string nutrition_facts:string"
     fix_model('Dish',['translates :name, :badge_name, :description, :story, :fallbacks_for_empty_translations => true','attr_accessible :active, :position, :badge_name, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts'])
 		
 		# Comment
