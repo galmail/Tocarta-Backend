@@ -2,6 +2,7 @@ object false
 
 ### restaurant info ###
 
+node :id do @restaurant.id end
 node :name do @restaurant.name end
 node :logo do @restaurant.chain.logo.url(:medium).split(ENV['S3_BUCKET']).last end
 node :num_tables do @restaurant.tables.length end
@@ -12,10 +13,10 @@ child @activities do
   object false
   attributes :id, :name, :ack
   node :table_number do |activity|
-    activity.table.number
+    activity.table_number
   end
   node :date do |activity|
-    ChronicDuration.output((Time.now.round - activity.created_at.round).to_i, :format => :short)
+    activity.date
   end
   child :order do
     attributes :id, :total
@@ -24,6 +25,9 @@ child @activities do
     end
     child :order_items do
       attributes :quantity, :note
+      node :item_name do |order_item|
+        order_item.dish.name
+      end
       child :dish do
         attributes :name, :description, :price
       end

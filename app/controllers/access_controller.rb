@@ -35,13 +35,23 @@ class AccessController < ApplicationController
   end
   
   def setup_activity(activity)
-      activity[:table_number] = activity.table.number
-      activity[:date] = activity.created_at.to_s
-      activity[:checked] = (!activity.ack.nil?)
-      #duration = Time.now - activity.created_at.time
-      #activity[:date] = ChronicDuration.output(duration.to_i, :format => :long)
-      #spanish_time = Chronic18n.parse(activity[:date], :es)
-      #activity[:date] = spanish_time if !spanish_time.nil?
+    # convert activity into hash
+    activityHash = activity.attributes
+    activityHash["table_number"] = activity.table_number
+    activityHash["date"] = activity.date
+    if !activity.order.nil?
+      # setup the order
+      activityHash["order"] = activity.order.attributes
+      activityHash["order"]["order_items"] = []
+      activity.order.order_items.each{ |order_item|
+        orderItemHash = order_item.attributes
+        orderItemHash["item_name"] = order_item.dish.name
+        activityHash["order"]["order_items"] << orderItemHash
+      }
+    end
+    #spanish_time = Chronic18n.parse(activity[:date], :es)
+    #activity[:date] = spanish_time if !spanish_time.nil?
+    return activityHash.to_json
   end
   
   def sort_and_filter(items,sort_attr,filter_attr,reverse_sort,limit)

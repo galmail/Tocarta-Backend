@@ -86,8 +86,7 @@ class Api::TocartasController < AccessController
     restaurant_activity.table = @table
     @result = restaurant_activity.save
     # push activity to server
-    #setup_activity(restaurant_activity)
-    Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', restaurant_activity.to_json)
+    Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
     # update table status
     @table.status = restaurant_activity.name
     @table.save
@@ -102,8 +101,7 @@ class Api::TocartasController < AccessController
     restaurant_activity.table = @table
     @result = restaurant_activity.save
     # push activity to server
-    #setup_activity(restaurant_activity)
-    Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', restaurant_activity.to_json)
+    Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
     # update table status
     @table.status = restaurant_activity.name
     @table.save
@@ -135,7 +133,7 @@ class Api::TocartasController < AccessController
     restaurant_activity.name = "checked" # as a check in
     restaurant_activity.table = @table
     @result = restaurant_activity.save
-    Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', restaurant_activity.to_json)
+    Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
     @table.status = restaurant_activity.name
     @table.save
   end
@@ -148,7 +146,7 @@ class Api::TocartasController < AccessController
       restaurant_activity.ack = DateTime.now
       @result = restaurant_activity.save
     end
-    Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', restaurant_activity.to_json)
+    Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
     @table.status = restaurant_activity.name
     @table.save
   end
@@ -156,8 +154,10 @@ class Api::TocartasController < AccessController
   def get_sent_order_items
     # get all orders since last checked in
     activity = RestaurantActivity.find(:first,:conditions => {:table_id => @table.id, :name => "checked"}, :order => "created_at DESC")
-    orders = Order.where('table_id = ? AND created_at > ?',@table.id,activity.created_at)
-    @order_items = orders.collect { |order| order.order_items }.flatten.uniq { |order_item| order_item.dish.id  }
+    if activity != nil
+      orders = Order.where('table_id = ? AND created_at > ?',@table.id,activity.created_at)
+      @order_items = orders.collect { |order| order.order_items }.flatten.uniq { |order_item| order_item.dish.id  }
+    end
   end
   
   def make_order
@@ -196,7 +196,7 @@ class Api::TocartasController < AccessController
     restaurant_activity.order = order
     @result = restaurant_activity.save
     # push activity to server
-    Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', restaurant_activity.to_json)
+    Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
     # update table status
     @table.status = restaurant_activity.name
     @table.save
