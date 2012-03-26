@@ -3,6 +3,7 @@ class Restaurant < ActiveRecord::Base
   belongs_to :chain
 	has_one :restaurant_setting
 	has_many :restaurant_activities
+	has_many :restaurant_banners
 	has_many :menus
 	has_many :combos
 	has_many :combo_types

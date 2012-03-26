@@ -1,7 +1,12 @@
 class AccessController < ApplicationController
 
   def validate_license_key
-    @result = true
+    @result = false
+    if !@tablet.activated
+      @tablet.activated = true
+      @tablet.save
+      @result = true
+    end
   end
 
   private

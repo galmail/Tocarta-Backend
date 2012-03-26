@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120320231053) do
+ActiveRecord::Schema.define(:version => 20120325131841) do
 
   create_table "chains", :force => true do |t|
     t.integer  "user_id"
@@ -211,6 +211,7 @@ ActiveRecord::Schema.define(:version => 20120320231053) do
   end
 
   add_index "orders", ["client_id"], :name => "index_orders_on_client_id"
+  add_index "orders", ["created_at"], :name => "index_orders_on_created_at"
   add_index "orders", ["table_id"], :name => "index_orders_on_table_id"
   add_index "orders", ["tablet_id"], :name => "index_orders_on_tablet_id"
 
@@ -237,9 +238,25 @@ ActiveRecord::Schema.define(:version => 20120320231053) do
     t.datetime "ack"
   end
 
+  add_index "restaurant_activities", ["created_at"], :name => "index_restaurant_activities_on_created_at"
   add_index "restaurant_activities", ["order_id"], :name => "index_restaurant_activities_on_order_id"
   add_index "restaurant_activities", ["restaurant_id"], :name => "index_restaurant_activities_on_restaurant_id"
   add_index "restaurant_activities", ["table_id"], :name => "index_restaurant_activities_on_table_id"
+
+  create_table "restaurant_banners", :force => true do |t|
+    t.integer  "restaurant_id"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.string   "name"
+    t.integer  "position"
+    t.boolean  "active",             :default => true
+  end
+
+  add_index "restaurant_banners", ["restaurant_id"], :name => "index_restaurant_banners_on_restaurant_id"
 
   create_table "restaurant_settings", :force => true do |t|
     t.integer  "restaurant_id"
@@ -256,6 +273,7 @@ ActiveRecord::Schema.define(:version => 20120320231053) do
     t.boolean  "request_bill_button", :default => true
     t.boolean  "show_help_button",    :default => true
     t.boolean  "show_survey",         :default => true
+    t.integer  "access_key",          :default => 1111
   end
 
   add_index "restaurant_settings", ["restaurant_id"], :name => "index_restaurant_settings_on_restaurant_id"
@@ -364,8 +382,8 @@ ActiveRecord::Schema.define(:version => 20120320231053) do
   create_table "tablets", :force => true do |t|
     t.integer  "table_id"
     t.string   "name"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.boolean  "active"
     t.string   "access_key"
     t.string   "display_size"
@@ -373,6 +391,7 @@ ActiveRecord::Schema.define(:version => 20120320231053) do
     t.string   "device_name"
     t.string   "device_os"
     t.datetime "last_menu_sync"
+    t.boolean  "activated",      :default => false
   end
 
   add_index "tablets", ["table_id"], :name => "index_tablets_on_table_id"

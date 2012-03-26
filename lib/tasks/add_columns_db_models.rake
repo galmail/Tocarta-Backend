@@ -42,10 +42,14 @@ namespace :db do
 		# Restaurant
     sh "#{action} add_columns_to_restaurant manager:string email:string address:string phone:string note:text"
     fix_model('Restaurant',['attr_accessible :manager, :email, :address, :phone, :note'])
+    
+    # RestaurantBanner
+    sh "#{action} add_columns_to_restaurant_banner name:string position:integer active:boolean"
+    fix_model('RestaurantBanner',['attr_accessible :name, :position, :active, :photo'])
 		
 		# RestaurantSetting
-		sh "#{action} add_columns_to_restaurant_setting num_licenses:integer default_language:string last_menu_sync:datetime multilang_homepage:boolean games:boolean call_waiter_button:boolean order_button:boolean request_bill_button:boolean show_help_button:boolean show_survey:boolean"
-		fix_model('RestaurantSetting',['attr_accessible :num_licenses, :default_language, :last_menu_sync'])
+		sh "#{action} add_columns_to_restaurant_setting num_licenses:integer default_language:string last_menu_sync:datetime multilang_homepage:boolean games:boolean call_waiter_button:boolean order_button:boolean request_bill_button:boolean show_help_button:boolean show_survey:boolean, access_key:integer"
+		fix_model('RestaurantSetting',['attr_accessible :num_licenses, :default_language, :last_menu_sync, :access_key'])
 		
 		# RestaurantActivity
     sh "#{action} add_columns_to_restaurant_activity ack:timestamp"
@@ -56,8 +60,8 @@ namespace :db do
     fix_model('Table',['attr_accessible :number,:status'])
     
     # Tablet
-    sh "#{action} add_columns_to_tablet active:boolean access_key:string display_size:string device_brand:string device_name:string device_os:string last_menu_sync:datetime"
-    fix_model('Tablet',['attr_accessible :active, :access_key, :display_size, :device_brand, :device_name, :device_os, :last_menu_sync'])
+    sh "#{action} add_columns_to_tablet active:boolean activated:boolean access_key:string display_size:string device_brand:string device_name:string device_os:string last_menu_sync:datetime"
+    fix_model('Tablet',['attr_accessible :active, :activated, :access_key, :display_size, :device_brand, :device_name, :device_os, :last_menu_sync'])
 		
 		# MenuSetting
 		sh "#{action} add_columns_to_menu_setting active:boolean priority:integer trigger_activation:datetime last_time_changed:datetime"

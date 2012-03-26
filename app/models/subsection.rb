@@ -3,10 +3,10 @@ class Subsection < ActiveRecord::Base
 	has_many :dishes
 	has_attached_file(
 	 :photo,
-	 :path => "img/subsections/:style/subsection_:id.:extension",
+	 :path => ":chain_rest_id/img/subsections/:style/subsection_:id.:extension",
 	 :styles => { :mini => TocartaAdmin::Application::IMAGE_MINI_SIZE, :thumb => TocartaAdmin::Application::IMAGE_THUMBNAIL_SIZE }
 	)
 	translates :name, :fallbacks_for_empty_translations => true
 	attr_accessible :active, :position, :photo, :name
-	attr_accessible :section_id
+	attr_accessible :section_id	
 end

@@ -1,7 +1,14 @@
 class Api::TocartasController < AccessController
   before_filter :identify_tablet, :setup_language
   
+  def reset_license
+    @tablet.activated = false
+    @result = @tablet.save
+  end
+  
   def get_restaurant_info
+    # show banners
+    sort_and_filter(@restaurant.restaurant_banners,nil,nil,nil,nil)
     # TODO get restaurant menus in all languages
     @menus = @restaurant.menus
     # show only active elements
@@ -133,7 +140,7 @@ class Api::TocartasController < AccessController
     restaurant_activity.name = "checked" # as a check in
     restaurant_activity.table = @table
     @result = restaurant_activity.save
-    Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
+    # Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
     @table.status = restaurant_activity.name
     @table.save
   end
@@ -146,7 +153,7 @@ class Api::TocartasController < AccessController
       restaurant_activity.ack = DateTime.now
       @result = restaurant_activity.save
     end
-    Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
+    # Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
     @table.status = restaurant_activity.name
     @table.save
   end

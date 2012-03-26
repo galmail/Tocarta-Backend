@@ -14,8 +14,9 @@ module TocartaAdmin
     
     IMAGE_MINI_SIZE = "80x53#"
     IMAGE_THUMBNAIL_SIZE = "151x115#"
-    IMAGE_MEDIUM_SIZE = "x49"
+    IMAGE_MEDIUM_SIZE = "x100" # "x49"
     IMAGE_LARGE_SIZE = "689x474#"
+    IMAGE_BANNER_SIZE = "705x474#"
     
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
