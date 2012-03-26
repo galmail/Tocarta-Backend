@@ -6,3 +6,5 @@ glue :dish do
     dish.photo.url(:thumb).split(ENV['S3_BUCKET']).last.split('?').first
   end
 end
+
+

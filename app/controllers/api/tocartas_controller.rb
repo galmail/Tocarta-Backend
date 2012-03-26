@@ -124,7 +124,7 @@ class Api::TocartasController < AccessController
     @tablet.table = table
     @tablet.save
     
-    if params[:new_table]=="false"
+    if params[:new_table]!="true"
       @result = true
       return true
     end
@@ -163,7 +163,9 @@ class Api::TocartasController < AccessController
     activity = RestaurantActivity.find(:first,:conditions => {:table_id => @table.id, :name => "checked"}, :order => "created_at DESC")
     if activity != nil
       orders = Order.where('table_id = ? AND created_at > ?',@table.id,activity.created_at)
-      @order_items = orders.collect { |order| order.order_items }.flatten.uniq { |order_item| order_item.dish.id  }
+      @order_items = orders.collect { |order|
+        order.order_items.select { |order_item| order_item.dish.subsection.nil? or !order_item.dish.subsection.section.hasBigSubsections }
+      }.flatten.uniq { |order_item| order_item.dish.id  }
     end
   end
   
