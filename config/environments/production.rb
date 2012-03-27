@@ -13,7 +13,7 @@ TocartaAdmin::Application.configure do
     }
   })
   
-  # Setting up Pusher in development
+  # Setting up Pusher in production
   Pusher.app_id = '17051'
   Pusher.key    = '7eb8d4a46b4a183f76e7'
   Pusher.secret = 'c5f0ad3864787f78d53f'

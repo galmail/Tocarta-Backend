@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120325131841) do
+ActiveRecord::Schema.define(:version => 20120327111914) do
 
   create_table "chains", :force => true do |t|
     t.integer  "user_id"
@@ -133,13 +133,13 @@ ActiveRecord::Schema.define(:version => 20120325131841) do
     t.integer  "section_id"
     t.integer  "subsection_id"
     t.string   "name"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.boolean  "active"
+    t.boolean  "active",             :default => true
     t.integer  "position"
     t.text     "description"
     t.decimal  "price"
@@ -313,7 +313,7 @@ ActiveRecord::Schema.define(:version => 20120325131841) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.boolean  "active"
+    t.boolean  "active",             :default => true
     t.integer  "position"
     t.boolean  "hasBigSubsections",  :default => false
   end
@@ -333,13 +333,13 @@ ActiveRecord::Schema.define(:version => 20120325131841) do
   create_table "subsections", :force => true do |t|
     t.integer  "section_id"
     t.string   "name"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.boolean  "active"
+    t.boolean  "active",             :default => true
     t.integer  "position"
   end
 
