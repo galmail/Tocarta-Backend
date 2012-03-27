@@ -6,6 +6,7 @@ class Ability
     
     can :access, :rails_admin
     can :manage, :all
+    
     #cannot [:update, :destroy], User, :email => 'username@example.com' #testing
     
     # if user.role == "admin"
