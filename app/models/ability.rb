@@ -9,7 +9,7 @@ class Ability
     #cannot [:update, :destroy], User, :email => 'username@example.com' #testing
     
     # if user.role == "admin"
-      # # can :manage, :all
+      # can :manage, :all
     # else
 #       
     # end

@@ -10,7 +10,7 @@ gem 'sqlite3', :group => :development
 gem 'pg', :group => :production
 
 #### Rails Admin Setup ####
-gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+gem 'rails_admin', :git => 'git://github.com/tocarta/rails_admin.git'
 gem 'devise'  # authentication
 gem 'cancan'  # authorization
 
