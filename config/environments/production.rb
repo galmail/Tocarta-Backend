@@ -1,11 +1,15 @@
 TocartaAdmin::Application.configure do
   
+  ENV['S3_BUCKET'] ||= 'tocarta-prod'
+  ENV['S3_KEY'] ||= 'AKIAJCY5PI67O7THQ5MQ'
+  ENV['S3_SECRET'] ||= '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'
+  
   Paperclip::Attachment.default_options.merge!({
     :storage => :s3,
-    :bucket => ENV['S3_BUCKET_PRO'],
+    :bucket => ENV['S3_BUCKET'],
     :s3_credentials => {
-      :access_key_id => ENV['S3_KEY_PRO'],
-      :secret_access_key => ENV['S3_SECRET_PRO']
+      :access_key_id => ENV['S3_KEY'],
+      :secret_access_key => ENV['S3_SECRET']
     }
   })
   

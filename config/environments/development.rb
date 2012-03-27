@@ -1,6 +1,10 @@
 TocartaAdmin::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
   
+  ENV['S3_BUCKET'] ||= 'tocarta-test'
+  ENV['S3_KEY'] ||= 'AKIAJCY5PI67O7THQ5MQ'
+  ENV['S3_SECRET'] ||= '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'
+  
   # Setting up Paperclip
   Paperclip::Attachment.default_options.merge!({
     :storage => :s3,
