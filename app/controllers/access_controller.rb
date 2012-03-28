@@ -68,12 +68,11 @@ class AccessController < ApplicationController
   end
   
   def sort_and_filter(items,sort_attr,filter_attr,reverse_sort,limit)
-    return if items.nil?
     sort_attr = sort_attr || :position
     filter_attr = filter_attr || :active
     items.sort_by!{|item|
       item_position = 0
-      item_position = item[sort_attr] if item[sort_attr].is_a?(Numeric)
+      item_position = item[sort_attr] if !item[sort_attr].nil? and item[sort_attr].is_a?(Numeric)
     }
     items.reject!{|item| !item[filter_attr]}
     if !reverse_sort.nil? and reverse_sort==true
