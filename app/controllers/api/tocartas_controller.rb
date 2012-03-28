@@ -83,7 +83,7 @@ class Api::TocartasController < AccessController
     end
     
     # get all common icons
-    @dish_types.each { |dish_type|
+    DishType.all.each { |dish_type|
       if !dish_type.icon_file_name.nil? and dish_type.icon_updated_at > last_update
         @images << dish_type.icon.url(:small_icon)
         @images << dish_type.icon.url(:big_icon)
