@@ -72,7 +72,11 @@ class AccessController < ApplicationController
     filter_attr = filter_attr || :active
     items.sort_by!{|item|
       item_position = 0
-      item_position = item[sort_attr] if !item[sort_attr].nil? and item[sort_attr].is_a?(Numeric)
+      if item[sort_attr].is_a?(Numeric) == false
+        item_position = 0
+      else
+        item_position = item[sort_attr]
+      end
     }
     items.reject!{|item| !item[filter_attr]}
     if !reverse_sort.nil? and reverse_sort==true
