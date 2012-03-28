@@ -40,6 +40,13 @@ child @menus do
     end
     child :dishes do
       attributes :id, :name, :price, :badge_name
+      node :short_title do |dish|
+        if dish.short_title.nil? or dish.short_title==""
+          dish.name
+        else
+          dish.short_title
+        end
+      end
       node :description do |dish|
         if dish.description.nil?
           dish.name
@@ -60,10 +67,22 @@ child @menus do
       child :comments do
         attributes :id, :name, :description, :rating
       end
+      child :dish_types => :dishtypes do
+        attributes :name
+        node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
+          dt.icon.url(:small_icon).split(ENV['S3_BUCKET']).last
+        end
+        node(:big_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
+          dt.icon.url(:big_icon).split(ENV['S3_BUCKET']).last
+        end
+      end
     end
     
     child :subsections do
       attributes :id, :name
+      node :short_title do |subsection|
+        subsection.name
+      end
       node(:mini, :unless => lambda {|s| s.photo_file_name.nil? }) do |subsection|
         subsection.photo.url(:mini).split(ENV['S3_BUCKET']).last
       end
@@ -72,6 +91,13 @@ child @menus do
       end
       child :dishes do
         attributes :id, :name, :price, :badge_name
+        node :short_title do |dish|
+          if dish.short_title.nil? or dish.short_title==""
+            dish.name
+          else
+            dish.short_title
+          end
+        end
         node :description do |dish|
           if dish.description.nil?
             dish.name
@@ -92,10 +118,16 @@ child @menus do
         child :comments do
           attributes :id, :name, :description, :rating
         end
+        child :dish_types => :dishtypes do
+          attributes :name
+          node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
+            dt.icon.url(:small_icon).split(ENV['S3_BUCKET']).last
+          end
+          node(:big_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
+            dt.icon.url(:big_icon).split(ENV['S3_BUCKET']).last
+          end
+        end
       end
     end
-    
   end
-  
 end
-

@@ -59,6 +59,14 @@ class AccessController < ApplicationController
     return activityHash.to_json
   end
   
+  def trigger_activity(restaurant_activity)
+    Pusher["tocarta_restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
+  end
+  
+  def trigger_tablet(key,message)
+    Pusher["tocarta_lk_#{key}_channel"].trigger(message,{})
+  end
+  
   def sort_and_filter(items,sort_attr,filter_attr,reverse_sort,limit)
     sort_attr = sort_attr || :position
     filter_attr = filter_attr || :active

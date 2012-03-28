@@ -18,6 +18,11 @@ module TocartaAdmin
     IMAGE_LARGE_SIZE = "689x474#"
     IMAGE_BANNER_SIZE = "705x474#"
     
+    ### dish icons ###
+    
+    BIG_ICON_SIZE = "20x16#"
+    SMALL_ICON_SIZE = "13x10#"
+    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

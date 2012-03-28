@@ -13,16 +13,13 @@ class Dish < ActiveRecord::Base
 	 :styles => { :large => TocartaAdmin::Application::IMAGE_LARGE_SIZE, :thumb => TocartaAdmin::Application::IMAGE_THUMBNAIL_SIZE, :mini => TocartaAdmin::Application::IMAGE_MINI_SIZE }
 	)
 	translates :name, :description, :story, :fallbacks_for_empty_translations => true
-	attr_accessible :name, :active, :position, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts, :badge_name, :photo
-	attr_accessible :section_id, :subsection_id
+	attr_accessible :name, :active, :position, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts, :short_title, :badge_name, :photo
+	attr_accessible :section_id, :subsection_id, :dish_type_ids
 	
 	def update_rating(comment_rating)
     num_comments = self.comments.length-1           # total number of comments (should filter only those comments that left)
     self.rating ||= 0                               # actual dish rating
     rate = ((num_comments.to_f*self.rating)+comment_rating.to_f)/(num_comments.to_f+1)
-    # puts "comment_rating=" + comment_rating.to_s
-    # puts "num_comments=" + num_comments.to_s
-    # puts "rating=" + rating.to_s
     self.rating = rate
     self.save
   end

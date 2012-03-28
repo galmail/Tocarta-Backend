@@ -1,6 +1,44 @@
 class Api::TocartasController < AccessController
   before_filter :identify_tablet, :setup_language
   
+  def im_alive
+    @result = false
+    @tablet.alive = Time.now
+    @result = @tablet.save
+  end
+  
+  def whos_alive
+    validate_params(['checked'])
+    # rest = Restaurant.find(params[:restaurant_id])
+    rest = @restaurant
+    # get all tablets of this restaurant and trigger them
+    unless rest.nil?
+      if params[:checked] == 'yes'
+        @now = 20.seconds.ago
+      else
+        @now = Time.now
+        rest.tablets.each { |tablet|
+          trigger_tablet(tablet.access_key,'alive')
+        }
+      end
+      @tablets = rest.tablets
+    end
+  end
+  
+  def update_tablets
+    @result = false
+    # validate_params(['restaurant_id'])
+    # rest = Restaurant.find(params[:restaurant_id])
+    rest = @restaurant
+    # get all tablets of this restaurant and trigger them
+    unless rest.nil?
+      rest.tablets.each { |tablet|
+        trigger_tablet(tablet.access_key,'update')
+      }
+      @result = true
+    end
+  end
+  
   def reset_license
     @tablet.activated = false
     @result = @tablet.save
@@ -43,6 +81,15 @@ class Api::TocartasController < AccessController
     if @tablet.last_menu_sync!=nil and params[:all]!="yes"
       last_update = @tablet.last_menu_sync
     end
+    
+    # get all common icons
+    @dish_types.each { |dish_type|
+      if !dish_type.icon_file_name.nil? and dish_type.icon_updated_at > last_update
+        @images << dish_type.icon.url(:small_icon)
+        @images << dish_type.icon.url(:big_icon)
+      end
+    }
+    
     # get all the photos of the restaurant, sections, subsections and dishes
     if !@restaurant.chain.logo_file_name.nil? and @restaurant.chain.logo_updated_at > last_update
       @images << @restaurant.chain.logo.url(:medium)
@@ -93,7 +140,7 @@ class Api::TocartasController < AccessController
     restaurant_activity.table = @table
     @result = restaurant_activity.save
     # push activity to server
-    Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
+    trigger_activity(restaurant_activity)
     # update table status
     @table.status = restaurant_activity.name
     @table.save
@@ -108,7 +155,7 @@ class Api::TocartasController < AccessController
     restaurant_activity.table = @table
     @result = restaurant_activity.save
     # push activity to server
-    Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
+    trigger_activity(restaurant_activity)
     # update table status
     @table.status = restaurant_activity.name
     @table.save
@@ -140,7 +187,6 @@ class Api::TocartasController < AccessController
     restaurant_activity.name = "checked" # as a check in
     restaurant_activity.table = @table
     @result = restaurant_activity.save
-    # Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
     @table.status = restaurant_activity.name
     @table.save
   end
@@ -153,7 +199,6 @@ class Api::TocartasController < AccessController
       restaurant_activity.ack = DateTime.now
       @result = restaurant_activity.save
     end
-    # Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
     @table.status = restaurant_activity.name
     @table.save
   end
@@ -205,7 +250,7 @@ class Api::TocartasController < AccessController
     restaurant_activity.order = order
     @result = restaurant_activity.save
     # push activity to server
-    Pusher["restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
+    trigger_activity(restaurant_activity)
     # update table status
     @table.status = restaurant_activity.name
     @table.save

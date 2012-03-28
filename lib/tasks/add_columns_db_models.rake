@@ -60,8 +60,8 @@ namespace :db do
     fix_model('Table',['attr_accessible :number,:status'])
     
     # Tablet
-    sh "#{action} add_columns_to_tablet active:boolean activated:boolean access_key:string display_size:string device_brand:string device_name:string device_os:string last_menu_sync:datetime"
-    fix_model('Tablet',['attr_accessible :active, :activated, :access_key, :display_size, :device_brand, :device_name, :device_os, :last_menu_sync'])
+    sh "#{action} add_columns_to_tablet active:boolean activated:boolean access_key:string display_size:string device_brand:string device_name:string device_os:string last_menu_sync:datetime alive:datetime"
+    fix_model('Tablet',['attr_accessible :active, :activated, :access_key, :display_size, :device_brand, :device_name, :device_os, :last_menu_sync, :alive'])
 		
 		# MenuSetting
 		sh "#{action} add_columns_to_menu_setting active:boolean priority:integer trigger_activation:datetime last_time_changed:datetime"
@@ -106,8 +106,8 @@ namespace :db do
     # DishTypeAssociation
 		
 		# Dish
-    sh "#{action} add_columns_to_dish active:boolean badge_name:string position:integer description:text price:decimal rating:decimal reviews:integer story:text video:string nutrition_facts:string"
-    fix_model('Dish',['translates :name, :badge_name, :description, :story, :fallbacks_for_empty_translations => true','attr_accessible :active, :position, :badge_name, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts'])
+    sh "#{action} add_columns_to_dish active:boolean badge_name:string position:integer description:text price:decimal rating:decimal reviews:integer story:text video:string nutrition_facts:string short_title:string"
+    fix_model('Dish',['translates :name, :badge_name, :description, :story, :fallbacks_for_empty_translations => true','attr_accessible :active, :position, :badge_name, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts, :short_title'])
 		
 		# Comment
 		sh "#{action} add_columns_to_comment description:text rating:integer approved:boolean"

@@ -10,4 +10,9 @@ class Restaurant < ActiveRecord::Base
 	has_many :tables
 	has_many :comments
 	attr_accessible :name, :manager, :email, :address, :phone, :note, :chain_id, :user_id
+	
+	def tablets
+	  self.tables.collect { |table| table.tablets }.flatten.select { |tablet| tablet.active }
+	end
+	
 end

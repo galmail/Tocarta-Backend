@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120325131841) do
+ActiveRecord::Schema.define(:version => 20120328123747) do
 
   create_table "chains", :force => true do |t|
     t.integer  "user_id"
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(:version => 20120325131841) do
     t.string   "video"
     t.string   "nutrition_facts"
     t.string   "badge_name"
+    t.string   "short_title"
   end
 
   add_index "dishes", ["combo_id"], :name => "index_dishes_on_combo_id"
@@ -392,6 +393,7 @@ ActiveRecord::Schema.define(:version => 20120325131841) do
     t.string   "device_os"
     t.datetime "last_menu_sync"
     t.boolean  "activated",      :default => false
+    t.datetime "alive"
   end
 
   add_index "tablets", ["table_id"], :name => "index_tablets_on_table_id"

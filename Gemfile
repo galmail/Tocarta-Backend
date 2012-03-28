@@ -6,8 +6,15 @@ gem 'rails', '3.2.1'
 gem 'jquery-rails'
 
 #### Database Setup ####
-gem 'sqlite3', :group => :development
-gem 'pg', :group => :production
+
+group :development do
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
+  gem 'thin'
+end
 
 #### Rails Admin Setup ####
 gem 'rails_admin', :git => 'git://github.com/tocarta/rails_admin.git'
@@ -17,6 +24,9 @@ gem 'cancan'  # authorization
 #### Ruby API Builder Language ####
 gem 'rabl'
 gem 'yajl-ruby'
+
+# JSON gem
+# gem 'json'
 
 #### Paperclip and Amazon S3 ####
 gem 'paperclip', '~> 2.7'
@@ -36,9 +46,6 @@ gem 'chronic_duration'
 
 # Twitter gem
 gem 'twitter_oauth'
-
-# JSON gem
-gem 'json'
 
 # Translation
 gem 'globalize3', :git => 'git://github.com/svenfuchs/globalize3.git'
