@@ -90,10 +90,19 @@ class Api::TocartasController < AccessController
       end
     }
     
-    # get all the photos of the restaurant, sections, subsections and dishes
+    # get the chain logo
     if !@restaurant.chain.logo_file_name.nil? and @restaurant.chain.logo_updated_at > last_update
       @images << @restaurant.chain.logo.url(:medium)
     end
+    
+    # get the restaurant banners
+    @restaurant.restaurant_banners.each { |banner|
+      if !banner.photo_file_name.nil? and banner.photo_updated_at > last_update
+        @images << banner.photo.url(:banner)
+      end
+    }
+    
+    # get all the photos of the menus, sections, subsections and dishes
     @restaurant.menus.each { |menu|
       menu.sections.each { |section|
         if !section.photo_file_name.nil? and section.photo_updated_at > last_update
