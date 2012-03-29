@@ -111,6 +111,7 @@ class Api::TocartasController < AccessController
         end
         section.dishes.each { |dish|
           if !dish.photo_file_name.nil? and dish.photo_updated_at > last_update
+            @images << dish.photo.url(:mini)
             @images << dish.photo.url(:thumb)
             @images << dish.photo.url(:large)
           end
@@ -122,6 +123,7 @@ class Api::TocartasController < AccessController
           end
           subsection.dishes.each { |dish|
             if !dish.photo_file_name.nil? and dish.photo_updated_at > last_update
+              @images << dish.photo.url(:mini)
               @images << dish.photo.url(:thumb)
               @images << dish.photo.url(:large)
             end
