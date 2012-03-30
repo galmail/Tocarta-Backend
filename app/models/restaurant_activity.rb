@@ -2,7 +2,7 @@ class RestaurantActivity < ActiveRecord::Base
   belongs_to :restaurant
   belongs_to :table
   belongs_to :order
-	attr_accessible :ack
+	attr_accessible :ack, :name
 	
 	def table_number
 	  self.table.number unless self.table.nil?
