@@ -147,7 +147,7 @@ class Api::TocartasController < AccessController
     # insert new activity
     restaurant_activity = RestaurantActivity.new
     restaurant_activity.restaurant = @restaurant
-    restaurant_activity.name = "Call Waiter"
+    restaurant_activity.name = "call_waiter"
     restaurant_activity.table = @table
     @result = restaurant_activity.save
     # push activity to server
@@ -162,7 +162,7 @@ class Api::TocartasController < AccessController
     # insert new activity
     restaurant_activity = RestaurantActivity.new
     restaurant_activity.restaurant = @restaurant
-    restaurant_activity.name = "Request Bill"
+    restaurant_activity.name = "request_bill"
     restaurant_activity.table = @table
     @result = restaurant_activity.save
     # push activity to server
@@ -256,7 +256,7 @@ class Api::TocartasController < AccessController
     # send it to the waiter
     restaurant_activity = RestaurantActivity.new
     restaurant_activity.restaurant = @restaurant
-    restaurant_activity.name = "Submit Order"
+    restaurant_activity.name = "submit_order"
     restaurant_activity.table = @table
     restaurant_activity.order = order
     @result = restaurant_activity.save

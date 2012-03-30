@@ -6,7 +6,7 @@ class Api::CommandCenterController < AccessController
   def get_restaurant_situation
     num_activities = params[:num_activities]
     num_activities = MAX_NUM_ACTIVITIES_TO_LOAD if num_activities.nil?
-    @activities = RestaurantActivity.where(:restaurant_id => @restaurant.id).order('created_at DESC').limit(num_activities)
+    @activities = RestaurantActivity.where('restaurant_id = ? AND name IS NOT ?',@restaurant.id,'checked').order('created_at DESC').limit(num_activities)
   end
   
   def ack_activity

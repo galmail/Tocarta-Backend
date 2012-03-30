@@ -4,7 +4,7 @@ object false
 
 node :id do @restaurant.id end
 node :name do @restaurant.name end
-node :logo do @restaurant.chain.logo.url(:medium).split(ENV['S3_BUCKET']).last end
+node :logo do @restaurant.chain.logo.url(:medium) end
 node :num_tables do @restaurant.tables.length end
 
 ### restaurant activities ###
