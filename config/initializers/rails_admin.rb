@@ -4,7 +4,7 @@
 RailsAdmin.config do |config|
 
   config.authorize_with :cancan
-  config.authenticate_with {}
+  # config.authenticate_with {}
 
 
   # If your default_local is different from :en, uncomment the following 2 lines and set your default locale here:
@@ -53,6 +53,129 @@ RailsAdmin.config do |config|
       
       fields_of_type :date do
         # Configuration here will affect all date fields, in the list section, for all included models. See README for a comprehensive type list.
+      end
+      
+      # field :name do
+        # label "Nombre"
+      # end
+      
+    end
+  end
+  
+  ######## Chain Model ########
+  
+  config.model Chain do
+    label 'Cadena'
+    label_plural 'Cadenas'
+    list do
+      exclude_fields :id, :user, :address, :note, :survey_questions
+    end
+  end
+  
+  ######## Restaurant Model ########
+  
+  config.model Restaurant do
+    label 'Restaurante'
+    label_plural 'Restaurantes'
+    list do
+      exclude_fields :id, :user, :note, :restaurant_activities, :restaurant_banners, :menus, :combos, :combo_types, :tables, :comments, :restaurant_setting
+      field :chain do
+        label "Cadena"
+      end
+    end
+  end
+  
+  ######## RestaurantSetting Model ########
+  
+  config.model RestaurantSetting do
+    label 'Ajustes'
+    label_plural 'Ajustes'
+    list do
+      exclude_fields :id, :name, :default_language, :last_menu_sync, :multilang_homepage, :games
+    end
+    edit do
+      exclude_fields :id, :name, :default_language, :last_menu_sync, :multilang_homepage, :games
+      field :num_licenses do
+        read_only true
+      end
+    end
+  end
+  
+  ######## Menu Model ########
+  
+  config.model Menu do
+    label 'Menu'
+    label_plural 'Menus'
+    list do
+      exclude_fields :id, :theme, :menu_setting, :sections
+    end
+  end
+  
+  ######## DishType Model ########
+  
+  config.model DishType do
+    label 'Tipo de Comida'
+    label_plural 'Tipos de Comida'
+    list do
+      exclude_fields :id, :position, :dish_class, :dish_type_associations, :dishes
+    end
+  end
+  
+  ######## Dish Model ########
+  
+  config.model Dish do
+    label 'Plato'
+    label_plural 'Platos'
+    list do
+      exclude_fields :id, :combo, :description, :rating, :reviews, :story, :video, :nutrition_facts, :photo
+      exclude_fields :badge_name, :short_title, :order_items, :comments, :dish_variations, :dish_type_associations, :dish_types
+    end
+    edit do
+      exclude_fields :id, :combo, :reviews, :story, :video, :nutrition_facts
+      exclude_fields :order_items, :comments, :dish_variations, :dish_type_associations
+      field :rating do
+        read_only true
+      end
+    end
+  end
+  
+  ######## Section Model ########
+  
+  config.model Section do
+    label 'Seccion'
+    label_plural 'Secciones'
+    list do
+      exclude_fields :id, :menu, :hasBigSubsections, :dishes, :subsections
+    end
+    edit do
+      exclude_fields :dishes, :subsections
+    end
+  end
+  
+  ######## Subsection Model ########
+  
+  config.model Subsection do
+    label 'Subseccion'
+    label_plural 'Subsecciones'
+    list do
+      exclude_fields :id, :dishes
+    end
+    edit do
+      exclude_fields :id, :dishes
+    end
+  end
+  
+  ######## Comment Model ########
+  
+  config.model Comment do
+    label 'Comentario'
+    label_plural 'Comentarios'
+    list do
+      exclude_fields :client
+    end
+    edit do
+      field [:dish, :restaurant, :client, :survey_question, :name, :description, :rating] do
+        read_only true
       end
     end
   end

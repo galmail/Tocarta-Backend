@@ -4,16 +4,29 @@ class Ability
   def initialize(user)
     
     
-    can :access, :rails_admin
-    can :manage, :all
+    can :access, :rails_admin   # grant access to rails_admin
+    can :dashboard              # grant access to the dashboard
     
     #cannot [:update, :destroy], User, :email => 'username@example.com' #testing
     
-    # if user.role == "admin"
-      # can :manage, :all
-    # else
-#       
-    # end
+    alias_action :update, :destroy, :create, :to => :write
+    
+    if user.role == "admin"
+      can :manage, :all
+    elsif user.role == "restaurant"
+      can :read, Chain, :user => { :id => user.id }
+      can :read, Restaurant, :chain => { :user => { :id => user.id } }
+      can [:read, :update], RestaurantSetting, :restaurant => { :chain => { :user => { :id => user.id } } }
+      can :read, Menu, :restaurant => { :chain => { :user => { :id => user.id } } }
+      can [:read, :update, :create], Section, :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } }
+      can [:read, :update, :create], Subsection, :section => { :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } } }
+      can [:read, :update, :create], Dish, :section => { :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } } }
+      # can :manage, Dish, :subsection => { :section => { :menu => { :restaurant => { :id => user.chain.restaurant_ids } } } }
+      can [:read, :update], Comment, :restaurant => { :chain => { :user => { :id => user.id } } }
+      
+      can :read, DishType
+      
+    end
     
     
     # Define abilities for the passed in user here. For example:

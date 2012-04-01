@@ -8,5 +8,5 @@ class Subsection < ActiveRecord::Base
 	)
 	translates :name, :fallbacks_for_empty_translations => true
 	attr_accessible :active, :position, :photo, :name
-	attr_accessible :section_id	
+	attr_accessible :section_id
 end

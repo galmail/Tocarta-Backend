@@ -6,7 +6,6 @@ gem 'rails', '3.2.1'
 gem 'jquery-rails'
 
 #### Database Setup ####
-
 group :development do
   gem 'sqlite3'
 end
