@@ -14,6 +14,7 @@ class Ability
     if user.role == "admin"
       can :manage, :all
     elsif user.role == "restaurant"
+      can :read, DishType
       can :read, Chain, :user => { :id => user.id }
       can :read, Restaurant, :chain => { :user => { :id => user.id } }
       can [:read, :update], RestaurantSetting, :restaurant => { :chain => { :user => { :id => user.id } } }
@@ -23,9 +24,10 @@ class Ability
       can [:read, :update, :create], Dish, :section => { :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } } }
       # can :manage, Dish, :subsection => { :section => { :menu => { :restaurant => { :id => user.chain.restaurant_ids } } } }
       can [:read, :update], Comment, :restaurant => { :chain => { :user => { :id => user.id } } }
-      
-      can :read, DishType
-      
+      can [:read, :create], Table, :restaurant => { :chain => { :user => { :id => user.id } } }
+      can :read, Tablet, :table => { :restaurant => { :chain => { :user => { :id => user.id } } } }
+      can :read, SurveyQuestion, :chain => { :user => { :id => user.id } }
+      can :read, Order, :table => { :restaurant => { :chain => { :user => { :id => user.id } } } }
     end
     
     

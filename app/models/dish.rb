@@ -16,6 +16,11 @@ class Dish < ActiveRecord::Base
 	attr_accessible :name, :active, :position, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts, :short_title, :badge_name, :photo
 	attr_accessible :section_id, :subsection_id, :dish_type_ids
 	
+	### Validations ###
+  
+  validates :name, :description, :price, :photo, :section_id, :presence => true
+  validates :badge_name, :length => { :maximum => 11 }
+	
 	def update_rating(comment_rating)
     num_comments = self.comments.length-1           # total number of comments (should filter only those comments that left)
     self.rating ||= 0                               # actual dish rating

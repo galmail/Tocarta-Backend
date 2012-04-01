@@ -54,11 +54,7 @@ RailsAdmin.config do |config|
       fields_of_type :date do
         # Configuration here will affect all date fields, in the list section, for all included models. See README for a comprehensive type list.
       end
-      
-      # field :name do
-        # label "Nombre"
-      # end
-      
+
     end
   end
   
@@ -94,7 +90,7 @@ RailsAdmin.config do |config|
       exclude_fields :id, :name, :default_language, :last_menu_sync, :multilang_homepage, :games
     end
     edit do
-      exclude_fields :id, :name, :default_language, :last_menu_sync, :multilang_homepage, :games
+      exclude_fields :id, :name, :default_language, :last_menu_sync, :multilang_homepage, :games, :restaurant
       field :num_licenses do
         read_only true
       end
@@ -178,6 +174,108 @@ RailsAdmin.config do |config|
         read_only true
       end
     end
+  end
+  
+  ######## Table Model ########
+  
+  config.model Table do
+    label 'Mesa'
+    label_plural 'Mesas'
+    object_label_method do
+      :table_label_method
+    end
+    list do
+      exclude_fields :id, :name, :language, :orders, :restaurant_activities
+      include_fields :updated_at
+      field :updated_at do
+        label 'Last Activity'
+      end
+      sort_by :updated_at
+    end
+    show do
+      exclude_fields :id, :name, :language, :orders, :restaurant_activities
+      include_fields :updated_at
+      field :updated_at do
+        label 'Last Activity'
+      end
+    end
+    create do
+      exclude_fields :id, :name, :language, :status, :dinners, :tablets, :orders, :restaurant_activities
+    end
+  end
+  
+  ######## Tablet Model ########
+  
+  config.model Tablet do
+    label 'Tablet'
+    label_plural 'Tablets'
+    list do
+      exclude_fields :id, :orders, :activated, :access_key, :display_size, :device_brand, :device_name, :device_os, :alive
+    end
+    show do
+      exclude_fields :id, :alive, :orders
+    end
+  end
+  
+  ######## SurveyQuestion Model ########
+  
+  config.model SurveyQuestion do
+    label 'Pregunta de Satisfaccion'
+    label_plural 'Preguntas de Satisfaccion'
+    list do
+      exclude_fields :id, :chain, :comments
+      sort_by :position
+    end
+    edit do
+      exclude_fields :id, :comments
+    end
+  end
+  
+  ######## Order Model ########
+  
+  config.model Order do
+    label 'Pedido'
+    label_plural 'Pedidos'
+    object_label_method do
+      :order_label_method
+    end
+    list do
+      exclude_fields :tablet, :client, :restaurant_activities, :name, :note, :language
+      include_fields :created_at
+      field :created_at do
+        label "Fecha y Hora"
+      end
+      field :order_items do
+        label "Articulos"
+      end
+      field :table do
+        label "Mesa"
+      end
+    end
+    show do
+      exclude_fields :client, :restaurant_activities, :name, :note, :language
+      include_fields :created_at, :total
+    end
+  end
+  
+  ######## OrderItem Model ########
+  
+  config.model OrderItem do
+    object_label_method do
+      :order_item_label_method
+    end
+  end
+  
+  def order_item_label_method
+    "#{self.quantity.to_s} #{self.dish.name}"
+  end
+  
+  def order_label_method
+    "#{self.id.to_s}"
+  end
+  
+  def table_label_method
+    "#{self.number.to_s}"
   end
   
   #

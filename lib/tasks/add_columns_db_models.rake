@@ -114,8 +114,8 @@ namespace :db do
 		fix_model('Comment',['attr_accessible :description, :rating, :approved'])
 		
 		# SurveyQuestion
-		sh "#{action} add_columns_to_survey_question description:text"
-		fix_model('SurveyQuestion',['translates :name, :description, :fallbacks_for_empty_translations => true','attr_accessible :description'])
+		sh "#{action} add_columns_to_survey_question description:text position:integer active:boolean"
+		fix_model('SurveyQuestion',['translates :name, :description, :fallbacks_for_empty_translations => true','attr_accessible :description, :name, :position, :active'])
 		
 		# DishVariation
     sh "#{action} add_columns_to_dish_variation price:decimal"

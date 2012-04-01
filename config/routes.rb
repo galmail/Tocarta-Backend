@@ -55,6 +55,7 @@ TocartaAdmin::Application.routes.draw do
   root :to => "rails_admin::Main#dashboard"
   
   # API for Tocartas
+  match 'api(/:action)', :controller => 'Api'
   match 'cli/c/:action(.:format)', :controller => 'Api::Tocartas'
   match 'cli/r/:action(.:format)', :controller => 'Api::CommandCenter'
   #match 'cli/an/:action(.:format)', :controller => 'Api::Analytics'

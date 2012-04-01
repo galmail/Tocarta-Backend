@@ -20,5 +20,37 @@ class Api::CommandCenterController < AccessController
     end
   end
   
+  def whos_alive
+    validate_params(['checked'])
+    # rest = Restaurant.find(params[:restaurant_id])
+    rest = @restaurant
+    # get all tablets of this restaurant and trigger them
+    unless rest.nil?
+      if params[:checked] == 'yes'
+        @now = 20.seconds.ago
+      else
+        @now = Time.now
+        rest.tablets.each { |tablet|
+          trigger_tablet(tablet.access_key,'alive')
+        }
+      end
+      @tablets = rest.tablets
+    end
+  end
+  
+  def update_tablets
+    @result = false
+    # validate_params(['restaurant_id'])
+    # rest = Restaurant.find(params[:restaurant_id])
+    rest = @restaurant
+    # get all tablets of this restaurant and trigger them
+    unless rest.nil?
+      rest.tablets.each { |tablet|
+        trigger_tablet(tablet.access_key,'update')
+      }
+      @result = true
+    end
+  end
+
 end
 

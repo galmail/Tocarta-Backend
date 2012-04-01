@@ -7,38 +7,6 @@ class Api::TocartasController < AccessController
     @result = @tablet.save
   end
   
-  def whos_alive
-    validate_params(['checked'])
-    # rest = Restaurant.find(params[:restaurant_id])
-    rest = @restaurant
-    # get all tablets of this restaurant and trigger them
-    unless rest.nil?
-      if params[:checked] == 'yes'
-        @now = 20.seconds.ago
-      else
-        @now = Time.now
-        rest.tablets.each { |tablet|
-          trigger_tablet(tablet.access_key,'alive')
-        }
-      end
-      @tablets = rest.tablets
-    end
-  end
-  
-  def update_tablets
-    @result = false
-    # validate_params(['restaurant_id'])
-    # rest = Restaurant.find(params[:restaurant_id])
-    rest = @restaurant
-    # get all tablets of this restaurant and trigger them
-    unless rest.nil?
-      rest.tablets.each { |tablet|
-        trigger_tablet(tablet.access_key,'update')
-      }
-      @result = true
-    end
-  end
-  
   def reset_license
     @tablet.activated = false
     @result = @tablet.save
@@ -47,6 +15,9 @@ class Api::TocartasController < AccessController
   def get_restaurant_info
     # show banners
     sort_and_filter(@restaurant.restaurant_banners,nil,nil,nil,nil)
+    # show survey questions
+    sort_and_filter(@restaurant.chain.survey_questions,nil,nil,nil,nil)
+    
     # TODO get restaurant menus in all languages
     @menus = @restaurant.menus
     # show only active elements
