@@ -16,7 +16,7 @@ module TocartaAdmin
     IMAGE_THUMBNAIL_SIZE = "151x115#"
     IMAGE_MEDIUM_SIZE = "x100" # "x49"
     IMAGE_LARGE_SIZE = "689x474#"
-    IMAGE_BANNER_SIZE = "705x474#"
+    IMAGE_BANNER_SIZE = "689x474#"
     
     ### dish icons ###
     

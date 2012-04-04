@@ -123,7 +123,7 @@ RailsAdmin.config do |config|
     label 'Plato'
     label_plural 'Platos'
     list do
-      exclude_fields :id, :combo, :description, :rating, :reviews, :story, :video, :nutrition_facts, :photo
+      exclude_fields :id, :combo, :description, :reviews, :story, :video, :nutrition_facts, :photo
       exclude_fields :badge_name, :short_title, :order_items, :comments, :dish_variations, :dish_type_associations, :dish_types
     end
     edit do
@@ -167,11 +167,66 @@ RailsAdmin.config do |config|
     label 'Comentario'
     label_plural 'Comentarios'
     list do
-      exclude_fields :client
+      include_fields :created_at, :rating, :description, :name, :dish, :survey_question, :approved, :restaurant
+      exclude_fields :id, :client
+      field :created_at do
+        label "Fecha y Hora"
+      end
+      field :rating do
+        label "Estrellas"
+      end
+      field :description do
+        label "Comentario"
+      end
+      field :name do
+        label "Nombre del Cliente"
+      end
+      field :dish do
+        label "Plato"
+      end
+      field :survey_question do
+        label "Pregunta de Satisfaccion"
+      end
+      field :restaurant do
+        label "Restaurante"
+      end
+      field :approved do
+        label "Aprobado"
+      end
     end
     edit do
-      field [:dish, :restaurant, :client, :survey_question, :name, :description, :rating] do
+      include_fields :created_at, :rating, :description, :name, :dish, :survey_question, :approved, :restaurant
+      exclude_fields :id, :client
+      field :created_at do
+        label "Fecha y Hora"
         read_only true
+      end
+      field :rating do
+        label "Estrellas"
+        read_only true
+      end
+      field :description do
+        label "Comentario"
+        read_only true
+      end
+      field :name do
+        label "Nombre del Cliente"
+        read_only true
+      end
+      field :dish do
+        label "Plato"
+        read_only true
+      end
+      field :survey_question do
+        label "Pregunta de Satisfaccion"
+        read_only true
+      end
+      field :restaurant do
+        label "Restaurante"
+        read_only true
+      end
+      field :approved do
+        label "Aprobado"
       end
     end
   end

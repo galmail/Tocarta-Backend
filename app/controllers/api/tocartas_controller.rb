@@ -9,6 +9,7 @@ class Api::TocartasController < AccessController
   
   def reset_license
     @tablet.activated = false
+    @tablet.last_menu_sync = nil
     @result = @tablet.save
   end
   
