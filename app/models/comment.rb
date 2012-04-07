@@ -9,6 +9,4 @@ class Comment < ActiveRecord::Base
 	# TODO capture everytime the comment is approved (or disapproved) and update dish rating
 	
 	
-	
-	
 end
