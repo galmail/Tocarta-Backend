@@ -21,8 +21,12 @@ class Ability
       can :read, Menu, :restaurant => { :chain => { :user => { :id => user.id } } }
       can [:read, :update, :create], Section, :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } }
       can [:read, :update, :create], Subsection, :section => { :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } } }
+      
       can [:read, :update, :create], Dish, :section => { :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } } }
-      # can :manage, Dish, :subsection => { :section => { :menu => { :restaurant => { :id => user.chain.restaurant_ids } } } }
+      # can [:read, :update, :create], Dish, {
+        # :subsection => { :section => { :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } } } }
+      # }
+      
       can [:read, :update], Comment, :restaurant => { :chain => { :user => { :id => user.id } } }
       can [:read, :create], Table, :restaurant => { :chain => { :user => { :id => user.id } } }
       can :read, Tablet, :table => { :restaurant => { :chain => { :user => { :id => user.id } } } }

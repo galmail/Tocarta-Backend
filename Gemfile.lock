@@ -115,6 +115,7 @@ GEM
     mime-types (1.18)
     multi_json (1.2.0)
     multi_xml (0.4.2)
+    newrelic_rpm (3.3.3)
     nokogiri (1.5.2)
     numerizer (0.1.1)
     oauth (0.4.5)
@@ -213,6 +214,7 @@ DEPENDENCIES
   devise
   globalize3!
   jquery-rails
+  newrelic_rpm
   paperclip (~> 2.7)
   pg
   pusher
