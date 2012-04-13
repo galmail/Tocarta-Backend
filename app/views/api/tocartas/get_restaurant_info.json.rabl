@@ -38,7 +38,7 @@ child @menus do
     node(:thumbnail, :unless => lambda {|s| s.photo_file_name.nil? }) do |section|
       section.photo.url(:thumb).split(ENV['S3_BUCKET']).last
     end
-    child :dishes do
+    child(:dishes, :if => lambda { |s| s.subsections.length==0 }) do
       attributes :id, :name, :price, :badge_name
       node :short_title do |dish|
         if dish.short_title.nil? or dish.short_title==""

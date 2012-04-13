@@ -18,7 +18,7 @@ class Dish < ActiveRecord::Base
 	
 	### Validations ###
   
-  validates :name, :description, :price, :photo, :section_id, :presence => true
+  validates :name, :price, :photo, :section_id, :presence => true
   validates :badge_name, :length => { :maximum => 11 }
 	
 	def update_rating(comment_rating)

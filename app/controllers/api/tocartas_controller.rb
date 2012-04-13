@@ -93,13 +93,13 @@ class Api::TocartasController < AccessController
             @images << subsection.photo.url(:mini)
             @images << subsection.photo.url(:thumb)
           end
-          subsection.dishes.each { |dish|
-            if !dish.photo_file_name.nil? and dish.photo_updated_at > last_update
-              @images << dish.photo.url(:mini)
-              @images << dish.photo.url(:thumb)
-              @images << dish.photo.url(:large)
-            end
-          }
+          # subsection.dishes.each { |dish|
+            # if !dish.photo_file_name.nil? and dish.photo_updated_at > last_update
+              # @images << dish.photo.url(:mini)
+              # @images << dish.photo.url(:thumb)
+              # @images << dish.photo.url(:large)
+            # end
+          # }
         }
       }
     }

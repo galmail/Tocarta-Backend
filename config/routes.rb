@@ -62,7 +62,6 @@ TocartaAdmin::Application.routes.draw do
   
   # Twitter and Facebook
   #match '/cli/c/twitter/:action(.:format)', :controller => 'Twitter'
-  
 
   # See how all your routes lay out with "rake routes"
 
