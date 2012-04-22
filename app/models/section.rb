@@ -10,4 +10,7 @@ class Section < ActiveRecord::Base
 	translates :name, :fallbacks_for_empty_translations => true
 	attr_accessible :name, :active, :position, :photo, :hasBigSubsections
 	attr_accessible :menu_id
+	
+	validates_attachment_presence :photo
+	
 end

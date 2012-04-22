@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120401115324) do
+ActiveRecord::Schema.define(:version => 20120420120717) do
 
   create_table "chains", :force => true do |t|
     t.integer   "user_id"
@@ -280,6 +280,7 @@ ActiveRecord::Schema.define(:version => 20120401115324) do
     t.boolean   "show_help_button",    :default => true
     t.boolean   "show_survey",         :default => true
     t.integer   "access_key",          :default => 1111
+    t.boolean   "show_filters",        :default => false
   end
 
   add_index "restaurant_settings", ["restaurant_id"], :name => "index_restaurant_settings_on_restaurant_id"
@@ -363,13 +364,13 @@ ActiveRecord::Schema.define(:version => 20120401115324) do
   add_index "survey_question_translations", ["survey_question_id"], :name => "index_310e069e62f38daa0fbaf3db7eb732365abc8120"
 
   create_table "survey_questions", :force => true do |t|
-    t.integer  "chain_id"
-    t.string   "name"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.text     "description"
-    t.integer  "position"
-    t.boolean  "active",      :default => true
+    t.integer   "chain_id"
+    t.string    "name"
+    t.timestamp "created_at",                    :null => false
+    t.timestamp "updated_at",                    :null => false
+    t.text      "description"
+    t.integer   "position"
+    t.boolean   "active",      :default => true
   end
 
   add_index "survey_questions", ["chain_id"], :name => "index_survey_questions_on_chain_id"

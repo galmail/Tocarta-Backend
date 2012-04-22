@@ -8,4 +8,6 @@ class Chain < ActiveRecord::Base
 	 :styles => { :medium => TocartaAdmin::Application::IMAGE_MEDIUM_SIZE }
 	)
 	attr_accessible :name, :email, :address, :note, :logo, :user_id, :restaurant_ids
+	validates_attachment_presence :logo
+	
 end
