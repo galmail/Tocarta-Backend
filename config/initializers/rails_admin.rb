@@ -58,6 +58,19 @@ RailsAdmin.config do |config|
     end
   end
   
+  ######## User Model ########
+  
+  config.model User do
+    label 'Usuario'
+    label_plural 'Usuarios'
+    list do
+      exclude_fields :id, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :current_sign_in_ip, :role, :restaurant, :client 
+    end
+    edit do
+      exclude_fields :id, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :current_sign_in_ip, :role, :restaurant, :client
+    end
+  end
+  
   ######## Chain Model ########
   
   config.model Chain do
