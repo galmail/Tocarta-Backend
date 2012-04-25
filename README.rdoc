@@ -23,10 +23,10 @@ Also check APIs are working nice at: api.html
 
 Migration Guide
 
-
+In app/models/dish.rb uncomment lines with #FIXME and git push
 heroku run rake db:migrate VERSION=20120424225809 --app tocarta-admin-staging 
 heroku run console --app tocarta-admin-staging
-# Dish.all.each { |dish| ds = DishSectionAssociation.new; ds.dish = dish; ds.section = dish.section; ds.save; }
-# Dish.all.each { |dish| if !dish.subsection.nil?; ds = DishSubsectionAssociation.new; ds.dish = dish; ds.subsection = dish.subsection; ds.save; end; }
-rake db:migrate
-
+Dish.all.each { |dish| ds = DishSectionAssociation.new; ds.dish = dish; ds.section = dish.section; ds.save; }
+Dish.all.each { |dish| if !dish.subsection.nil?; ds = DishSubsectionAssociation.new; ds.dish = dish; ds.subsection = dish.subsection; ds.save; end; }
+heroku run rake db:migrate --app tocarta-admin-staging
+In app/models/dish.rb comment lines with #FIXME and git push again
