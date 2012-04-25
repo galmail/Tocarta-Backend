@@ -64,7 +64,7 @@ RailsAdmin.config do |config|
     label 'Usuario'
     label_plural 'Usuarios'
     list do
-      exclude_fields :id, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :current_sign_in_ip, :role, :restaurant, :client 
+      exclude_fields :id, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :current_sign_in_ip, :role, :restaurant, :client
     end
     edit do
       exclude_fields :id, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :current_sign_in_ip, :role, :restaurant, :client
@@ -137,11 +137,11 @@ RailsAdmin.config do |config|
     label_plural 'Platos'
     list do
       exclude_fields :id, :combo, :description, :reviews, :story, :video, :nutrition_facts, :photo
-      exclude_fields :badge_name, :short_title, :order_items, :comments, :dish_variations, :dish_type_associations, :dish_types
+      exclude_fields :badge_name, :short_title, :order_items, :comments, :dish_variations, :dish_type_associations, :dish_types, :dish_section_associations, :dish_subsection_associations
     end
     edit do
       exclude_fields :id, :combo, :reviews, :story, :video, :nutrition_facts
-      exclude_fields :order_items, :comments, :dish_variations, :dish_type_associations
+      exclude_fields :order_items, :comments, :dish_variations, :dish_type_associations, :dish_section_associations, :dish_subsection_associations
       field :rating do
         read_only true
       end
@@ -154,10 +154,10 @@ RailsAdmin.config do |config|
     label 'Seccion'
     label_plural 'Secciones'
     list do
-      exclude_fields :id, :menu, :hasBigSubsections, :dishes, :subsections
+      exclude_fields :id, :menu, :hasBigSubsections, :subsections, :dishes, :dish_section_associations
     end
     edit do
-      exclude_fields :dishes, :subsections
+      exclude_fields :subsections, :dishes, :dish_section_associations
     end
   end
   
@@ -167,10 +167,10 @@ RailsAdmin.config do |config|
     label 'Subseccion'
     label_plural 'Subsecciones'
     list do
-      exclude_fields :id, :dishes
+      exclude_fields :id, :dishes, :dish_subsection_associations
     end
     edit do
-      exclude_fields :id, :dishes
+      exclude_fields :id, :dishes, :dish_subsection_associations
     end
   end
   

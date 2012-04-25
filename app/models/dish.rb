@@ -1,7 +1,9 @@
 class Dish < ActiveRecord::Base
   belongs_to :combo
-  belongs_to :section
-  belongs_to :subsection
+  has_many :sections, :through => :dish_section_associations
+  has_many :dish_section_associations
+  has_many :subsections, :through => :dish_subsection_associations
+  has_many :dish_subsection_associations
 	has_many :order_items
 	has_many :comments
 	has_many :dish_variations
@@ -14,11 +16,11 @@ class Dish < ActiveRecord::Base
 	)
 	translates :name, :description, :story, :fallbacks_for_empty_translations => true
 	attr_accessible :name, :active, :position, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts, :short_title, :badge_name, :photo
-	attr_accessible :section_id, :subsection_id, :dish_type_ids
+	attr_accessible :section_ids, :subsection_ids, :dish_type_ids
 	
 	### Validations ###
   
-  validates :name, :price, :section_id, :presence => true
+  validates :name, :price, :presence => true
   validates_attachment_presence :photo
   validates :badge_name, :length => { :maximum => 11 }
 	

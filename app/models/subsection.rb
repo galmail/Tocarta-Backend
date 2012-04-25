@@ -1,6 +1,7 @@
 class Subsection < ActiveRecord::Base
   belongs_to :section
-	has_many :dishes
+	has_many :dishes, :through => :dish_subsection_associations
+  has_many :dish_subsection_associations
 	has_attached_file(
 	 :photo,
 	 :path => ":chain_rest_id/img/subsections/:style/subsection_:id.:extension",

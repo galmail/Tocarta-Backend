@@ -1,6 +1,7 @@
 class Section < ActiveRecord::Base
   belongs_to :menu
-	has_many :dishes
+	has_many :dishes, :through => :dish_section_associations
+  has_many :dish_section_associations
 	has_many :subsections
 	has_attached_file(
 	 :photo,

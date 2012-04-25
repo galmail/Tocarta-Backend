@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120420120717) do
+ActiveRecord::Schema.define(:version => 20120424235211) do
 
   create_table "chains", :force => true do |t|
     t.integer   "user_id"
@@ -80,6 +80,26 @@ ActiveRecord::Schema.define(:version => 20120420120717) do
   add_index "comments", ["restaurant_id"], :name => "index_comments_on_restaurant_id"
   add_index "comments", ["survey_question_id"], :name => "index_comments_on_survey_question_id"
 
+  create_table "dish_section_associations", :force => true do |t|
+    t.integer  "dish_id"
+    t.integer  "section_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "dish_section_associations", ["dish_id"], :name => "index_dish_section_associations_on_dish_id"
+  add_index "dish_section_associations", ["section_id"], :name => "index_dish_section_associations_on_section_id"
+
+  create_table "dish_subsection_associations", :force => true do |t|
+    t.integer  "dish_id"
+    t.integer  "subsection_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "dish_subsection_associations", ["dish_id"], :name => "index_dish_subsection_associations_on_dish_id"
+  add_index "dish_subsection_associations", ["subsection_id"], :name => "index_dish_subsection_associations_on_subsection_id"
+
   create_table "dish_translations", :force => true do |t|
     t.integer   "dish_id"
     t.string    "locale"
@@ -129,37 +149,28 @@ ActiveRecord::Schema.define(:version => 20120420120717) do
   add_index "dish_variations", ["dish_id"], :name => "index_dish_variations_on_dish_id"
 
   create_table "dishes", :force => true do |t|
-    t.integer   "combo_id"
-    t.integer   "section_id"
-    t.integer   "subsection_id"
-    t.string    "name"
-    t.timestamp "created_at",                           :null => false
-    t.timestamp "updated_at",                           :null => false
-    t.string    "photo_file_name"
-    t.string    "photo_content_type"
-    t.integer   "photo_file_size"
-    t.timestamp "photo_updated_at"
-    t.boolean   "active",             :default => true
-    t.integer   "position"
-    t.text      "description"
-    t.decimal   "price"
-    t.decimal   "rating"
-    t.integer   "reviews"
-    t.text      "story"
-    t.string    "video"
-    t.string    "nutrition_facts"
-    t.string    "badge_name"
-    t.string    "short_title"
+    t.integer  "combo_id"
+    t.string   "name"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.boolean  "active",             :default => true
+    t.integer  "position"
+    t.text     "description"
+    t.decimal  "price"
+    t.decimal  "rating"
+    t.integer  "reviews"
+    t.text     "story"
+    t.string   "video"
+    t.string   "nutrition_facts"
+    t.string   "badge_name"
+    t.string   "short_title"
   end
 
   add_index "dishes", ["combo_id"], :name => "index_dishes_on_combo_id"
-  add_index "dishes", ["section_id"], :name => "index_dishes_on_section_id"
-  add_index "dishes", ["subsection_id"], :name => "index_dishes_on_subsection_id"
-
-  create_table "dogs", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "menu_settings", :force => true do |t|
     t.integer   "menu_id"

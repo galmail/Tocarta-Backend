@@ -4,10 +4,8 @@ Paperclip.interpolates :chain_rest_id do |attachment, style|
   rest = nil
   case attachment.instance.class.to_s
     when "Dish"
-      if !attachment.instance.section.nil? and !attachment.instance.section.menu.nil? and !attachment.instance.section.menu.restaurant.nil?
-        rest = attachment.instance.section.menu.restaurant
-      elsif !attachment.instance.subsection.nil? and !attachment.instance.subsection.section.nil? and !attachment.instance.subsection.section.menu.nil? and !attachment.instance.subsection.section.menu.restaurant.nil?
-        rest = attachment.instance.subsection.section.menu.restaurant
+      if !attachment.instance.sections.empty? and !attachment.instance.sections.first.menu.nil? and !attachment.instance.sections.first.menu.restaurant.nil?
+        rest = attachment.instance.sections.first.menu.restaurant
       end
     when "Section"
       if !attachment.instance.menu.nil? and !attachment.instance.menu.restaurant.nil?
