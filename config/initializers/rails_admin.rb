@@ -335,7 +335,7 @@ RailsAdmin.config do |config|
   end
   
   def order_item_label_method
-    "#{self.quantity.to_s} #{self.dish.name}"
+    "#{self.quantity.to_s} #{self.name}"
   end
   
   def order_label_method

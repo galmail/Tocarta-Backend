@@ -9,7 +9,7 @@ node :num_tables do @restaurant.tables.length end
 
 ### restaurant activities ###
 
-child @activities do
+child @activities => 'activities' do
   object false
   attributes :id, :name, :ack
   node :table_number do |activity|
@@ -24,12 +24,15 @@ child @activities do
       order.table.number
     end
     child :order_items do
-      attributes :quantity, :note
-      node :item_name do |order_item|
-        order_item.dish.name
-      end
+      attributes :quantity, :note, :name
       child :dish do
         attributes :name, :description, :price
+      end
+      child :combo do
+        attributes :name, :price
+        child :dishes do
+          attributes :name, :description, :price
+        end
       end
     end
   end

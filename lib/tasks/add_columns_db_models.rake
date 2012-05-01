@@ -89,7 +89,7 @@ namespace :db do
     
     # ComboType
     sh "#{action} add_columns_to_combo_type active:boolean position:integer price:decimal description:text"
-    fix_model('ComboType',['translates :name, :description, :fallbacks_for_empty_translations => true','attr_accessible :active, :position, :price, :description'])
+    fix_model('ComboType',['translates :name, :description, :fallbacks_for_empty_translations => true','attr_accessible :active, :position, :price, :name, :description'])
 		
 		# Order
 		sh "#{action} add_columns_to_order note:string total:decimal language:string"

@@ -164,6 +164,8 @@ namespace :db do
     sh "#{action} Dish"
     sh "#{action} DishType"
     sh "#{action} DishTypeAssociation"
+    sh "#{action} Combo"
+    sh "#{action} ComboType"
     sh "#{action} Comment"
     sh "#{action} SurveyQuestion"
     sh "#{action} DishVariation"

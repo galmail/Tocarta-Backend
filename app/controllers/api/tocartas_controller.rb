@@ -19,7 +19,6 @@ class Api::TocartasController < AccessController
     # show survey questions
     sort_and_filter(@restaurant.chain.survey_questions,nil,nil,nil,nil)
     
-    # TODO get restaurant menus in all languages
     @menus = @restaurant.menus
     # show only active elements
     @menus.each { |menu|
@@ -212,7 +211,21 @@ class Api::TocartasController < AccessController
       order_obj["order_items"].each { |order_item_obj|
         order_item = OrderItem.new
         order_item.order = order
-        order_item.dish = Dish.find(:first,:conditions => {:id => order_item_obj["dish_id"]})
+        if order_item_obj["combo_id"]
+          # create combo
+          combo = Combo.new
+          combo.restaurant = @restaurant
+          combo.dishes = []
+          order_item_obj["combo_dishes"].each { |combo_dish_obj|
+            combo.dishes.push(Dish.find(:first,:conditions => {:id => combo_dish_obj["id"]}))
+          }
+          # combo.combo_type = ComboType.find(:first,:conditions => {:name => combo_dish_obj["item_name"]})
+          combo.name = order_item_obj["item_name"]
+          order_item.combo = combo
+        else
+          order_item.dish = Dish.find(:first,:conditions => {:id => order_item_obj["dish_id"]})
+        end
+        order_item.name = order_item_obj["item_name"]
         order_item.quantity = order_item_obj["quantity"]
         order_item.save
       }
@@ -220,7 +233,21 @@ class Api::TocartasController < AccessController
       order_item_obj = order_obj["order_items"]
       order_item = OrderItem.new
       order_item.order = order
-      order_item.dish = Dish.find(:first,:conditions => {:id => order_item_obj["dish_id"]})
+      if order_item_obj["combo_id"]
+        # create combo
+        combo = Combo.new
+        combo.restaurant = @restaurant
+        combo.dishes = []
+        order_item_obj["combo_dishes"].each { |combo_dish_obj|
+          combo.dishes.push(Dish.find(:first,:conditions => {:id => combo_dish_obj["id"]}))
+        }
+        # combo.combo_type = ComboType.find(:first,:conditions => {:name => combo_dish_obj["item_name"]})
+        combo.name = order_item_obj["item_name"]
+        order_item.combo = combo
+      else
+        order_item.dish = Dish.find(:first,:conditions => {:id => order_item_obj["dish_id"]})
+      end
+      order_item.name = order_item_obj["item_name"]
       order_item.quantity = order_item_obj["quantity"]
       order_item.save
     end

@@ -3,5 +3,5 @@ class ComboType < ActiveRecord::Base
 	has_many :combos
 	has_many :order_items
 	translates :name, :description, :fallbacks_for_empty_translations => true
-	attr_accessible :active, :position, :price, :description
+	attr_accessible :active, :position, :price, :name, :description, :restaurant_id
 end

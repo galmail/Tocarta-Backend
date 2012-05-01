@@ -28,7 +28,7 @@ end
 
 child @menus do
   object false
-  attributes :id, :name, :menu_type
+  attributes :id, :name, :menu_type, :price
   
   child :sections do
     attributes :id, :name, :hasBigSubsections

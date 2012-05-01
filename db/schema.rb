@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120424235211) do
+ActiveRecord::Schema.define(:version => 20120427085542) do
 
   create_table "chains", :force => true do |t|
     t.integer   "user_id"
@@ -38,15 +38,27 @@ ActiveRecord::Schema.define(:version => 20120424235211) do
 
   add_index "clients", ["user_id"], :name => "index_clients_on_user_id"
 
+  create_table "combo_type_translations", :force => true do |t|
+    t.integer  "combo_type_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "combo_type_translations", ["combo_type_id"], :name => "index_combo_type_translations_on_combo_type_id"
+  add_index "combo_type_translations", ["locale"], :name => "index_combo_type_translations_on_locale"
+
   create_table "combo_types", :force => true do |t|
-    t.integer   "restaurant_id"
-    t.string    "name"
-    t.timestamp "created_at",    :null => false
-    t.timestamp "updated_at",    :null => false
-    t.boolean   "active"
-    t.integer   "position"
-    t.decimal   "price"
-    t.text      "description"
+    t.integer  "restaurant_id"
+    t.string   "name"
+    t.boolean  "active"
+    t.integer  "position"
+    t.decimal  "price"
+    t.text     "description"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   add_index "combo_types", ["restaurant_id"], :name => "index_combo_types_on_restaurant_id"

@@ -50,7 +50,11 @@ class AccessController < ApplicationController
       activityHash["order"]["order_items"] = []
       activity.order.order_items.each{ |order_item|
         orderItemHash = order_item.attributes
-        orderItemHash["item_name"] = order_item.dish.name
+        if !order_item.dish.nil?
+          orderItemHash["item_name"] = order_item.dish.name
+        else
+          orderItemHash["item_name"] = order_item.combo.name
+        end
         activityHash["order"]["order_items"] << orderItemHash
       }
     end
