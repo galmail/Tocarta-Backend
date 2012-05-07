@@ -39,26 +39,26 @@ ActiveRecord::Schema.define(:version => 20120504084336) do
   add_index "clients", ["user_id"], :name => "index_clients_on_user_id"
 
   create_table "combo_type_translations", :force => true do |t|
-    t.integer  "combo_type_id"
-    t.string   "locale"
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer   "combo_type_id"
+    t.string    "locale"
+    t.string    "name"
+    t.text      "description"
+    t.timestamp "created_at",    :null => false
+    t.timestamp "updated_at",    :null => false
   end
 
   add_index "combo_type_translations", ["combo_type_id"], :name => "index_combo_type_translations_on_combo_type_id"
   add_index "combo_type_translations", ["locale"], :name => "index_combo_type_translations_on_locale"
 
   create_table "combo_types", :force => true do |t|
-    t.integer  "restaurant_id"
-    t.string   "name"
-    t.boolean  "active"
-    t.integer  "position"
-    t.decimal  "price"
-    t.text     "description"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer   "restaurant_id"
+    t.string    "name"
+    t.boolean   "active"
+    t.integer   "position"
+    t.decimal   "price"
+    t.text      "description"
+    t.timestamp "created_at",    :null => false
+    t.timestamp "updated_at",    :null => false
   end
 
   add_index "combo_types", ["restaurant_id"], :name => "index_combo_types_on_restaurant_id"
@@ -103,20 +103,20 @@ ActiveRecord::Schema.define(:version => 20120504084336) do
   add_index "dish_combo_associations", ["dish_id"], :name => "index_dish_combo_associations_on_dish_id"
 
   create_table "dish_section_associations", :force => true do |t|
-    t.integer  "dish_id"
-    t.integer  "section_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer   "dish_id"
+    t.integer   "section_id"
+    t.timestamp "created_at", :null => false
+    t.timestamp "updated_at", :null => false
   end
 
   add_index "dish_section_associations", ["dish_id"], :name => "index_dish_section_associations_on_dish_id"
   add_index "dish_section_associations", ["section_id"], :name => "index_dish_section_associations_on_section_id"
 
   create_table "dish_subsection_associations", :force => true do |t|
-    t.integer  "dish_id"
-    t.integer  "subsection_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer   "dish_id"
+    t.integer   "subsection_id"
+    t.timestamp "created_at",    :null => false
+    t.timestamp "updated_at",    :null => false
   end
 
   add_index "dish_subsection_associations", ["dish_id"], :name => "index_dish_subsection_associations_on_dish_id"

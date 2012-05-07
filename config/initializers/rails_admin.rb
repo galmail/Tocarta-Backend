@@ -121,6 +121,19 @@ RailsAdmin.config do |config|
     end
   end
   
+  ######## MenuSetting Model ########
+  
+  config.model MenuSetting do
+    label 'Menu Setting'
+    label_plural 'Menu Settings'
+    list do
+      exclude_fields :id, :priority, :trigger_activation, :last_time_changed
+    end
+    edit do
+      exclude_fields :id, :priority, :trigger_activation, :last_time_changed
+    end
+  end
+  
   ######## DishType Model ########
   
   config.model DishType do
