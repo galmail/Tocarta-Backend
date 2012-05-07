@@ -31,7 +31,7 @@ child @menus do
   attributes :id, :name, :menu_type, :price
   
   child :sections do
-    attributes :id, :name, :hasBigSubsections
+    attributes :id, :name, :hasBigSubsections, :dishes_per_page
     node(:mini, :unless => lambda {|s| s.photo_file_name.nil? }) do |section|
       section.photo.url(:mini).split(ENV['S3_BUCKET']).last
     end

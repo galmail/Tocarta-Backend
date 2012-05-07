@@ -19,7 +19,7 @@ class Api::TocartasController < AccessController
     # show survey questions
     sort_and_filter(@restaurant.chain.survey_questions,nil,nil,nil,nil)
     
-    @menus = @restaurant.menus
+    @menus = @restaurant.active_menus
     # show only active elements
     @menus.each { |menu|
       ##### sorting and filtering sections #####
@@ -207,30 +207,11 @@ class Api::TocartasController < AccessController
     order.total = order_obj["total"]
     order.save
     
-    if order_obj["order_items"].class.to_s.downcase == "array"
-      order_obj["order_items"].each { |order_item_obj|
-        order_item = OrderItem.new
-        order_item.order = order
-        if order_item_obj["combo_id"]
-          # create combo
-          combo = Combo.new
-          combo.restaurant = @restaurant
-          combo.dishes = []
-          order_item_obj["combo_dishes"].each { |combo_dish_obj|
-            combo.dishes.push(Dish.find(:first,:conditions => {:id => combo_dish_obj["id"]}))
-          }
-          # combo.combo_type = ComboType.find(:first,:conditions => {:name => combo_dish_obj["item_name"]})
-          combo.name = order_item_obj["item_name"]
-          order_item.combo = combo
-        else
-          order_item.dish = Dish.find(:first,:conditions => {:id => order_item_obj["dish_id"]})
-        end
-        order_item.name = order_item_obj["item_name"]
-        order_item.quantity = order_item_obj["quantity"]
-        order_item.save
-      }
-    else
-      order_item_obj = order_obj["order_items"]
+    if order_obj["order_items"].class.to_s.downcase != "array"
+      order_obj["order_items"] = [ order_obj["order_items"] ]
+    end
+    
+    order_obj["order_items"].each { |order_item_obj|
       order_item = OrderItem.new
       order_item.order = order
       if order_item_obj["combo_id"]
@@ -239,19 +220,22 @@ class Api::TocartasController < AccessController
         combo.restaurant = @restaurant
         combo.dishes = []
         order_item_obj["combo_dishes"].each { |combo_dish_obj|
-          combo.dishes.push(Dish.find(:first,:conditions => {:id => combo_dish_obj["id"]}))
+          puts "Processing combo dish id = " << combo_dish_obj["id"]
+          dish = Dish.find(:first,:conditions => {:id => combo_dish_obj["id"]})
+          combo.dishes.push(dish) unless dish.nil?
         }
         # combo.combo_type = ComboType.find(:first,:conditions => {:name => combo_dish_obj["item_name"]})
         combo.name = order_item_obj["item_name"]
         order_item.combo = combo
       else
-        order_item.dish = Dish.find(:first,:conditions => {:id => order_item_obj["dish_id"]})
+        dish = Dish.find(:first,:conditions => {:id => order_item_obj["dish_id"]})
+        order_item.dish = dish
       end
       order_item.name = order_item_obj["item_name"]
       order_item.quantity = order_item_obj["quantity"]
       order_item.save
-    end
-    
+    }
+
     # send it to the waiter
     restaurant_activity = RestaurantActivity.new
     restaurant_activity.restaurant = @restaurant
@@ -270,22 +254,10 @@ class Api::TocartasController < AccessController
     @result = false
     validate_params(['survey'])
     survey_obj = params[:survey]
-    if survey_obj.class.to_s.downcase == "array"
-      survey_obj.each { |comment_obj|
-        comment = Comment.new
-        comment.restaurant = @restaurant
-        comment.dish = Dish.find(:first,:conditions => {:id => comment_obj["dish_id"].to_i})
-        comment.survey_question = SurveyQuestion.find(:first,:conditions => {:id => comment_obj["survey_question_id"].to_i})
-        comment.name = comment_obj["name"]
-        comment.description = comment_obj["description"]
-        comment.rating = comment_obj["rating"].to_i if comment_obj["rating"].to_i>0
-        comment.save
-        if !comment.dish.nil? and !comment.rating.nil?
-          comment.dish.update_rating(comment.rating)
-        end
-      }
-    else
-      comment_obj = survey_obj
+    if survey_obj.class.to_s.downcase != "array"
+      survey_obj = [ survey_obj ]
+    end
+    survey_obj.each { |comment_obj|
       comment = Comment.new
       comment.restaurant = @restaurant
       comment.dish = Dish.find(:first,:conditions => {:id => comment_obj["dish_id"].to_i})
@@ -296,9 +268,8 @@ class Api::TocartasController < AccessController
       comment.save
       if !comment.dish.nil? and !comment.rating.nil?
         comment.dish.update_rating(comment.rating)
-        comment.dish.save
       end
-    end
+    }
     @result = true
   end
   

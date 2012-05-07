@@ -15,4 +15,8 @@ class Restaurant < ActiveRecord::Base
 	  self.tables.collect { |table| table.tablets }.flatten.select { |tablet| tablet.active }
 	end
 	
+	def active_menus
+	  self.menus.select { |menu| menu.activated }
+	end
+	
 end

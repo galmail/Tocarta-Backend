@@ -1,9 +1,11 @@
 class Dish < ActiveRecord::Base
-  belongs_to :combo
   # FIXME comment these lines after migration
   # belongs_to :section
   # belongs_to :subsection
   
+  
+  has_many :combos, :through => :dish_combo_associations
+  has_many :dish_combo_associations
   has_many :sections, :through => :dish_section_associations
   has_many :dish_section_associations
   has_many :subsections, :through => :dish_subsection_associations

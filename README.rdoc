@@ -3,15 +3,17 @@ This project is the whole backend of Tocarta and serves for 2 purposes:
 1. For administration purpose
 2. It gives APIs for all tablets
 
-Environments: Staging and Production
+Environments: Staging and (Production+Free)
 
 Staging: http://tocarta-admin-staging.herokuapp.com
 Production: http://tocarta-admin.herokuapp.com
+Production Free: http://tocarta-admin-free.herokuapp.com
 
 Pushing to environments:
 
 $ heroku push staging master
 $ heroku push production master
+$ heroku push free master
 
 If database model has changed:
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120427085542) do
+ActiveRecord::Schema.define(:version => 20120504084336) do
 
   create_table "chains", :force => true do |t|
     t.integer   "user_id"
@@ -92,6 +92,16 @@ ActiveRecord::Schema.define(:version => 20120427085542) do
   add_index "comments", ["restaurant_id"], :name => "index_comments_on_restaurant_id"
   add_index "comments", ["survey_question_id"], :name => "index_comments_on_survey_question_id"
 
+  create_table "dish_combo_associations", :force => true do |t|
+    t.integer  "dish_id"
+    t.integer  "combo_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "dish_combo_associations", ["combo_id"], :name => "index_dish_combo_associations_on_combo_id"
+  add_index "dish_combo_associations", ["dish_id"], :name => "index_dish_combo_associations_on_dish_id"
+
   create_table "dish_section_associations", :force => true do |t|
     t.integer  "dish_id"
     t.integer  "section_id"
@@ -161,7 +171,6 @@ ActiveRecord::Schema.define(:version => 20120427085542) do
   add_index "dish_variations", ["dish_id"], :name => "index_dish_variations_on_dish_id"
 
   create_table "dishes", :force => true do |t|
-    t.integer  "combo_id"
     t.string   "name"
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
@@ -182,8 +191,6 @@ ActiveRecord::Schema.define(:version => 20120427085542) do
     t.string   "short_title"
   end
 
-  add_index "dishes", ["combo_id"], :name => "index_dishes_on_combo_id"
-
   create_table "menu_settings", :force => true do |t|
     t.integer   "menu_id"
     t.string    "name"
@@ -193,6 +200,10 @@ ActiveRecord::Schema.define(:version => 20120427085542) do
     t.integer   "priority"
     t.timestamp "trigger_activation"
     t.timestamp "last_time_changed"
+    t.string    "from_day"
+    t.string    "to_day"
+    t.time      "from_time"
+    t.time      "to_time"
   end
 
   add_index "menu_settings", ["menu_id"], :name => "index_menu_settings_on_menu_id"
@@ -346,6 +357,7 @@ ActiveRecord::Schema.define(:version => 20120427085542) do
     t.boolean   "active",             :default => true
     t.integer   "position"
     t.boolean   "hasBigSubsections",  :default => false
+    t.integer   "dishes_per_page",    :default => 0
   end
 
   add_index "sections", ["menu_id"], :name => "index_sections_on_menu_id"
