@@ -7,13 +7,15 @@ Environments: Staging and (Production+Free)
 
 Staging: http://tocarta-admin-staging.herokuapp.com
 Production: http://tocarta-admin.herokuapp.com
-Production Free: http://tocarta-admin-free.herokuapp.com
+Free Version: http://tocarta-admin-free.herokuapp.com
+Demo: http://tocarta-admin-demo.herokuapp.com
 
 Pushing to environments:
 
 $ heroku push staging master
 $ heroku push production master
 $ heroku push free master
+$ heroku push demo master
 
 If database model has changed:
 
