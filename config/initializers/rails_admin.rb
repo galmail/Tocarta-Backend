@@ -103,11 +103,14 @@ RailsAdmin.config do |config|
     list do
       exclude_fields :id, :name, :default_language, :last_menu_sync, :multilang_homepage, :games
     end
-    edit do
+    update do
       exclude_fields :id, :name, :default_language, :last_menu_sync, :multilang_homepage, :games, :restaurant
       field :num_licenses do
         read_only true
       end
+    end
+    create do
+      exclude_fields :id, :default_language, :last_menu_sync, :multilang_homepage, :games
     end
   end
   
