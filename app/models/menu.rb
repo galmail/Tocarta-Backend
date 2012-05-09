@@ -19,7 +19,7 @@ class Menu < ActiveRecord::Base
 	  time = Time.now
 	  
 	  # comparing days in week
-	  if !settings.from_day.nil? and !settings.to_day.nil?
+	  if settings.from_day.is_a?(Numeric) and settings.to_day.is_a?(Numeric)
 	    if time.wday >= settings.from_day_num and time.wday <= settings.to_day_num
         puts "today is a valid day"
       else
@@ -29,7 +29,7 @@ class Menu < ActiveRecord::Base
 	  end
 	  
 	  # comparing time in day
-	  if !settings.from_time.nil? and !settings.to_time.nil?
+	  if settings.from_time.is_a?(Time) and settings.to_time.is_a?(Time)
 	    this_time = Time.at(time.hour * 60 * 60 + time.min * 60 + time.sec)
       from_time = Time.at(settings.from_time.hour * 60 * 60 + settings.from_time.min * 60 + settings.from_time.sec)
       to_time = Time.at(settings.to_time.hour * 60 * 60 + settings.to_time.min * 60 + settings.to_time.sec)
