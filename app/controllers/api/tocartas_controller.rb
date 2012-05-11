@@ -147,7 +147,7 @@ class Api::TocartasController < AccessController
     @result = false
     validate_params(['table','dinners','language','new_table'])
     # this tablet now belongs to the new table
-    table = @restaurant.tables.select { |table| table.number==params[:table].to_i }.first
+    table = @restaurant.tables.select { |tb| tb.number==params[:table].to_i }.first
     return false if table.nil?
     
     @tablet.table = table
@@ -187,11 +187,11 @@ class Api::TocartasController < AccessController
   
   def get_sent_order_items
     # get all orders since last checked in
-    activity = RestaurantActivity.find(:first,:conditions => {:table_id => @table.id, :name => "checked"}, :order => "created_at DESC")
+    activity = RestaurantActivity.find(:first,:conditions => {:table_id => @table.id, :name => "checked"}, :order => "updated_at DESC")
     if activity != nil
-      orders = Order.where('table_id = ? AND created_at > ?',@table.id,activity.created_at)
+      orders = Order.where('table_id = ? AND created_at > ?',@table.id,activity.updated_at)
       @order_items = orders.collect { |order|
-        order.order_items.select { |order_item| order_item.dish.subsection.nil? or !order_item.dish.subsection.section.hasBigSubsections }
+        order.order_items.select { |order_item| order_item.dish.rate_me }
       }.flatten.uniq { |order_item| order_item.dish.id  }
     end
   end

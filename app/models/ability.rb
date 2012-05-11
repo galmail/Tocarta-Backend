@@ -23,7 +23,10 @@ class Ability
       can [:read, :update], MenuSetting, :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } }
       can [:read, :update, :create], Section, :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } }
       can [:read, :update, :create], Subsection, :section => { :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } } }
-      can [:read, :update, :create], Dish, :sections => { :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } } }
+      
+      # can [:read, :update, :create], Dish, :sections => { :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } } }
+      can [:read, :update, :create], Dish, :chain => { :user => { :id => user.id } }
+      
       can [:read, :update], Comment, :restaurant => { :chain => { :user => { :id => user.id } } }
       can [:read, :create], Table, :restaurant => { :chain => { :user => { :id => user.id } } }
       can :read, Tablet, :table => { :restaurant => { :chain => { :user => { :id => user.id } } } }

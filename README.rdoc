@@ -33,4 +33,8 @@ heroku run console --app tocarta-admin-staging
 Dish.all.each { |dish| ds = DishSectionAssociation.new; ds.dish = dish; ds.section = dish.section; ds.save; }
 Dish.all.each { |dish| if !dish.subsection.nil?; ds = DishSubsectionAssociation.new; ds.dish = dish; ds.subsection = dish.subsection; ds.save; end; }
 heroku run rake db:migrate --app tocarta-admin-staging
+heroku run console --app tocarta-admin-staging
+Dish.all.each { |dish| dish.chain = Chain.first; dish.save; }
+sections = Section.find(:all, :conditions => { :name => 'Bebidas' })
+sections.each { |sec| sec.dishes.each { |dish| dish.rate_me = false; dish.save; } }
 In app/models/dish.rb comment lines with #FIXME and git push again

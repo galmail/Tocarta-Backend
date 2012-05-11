@@ -8,6 +8,10 @@ class Menu < ActiveRecord::Base
 	def menu_type_enum
     ['main', 'daily']
   end
+  
+  ### Validations ###
+  
+  validates :restaurant_id, :presence => true
 	
 	def activated
 	  settings = self.menu_setting

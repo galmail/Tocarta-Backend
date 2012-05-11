@@ -3,6 +3,10 @@ class MenuSetting < ActiveRecord::Base
 	attr_accessible :name, :active, :priority, :trigger_activation, :last_time_changed, :menu_id
 	attr_accessible :from_day, :to_day, :from_time, :to_time
 	
+	### Validations ###
+  
+  validates :menu_id, :presence => true
+	
 	def from_day_enum
 	  Date::DAYNAMES
 	end

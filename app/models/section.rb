@@ -12,6 +12,9 @@ class Section < ActiveRecord::Base
 	attr_accessible :name, :active, :position, :photo, :hasBigSubsections, :dishes_per_page
 	attr_accessible :menu_id
 	
+	### Validations ###
+  
+  validates :menu_id, :presence => true
 	validates_attachment_presence :photo
 	
 end

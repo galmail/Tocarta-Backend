@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120504084336) do
+ActiveRecord::Schema.define(:version => 20120511002850) do
 
   create_table "chains", :force => true do |t|
     t.integer   "user_id"
@@ -189,7 +189,11 @@ ActiveRecord::Schema.define(:version => 20120504084336) do
     t.string   "nutrition_facts"
     t.string   "badge_name"
     t.string   "short_title"
+    t.boolean  "rate_me",            :default => true
+    t.integer  "chain_id"
   end
+
+  add_index "dishes", ["chain_id"], :name => "index_dishes_on_chain_id"
 
   create_table "menu_settings", :force => true do |t|
     t.integer   "menu_id"
