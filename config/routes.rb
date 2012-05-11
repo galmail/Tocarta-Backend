@@ -56,6 +56,7 @@ TocartaAdmin::Application.routes.draw do
   
   # API for Tocartas
   match 'api(/:action)', :controller => 'Api'
+  match 'ftp(/:action)', :controller => 'Ftp'
   match 'cli/c/:action(.:format)', :controller => 'Api::Tocartas'
   match 'cli/r/:action(.:format)', :controller => 'Api::CommandCenter'
   #match 'cli/an/:action(.:format)', :controller => 'Api::Analytics'

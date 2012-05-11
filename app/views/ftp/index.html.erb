@@ -1,0 +1,9 @@
+<h2>Testing ftp server</h2>
+
+<form enctype="multipart/form-data" method="post" action="/ftp/upload">
+<label for="ftpserver">Ftp Server:</label> <%= text_field_tag 'ftpserver' %><br/>
+<label for="login">Login:</label> <%= text_field_tag 'login' %><br/>
+<label for="passwd">Passwd:</label> <%= text_field_tag 'passwd' %><br/>
+<label for="file">File to Upload</label> <%= file_field_tag "file" %>
+<%= submit_tag 'Upload' %>
+</form>
