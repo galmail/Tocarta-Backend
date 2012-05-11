@@ -27,7 +27,7 @@ Also check APIs are working nice at: api.html
 
 Migration Guide
 
-In app/models/dish.rb uncomment lines with #FIXME and git push
+In app/models/dish.rb and app/models/combo.rb comment/uncomment lines with #FIXME and git push
 heroku run rake db:migrate VERSION=20120424225809 --app tocarta-admin-staging 
 heroku run console --app tocarta-admin-staging
 Dish.all.each { |dish| ds = DishSectionAssociation.new; ds.dish = dish; ds.section = dish.section; ds.save; }
