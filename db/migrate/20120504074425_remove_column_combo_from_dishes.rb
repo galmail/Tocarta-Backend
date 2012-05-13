@@ -3,6 +3,9 @@ class RemoveColumnComboFromDishes < ActiveRecord::Migration
     remove_column :dishes, :combo_id
   end
   def down
-    add_column :dishes, :combo_id
+    change_table :dishes do |t|
+      t.references :combo
+    end
+    add_index :dishes, :combo_id
   end
 end
