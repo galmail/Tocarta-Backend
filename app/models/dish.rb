@@ -1,11 +1,11 @@
 class Dish < ActiveRecord::Base
   before_save :associate_chain
   # FIXME comment these lines after migration
-  # belongs_to :section
-  # belongs_to :subsection
+  belongs_to :section
+  belongs_to :subsection
   # FIXME uncomment these lines after migration
-  has_many :combos, :through => :dish_combo_associations
-  has_many :dish_combo_associations
+  # has_many :combos, :through => :dish_combo_associations
+  # has_many :dish_combo_associations
   
   
   
