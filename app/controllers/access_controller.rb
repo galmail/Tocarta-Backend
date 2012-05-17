@@ -3,7 +3,7 @@ class AccessController < ApplicationController
   def validate_license_key
     @result = false
     if !@tablet.activated
-      @tablet.activated = true unless @tablet.access_key.include?("demo")
+      @tablet.activated = true unless @tablet.access_key == "demo"
       @tablet.save
       @result = true
     end

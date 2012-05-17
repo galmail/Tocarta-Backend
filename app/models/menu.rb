@@ -22,8 +22,7 @@ class Menu < ActiveRecord::Base
 	  
 	  time = Time.now
 	  
-	  # comparing days in week
-	  if settings.from_day.is_a?(Numeric) and settings.to_day.is_a?(Numeric)
+	  if settings.from_day_num.is_a?(Numeric) and settings.to_day_num.is_a?(Numeric)
 	    if time.wday >= settings.from_day_num and time.wday <= settings.to_day_num
         puts "today is a valid day"
       else
@@ -48,6 +47,16 @@ class Menu < ActiveRecord::Base
 	  return true
 	end
 	
-
+  def dishtypes
+    dishtypes = []
+    self.sections.each { |section|
+      section.dishes.each { |dish|
+        dish.dish_types.each { |dt|
+          dishtypes.push(dt)
+        }
+      }
+    }
+    return dishtypes.uniq
+  end
 	
 end

@@ -170,6 +170,9 @@ RailsAdmin.config do |config|
   config.model Section do
     label 'Seccion'
     label_plural 'Secciones'
+    object_label_method do
+      :section_label_method
+    end
     list do
       exclude_fields :id, :menu, :hasBigSubsections, :subsections, :dishes, :dish_section_associations
     end
@@ -361,6 +364,10 @@ RailsAdmin.config do |config|
   
   def table_label_method
     "#{self.number.to_s}"
+  end
+  
+  def section_label_method
+    "#{self.name.to_s} - #{self.menu.name.to_s}"
   end
   
   #

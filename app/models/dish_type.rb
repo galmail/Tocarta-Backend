@@ -7,5 +7,7 @@ class DishType < ActiveRecord::Base
    :path => "common/img/dish_types/:style/dish_type_:id.:extension",
    :styles => { :big_icon => TocartaAdmin::Application::BIG_ICON_SIZE, :small_icon => TocartaAdmin::Application::SMALL_ICON_SIZE }
   )
-	attr_accessible :name, :position, :icon
+	attr_accessible :name, :position, :icon, :description
+	translates :description, :fallbacks_for_empty_translations => true
+	
 end

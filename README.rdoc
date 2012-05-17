@@ -40,3 +40,4 @@ sections = Section.find(:all, :conditions => { :name => 'Bebidas' })
 sections.each { |sec| sec.dishes.each { |dish| dish.rate_me = false; dish.save; } }
 In app/models/dish.rb and app/models/combo.rb comment/uncomment lines with #FIXME and git push
 Move config/rails_admin.rb to config/initializers/rails_admin.rb
+

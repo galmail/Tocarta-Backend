@@ -6,7 +6,7 @@ node :name do @restaurant.name end
 node :logo do @restaurant.chain.logo.url(:medium).split(ENV['S3_BUCKET']).last end
 
 child @restaurant.restaurant_setting => :setting do
-  attributes :multilang_homepage, :games, :call_waiter_button, :order_button, :request_bill_button, :show_help_button, :show_survey, :access_key
+  attributes :multilang_homepage, :games, :call_waiter_button, :order_button, :request_bill_button, :show_help_button, :show_survey, :show_filters, :access_key
 end
 
 ### restaurant banners ###
@@ -30,6 +30,13 @@ child @menus do
   object false
   attributes :id, :name, :menu_type, :price
   
+  child :dishtypes => :dishtypes do
+    attributes :id, :name, :description
+    node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
+      dt.icon.url(:small_icon).split(ENV['S3_BUCKET']).last
+    end
+  end
+
   child :sections do
     attributes :id, :name, :hasBigSubsections, :dishes_per_page
     node(:mini, :unless => lambda {|s| s.photo_file_name.nil? }) do |section|

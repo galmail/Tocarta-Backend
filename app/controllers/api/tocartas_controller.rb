@@ -18,7 +18,6 @@ class Api::TocartasController < AccessController
     sort_and_filter(@restaurant.restaurant_banners,nil,nil,nil,nil)
     # show survey questions
     sort_and_filter(@restaurant.chain.survey_questions,nil,nil,nil,nil)
-    
     @menus = @restaurant.active_menus
     # show only active elements
     @menus.each { |menu|

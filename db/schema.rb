@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120511002850) do
+ActiveRecord::Schema.define(:version => 20120516144339) do
 
   create_table "chains", :force => true do |t|
     t.integer   "user_id"
@@ -144,16 +144,28 @@ ActiveRecord::Schema.define(:version => 20120511002850) do
   add_index "dish_type_associations", ["dish_id"], :name => "index_dish_type_associations_on_dish_id"
   add_index "dish_type_associations", ["dish_type_id"], :name => "index_dish_type_associations_on_dish_type_id"
 
+  create_table "dish_type_translations", :force => true do |t|
+    t.integer  "dish_type_id"
+    t.string   "locale"
+    t.string   "description"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "dish_type_translations", ["dish_type_id"], :name => "index_dish_type_translations_on_dish_type_id"
+  add_index "dish_type_translations", ["locale"], :name => "index_dish_type_translations_on_locale"
+
   create_table "dish_types", :force => true do |t|
-    t.string    "name"
-    t.timestamp "created_at",        :null => false
-    t.timestamp "updated_at",        :null => false
-    t.string    "icon_file_name"
-    t.string    "icon_content_type"
-    t.integer   "icon_file_size"
-    t.timestamp "icon_updated_at"
-    t.integer   "position"
-    t.string    "dish_class"
+    t.string   "name"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
+    t.integer  "position"
+    t.string   "dish_class"
+    t.string   "description"
   end
 
   create_table "dish_variations", :force => true do |t|
