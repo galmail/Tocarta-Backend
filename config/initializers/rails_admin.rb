@@ -367,7 +367,11 @@ RailsAdmin.config do |config|
   end
   
   def section_label_method
-    "#{self.name.to_s} - #{self.menu.name.to_s}"
+    if self.menu.nil?
+      "#{self.name.to_s}"
+    else
+      "#{self.name.to_s} - #{self.menu.name.to_s}"
+    end 
   end
   
   #
