@@ -1,7 +1,7 @@
 class Api::CommandCenterController < AccessController
   before_filter :identify_tablet, :setup_language
   
-  MAX_NUM_ACTIVITIES_TO_LOAD = 100
+  MAX_NUM_ACTIVITIES_TO_LOAD = 50
   
   def get_restaurant_situation
     num_activities = params[:num_activities]
