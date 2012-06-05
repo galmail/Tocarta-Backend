@@ -20,7 +20,7 @@ class Menu < ActiveRecord::Base
 	  return false if !settings.active
 	  return true if settings.from_day.nil? and settings.to_day.nil? and settings.from_time.nil? and settings.to_time.nil? 
 	  
-	  time = Time.now
+	  time = Time.zone.now
 	  
 	  if settings.from_day_num.is_a?(Numeric) and settings.to_day_num.is_a?(Numeric)
 	    if time.wday >= settings.from_day_num and time.wday <= settings.to_day_num
