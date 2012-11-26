@@ -14,9 +14,9 @@ TocartaAdmin::Application.configure do
   })
   
   # Setting up Pusher in production
-  Pusher.app_id = '17051'
-  Pusher.key    = '7eb8d4a46b4a183f76e7'
-  Pusher.secret = 'c5f0ad3864787f78d53f'
+  Pusher.app_id = '4915'
+  Pusher.key    = 'd20cf40b86a0639e33cc'
+  Pusher.secret = 'f13b3a335cc5627caacc'
   
   # Settings specified here will take precedence over those in config/application.rb
 

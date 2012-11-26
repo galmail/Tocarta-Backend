@@ -12,10 +12,10 @@ Demo: http://tocarta-admin-demo.herokuapp.com
 
 Pushing to environments:
 
-$ heroku push staging master
-$ heroku push production master
-$ heroku push free master
-$ heroku push demo master
+$ git push staging master
+$ git push production master
+$ git push free master
+$ git push demo master
 
 If database model has changed:
 
