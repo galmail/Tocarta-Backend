@@ -15,7 +15,7 @@ class Ability
       can :manage, :all
     elsif user.role == "restaurant"
       can :read, DishType
-      can [:read, :update], User, :id => user.id
+      # can [:read, :update], User, :id => user.id
       can :read, Chain, :user => { :id => user.id }
       can :read, Restaurant, :chain => { :user => { :id => user.id } }
       can [:read, :update], RestaurantSetting, :restaurant => { :chain => { :user => { :id => user.id } } }

@@ -1,4 +1,5 @@
 class Api::TocartasController < AccessController
+  #skip_before_filter  :verify_authenticity_token
   before_filter :identify_tablet, :setup_language
   
   def im_alive
@@ -91,13 +92,6 @@ class Api::TocartasController < AccessController
             @images << subsection.photo.url(:mini)
             @images << subsection.photo.url(:thumb)
           end
-          # subsection.dishes.each { |dish|
-            # if !dish.photo_file_name.nil? and dish.photo_updated_at > last_update
-              # @images << dish.photo.url(:mini)
-              # @images << dish.photo.url(:thumb)
-              # @images << dish.photo.url(:large)
-            # end
-          # }
         }
       }
     }
