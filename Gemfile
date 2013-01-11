@@ -1,7 +1,10 @@
 source 'https://rubygems.org'
 
 #### Ruby on Rails ####
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.11'
+
+# rails '3.2.11'
+
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'jquery-rails'
 
