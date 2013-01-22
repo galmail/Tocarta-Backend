@@ -1,10 +1,11 @@
-module SubtleData
-  class Client
+# module SubtleData
+  class Subtledata::Client
+    
     attr_reader :location_id, :user_id, :device_id
 
-    def initialize(secret, location_id, options = {})
-      @location_id = location_id
-      @secret = secret
+    def initialize(secret = 'RzArM1VQ', location_id = 611, options = {})
+      @location_id = location_id # Cloud POS for testing called ToCarta Sandwich Shop
+      @secret = secret # Tablet android app
       @session_token = options[:session_token]
       @user_id = options[:user_id]
       @device_id = options[:device_id]
@@ -13,11 +14,11 @@ module SubtleData
     end
 
     def user
-      SubtleData::User.new(self)
+      Subtledata::User.new(self)
     end
 
     def order
-      SubtleData::Order.new(self)
+      Subtledata::Order.new(self)
     end
 
     def get(method, params)
@@ -46,4 +47,4 @@ module SubtleData
         @session_token = response.body.split('|')[1]
       end
   end
-end
+# end

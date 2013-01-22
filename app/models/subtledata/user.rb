@@ -1,5 +1,5 @@
-module SubtleData
-  class User
+# module SubtleData
+  class Subtledata::User
 
     def initialize(client)
       @client = client
@@ -43,4 +43,4 @@ module SubtleData
       }
     end
   end
-end
+# end

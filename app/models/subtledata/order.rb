@@ -1,5 +1,5 @@
-module SubtleData
-  class Order
+# module SubtleData
+  class Subtledata::Order
     def initialize(client)
       @client = client
     end
@@ -78,4 +78,4 @@ module SubtleData
         [ @client.location_id, 0, 0, 0, 0, @client.user_id, @client.device_id, 1, 0, "", "#{items(order[:line_items])}", payment(order[:payment]), 0, 0]
       end
   end
-end
+# end
