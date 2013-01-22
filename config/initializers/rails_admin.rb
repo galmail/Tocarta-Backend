@@ -67,9 +67,9 @@ RailsAdmin.config do |config|
     # list do
       # exclude_fields :id, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :current_sign_in_ip, :restaurant, :client
     # end
-    edit do
-      exclude_fields :id, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :current_sign_in_ip, :restaurant, :client
-    end
+    # edit do
+      # exclude_fields :id, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :current_sign_in_ip, :restaurant, :client
+    # end
   end
   
   ######## Chain Model ########
