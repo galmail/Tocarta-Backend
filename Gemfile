@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 #### Ruby on Rails ####
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.11'
 
 # rails '3.2.11'
 
@@ -10,7 +10,7 @@ gem 'jquery-rails'
 
 #### Database Setup ####
 group :development do
-  gem "sqlite3-ruby", :require => "sqlite3"
+  gem 'sqlite3'
 end
 
 group :production do
