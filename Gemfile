@@ -20,7 +20,8 @@ group :production do
 end
 
 #### Rails Admin Setup ####
-gem 'rails_admin', :git => 'git://github.com/tocarta/rails_admin.git'
+gem 'rails_admin'
+# gem 'rails_admin', :git => 'git://github.com/tocarta/rails_admin.git'
 gem 'devise'  # authentication
 gem 'cancan'  # authorization
 
@@ -38,9 +39,6 @@ gem 'aws-sdk', '~> 1.3.4'
 # Habilitando Push Notifications
 gem 'pusher'
 
-# Smart dates and times
-gem 'chronic_duration'
-
 # Debugger for development
 # group :development do
   # gem 'linecache19'
@@ -53,6 +51,7 @@ gem 'twitter_oauth'
 # Translation
 gem 'globalize3', :git => 'git://github.com/svenfuchs/globalize3.git'
 
+# Smart dates and times
 gem 'chronic'
 gem 'chronic_duration'
 gem 'chronic18n'
