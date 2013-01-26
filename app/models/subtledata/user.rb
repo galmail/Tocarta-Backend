@@ -4,31 +4,54 @@
     def initialize(client)
       @client = client
     end
-
-    def create(username, password, email, options = {})
+    
+    def create(sd_user_settings)
       response = @client.get "0110", [
-        username,
-        password,
-        options[:first_name] || username,
-        options[:middle_name],
-        options[:last_name] || "Last Name",
-        options[:dob],
-        options[:cell_phone],
-        email,
-        options[:latitude],
-        options[:longitude],
-        options[:guid] || "123456"
+        sd_user_settings[:username],
+        sd_user_settings[:password],
+        sd_user_settings[:first_name] || sd_user_settings[:username],
+        sd_user_settings[:middle_name],
+        sd_user_settings[:last_name] || "Last Name",
+        sd_user_settings[:dob],
+        sd_user_settings[:cell_phone],
+        sd_user_settings[:email],
+        sd_user_settings[:latitude],
+        sd_user_settings[:longitude],
+        sd_user_settings[:guid] || "123456"
       ]
-      
       results = response.body.split("|")
-      if results[1].to_i < 0
-        return {error: errors[results[1]]}
+      if results[1].to_i <= 0
+        return {error: create_user_errors[results[1]]}
       else
+        @client.user_id = results[1]
+        @client.device_id = results[2]
+        @client.user_guid = results[3]
         return {user_id: results[1], device_id: results[2], user_guid: results[3]}
       end
     end
-
-    def errors
+    
+    def authenticate(sd_user_settings)
+      response = @client.get "0111", [
+        sd_user_settings[:username],
+        sd_user_settings[:password],
+        sd_user_settings[:latitude] || "0",
+        sd_user_settings[:longitude] || "0",
+        @client.device_id
+      ]
+      results = response.body.split("|")
+      if results[1].to_i <= 0
+        return {error: authenticate_user_errors[results[1]]}
+      else
+        @client.user_id = results[1]
+        @client.device_id = results[2]
+        @client.user_guid = results[3]
+        return {user_id: results[1], device_id: results[2], user_guid: results[3]}
+      end
+    end
+    
+    #### list of error codes ####
+    
+    def create_user_errors
       {
         "0" => "General failure. Try again.",
         "-1" => "Username not long enough",
@@ -40,6 +63,16 @@
         "-11" => "Unique identifier not passed",
         "-100" => "Not using HTTPS",
         "-101" => "Username already exists"
+      }
+    end
+    
+    def authenticate_user_errors
+      {
+        "0" => "General failure. Try again.",
+        "-1" => "Username missing",
+        "-2" => "Password not long enough",
+        "-5" => "Unique Identifier not passed",
+        "-100" => "Not using HTTPS"
       }
     end
   end

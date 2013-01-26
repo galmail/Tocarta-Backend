@@ -1,16 +1,34 @@
 # module SubtleData
   class Subtledata::Client
     
-    attr_reader :location_id, :user_id, :device_id
+    attr_accessor :user_id, :device_id, :user_guid
 
-    def initialize(secret = 'RzArM1VQ', location_id = 611, options = {})
-      @location_id = location_id # Cloud POS for testing called ToCarta Sandwich Shop
-      @secret = secret # Tablet android app
-      @session_token = options[:session_token]
-      @user_id = options[:user_id]
-      @device_id = options[:device_id]
-      @url = "https://www.subtledata.com"
-      @base = "/API/M/1/"
+    def initialize(sd_settings = self.sd_settings)
+      @location_id = sd_settings[:location_id]
+      @secret = sd_settings[:secret]
+      # @session_token = startup
+      @user_id = sd_settings[:user][:user_id]
+      @device_id = sd_settings[:user][:device_id]
+      @url = sd_settings[:url]
+      @base = sd_settings[:base]
+    end
+    
+    def sd_settings
+      {
+        :url => "https://www.subtledata.com",
+        :base => "/API/M/1/",
+        :secret => "RzArM1VQ",
+        :location_id => 611,
+        :user => {
+          :username => "aaaaaaaa",
+          :password => "bbbbbbbb",
+          :email => "aaabbb@company.com",
+          # if user exists, you must indicate the following settings
+          :user_id => "1644",
+          :device_id => "1275",
+          :user_guid => "ed83a73e-578c-4263-9ef2-f76c7bc60d1e"
+        }
+      }
     end
 
     def user

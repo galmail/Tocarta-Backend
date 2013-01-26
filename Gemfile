@@ -29,6 +29,10 @@ gem 'cancan'  # authorization
 gem 'rabl'
 gem 'yajl-ruby'
 
+
+#### HTTP Client used for Subtledata ####
+gem "faraday", "~> 0.8.4"
+
 # JSON gem
 # gem 'json'
 
