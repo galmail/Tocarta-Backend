@@ -14,7 +14,10 @@ sd_settings = {
 	  # if user exists, you must indicate the following settings
 	  :user_id => "1644",
 	  :device_id => "1275",
-	  :user_guid => "ed83a73e-578c-4263-9ef2-f76c7bc60d1e"
+	  :user_guid => "ed83a73e-578c-4263-9ef2-f76c7bc60d1e",
+	  # setting user's gps location
+	  :latitude => "30.36269",
+    :longitude => "-97.980011"
 	}
 }
 
@@ -27,28 +30,9 @@ user.create(sd_settings[:user])
 ##### OPTION B: Authenticate existing user #####
 user.authenticate(sd_settings[:user])
 
-
-
-
-
-
-
-
-
-
 ************** Creating a new ticket for dine-in **************
-
-Authenticate User
-Request: c.get("0111",["tocarta","tocarta123","0","0","1269"]).body
-Response: "0111|1639|1270|cfc9bdb5-4dfb-43d3-8fa7-83d5d6d11226"
-
-Set their GPS location
-Request: c.get("0105",["1639","41.1167","1.2500"]).body
-Response: "0105|1"
-
-
-
-
+ticket = Subtledata::Ticket.new(client)
+ticket.dine_in
 
 ************** Subtledata tested Methods **************
 
