@@ -26,5 +26,60 @@
       @ticket_id = @client.open_new_ticket(location_id,center_id,table_id,num_people,bizexp,ticket_desc,ticket_name)
     end
     
+    def is_open?
+      response = @client.get("0451",[@ticket_id])
+      results = response.body.split("|")
+      return results[1].to_i > 0
+    end
+    
+    def get_categories(parent_category = 0)
+      response = @client.get("0210",[@ticket_id,parent_category])
+      results = response.body.split("|")
+      position = results[1].split("^")
+      i = 0
+      final_res = []
+      while i < position.length
+        final_res.push({
+          category_id: position[i],
+          name: position[i+1],
+          instruction_text: position[i+2],
+          has_items: position[i+3],
+          has_subcategories: position[i+4]
+        })
+        i+=5
+      end
+      return final_res
+    end
+    
+    def get_items_of_category(category_id)
+      response = @client.get("0211",[@ticket_id,category_id])
+      results = response.body.split("|")
+      position = results[1].split("^")
+      i = 0
+      final_res = []
+      while i < position.length
+        final_res.push({
+          item_id: position[i],
+          name: position[i+1],
+          price: position[i+2]
+        })
+        i+=3
+      end
+      return final_res
+    end
+    
+    def get_item_modifiers(item_id)
+      response = @client.get("0220",[item_id])
+      results = response.body.split("|")
+      position = results[1].split("^")
+      return {category_id: position[0], name: position[1], description: position[2]}
+    end
+    
+    
+    
+    
+    
+    
+    
   end
 # end

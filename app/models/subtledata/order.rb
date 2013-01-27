@@ -1,8 +1,32 @@
 # module SubtleData
   class Subtledata::Order
-    def initialize(client)
-      @client = client
+    
+    def initialize(ticket)
+      @ticket = ticket
     end
+    
+    def place_order
+      # 1. Check that the ticket is still open. (0451)
+      return "error: Ticket is closed!" unless @ticket.is_open?
+      # 2. Get the categories for parent category 0. Continue to iterate using the category as the parent category. (0210)
+      categories = @ticket.get_categories
+      # 3. Get the items for the category. (0211)
+      items = @ticket.get_items_of_category(categories.first[:category_id])
+      # 4. Get the item modifiers for the item. (0220)
+      item_modifiers = @ticket.get_item_modifiers(items.first[:item_id])
+      # 5. Add the items to the ticket along with the modifier(s). (0520)
+      
+      # 6. Update the quantity for the items that were ordered (if they need to change them). (0530)
+      # 7. Delete any items that they don’t want to order. (0531)
+      # 8. Get the current order (unless you store this locally as well). (0510)
+      # 9. Place the current order. (0511)
+      # 10. Show the current ticket items. (0500)
+      
+      return "order placed!"
+    end
+    
+    
+    
 
     def create(order)
       response = @client.get "0480", order_to_subtledata(order)
