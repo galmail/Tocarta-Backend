@@ -15,12 +15,22 @@
       # 4. Get the item modifiers for the item. (0220)
       item_modifiers = @ticket.get_item_modifiers(items.first[:item_id])
       # 5. Add the items to the ticket along with the modifier(s). (0520)
-      
+      @ticket.add_items(item,cover_number)
       # 6. Update the quantity for the items that were ordered (if they need to change them). (0530)
+      @ticket.update_item_quantity(item_quantity_collection)
       # 7. Delete any items that they don’t want to order. (0531)
+      @ticket.delete_items(items_collection)
       # 8. Get the current order (unless you store this locally as well). (0510)
+      @ticket.get_items_to_order
       # 9. Place the current order. (0511)
-      # 10. Show the current ticket items. (0500)
+      order_result = @ticket.place_current_order
+      if order_result[:ok]
+        # wait order_result[:secs_to_wait]
+        # 10. Show the current ticket items. (0500)
+        @ticket.get_all_items
+      end
+      
+      
       
       return "order placed!"
     end

@@ -27,10 +27,26 @@
           :user_id => "1644",
           :device_id => "1275",
           :user_guid => "ed83a73e-578c-4263-9ef2-f76c7bc60d1e",
-          # setting user's gps location
+          # setting user's gps location (Austing Texas Subtledata Default Location)
           :latitude => "30.36269",
           :longitude => "-97.980011"
-        }
+        },
+        :secret_keys => {
+          :android_phone => "RzArM1VP",
+          :android_tablet => "RzArM1VQ",
+          :app_mobi => "RzArM1VR",
+          :blackberry_phone => "RzArM1VS",
+          :blackberry_tablet => "RzArM1VT",
+          :desktop_app => "RzArM1VU",
+          :ipad => "RzArM1VV",
+          :iphone => "RzArM1VW",
+          :ipod_touch => "RzArM1VX",
+          :website => "RzArM1VY",
+          :windows_phone => "RzArM1VZ"
+        },
+        :employees => [
+          {:username => "test", :password => "1234"}
+        ]
       }
     end
     
@@ -97,9 +113,9 @@
       response = get("0410",[location_id,center_id,@user_id,@device_id,table_id,num_people,bizexp,ticket_desc,@latitude,@longitude,ticket_name])
       results = response.body.split("|")
       if results[1].to_i <= 0
-        return {error: new_ticket_errors[results[1]]}
+        return {ok: false, error: new_ticket_errors[results[1]]}
       else
-        return {ticket_id: results[1]}
+        return {ok: true, ticket_id: results[1]}
       end
     end
 

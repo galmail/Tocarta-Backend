@@ -20,34 +20,26 @@ sd_settings = {
     :longitude => "-97.980011"
 	},
 	:secret_keys => {
-		:android_phone => "RzArM1VP",
-		:android_tablet => "RzArM1VQ",
-		:app_mobi => "RzArM1VR",
-		:blackberry_phone => "RzArM1VS",
-		:blackberry_tablet => "RzArM1VT",
-		:desktop_app => "RzArM1VU",
-		:ipad => RzArM1VV",
-		:iphone => "RzArM1VW",
-		:ipod_touch => "RzArM1VX",
-		:website => "RzArM1VY",
-		:windows_phone => "RzArM1VZ"
-	},
-	:employees => [
-		{:username => "test", :password => "1234"}
-	]
+    :android_phone => "RzArM1VP",
+    :android_tablet => "RzArM1VQ",
+    :app_mobi => "RzArM1VR",
+    :blackberry_phone => "RzArM1VS",
+    :blackberry_tablet => "RzArM1VT",
+    :desktop_app => "RzArM1VU",
+    :ipad => "RzArM1VV",
+    :iphone => "RzArM1VW",
+    :ipod_touch => "RzArM1VX",
+    :website => "RzArM1VY",
+    :windows_phone => "RzArM1VZ"
+  },
+  :employees => [
+    {:username => "test", :password => "1234"}
+  ]
 }
 
-
-
-
-
 ##### Starting Subtledata objects #####
-client = Subtledata::Client.new(sd_settings)
+client = Subtledata::Client.new()
 user = Subtledata::User.new(client)
-##### OPTION A: Create a new user #####
-user.create(sd_settings[:user])
-##### OPTION B: Authenticate existing user #####
-user.authenticate(sd_settings[:user])
 
 ##### Creating a new ticket for dine-in #####
 ticket = Subtledata::Ticket.new(client)
@@ -57,6 +49,12 @@ ticket.dine_in
 order = Subtledata::Order.new(ticket)
 order.place_order
 
+
+
+##### OPTION A: Create a new user #####
+user.create(sd_settings[:user])
+##### OPTION B: Authenticate existing user #####
+user.authenticate(sd_settings[:user])
 
 
 ************** Subtledata tested Methods **************
