@@ -17,21 +17,21 @@ class Ability
       can :read, DishType
       # can [:read, :update], User, :id => user.id
       can :read, Chain, :user => { :id => user.id }
-      can :read, Restaurant, :chain => { :user => { :id => user.id } }
-      can [:read, :update], RestaurantSetting, :restaurant => { :chain => { :user => { :id => user.id } } }
-      can :read, Menu, :restaurant => { :chain => { :user => { :id => user.id } } }
-      can [:read, :update], MenuSetting, :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } }
-      can [:read, :update, :create], Section, :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } }
-      can [:read, :update, :create], Subsection, :section => { :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } } }
+      can :read, Restaurant, :chain => { :user_id => user.id }
+      can [:read, :update], RestaurantSetting, :restaurant => { :chain => { :user_id => user.id } }
+      can :read, Menu, :restaurant => { :chain => { :user_id => user.id } }
+      can [:read, :update], MenuSetting, :menu => { :restaurant => { :chain => { :user_id => user.id } } }
       
-      # can [:read, :update, :create], Dish, :sections => { :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } } }
-      can [:read, :update, :create], Dish, :chain => { :user => { :id => user.id } }
+      can [:read, :update, :create], Section, :menu => { :restaurant => { :chain => { :user_id => user.id } } }
+      can [:read, :update, :create], Subsection, :section => { :menu => { :restaurant => { :chain => { :user_id => user.id } } } }
       
-      can [:read, :update], Comment, :restaurant => { :chain => { :user => { :id => user.id } } }
-      can [:read, :create], Table, :restaurant => { :chain => { :user => { :id => user.id } } }
-      can :read, Tablet, :table => { :restaurant => { :chain => { :user => { :id => user.id } } } }
-      can :read, SurveyQuestion, :chain => { :user => { :id => user.id } }
-      can :read, Order, :table => { :restaurant => { :chain => { :user => { :id => user.id } } } }
+      can [:read, :update, :create], Dish, :chain => { :user_id => user.id }
+      
+      can [:read, :update], Comment, :restaurant => { :chain => { :user_id => user.id } }
+      can [:read, :create], Table, :restaurant => { :chain => { :user_id => user.id } }
+      can :read, Tablet, :table => { :restaurant => { :chain => { :user_id => user.id } } }
+      can :read, SurveyQuestion, :chain => { :user_id => user.id }
+      can :read, Order, :table => { :restaurant => { :chain => { :user_id => user.id } } }
     end
     
     

@@ -6,37 +6,37 @@
 #### Aperitivos ####
 
 plato1_aperitivos_main_menu_sushibar_demo_sushibar_chain:
- section_id: <%= ActiveRecord::Fixtures.identify(:aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
+ # section_id: <%= ActiveRecord::Fixtures.identify(:aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
  name: Atún Abrasado
  description: Desc
  position: 1
  price: 7.50
 plato2_aperitivos_main_menu_sushibar_demo_sushibar_chain:
- section_id: <%= ActiveRecord::Fixtures.identify(:aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
+ # section_id: <%= ActiveRecord::Fixtures.identify(:aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
  name: Pollo frito marinado al estilo japonés
  description: Desc
  position: 2
  price: 9.10
 plato3_aperitivos_main_menu_sushibar_demo_sushibar_chain:
- section_id: <%= ActiveRecord::Fixtures.identify(:aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
+ # section_id: <%= ActiveRecord::Fixtures.identify(:aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
  name: Empanadillas de cerdo fritas
  description: Desc
  position: 3
  price: 5.50
 plato4_aperitivos_main_menu_sushibar_demo_sushibar_chain:
- section_id: <%= ActiveRecord::Fixtures.identify(:aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
+ # section_id: <%= ActiveRecord::Fixtures.identify(:aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
  name: Vieiras rebozadas
  description: Desc
  position: 4
  price: 7.50
 plato5_aperitivos_main_menu_sushibar_demo_sushibar_chain:
- section_id: <%= ActiveRecord::Fixtures.identify(:aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
+ # section_id: <%= ActiveRecord::Fixtures.identify(:aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
  name: Crispy Tofu
  description: Desc
  position: 5
  price: 6.00
 plato6_aperitivos_main_menu_sushibar_demo_sushibar_chain:
- section_id: <%= ActiveRecord::Fixtures.identify(:aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
+ # section_id: <%= ActiveRecord::Fixtures.identify(:aperitivos_main_menu_sushibar_demo_sushibar_chain) %>
  name: Tarta de Salmón
  description: Desc
  position: 6
@@ -45,19 +45,19 @@ plato6_aperitivos_main_menu_sushibar_demo_sushibar_chain:
 #### Maki ####
 
 plato1_maki_main_menu_sushibar_demo_sushibar_chain:
- section_id: <%= ActiveRecord::Fixtures.identify(:maki_main_menu_sushibar_demo_sushibar_chain) %>
+ # section_id: <%= ActiveRecord::Fixtures.identify(:maki_main_menu_sushibar_demo_sushibar_chain) %>
  name: California
  description: desc...
  position: 1
  price: 9.50
 plato2_maki_main_menu_sushibar_demo_sushibar_chain:
- section_id: <%= ActiveRecord::Fixtures.identify(:maki_main_menu_sushibar_demo_sushibar_chain) %>
+ # section_id: <%= ActiveRecord::Fixtures.identify(:maki_main_menu_sushibar_demo_sushibar_chain) %>
  name: King Crab
  description: desc...
  position: 2
  price: 10.20
 plato3_maki_main_menu_sushibar_demo_sushibar_chain:
- section_id: <%= ActiveRecord::Fixtures.identify(:maki_main_menu_sushibar_demo_sushibar_chain) %>
+ # section_id: <%= ActiveRecord::Fixtures.identify(:maki_main_menu_sushibar_demo_sushibar_chain) %>
  name: Las Vegas
  description: desc...
  position: 3
@@ -70,13 +70,13 @@ plato3_maki_main_menu_sushibar_demo_sushibar_chain:
 
 #### Entrantes ####
 plato1_entrantes_main_menu_sushidaki_vigo_sushidaki_chain:
- section_id: <%= ActiveRecord::Fixtures.identify(:entrantes_main_menu_sushidaki_vigo_sushidaki_chain) %>
+ # section_id: <%= ActiveRecord::Fixtures.identify(:entrantes_main_menu_sushidaki_vigo_sushidaki_chain) %>
  name: Sopa Miso Shiru
  description: 
  position: 1
  price: 3.95
 plato2_entrantes_main_menu_sushidaki_vigo_sushidaki_chain:
- section_id: <%= ActiveRecord::Fixtures.identify(:entrantes_main_menu_sushidaki_vigo_sushidaki_chain) %>
+ # section_id: <%= ActiveRecord::Fixtures.identify(:entrantes_main_menu_sushidaki_vigo_sushidaki_chain) %>
  name: Su No Mono
  description: 
  position: 2
