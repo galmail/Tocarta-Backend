@@ -31,7 +31,6 @@ class Ability
       can :read, Tablet, :table => { :restaurant_id => user.chain.restaurants }
       can :read, SurveyQuestion, :chain => { :user_id => user }
       can :read, Order, :table => { :restaurant_id => user.chain.restaurants }
-      
     end
 
     # Define abilities for the passed in user here. For example:

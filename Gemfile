@@ -10,6 +10,7 @@ gem 'jquery-rails'
 
 #### Database Setup ####
 group :development do
+  gem 'yaml_db'
   gem 'sqlite3'
 end
 

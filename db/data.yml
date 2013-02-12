@@ -1,0 +1,1540 @@
+
+---
+dish_translations:
+  columns:
+  - id
+  - dish_id
+  - locale
+  - name
+  - description
+  - story
+  - created_at
+  - updated_at
+  records: 
+  - - 220299140
+    - 838733414
+    - es
+    - California
+    - Roll de aguacate pepino y langostino
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 293349727
+    - 765679809
+    - es
+    - Las Vegas
+    - Roll tempurizado de salmón y cangrejo adornado con jengibre crujiente
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 498291672
+    - 950703390
+    - es
+    - Su No Mono
+    - Ensalada de pepino y pescado.
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 553724886
+    - 762965278
+    - es
+    - Vieiras rebozadas
+    - Vieiras rebozadas con un toque de soja
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 669407169
+    - 50303245
+    - es
+    - Sopa Miso Shiru
+    - Sopa de pasta de soja, cebolletas, algas y tofu.
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 725604424
+    - 658972296
+    - es
+    - Crispy Tofu
+    - Delicados cuadritos de tofu crujiente
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 772655794
+    - 578096254
+    - es
+    - Tarta de Salmón
+    - En un bollo francés con queso crema y ensalada
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 806619266
+    - 1013763762
+    - es
+    - Tori Karaage
+    - Pollo frito marinado al estilo japonés
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 854196497
+    - 238383347
+    - es
+    - King Crab
+    - Tempurizado de arroz relleno de cangrejo con topping picante
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 891689612
+    - 962518088
+    - es
+    - Atún Abrasado
+    - Ruedas de atún abrasado a la pimienta
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 975895532
+    - 911359268
+    - es
+    - Empanadillas
+    - Empanadillas de cerdo fritas
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+
+---
+section_translations:
+  columns:
+  - id
+  - section_id
+  - locale
+  - name
+  - created_at
+  - updated_at
+  records: 
+  - - 28834907
+    - 726053166
+    - es
+    - Entrantes
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 55661539
+    - 970252507
+    - en
+    - Main Dishes
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 164956892
+    - 589580209
+    - es
+    - Primeros
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 166001741
+    - 578096721
+    - en
+    - Deserts
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 193560571
+    - 578096721
+    - es
+    - Postres
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 269435278
+    - 118293991
+    - es
+    - Aperitivos
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 297992728
+    - 726053166
+    - en
+    - Starters
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 321236398
+    - 970252507
+    - es
+    - Segundos
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 355072097
+    - 340033105
+    - es
+    - Postres
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 409497299
+    - 604020431
+    - es
+    - Sopas
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 427421100
+    - 600487994
+    - es
+    - Pastas
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 430044309
+    - 589580209
+    - en
+    - Entrants
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 467858707
+    - 663356687
+    - es
+    - Sushi
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 473232946
+    - 933561388
+    - en
+    - Sashimi and Nigiri
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 474637640
+    - 663356687
+    - en
+    - Sushi
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 487449935
+    - 46776712
+    - en
+    - Steak
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 509179264
+    - 933561388
+    - es
+    - Sashimi y Nigiri
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 510005692
+    - 269817099
+    - es
+    - Maki
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 516564561
+    - 340033105
+    - en
+    - Desserts
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 532741774
+    - 604020431
+    - en
+    - Soup
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 538820138
+    - 183300959
+    - es
+    - Primeros
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 539773115
+    - 196983459
+    - en
+    - Desserts
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 559873472
+    - 269817099
+    - en
+    - Maki
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 574737161
+    - 196983459
+    - es
+    - Postres
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 613059811
+    - 772068607
+    - en
+    - Beverages
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 685649300
+    - 307994282
+    - en
+    - Salads
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 714729237
+    - 270292009
+    - en
+    - Seconds
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 795431663
+    - 772068607
+    - es
+    - Bebidas
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 805572105
+    - 435716003
+    - es
+    - Bebidas
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 812204135
+    - 183300959
+    - en
+    - Firsts
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 845778363
+    - 435716003
+    - en
+    - Beverages
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 922511732
+    - 118293991
+    - en
+    - Entrees
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 922915491
+    - 1032637119
+    - en
+    - Deserts
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 947557406
+    - 46776712
+    - es
+    - Carnes
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 950719455
+    - 307994282
+    - es
+    - Ensaladas
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 971825875
+    - 269521785
+    - es
+    - Paellas
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 988617052
+    - 270292009
+    - es
+    - Segundos
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 998334821
+    - 269521785
+    - en
+    - Paellas
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 1007590655
+    - 600487994
+    - en
+    - Spaghettis
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 1021398191
+    - 1032637119
+    - es
+    - Postres
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+
+---
+subsection_translations:
+  columns:
+  - id
+  - subsection_id
+  - locale
+  - name
+  - created_at
+  - updated_at
+  records: 
+  - - 6
+    - 6
+    - es
+    - Hot Sushi
+    - '2012-03-29 04:39:20.921372+0000'
+    - '2012-03-29 04:39:20.926255+0000'
+  - - 7
+    - 7
+    - es
+    - Temaki
+    - '2012-03-29 04:41:56.602670+0000'
+    - '2012-03-29 04:41:56.607716+0000'
+  - - 9
+    - 9
+    - es
+    - Sin Alcohol
+    - '2012-03-29 10:28:33.625673+0000'
+    - '2012-03-29 10:28:33.631236+0000'
+  - - 10
+    - 10
+    - es
+    - Cerveza
+    - '2012-03-29 10:29:44.059367+0000'
+    - '2012-03-29 10:29:44.063834+0000'
+  - - 11
+    - 11
+    - es
+    - Vino Blanco
+    - '2012-03-29 10:31:59.361344+0000'
+    - '2012-03-29 10:31:59.371130+0000'
+  - - 12
+    - 12
+    - es
+    - Vino Tinto
+    - '2012-03-29 10:34:42.341188+0000'
+    - '2012-03-29 10:34:42.345539+0000'
+  - - 13
+    - 13
+    - es
+    - Rosados y Cavas
+    - '2012-03-29 10:35:22.520385+0000'
+    - '2012-03-29 11:42:52.592687+0000'
+  - - 16
+    - 16
+    - es
+    - Refrescos
+    - '2012-12-03 23:49:33.170146+0000'
+    - '2012-12-03 23:49:33.264352+0000'
+  - - 17
+    - 17
+    - es
+    - Zumos
+    - '2012-12-03 23:50:17.809709+0000'
+    - '2012-12-03 23:50:17.818081+0000'
+  - - 18
+    - 18
+    - es
+    - Comprar vins
+    - '2012-12-05 19:04:30.706213+0000'
+    - '2012-12-05 19:04:30.737336+0000'
+
+---
+survey_question_translations:
+  columns:
+  - id
+  - survey_question_id
+  - locale
+  - name
+  - description
+  - created_at
+  - updated_at
+  records: 
+  - - 319075730
+    - 403404663
+    - es
+    - Service Question
+    - Trato recibido por nuestro personal
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 418266072
+    - 770467619
+    - es
+    - Food Question
+    - ¿Qué te ha parecido la comida?
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 525203766
+    - 242067241
+    - es
+    - Experience Question
+    - Tu experiencia en nuestro establecimiento
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+
+---
+chains:
+  columns:
+  - id
+  - user_id
+  - name
+  - created_at
+  - updated_at
+  - logo_file_name
+  - logo_content_type
+  - logo_file_size
+  - logo_updated_at
+  - email
+  - address
+  - note
+  records: 
+  - - 646192600
+    - !!null 
+    - Sushidaki
+    - '2013-02-11 10:41:45'
+    - '2013-02-11 10:41:45'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - info@sushidaki.com
+    - !!null 
+    - Sushidaki chain
+  - - 730117888
+    - 2
+    - Sushibar
+    - '2013-02-11 10:41:45'
+    - '2013-02-11 10:53:39.878406'
+    - sushi-bar-logo-thumb13337014.jpg
+    - image/jpeg
+    - 17693
+    - '2013-02-11 10:53:39.276551'
+    - info@sushibar.com
+    - ''
+    - Sushibar chain demo
+
+---
+comments:
+  columns:
+  - id
+  - dish_id
+  - restaurant_id
+  - client_id
+  - survey_question_id
+  - name
+  - created_at
+  - updated_at
+  - description
+  - rating
+  - approved
+  records: 
+  - - 32233229
+    - 962518088
+    - !!null 
+    - !!null 
+    - !!null 
+    - maria
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - Interesante combinación de ingredientes. Lo recomiendo.
+    - 8
+    - true
+  - - 187488411
+    - 962518088
+    - !!null 
+    - !!null 
+    - !!null 
+    - lola
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - Sushi sencillo pero muy rico, aunque poca cantidad.
+    - 6
+    - true
+  - - 513984447
+    - 962518088
+    - !!null 
+    - !!null 
+    - !!null 
+    - juan
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - Sushi excelente! me ha gustado mucho!
+    - 10
+    - true
+
+---
+dish_combo_associations:
+  columns:
+  - id
+  - dish_id
+  - combo_id
+  - created_at
+  - updated_at
+  records: 
+  - - 298486374
+    - !!null 
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 980190962
+    - !!null 
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+
+---
+dish_section_associations:
+  columns:
+  - id
+  - dish_id
+  - section_id
+  - created_at
+  - updated_at
+  records: 
+  - - 298486374
+    - !!null 
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 980190962
+    - !!null 
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+
+---
+dish_subsection_associations:
+  columns:
+  - id
+  - dish_id
+  - subsection_id
+  - created_at
+  - updated_at
+  records: 
+  - - 298486374
+    - !!null 
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+  - - 980190962
+    - !!null 
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+
+---
+dish_types:
+  columns:
+  - id
+  - name
+  - created_at
+  - updated_at
+  - icon_file_name
+  - icon_content_type
+  - icon_file_size
+  - icon_updated_at
+  - position
+  - dish_class
+  - description
+  records: 
+  - - 68115005
+    - Nuevo
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+  - - 262564613
+    - Picante
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+  - - 555033238
+    - Apto para Celiacos
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+  - - 775001609
+    - Sugerencia del Chef
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+  - - 966837031
+    - Light
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+  - - 1012644456
+    - Vegetariano
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+  - - 1018117489
+    - No contiene frutos secos
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+
+---
+dishes:
+  columns:
+  - id
+  - name
+  - created_at
+  - updated_at
+  - photo_file_name
+  - photo_content_type
+  - photo_file_size
+  - photo_updated_at
+  - active
+  - position
+  - description
+  - price
+  - rating
+  - reviews
+  - story
+  - video
+  - nutrition_facts
+  - badge_name
+  - short_title
+  - rate_me
+  - chain_id
+  records: 
+  - - 50303245
+    - Sopa Miso Shiru
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - false
+    - 1
+    - !!null 
+    - 3.95
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - !!null 
+  - - 238383347
+    - King Crab
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - false
+    - 2
+    - desc...
+    - 10.2
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - !!null 
+  - - 578096254
+    - Tarta de Salmón
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - false
+    - 6
+    - Desc
+    - 11.2
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - !!null 
+  - - 658972296
+    - Crispy Tofu
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - false
+    - 5
+    - Desc
+    - 6
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - !!null 
+  - - 762965278
+    - Vieiras rebozadas
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - false
+    - 4
+    - Desc
+    - 7.5
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - !!null 
+  - - 765679809
+    - Las Vegas
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - false
+    - 3
+    - desc...
+    - 12.5
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - !!null 
+  - - 838733414
+    - California
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - false
+    - 1
+    - desc...
+    - 9.5
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - !!null 
+  - - 911359268
+    - Empanadillas de cerdo fritas
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - false
+    - 3
+    - Desc
+    - 5.5
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - !!null 
+  - - 950703390
+    - Su No Mono
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - false
+    - 2
+    - !!null 
+    - 8.5
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - !!null 
+  - - 962518088
+    - Atún Abrasado
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - false
+    - 1
+    - Desc
+    - 7.5
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - !!null 
+  - - 1013763762
+    - Pollo frito marinado al estilo japonés
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - false
+    - 2
+    - Desc
+    - 9.1
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - !!null 
+
+---
+menus:
+  columns:
+  - id
+  - restaurant_id
+  - theme_id
+  - name
+  - created_at
+  - updated_at
+  - price
+  - menu_type
+  records: 
+  - - 1006488515
+    - 85105895
+    - !!null 
+    - SushiDaki Main Menu
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - main
+  - - 1014839498
+    - 520209077
+    - !!null 
+    - SushiBar Daily Menu
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - 13.5
+    - daily
+  - - 1030787733
+    - 520209077
+    - !!null 
+    - SushiBar Main Menu
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - main
+
+---
+restaurant_banners:
+  columns:
+  - id
+  - restaurant_id
+  - created_at
+  - updated_at
+  - photo_file_name
+  - photo_content_type
+  - photo_file_size
+  - photo_updated_at
+  - name
+  - position
+  - active
+  records: 
+  - - 298486374
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+  - - 980190962
+    - !!null 
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+
+---
+restaurant_settings:
+  columns:
+  - id
+  - restaurant_id
+  - name
+  - created_at
+  - updated_at
+  - num_licenses
+  - default_language
+  - last_menu_sync
+  - multilang_homepage
+  - games
+  - call_waiter_button
+  - order_button
+  - request_bill_button
+  - show_help_button
+  - show_survey
+  - access_key
+  - show_filters
+  records: 
+  - - 36712152
+    - 520209077
+    - SushiBar Demo
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - 4
+    - en
+    - !!null 
+    - false
+    - false
+    - true
+    - true
+    - true
+    - true
+    - true
+    - 1111
+    - false
+  - - 578688996
+    - 85105895
+    - SushiDaki Vigo
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - 6
+    - es
+    - !!null 
+    - false
+    - false
+    - true
+    - true
+    - true
+    - true
+    - true
+    - 1111
+    - false
+
+---
+restaurants:
+  columns:
+  - id
+  - user_id
+  - chain_id
+  - name
+  - created_at
+  - updated_at
+  - manager
+  - email
+  - address
+  - phone
+  - note
+  records: 
+  - - 85105895
+    - !!null 
+    - 646192600
+    - SushiDaki Vigo
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+  - - 520209077
+    - !!null 
+    - 730117888
+    - SushiBar Demo
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+
+---
+sections:
+  columns:
+  - id
+  - menu_id
+  - name
+  - created_at
+  - updated_at
+  - photo_file_name
+  - photo_content_type
+  - photo_file_size
+  - photo_updated_at
+  - active
+  - position
+  - hasBigSubsections
+  - dishes_per_page
+  records: 
+  - - 275957659
+    - 1006488515
+    - Entrantes
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - 1
+    - false
+    - 0
+  - - 357830342
+    - 1006488515
+    - Brochetas
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - 3
+    - false
+    - 0
+  - - 384895999
+    - 1030787733
+    - Maki
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - 3
+    - false
+    - 0
+  - - 411352446
+    - 1014839498
+    - Postres
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - 3
+    - false
+    - 0
+  - - 531022026
+    - 1006488515
+    - Wok, Grill y Pasta
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - 4
+    - false
+    - 0
+  - - 794683792
+    - 1030787733
+    - Postres
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - 4
+    - false
+    - 0
+  - - 815283412
+    - 1014839498
+    - Segundos
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - 2
+    - false
+    - 0
+  - - 819861853
+    - 1030787733
+    - Sashimi y Nigiri
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - 2
+    - false
+    - 0
+  - - 863579291
+    - 1014839498
+    - Primeros
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - 1
+    - false
+    - 0
+  - - 965587040
+    - 1030787733
+    - Aperitivos
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - 1
+    - false
+    - 0
+  - - 1016334524
+    - 1006488515
+    - Arroces
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - true
+    - 2
+    - false
+    - 0
+
+---
+survey_questions:
+  columns:
+  - id
+  - chain_id
+  - name
+  - created_at
+  - updated_at
+  - description
+  - position
+  - active
+  records: 
+  - - 242067241
+    - 730117888
+    - Experience Question
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - Experience Question Description
+    - !!null 
+    - true
+  - - 403404663
+    - 730117888
+    - Service Question
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - Service Question Description
+    - !!null 
+    - true
+  - - 770467619
+    - 730117888
+    - Food Question
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - Food Question Description
+    - !!null 
+    - true
+
+---
+tables:
+  columns:
+  - id
+  - restaurant_id
+  - name
+  - created_at
+  - updated_at
+  - number
+  - status
+  - dinners
+  - language
+  records: 
+  - - 247505687
+    - 85105895
+    - table3
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - 3
+    - !!null 
+    - !!null 
+    - !!null 
+  - - 512521699
+    - 520209077
+    - table3
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - 3
+    - !!null 
+    - !!null 
+    - !!null 
+  - - 585930475
+    - 520209077
+    - table2
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - 2
+    - !!null 
+    - !!null 
+    - !!null 
+  - - 642626546
+    - 520209077
+    - table1
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - 1
+    - !!null 
+    - !!null 
+    - !!null 
+  - - 732880089
+    - 520209077
+    - table4
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - 4
+    - !!null 
+    - !!null 
+    - !!null 
+  - - 771069218
+    - 520209077
+    - Control Center
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - 0
+    - !!null 
+    - !!null 
+    - !!null 
+  - - 906341890
+    - 85105895
+    - table1
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - 1
+    - !!null 
+    - !!null 
+    - !!null 
+  - - 1009456154
+    - 85105895
+    - Control Center
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - 0
+    - !!null 
+    - !!null 
+    - !!null 
+  - - 1058711232
+    - 85105895
+    - table2
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - 2
+    - !!null 
+    - !!null 
+    - !!null 
+
+---
+tablets:
+  columns:
+  - id
+  - table_id
+  - name
+  - created_at
+  - updated_at
+  - active
+  - access_key
+  - display_size
+  - device_brand
+  - device_name
+  - device_os
+  - last_menu_sync
+  - activated
+  - alive
+  records: 
+  - - 894866190
+    - 1009456154
+    - tablet1
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - true
+    - sushidaki1
+    - 1024x768
+    - Apple
+    - iPad
+    - iOS 5
+    - !!null 
+    - false
+    - !!null 
+  - - 1004760934
+    - 771069218
+    - tablet1
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - true
+    - sushibar1
+    - 1024x768
+    - Apple
+    - iPad
+    - iOS 4.2
+    - !!null 
+    - false
+    - !!null 
+  - - 1011456948
+    - 1009456154
+    - tablet2
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - true
+    - sushidaki2
+    - 1024x768
+    - Apple
+    - iPad
+    - iOS 5
+    - !!null 
+    - false
+    - !!null 
+  - - 1061309053
+    - 771069218
+    - tablet2
+    - '2013-02-11 10:41:46'
+    - '2013-02-11 10:41:46'
+    - true
+    - sushibar2
+    - 1024x768
+    - Apple
+    - iPad2
+    - iOS 5
+    - !!null 
+    - false
+    - !!null 
+
+---
+users:
+  columns:
+  - id
+  - email
+  - encrypted_password
+  - reset_password_token
+  - reset_password_sent_at
+  - remember_created_at
+  - sign_in_count
+  - current_sign_in_at
+  - last_sign_in_at
+  - current_sign_in_ip
+  - last_sign_in_ip
+  - created_at
+  - updated_at
+  - role
+  records: 
+  - - 1
+    - gal@tocarta.es
+    - $2a$10$WUUAIwQWiSU1i/6l2JJqleFS9bii.uHNpMdYtn1cSKsqLokvYRSne
+    - !!null 
+    - !!null 
+    - !!null 
+    - 0
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - '2013-02-11 10:51:47.228848'
+    - '2013-02-11 10:51:47.228848'
+    - admin
+  - - 2
+    - info@sushibar.com
+    - $2a$10$1XNHs3P.gf8UauwXuxtU1eKKN6Z8SqJKK8jeL77xFBZJ/nGYa7EIe
+    - !!null 
+    - !!null 
+    - !!null 
+    - 0
+    - !!null 
+    - !!null 
+    - !!null 
+    - !!null 
+    - '2013-02-11 10:52:05.033824'
+    - '2013-02-11 10:52:05.033824'
+    - restaurant
