@@ -7,6 +7,6 @@ class RestaurantSetting < ActiveRecord::Base
 	### Validations ###
 	
 	validates :num_licenses, :restaurant_id, :access_key, :presence => true
-	validates :access_key, :length => { :is => 4 }
+	validates :access_key, :length => { :is => 4 }	  
 	
 end

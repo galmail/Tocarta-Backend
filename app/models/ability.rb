@@ -13,28 +13,27 @@ class Ability
     
     if user.role == "admin"
       can :manage, :all
+    
     elsif user.role == "restaurant"
       can :read, DishType
       # can [:read, :update], User, :id => user.id
-      can :read, Chain, :user => { :id => user.id }
-      can :read, Restaurant, :chain => { :user => { :id => user.id } }
-      can [:read, :update], RestaurantSetting, :restaurant => { :chain => { :user => { :id => user.id } } }
-      can :read, Menu, :restaurant => { :chain => { :user => { :id => user.id } } }
-      can [:read, :update], MenuSetting, :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } }
-      can [:read, :update, :create], Section, :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } }
-      can [:read, :update, :create], Subsection, :section => { :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } } }
-      
+      can :read, Chain, :user_id => user
+      can :read, Restaurant, :chain => { :user_id => user }
+      can [:read, :update], RestaurantSetting, :restaurant => { :chain_id => user.chain  }
+      can :read, Menu, :restaurant => { :chain_id => user.chain  }
+      can [:read, :update], MenuSetting, :menu => { :restaurant_id => user.chain.restaurants }
+      can [:read, :update, :create], Section, :menu => { :restaurant_id => user.chain.restaurants }
+      can [:read, :update, :create], Subsection, :section => { :menu_id => user.chain.restaurants.collect{ |res| res.menus }.flatten }  
       # can [:read, :update, :create], Dish, :sections => { :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } } }
-      can [:read, :update, :create], Dish, :chain => { :user => { :id => user.id } }
+      can [:read, :update, :create], Dish, :chain => { :user_id => user }
+      can [:read, :update], Comment, :restaurant => { :chain_id => user.chain  }
+      can [:read, :create], Table, :restaurant => { :chain_id => user.chain  }
+      can :read, Tablet, :table => { :restaurant_id => user.chain.restaurants }
+      can :read, SurveyQuestion, :chain => { :user_id => user }
+      can :read, Order, :table => { :restaurant_id => user.chain.restaurants }
       
-      can [:read, :update], Comment, :restaurant => { :chain => { :user => { :id => user.id } } }
-      can [:read, :create], Table, :restaurant => { :chain => { :user => { :id => user.id } } }
-      can :read, Tablet, :table => { :restaurant => { :chain => { :user => { :id => user.id } } } }
-      can :read, SurveyQuestion, :chain => { :user => { :id => user.id } }
-      can :read, Order, :table => { :restaurant => { :chain => { :user => { :id => user.id } } } }
     end
-    
-    
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
