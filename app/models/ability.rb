@@ -16,34 +16,35 @@ class Ability
     
     elsif user.role == "restaurant"
       can :read, DishType
-      can :read, Chain, :user_id => user
-      can :read, Restaurant, :chain => { :user_id => user }
-      can [:read, :update], RestaurantSetting, :restaurant => { :chain_id => user.chain  }
-      can :read, Menu, :restaurant => { :chain_id => user.chain  }
-      can [:read, :update], MenuSetting, :menu => { :restaurant_id => user.chain.restaurants }
-      can [:read, :update, :create], Section, :menu => { :restaurant_id => user.chain.restaurants }
-      can [:read, :update, :create], Subsection, :section => { :menu_id => user.chain.restaurants.collect{ |res| res.menus }.flatten }  
-      can [:read, :update, :create], Dish, :chain => { :user_id => user }
-      can [:read, :update], Comment, :restaurant => { :chain_id => user.chain  }
-      can [:read, :create], Table, :restaurant => { :chain_id => user.chain  }
-      can :read, Tablet, :table => { :restaurant_id => user.chain.restaurants }
-      can :read, SurveyQuestion, :chain => { :user_id => user }
-      can :read, Order, :table => { :restaurant_id => user.chain.restaurants }
+      can :read, Chain, :user_id => user.id
+      can :read, Restaurant, :chain => { :user_id => user.id }
+      can [:read, :update], RestaurantSetting, :restaurant => { :chain_id => user.chain.id  }
+      can :read, Menu, :restaurant => { :chain_id => user.chain.id  }
+      can [:read, :update], MenuSetting, :menu => { :restaurant_id => user.chain.restaurants.collect{ |res| res.id }.flatten }
+      can [:read, :update, :create], Section, :menu => { :restaurant_id => user.chain.restaurants.collect{ |res| res.id }.flatten }
+      can [:read, :update, :create], Subsection, :section => { :menu_id => user.chain.restaurants.collect{ |res| res.menus.collect{ |menu| menu.id }}.flatten }
+      can [:read, :update, :create], Dish, :chain => { :user_id => user.id }
+      can [:read, :update], Comment, :restaurant => { :chain_id => user.chain.id  }
+      can [:read, :create], Table, :restaurant => { :chain_id => user.chain.id  }
+      can :read, Tablet, :table => { :restaurant_id => user.chain.restaurants.collect{ |res| res.id }.flatten }
+      can :read, SurveyQuestion, :chain => { :user_id => user.id }
+      can :read, Order, :table => { :restaurant_id => user.chain.restaurants.collect{ |res| res.id }.flatten }
     elsif user.role == "distributor"
       can :read, DishType
-      can [:read, :update], Chain, :user_id => user
-      can :manage, Restaurant, :chain => { :user_id => user }
-      can :manage, RestaurantSetting, :restaurant => { :chain_id => user.chain  }
-      can :manage, Menu, :restaurant => { :chain_id => user.chain  }
-      can :manage, MenuSetting, :menu => { :restaurant_id => user.chain.restaurants }
-      can :manage, Section, :menu => { :restaurant_id => user.chain.restaurants }
-      can :manage, Subsection, :section => { :menu_id => user.chain.restaurants.collect{ |res| res.menus }.flatten }
-      can :manage, Dish, :chain => { :user_id => user }
-      can [:read, :update], Comment, :restaurant => { :chain_id => user.chain  }
-      can :manage, Table, :restaurant => { :chain_id => user.chain  }
-      can :manage, Tablet, :table => { :restaurant_id => user.chain.restaurants }
-      can :manage, SurveyQuestion, :chain => { :user_id => user }
-      can :read, Order, :table => { :restaurant_id => user.chain.restaurants }
+      can [:read, :update], Chain, :user_id => user.id
+      can :manage, Restaurant, :chain => { :user_id => user.id }
+      can :manage, RestaurantSetting, :restaurant => { :chain_id => user.chain.id  }
+      can :manage, RestaurantBanner, :restaurant => { :chain_id => user.chain.id  }
+      can :manage, Menu, :restaurant => { :chain_id => user.chain.id  }
+      can :manage, MenuSetting, :menu => { :restaurant_id => user.chain.restaurants.collect{ |res| res.id }.flatten }
+      can :manage, Section, :menu => { :restaurant_id => user.chain.restaurants.collect{ |res| res.id }.flatten }
+      can :manage, Subsection, :section => { :menu_id => user.chain.restaurants.collect{ |res| res.menus.collect{ |menu| menu.id }}.flatten }
+      can :manage, Dish, :chain => { :user_id => user.id }
+      can [:read, :update], Comment, :restaurant => { :chain_id => user.chain.id  }
+      can :manage, Table, :restaurant => { :chain_id => user.chain.id  }
+      can :manage, Tablet, :table => { :restaurant_id => user.chain.restaurants.collect{ |res| res.id }.flatten }
+      can :manage, SurveyQuestion, :chain => { :user_id => user.id }
+      can :read, Order, :table => { :restaurant_id => user.chain.restaurants.collect{ |res| res.id }.flatten }
     end
 
     # Define abilities for the passed in user here. For example:
