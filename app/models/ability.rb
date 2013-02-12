@@ -16,7 +16,6 @@ class Ability
     
     elsif user.role == "restaurant"
       can :read, DishType
-      # can [:read, :update], User, :id => user.id
       can :read, Chain, :user_id => user
       can :read, Restaurant, :chain => { :user_id => user }
       can [:read, :update], RestaurantSetting, :restaurant => { :chain_id => user.chain  }
@@ -24,12 +23,26 @@ class Ability
       can [:read, :update], MenuSetting, :menu => { :restaurant_id => user.chain.restaurants }
       can [:read, :update, :create], Section, :menu => { :restaurant_id => user.chain.restaurants }
       can [:read, :update, :create], Subsection, :section => { :menu_id => user.chain.restaurants.collect{ |res| res.menus }.flatten }  
-      # can [:read, :update, :create], Dish, :sections => { :menu => { :restaurant => { :chain => { :user => { :id => user.id } } } } }
       can [:read, :update, :create], Dish, :chain => { :user_id => user }
       can [:read, :update], Comment, :restaurant => { :chain_id => user.chain  }
       can [:read, :create], Table, :restaurant => { :chain_id => user.chain  }
       can :read, Tablet, :table => { :restaurant_id => user.chain.restaurants }
       can :read, SurveyQuestion, :chain => { :user_id => user }
+      can :read, Order, :table => { :restaurant_id => user.chain.restaurants }
+    elsif user.role == "distributor"
+      can :read, DishType
+      can [:read, :update], Chain, :user_id => user
+      can :manage, Restaurant, :chain => { :user_id => user }
+      can :manage, RestaurantSetting, :restaurant => { :chain_id => user.chain  }
+      can :manage, Menu, :restaurant => { :chain_id => user.chain  }
+      can :manage, MenuSetting, :menu => { :restaurant_id => user.chain.restaurants }
+      can :manage, Section, :menu => { :restaurant_id => user.chain.restaurants }
+      can :manage, Subsection, :section => { :menu_id => user.chain.restaurants.collect{ |res| res.menus }.flatten }
+      can :manage, Dish, :chain => { :user_id => user }
+      can [:read, :update], Comment, :restaurant => { :chain_id => user.chain  }
+      can :manage, Table, :restaurant => { :chain_id => user.chain  }
+      can :manage, Tablet, :table => { :restaurant_id => user.chain.restaurants }
+      can :manage, SurveyQuestion, :chain => { :user_id => user }
       can :read, Order, :table => { :restaurant_id => user.chain.restaurants }
     end
 
