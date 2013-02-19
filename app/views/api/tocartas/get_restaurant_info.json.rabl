@@ -74,6 +74,7 @@ child @menus do
       child :comments do
         attributes :id, :name, :description, :rating
       end
+=begin 
       child :dish_types => :dishtypes do
         attributes :name
         node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
@@ -83,6 +84,8 @@ child @menus do
           dt.icon.url(:big_icon).split(ENV['S3_BUCKET']).last
         end
       end
+=end
+
     end
     
     child :subsections do
@@ -125,6 +128,8 @@ child @menus do
         child :comments do
           attributes :id, :name, :description, :rating
         end
+        
+=begin  
         child :dish_types => :dishtypes do
           attributes :name
           node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
@@ -134,6 +139,8 @@ child @menus do
             dt.icon.url(:big_icon).split(ENV['S3_BUCKET']).last
           end
         end
+=end        
+        
       end
     end
   end
