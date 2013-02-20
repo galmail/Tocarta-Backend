@@ -41,7 +41,7 @@ class Api::TocartasController < AccessController
             sort_and_filter(dish.comments,:created_at,:approved,true,MAX_COMMENTS_PER_DISH)
           }
         }
-      }
+      } 
     }
   end
   

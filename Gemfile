@@ -28,7 +28,8 @@ gem 'cancan'  # authorization
 
 #### Ruby API Builder Language ####
 gem 'rabl'
-gem 'yajl-ruby'
+# gem 'yajl-ruby'
+gem 'oj'
 
 
 #### HTTP Client used for Subtledata ####
@@ -38,7 +39,8 @@ gem "faraday", "~> 0.8.4"
 # gem 'json'
 
 #### Paperclip and Amazon S3 ####
-gem 'paperclip', '~> 2.7'
+# gem 'paperclip', '~> 2.7'
+gem "paperclip", "~> 3.4.0"
 gem 'aws-sdk', '~> 1.3.4'
 
 # Habilitando Push Notifications

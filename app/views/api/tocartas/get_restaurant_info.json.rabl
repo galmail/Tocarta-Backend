@@ -1,5 +1,3 @@
-object false
-
 ### restaurant setting ###
 
 node :name do @restaurant.name end
@@ -27,7 +25,6 @@ end
 ### restaurant menus ###
 
 child @menus do
-  object false
   attributes :id, :name, :menu_type, :price
   
   child :dishtypes => :dishtypes do
@@ -38,8 +35,10 @@ child @menus do
   end
 
   child :sections do
-    attributes :id, :name, :hasBigSubsections, :dishes_per_page
-    node(:mini, :unless => lambda {|s| s.photo_file_name.nil? }) do |section|
+    attributes :id, :name, :hasBigSubsections, :dishes_per_page    
+    node(:mini, :unless => lambda {|s|
+        s.photo_file_name.nil?
+      }) do |section|
       section.photo.url(:mini).split(ENV['S3_BUCKET']).last
     end
     node(:thumbnail, :unless => lambda {|s| s.photo_file_name.nil? }) do |section|
@@ -74,7 +73,7 @@ child @menus do
       child :comments do
         attributes :id, :name, :description, :rating
       end
-=begin 
+
       child :dish_types => :dishtypes do
         attributes :name
         node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
@@ -84,7 +83,6 @@ child @menus do
           dt.icon.url(:big_icon).split(ENV['S3_BUCKET']).last
         end
       end
-=end
 
     end
     
@@ -129,7 +127,6 @@ child @menus do
           attributes :id, :name, :description, :rating
         end
         
-=begin  
         child :dish_types => :dishtypes do
           attributes :name
           node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
@@ -139,7 +136,6 @@ child @menus do
             dt.icon.url(:big_icon).split(ENV['S3_BUCKET']).last
           end
         end
-=end        
         
       end
     end
