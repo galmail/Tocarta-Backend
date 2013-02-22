@@ -1,10 +1,9 @@
 %ul.nav.pull-right
   - actions(:root).each do |action|
     %li= link_to wording_for(:menu, action), { :action => action.action_name, :controller => 'rails_admin/main' }, :class => 'pjax'
-  - if request.original_url.end_with? "es"
-    %li= link_to 'English', url_for( :locale => 'en')
-  - else
-    %li= link_to 'Español', url_for( :locale => 'es')
+    
+    %li= select("locale","", [["Español","es"],["English","en"],["Catalan","cat"],["Français","fr"]], {:selected => params[:locale]}, { :index => nil, :onchange => "_clocale=window.location.href.replace(/(locale=)\\w+/,'locale='+this.value);window.location.href=_clocale;"})
+    
   - if main_app_root_path = (main_app.root_path rescue false)
     %li= link_to t('admin.home.name').capitalize, main_app_root_path
   - if _current_user
