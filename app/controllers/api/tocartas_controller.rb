@@ -184,7 +184,7 @@ class Api::TocartasController < AccessController
     if activity != nil
       orders = Order.where('table_id = ? AND created_at > ?',@table.id,activity.updated_at)
       @order_items = orders.collect { |order|
-        order.order_items.select { |order_item| order_item.dish.rate_me }
+        order.order_items.select { |order_item| (!order_item.dish.nil?) ? order_item.dish.rate_me : nil }
       }.flatten.uniq { |order_item| order_item.dish.id  }
     end
   end
