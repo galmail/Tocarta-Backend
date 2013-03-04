@@ -61,8 +61,8 @@ RailsAdmin.config do |config|
   ######## User Model ########
   
   config.model User do
-    label 'Usuario'
-    label_plural 'Usuarios'
+    label 'Users'
+    label_plural 'Users'
     object_label_method :email
     list do
       exclude_fields :id, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :current_sign_in_ip, :restaurant, :client
@@ -75,8 +75,8 @@ RailsAdmin.config do |config|
   ######## Chain Model ########
   
   config.model Chain do
-    label 'Cadena'
-    label_plural 'Cadenas'
+    label 'Chain'
+    label_plural 'Chains'
     list do
       exclude_fields :id, :user, :address, :note, :survey_questions
     end
@@ -85,12 +85,12 @@ RailsAdmin.config do |config|
   ######## Restaurant Model ########
   
   config.model Restaurant do
-    label 'Restaurante'
-    label_plural 'Restaurantes'
+    label 'Restaurant'
+    label_plural 'Restaurants'
     list do
       exclude_fields :id, :user, :note, :restaurant_activities, :restaurant_banners, :menus, :combos, :combo_types, :tables, :comments, :restaurant_setting
       field :chain do
-        label "Cadena"
+        label "Chain"
       end
     end
   end
@@ -98,8 +98,8 @@ RailsAdmin.config do |config|
   ######## RestaurantSetting Model ########
   
   config.model RestaurantSetting do
-    label 'Ajustes'
-    label_plural 'Ajustes'
+    label 'Settings'
+    label_plural 'Settings'
     list do
       exclude_fields :id, :name, :default_language, :last_menu_sync, :multilang_homepage, :games
     end
@@ -107,6 +107,11 @@ RailsAdmin.config do |config|
       exclude_fields :id, :name, :default_language, :last_menu_sync, :multilang_homepage, :games, :restaurant
       field :num_licenses do
         read_only true
+      end
+      field :supported_lang do
+        render do
+            bindings[:form].select( "supported_lang", bindings[:object].supported_lang_enum, {}, { :multiple => true })
+        end
       end
     end
     create do
@@ -140,8 +145,8 @@ RailsAdmin.config do |config|
   ######## DishType Model ########
   
   config.model DishType do
-    label 'Tipo de Comida'
-    label_plural 'Tipos de Comida'
+    label 'Food Type'
+    label_plural 'Food Type'
     list do
       exclude_fields :id, :position, :dish_class, :dish_type_associations, :dishes
     end
@@ -150,8 +155,8 @@ RailsAdmin.config do |config|
   ######## Dish Model ########
   
   config.model Dish do
-    label 'Plato'
-    label_plural 'Platos'
+    label 'Dish'
+    label_plural 'Dishes'
     list do
       exclude_fields :id, :combo, :description, :reviews, :story, :video, :nutrition_facts, :photo
       exclude_fields :badge_name, :short_title, :order_items, :comments, :dish_variations, :dish_type_associations, :dish_types, :dish_section_associations, :dish_subsection_associations
@@ -168,8 +173,8 @@ RailsAdmin.config do |config|
   ######## Section Model ########
   
   config.model Section do
-    label 'Seccion'
-    label_plural 'Secciones'
+    label 'Section'
+    label_plural 'Sections'
     object_label_method do
       :section_label_method
     end
@@ -184,8 +189,8 @@ RailsAdmin.config do |config|
   ######## Subsection Model ########
   
   config.model Subsection do
-    label 'Subseccion'
-    label_plural 'Subsecciones'
+    label 'Subsection'
+    label_plural 'Subsections'
     list do
       exclude_fields :id, :dishes, :dish_subsection_associations
     end
@@ -197,69 +202,69 @@ RailsAdmin.config do |config|
   ######## Comment Model ########
   
   config.model Comment do
-    label 'Comentario'
-    label_plural 'Comentarios'
+    label 'Comment'
+    label_plural 'Comments'
     list do
       include_fields :created_at, :rating, :description, :name, :dish, :survey_question, :approved, :restaurant
       exclude_fields :id, :client
       field :created_at do
-        label "Fecha y Hora"
+        label "Datetime"
       end
       field :rating do
-        label "Estrellas"
+        label "Rating"
       end
       field :description do
-        label "Comentario"
+        label "Comment"
       end
       field :name do
-        label "Nombre del Cliente"
+        label "Client's name"
       end
       field :dish do
-        label "Plato"
+        label "Dish"
       end
       field :survey_question do
-        label "Pregunta de Satisfaccion"
+        label "Survet Question"
       end
       field :restaurant do
-        label "Restaurante"
+        label "Restaurant"
       end
       field :approved do
-        label "Aprobado"
+        label "Approved"
       end
     end
     edit do
       include_fields :created_at, :rating, :description, :name, :dish, :survey_question, :approved, :restaurant
       exclude_fields :id, :client
       field :created_at do
-        label "Fecha y Hora"
+        label "Datetime"
         read_only true
       end
       field :rating do
-        label "Estrellas"
+        label "Rating"
         read_only true
       end
       field :description do
-        label "Comentario"
+        label "Comment"
         read_only true
       end
       field :name do
-        label "Nombre del Cliente"
+        label "Client's name"
         read_only true
       end
       field :dish do
-        label "Plato"
+        label "Dish"
         read_only true
       end
       field :survey_question do
-        label "Pregunta de Satisfaccion"
+        label "Survey Question"
         read_only true
       end
       field :restaurant do
-        label "Restaurante"
+        label "Restaurant"
         read_only true
       end
       field :approved do
-        label "Aprobado"
+        label "Approved"
       end
     end
   end
@@ -267,8 +272,8 @@ RailsAdmin.config do |config|
   ######## Table Model ########
   
   config.model Table do
-    label 'Mesa'
-    label_plural 'Mesas'
+    label 'Table'
+    label_plural 'Tables'
     object_label_method do
       :table_label_method
     end
@@ -308,8 +313,8 @@ RailsAdmin.config do |config|
   ######## SurveyQuestion Model ########
   
   config.model SurveyQuestion do
-    label 'Pregunta de Satisfaccion'
-    label_plural 'Preguntas de Satisfaccion'
+    label 'Survey Question'
+    label_plural 'Survey Questions'
     list do
       exclude_fields :id, :chain, :comments
       sort_by :position
@@ -322,8 +327,8 @@ RailsAdmin.config do |config|
   ######## Order Model ########
   
   config.model Order do
-    label 'Pedido'
-    label_plural 'Pedidos'
+    label 'Order'
+    label_plural 'Orders'
     object_label_method do
       :order_label_method
     end
@@ -331,13 +336,13 @@ RailsAdmin.config do |config|
       exclude_fields :tablet, :client, :restaurant_activities, :name, :note, :language
       include_fields :created_at
       field :created_at do
-        label "Fecha y Hora"
+        label "Datetime"
       end
       field :order_items do
-        label "Articulos"
+        label "Order Items"
       end
       field :table do
-        label "Mesa"
+        label "Table"
       end
     end
     show do
@@ -363,7 +368,11 @@ RailsAdmin.config do |config|
   end
   
   def table_label_method
-    "#{self.number.to_s}"
+    if !self.restaurant.nil?
+      "#{self.restaurant.name} - #{self.number.to_s}"
+    else
+      "#{self.number.to_s}"
+    end
   end
   
   def section_label_method
