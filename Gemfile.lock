@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/svenfuchs/globalize3.git
-  revision: 9a4895b5410a28aedfd774b22e06fa946d9e1191
+  revision: ee44def9b244f02a41c3687a73cf7c0165667e3d
   specs:
     globalize3 (0.3.0)
       activemodel (>= 3.0.0)
@@ -108,7 +108,7 @@ GEM
     oauth (0.4.7)
     oj (2.0.7)
     orm_adapter (0.4.0)
-    paper_trail (2.7.0)
+    paper_trail (2.7.1)
       activerecord (~> 3.0)
       railties (~> 3.0)
     paperclip (3.4.0)

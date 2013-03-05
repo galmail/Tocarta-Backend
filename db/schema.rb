@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130304122147) do
+ActiveRecord::Schema.define(:version => 20130305185208) do
 
   create_table "chains", :force => true do |t|
     t.integer   "user_id"
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20130304122147) do
     t.text      "story"
     t.timestamp "created_at",  :null => false
     t.timestamp "updated_at",  :null => false
+    t.string    "short_title"
   end
 
   add_index "dish_translations", ["dish_id"], :name => "index_dish_translations_on_dish_id"

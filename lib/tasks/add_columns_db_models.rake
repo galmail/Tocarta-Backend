@@ -107,7 +107,7 @@ namespace :db do
 		
 		# Dish
     sh "#{action} add_columns_to_dish active:boolean badge_name:string position:integer description:text price:decimal rating:decimal reviews:integer story:text video:string nutrition_facts:string short_title:string"
-    fix_model('Dish',['translates :name, :badge_name, :description, :story, :fallbacks_for_empty_translations => true','attr_accessible :active, :position, :badge_name, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts, :short_title'])
+    fix_model('Dish',['translates :name, :short_title, :badge_name, :description, :story, :fallbacks_for_empty_translations => true','attr_accessible :active, :position, :badge_name, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts, :short_title'])
 		
 		# Comment
 		sh "#{action} add_columns_to_comment description:text rating:integer approved:boolean"
