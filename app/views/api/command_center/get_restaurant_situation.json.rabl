@@ -8,7 +8,6 @@ node :num_tables do @restaurant.tables.length end
 ### restaurant activities ###
 
 child @activities => 'activities' do
-  object false
   attributes :id, :name, :ack
   node :table_number do |activity|
     activity.table_number
