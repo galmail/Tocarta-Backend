@@ -1,3 +1,4 @@
+
 ### restaurant info ###
 
 node :id do @restaurant.id end
