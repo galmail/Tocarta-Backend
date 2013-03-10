@@ -162,7 +162,7 @@ RailsAdmin.config do |config|
       exclude_fields :badge_name, :short_title, :order_items, :comments, :dish_variations, :dish_type_associations, :dish_types, :dish_section_associations, :dish_subsection_associations
     end
     edit do
-      exclude_fields :id, :combo, :reviews, :story, :video, :nutrition_facts
+      exclude_fields :id, :combo, :reviews, :story, :nutrition_facts
       exclude_fields :order_items, :comments, :dish_variations, :dish_type_associations, :dish_section_associations, :dish_subsection_associations
       field :rating do
         read_only true

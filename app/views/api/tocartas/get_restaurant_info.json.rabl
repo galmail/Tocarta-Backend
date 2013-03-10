@@ -2,6 +2,8 @@
 
 node :name do @restaurant.name end
 node :logo do @restaurant.chain.logo.url(:medium).split(ENV['S3_BUCKET']).last end
+node :i18nbg do @restaurant.chain.i18nbg.url.split(ENV['S3_BUCKET']).last end
+node :bg do @restaurant.chain.bg.url.split(ENV['S3_BUCKET']).last end
 
 child @restaurant.restaurant_setting => :setting do
   attributes :multilang_homepage, :games, :call_waiter_button, :order_button, :request_bill_button, :show_help_button, :show_survey, :show_filters, :access_key, :supported_lang
@@ -46,6 +48,8 @@ child @menus do
     end
     child(:dishes, :if => lambda { |s| s.subsections.length==0 }) do
       attributes :id, :name, :price, :badge_name
+      attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
+      
       node :short_title do |dish|
         if dish.short_title.nil? or dish.short_title==""
           dish.name
@@ -99,6 +103,8 @@ child @menus do
       end
       child :dishes do
         attributes :id, :name, :price, :badge_name
+        attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
+        
         node :short_title do |dish|
           if dish.short_title.nil? or dish.short_title==""
             dish.name

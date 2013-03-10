@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130305185208) do
+ActiveRecord::Schema.define(:version => 20130310100555) do
 
   create_table "chains", :force => true do |t|
     t.integer   "user_id"
     t.string    "name"
-    t.timestamp "created_at",        :null => false
-    t.timestamp "updated_at",        :null => false
+    t.timestamp "created_at",          :null => false
+    t.timestamp "updated_at",          :null => false
     t.string    "logo_file_name"
     t.string    "logo_content_type"
     t.integer   "logo_file_size"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(:version => 20130305185208) do
     t.string    "email"
     t.string    "address"
     t.text      "note"
+    t.string    "i18nbg_file_name"
+    t.string    "i18nbg_content_type"
+    t.integer   "i18nbg_file_size"
+    t.datetime  "i18nbg_updated_at"
+    t.string    "bg_file_name"
+    t.string    "bg_content_type"
+    t.integer   "bg_file_size"
+    t.datetime  "bg_updated_at"
   end
 
   add_index "chains", ["user_id"], :name => "index_chains_on_user_id"

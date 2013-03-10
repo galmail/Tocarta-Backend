@@ -18,6 +18,8 @@ module TocartaAdmin
     IMAGE_LARGE_SIZE = "689x474#"
     IMAGE_BANNER_SIZE = "689x474#"
     
+    IMAGE_FULL_SIZE = "1024x768#"
+    
     ### dish icons ###
     
     BIG_ICON_SIZE = "20x16#"
