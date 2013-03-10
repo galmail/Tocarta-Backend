@@ -61,9 +61,15 @@ class Api::TocartasController < AccessController
       end
     }
     
-    # get the chain logo
+    # get the chain logo and backgrounds
     if !@restaurant.chain.logo_file_name.nil? and @restaurant.chain.logo_updated_at > last_update
       @images << @restaurant.chain.logo.url(:medium)
+    end
+    if !@restaurant.chain.i18nbg_file_name.nil? and @restaurant.chain.i18nbg_updated_at > last_update
+      @images << @restaurant.chain.i18nbg.url
+    end
+    if !@restaurant.chain.bg_file_name.nil? and @restaurant.chain.bg_updated_at > last_update
+      @images << @restaurant.chain.bg.url
     end
     
     # get the restaurant banners
