@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130310100555) do
+ActiveRecord::Schema.define(:version => 20130314093210) do
 
   create_table "chains", :force => true do |t|
     t.integer   "user_id"
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(:version => 20130310100555) do
     t.timestamp "created_at",  :null => false
     t.timestamp "updated_at",  :null => false
     t.string    "short_title"
+    t.string    "badge_name"
   end
 
   add_index "dish_translations", ["dish_id"], :name => "index_dish_translations_on_dish_id"
