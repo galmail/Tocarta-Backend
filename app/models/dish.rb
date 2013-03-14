@@ -1,3 +1,6 @@
+#!/bin/env ruby
+# encoding: utf-8
+
 class Dish < ActiveRecord::Base
   before_save :associate_chain
   # FIXME comment these lines after migration
@@ -6,9 +9,6 @@ class Dish < ActiveRecord::Base
   # FIXME uncomment these lines after migration
   has_many :combos, :through => :dish_combo_associations
   has_many :dish_combo_associations
-  
-  
-  
   
   has_many :sections, :through => :dish_section_associations
   has_many :dish_section_associations
@@ -35,6 +35,22 @@ class Dish < ActiveRecord::Base
   validates_attachment_presence :photo
   validates :badge_name, :length => { :maximum => 11 }
   validate :validate_min_sections
+  
+  def badge_name_enum
+    if I18n.locale.to_s=="es"
+      return ['nuevo', 'recomendado', 'estrella']
+    elsif I18n.locale.to_s=="fr"
+      return ['nouveau', 'recommandé', 'vedette']
+    elsif I18n.locale.to_s=="de"
+      return ['neues', 'empfohlen', 'sterne']
+    elsif I18n.locale.to_s=="cat"
+      return ['nou', 'recomanat', 'estrella']
+    elsif I18n.locale.to_s=="en"
+      return ['new', 'recommended', 'starred']
+    else
+      return []
+    end
+  end
   
 	def update_rating(comment_rating)
     num_comments = self.comments.length-1           # total number of comments (should filter only those comments that left)
