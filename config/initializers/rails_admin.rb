@@ -142,6 +142,32 @@ RailsAdmin.config do |config|
     end
   end
   
+  ######## Theme Model ########
+  
+  config.model Theme do
+    label 'Theme'
+    label_plural 'Themes'
+    list do
+      exclude_fields :id, :css, :created_at, :menus
+    end
+    edit do
+      exclude_fields :id, :css, :menus
+    end
+  end
+  
+  ######## Skin Model ########
+  
+  config.model Skin do
+    label 'Skin'
+    label_plural 'Skins'
+    list do
+      exclude_fields :id, :created_at, :menus, :user, :stylesheet
+    end
+    edit do
+      exclude_fields :id, :menus
+    end
+  end
+  
   ######## DishType Model ########
   
   config.model DishType do
