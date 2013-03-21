@@ -92,6 +92,10 @@ namespace :db do
     sh "#{action} Theme name:string"
     fix_association('Theme',['has_many :menus'])
     
+    # Skin
+    sh "#{action} Skin theme:references name:string"
+    fix_association('Skin',['has_many :menus'])
+    
     # Section
     sh "#{action} Section menu:references name:string"
     fix_association('Section',['has_many :dishes','has_many :subsections'])

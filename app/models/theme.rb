@@ -1,4 +1,6 @@
 class Theme < ActiveRecord::Base
 	has_many :menus
-	attr_accessible :css, :description
+	has_many :skins
+	
+	attr_accessible :name, :description
 end

@@ -81,6 +81,11 @@ class Api::TocartasController < AccessController
     
     # get all the photos of the menus, sections, subsections and dishes
     @restaurant.menus.each { |menu|
+      
+      if !menu.skin.nil? and menu.skin.stylesheet_updated_at > last_update
+        @images << menu.skin.stylesheet.url
+      end
+      
       menu.sections.each { |section|
         if !section.photo_file_name.nil? and section.photo_updated_at > last_update
           @images << section.photo.url(:mini)

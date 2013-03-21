@@ -29,6 +29,10 @@ end
 child @menus do
   attributes :id, :name, :menu_type, :price
   
+  node(:stylesheet, :unless => lambda {|m| m.skin.nil? }) do |menu|
+    menu.skin.stylesheet.url.split(ENV['S3_BUCKET']).last
+  end
+  
   child :dishtypes => :dishtypes do
     attributes :id, :name, :description
     node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|

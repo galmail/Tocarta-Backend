@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130314093210) do
+ActiveRecord::Schema.define(:version => 20130320232434) do
 
   create_table "chains", :force => true do |t|
     t.integer   "user_id"
@@ -242,9 +242,11 @@ ActiveRecord::Schema.define(:version => 20130314093210) do
     t.timestamp "updated_at",    :null => false
     t.decimal   "price"
     t.string    "menu_type"
+    t.integer   "skin_id"
   end
 
   add_index "menus", ["restaurant_id"], :name => "index_menus_on_restaurant_id"
+  add_index "menus", ["skin_id"], :name => "index_menus_on_skin_id"
   add_index "menus", ["theme_id"], :name => "index_menus_on_theme_id"
 
   create_table "order_items", :force => true do |t|
@@ -388,6 +390,22 @@ ActiveRecord::Schema.define(:version => 20130314093210) do
   end
 
   add_index "sections", ["menu_id"], :name => "index_sections_on_menu_id"
+
+  create_table "skins", :force => true do |t|
+    t.integer  "theme_id"
+    t.string   "name"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.text     "description"
+    t.string   "stylesheet_file_name"
+    t.string   "stylesheet_content_type"
+    t.integer  "stylesheet_file_size"
+    t.datetime "stylesheet_updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "skins", ["theme_id"], :name => "index_skins_on_theme_id"
+  add_index "skins", ["user_id"], :name => "index_skins_on_user_id"
 
   create_table "subsection_translations", :force => true do |t|
     t.integer   "subsection_id"
