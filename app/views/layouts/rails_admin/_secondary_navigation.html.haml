@@ -3,7 +3,8 @@
 
     -# %li= link_to wording_for(:menu, action), { :action => action.action_name, :controller => 'rails_admin/main' }, :class => 'pjax'
     
-    %li= select("locale","", [["Español","es"],["English","en"],["Catalan","cat"],["Français","fr"],["Deutsch","de"]], {:selected => params[:locale]}, { :index => nil, :onchange => "_clocale=window.location.href.replace(/(locale=)\\w+/,'locale='+this.value);window.location.href=_clocale;"})
+    %li= select("locale","", [["Español","es"],["English","en"],["Catalan","cat"],["Français","fr"],["Deutsch","de"]], {:selected => params[:locale]},
+      { :index => nil, :onchange => "_bl=window.location.href;_clocale=window.location.href.replace(/(locale=)\\w+/,'locale='+this.value);if(_bl==_clocale) window.location.href+='?locale='+this.value;else window.location.href=_clocale;" })
     
     %li= link_to t('admin.home.help').capitalize, 'https://docs.google.com/file/d/0B4U0-pkzpHWTbVAyV3lNUWUxOHc/edit?usp=sharing', {:target => '_blank'}
     
