@@ -8,6 +8,7 @@ es:
       truncate: "…"
   admin:
     home:
+      help: Ayuda
       name: Inicio
     misc:
       search: "Buscar"
