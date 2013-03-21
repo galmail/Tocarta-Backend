@@ -43,6 +43,13 @@ es:
       item: "Elemento"
       message: "Mensaje"
     actions:
+      update_tablet:
+        title: "Actualizar %{model_label_plural}"
+        menu: "Actualizar Tablet"
+        breadcrumb: "Actualizar Tablet"
+        link: "Agregar un nuevo %{model_label}"
+        done: "Actualizado"
+        bulk_link: "Actualizar %{model_label_plural} seleccionados"
       dashboard:
         title: "Administración del sitio"
         menu: "Panel de control"

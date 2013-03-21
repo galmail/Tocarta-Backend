@@ -22,6 +22,8 @@ end
 
 #### Rails Admin Setup ####
 gem 'rails_admin'
+gem 'rails_admin_update_tablets', path: "vendor/engines/rails_admin_update_tablets"
+
 # gem 'rails_admin', :git => 'git://github.com/tocarta/rails_admin.git'
 gem 'devise'  # authentication
 gem 'cancan'  # authorization

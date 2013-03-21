@@ -13,4 +13,8 @@ class Tablet < ActiveRecord::Base
 	  self.access_key ||= (0...8).map{65.+(rand(25)).chr}.join
 	end
 	
+	def send_update_notification
+	  Pusher["tocarta_lk_#{self.access_key}_channel"].trigger('update',{})
+	end
+	
 end
