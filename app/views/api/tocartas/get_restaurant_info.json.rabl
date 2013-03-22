@@ -21,7 +21,7 @@ end
 ### restaurant survey questions ###
 
 child	@restaurant.chain.survey_questions => :survey_questions do
-	attributes :id, :name, :description
+	attributes :id, :name, :description, :yes_no_type
 end
 
 ### restaurant menus ###
