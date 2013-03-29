@@ -7452,10 +7452,6 @@ input[type="search"]::-webkit-search-cancel-button {
 .tcRestaurantCarousel .x-carousel-item .x-img {
   border-radius: 7px;
 }
-/* line 22, ../../styles/restaurantinfo/carousel.scss */
-.tcRestaurantCarousel .tcRestaurantCarouselBottomToolbar {
-  display: none;
-}
 
 /**
  * Sidebar main stylesheet
@@ -7837,7 +7833,6 @@ input[type="search"]::-webkit-search-cancel-button {
   font-size: 12px;
   color: white;
   background: transparent;
-  height: 474px;
 }
 /* line 18, ../../styles/sidebar/items-view.scss */
 .tcMenuPanelItemsView .x-dataview-item {
@@ -7972,7 +7967,6 @@ input[type="search"]::-webkit-search-cancel-button {
 
 /* line 32, ../../styles/sidebar/main.scss */
 .tcSidebarBottomToolbar {
-  display: none;
   background: transparent;
   height: 54px;
   border: none !important;
@@ -9315,27 +9309,28 @@ input[type="search"]::-webkit-search-cancel-button {
 /* line 7, ../../styles/survey/comments.scss */
 .tcSurveyComments {
   padding: 5px 10px;
+  background: #f1e5d0;
 }
-/* line 9, ../../styles/survey/comments.scss */
+/* line 10, ../../styles/survey/comments.scss */
 .tcSurveyComments label {
   font-size: 16px;
 }
-/* line 13, ../../styles/survey/comments.scss */
+/* line 14, ../../styles/survey/comments.scss */
 .tcSurveyComments .tcSurveyCommentsNameContainer {
   width: 200px;
 }
-/* line 16, ../../styles/survey/comments.scss */
+/* line 17, ../../styles/survey/comments.scss */
 .tcSurveyComments .tcSurveyCommentsNameContainer .tcSurveyCommentsName input {
   display: block;
   margin-top: 3px;
   height: 36px;
   padding: 0 3px;
 }
-/* line 25, ../../styles/survey/comments.scss */
+/* line 26, ../../styles/survey/comments.scss */
 .tcSurveyComments .tcSurveyCommentsDetailsContainer {
   width: 662px;
 }
-/* line 28, ../../styles/survey/comments.scss */
+/* line 29, ../../styles/survey/comments.scss */
 .tcSurveyComments .tcSurveyCommentsDetailsContainer .tcSurveyCommentsDetails .tcSurveyGeneralComment {
   height: 36px;
   width: 100%;
@@ -9343,7 +9338,7 @@ input[type="search"]::-webkit-search-cancel-button {
   margin-top: 3px;
   padding: 7px 5px;
 }
-/* line 38, ../../styles/survey/comments.scss */
+/* line 39, ../../styles/survey/comments.scss */
 .tcSurveyComments .tcSurveyCommentsBtn.x-button {
   margin-left: 10px;
   margin-top: 24px;
@@ -9355,13 +9350,13 @@ input[type="search"]::-webkit-search-cancel-button {
   background-image: -webkit-linear-gradient(#625b5b, #000000, #000000);
   background-image: linear-gradient(#625b5b, #000000, #000000);
 }
-/* line 46, ../../styles/survey/comments.scss */
+/* line 47, ../../styles/survey/comments.scss */
 .tcSurveyComments .tcSurveyCommentsBtn.x-button.x-button-pressing, .tcSurveyComments .tcSurveyCommentsBtn.x-button.x-button-pressed {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(100%, #625b5b));
   background-image: -webkit-linear-gradient(#333333, #625b5b);
   background-image: linear-gradient(#333333, #625b5b);
 }
-/* line 49, ../../styles/survey/comments.scss */
+/* line 50, ../../styles/survey/comments.scss */
 .tcSurveyComments .tcSurveyCommentsBtn.x-button.x-button-action {
   color: white;
 }
@@ -9375,6 +9370,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 /* line 14, ../../styles/survey/main.scss */
 .tcSurveyContainer .tcSurveyTitle {
+  position: relative;
   background-color: black;
   color: white;
   padding: 3px 5px;
@@ -9385,73 +9381,162 @@ input[type="search"]::-webkit-search-cancel-button {
  * Classic Theme and Responsive Style for 1024x600
  */
 @media all and (max-width: 1024px) and (max-height: 600px) {
+  /** Remove tabs and empty spaces **/
+  /* line 9, ../../styles/skins/classic1024x600.scss */
+  .tcSidebarBottomToolbar {
+    display: none;
+  }
+
+  /* line 12, ../../styles/skins/classic1024x600.scss */
+  .tcRestaurantCarousel .tcRestaurantCarouselBottomToolbar {
+    display: none;
+  }
+
+  /* line 16, ../../styles/skins/classic1024x600.scss */
+  .tcDishContainer .tcDishContainerTabBar {
+    display: none;
+  }
+
   /** The Dish **/
-  /* line 11, ../../styles/skins/classic1024x600.scss */
+  /* line 24, ../../styles/skins/classic1024x600.scss */
   .tcDishPhoto .dish-photo-container .dish-image {
     width: 684px;
     height: 408px !important;
   }
-  /* line 15, ../../styles/skins/classic1024x600.scss */
+  /* line 28, ../../styles/skins/classic1024x600.scss */
   .tcDishPhoto .dish-photo-container .dish-info {
     height: 80px;
     margin-top: -85px;
   }
-  /* line 18, ../../styles/skins/classic1024x600.scss */
+  /* line 31, ../../styles/skins/classic1024x600.scss */
   .tcDishPhoto .dish-photo-container .dish-info .dish-description {
     width: 494px;
   }
-  /* line 21, ../../styles/skins/classic1024x600.scss */
+  /* line 34, ../../styles/skins/classic1024x600.scss */
   .tcDishPhoto .dish-photo-container .dish-info .dish-price {
     width: 190px;
     font-size: 38px;
     padding-top: 13px;
   }
-  /* line 25, ../../styles/skins/classic1024x600.scss */
+  /* line 38, ../../styles/skins/classic1024x600.scss */
   .tcDishPhoto .dish-photo-container .dish-info .dish-price .euro {
     font-size: 38px;
   }
 
   /** The Order **/
-  /* line 37, ../../styles/skins/classic1024x600.scss */
+  /* line 50, ../../styles/skins/classic1024x600.scss */
   .tcOrderView .tcOrderDataView .order-item .dish-total .euro {
     display: none;
   }
-  /* line 41, ../../styles/skins/classic1024x600.scss */
+  /* line 54, ../../styles/skins/classic1024x600.scss */
   .tcOrderView .tcOrderTotal .total-order .text {
     font-size: 23px;
     margin-top: 7px;
   }
-  /* line 45, ../../styles/skins/classic1024x600.scss */
+  /* line 58, ../../styles/skins/classic1024x600.scss */
   .tcOrderView .tcOrderTotal .total-order .order-total-euros {
     font-size: inherit;
   }
-  /* line 47, ../../styles/skins/classic1024x600.scss */
+  /* line 60, ../../styles/skins/classic1024x600.scss */
   .tcOrderView .tcOrderTotal .total-order .order-total-euros .euro {
     font-size: 28px;
   }
-  /* line 50, ../../styles/skins/classic1024x600.scss */
+  /* line 63, ../../styles/skins/classic1024x600.scss */
   .tcOrderView .tcOrderTotal .total-order .order-total-euros .num {
     font-size: 30px;
   }
 
   /** The Survey **/
-  /* line 60, ../../styles/skins/classic1024x600.scss */
+  /* line 73, ../../styles/skins/classic1024x600.scss */
   .tcSurveyContainer .tcSurveyTitleDishes {
     display: none;
   }
-  /* line 63, ../../styles/skins/classic1024x600.scss */
+  /* line 76, ../../styles/skins/classic1024x600.scss */
   .tcSurveyContainer .tcSurveyDishes {
     display: none;
   }
-  /* line 66, ../../styles/skins/classic1024x600.scss */
+  /* line 79, ../../styles/skins/classic1024x600.scss */
   .tcSurveyContainer .tcSurveyQuestions {
     height: 304px;
   }
-  /* line 68, ../../styles/skins/classic1024x600.scss */
+  /* line 81, ../../styles/skins/classic1024x600.scss */
+  .tcSurveyContainer .tcSurveyQuestions .survey_question {
+    padding-bottom: 8px;
+  }
+  /* line 84, ../../styles/skins/classic1024x600.scss */
   .tcSurveyContainer .tcSurveyQuestions .x-dataview-item {
     padding: 3px 0px;
   }
 }
 /***
+ * Classic Theme and Responsive Style for 1024x768
+ */
+@media all and (max-width: 1024px) and (height: 768px) {
+  /** Toolbars **/
+  /* line 9, ../../styles/skins/classic1024x768.scss */
+  .tcMsgToolbar {
+    position: relative;
+  }
+
+  /* line 13, ../../styles/skins/classic1024x768.scss */
+  .x-toolbar.tcTopToolbar {
+    height: 105px;
+  }
+
+  /* line 17, ../../styles/skins/classic1024x768.scss */
+  .x-toolbar.tcBottomToolbar {
+    height: 70px;
+  }
+
+  /** Dish Photo **/
+  /* line 24, ../../styles/skins/classic1024x768.scss */
+  .tcDishPhoto .dish-photo-container .dish-image {
+    width: 685px;
+  }
+  /* line 27, ../../styles/skins/classic1024x768.scss */
+  .tcDishPhoto .dish-photo-container .dish-info .dish-price {
+    width: 214px;
+  }
+
+  /** Survey **/
+  /* line 34, ../../styles/skins/classic1024x768.scss */
+  .tcSurveyQuestions {
+    height: 159px;
+  }
+}
+/***
  * Classic Theme and Responsive Style for 1280x800
  */
+@media all and (min-width: 1280px) and (min-height: 800px) {
+  /** Toolbars **/
+  /* line 9, ../../styles/skins/classic1280x800.scss */
+  .tcMsgToolbar {
+    position: relative;
+  }
+
+  /* line 13, ../../styles/skins/classic1280x800.scss */
+  .x-toolbar.tcTopToolbar {
+    height: 105px;
+  }
+
+  /* line 17, ../../styles/skins/classic1280x800.scss */
+  .x-toolbar.tcBottomToolbar {
+    height: 70px;
+  }
+
+  /** Dish Photo **/
+  /* line 24, ../../styles/skins/classic1280x800.scss */
+  .tcDishPhoto .dish-photo-container .dish-image {
+    width: 685px;
+  }
+  /* line 27, ../../styles/skins/classic1280x800.scss */
+  .tcDishPhoto .dish-photo-container .dish-info .dish-price {
+    width: 214px;
+  }
+
+  /** Survey **/
+  /* line 34, ../../styles/skins/classic1280x800.scss */
+  .tcSurveyQuestions {
+    height: 159px;
+  }
+}
