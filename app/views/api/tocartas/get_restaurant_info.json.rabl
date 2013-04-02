@@ -51,7 +51,8 @@ child @menus do
       section.photo.url(:thumb).split(ENV['S3_BUCKET']).last
     end
     child(:dishes, :if => lambda { |s| s.subsections.length==0 }) do
-      attributes :id, :name, :price, :badge_name
+      attributes :id, :name, :price
+      attributes :badge_name, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
       attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
       
       node :short_title do |dish|
@@ -106,7 +107,8 @@ child @menus do
         subsection.photo.url(:thumb).split(ENV['S3_BUCKET']).last
       end
       child :dishes do
-        attributes :id, :name, :price, :badge_name
+        attributes :id, :name, :price
+        attributes :badge_name, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
         attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
         
         node :short_title do |dish|

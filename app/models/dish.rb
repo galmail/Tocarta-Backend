@@ -38,15 +38,15 @@ class Dish < ActiveRecord::Base
   
   def badge_name_enum
     if I18n.locale.to_s=="es"
-      return ['nuevo', 'recomendado', 'estrella']
+      return ['-----','nuevo', 'recomendado', 'estrella']
     elsif I18n.locale.to_s=="fr"
-      return ['nouveau', 'recommandé', 'vedette']
+      return ['-----','nouveau', 'recommandé', 'vedette']
     elsif I18n.locale.to_s=="de"
-      return ['neues', 'empfohlen', 'sterne']
+      return ['-----','neues', 'empfohlen', 'sterne']
     elsif I18n.locale.to_s=="cat"
-      return ['nou', 'recomanat', 'estrella']
+      return ['-----','nou', 'recomanat', 'estrella']
     elsif I18n.locale.to_s=="en"
-      return ['new', 'recommended', 'starred']
+      return ['-----','new', 'recommended', 'starred']
     else
       return []
     end

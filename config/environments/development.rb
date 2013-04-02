@@ -42,6 +42,8 @@ TocartaAdmin::Application.configure do
   config.active_support.deprecation = :log
   
   config.log_level = :debug
+  
+  # config.serve_static_assets = true
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin

@@ -1,0 +1,10 @@
+/* humanstxt.org */
+
+  Team: Tocarta's team is a multi-cultural, out-of-the-box, multi-disciplinary people who day by day continue providing ideas for innovation and creating new ways for consumers to interact with technology in restaurants, hotels and cafes around the world.
+
+  Site: www.tocarta.es
+  Twitter: @tocarta
+  Location: Madrid, Spain
+
+  Standards: HTML5, CSS3
+  Components: Modernizr, jQuery
