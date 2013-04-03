@@ -7332,15 +7332,15 @@ input[type="search"]::-webkit-search-cancel-button {
 /* line 107, ../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item .tcDailyMenuDish .tcDailyMenuDishPhoto {
   width: 100%;
-  min-height: 30%;
-  max-height: 60%;
+  min-height: auto;
+  max-height: none;
   border: 2px solid black;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
 /* line 116, ../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item .tcDailyMenuDish .tcDailyMenuDishText {
-  padding: 10px;
+  padding: 10px 10px;
 }
 /* line 119, ../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item .tcDailyMenuDish .tcDailyMenuDishText .tcDailyMenuDishTitle {
@@ -9500,6 +9500,15 @@ input[type="search"]::-webkit-search-cancel-button {
   /* line 84, ../../styles/skins/classic1024x600.scss */
   .tcSurveyContainer .tcSurveyQuestions .x-dataview-item {
     padding: 3px 0px;
+  }
+
+  /* line 91, ../../styles/skins/classic1024x600.scss */
+  .tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item .tcDailyMenuDish .tcDailyMenuDishText {
+    padding: 0px 10px;
+  }
+  /* line 94, ../../styles/skins/classic1024x600.scss */
+  .tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item .tcDailyMenuDish .tcDailyMenuDishPhoto {
+    height: 180px;
   }
 }
 /***
