@@ -62012,6 +62012,7 @@ Ext.define('TC.controller.MainMenu', {
     		// getting the dish
     		this.setCurrentDish(dataview.getStore().getAt(position));
 	    	var dishContainer = this.getDishContainer();
+	    	
 	    	// set dishTitle
 	    	var dishTitle = dishContainer.down('#tcDishTitleId');
 	    	dishTitle.setTitle(this.getCurrentDish().get('name'));
@@ -62053,6 +62054,11 @@ Ext.define('TC.controller.MainMenu', {
 	    	dishTabPanel.setActiveItem(dishTabPanel.items.items[0]);
 	    	// show dish container
 	    	this.getMainMenu().setActiveItem(dishContainer);
+	    	
+	    	// fix photo height (On android height:100% doesnt work)
+	    	var _h = $j('#tcDishImgId').parent().parent().parent().height();
+	    	$j('#tcDishImgId').height(_h);
+	    	
     	}
     	else if(dataview.getItemsClass()=='subsections'){
     		// display mini dishes
