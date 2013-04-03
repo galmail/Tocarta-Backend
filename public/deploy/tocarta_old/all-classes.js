@@ -43981,15 +43981,6 @@ Ext.define('TC.controller.Survey', {
   	
   	// lets bind stuff
   	$z(document).on($tc.click, '.tcSurveyContainer .rating .star', me.rate);
-  	$z(document).on($tc.click, '.tcSurveyContainer .survey_question .x-segmentedbutton .x-button', me.selectAnswer);
-  },
-  
-  selectAnswer: function(event,a,b){
-  	console.log('TC.controller.Survey.selectAnswer');
-  	var selectedOption = event.target;
-		var selectedClass = 'x-button-pressed';
-		$j(selectedOption).addClass(selectedClass);
-  	$j(selectedOption).siblings().removeClass(selectedClass);
   },
   
   rate: function(event,a,b){
@@ -44028,8 +44019,7 @@ Ext.define('TC.model.SurveyQuestion', {
 		fields: [
 	    {name: "id", type: "int"},
 	    {name: "name", type: "string"},
-	    {name: "description", type: "string"},
-	    {name: "yes_no_type", type: "boolean"}
+	    {name: "description", type: "string"}
 	  ],
 	  associations: [
 	  	{type: 'belongsTo', model: 'TC.model.Restaurant', name: 'restaurant'},
@@ -46035,7 +46025,6 @@ Ext.define('TC.view.help.HelpView', {
 		modal: true,
 		hideOnMaskTap: true,
 		centered: true,
-		padding: 5,
 		styleHtmlContent: true,
 		scrollable: 'vertical',
 		items: [
@@ -53400,28 +53389,6 @@ Ext.define('TC.view.survey.SurveyQuestions', {
 		itemTpl: [
       '<div id="survey_question_{id}" class="survey_question">',
       	'<div class="question_title">{description}</div>',
-      	'<tpl if="yes_no_type==true">',
-      		'<div class="x-container x-segmentedbutton x-layout-box-item x-stretched" style="float:right;margin-top:8px;margin-right: 5px;">',
-	      		'<div class="x-inner x-segmentedbutton-inner x-horizontal x-align-stretch x-pack-start x-layout-box">',
-		      		'<div style="float:left;" class="x-button-normal x-button x-layout-box-item x-stretched x-first">',
-			      		'<span style="display: none;" class="x-badge"></span>',
-			      		'<span class="x-button-icon" style="display: none;"></span>',
-			      		'<span style="" class="x-button-label">'+$T.yes_button+'</span>',
-		      		'</div>',
-							'<div style="float:left;" class="x-button-normal x-button x-layout-box-item x-stretched">',
-								'<span style="display: none;" class="x-badge"></span>',
-								'<span class="x-button-icon" style="display: none;"></span>',
-								'<span style="" class="x-button-label">'+$T.maybe_button+'</span>',
-							'</div>',
-							'<div style="float:left;" class="x-button-normal x-button x-layout-box-item x-stretched x-last">',
-								'<span style="display: none;" class="x-badge"></span>',
-								'<span class="x-button-icon" style="display: none;"></span>',
-								'<span style="" class="x-button-label">'+$T.no_button+'</span>',
-							'</div>',
-						'</div>',
-					'</div>',
-				'</tpl>',
-				'<tpl if="yes_no_type==false">',
       	'<div class="rating">',
       		'<div class="star"></div>',
       		'<div class="star"></div>',
@@ -53429,7 +53396,6 @@ Ext.define('TC.view.survey.SurveyQuestions', {
       		'<div class="star"></div>',
       		'<div class="star"></div>',
       	'</div>',
-      	'</tpl>',
       '</div>'
 		].join('')
 	}
@@ -53453,7 +53419,7 @@ Ext.define('TC.view.survey.SurveyContainer', {
 		cls: 'tcSurveyContainer',
 		scrollable: false,
 		items: [
-			{ cls: 'tcSurveyTitle tcSurveyTitleDishes', html: '<div>'+$T.comment_dishes_eaten+'</div>' },
+			{ cls: 'tcSurveyTitle', html: '<div>'+$T.comment_dishes_eaten+'</div>' },
 			{ itemId: 'tcSurveyDishesId', xtype: 'survey-dishes' },
 			{ cls: 'tcSurveyTitle', html: '<div>'+$T.your_opinion+'</div>' },
 			{ xtype: 'survey-questions' },
@@ -55115,8 +55081,6 @@ Ext.define('TC.view.mainmenu.MainMenu', {
 		items: [
 			{
 				xtype: 'panel',
-				cls: 'tcLeftSidebar',
-				width: window.innerWidth/3.2,
 				docked: 'left',
 				layout: {
 					type: 'vbox'

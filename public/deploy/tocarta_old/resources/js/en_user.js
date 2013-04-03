@@ -106,7 +106,6 @@ $T = {
 	//// config.js ////
 	
 	"yes_button": "Yes",
-	"no_button": "No",
-	"maybe_button": "Maybe"
+	"no_button": "No"
 	
 }

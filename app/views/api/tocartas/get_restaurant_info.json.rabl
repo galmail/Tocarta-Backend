@@ -3,7 +3,11 @@
 node :name do @restaurant.name end
 node :logo do @restaurant.chain.logo.url(:medium).split(ENV['S3_BUCKET']).last end
 node :i18nbg do @restaurant.chain.i18nbg.url.split(ENV['S3_BUCKET']).last end
-node :bg do @restaurant.chain.bg.url.split(ENV['S3_BUCKET']).last end
+
+if @restaurant.chain.bg.file?
+  node :bg do @restaurant.chain.bg.url.split(ENV['S3_BUCKET']).last end
+end
+
 
 child @restaurant.restaurant_setting => :setting do
   attributes :multilang_homepage, :games, :call_waiter_button, :order_button, :request_bill_button, :show_help_button, :show_survey, :show_filters, :access_key, :supported_lang

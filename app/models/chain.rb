@@ -17,6 +17,11 @@ class Chain < ActiveRecord::Base
   )
   
 	attr_accessible :name, :email, :address, :note, :logo, :i18nbg, :bg, :user_id, :restaurant_ids
+	
+	attr_accessible :delete_bg
+	attr_accessor :delete_bg
+	before_validation { self.bg.clear if self.delete_bg == '1' }
+	
 	validates_attachment_presence :logo
 	validates :user_id, :presence => true
 	
