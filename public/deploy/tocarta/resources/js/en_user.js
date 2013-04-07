@@ -52,6 +52,10 @@ $T = {
 	
 	"add": "Add",
 	
+	//// TC.view.dailymenu.DailyMenu ////
+	
+	"add_menu": "Add Menu",
+	
 	//// TC.view.loading.Loader ////
 	
 	"loading_app": "Loading the menu...",

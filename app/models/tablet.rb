@@ -1,3 +1,5 @@
+require 'net/http'
+
 class Tablet < ActiveRecord::Base
   belongs_to :table
 	has_many :orders
@@ -14,6 +16,7 @@ class Tablet < ActiveRecord::Base
 	end
 	
 	def send_update_notification
+	  Net::HTTP.get(URI.parse("http://tocarta-node.herokuapp.com/proxy?channel=tocarta_lk_#{self.access_key}_channel&action=update"))
 	  Pusher["tocarta_lk_#{self.access_key}_channel"].trigger('update',{})
 	end
 	
