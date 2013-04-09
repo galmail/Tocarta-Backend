@@ -1,0 +1,160 @@
+/**
+ * @class Global_CSS
+ */
+/**
+ * Add a background gradient to a selector.
+ *
+ *     .my-element {
+ *       @include background-gradient(green, 'recessed')
+ *     }
+ *
+ * @param {color} $bg-color The base color of the gradient.
+ * @param {string} $type The style of the gradient, one of five pre-defined options: matte, bevel, glossy, recessed, or flat.
+ */
+/**
+ * Includes a base64-encoded icon for use within tab bars and buttons (With the component parameter iconMask: true).
+ *
+ *     @include pictos-iconmask('attachment');
+ *
+ * @param {string} $name The name of the icon to be included. This is to match the name of the icon file (located at resources/themes/images/default/pictos) without its extention (.png).
+ */
+/**
+ * Includes the default styles for toolbar buttons, mostly used as a helper function.
+ *
+ * @param {color} $bg-color Base color to be used for the button.
+ * @param {color} $type Gradient style for the button, will automatically use "recessed" when pressed.
+ */
+/**
+ * Adds a small text shadow (or highlight) to give the impression of beveled text.
+ *
+ * @param {string} $type Either shadow or highlight, decides whether to apply a light shadow or dark.
+ */
+/**
+ * Adds a small box shadow (or highlight) to give the impression of being beveled.
+ *
+ * @param {string} $type Either shadow or highlight, decides whether to apply a light shadow or dark.
+ */
+/**
+ * Adds basic styles to :before or :after pseudo-elements.
+ *
+ *     .my-element:after {
+ *       @include insertion(50px, 50px);
+ *     }
+ *
+ * @param {measurement} $width Height of pseudo-element.
+ * @param {measurement} $height Height of pseudo-element.
+ * @param {measurement} $top Top positioning of pseudo-element.
+ * @param {measurement} $left Left positioning of pseudo-element.
+ *
+ */
+/**
+ * Makes an element stretch to its parent's bounds.
+ */
+/**
+ * Colors the text of an element based on lightness of its background.
+ *
+ *     .my-element {
+ *       @include color-by-background(#fff); // Colors text black.
+ *     }
+ *
+ *     .my-element {
+ *       @include color-by-background(#fff, 40%); // Colors text gray.
+ *     }
+ *
+ * @param {color} $bg-color Background color of element.
+ * @param {percent} $contrast Contrast of text color to its background.
+ *
+ */
+/**
+ * Bevels the text based on its background.
+ *
+ * @param {color} $bg-color Background color of element.
+ * @see bevel-text
+ *
+ */
+/**
+ * Creates a background gradient for masked elements, based on the lightness of their background.
+ *
+ * @param {color} $bg-color Background color of element.
+ * @param {percent} $percent Contrast of the new gradient to its background.
+ * @param {percent} $style Gradient style of the gradient.
+ * @see background-gradient
+ *
+ */
+/**
+ * Makes the element text overflow to use ellipsis.
+ */
+/* line 43, ../../../lib/touch/resources/themes/stylesheets/sencha-touch/default/_mixins.scss */
+.x-tab .x-button-icon.check2,
+.x-button .x-button-icon.x-icon-mask.check2 {
+  -webkit-mask-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAE+klEQVRoBe2aS28URxRGsY0h2FmwCQuEWLHjvUNgZAQ4PMwrEkIRIGEgySKwB8QvYIvEP+ANO0CwsJAA88wGBEKBZJUVQkJCQrwJ5nxN31Z5pnpc7e4ZT9vT0peqqanquqfurVvlIW3Dw8NTJtPTPplgxdoCnugeb3m45eEJtgJTJwJPGw8cP8V6TfmC4/Z/H9uEAAZsIdqHZiMBn2UNbvigSw8M2AIAD6PtqBPpmYe+8t1NoL9GLfYf3bTKKhiWo9PoA9KV0dUgn/tRh8tXWg/Hnj0KUB8yz1JNnjXUuhFd264A/f0O7dKXpQ7EIiTPfkKuVyvrSlx3US+KPF26cMbwxeg8Gg3W4LWHFd6rUUepQprQnI/Rh9A25AtjmqseHVkK7w59UxpgYFdg7wH0CwqFpWvyrKI23GZ7OWluwgqwOnqOobVoWh4Tm97DwCpBHUFp2TiUX3v5QVMnLQzMmqAsUVWWyta3UX/TAmOcwjjk6KmE830W7GbU0ZTAGKYEJdj3yAcQ2qYw1jmsG9e0KF8122UDw/SHwFX0EYWC+fpZGG/hPcn1sqk8jGHas+dQ6KXCB6o2g91IPfKsObZpgDGsqAT1hXdpz25A7QZqZU1gBsxFSh5zbEA9yniOU5R5PSvvCnYTSsLYtdkLTGf9uKdD/gS6gI6jPndgUXXe24OKSFAK4zsoSVA+G6uAGaC758/oBrIs+Zb6rbg9up35Xpa1jffpUqEEldezysbJ0VPLjhHADOpEfUiw2gtuUtAKDiGtYNXeqDWJ7zveYQnqM3V3nqx1s2s97xmRoLzzWqMgkLLaTVQJa0ZoJe+hXjRmaMYKVlslr2dlp5wgu4PsiTyszmg5qgVr0CqvoZW2WFlKxhV5gxJsdIMKtYH+Eew6yksoNLy0soJeFzqR+vEI9gx6h9wFzFoPSlA+25g3SlChnnUNU3grkWmxRg0n+ihBnUR5w9j2bCbPGjzzR3sgbc+6gL66TV4zkTHHEqSfZSzr+94V0mbzKUF1GkSWknG5QktGyoj7qBdVeZo2S1Ch2yUNXOMVUcEJyrcQjOeP4vzQCu9BpBtOck5T70HybN4w1iJcR7ouem9QPjhfG+On7EBPUNrKhrYLWp7+FS1FCjtdKvJ6VvM/Q9o2uWC1AHq60QB6hELh0voJ+im6iHReF+FZwe5HP/g8lrXNzuEfeeFu9C9Kg8nSrr9lBZ9ljK/v37xjL5qRFSytf3K15KXy9EH0D/JN3ui2Qj1rC5AAq4FnJvoDPUSNBnTnUy4YQF1maFHlCOAYuouJFN6PkWtEo+ryrH5sL2TPVi5UFXAMrfDegxrtae3ZfWh6paFFffYCx9BKZLtQo/a0YLXIhSUo3yKlAsfQ8vSBBkALtrCjxwdqbTWBY2glst9REee0Lw/ULUEZpFuOChxD1yuRybNbUV0SlAtq9SDgGFp7ushEJlhdKuqWoAzSLYOBHeidGPkc+cIztE2wA6iuCcoFtXom4Bha4f0nGmv2FqyOnoaFscFG9rsfQusYq0T2G8qayASrbdEdOlfR/TJ72AzAaHla5/QD9BnVCucvfK/fjZXtx8WzZneu/+WBf53XOb0G6XetHjQXyfv2vKLyH7qLLqMhJn5DOW5PLmBZDfRUilloGUoD/ovvXgIrT4/rkxt4XK0fw+TtYxhT6iEt4FK7L8D4locDFqnUXSadh78Bx5bEl2CLG+8AAAAASUVORK5CYII=');
+}
+
+/* line 43, ../../../lib/touch/resources/themes/stylesheets/sencha-touch/default/_mixins.scss */
+.x-tab .x-button-icon.note2,
+.x-button .x-button-icon.x-icon-mask.note2 {
+  -webkit-mask-image: url('data:image/png;base64,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');
+}
+
+/**
+ * Messages stylesheet
+ * Define all messages
+ * 
+ **/
+/* line 10, ../../../styles/command_center/messages.scss */
+.x-msgbox > .x-docking-vertical {
+  background-color: white;
+}
+/* line 13, ../../../styles/command_center/messages.scss */
+.x-msgbox .x-msgbox-title {
+  display: none;
+}
+/* line 16, ../../../styles/command_center/messages.scss */
+.x-msgbox .x-body {
+  background: transparent;
+  border: none;
+  padding: 15px 30px;
+  color: #222;
+  font-size: 20px;
+}
+/* line 23, ../../../styles/command_center/messages.scss */
+.x-msgbox .x-msgbox-buttons {
+  background: transparent;
+  border: none;
+  margin-bottom: 20px;
+}
+/* line 27, ../../../styles/command_center/messages.scss */
+.x-msgbox .x-msgbox-buttons .x-button {
+  color: gray;
+  margin: 0 15px;
+  font-size: 25px;
+  border-radius: 0.2em;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #625b5b), color-stop(50%, #000000), color-stop(100%, #000000));
+  background-image: -webkit-linear-gradient(#625b5b, #000000, #000000);
+  background-image: -moz-linear-gradient(#625b5b, #000000, #000000);
+  background-image: -o-linear-gradient(#625b5b, #000000, #000000);
+  background-image: -ms-linear-gradient(#625b5b, #000000, #000000);
+  background-image: linear-gradient(#625b5b, #000000, #000000);
+}
+/* line 33, ../../../styles/command_center/messages.scss */
+.x-msgbox .x-msgbox-buttons .x-button.x-button-pressing, .x-msgbox .x-msgbox-buttons .x-button.x-button-pressed {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(100%, #625b5b));
+  background-image: -webkit-linear-gradient(#333333, #625b5b);
+  background-image: -moz-linear-gradient(#333333, #625b5b);
+  background-image: -o-linear-gradient(#333333, #625b5b);
+  background-image: -ms-linear-gradient(#333333, #625b5b);
+  background-image: linear-gradient(#333333, #625b5b);
+}
+/* line 36, ../../../styles/command_center/messages.scss */
+.x-msgbox .x-msgbox-buttons .x-button.x-button-action {
+  color: white;
+}
+/* line 41, ../../../styles/command_center/messages.scss */
+.x-msgbox .x-field-text {
+  margin-top: 10px;
+}
+/* line 44, ../../../styles/command_center/messages.scss */
+.x-msgbox .x-field-input {
+  border: 2px solid black;
+  border-radius: 5px;
+}

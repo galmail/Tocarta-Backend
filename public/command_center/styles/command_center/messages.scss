@@ -1,0 +1,50 @@
+@import '../skins/japanese';
+
+/**
+ * Messages stylesheet
+ * Define all messages
+ * 
+ **/
+
+.x-msgbox {
+  & > .x-docking-vertical {
+    background-color: white;
+  }
+  .x-msgbox-title {
+    display: none;
+  }
+  .x-body {
+    background: transparent;
+    border: none;
+    padding: 15px 30px;
+    color: #222;
+    font-size: 20px;
+  }
+  .x-msgbox-buttons {
+    background: transparent;
+    border: none;
+    margin-bottom: 20px;
+    .x-button {
+      color: gray;
+      margin: 0 15px;
+      font-size: 25px;
+      border-radius: 0.2em;
+      @include background-image(linear-gradient($tc-btn-gradient-color, $tc-btn-color, $tc-btn-color));
+      &.x-button-pressing, &.x-button-pressed {
+        @include background-image(linear-gradient(lighten($tc-btn-color,20%), $tc-btn-gradient-color));
+      }
+      &.x-button-action {
+        color: white;
+      }
+    }
+  }
+  .x-field-text {
+    margin-top: 10px;
+  }
+  .x-field-input {
+    border: 2px solid black;
+    border-radius: 5px;
+  }
+}
+
+

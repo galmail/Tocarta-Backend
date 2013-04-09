@@ -1,0 +1,17 @@
+[
+	{
+		id: 123,
+		name: 'experience',
+		description: 'Tu experiencia en nuestro establecimiento'
+	},
+	{
+		id: 456,
+		name: 'service',
+		description: 'Trato recibido por nuestro personal'
+	},
+	{
+		id: 789,
+		name: 'tocarta',
+		description: 'Que te ha parecido la tocarta?'
+	}
+]

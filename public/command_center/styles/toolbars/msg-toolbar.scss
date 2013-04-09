@@ -1,0 +1,21 @@
+/**
+ * Message Toolbar stylesheet
+ **/
+
+.tcMsgToolbar {
+  display: none;
+}
+
+#tcActivitiesMsgToolbarId {
+  height: 70px;
+  background: transparent;
+  border-bottom: 1px solid black;
+  .x-title {
+    font-size: 26px;
+  }
+  .x-segmentedbutton {
+    font-size: 19px;
+    font-weight: bold;
+  }
+}
+

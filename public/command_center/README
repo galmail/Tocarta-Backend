@@ -1,0 +1,24 @@
+Steps for development
+======================
+
+1. When styling or theming
+
+./public/www/styles/compass watch
+
+check this for docs: http://www.slideshare.net/senchainc/theming-sencha-touch
+
+
+Steps for production
+======================
+
+1. Compile Stylesheets
+
+./public/www/styles/compass compile
+
+2. Setup the config environment: config.js
+
+3. Run jsb3 script (to compress and deploy js and css)
+
+$> sencha create jsb -a index.html -p tc.jsb3
+$> sencha build -p tc.jsb3 -d ../deploy/command_center -v
+

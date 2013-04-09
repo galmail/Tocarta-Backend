@@ -46235,6 +46235,8 @@ Ext.define('TC.controller.Main', {
 	    // Flash fallback logging - don't include this in production
 	    // WEB_SOCKET_DEBUG = true;
 	    // start listening for incoming activities
+	    
+	    /*
 	    var pusher = new Pusher($tc.pusherKey);
 	    var channel = pusher.subscribe('tocarta_restaurant_'+TC.Restaurant.getId()+'_channel');
 	    channel.bind('activity', function(activity) {
@@ -46244,6 +46246,23 @@ Ext.define('TC.controller.Main', {
 	    	// add new activity
 	    	TC.RestaurantActivities.add(activity);
 	    });
+	    */
+	    
+	    /* Listen to NodeJS Socket.io events */
+	   	var endpoint = "http://tocarta-node.herokuapp.com";
+	   	var pipe = 'tocarta_restaurant_'+TC.Restaurant.getId()+'_channel';
+			console.log("Connecting to "+endpoint);
+		  var socket = io.connect(endpoint);
+		  console.log("Listening on "+pipe);
+		  socket.on(pipe, function (data) {
+		  	if(data && data.action){
+		  		console.log('TC.controller.Main._check_for_incoming_activities action: '+data.action);
+		    	if(data.action=="activity"){
+		    		TC.RestaurantActivities.add(activity);
+		    	}
+		  	}
+		  });
+
     },
     
     _validateLicenseKey: function(){

@@ -1,0 +1,64 @@
+/**
+ * Order main stylesheet
+ **/
+
+.tcOrderView {
+  width: 500px;
+  height: 500px;
+  //min-height: 200px;
+  .tcOrderDataView {
+    min-height: 200px;
+    font-size: 20px;
+    .order-item {
+      overflow: hidden;
+      clear: both;
+      padding: 7px 0;
+      .dish-quantity {
+        float: left;
+        width: 23px;
+      }
+      .dish-name {
+        float: left;
+        width: 430px;
+        .combo-dishes {
+          padding-left: 10px;
+          font-size: 16px;
+          font-style: italic;
+        }
+      }
+      .remove-dish-icon {
+        float: right;
+        width: 20px;
+        height: 20px;
+        background: url('../img/common/icons/delete_black2.png') no-repeat;
+        margin-right: 10px;
+      }
+      .dish-total {
+        float: right;
+        width: 48px;
+        overflow: hidden;
+        margin-right: 10px;
+        .euro {
+          float: left;
+        }
+        .total-per-item {
+          float: right;
+        }
+      }
+    }
+  }
+  .total-order {
+    overflow: hidden;
+    clear: both;
+    padding: 10px;
+    .text {
+      float: left;
+    }
+    .order-total-euros {
+      float: right;
+      .euro {
+        margin-right: 5px;
+      }
+    }
+  }
+}

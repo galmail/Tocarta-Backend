@@ -1,0 +1,17 @@
+@import 'sencha-touch/default/mixins';
+
+$base-color: #fff;
+$active-color: #474237;
+
+// top toolbar
+$tc-toolbar-border-bottom-color: #DDD;
+$tc-btn-color: #000;
+$tc-btn-border-color: #DDCFB9;
+$tc-btn-gradient-color: #625b5b;
+
+$theme-name: 'japanese';
+$include-default-icons: false;
+
+@include pictos-iconmask('check2');
+@include pictos-iconmask('note2');
+// @include pictos-iconmask('twitter2');

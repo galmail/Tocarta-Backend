@@ -62947,9 +62947,9 @@ Ext.define('TC.controller.Main', {
     
     launch: function(){
     	console.log('TC.controller.Main.launch');
-    	this._updateOrderBadge();								// updates the order badge when needed
-    	this._check_for_incoming_messages();		// check for incoming messages
-    	this._bindTranslations();
+    	// this._updateOrderBadge();								// updates the order badge when needed
+    	// this._check_for_incoming_messages();		// check for incoming messages
+    	// this._bindTranslations();
     },
     
     reloadViewport: function(){
@@ -63019,6 +63019,12 @@ Ext.define('TC.controller.Main', {
     
     goToHome: function(){
     	console.log('TC.controller.Main.goToHome');
+    	
+    	this._updateOrderBadge();								// updates the order badge when needed
+    	this._check_for_incoming_messages();		// check for incoming messages
+    	this._bindTranslations();
+    	
+    	
     	// TODO decide if home is the multilang or mainmenu
     	// if(TC.Restaurant.data.setting.supported_lang && TC.Restaurant.data.setting.supported_lang.length>2){
     		// this.redirectTo('multilang');
@@ -63026,6 +63032,7 @@ Ext.define('TC.controller.Main', {
     	// else {
     		this.redirectTo('mainmenu');
     	// }
+    	
     },
     
     switchMenu: function(){
@@ -63321,6 +63328,8 @@ Ext.define('TC.controller.Main', {
 		
 		_check_for_incoming_messages: function(){
     	console.log('TC.controller.Main._check_for_incoming_messages');
+    	var me = this;
+    	
 			// Enable pusher logging - don't include this in production
 	    // Pusher.log = function(message) {
 	      // if (window.console && window.console.log) window.console.log(message);
@@ -63328,9 +63337,11 @@ Ext.define('TC.controller.Main', {
 	    // Flash fallback logging - don't include this in production
 	    // WEB_SOCKET_DEBUG = true;
 	    // start listening for incoming activities
+	    
+	    
+	    /*
 	    var pusher = new Pusher($tc.pusherKey);
 	    var channel = pusher.subscribe('tocarta_lk_'+TC.Setting.get('key')+'_channel');
-	    var me = this;
 	    channel.bind('alive', function(data) {
 	    	console.log('TC.controller.Main._check_for_incoming_messages received alive message');
 	    	TC.ajaxRequest({
@@ -63341,6 +63352,27 @@ Ext.define('TC.controller.Main', {
 	    	console.log('TC.controller.Main._check_for_incoming_messages received update message');
 	    	me.redirectTo('update');
 	    });
+	    */
+	    
+	    /* Listen to NodeJS Socket.io events */
+	   	var endpoint = "http://tocarta-node.herokuapp.com";
+	   	var pipe = 'tocarta_lk_'+TC.Setting.get('key')+'_channel';
+			console.log("Connecting to "+endpoint);
+		  var socket = io.connect(endpoint);
+		  console.log("Listening on "+pipe);
+		  socket.on(pipe, function (data) {
+		  	if(data && data.action){
+		  		console.log('TC.controller.Main._check_for_incoming_messages action: '+data.action);
+		    	if(data.action=="alive"){
+		    		TC.ajaxRequest({
+			  			url: $tc.url('im_alive')
+			  		});
+		    	}
+		    	else if(data.action=="update"){
+		    		me.redirectTo('update');
+		    	}
+		  	}
+		  });
     }
 });
 
