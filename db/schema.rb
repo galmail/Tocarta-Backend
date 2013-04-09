@@ -28,11 +28,11 @@ ActiveRecord::Schema.define(:version => 20130314093210) do
     t.string    "i18nbg_file_name"
     t.string    "i18nbg_content_type"
     t.integer   "i18nbg_file_size"
-    t.datetime  "i18nbg_updated_at"
+    t.timestamp "i18nbg_updated_at"
     t.string    "bg_file_name"
     t.string    "bg_content_type"
     t.integer   "bg_file_size"
-    t.datetime  "bg_updated_at"
+    t.timestamp "bg_updated_at"
   end
 
   add_index "chains", ["user_id"], :name => "index_chains_on_user_id"
