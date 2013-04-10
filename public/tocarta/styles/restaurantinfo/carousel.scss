@@ -1,0 +1,23 @@
+/**
+ * Restaurant Carousel Stylesheet
+ */
+
+.tcRestaurantCarousel {
+  background: transparent;
+  .x-toolbar {
+    background: transparent;
+    border: none;
+    &.x-docked-top {
+      height: 47px;
+    }
+    &.x-docked-bottom {
+      height: 54px;
+    }
+  }
+  .x-carousel-item .x-img{
+    // width: 674px;
+    // height: 474px;
+    border-radius: 7px;
+    background-size: 100% 100%;
+  }
+}

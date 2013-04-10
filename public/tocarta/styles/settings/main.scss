@@ -1,0 +1,17 @@
+/**
+ * Settings main stylesheet
+ **/
+
+@import 'waiter-login';
+@import 'switch-table';
+
+// setting the sidebar width
+
+.tcSettingsView {
+  width: 300px;
+  height: 500px;
+  .tcSettingsContainer {
+    height: 441px;
+  }
+}
+

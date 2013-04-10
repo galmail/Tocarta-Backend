@@ -1,0 +1,95 @@
+@import '../skins/japanese';
+
+/**
+ * Dish photo stylesheet
+ **/
+
+.tcDishPhoto {
+  // height: 474px;
+  background: transparent;
+  .tcBigBadge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-width: 0 73px 70px;
+    border-color: transparent transparent #ededed;
+    border-style: solid;
+    height: 0;
+    line-height: 92px;
+    color: black;
+    text-transform: lowercase;
+    -webkit-transform: rotate(-45deg);
+    margin-left: -48px;
+    margin-top: -11px;
+    width: 133px;
+    text-align: center;
+    
+    .dish-big-badge {
+      text-align: center;
+      margin-left: -51px;
+      width: 101px;
+      font-size: 0.7em;
+    }
+    
+  }
+  .tcAddButton {
+    position: absolute;
+    right: 1px;
+    @include background-image(linear-gradient($tc-btn-gradient-color, $tc-btn-color, $tc-btn-color));
+    display: block;
+    font-size: 18px;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    &.x-button-pressing, &.x-button-pressed {
+      @include background-image(linear-gradient(lighten($tc-btn-color,20%), $tc-btn-gradient-color));
+    }
+    .x-button-label {
+      padding: 5px 0;
+      padding-bottom: 7px;
+      width: 100px;
+    }
+  }
+  .dish-photo-container {
+    .dish-image {
+      width: 100%;
+      height: 100%;
+      // width: 678px;
+      // height: 474px;
+      border-radius: 5px;
+    }
+    .dish-info {
+      clear: both;
+      overflow: hidden;
+      width: 100%;
+      height: 100px;
+      position: absolute;
+      bottom: 0;
+      // margin-top: -105px;
+      .dish-description {
+        float: left;
+        background-color: white;
+        width: 70%;
+        height: 100%;
+        padding: 10px;
+        opacity: 0.6;
+      }
+      .dish-price {
+        float: right;
+        width: 30%;
+        height: 100%;
+        background-color: black;
+        font-size: 44px;
+        color: white;
+        text-align: center;
+        padding-top: 22px;
+        opacity: 0.8;
+        .euro {
+          color: #CB8D8A;
+          font-size: 43px;
+          margin-right: 15px;
+        }
+      }
+    }
+  }
+}

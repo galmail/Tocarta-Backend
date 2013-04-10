@@ -8,16 +8,21 @@
 
 Ext.define('TC.view.matrixmenu.MatrixMenu', {
 	extend: 'Ext.Panel',
-	requires: ['TC.view.matrixmenu.ItemView'],
-	
+	requires: [],
 	xtype: 'matrix-menu',
-	
 	config: {
 		cls: 'tcMatrixMenu',
 		layout: 'vbox',
 		items: [
 			{
-				xtype: 'matrixmenu-itemview'
+				cls : 'tcMatrixMenuTitle',
+				layout: {
+					type: 'hbox',
+					pack: 'start',
+					align: 'center'
+				},
+				items: [
+				]
 			}
 		]
 	}

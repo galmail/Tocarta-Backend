@@ -1,0 +1,90 @@
+/***
+ * Classic Theme and Responsive Style for 1024x600
+ */
+@media all and (max-width: 1024px) and (max-height: 600px) {
+  /** Remove tabs and empty spaces **/
+  /* line 9, ../../../styles/skins/classic1024x600.scss */
+  .tcSidebarBottomToolbar {
+    display: none;
+  }
+
+  /* line 12, ../../../styles/skins/classic1024x600.scss */
+  .tcRestaurantCarousel .tcRestaurantCarouselBottomToolbar {
+    display: none;
+  }
+
+  /* line 16, ../../../styles/skins/classic1024x600.scss */
+  .tcDishContainer .tcDishContainerTabBar {
+    display: none;
+  }
+
+  /** The Dish **/
+  /* line 28, ../../../styles/skins/classic1024x600.scss */
+  .tcDishPhoto .dish-photo-container .dish-info {
+    height: 80px;
+    margin-top: -85px;
+  }
+  /* line 34, ../../../styles/skins/classic1024x600.scss */
+  .tcDishPhoto .dish-photo-container .dish-info .dish-price {
+    font-size: 38px;
+    padding-top: 13px;
+  }
+  /* line 38, ../../../styles/skins/classic1024x600.scss */
+  .tcDishPhoto .dish-photo-container .dish-info .dish-price .euro {
+    font-size: 38px;
+  }
+
+  /** The Order **/
+  /* line 50, ../../../styles/skins/classic1024x600.scss */
+  .tcOrderView .tcOrderDataView .order-item .dish-total .euro {
+    display: none;
+  }
+  /* line 54, ../../../styles/skins/classic1024x600.scss */
+  .tcOrderView .tcOrderTotal .total-order .text {
+    font-size: 23px;
+    margin-top: 7px;
+  }
+  /* line 58, ../../../styles/skins/classic1024x600.scss */
+  .tcOrderView .tcOrderTotal .total-order .order-total-euros {
+    font-size: inherit;
+  }
+  /* line 60, ../../../styles/skins/classic1024x600.scss */
+  .tcOrderView .tcOrderTotal .total-order .order-total-euros .euro {
+    font-size: 28px;
+  }
+  /* line 63, ../../../styles/skins/classic1024x600.scss */
+  .tcOrderView .tcOrderTotal .total-order .order-total-euros .num {
+    font-size: 30px;
+  }
+
+  /** The Survey **/
+  /* line 73, ../../../styles/skins/classic1024x600.scss */
+  .tcSurveyContainer .tcSurveyTitleDishes {
+    display: none;
+  }
+  /* line 76, ../../../styles/skins/classic1024x600.scss */
+  .tcSurveyContainer .tcSurveyDishes {
+    display: none;
+  }
+  /* line 79, ../../../styles/skins/classic1024x600.scss */
+  .tcSurveyContainer .tcSurveyQuestions {
+    height: 304px;
+  }
+  /* line 81, ../../../styles/skins/classic1024x600.scss */
+  .tcSurveyContainer .tcSurveyQuestions .survey_question {
+    padding-bottom: 8px;
+  }
+  /* line 84, ../../../styles/skins/classic1024x600.scss */
+  .tcSurveyContainer .tcSurveyQuestions .x-dataview-item {
+    padding: 3px 0px;
+  }
+
+  /* line 91, ../../../styles/skins/classic1024x600.scss */
+  .tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item .tcDailyMenuDish .tcDailyMenuDishText {
+    padding: 0px 10px;
+  }
+  /* line 94, ../../../styles/skins/classic1024x600.scss */
+  .tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item .tcDailyMenuDish .tcDailyMenuDishPhoto {
+    height: 180px;
+  }
+}

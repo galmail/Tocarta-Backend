@@ -1,0 +1,36 @@
+/**
+ * Sidebar main stylesheet
+ **/
+
+@import 'list-view';
+@import 'items-view';
+
+// setting the sidebar width
+
+// $tc-menu-panel-width: 500px;
+
+.tcMenuPanel {
+  // width: $tc-menu-panel-width;
+  .tcMenuPanelTopBar {
+    height: 47px;
+    background: transparent;
+    border: none !important;
+    font-family: 'HelveticaNeue-Bold';
+    .x-title {
+      color: #B7AE97;
+      font-weight: bold;
+      font-size: 25px;
+      text-shadow: none;
+      line-height: 40px;
+    }
+    .x-button.x-button-back {
+      margin-left: 7px;
+    }
+  }
+}
+
+.tcSidebarBottomToolbar {
+  background: transparent;
+  height: 54px;
+  border: none !important;
+}

@@ -1,0 +1,130 @@
+@import '../skins/japanese';
+
+/**
+ * Order main stylesheet
+ **/
+
+.tcOrderView {
+  width: 450px;
+  min-height: 147px;
+  .x-inner.x-panel-inner.x-html {
+    padding: 5px 10px;
+  }
+  .tcEmptyOrderMsg {
+    padding: 15px;
+    font-size: 15px;
+  }
+  .tcOrderDataView {
+    // min-height: 50px;
+    .x-scroll-indicator.x-scroll-indicator-y {
+      // opacity: 1 !important;
+      left: 3px;
+      width: 4px;
+    }
+    .order-item {
+      overflow: hidden;
+      clear: both;
+      padding: 7px 0;
+      padding-top: 11px;
+      border-bottom: 1px dotted #654;
+      .dish-quantity {
+        float: left;
+        width: 20px;
+        font-size: 20px;
+        color: #666;
+      }
+      .dish-name {
+        float: left;
+        width: 260px;
+        font-size: 20px;
+        margin-left: 10px;
+        .dish-name-title {
+          float: left;
+        }
+        .toggle-combo-icon {
+          display: none;
+          color: blue;
+          float: left;
+          margin-left: 10px;
+        }
+      }
+      .remove-dish-icon {
+        float: right;
+        width: 36px;
+        height: 30px;
+        background: url('../img/common/icons/delete_black2.png') no-repeat;
+        background-position: center;
+        margin-right: 5px;
+      }
+      .dish-total {
+        float: right;
+        width: 66px;
+        overflow: hidden;
+        margin-right: 10px;
+        font-size: 20px;
+        .euro {
+          float: left;
+        }
+        .total-per-item {
+          float: right;
+        }
+      }
+      .combo-dishes {
+        clear: both;
+        // display: none;
+        padding-left: 40px;
+        .combo-dish-name {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  .tcOrderTotal {
+    height: 61px;
+    .total-order {
+      overflow: hidden;
+      clear: both;
+      // padding: 0 7px;
+      // border-top: 1px dotted #DDD;
+      .text {
+        float: left;      
+        font-size: 28px;
+        margin-left: 5px;
+        margin-top: 12px;
+      }
+      .order-total-euros {
+        float: right;
+        margin-left: 25px;
+        // margin-right: 6px;
+        font-size: 40px;
+        font-weight: bold;
+        color: #654;
+        .euro {
+          margin-top: 20px;
+          margin-right: 10px;
+          font-size: 31px;
+          color: #999;
+        }
+      }
+    }
+  }
+  .tcOrderBtn {
+    @include background-image(linear-gradient($tc-btn-gradient-color, $tc-btn-color, $tc-btn-color));
+    display: block;
+    font-size: 18px;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    max-width: 200px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    &.x-button-pressing, &.x-button-pressed {
+      @include background-image(linear-gradient(lighten($tc-btn-color,20%), $tc-btn-gradient-color));
+    }
+    .x-button-label {
+      padding: 5px 0;
+    }
+  }
+}

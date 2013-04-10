@@ -1,0 +1,90 @@
+@import 'sencha-touch/default/mixins';
+
+// $base-color: #000;
+// $active-color: #ea4199;
+// 
+// $base-gradient: 'glossy';
+// $tabs-dark: darken($base-color, 20%);
+// $tabs-dark-active-color: saturate($active-color, 20%);
+// $tabs-bottom-active-gradient: 'recessed';
+
+
+$base-color: #B39232;  //#67512d
+$active-color: #474237;
+
+// 
+// $tabs-bar-gradient: 'flat';
+// $tabs-dark: darken(desaturate($base-color, 10%), 5%);
+// $tabs-dark-active-color: $active-color;
+// $tabs-bottom-active-gradient: 'glossy';
+
+
+// $loading-spinner-color: black;
+
+
+/////////////// GLOBAL COLORS ///////////////
+
+// $body-bg-color: #fff;
+// $base-color: green;
+// $active-color: #67512d;
+
+/////////////// TOOLBARS ///////////////
+
+// $toolbar-gradient: 'glossy';
+// $toolbar-base-color: #fff;
+// $include-toolbar-uis: false;
+// $toolbar-icon-size: 60px;
+
+// top toolbar
+$tc-toolbar-border-bottom-color: #DDD;
+$tc-btn-color: #000;
+$tc-btn-border-color: #DDCFB9;
+$tc-btn-gradient-color: #625b5b;
+
+$tc-btn-active-color: #8b0000;
+$tc-btn-active-gradient-color: #c40202;
+
+/////////////// BUTTONS ///////////////
+
+// $default-bg-color: #ccc; // #332b1d
+// $default-bg-color-is-dark: true;
+// $button-gradient: background-gradient(green, 'recessed');
+
+$badge-size: 20px;
+// $badge-bg-color: #fff;
+
+/////////////// ICONS ///////////////
+
+$theme-name: 'japanese';
+$include-default-icons: false;
+
+// icons for the top toolbar
+
+@include pictos-iconmask('home');
+@include pictos-iconmask('waiter');
+@include pictos-iconmask('order');
+@include pictos-iconmask('bill');
+@include pictos-iconmask('games');
+@include pictos-iconmask('info');
+@include pictos-iconmask('globe2');
+@include pictos-iconmask('flag');
+@include pictos-iconmask('filters');
+@include pictos-iconmask('search');
+@include pictos-iconmask('tabbed_book');
+
+// $page-bg-color: transparent;
+
+// @include pictos-iconmask('action');
+// @include pictos-iconmask('globe2');
+
+// icons for the dish tabs
+
+// @include pictos-iconmask('photos2');
+// @include pictos-iconmask('chat');
+
+// icons for the bottom toolbar
+
+// @include pictos-iconmask('info');
+// @include pictos-iconmask('settings6');
+
+

@@ -1,0 +1,25 @@
+/**
+ * General main stylesheet
+ **/
+
+@import 'fonts';
+@import 'buttons';
+@import 'messages';
+
+// body {
+  // font-family: Georgia;
+  // color: #5a3d23;
+// }
+
+.tcViewport {
+  font-family: 'HelveticaNeue';
+  padding: 0px 10px;
+  // font-size: 15px;
+  // font-weight: 100;
+  // background: -webkit-linear-gradient(top, #FFFFFF, #F0E2CA);
+  background: linear-gradient(color-stops(#FFFFFF, #F0E2CA));
+  
+  .tcEmptyScreen {
+    background: transparent;
+  }
+}

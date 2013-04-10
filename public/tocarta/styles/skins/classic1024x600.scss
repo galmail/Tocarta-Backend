@@ -1,0 +1,100 @@
+/***
+ * Classic Theme and Responsive Style for 1024x600
+ */
+
+@media all and (max-width: 1024px) and (max-height: 600px){
+  
+  /** Remove tabs and empty spaces **/
+   
+  .tcSidebarBottomToolbar {
+    display: none;
+  }
+  .tcRestaurantCarousel .tcRestaurantCarouselBottomToolbar {
+    display: none;
+  }
+  
+  .tcDishContainer .tcDishContainerTabBar {
+    display: none;
+  }
+  
+  /** The Dish **/
+  
+  .tcDishPhoto {
+    .dish-photo-container {
+      .dish-image {
+        // width: 684px;
+        // height: 408px !important;
+      }
+      .dish-info {
+        height: 80px;
+        margin-top: -85px;
+        .dish-description {
+          // width: 494px;
+        }
+        .dish-price {
+          // width: 190px;
+          font-size: 38px;
+          padding-top: 13px;
+          .euro {
+            font-size: 38px;
+          }
+        }
+      }
+    }
+  }
+  
+  
+  /** The Order **/
+  
+  .tcOrderView {
+    .tcOrderDataView .order-item .dish-total .euro {
+      display: none;
+    }
+    .tcOrderTotal .total-order {
+      .text {
+        font-size: 23px;
+        margin-top: 7px;
+      }
+      .order-total-euros {
+        font-size: inherit;
+        .euro {
+          font-size: 28px;
+        }
+        .num {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+  
+  /** The Survey **/
+   
+  .tcSurveyContainer {
+    .tcSurveyTitleDishes {
+      display: none;
+    }
+    .tcSurveyDishes {
+      display: none;
+    }
+    .tcSurveyQuestions {
+      height: 304px;
+      .survey_question {
+        padding-bottom: 8px;
+      }
+      .x-dataview-item {
+        padding: 3px 0px;
+      }
+    }
+  }
+  
+  .tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item .tcDailyMenuDish {
+    .tcDailyMenuDishText {
+      padding: 0px 10px;
+    }
+    .tcDailyMenuDishPhoto {
+      height: 180px;
+    }
+  }
+  
+}
+

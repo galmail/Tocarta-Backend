@@ -1,0 +1,59 @@
+/**
+ * Minidishes Stylesheet
+ **/
+
+.tcMiniDishesContainer {
+  background: transparent;
+  .tcDishTitle {
+    background: transparent;
+    border: none;
+    .x-title {
+      color: #000;
+    }
+  }
+  .x-dataview-item {
+    display: inline-block;
+    width: 50%;
+    padding: 0 5px;
+    margin-top: 4px;
+  }
+  .minidish {
+    display: block;
+    text-decoration: none;
+    background-color: black;
+    font-size: 14px;
+    color: white;
+    border-radius: 5px;
+    height: 53px;
+    overflow: hidden;
+    clear: both;
+    &:active {
+      background-color: red;
+    }
+    img {
+      display: block;
+      float: left;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+    .minidish_title {
+      display: block;
+      float: left;
+      width: 193px;
+      text-align: left;
+      padding-top: 7px;
+      padding-left: 5px;
+      line-height: 19px;
+      font-weight: bold;
+    }
+    .minidish_price {
+      float: right;
+      clear: right;
+      padding-top: 28px;
+      padding-right: 5px;
+      color: #C4B590;
+      font-weight: bold;
+    }
+  }
+  
+}

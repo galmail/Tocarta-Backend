@@ -1,0 +1,33 @@
+/**
+ * Dish photo stylesheet
+ **/
+/* line 6, ../../../styles/survey/photo.scss */
+.tcDishPhoto .tcAddButton {
+  width: 130px !important;
+  position: absolute;
+  right: 0px;
+}
+/* line 12, ../../../styles/survey/photo.scss */
+.tcDishPhoto .dish-photo-container .dish-image {
+  width: 100%;
+  height: 410px;
+}
+/* line 16, ../../../styles/survey/photo.scss */
+.tcDishPhoto .dish-photo-container .dish-info {
+  clear: both;
+  overflow: hidden;
+  padding: 5px;
+  background-color: white;
+  height: 70px;
+  position: relative;
+  margin-top: -70px;
+  opacity: 0.4;
+}
+/* line 25, ../../../styles/survey/photo.scss */
+.tcDishPhoto .dish-photo-container .dish-info .dish-description {
+  float: left;
+}
+/* line 28, ../../../styles/survey/photo.scss */
+.tcDishPhoto .dish-photo-container .dish-info .dish-price {
+  float: right;
+}

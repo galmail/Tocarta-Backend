@@ -1,0 +1,70 @@
+[
+	{
+		"combo_type_id" : null,
+	  "dish_id" : 542431918,
+	  "dish_photo" : "resources/img/dishes/dish_542431918.jpg",
+	  "id" : 1,
+	  "item_name" : "Tori Karaage",
+	  "item_price" : 9.0999999999999996,
+	  "order_id" : 1,
+	  "quantity" : 1,
+	  "total" : 9.0999999999999996
+	},
+	{
+		"combo_type_id" : null,
+	  "dish_id" : 789378497,
+	  "dish_photo" : "resources/img/dishes/dish_789378497.jpg",
+	  "id" : 2,
+	  "item_name" : "Empanadillas",
+	  "item_price" : 5.5,
+	  "order_id" : 1,
+	  "quantity" : 2,
+	  "total" : 11
+	},
+	{
+		"combo_type_id" : null,
+	  "dish_id" : 718122457,
+	  "dish_photo" : "resources/img/dishes/dish_718122457.jpg",
+	  "id" : 3,
+	  "item_name" : "Atún Abrasado",
+	  "item_price" : 7.5,
+	  "order_id" : 1,
+	  "quantity" : 1,
+	  "total" : 7.5
+	},
+	
+	
+	{
+		"combo_type_id" : null,
+	  "dish_id" : 54243111918,
+	  "dish_photo" : "resources/img/dishes/dish_542431918.jpg",
+	  "id" : 4,
+	  "item_name" : "Tori Karaage",
+	  "item_price" : 9.0999999999999996,
+	  "order_id" : 1,
+	  "quantity" : 1,
+	  "total" : 9.0999999999999996
+	},
+	{
+		"combo_type_id" : null,
+	  "dish_id" : 78937833497,
+	  "dish_photo" : "resources/img/dishes/dish_789378497.jpg",
+	  "id" : 5,
+	  "item_name" : "Empanadillas",
+	  "item_price" : 5.5,
+	  "order_id" : 1,
+	  "quantity" : 2,
+	  "total" : 11
+	},
+	{
+		"combo_type_id" : null,
+	  "dish_id" : 718122455557,
+	  "dish_photo" : "resources/img/dishes/dish_718122457.jpg",
+	  "id" : 6,
+	  "item_name" : "Atún Abrasado",
+	  "item_price" : 7.5,
+	  "order_id" : 1,
+	  "quantity" : 1,
+	  "total" : 7.5
+	}
+]

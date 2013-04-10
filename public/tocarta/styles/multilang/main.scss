@@ -1,0 +1,32 @@
+/**
+ * Multi Language main stylesheet
+ **/
+
+.tcMultiLangPanel {
+  // background: transparent;
+  // padding: 50px 20px;
+  // text-align: center;
+  .x-button.flag {
+    display: block;
+    width: 72px;
+    height: 72px;
+    float: left;
+    margin: 20px;
+    &.en {
+      background-image: url('../img/flags/bt-en.png');
+    }
+    &.es {
+      background-image: url('../img/flags/bt-es.png');
+    }
+    &.cat {
+      background-image: url('../img/flags/bt-cat.png');
+    }
+    &.fr {
+      background-image: url('../img/flags/bt-fr.png');
+    }
+    &.gr {
+      background-image: url('../img/flags/bt-gr.png');
+    }
+  }
+}
+

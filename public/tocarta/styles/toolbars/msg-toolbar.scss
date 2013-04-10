@@ -1,0 +1,42 @@
+/**
+ * Message Toolbar stylesheet
+ **/
+
+.tcMsgToolbar {
+  text-align: center;
+  height: 22px;
+  position: absolute;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  .tcMsgBox {
+    display: none;
+    border-color: #F0C36D;
+    background-color: #F9EDBE;
+    border: 1px solid transparent;
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    font-weight: bold;
+    padding: 3px 7px;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    &.info {
+      // border-color: blue;
+    }
+    &.warning {
+      // border-color: yellow;
+    }
+    &.success {
+      // border-color: green;
+    }
+    &.error {
+      background-color: red !important;
+      color: white;
+      font-weight: normal;
+      // border-color: black;
+    }
+  }
+}
+

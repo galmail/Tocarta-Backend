@@ -1,0 +1,34 @@
+/**
+ * Survey questions stylesheet
+ **/
+
+.tcSurveyQuestions {
+  padding: 5px 10px;
+  height: 169px;
+  background: #F1E5D2;
+  .survey_question {
+    clear: both;
+    line-height: 35px;
+    overflow: hidden;
+    padding-bottom: 5px;
+    .question_title {
+      float: left;
+      font-size:20px;
+      margin-top: 10px;
+    }
+    .rating {
+      float: right;
+      .star {
+        float: left;
+        background: url("../img/common/icons/star_med_white.png") no-repeat;
+        width: 48px;
+        height: 48px;
+        margin-left: 4px;
+        &.selected {
+          background: url("../img/common/icons/star_med_gold.png") no-repeat;
+        }
+      }
+    }
+  }
+}
+

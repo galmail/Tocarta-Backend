@@ -1,0 +1,35 @@
+/**
+ * Waiter login stylesheet
+ **/
+
+.tcWaiterLogin {
+  .tcWaiterCode {
+    width: 100%;
+    padding: 5px;
+    .x-inner.x-layout-hbox {
+      padding-left: 18px;
+    }
+    .box {
+      width: 50px;
+      height: 40px;
+      margin: 5px;
+      text-align: center;
+      font-size: 30px;
+    }
+  }
+  .tcWaiterPad {
+    width: 100%;
+    .tcWaiterPadLine {
+      padding: 5px;
+      .tcWaiterPadButton {
+        margin: 5px;
+        padding: 29px;
+        .x-button-label {
+          font-size: 24px;
+        }
+      }
+    }
+    
+  }
+}
+

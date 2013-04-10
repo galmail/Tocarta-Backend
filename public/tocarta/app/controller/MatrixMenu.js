@@ -11,7 +11,7 @@ Ext.define('TC.controller.MatrixMenu', {
     config: {
       
       views : [
-      	'TC.view.matrixmenu.ItemView'
+      	
 	    ],
       
       refs: {
@@ -31,15 +31,6 @@ Ext.define('TC.controller.MatrixMenu', {
     
     matrixMenuShow: function(){
     	console.log('TC.controller.MatrixMenu.matrixMenuShow');
-    	printDish(TC.Restaurant.getMainMenu().sections().getAt(0).dishes().getAt(0));
-    },
-    
-    printDish: function(dish){
-    	console.log('TC.controller.MatrixMenu.printDish');
-    	var dish_view = Ext.create('TC.view.matrixmenu.ItemView', {
-				data: dish
-			});
-	    this.getMatrixMenu().setItems(dish_view);
     }
     
 });

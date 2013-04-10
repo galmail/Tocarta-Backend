@@ -1,0 +1,10 @@
+[
+	{
+		"source": "http://s3.amazonaws.com/bucket_tocarta_staging/img/sections/section_933561390.png",
+		"dest": "sections/section_933561390.png"
+	},
+	{
+		"source": "http://s3.amazonaws.com/bucket_tocarta_staging/img/sections/section_933561391.png",
+		"dest": "sections/section_933561391.png"
+	}
+]
