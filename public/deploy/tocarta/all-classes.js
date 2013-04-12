@@ -1,5 +1,5 @@
 /*
-Copyright(c) 2013 Tocarta International SL
+Copyright(c) 2012 Company Name
 */
 /**
  * @private
@@ -62850,6 +62850,7 @@ Ext.define('TC.controller.Main', {
         '': 'loadApp',
         'mainmenu': 'loadMainMenu',
         'dailymenu': 'loadDailyMenu',
+        'matrixmenu': 'loadMatrixMenu',
         'home': 'goToHome'
       },
       
@@ -62859,7 +62860,8 @@ Ext.define('TC.controller.Main', {
 	      'filter.FilterView',
 	      'order.OrderView',
 	      'mainmenu.MainMenu',
-	      'dailymenu.DailyMenu'
+	      'dailymenu.DailyMenu',
+	      'matrixmenu.MatrixMenu',
 	    ],
 	    
 	    refs: {
@@ -63116,6 +63118,16 @@ Ext.define('TC.controller.Main', {
     	}
     },
     
+    loadMatrixMenu: function(){
+    	if(TC.Restaurant){
+    		console.log('TC.controller.Main.loadMatrixMenu');
+    		this.switchView({xtype: 'matrix-menu'});
+    	}
+    	else {
+    		this.loadApp();
+    	}
+    },
+    
     switchTable: function(){
     	console.log('TC.controller.Main.switchTable');
     	if(!this.settingsView){
@@ -63355,7 +63367,7 @@ Ext.define('TC.controller.Main', {
 	    */
 	    
 	    /* Listen to NodeJS Socket.io events */
-	   	var endpoint = "http://tocarta-node.herokuapp.com";
+	   	var endpoint = $tc.nodeserver;
 	   	var pipe = 'tocarta_lk_'+TC.Setting.get('key')+'_channel';
 			console.log("Connecting to "+endpoint);
 		  var socket = io.connect(endpoint);
@@ -64239,6 +64251,36 @@ Ext.define('TC.view.help.HelpView', {
 		]
 	}
 	
+});
+
+/**
+ * @class TC.view.matrixmenu.MatrixMenu
+ * @extends Ext.Panel
+ *
+ * Matrix Menu Panel
+ * @description This panel displays the matrix menu
+ **/
+
+Ext.define('TC.view.matrixmenu.MatrixMenu', {
+	extend: 'Ext.Panel',
+	requires: [],
+	xtype: 'matrix-menu',
+	config: {
+		cls: 'tcMatrixMenu',
+		layout: 'vbox',
+		items: [
+			{
+				cls : 'tcMatrixMenuTitle',
+				layout: {
+					type: 'hbox',
+					pack: 'start',
+					align: 'center'
+				},
+				items: [
+				]
+			}
+		]
+	}
 });
 
 /**
