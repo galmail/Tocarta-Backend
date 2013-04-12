@@ -1,8 +1,12 @@
 %ul.nav.pull-right
   - actions(:root).each do |action|
-    %li= link_to wording_for(:menu, action), { :action => action.action_name, :controller => 'rails_admin/main' }, :class => 'pjax'
+
+    -# %li= link_to wording_for(:menu, action), { :action => action.action_name, :controller => 'rails_admin/main' }, :class => 'pjax'
     
-    %li= select("locale","", [["Español","es"],["English","en"],["Catalan","cat"],["Français","fr"],["Deutsch","de"]], {:selected => params[:locale]}, { :index => nil, :onchange => "_clocale=window.location.href.replace(/(locale=)\\w+/,'locale='+this.value);window.location.href=_clocale;"})
+    %li= select("locale","", [["Español","es"],["English","en"],["Catalan","cat"],["Français","fr"],["Deutsch","de"]], {:selected => params[:locale]},
+      { :index => nil, :onchange => "_bl=window.location.href;_clocale=window.location.href.replace(/(locale=)\\w+/,'locale='+this.value);if(_bl==_clocale) window.location.href+='?locale='+this.value;else window.location.href=_clocale;" })
+    
+    %li= link_to t('admin.home.help').capitalize, 'http://bit.ly/ManualTocartaAdmin', {:target => '_blank'}
     
   - if main_app_root_path = (main_app.root_path rescue false)
     %li= link_to t('admin.home.name').capitalize, main_app_root_path

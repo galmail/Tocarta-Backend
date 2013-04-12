@@ -42,6 +42,34 @@ RailsAdmin.config do |config|
 
   # Application wide tried label methods for models' instances
   # config.label_methods << :description # Default is [:name, :title]
+  
+  config.actions do
+    # root actions
+    dashboard                     # mandatory
+    # collection actions 
+    index                         # mandatory
+    new
+    export
+    history_index
+    bulk_delete
+    # member actions
+    show
+    edit
+    delete
+    history_show
+    show_in_app
+    
+    update_tablet do
+      # Make it visible only for tablets model.
+      visible do
+        bindings[:abstract_model].model.to_s == "Tablet"
+      end
+    end
+
+  end
+  
+  
+  
 
   #  ==> Global models configuration
   config.models do
@@ -139,6 +167,32 @@ RailsAdmin.config do |config|
     end
     edit do
       exclude_fields :id, :priority, :trigger_activation, :last_time_changed
+    end
+  end
+  
+  ######## Theme Model ########
+  
+  config.model Theme do
+    label 'Theme'
+    label_plural 'Themes'
+    list do
+      exclude_fields :id, :css, :created_at, :menus
+    end
+    edit do
+      exclude_fields :id, :css, :menus
+    end
+  end
+  
+  ######## Skin Model ########
+  
+  config.model Skin do
+    label 'Skin'
+    label_plural 'Skins'
+    list do
+      exclude_fields :id, :created_at, :menus, :user, :stylesheet
+    end
+    edit do
+      exclude_fields :id, :menus
     end
   end
   

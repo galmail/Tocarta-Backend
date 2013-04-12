@@ -3,7 +3,11 @@
 node :name do @restaurant.name end
 node :logo do @restaurant.chain.logo.url(:medium).split(ENV['S3_BUCKET']).last end
 node :i18nbg do @restaurant.chain.i18nbg.url.split(ENV['S3_BUCKET']).last end
-node :bg do @restaurant.chain.bg.url.split(ENV['S3_BUCKET']).last end
+
+if @restaurant.chain.bg.file?
+  node :bg do @restaurant.chain.bg.url.split(ENV['S3_BUCKET']).last end
+end
+
 
 child @restaurant.restaurant_setting => :setting do
   attributes :multilang_homepage, :games, :call_waiter_button, :order_button, :request_bill_button, :show_help_button, :show_survey, :show_filters, :access_key, :supported_lang
@@ -21,13 +25,17 @@ end
 ### restaurant survey questions ###
 
 child	@restaurant.chain.survey_questions => :survey_questions do
-	attributes :id, :name, :description
+	attributes :id, :name, :description, :yes_no_type
 end
 
 ### restaurant menus ###
 
 child @menus do
   attributes :id, :name, :menu_type, :price
+  
+  node(:stylesheet, :unless => lambda {|m| m.skin.nil? }) do |menu|
+    menu.skin.stylesheet.url.split(ENV['S3_BUCKET']).last
+  end
   
   child :dishtypes => :dishtypes do
     attributes :id, :name, :description
@@ -47,7 +55,8 @@ child @menus do
       section.photo.url(:thumb).split(ENV['S3_BUCKET']).last
     end
     child(:dishes, :if => lambda { |s| s.subsections.length==0 }) do
-      attributes :id, :name, :price, :badge_name
+      attributes :id, :name, :price
+      attributes :badge_name, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
       attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
       
       node :short_title do |dish|
@@ -102,7 +111,8 @@ child @menus do
         subsection.photo.url(:thumb).split(ENV['S3_BUCKET']).last
       end
       child :dishes do
-        attributes :id, :name, :price, :badge_name
+        attributes :id, :name, :price
+        attributes :badge_name, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
         attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
         
         node :short_title do |dish|

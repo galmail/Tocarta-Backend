@@ -1,3 +1,5 @@
+require 'net/http'
+
 class AccessController < ApplicationController
 
   def validate_license_key
@@ -64,10 +66,15 @@ class AccessController < ApplicationController
   end
   
   def trigger_activity(restaurant_activity)
+    # Call HTTP GET proxy with channel and action
+    enc_activity = URI.encode(setup_activity(restaurant_activity))
+    Net::HTTP.get(URI.parse("#{ENV['NODE_SERVER']}/proxy?channel=tocarta_restaurant_#{@restaurant.id}_channel&action="+enc_activity))
     Pusher["tocarta_restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
   end
   
   def trigger_tablet(key,message)
+    # Call HTTP GET proxy with channel and action
+    Net::HTTP.get(URI.parse("#{ENV['NODE_SERVER']}/proxy?channel=tocarta_lk_#{key}_channel&action=#{message}"))
     Pusher["tocarta_lk_#{key}_channel"].trigger(message,{})
   end
   

@@ -45,9 +45,15 @@ class Api::CommandCenterController < AccessController
     rest = @restaurant
     # get all tablets of this restaurant and trigger them
     unless rest.nil?
-      rest.tablets.each { |tablet|
+      if params[:tablet_id].nil?
+        rest.tablets.each { |tablet|
+          trigger_tablet(tablet.access_key,'update')
+        }
+      else
+        tablet = Tablet.find_by_id(params[:tablet_id])
+        return false if tablet.nil?
         trigger_tablet(tablet.access_key,'update')
-      }
+      end
       @result = true
     end
   end

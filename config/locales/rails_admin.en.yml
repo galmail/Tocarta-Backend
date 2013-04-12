@@ -7,6 +7,9 @@ en:
       next: "Next &raquo;"
       truncate: "…"
   admin:
+    home:
+      help: Help
+      name: Home
     misc:
       filter_date_format: "mm/dd/yy" # a combination of 'dd', 'mm' and 'yy' with any delimiter. No other interpolation will be done!
       search: "Search"

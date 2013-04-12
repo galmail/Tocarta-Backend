@@ -13,9 +13,11 @@ class Ability
     
     if user.role == "admin"
       can :manage, :all
-    
+      can :update_tablet, :all
     elsif user.role == "restaurant"
       can :read, DishType
+      can :read, Theme
+      can :read, Skin
       can :read, Chain, :user_id => user.id
       can :read, Restaurant, :chain => { :user_id => user.id }
       can [:read, :update], RestaurantSetting, :restaurant => { :chain_id => user.chain.id  }
@@ -31,6 +33,9 @@ class Ability
       can :read, Order, :table => { :restaurant_id => user.chain.restaurants.collect{ |res| res.id }.flatten }
     elsif user.role == "distributor"
       can :read, DishType
+      can :read, Theme
+      can :read, Skin
+      can [:update, :create], Skin, :user_id => user.id
       can [:read, :update], Chain, :user_id => user.id
       can :manage, Restaurant, :chain => { :user_id => user.id }
       can :manage, RestaurantSetting, :restaurant => { :chain_id => user.chain.id  }

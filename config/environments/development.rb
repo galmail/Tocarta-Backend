@@ -8,6 +8,9 @@ TocartaAdmin::Application.configure do
   ENV['S3_KEY'] ||= 'AKIAJCY5PI67O7THQ5MQ'
   ENV['S3_SECRET'] ||= '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'
   
+  ENV['NODE_SERVER'] ||= 'http://localhost:5000'
+  
+  
   # Setting up Paperclip
   Paperclip::Attachment.default_options.merge!({
     :storage => :s3,
@@ -42,6 +45,8 @@ TocartaAdmin::Application.configure do
   config.active_support.deprecation = :log
   
   config.log_level = :debug
+  
+  # config.serve_static_assets = true
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
@@ -57,5 +62,5 @@ TocartaAdmin::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  config.assets.debug = false
 end
