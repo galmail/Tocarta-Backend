@@ -67,13 +67,14 @@ class AccessController < ApplicationController
   
   def trigger_activity(restaurant_activity)
     # Call HTTP GET proxy with channel and action
-    Net::HTTP.get(URI.parse("http://tocarta-node.herokuapp.com/proxy?channel=tocarta_restaurant_#{@restaurant.id}_channel&action="+setup_activity(restaurant_activity)))
+    enc_activity = URI.encode(setup_activity(restaurant_activity))
+    Net::HTTP.get(URI.parse("#{ENV['NODE_SERVER']}/proxy?channel=tocarta_restaurant_#{@restaurant.id}_channel&action="+enc_activity))
     Pusher["tocarta_restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
   end
   
   def trigger_tablet(key,message)
     # Call HTTP GET proxy with channel and action
-    Net::HTTP.get(URI.parse("http://tocarta-node.herokuapp.com/proxy?channel=tocarta_lk_#{key}_channel&action=#{message}"))
+    Net::HTTP.get(URI.parse("#{ENV['NODE_SERVER']}/proxy?channel=tocarta_lk_#{key}_channel&action=#{message}"))
     Pusher["tocarta_lk_#{key}_channel"].trigger(message,{})
   end
   

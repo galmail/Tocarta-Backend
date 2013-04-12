@@ -4,6 +4,8 @@ TocartaAdmin::Application.configure do
   ENV['S3_KEY'] ||= 'AKIAJCY5PI67O7THQ5MQ'
   ENV['S3_SECRET'] ||= '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'
   
+  ENV['NODE_SERVER'] ||= 'http://tocarta-node.herokuapp.com'
+  
   Paperclip::Attachment.default_options.merge!({
     :storage => :s3,
     :bucket => ENV['S3_BUCKET'],

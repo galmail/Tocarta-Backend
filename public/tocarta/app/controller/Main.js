@@ -531,7 +531,7 @@ Ext.define('TC.controller.Main', {
 	    */
 	    
 	    /* Listen to NodeJS Socket.io events */
-	   	var endpoint = "http://tocarta-node.herokuapp.com";
+	   	var endpoint = $tc.nodeserver;
 	   	var pipe = 'tocarta_lk_'+TC.Setting.get('key')+'_channel';
 			console.log("Connecting to "+endpoint);
 		  var socket = io.connect(endpoint);

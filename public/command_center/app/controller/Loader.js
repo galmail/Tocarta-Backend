@@ -36,6 +36,7 @@ Ext.define('TC.controller.Loader', {
   	if(!TC.Restaurant){
   		TC.Restaurant = Ext.create('TC.model.Restaurant',{id: 1});
   	}
+  	if(!TC.RestaurantSetting || TC.RestaurantSetting.get('key')==null){ return false; }
   	TC.model.Restaurant.setProxy({
   		type: $tc.protocol,
   		url: $tc.url('get_restaurant')+'?all='+ fullUpdate +'&key='+TC.RestaurantSetting.get('key'),

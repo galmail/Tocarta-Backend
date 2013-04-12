@@ -239,17 +239,15 @@ Ext.define('TC.controller.Main', {
 	    */
 	    
 	    /* Listen to NodeJS Socket.io events */
-	   	var endpoint = "http://tocarta-node.herokuapp.com";
+	   	var endpoint = $tc.nodeserver;
 	   	var pipe = 'tocarta_restaurant_'+TC.Restaurant.getId()+'_channel';
 			console.log("Connecting to "+endpoint);
 		  var socket = io.connect(endpoint);
 		  console.log("Listening on "+pipe);
 		  socket.on(pipe, function (data) {
 		  	if(data && data.action){
-		  		console.log('TC.controller.Main._check_for_incoming_activities action: '+data.action);
-		    	if(data.action=="activity"){
-		    		TC.RestaurantActivities.add(activity);
-		    	}
+		  		console.log('TC.controller.Main._check_for_incoming_activities action: '+data.action.name);
+		    	TC.RestaurantActivities.add(data.action);
 		  	}
 		  });
 

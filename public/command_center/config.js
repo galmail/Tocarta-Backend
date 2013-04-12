@@ -3,7 +3,7 @@
  * All configuration and variables used in the app
  */
 
-var CURRENT_ENV = "prod"; // options: mock, dev, staging, prod
+var CURRENT_ENV = "dev"; // options: mock, dev, staging, prod
 
 /*** development (mocked services) ***/
 if(CURRENT_ENV == "mock"){
@@ -13,6 +13,7 @@ if(CURRENT_ENV == "mock"){
 else if(CURRENT_ENV == "dev"){
 	$tc = {
 		server: 'http://localhost:3000',
+		nodeserver: 'http://localhost:5000',
 		s3_path: "http://s3.amazonaws.com/tocarta-test",
 		images_path: '/www/resources/img/',
 		pusherKey: 'c9c649f5255c17685066',
@@ -32,6 +33,7 @@ else if(CURRENT_ENV == "dev"){
 else if(CURRENT_ENV == "staging"){
 	$tc = {
 		server: 'http://tocarta-admin-staging.herokuapp.com',
+		nodeserver: 'http://tocarta-node-staging.herokuapp.com',
 		s3_path: "http://s3.amazonaws.com/tocarta-test",
 		images_path: '/www/resources/img/',
 		pusherKey: 'c9c649f5255c17685066',
@@ -50,7 +52,8 @@ else if(CURRENT_ENV == "staging"){
 /*** production (iPad ready app) ***/
 else if(CURRENT_ENV == "prod"){
 	$tc = {
-		server: 'http://admin.tocarta.net',
+		server: 'http://admin.tocarta.es',
+		nodeserver: 'http://tocarta-node.herokuapp.com',
 		s3_path: "http://s3.amazonaws.com/tocarta-prod",
 		images_path: '/www/resources/img/',
 		pusherKey: '7eb8d4a46b4a183f76e7',
