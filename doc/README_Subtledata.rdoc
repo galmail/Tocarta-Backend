@@ -1,0 +1,76 @@
+Subtledata Initialization
+
+##### SETUP SubtleData Settings #####
+
+sd_settings = {
+	:url => "https://www.subtledata.com",
+  :base => "/API/M/1/",
+	:secret => "RzArM1VQ",
+	:location_id => 611,
+	:user => {
+	  :username => "aaaaaaaa",
+	  :password => "bbbbbbbb",
+	  :email => "aaabbb@company.com",
+	  # if user exists, you must indicate the following settings
+	  :user_id => "1644",
+	  :device_id => "1275",
+	  :user_guid => "ed83a73e-578c-4263-9ef2-f76c7bc60d1e",
+	  # setting user's gps location (Austing Texas Subtledata Default Location)
+	  :latitude => "30.36269",
+    :longitude => "-97.980011"
+	},
+	:secret_keys => {
+    :android_phone => "RzArM1VP",
+    :android_tablet => "RzArM1VQ",
+    :app_mobi => "RzArM1VR",
+    :blackberry_phone => "RzArM1VS",
+    :blackberry_tablet => "RzArM1VT",
+    :desktop_app => "RzArM1VU",
+    :ipad => "RzArM1VV",
+    :iphone => "RzArM1VW",
+    :ipod_touch => "RzArM1VX",
+    :website => "RzArM1VY",
+    :windows_phone => "RzArM1VZ"
+  },
+  :employees => [
+    {:username => "test", :password => "1234"}
+  ]
+}
+
+##### Starting Subtledata objects #####
+client = Subtledata::Client.new()
+user = Subtledata::User.new(client)
+
+##### Creating a new ticket for dine-in #####
+ticket = Subtledata::Ticket.new(client)
+ticket.dine_in
+
+##### Place an order #####
+order = Subtledata::Order.new(ticket)
+order.place_order
+
+
+
+##### OPTION A: Create a new user #####
+user.create(sd_settings[:user])
+##### OPTION B: Authenticate existing user #####
+user.authenticate(sd_settings[:user])
+
+
+************** Subtledata tested Methods **************
+
+Get all users: (Analytics Calls, 9500)
+Request: c.get("9500",["gulio","","","","1/1/2012","5/5/2013"]).body
+Response: "9500|1637^0^English^gulio^gulio^^^1/26/2013^^^galmail@gmail.com^1/26/2013 8:22 PM~1638^0^English^guliox^guliox^^^1/26/2013^^^galmail@gmail.com^1/26/2013 8:23 PM"
+
+Create a user: (User Calls, 0110)
+Request: u.create("tocarta","tocarta123","galmail@gmail.com")
+Response: {:user_id=>"1639", :device_id=>"1269", :user_guid=>"cfc9bdb5-4dfb-43d3-8fa7-83d5d6d11226"}
+
+Get all tables: (Location Calls, 0331)
+Request: c.get("0331",["611","0"]).body
+Response: "0331|20122^1^Table 1~20123^2^Table 2~20124^3^Table 3~20125^4^Table 4~20126^5^Table 5"
+
+
+
+
