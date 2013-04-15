@@ -1,0 +1,187 @@
+/**
+ *   MatrixMenu Stylesheet
+ */
+
+.tcMatrixMenu {
+  
+  // DishImageView
+  .tcMatrixMenuDishImageView {
+    width: 100%;
+    height: 100%;
+    
+    .dish-image img {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .dish-info {
+      bottom: 0px;
+      width: 100%;
+      height: 10%;
+      background-color: rgba(0,0,0,0.10);
+      position: absolute;
+      display: inline-block;
+      
+      .dish-name {
+        width: 40%;
+        display: inline-block;
+        
+        p {
+          font-weight: bold;
+        }
+      }
+      
+      .dish-description {
+        width: 56%;
+        display: inline-block;
+        
+        p {
+         // font-weight: bold;
+        }
+      }
+      
+      .dish-price {
+        width: 4%;
+        display: inline-block;
+        
+        p {
+         // font-weight: bold;
+        }
+      }
+    
+    }
+  }
+  
+  // DishTextView
+  .tcMatrixMenuDishTextView {
+    width: 100%;
+    height: 100%;
+    
+    .dish-name {
+      width: 100%;
+      height: 100%;
+      
+      text-align: center;
+      
+      h1 {
+        font-weight: bold;
+        font-size: 200%;
+      }
+    }
+    
+    .dish-info {
+      bottom: 0px;
+      width: 100%;
+      height: 10%;
+      background-color: rgba(0,0,0,0.10);
+      position: absolute;
+      display: inline-block;
+      
+      .dish-description {
+        width: 96%;
+        display: inline-block;
+        
+        p {
+         // font-weight: bold;
+        }
+      }
+      
+      .dish-price {
+        width: 4%;
+        display: inline-block;
+        
+        p {
+         // font-weight: bold;
+        }
+      }
+    
+    }
+  }
+  
+  
+  
+  // MiniDishImageView
+  .tcMatrixMenuMiniDishImageView {
+    width: 100%;
+    height: 100%;
+    
+    .dish-image img {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .dish-info {
+      bottom: 0px;
+      width: 100%;
+      position: absolute;
+      display: inline-block;
+      
+      .dish-name {
+        width: 96%;
+        display: inline-block;
+        
+        p {
+          font-weight: bold;
+        }
+      }
+      
+      .dish-price {
+        width: 4%;
+        display: inline-block;
+        
+        p {
+         // font-weight: bold;
+        }
+      }
+    }
+  }
+  
+  
+  // MiniDishTextView
+  .tcMatrixMenuMiniDishTextView {
+    width: 100%;
+    height: 100%;
+    
+    .dish-name {
+      width: 100%;
+      height: 100%;
+      
+      text-align: center;
+      
+      h1 {
+        font-weight: bold;
+        font-size: 200%;
+      }
+    }
+    
+    .dish-info {
+      bottom: 0px;
+      width: 100%;
+      position: absolute;
+      display: inline-block;
+      
+      .dish-description {
+        width: 96%;
+        display: inline-block;
+        
+        p {
+         // font-weight: bold;
+        }
+      }
+      
+      .dish-price {
+        width: 4%;
+        display: inline-block;
+        
+        p {
+         // font-weight: bold;
+        }
+      }
+    
+    }
+  }
+  
+  // DishTiledView
+  
+  
+}

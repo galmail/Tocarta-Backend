@@ -8,22 +8,20 @@
 
 Ext.define('TC.view.matrixmenu.MatrixMenu', {
 	extend: 'Ext.Panel',
-	requires: [],
+	
 	xtype: 'matrix-menu',
+	
 	config: {
 		cls: 'tcMatrixMenu',
-		layout: 'vbox',
+		
 		items: [
-			{
-				cls : 'tcMatrixMenuTitle',
-				layout: {
-					type: 'hbox',
-					pack: 'start',
-					align: 'center'
-				},
-				items: [
-				]
-			}
+			/*{
+				xtype : 'carousel',
+				id : 'matrix-carousel',
+				direction : 'horizontal',
+				indicator: false,
+				directionLock : true
+			}*/            
 		]
 	}
 });

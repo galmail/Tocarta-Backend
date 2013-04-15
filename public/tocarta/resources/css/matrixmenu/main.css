@@ -1,0 +1,140 @@
+/**
+ *   MatrixMenu Stylesheet
+ */
+/* line 8, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView {
+  width: 100%;
+  height: 100%;
+}
+/* line 12, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-image img {
+  width: 100%;
+  height: 100%;
+}
+/* line 17, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info {
+  bottom: 0px;
+  width: 100%;
+  height: 10%;
+  background-color: rgba(0, 0, 0, 0.1);
+  position: absolute;
+  display: inline-block;
+}
+/* line 25, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-name {
+  width: 40%;
+  display: inline-block;
+}
+/* line 29, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-name p {
+  font-weight: bold;
+}
+/* line 34, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-description {
+  width: 56%;
+  display: inline-block;
+}
+/* line 43, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-price {
+  width: 4%;
+  display: inline-block;
+}
+/* line 56, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishTextView {
+  width: 100%;
+  height: 100%;
+}
+/* line 60, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishTextView .dish-name {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+/* line 66, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishTextView .dish-name h1 {
+  font-weight: bold;
+  font-size: 200%;
+}
+/* line 72, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishTextView .dish-info {
+  bottom: 0px;
+  width: 100%;
+  height: 10%;
+  background-color: rgba(0, 0, 0, 0.1);
+  position: absolute;
+  display: inline-block;
+}
+/* line 80, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishTextView .dish-info .dish-description {
+  width: 96%;
+  display: inline-block;
+}
+/* line 89, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishTextView .dish-info .dish-price {
+  width: 4%;
+  display: inline-block;
+}
+/* line 104, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuMiniDishImageView {
+  width: 100%;
+  height: 100%;
+}
+/* line 108, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuMiniDishImageView .dish-image img {
+  width: 100%;
+  height: 100%;
+}
+/* line 113, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuMiniDishImageView .dish-info {
+  bottom: 0px;
+  width: 100%;
+  position: absolute;
+  display: inline-block;
+}
+/* line 119, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuMiniDishImageView .dish-info .dish-name {
+  width: 96%;
+  display: inline-block;
+}
+/* line 123, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuMiniDishImageView .dish-info .dish-name p {
+  font-weight: bold;
+}
+/* line 128, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuMiniDishImageView .dish-info .dish-price {
+  width: 4%;
+  display: inline-block;
+}
+/* line 141, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuMiniDishTextView {
+  width: 100%;
+  height: 100%;
+}
+/* line 145, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuMiniDishTextView .dish-name {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+/* line 151, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuMiniDishTextView .dish-name h1 {
+  font-weight: bold;
+  font-size: 200%;
+}
+/* line 157, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuMiniDishTextView .dish-info {
+  bottom: 0px;
+  width: 100%;
+  position: absolute;
+  display: inline-block;
+}
+/* line 163, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuMiniDishTextView .dish-info .dish-description {
+  width: 96%;
+  display: inline-block;
+}
+/* line 172, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuMiniDishTextView .dish-info .dish-price {
+  width: 4%;
+  display: inline-block;
+}

@@ -24,7 +24,7 @@ Ext.require([
    	},
 		
 		requires: ['Ext.io.Controller'],
-		controllers: ['Loader','MainMenu','DailyMenu','Order','Filter','Settings','Survey','Main','MultiLang'],
+		controllers: ['Loader','MainMenu','DailyMenu','Order','Filter','Settings','Survey','Main','MultiLang','MatrixMenu'],
 		//models     : ['ComboType','Comment','Dish'],
 		//stores: ['Menus'],
 		//views: ['Viewport'],
