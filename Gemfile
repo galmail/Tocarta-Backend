@@ -12,14 +12,19 @@ gem 'jquery-rails'
 group :development do
   gem 'yaml_db'
   gem 'sqlite3'
-  gem 'pg'
+  gem 'meta_request' # for rails_panel
+  gem 'pry-rails'    # for Pry
+  gem "better_errors"
+  gem "binding_of_caller" # for better_errors
+  gem 'quiet_assets'
 end
 
 group :production do
-  gem 'pg'
   gem 'thin'
   gem 'newrelic_rpm'
 end
+
+gem 'pg'
 
 #### Rails Admin Setup ####
 gem 'rails_admin'
