@@ -21,3 +21,5 @@
 /public/command_center/styles/.sass-cache
 /public/command_center/lib/touch/docs
 
+# Ignore RubyMine IDE generated files.
+.idea/

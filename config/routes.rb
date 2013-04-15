@@ -1,5 +1,8 @@
 TocartaAdmin::Application.routes.draw do
+
+  match "/admin/:model_name/import" => "custom_admin#import" , :as => "import", :via => [:get, :post]
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
   devise_for :users
 
   # The priority is based upon order of creation:

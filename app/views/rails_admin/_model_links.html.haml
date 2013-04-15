@@ -1,0 +1,2 @@
+- if can_import = authorized? :import, abstract_model
+  %li{:class => (params[:action] == 'import' && 'active')}= link_to "Import", main_app.import_path(model_name) if can_import

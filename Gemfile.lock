@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/stephskardal/rails_admin_import.git
+  revision: 90f967a3700f803670cc59da916cd06999a9aebf
+  specs:
+    rails_admin_import (0.1.8)
+
+GIT
   remote: git://github.com/svenfuchs/globalize3.git
   revision: ee44def9b244f02a41c3687a73cf7c0165667e3d
   specs:
@@ -235,6 +241,7 @@ DEPENDENCIES
   rabl
   rails (= 3.2.12)
   rails_admin
+  rails_admin_import!
   rails_admin_update_tablets!
   sass-rails (~> 3.2.3)
   sqlite3

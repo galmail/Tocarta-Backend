@@ -14,6 +14,7 @@ class Ability
     if user.role == "admin"
       can :manage, :all
       can :update_tablet, :all
+      can :import, [Menu]
     elsif user.role == "restaurant"
       can :read, DishType
       can :read, Theme
