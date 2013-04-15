@@ -1,0 +1,45 @@
+/**
+ * Command Center main stylesheet
+ **/
+
+@import 'messages';
+@import 'activities';
+@import 'tables';
+
+// setting the sidebar width
+
+.tcViewport {
+  font-family: 'HelveticaNeue';
+  padding: 0px 10px;
+  // font-size: 15px;
+  // font-weight: 100;
+  // background: url('../img/common/bg2.png') repeat-x;
+  
+  .tcMainContainer {
+    background: transparent;
+  }
+  .tcUpdaterView {
+    background: transparent;
+    h1 {
+      padding-top: 200px;
+      text-align: center;
+    }
+  }
+  
+}
+
+/* Portrait */
+@media screen and (orientation:portrait) {
+  .tcViewport {
+    background: url('../img/common/bg2.png') repeat-x;
+  }
+}
+/* Landscape */
+@media screen and (orientation:landscape) {
+  .tcViewport {
+    background: url('../img/common/bg.png') repeat-x;
+  }
+}
+
+
+

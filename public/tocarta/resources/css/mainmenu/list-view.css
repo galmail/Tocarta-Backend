@@ -1,0 +1,35 @@
+/**
+ * Sidebar list view stylesheet
+ **/
+/* line 10, ../../../styles/mainmenu/list-view.scss */
+.tcMenuPanelListView {
+  font-size: 14px;
+  color: white;
+  background: transparent;
+}
+/* line 14, ../../../styles/mainmenu/list-view.scss */
+.tcMenuPanelListView .item {
+  margin: 5px;
+  clear: both;
+  overflow: hidden;
+  background-color: black;
+  border-radius: 5px;
+}
+/* line 20, ../../../styles/mainmenu/list-view.scss */
+.tcMenuPanelListView .item .item-thumbnail {
+  width: 80px;
+  height: 53px;
+  display: block;
+  float: left;
+  margin-right: 10px;
+}
+/* line 27, ../../../styles/mainmenu/list-view.scss */
+.tcMenuPanelListView .item .item-title {
+  display: block;
+  float: left;
+  line-height: 52px;
+}
+/* line 34, ../../../styles/mainmenu/list-view.scss */
+.tcMenuPanelListView .x-dataview-item.x-item-pressed .item {
+  background-color: red;
+}

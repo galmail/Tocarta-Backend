@@ -1,0 +1,23 @@
+/**
+ * Message Toolbar stylesheet
+ **/
+/* line 5, ../../../styles/toolbars/msg-toolbar.scss */
+.tcMsgToolbar {
+  display: none;
+}
+
+/* line 9, ../../../styles/toolbars/msg-toolbar.scss */
+#tcActivitiesMsgToolbarId {
+  height: 70px;
+  background: transparent;
+  border-bottom: 1px solid black;
+}
+/* line 13, ../../../styles/toolbars/msg-toolbar.scss */
+#tcActivitiesMsgToolbarId .x-title {
+  font-size: 26px;
+}
+/* line 16, ../../../styles/toolbars/msg-toolbar.scss */
+#tcActivitiesMsgToolbarId .x-segmentedbutton {
+  font-size: 19px;
+  font-weight: bold;
+}

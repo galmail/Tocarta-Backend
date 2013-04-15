@@ -1,0 +1,62 @@
+/**
+ * Dish comments stylesheet
+ **/
+
+.tcDishComments {
+  padding: 10px;
+  background: white;
+  h2 {
+    font-size: 18px;
+    margin-right: 20px;
+    margin-top: 2px;
+    float: left;
+    font-style: italic;
+  }
+  .rating.ministars {
+    overflow: hidden;
+    float: left;
+    li {
+      background-image: url('../img/common/icons/star_mini_white.png');
+      margin-right: 2px;
+      float: left;
+      a {
+        display: block;
+        width: 24px;
+        height: 24px;
+      }
+      &.current {
+        background-image: url('../img/common/icons/star_mini_gold.png');
+      }
+    }
+  }
+  .tlt-comment {
+    font-size: 19px;
+    font-weight: bold;
+    color: #ACA38B;
+    margin-top: 15px;
+    float: left;
+  }
+  .tcDishCommentsDataItems {
+    padding-top: 0px;
+    height: 390px;
+    .dish_comment {
+      padding-top: 12px;
+      padding-bottom: 5px;
+      .dish_comment_author {
+        font-size: 14px;
+        float: left;
+        margin-left: 10px;
+        padding-top: 4px;
+        font-weight: bold;
+      }
+      .dish_comment_text {
+        font-size: 15px;
+        margin-top: 7px;
+        line-height: 23px;
+        padding-left: 4px;
+        padding-top: 1px;
+      }
+    }
+  }
+}
+

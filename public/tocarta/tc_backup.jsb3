@@ -1,0 +1,325 @@
+{
+    "projectName": "Project Name",
+    "licenseText": "Copyright(c) 2011 Company Name",
+    "builds": [
+        {
+            "name": "All Classes",
+            "target": "all-classes.js",
+            "options": {
+                "debug": true
+            },
+            "files": [
+                {
+                    "path": "app/controller/",
+                    "name": "MainMenu.js",
+                    "clsName": "TC.controller.MainMenu"
+                },
+                {
+                    "path": "app/controller/",
+                    "name": "Order.js",
+                    "clsName": "TC.controller.Order"
+                },
+                {
+                    "path": "app/controller/",
+                    "name": "Settings.js",
+                    "clsName": "TC.controller.Settings"
+                },
+                {
+                    "path": "app/controller/",
+                    "name": "Survey.js",
+                    "clsName": "TC.controller.Survey"
+                },
+                {
+                    "path": "app/controller/",
+                    "name": "MultiLang.js",
+                    "clsName": "TC.controller.MultiLang"
+                },
+                {
+                    "path": "app/model/",
+                    "name": "Setting.js",
+                    "clsName": "TC.model.Setting"
+                },
+                {
+                    "path": "app/model/",
+                    "name": "Image.js",
+                    "clsName": "TC.model.Image"
+                },
+                {
+                    "path": "app/model/",
+                    "name": "Banner.js",
+                    "clsName": "TC.model.Banner"
+                },
+                {
+                    "path": "app/model/",
+                    "name": "OrderItem.js",
+                    "clsName": "TC.model.OrderItem"
+                },
+                {
+                    "path": "app/model/",
+                    "name": "Comment.js",
+                    "clsName": "TC.model.Comment"
+                },
+                {
+                    "path": "app/model/",
+                    "name": "DishType.js",
+                    "clsName": "TC.model.DishType"
+                },
+                {
+                    "path": "app/store/",
+                    "name": "Images.js",
+                    "clsName": "TC.store.Images"
+                },
+                {
+                    "path": "app/store/",
+                    "name": "OrderItems.js",
+                    "clsName": "TC.store.OrderItems"
+                },
+                {
+                    "path": "app/model/",
+                    "name": "Order.js",
+                    "clsName": "TC.model.Order"
+                },
+                {
+                    "path": "app/controller/",
+                    "name": "Main.js",
+                    "clsName": "TC.controller.Main"
+                },
+                {
+                    "path": "app/model/",
+                    "name": "SurveyQuestion.js",
+                    "clsName": "TC.model.SurveyQuestion"
+                },
+                {
+                    "path": "app/model/",
+                    "name": "Dish.js",
+                    "clsName": "TC.model.Dish"
+                },
+                {
+                    "path": "app/model/",
+                    "name": "Subsection.js",
+                    "clsName": "TC.model.Subsection"
+                },
+                {
+                    "path": "app/model/",
+                    "name": "Section.js",
+                    "clsName": "TC.model.Section"
+                },
+                {
+                    "path": "app/model/",
+                    "name": "Menu.js",
+                    "clsName": "TC.model.Menu"
+                },
+                {
+                    "path": "app/model/",
+                    "name": "Restaurant.js",
+                    "clsName": "TC.model.Restaurant"
+                },
+                {
+                    "path": "app/controller/",
+                    "name": "Loader.js",
+                    "clsName": "TC.controller.Loader"
+                },
+                {
+                    "path": "app/view/loading/",
+                    "name": "Loader.js",
+                    "clsName": "TC.view.loading.Loader"
+                },
+                {
+                    "path": "app/view/loading/",
+                    "name": "Updater.js",
+                    "clsName": "TC.view.loading.Updater"
+                },
+                {
+                    "path": "app/view/restaurantinfo/",
+                    "name": "RestaurantCarousel.js",
+                    "clsName": "TC.view.restaurantinfo.RestaurantCarousel"
+                },
+                {
+                    "path": "app/view/sidebar/",
+                    "name": "MenuPanelListView.js",
+                    "clsName": "TC.view.sidebar.MenuPanelListView"
+                },
+                {
+                    "path": "app/view/order/",
+                    "name": "OrderView.js",
+                    "clsName": "TC.view.order.OrderView"
+                },
+                {
+                    "path": "app/view/survey/",
+                    "name": "SurveyDishes.js",
+                    "clsName": "TC.view.survey.SurveyDishes"
+                },
+                {
+                    "path": "app/view/survey/",
+                    "name": "SurveyQuestions.js",
+                    "clsName": "TC.view.survey.SurveyQuestions"
+                },
+                {
+                    "path": "app/view/survey/",
+                    "name": "SurveyComments.js",
+                    "clsName": "TC.view.survey.SurveyComments"
+                },
+                {
+                    "path": "app/view/help/",
+                    "name": "HelpView.js",
+                    "clsName": "TC.view.help.HelpView"
+                },
+                {
+                    "path": "app/view/multilang/",
+                    "name": "PickLanguageView.js",
+                    "clsName": "TC.view.multilang.PickLanguageView"
+                },
+                {
+                    "path": "app/store/",
+                    "name": "Dishes.js",
+                    "clsName": "TC.store.Dishes"
+                },
+                {
+                    "path": "app/view/dish/",
+                    "name": "DishTitle.js",
+                    "clsName": "TC.view.dish.DishTitle"
+                },
+                {
+                    "path": "app/view/dish/",
+                    "name": "DishPhoto.js",
+                    "clsName": "TC.view.dish.DishPhoto"
+                },
+                {
+                    "path": "app/view/dish/",
+                    "name": "DishComments.js",
+                    "clsName": "TC.view.dish.DishComments"
+                },
+                {
+                    "path": "app/view/settings/",
+                    "name": "WaiterLogin.js",
+                    "clsName": "TC.view.settings.WaiterLogin"
+                },
+                {
+                    "path": "app/view/settings/",
+                    "name": "SwitchTable.js",
+                    "clsName": "TC.view.settings.SwitchTable"
+                },
+                {
+                    "path": "app/view/toolbars/",
+                    "name": "TopToolbar.js",
+                    "clsName": "TC.view.toolbars.TopToolbar"
+                },
+                {
+                    "path": "app/view/toolbars/",
+                    "name": "BottomToolbar.js",
+                    "clsName": "TC.view.toolbars.BottomToolbar"
+                },
+                {
+                    "path": "app/view/toolbars/",
+                    "name": "MsgToolbar.js",
+                    "clsName": "TC.view.toolbars.MsgToolbar"
+                },
+                {
+                    "path": "app/view/dish/",
+                    "name": "MiniDishesContainer.js",
+                    "clsName": "TC.view.dish.MiniDishesContainer"
+                },
+                {
+                    "path": "app/view/sidebar/",
+                    "name": "MenuPanel.js",
+                    "clsName": "TC.view.sidebar.MenuPanel"
+                },
+                {
+                    "path": "app/view/sidebar/",
+                    "name": "MenuPanelItemsView.js",
+                    "clsName": "TC.view.sidebar.MenuPanelItemsView"
+                },
+                {
+                    "path": "app/view/dish/",
+                    "name": "DishContainer.js",
+                    "clsName": "TC.view.dish.DishContainer"
+                },
+                {
+                    "path": "app/view/settings/",
+                    "name": "SettingsView.js",
+                    "clsName": "TC.view.settings.SettingsView"
+                },
+                {
+                    "path": "app/view/survey/",
+                    "name": "SurveyContainer.js",
+                    "clsName": "TC.view.survey.SurveyContainer"
+                },
+                {
+                    "path": "app/view/",
+                    "name": "Viewport.js",
+                    "clsName": "TC.view.Viewport"
+                },
+                {
+                    "path": "app/view/mainmenu/",
+                    "name": "MainMenu.js",
+                    "clsName": "TC.view.mainmenu.MainMenu"
+                }
+            ]
+        },
+        {
+            "name": "Application - Production",
+            "target": "app-all.js",
+            "compress": true,
+            "files": [
+            		{
+                    "path": "",
+                    "name": "config.js"
+                },
+                {
+                    "path": "../deploy/tocarta/",
+                    "name": "all-classes.js"
+                },
+                {
+                    "path": "",
+                    "name": "app.js"
+                }
+            ]
+        }
+    ],
+    "resources": [
+    	{
+          "src": "lib/touch/sencha-touch.js",
+          "dest": "resources/js/"
+      },
+      {
+          "src": "lib/sencha-io/sencha-io.js",
+          "dest": "resources/js/"
+      },
+      {
+          "src": "lib/socket-io/socket.io.min.js",
+          "dest": "resources/js/"
+      },
+      {
+          "src": "lib/pusher/*.js",
+          "dest": "resources/js/"
+      },
+    	{
+          "src": "lib/jquery/*.js",
+          "dest": "resources/js/"
+      },
+      {
+          "src": "lib/zepto/*.js",
+          "dest": "resources/js/"
+      },
+      {
+          "src": "lib/phonegap/*.js",
+          "dest": "resources/js/"
+      },
+      {
+          "src": "resources/css/*.css",
+          "dest": "resources/css/"
+      },
+      {
+          "src": "resources/i18n/operator/*.js",
+          "dest": "resources/js/"
+      },
+      {
+          "src": "resources/i18n/user/*.js",
+          "dest": "resources/js/"
+      },
+      {
+          "src": "resources/img/",
+          "dest": "resources/img/"
+      }
+    ]
+}

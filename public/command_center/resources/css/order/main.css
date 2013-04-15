@@ -1,0 +1,76 @@
+/**
+ * Order main stylesheet
+ **/
+/* line 5, ../../../styles/order/main.scss */
+.tcOrderView {
+  width: 500px;
+  height: 500px;
+}
+/* line 9, ../../../styles/order/main.scss */
+.tcOrderView .tcOrderDataView {
+  min-height: 200px;
+  font-size: 20px;
+}
+/* line 12, ../../../styles/order/main.scss */
+.tcOrderView .tcOrderDataView .order-item {
+  overflow: hidden;
+  clear: both;
+  padding: 7px 0;
+}
+/* line 16, ../../../styles/order/main.scss */
+.tcOrderView .tcOrderDataView .order-item .dish-quantity {
+  float: left;
+  width: 23px;
+}
+/* line 20, ../../../styles/order/main.scss */
+.tcOrderView .tcOrderDataView .order-item .dish-name {
+  float: left;
+  width: 430px;
+}
+/* line 23, ../../../styles/order/main.scss */
+.tcOrderView .tcOrderDataView .order-item .dish-name .combo-dishes {
+  padding-left: 10px;
+  font-size: 16px;
+  font-style: italic;
+}
+/* line 29, ../../../styles/order/main.scss */
+.tcOrderView .tcOrderDataView .order-item .remove-dish-icon {
+  float: right;
+  width: 20px;
+  height: 20px;
+  background: url("../img/common/icons/delete_black2.png") no-repeat;
+  margin-right: 10px;
+}
+/* line 36, ../../../styles/order/main.scss */
+.tcOrderView .tcOrderDataView .order-item .dish-total {
+  float: right;
+  width: 48px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+/* line 41, ../../../styles/order/main.scss */
+.tcOrderView .tcOrderDataView .order-item .dish-total .euro {
+  float: left;
+}
+/* line 44, ../../../styles/order/main.scss */
+.tcOrderView .tcOrderDataView .order-item .dish-total .total-per-item {
+  float: right;
+}
+/* line 50, ../../../styles/order/main.scss */
+.tcOrderView .total-order {
+  overflow: hidden;
+  clear: both;
+  padding: 10px;
+}
+/* line 54, ../../../styles/order/main.scss */
+.tcOrderView .total-order .text {
+  float: left;
+}
+/* line 57, ../../../styles/order/main.scss */
+.tcOrderView .total-order .order-total-euros {
+  float: right;
+}
+/* line 59, ../../../styles/order/main.scss */
+.tcOrderView .total-order .order-total-euros .euro {
+  margin-right: 5px;
+}

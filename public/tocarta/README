@@ -1,0 +1,39 @@
+PRUEBAMASTER
+Steps for development
+======================
+
+1. Create the project for iOS/Android
+
+1.1. iOS Project
+
+ A) To create the iOS Project, download and install the latest Phonegap into XCode.
+ B) Download the project from here: https://www.dropbox.com/s/s7spvn734i8havk/Tocarta%20iOS.zip
+ C) Import the project and fix bad references 
+
+1.2. Android Project
+
+ A) To create the Android Project, download and install the latest Phonegap and Android.
+ B) Download the project from here: https://www.dropbox.com/s/hhkau08mq19yb89/TocartaAndroid.zip
+ C) Import the project (from Eclipse do: new android project from existing sources) and fix bad references
+
+3. When styling or theming
+
+./public/www/styles/compass watch
+
+check this for docs: http://www.slideshare.net/senchainc/theming-sencha-touch
+
+
+Steps for production
+======================
+
+1. Compile Stylesheets
+
+./public/www/styles/compass compile
+
+2. Setup the config environment: config.js
+
+3. Run jsb3 script (to compress and deploy js and css)
+
+$> sencha create jsb -a index.html -p tc.jsb3
+$> sencha build -p tc.jsb3 -d ../deploy/tocarta -v
+

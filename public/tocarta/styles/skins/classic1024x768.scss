@@ -1,0 +1,40 @@
+/***
+ * Classic Theme and Responsive Style for 1024x768
+ */
+
+@media all and (max-width: 1024px) and (height: 768px){
+  
+  /** Toolbars **/
+  
+  .tcMsgToolbar {
+    position: relative;
+  }
+  
+  .x-toolbar.tcTopToolbar {
+    height: 105px;
+  }
+  
+  .x-toolbar.tcBottomToolbar {
+    height: 70px;
+  }
+  
+  /** Dish Photo **/
+   
+  .tcDishPhoto .dish-photo-container {
+    .dish-image {
+      // width: 685px;
+    }
+    .dish-info .dish-price {
+      // width: 214px;
+    }
+  }
+    
+  /** Survey **/
+   
+  .tcSurveyQuestions {
+    height: 159px;
+  }
+  
+
+}
+

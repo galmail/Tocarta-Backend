@@ -1,0 +1,61 @@
+/**
+ * Survey dishes stylesheet
+ **/
+
+.tcSurveyDishes {
+  height: 245px;
+  // width: 100%;
+  .x-dataview-container {
+    // width: 1880px;
+    white-space: nowrap;
+    .x-dataview-item {
+      float: left;
+      overflow: hidden;
+      padding: 10px 19px;
+      padding-top: 7px;
+      &:first-child {
+        padding-left: 38px;
+      }
+      &:last-child {
+        padding-right: 38px;
+      }
+    }
+  }
+  .dish_eaten {
+    .rating {
+      overflow: hidden;
+      .star {
+        float: left;
+        background: url('../img/common/icons/star_small_white.png') no-repeat;
+        width: 32px;
+        height: 32px;
+        margin-right: 8px;
+        &.selected {
+          background: url('../img/common/icons/star_small_gold.png') no-repeat;
+        }
+      }
+    }
+    .dish_photo{
+      border: 1px solid black;
+      margin-top: 5px;
+      width: 191px;
+      height: 126px;
+      display:block;
+      border-radius: 3px;
+    }
+    .survey_dish_comment {
+      margin-top:10px;
+      width: 191px;
+      height: 54px;
+      padding: 2px;
+      margin-left: 0px;
+      background-color: #F2F2F2;
+      font-size: 14px;
+    }
+  }
+  
+  
+  
+  
+}
+

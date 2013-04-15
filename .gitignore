@@ -13,3 +13,11 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore sass cache
+/public/tocarta/styles/.sass-cache
+/public/tocarta/lib/touch/docs
+
+/public/command_center/styles/.sass-cache
+/public/command_center/lib/touch/docs
+

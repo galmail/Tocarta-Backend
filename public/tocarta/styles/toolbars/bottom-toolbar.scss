@@ -1,0 +1,24 @@
+// @import 'compass/css3';
+// @import '../skins/japanese';
+
+/**
+ * Bottom Toolbar stylesheet
+ **/
+
+.x-toolbar.tcBottomToolbar {
+  height: 60px;
+  border-top: none;
+  background: transparent;
+  
+  #tcSwitchTableBtnId .x-button-icon.x-icon-mask {
+    width: 55px;
+    height: 26px;
+    background: transparent no-repeat;
+  }
+  
+  #tcHelpBtnId .x-button-icon.x-icon-mask {
+    // background-image: -webkit-linear-gradient(black, black 2%, #F4EFE6);
+    background-image: -webkit-linear-gradient(#6B4C58, #876B76);
+  }
+  
+}

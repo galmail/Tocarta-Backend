@@ -1,0 +1,64 @@
+@import '../skins/japanese';
+
+/**
+ * Sidebar list view stylesheet
+ **/
+
+$sidebar-listview-font-size: 14px;
+$sidebar-listview-font-color: #fff;
+$sidebar-listview-background-color: #000;
+$sidebar-listview-background-active-color: red;
+
+.tcMenuPanelListView {
+  font-size: $sidebar-listview-font-size;
+  color: $sidebar-listview-font-color;
+  background: transparent;
+  // height: 474px;
+  
+  .x-dataview-item {
+    padding: 3px 0;
+    padding-bottom: 4px;
+    padding-right: 8px;
+    &:first-child {
+      padding-top: 0;
+    }
+    &:last-child {
+      padding-bottom: 0;
+    }
+    .item {
+      @include background-image(linear-gradient($tc-btn-gradient-color, $tc-btn-color, $tc-btn-color));
+    }
+    &.x-item-pressed {
+      .item {
+        @include background-image(linear-gradient(lighten($tc-btn-color,20%), $tc-btn-gradient-color));
+      }
+    }
+  }
+  .item {
+    clear: both;
+    overflow: hidden;
+    background-color: $sidebar-listview-background-color;
+    border-radius: 5px;
+    .item-thumbnail {
+      width: 80px;
+      height: 53px;
+      display: block;
+      float: left;
+      margin-right: 10px;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+    .item-title {
+      display: block;
+      float: left;
+      line-height: 52px;
+      padding-left: 6px;
+      font-weight: bold;
+    }
+  }
+  
+  .x-dataview-item.x-item-pressed .item {
+    background-color: $sidebar-listview-background-active-color;
+  }
+  
+}

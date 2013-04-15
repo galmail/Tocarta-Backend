@@ -1,0 +1,9 @@
+/**
+ *   Top toolbar stylesheet
+ */
+/* line 5, ../../../styles/toolbars/top-toolbar.scss */
+.tcTopToolbar {
+  height: 100px;
+  border-bottom: 1px dotted #DDD !important;
+  background: transparent;
+}

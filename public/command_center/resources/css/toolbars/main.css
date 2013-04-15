@@ -1,0 +1,52 @@
+/**
+ * Toolbars main stylesheet
+ **/
+/**
+ *   Top toolbar stylesheet
+ */
+/* line 5, ../../../styles/toolbars/top-toolbar.scss */
+.tcTopToolbar {
+  height: 100px;
+  border-bottom: 1px dotted #DDD !important;
+  background: transparent;
+}
+
+/**
+ *   Bottom toolbar stylesheet
+ */
+/* line 5, ../../../styles/toolbars/bottom-toolbar.scss */
+.tcBottomToolbar {
+  height: 60px;
+  border: none !important;
+  background: transparent;
+}
+/* line 9, ../../../styles/toolbars/bottom-toolbar.scss */
+.tcBottomToolbar #tcLogoBtnId .x-button-icon.x-icon-mask {
+  width: 55px;
+  height: 26px;
+  background: transparent no-repeat;
+}
+
+/**
+ * Message Toolbar stylesheet
+ **/
+/* line 5, ../../../styles/toolbars/msg-toolbar.scss */
+.tcMsgToolbar {
+  display: none;
+}
+
+/* line 9, ../../../styles/toolbars/msg-toolbar.scss */
+#tcActivitiesMsgToolbarId {
+  height: 70px;
+  background: transparent;
+  border-bottom: 1px solid black;
+}
+/* line 13, ../../../styles/toolbars/msg-toolbar.scss */
+#tcActivitiesMsgToolbarId .x-title {
+  font-size: 26px;
+}
+/* line 16, ../../../styles/toolbars/msg-toolbar.scss */
+#tcActivitiesMsgToolbarId .x-segmentedbutton {
+  font-size: 19px;
+  font-weight: bold;
+}

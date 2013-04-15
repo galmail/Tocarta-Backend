@@ -1,0 +1,75 @@
+/**
+ * Dish main stylesheet
+ **/
+
+@import 'photo';
+@import 'comments';
+@import 'minidishes';
+
+// setting the sidebar width
+
+.tcDishContainer {
+  background: transparent;
+  
+  .x-docking-vertical {
+    width: 100%;
+    .x-container > .x-inner {
+      width: 100%;
+    }
+  }
+  
+  .tcDishTitle {
+    background: transparent;
+    border: none;
+    // margin-bottom: 5px;
+    padding-top: 2px;
+    height: 47px;
+    .x-title {
+      color: #000;
+      .x-innerhtml {
+        font-size: 24px;
+      }
+    }
+    .tcDishTitleIcons {
+      width: 120px;
+      height: 16px;
+      .x-dataview-item {
+        display: inline-block;
+        margin-right: 3px;
+      }
+    }
+  }
+  .tcDishContainerTabBar {
+    height: 54px;
+    background: transparent;
+    border: none;
+    .x-tab {
+      background-image: none;
+      background-color: #67512d;
+      border-bottom-right-radius: 7px;
+      border-bottom-left-radius: 7px;
+      border-top-right-radius: 0px;      
+      border-top-left-radius: 0px;
+      border-right: 2px solid black;
+      border-bottom: 2px solid black;
+      border-top-width: 0px;
+      margin-bottom: 8px;
+      .x-button-icon {
+        display: none;
+      }
+      .x-button-label {
+        font-size: 15px;
+        color: white;
+        padding: 14px;
+        padding-top: 20px;
+        padding-bottom: 14px;
+      }
+      &.x-tab-active {
+        background-color: white;
+        .x-button-label {
+          color: black;
+        }
+      }
+    }
+  }
+}

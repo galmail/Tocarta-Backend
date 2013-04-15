@@ -1,0 +1,202 @@
+@import '../skins/japanese';
+
+/**
+ * DailyMenu Stylesheet
+ **/
+
+.tcDailyMenu {
+  background: transparent;
+  .x-tabpanel .x-body {
+    z-index: 1;
+    position: relative;
+  }
+  .tcDailyMenuTitle {
+    margin-bottom: 0px;
+  }
+  .tcDailyMenuTitleText {
+    overflow: hidden;
+    font-weight: bold;
+    font-size: 24px !important;
+    & > div {
+      float: left;
+      margin-left: 10px;
+    }
+  }
+
+  .tcDailyMenuTabBar {
+    background: transparent;
+    border: 0;
+    height: 2.14em;
+    padding: 0;
+    position: relative;
+    z-index: 2;
+    .x-tab {
+      height: 2.2em;
+      padding: 0.4em 1em;
+      border-radius: 0.5em;
+      border-bottom-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      background-color: black;
+      color: white;
+      margin-right: 2px;
+      &.x-tab-active {
+        background: white !important;
+        color: black;
+        border: 1px solid black;
+        border-bottom: 0px;
+      }
+      .x-button-label {
+        line-height: 1.8em;
+        margin-left: 2.2em;
+        margin-top: -2em;
+      }
+      .x-badge {
+        position: relative;
+        margin-top: 0.5em !important;
+        margin-left: 0 !important;
+        font-size: 0.7em;
+        line-height: 1em;
+        background: lightgray;
+      }
+      &.selected {
+        .x-badge {
+          background-color: #900;
+          background-image: linear-gradient(#E60000, #B30000 50%, #900 51%, maroon);
+        }
+        .x-button-label {
+          margin-top: -1.7em;
+        }
+      }
+    }
+  }
+  .tcDailyMenuSection {
+    background-color: white;
+    margin: 0;
+    border: 1px solid black;
+    padding-top: 0.6em;
+    border-radius: 5px;
+    border-top-left-radius: 0;
+    
+    .x-carousel-indicator {
+      padding-top: 10px;
+    }
+    
+    .tcDailyMenuSectionPage {
+      .x-dataview-container {
+        overflow: hidden;
+        margin-top: 10px;
+        position: absolute;
+        height: 90%;
+        width: 100%;
+        .x-dataview-item {
+          float: left;
+          width: 33%;
+          height: 100%;
+          .tcDailyMenuDish {
+            // width: 308px;
+            margin-right: 5px;
+            margin-left: 15px;
+            // height: 444px;
+            height: 100%;
+            color: white;
+            box-shadow: 0 0 10px black;
+            border-radius: 3px;
+            background: black;
+            // background-image: url(../img/common/bg-dish-daily.png);
+            // background-position: bottom;
+            .tcDailyMenuDishPhoto {
+              width: 100%;
+              // height: 290px;
+              min-height: auto;
+              max-height: none;
+              border: 2px solid black;
+              border-top-left-radius: 5px;
+              border-top-right-radius: 5px;
+            }
+            .tcDailyMenuDishText {
+              padding: 10px 10px;
+              // margin-top: 15px;
+              .tcDailyMenuDishTitle {
+                font-size: 22px;
+                margin-bottom: 15px;
+              }
+              .tcDailyMenuDishDescription {
+                font-size: 16px;
+              }
+            }
+          }
+          &.x-item-selected .tcDailyMenuDish {
+            background-color: #900;
+            background-image: linear-gradient(#E60000, #B30000 50%, #900 51%, maroon);
+            .tcDailyMenuDishPhoto {
+              border: 2px solid #900;
+            }
+          }
+        }
+      }
+    }
+    // beverages section
+    &.tcDailyMenuSection50 {
+     .tcDailyMenuSectionPage {
+       .x-dataview-container {
+         padding-top: 10px;
+         .x-dataview-item {
+           margin-bottom: 10px;
+           .tcDailyMenuDish {
+             width: 300px;
+             height: 53px;
+             .tcDailyMenuDishPhoto {
+               width: 80px;
+               height: inherit;
+               float: left;
+               display: block;
+               border-top-left-radius: 4px;
+               border-bottom-left-radius: 4px;
+             }
+             .tcDailyMenuDishText {
+               float: left;
+               margin-top: 0;
+               padding: 0;
+               padding-top: 7px;
+               padding-left: 5px;
+               height: 53px;
+               .tcDailyMenuDishTitle {
+                  font-size: 14px;
+                  width: 193px;
+                  text-align: left;
+                  line-height: 19px;
+                  font-weight: bold;
+               }
+               .tcDailyMenuDishDescription {
+                  display: none;
+               }
+             }
+           }
+         }
+       }
+     }
+    }
+  }
+  
+  .tcDailyMenuAddBtn {
+    @include background-image(linear-gradient($tc-btn-gradient-color, $tc-btn-color, $tc-btn-color));
+    display: block;
+    font-size: 16px;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    max-width: 200px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    &.x-button-pressing, &.x-button-pressed {
+      @include background-image(linear-gradient(lighten($tc-btn-color,20%), $tc-btn-gradient-color));
+    }
+    .x-button-label {
+      padding: 5px 0;
+      font-weight: normal;
+      letter-spacing: 0.1em;
+    }
+  }
+  
+}
+

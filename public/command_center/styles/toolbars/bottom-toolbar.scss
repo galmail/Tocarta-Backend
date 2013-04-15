@@ -1,0 +1,14 @@
+/**
+ *   Bottom toolbar stylesheet
+ */
+
+.tcBottomToolbar {
+  height: 60px;
+  border: none !important;
+  background: transparent;
+  #tcLogoBtnId .x-button-icon.x-icon-mask {
+    width: 55px;
+    height: 26px;
+    background: transparent no-repeat;
+  }
+}

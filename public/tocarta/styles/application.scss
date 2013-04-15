@@ -1,0 +1,49 @@
+/**
+ * Main Application Stylesheet
+ * 
+ **/
+ 
+// 1. Include Sencha Touch styles
+@import 'sencha-touch/default/all';
+
+// 2. Include the skin here
+@import 'skins/japanese';
+
+// You may remove any of the following modules that you
+// do not use in order to create a smaller css file.
+@include sencha-panel;
+@include sencha-buttons;
+@include sencha-sheet;
+@include sencha-picker;
+@include sencha-toolbar-forms;
+@include sencha-tabs;
+@include sencha-toolbar;
+@include sencha-carousel;
+@include sencha-indexbar;
+@include sencha-list;
+@include sencha-layout;
+@include sencha-form;
+@include sencha-loading-spinner;
+
+// 3. Include all the stylesheets
+
+@import 'main/main';
+@import 'filters/main';
+@import 'loading/main';
+@import 'multilang/main';
+@import 'help/main';
+@import 'mainmenu/main';
+@import 'dailymenu/main';
+@import 'restaurantinfo/carousel';
+@import 'sidebar/main';
+@import 'dish/main';
+@import 'order/main';
+@import 'settings/main';
+@import 'toolbars/main';
+@import 'survey/main';
+
+// 4. Include the responsive style fixes
+@import 'skins/classic1024x600';
+@import 'skins/classic1024x768';
+@import 'skins/classic1280x800';
+
