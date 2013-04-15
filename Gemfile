@@ -12,6 +12,7 @@ gem 'jquery-rails'
 group :development do
   gem 'yaml_db'
   gem 'sqlite3'
+  gem 'pg'
 end
 
 group :production do
