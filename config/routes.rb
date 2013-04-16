@@ -1,7 +1,7 @@
 TocartaAdmin::Application.routes.draw do
 
-  match "/admin/:model_name/import" => "custom_admin#import" , :as => "import", :via => [:get, :post]
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+  mount RailsAdminImport::Engine => '/rails_admin_import', :as => 'rails_admin_import'
 
   devise_for :users
 
@@ -73,4 +73,5 @@ TocartaAdmin::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
   # match ':controller(/:action(/:id(.:format)))'
+
 end
