@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 
 #### Ruby on Rails ####
-# gem 'rails', '~> 3.0.20'
-
 gem 'rails', '3.2.13'
 
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -11,7 +9,7 @@ gem 'jquery-rails'
 #### Database Setup ####
 group :development do
   gem 'yaml_db'
-  gem 'sqlite3'
+  # gem 'sqlite3'
   gem 'meta_request' # for rails_panel
   gem 'pry-rails'    # for Pry
   gem "better_errors"
