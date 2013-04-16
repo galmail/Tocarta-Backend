@@ -11,9 +11,8 @@ Ext.define('TC.view.matrixmenu.DishTiledView', {
     xtype: 'matrixmenu-dishtiledview',
 
     config: {
-        layout: 'vbox',
         baseCls: 'tcMatrixMenuDishTiledView',
-
+        
         items: null
 
     },

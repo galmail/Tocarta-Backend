@@ -181,7 +181,66 @@
     }
   }
   
-  // DishTiledView
+  // DishDetailsView
+  .tcMatrixMenuDishDetailsView
+  {
+    width: 100%;
+    height: 100%;
+    
+    .dish-info {
+      top: 0px;
+      width: 100%;
+      height: 10%;
+      position: relative;
+      display: inline-block;
+      
+      .dish-name {
+        width: 35%;
+        display: inline-block;
+      }
+      
+      .dish-description {
+        width: 50%;
+        display: inline-block;
+      }
+      
+      .dish-price {
+        width: 5%;
+        display: inline-block;
+      }
+    }
+    
+    .dish-extra {
+      width: 100%;
+      height: 90%;
+      position: relative;
+      
+      .dish-tabs {
+        width: 60%;
+        height: 100%;
+        position: relative;
+        
+        .tab-content {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+        }
+      } 
+      
+      .dish-social {
+        width: 40%;
+        height: 100%;
+        position: relative;
+      } 
+    }
+    
+  }
   
+  // DishTiledView
+  .tcMatrixMenuDishTiledView .tcMatrixMenuMiniDishImageView
+  {
+    position: relative;
+    display: inline-block !important;
+  }
   
 }
