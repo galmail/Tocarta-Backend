@@ -59,7 +59,11 @@ RailsAdmin.config do |config|
     delete
     history_show
     show_in_app
-    import
+    import do
+      visible do
+        bindings[:abstract_model].model.to_s == "Menu"
+      end
+    end
     update_tablet do
       # Make it visible only for tablets model.
       visible do
@@ -471,6 +475,5 @@ end
 RailsAdminImport.config do |config|
   config.model Menu do
     label :name
-
   end
 end
