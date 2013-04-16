@@ -43,6 +43,10 @@ es:
       item: "Elemento"
       message: "Mensaje"
     actions:
+      import:
+        menu: "Importar"
+        breadcrumb: "Importar"
+        title: "Importar Menu"
       update_tablet:
         title: "Actualizar %{model_label_plural}"
         menu: "Actualizar Tablet"

@@ -14,6 +14,7 @@ class Ability
     if user.role == "admin"
       can :manage, :all
       can :update_tablet, :all
+      can :import, [Menu]
     elsif user.role == "restaurant"
       can :read, DishType
       can :read, Theme
@@ -31,6 +32,7 @@ class Ability
       can :read, Tablet, :table => { :restaurant_id => user.chain.restaurants.collect{ |res| res.id }.flatten }
       can :read, SurveyQuestion, :chain => { :user_id => user.id }
       can :read, Order, :table => { :restaurant_id => user.chain.restaurants.collect{ |res| res.id }.flatten }
+      cannot :import, [Menu]
     elsif user.role == "distributor"
       can :read, DishType
       can :read, Theme
@@ -50,6 +52,7 @@ class Ability
       can :manage, Tablet, :table => { :restaurant_id => user.chain.restaurants.collect{ |res| res.id }.flatten }
       can :manage, SurveyQuestion, :chain => { :user_id => user.id }
       can :read, Order, :table => { :restaurant_id => user.chain.restaurants.collect{ |res| res.id }.flatten }
+      cannot :import, [Menu]
     end
 
     # Define abilities for the passed in user here. For example:

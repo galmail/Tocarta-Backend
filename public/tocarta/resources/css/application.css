@@ -7570,6 +7570,63 @@ input[type="search"]::-webkit-search-cancel-button {
   width: 4%;
   display: inline-block;
 }
+/* line 186, ../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishDetailsView {
+  width: 100%;
+  height: 100%;
+}
+/* line 190, ../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-info {
+  top: 0px;
+  width: 100%;
+  height: 10%;
+  position: relative;
+  display: inline-block;
+}
+/* line 197, ../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-info .dish-name {
+  width: 35%;
+  display: inline-block;
+}
+/* line 202, ../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-info .dish-description {
+  width: 50%;
+  display: inline-block;
+}
+/* line 207, ../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-info .dish-price {
+  width: 5%;
+  display: inline-block;
+}
+/* line 213, ../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra {
+  width: 100%;
+  height: 90%;
+  position: relative;
+}
+/* line 218, ../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-tabs {
+  width: 60%;
+  height: 100%;
+  position: relative;
+}
+/* line 223, ../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-tabs .tab-content {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+/* line 230, ../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-social {
+  width: 40%;
+  height: 100%;
+  position: relative;
+}
+/* line 241, ../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishTiledView .tcMatrixMenuMiniDishImageView {
+  position: relative;
+  display: inline-block !important;
+}
 
 /**
  * Restaurant Carousel Stylesheet

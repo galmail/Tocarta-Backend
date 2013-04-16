@@ -1,6 +1,7 @@
 # RailsAdmin config file. Generated on March 15, 2012 10:25
 # See github.com/sferik/rails_admin for more informations
 
+
 RailsAdmin.config do |config|
 
   config.authorize_with :cancan
@@ -58,7 +59,11 @@ RailsAdmin.config do |config|
     delete
     history_show
     show_in_app
-    
+    import do
+      visible do
+        bindings[:abstract_model].model.to_s == "Menu"
+      end
+    end
     update_tablet do
       # Make it visible only for tablets model.
       visible do
@@ -465,4 +470,10 @@ RailsAdmin.config do |config|
 
   # All fields marked as 'hidden' won't be shown anywhere in the rails_admin unless you mark them as visible. (visible(true))
 
+end
+
+RailsAdminImport.config do |config|
+  config.model Menu do
+    label :name
+  end
 end

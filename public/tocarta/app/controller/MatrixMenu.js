@@ -14,7 +14,10 @@ Ext.define('TC.controller.MatrixMenu', {
       views : [
         'TC.view.matrixmenu.DishTiledView',
         'TC.view.matrixmenu.DishImageView',
-      	'TC.view.matrixmenu.DishTextView'
+        'TC.view.matrixmenu.DishTextView',
+        'TC.view.matrixmenu.MiniDishImageView',
+        'TC.view.matrixmenu.MiniDishTextView',
+        'TC.view.matrixmenu.DishDetailsView'
 	    ],
       
       refs: {
@@ -36,6 +39,10 @@ Ext.define('TC.controller.MatrixMenu', {
     matrixMenuShow: function(){
     	console.log('TC.controller.MatrixMenu.matrixMenuShow');
     
+    	/*
+    	 * Prueba componentes Nv1
+    	 */
+    	
     	/*var me = this, dish_views = [];
     	
     	TC.Restaurant.getMainMenu().sections().getAt(0).dishes().each(function(dish)
@@ -45,10 +52,21 @@ Ext.define('TC.controller.MatrixMenu', {
     	
     	this.getMatrixCarousel().setItems(dish_views);
         */
-       this.getMatrixMenu().setItems(this.tiledView(TC.Restaurant.getMainMenu().sections().getAt(0)));
+       
+        /*
+         * Prueba DishDetailsView (Nv1)
+         */
+         this.getMatrixMenu().setItems(Ext.create('TC.view.matrixmenu.DishDetailsView', { data: [TC.Restaurant.getMainMenu().sections().getAt(0).dishes().getAt(0)]}));
+       
+        /*
+         * Prueba TiledView (Nv2)
+         */
+       //this.getMatrixMenu().setItems(this.tiledView(TC.Restaurant.getMainMenu().sections().getAt(0).dishes()));
+    
+    
     },
     
-    tiledView: function (section){
+    tiledView: function (dishes){
     	console.log('TC.controller.MatrixMenu.tiledView');
     	
     	var me = this, section_view = [], container_width = 0, container_height = 0, priority_sum = 0, priority_avg = 0;
@@ -56,38 +74,36 @@ Ext.define('TC.controller.MatrixMenu', {
     	var container_width = this.getMatrixMenu().element.getWidth();
     	var container_height = this.getMatrixMenu().element.getHeight();
 
-        var tile_width = (container_width / section.dishes().data.length);
-            tile_height = (container_height / section.dishes().data.length);
-        section.dishes().each(function(dish)
+        var tile_width = ((container_width * 25) / 100);
+            tile_height = ((container_height * 45) / 100);
+            
+        console.log("Tile width:" + tile_width + " de " + container_width);
+        console.log("Tile height:" + tile_height + " de " + container_height);
+        
+        dishes.each(function(dish)
         {
-            var dish_view = me.printDish(dish);
+            var dish_view = me.printDish(dish, 'TC.view.matrixmenu.MiniDishImageView');
                 dish_view.setWidth(tile_width + "px");
                 dish_view.setHeight(tile_height + "px");
             
             section_view.push(dish_view);
         });
         
-    	return Ext.create('TC.view.matrixmenu.DishTiledView', {width: container_width, height: container_height, items: section_view });
+    	return Ext.create('TC.view.matrixmenu.DishTiledView', {width: container_width, height: container_height, scrollable: 'vertical', items: section_view });
     },
     
    
-    printDish: function (dish){
+    printDish: function (dish, view){
     	console.log('TC.controller.MatrixMenu.printDish');
     	
     	var dish_view = null;
     	
-    	if (dish.data.large_photo_url.length > 0)
-    	{
-    		dish_view = Ext.create('TC.view.matrixmenu.DishImageView', {
-	    				data: [dish]
-	    			});
-	    }
+    	if (view != undefined)
+            dish_view = Ext.create(view, { data: [dish] });
+    	else if (dish.data.large_photo_url.length > 0)
+    		dish_view = Ext.create('TC.view.matrixmenu.DishImageView', { data: [dish] });
 	    else
-	    {
-	    	dish_view = Ext.create('TC.view.matrixmenu.DishTextView', {
-	    				data: [dish]
-	    			}); 
-	    }
+	    	dish_view = Ext.create('TC.view.matrixmenu.DishTextView', { data: [dish] }); 
 	    
     
         /*

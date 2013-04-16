@@ -33,10 +33,10 @@ Ext.define('TC.view.matrixmenu.DishTextView', {
 	},
 	
 	listeners: {
-		activate: 'onActivate'
+		initialize: 'onInitialize'
 	},
 	
-	onActivate: function()
+	onInitialize: function()
 	{
 		var me = this;
 		
