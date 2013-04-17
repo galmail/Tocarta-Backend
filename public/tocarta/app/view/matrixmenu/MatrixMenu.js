@@ -13,6 +13,7 @@ Ext.define('TC.view.matrixmenu.MatrixMenu', {
 	
 	config: {
 		cls: 'tcMatrixMenu',
+		layout: 'vbox',
 		
 		items: [
 		]

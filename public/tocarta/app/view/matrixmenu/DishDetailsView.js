@@ -35,7 +35,6 @@ Ext.define('TC.view.matrixmenu.DishDetailsView', {
                 tabBarPosition: 'top',
                 
                 layout: {
-                    type: 'vbox',
                     animation: 'fade'
                 },
                 
@@ -58,9 +57,10 @@ Ext.define('TC.view.matrixmenu.DishDetailsView', {
                     html: 'Acerca de'
                 },
                 {
-                  itemId: 'dish-comments',
-                  title: $T.comments,
-                  xtype: 'dish-comments-tab'
+                    itemId: 'dish-comments',
+                    cls: 'tab-content',
+                    title: $T.comments,
+                    xtype: 'dish-comments-tab'
                 },
                 {
                     itemId: 'dish-properties',
@@ -69,9 +69,9 @@ Ext.define('TC.view.matrixmenu.DishDetailsView', {
                     html: 'Datos nutricion'
                 },
                 {
-                  itemId: 'dish-video',
-                  title: $T.video,
-                  xtype: 'dish-video-tab'
+                    itemId: 'dish-video',
+                    title: $T.video,
+                    xtype: 'dish-video-tab'
                 }]
             },
             {

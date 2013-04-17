@@ -7614,7 +7614,7 @@ input[type="search"]::-webkit-search-cancel-button {
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-tabs .tab-content {
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: relative !important;
 }
 /* line 230, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-social {
