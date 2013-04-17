@@ -61,7 +61,7 @@ RailsAdmin.config do |config|
     show_in_app
     import do
       visible do
-        bindings[:abstract_model].model.to_s == "Menu"
+        bindings[:abstract_model].model.to_s == "Dish"
       end
     end
     update_tablet do
@@ -483,7 +483,7 @@ RailsAdmin.config do |config|
 end
 
 RailsAdminImport.config do |config|
-  config.model Menu do
+  config.model Dish  do
     label :name
   end
 end
