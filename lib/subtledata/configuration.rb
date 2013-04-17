@@ -5,12 +5,15 @@ module Subtledata
   module  Configuration
     # An array of valid keys in the options hash
     VALID_OPTIONS_KEYS = [
+      :adapter,
       :user_id,
       :device_id,
       :user_guid,
       :latitude,
       :longitude,
-      :adapter,
+      :location_id,
+      :secret,
+      :session_token,
       :base,
       :url
     ].freeze
@@ -24,9 +27,12 @@ module Subtledata
     DEFAULT_LATITUDE  = nil
     DEFAULT_LONGITUDE = nil
 
+    DEFAULT_SESSION_TOKEN = nil
+    DEFAULT_SECRET        = nil
+
     # Default endpoint
     DEFAULT_URL  = 'https://www.subtledata.com'
-    DEFAULT_BASE = '/API/M/1'
+    DEFAULT_BASE = '/API/M/1/'
 
     attr_accessor *VALID_OPTIONS_KEYS
 
@@ -49,14 +55,16 @@ module Subtledata
 
     # Reset all configuration options to defaults
     def reset
-      self.adapter    = DEFAULT_ADAPTER
-      self.user_id    = DEFAULT_USER_ID
-      self.device_id  = DEFAULT_DEVICE_ID
-      self.user_guid  = DEFAULT_USER_GUID
-      self.latitude   = DEFAULT_LATITUDE
-      self.longitude  = DEFAULT_LONGITUDE
-      self.url        = DEFAULT_URL
-      self.base       = DEFAULT_BASE
+      self.adapter       = DEFAULT_ADAPTER
+      self.user_id       = DEFAULT_USER_ID
+      self.device_id     = DEFAULT_DEVICE_ID
+      self.user_guid     = DEFAULT_USER_GUID
+      self.latitude      = DEFAULT_LATITUDE
+      self.longitude     = DEFAULT_LONGITUDE
+      self.secret        = DEFAULT_SECRET
+      self.session_token = DEFAULT_SESSION_TOKEN
+      self.url           = DEFAULT_URL
+      self.base          = DEFAULT_BASE
     end
   end
 end

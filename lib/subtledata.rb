@@ -1,8 +1,8 @@
 # require File.expand_path('../instagram/error', __FILE__)
 require 'subtledata/configuration'
-# require File.expand_path('../instagram/api', __FILE__)
-# require File.expand_path('../instagram/client', __FILE__)
-# require File.expand_path('../instagram/response', __FILE__)
+require 'subtledata/api'
+require 'subtledata/client'
+require 'subtledata/response'
 
 module Subtledata
   extend Configuration
@@ -11,7 +11,17 @@ module Subtledata
   #
   # @return [Subtledata::Client]
   def self.client(options={})
-    puts "hola"
-    # Subtledata::Client.new(options)
+    Subtledata::Client.new(options)
+  end
+
+  # Delegate to Subtledata::Client
+  def self.method_missing(method, *args, &block)
+    return super unless client.respond_to?(method)
+    client.send(method, *args, &block)
+  end
+
+  # Delegate to Subtledata::Client
+  def self.respond_to?(method)
+    return client.respond_to?(method) || super
   end
 end
