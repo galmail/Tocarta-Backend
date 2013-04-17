@@ -4,15 +4,15 @@
     attr_accessor :user_id, :device_id, :user_guid, :latitude, :longitude
 
     def initialize(sd_settings = self.sd_settings)
-      @location_id = sd_settings[:location_id]
-      @secret = sd_settings[:secret]
-      # @session_token = startup
-      @user_id = sd_settings[:user][:user_id]
-      @device_id = sd_settings[:user][:device_id]
       @url = sd_settings[:url]
-      @base = sd_settings[:base]
+      @base          = sd_settings[:base]
+      @secret        = sd_settings[:secret]
+      # @user_id     = sd_settings[:user][:user_id]
+      # @device_id   = sd_settings[:user][:device_id]
+      # @location_id = sd_settings[:location_id]
+      ## @session_token = startup
     end
-    
+
     def sd_settings
       {
         :url => "https://www.subtledata.com",
@@ -49,7 +49,7 @@
         ]
       }
     end
-    
+
     def set_gps_location(latitude,longitude)
       response = get("0105",[@user_id,latitude,longitude])
       results = response.body.split("|")
@@ -61,13 +61,13 @@
         return {user_id: @user_id, latitude: @latitude, longitude: @longitude}
       end
     end
-    
+
     def get_walked_tickets
       response = get("0150",[@user_id])
       results = response.body.split("|")
       return results[1]
     end
-    
+
     def get_locations
       distance = "10" # within 10 miles
       name_of_location = ""
@@ -82,7 +82,7 @@
       end
       return final_res
     end
-    
+
     def get_revenue_centers(location_id)
       response = get("0330",[location_id])
       results = response.body.split("|")
@@ -95,7 +95,7 @@
       end
       return final_res
     end
-    
+
     def get_tables(location_id)
       response = get("0331",[location_id,0])
       results = response.body.split("|")
@@ -108,7 +108,7 @@
       end
       return final_res
     end
-    
+
     def open_new_ticket(location_id,center_id,table_id,num_people,bizexp,ticket_desc,ticket_name)
       response = get("0410",[location_id,center_id,@user_id,@device_id,table_id,num_people,bizexp,ticket_desc,@latitude,@longitude,ticket_name])
       results = response.body.split("|")
