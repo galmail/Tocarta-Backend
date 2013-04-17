@@ -15,13 +15,6 @@ Ext.define('TC.view.matrixmenu.MatrixMenu', {
 		cls: 'tcMatrixMenu',
 		
 		items: [
-			/*{
-				xtype : 'carousel',
-				id : 'matrix-carousel',
-				direction : 'horizontal',
-				indicator: false,
-				directionLock : true
-			}*/            
 		]
 	}
 });

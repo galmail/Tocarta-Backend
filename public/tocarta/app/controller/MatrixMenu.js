@@ -11,6 +11,12 @@ Ext.define('TC.controller.MatrixMenu', {
     
     config: {
       
+      routes: {
+        'cmp1test' : 'cmp1test',
+        'detailstest' : 'detailstest',
+        'tiletest' : 'tiletest',
+      },
+      
       views : [
         'TC.view.matrixmenu.DishTiledView',
         'TC.view.matrixmenu.DishImageView',
@@ -39,33 +45,47 @@ Ext.define('TC.controller.MatrixMenu', {
     matrixMenuShow: function(){
     	console.log('TC.controller.MatrixMenu.matrixMenuShow');
     
-    	/*
-    	 * Prueba componentes Nv1
-    	 */
-    	
-    	/*var me = this, dish_views = [];
-    	
-    	TC.Restaurant.getMainMenu().sections().getAt(0).dishes().each(function(dish)
-    	{
-    		dish_views.push(me.printDish(dish));
-    	});
-    	
-    	this.getMatrixCarousel().setItems(dish_views);
-        */
-       
         /*
+         * Prueba componentes Nv1
+         */
+        
+        var me = this, dish_views = [];
+        
+        TC.Restaurant.getMainMenu().sections().getAt(0).dishes().each(function(dish)
+        {
+            dish_views.push(me.printDish(dish));
+        });
+        
+        this.getMatrixMenu().setItems(
+        {
+            xtype: 'carousel', 
+            id : 'matrix-carousel',
+            direction : 'horizontal',
+            indicator: false,
+            directionLock : true, 
+            items: dish_views
+        });
+    },
+    
+    
+    detailstest: function(){
+        console.log('TC.controller.MatrixMenu.detailstest');
+        
+         /*
          * Prueba DishDetailsView (Nv1)
          */
-         this.getMatrixMenu().setItems(Ext.create('TC.view.matrixmenu.DishDetailsView', { data: [TC.Restaurant.getMainMenu().sections().getAt(0).dishes().getAt(0)]}));
+         this.getMatrixMenu().setItems(Ext.create('TC.view.matrixmenu.DishDetailsView', { data: [TC.Restaurant.getMainMenu().sections().getAt(0).dishes().getAt(0)]})); 
+    },
        
+    tiletest: function(){
+        console.log('TC.controller.MatrixMenu.tiletest');
+        
         /*
          * Prueba TiledView (Nv2)
          */
-       //this.getMatrixMenu().setItems(this.tiledView(TC.Restaurant.getMainMenu().sections().getAt(0).dishes()));
-    
-    
+       this.getMatrixMenu().setItems(this.tiledView(TC.Restaurant.getMainMenu().sections().getAt(0).dishes()));
     },
-    
+     
     tiledView: function (dishes){
     	console.log('TC.controller.MatrixMenu.tiledView');
     	

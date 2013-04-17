@@ -32,10 +32,10 @@ Ext.define('TC.view.matrixmenu.DishDetailsView', {
             
             items: [{
                 xtype: 'tabpanel',
-            
                 tabBarPosition: 'top',
                 
                 layout: {
+                    type: 'vbox',
                     animation: 'fade'
                 },
                 
@@ -52,20 +52,24 @@ Ext.define('TC.view.matrixmenu.DishDetailsView', {
                 
                 items:[
                 {
+                    itemId: 'dish-about',
                     cls: 'tab-content',
                     title: 'Acerca del plato',
-                    html: 'lol1'
+                    html: 'Acerca de'
                 },
                 {
+                  itemId: 'dish-comments',
                   title: $T.comments,
                   xtype: 'dish-comments-tab'
                 },
                 {
+                    itemId: 'dish-properties',
                     cls: 'tab-content',
                     title: 'Datos de nutrición',
-                    html: 'Datos de nutrición3'
+                    html: 'Datos nutricion'
                 },
                 {
+                  itemId: 'dish-video',
                   title: $T.video,
                   xtype: 'dish-video-tab'
                 }]
@@ -73,22 +77,25 @@ Ext.define('TC.view.matrixmenu.DishDetailsView', {
             {
                 cls: 'dish-social',
                 xtype: 'container',
-                flex: 2,
+                layout: 'hbox',
+                
                 items: [
                 {
-                    xtype: 'image',
-                    mode: 'image',
-                    src: 'http://news.talkqueen.com/wp-content/uploads/2012/07/twitter_icon-300x300-64x64.png'
+                    xtype: 'toolbar',
+                    docked: 'top',
+                    title: 'Social',
                 },
                 {
                     xtype: 'image',
-                    mode: 'image',
-                    src: 'http://blog.ono.es/wp-content/themes/oblog/images/fb_icon.png'
+                    cls: 'share facebook',
                 },
                 {
                     xtype: 'image',
-                    mode: 'image',
-                    src: 'http://lydiahutchinson.com/wp-content/uploads/2011/11/Google-Plus-1-icon.png'
+                    cls: 'share twitter',
+                },
+                {
+                    xtype: 'image',
+                    cls: 'share google',
                 }]
             }]
         }],
@@ -103,11 +110,12 @@ Ext.define('TC.view.matrixmenu.DishDetailsView', {
     {
         var me = this;
         
-        // Data hierarchy
         this.getItems().each(function(item)
         {
-            item.setData(me.getData()[0].data);
+            item.setData(me.getData()[0].data);            
         });
+        
+        this.down('#tcDishCommentsDataItemsId').setStore(me.getData()[0].comments());
     }
     
 
