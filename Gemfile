@@ -9,7 +9,7 @@ gem 'jquery-rails'
 #### Database Setup ####
 group :development do
   gem 'yaml_db'
-  # gem 'sqlite3'
+  gem 'sqlite3'
   gem 'meta_request' # for rails_panel
   gem 'pry-rails'    # for Pry
   gem "better_errors"
