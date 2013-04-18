@@ -1,5 +1,6 @@
 require 'subtledata/connection'
 require 'subtledata/request'
+require 'subtledata/auth'
 
 module Subtledata
   class API
@@ -15,5 +16,6 @@ module Subtledata
 
     include Connection
     include Request
+    include Auth
   end
 end

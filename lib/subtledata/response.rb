@@ -1,14 +1,12 @@
 module Subtledata
   module Response
     def self.create( response )
-      # data = response_hash.data.dup rescue response_hash
-      # data.extend( self )
-      # data.instance_exec do
-        # @pagination = response_hash.pagination
-        # @meta = response_hash.meta
-      # end
-      # data
-      response
+      data = response.split('|')
+      if data[0] = '0000'
+        data[1]
+      else
+        data
+      end
     end
 
     # attr_reader :pagination

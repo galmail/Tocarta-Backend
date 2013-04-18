@@ -1,6 +1,20 @@
 Subtledata Initialization
 
 ##### SETUP SubtleData Settings #####
+## config/initializers/subtledata.rb
+require_dependency 'subtledata'
+
+Subtledata.configure do |c|
+  c.secret = 'RzArM1VQ'
+end
+
+##### Starting Subtledata objects #####
+
+client = Subtledata.client({session_token: Subtledata.get_session_token })
+
+#####################################
+
+##### SETUP SubtleData Settings #####
 
 sd_settings = {
 	:url => "https://www.subtledata.com",

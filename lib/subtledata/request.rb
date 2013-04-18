@@ -24,10 +24,9 @@ module Subtledata
     private
 
     # Perform an HTTP request
-    # TODO: format path?
     def request(method, path, options, raw=false, unformatted=false, no_response_wrapper=false)
       response = connection(raw).send(method) do |request|
-        # path = formatted_path(path) unless unformatted
+        options = formatted_options(options) unless unformatted
         case method
         when :get, :delete
           request.url(path, options)
@@ -41,8 +40,13 @@ module Subtledata
       return Response.create( response.body )
     end
 
-    def formatted_path(path)
-      [path, format].compact.join('.')
+    def formatted_options(options)
+      # FIXME: use inject
+      data = {}
+      options.each do |k,v|
+        data = { "Q" => k + '|' + v.join('|') }
+      end
+      data
     end
   end
 end
