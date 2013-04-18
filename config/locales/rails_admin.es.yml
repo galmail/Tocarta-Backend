@@ -44,9 +44,10 @@ es:
       message: "Mensaje"
     actions:
       import:
+        dish: "Importar"
         menu: "Importar"
         breadcrumb: "Importar"
-        title: "Importar Menu"
+        title: "Importar %{model_label_plural}"
       update_tablet:
         title: "Actualizar %{model_label_plural}"
         menu: "Actualizar Tablet"

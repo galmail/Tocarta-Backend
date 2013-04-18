@@ -26,7 +26,7 @@ class Dish < ActiveRecord::Base
 	 :path => ":chain_rest_id/img/dishes/:style/dish_:id.:extension",
 	 :styles => { :large => TocartaAdmin::Application::IMAGE_LARGE_SIZE, :thumb => TocartaAdmin::Application::IMAGE_THUMBNAIL_SIZE, :mini => TocartaAdmin::Application::IMAGE_MINI_SIZE }
 	)
-	translates :name, :description, :story, :short_title, :badge_name, :fallbacks_for_empty_translations => true
+	#translates :name, :description, :story, :short_title, :badge_name, :fallbacks_for_empty_translations => true
 	attr_accessible :name, :active, :position, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts, :short_title, :badge_name, :photo, :rate_me
 	attr_accessible :section_ids, :subsection_ids, :dish_type_ids, :dish_variation_ids
 	
