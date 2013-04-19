@@ -207,7 +207,17 @@ RailsAdmin.config do |config|
     label 'Dish Variation'
     label_plural 'Dish Variations'
     list do
-      exclude_fields :id, :position, :dish_variation_associations, :dishes
+      exclude_fields :id, :position
+    end
+  end
+  
+  ######## DishVariationSet Model ########
+  
+  config.model DishVariationSet do
+    label 'Dish Variation Set'
+    label_plural 'Dish Variation Sets'
+    list do
+      exclude_fields :id, :dishes
     end
   end
   
@@ -228,11 +238,11 @@ RailsAdmin.config do |config|
     label_plural 'Dishes'
     list do
       exclude_fields :id, :combo, :description, :reviews, :story, :video, :nutrition_facts, :photo
-      exclude_fields :badge_name, :short_title, :order_items, :comments, :dish_variations, :dish_variation_associations, :dish_type_associations, :dish_types, :dish_section_associations, :dish_subsection_associations
+      exclude_fields :badge_name, :short_title, :order_items, :comments, :dish_variation_sets, :dish_variation_set_associations, :dish_type_associations, :dish_types, :dish_section_associations, :dish_subsection_associations
     end
     edit do
       exclude_fields :id, :combo, :reviews, :story, :nutrition_facts
-      exclude_fields :order_items, :comments, :dish_variation_associations, :dish_type_associations, :dish_section_associations, :dish_subsection_associations
+      exclude_fields :order_items, :comments, :dish_variation_set_associations, :dish_type_associations, :dish_section_associations, :dish_subsection_associations
       field :rating do
         read_only true
       end
