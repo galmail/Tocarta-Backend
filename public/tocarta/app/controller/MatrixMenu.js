@@ -11,13 +11,21 @@ Ext.define('TC.controller.MatrixMenu', {
     
     config: {
       
+      routes: {
+        'cmp1test' : 'cmp1test',
+        'detailstest' : 'detailstest',
+        'tiletest' : 'tiletest',
+        'infinitest' : 'infinitest',
+      },
+      
       views : [
         'TC.view.matrixmenu.DishTiledView',
         'TC.view.matrixmenu.DishImageView',
         'TC.view.matrixmenu.DishTextView',
         'TC.view.matrixmenu.MiniDishImageView',
         'TC.view.matrixmenu.MiniDishTextView',
-        'TC.view.matrixmenu.DishDetailsView'
+        'TC.view.matrixmenu.DishDetailsView',
+        'TC.view.matrixmenu.InfiniteMenu'
 	    ],
       
       refs: {
@@ -39,33 +47,77 @@ Ext.define('TC.controller.MatrixMenu', {
     matrixMenuShow: function(){
     	console.log('TC.controller.MatrixMenu.matrixMenuShow');
     
-    	/*
-    	 * Prueba componentes Nv1
-    	 */
-    	
-    	/*var me = this, dish_views = [];
-    	
-    	TC.Restaurant.getMainMenu().sections().getAt(0).dishes().each(function(dish)
-    	{
-    		dish_views.push(me.printDish(dish));
-    	});
-    	
-    	this.getMatrixCarousel().setItems(dish_views);
-        */
-       
         /*
+         * Prueba componentes Nv1
+         */
+        
+        var me = this, dish_views = [];
+        
+        TC.Restaurant.getMainMenu().sections().getAt(0).dishes().each(function(dish)
+        {
+            dish_views.push(me.printDish(dish));
+        });
+        
+        this.getMatrixMenu().setItems(
+        {
+            xtype: 'carousel', 
+            id : 'matrix-carousel',
+            direction : 'horizontal',
+            indicator: false,
+            directionLock : true, 
+            items: dish_views,
+            width: this.getMatrixMenu().element.getWidth(),
+            height: this.getMatrixMenu().element.getHeight(),
+        });
+    },
+    
+    
+    detailstest: function(){
+        console.log('TC.controller.MatrixMenu.detailstest');
+        
+         /*
          * Prueba DishDetailsView (Nv1)
          */
-         this.getMatrixMenu().setItems(Ext.create('TC.view.matrixmenu.DishDetailsView', { data: [TC.Restaurant.getMainMenu().sections().getAt(0).dishes().getAt(0)]}));
+         this.getMatrixMenu().setItems(Ext.create('TC.view.matrixmenu.DishDetailsView', { data: [TC.Restaurant.getMainMenu().sections().getAt(0).dishes().getAt(0)]})); 
+    },
        
+    tiletest: function(){
+        console.log('TC.controller.MatrixMenu.tiletest');
+        
         /*
          * Prueba TiledView (Nv2)
          */
-       //this.getMatrixMenu().setItems(this.tiledView(TC.Restaurant.getMainMenu().sections().getAt(0).dishes()));
-    
-    
+       this.getMatrixMenu().setItems(this.tiledView(TC.Restaurant.getMainMenu().sections().getAt(0).dishes()));
     },
-    
+     
+    infinitest: function()
+    {
+        console.log('TC.controller.MatrixMenu.infinitest');
+        
+        /*
+         * Prueba InfinteMenu (Nv3)
+         */
+       var me = this, infinite_items = [];
+       
+       TC.Restaurant.getMainMenu().sections().each(function(section)
+       {
+            infinite_items.push(me.tiledView(section.dishes()));    
+       });
+       
+       
+        var container_width = this.getMatrixMenu().element.getWidth();
+        var container_height = this.getMatrixMenu().element.getHeight();
+
+        var tile_width = ((container_width * 25) / 100);
+            tile_height = ((container_height * 45) / 100);
+        
+        var infinite_menu = Ext.create('TC.view.matrixmenu.InfiniteMenu', { items: infinite_items });
+            infinite_menu.setWidth(container_width);
+            infinite_menu.setHeight(container_height);
+       
+       this.getMatrixMenu().setItems(infinite_menu);
+    },
+     
     tiledView: function (dishes){
     	console.log('TC.controller.MatrixMenu.tiledView');
     	
@@ -89,7 +141,7 @@ Ext.define('TC.controller.MatrixMenu', {
             section_view.push(dish_view);
         });
         
-    	return Ext.create('TC.view.matrixmenu.DishTiledView', {width: container_width, height: container_height, scrollable: 'vertical', items: section_view });
+    	return Ext.create('TC.view.matrixmenu.DishTiledView', { width: container_width, height: container_height, scrollable: 'horizontal', items: section_view });
     },
     
    
