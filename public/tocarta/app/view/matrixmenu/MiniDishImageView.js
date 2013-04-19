@@ -33,7 +33,7 @@ Ext.define('TC.view.matrixmenu.MiniDishImageView', {
 	},
 	
 	listeners: {
-		initialize: 'onInitialize'
+		initialize: 'onInitialize',
 	},
 	
 	onInitialize: function()
