@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130417220141) do
+ActiveRecord::Schema.define(:version => 20130419000912) do
 
   create_table "chains", :force => true do |t|
     t.integer   "user_id"
@@ -178,15 +178,24 @@ ActiveRecord::Schema.define(:version => 20130417220141) do
     t.string    "description"
   end
 
-  create_table "dish_variation_associations", :force => true do |t|
-    t.integer  "dish_variation_id"
+  create_table "dish_variation_set_associations", :force => true do |t|
+    t.integer  "dish_variation_set_id"
     t.integer  "dish_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
-  add_index "dish_variation_associations", ["dish_id"], :name => "index_dish_variation_associations_on_dish_id"
-  add_index "dish_variation_associations", ["dish_variation_id"], :name => "index_dish_variation_associations_on_dish_variation_id"
+  add_index "dish_variation_set_associations", ["dish_id"], :name => "index_dish_variation_set_associations_on_dish_id"
+  add_index "dish_variation_set_associations", ["dish_variation_set_id"], :name => "index_dish_variation_set_associations_on_dish_variation_set_id"
+
+  create_table "dish_variation_sets", :force => true do |t|
+    t.integer  "chain_id"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "dish_variation_sets", ["chain_id"], :name => "index_dish_variation_sets_on_chain_id"
 
   create_table "dish_variation_translations", :force => true do |t|
     t.integer  "dish_variation_id"
@@ -201,17 +210,17 @@ ActiveRecord::Schema.define(:version => 20130417220141) do
   add_index "dish_variation_translations", ["locale"], :name => "index_dish_variation_translations_on_locale"
 
   create_table "dish_variations", :force => true do |t|
-    t.integer  "chain_id"
+    t.integer  "dish_variation_set_id"
     t.string   "name"
     t.boolean  "active"
     t.integer  "position"
     t.decimal  "price"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
-  add_index "dish_variations", ["chain_id"], :name => "index_dish_variations_on_chain_id"
+  add_index "dish_variations", ["dish_variation_set_id"], :name => "index_dish_variations_on_dish_variation_set_id"
 
   create_table "dishes", :force => true do |t|
     t.string    "name"

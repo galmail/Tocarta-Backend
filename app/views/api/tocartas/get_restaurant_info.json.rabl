@@ -64,8 +64,11 @@ child @menus do
       attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
       
       
-      child(:dish_variations, :if => lambda { |d| d.dish_variations.length>0 }) do
-        attributes :id, :name, :price
+      child(:dish_variation_sets, :if => lambda { |d| d.dish_variation_sets.length>0 }) do
+        attributes :id, :name
+        child(:dish_variations, :if => lambda { |s| s.dish_variations.length>0 }) do
+          attributes :id, :name
+        end
       end
       
       

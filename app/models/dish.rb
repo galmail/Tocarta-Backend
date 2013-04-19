@@ -16,8 +16,8 @@ class Dish < ActiveRecord::Base
   has_many :dish_subsection_associations
 	has_many :order_items
 	has_many :comments
-	has_many :dish_variation_associations
-	has_many :dish_variations, :through => :dish_variation_associations
+	has_many :dish_variation_set_associations
+	has_many :dish_variation_sets, :through => :dish_variation_set_associations
 	has_many :dish_type_associations
 	has_many :dish_types, :through => :dish_type_associations
 	belongs_to :chain
@@ -28,7 +28,7 @@ class Dish < ActiveRecord::Base
 	)
 	#translates :name, :description, :story, :short_title, :badge_name, :fallbacks_for_empty_translations => true
 	attr_accessible :name, :active, :position, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts, :short_title, :badge_name, :photo, :rate_me
-	attr_accessible :section_ids, :subsection_ids, :dish_type_ids, :dish_variation_ids
+	attr_accessible :section_ids, :subsection_ids, :dish_type_ids, :dish_variation_set_ids
 	
 	### Validations ###
   
