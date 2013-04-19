@@ -19,6 +19,7 @@ Ext.define('TC.controller.MatrixMenu', {
       },
       
       views : [
+      	'TC.view.matrixmenu.DishTiledTitleView',
         'TC.view.matrixmenu.DishTiledComponentView',
         'TC.view.matrixmenu.DishTiledView',
         'TC.view.matrixmenu.DishImageView',
