@@ -5,6 +5,7 @@ module Subtledata
   module  Configuration
     # An array of valid keys in the options hash
     VALID_OPTIONS_KEYS = [
+      :logger,
       :adapter,
       :user_id,
       :device_id,
@@ -18,6 +19,7 @@ module Subtledata
       :url
     ].freeze
 
+    DEFAULT_LOGGER  = nil
     DEFAULT_ADAPTER = Faraday.default_adapter
 
     # By default everithing is nil
@@ -55,6 +57,7 @@ module Subtledata
 
     # Reset all configuration options to defaults
     def reset
+      self.logger        = DEFAULT_LOGGER
       self.adapter       = DEFAULT_ADAPTER
       self.user_id       = DEFAULT_USER_ID
       self.device_id     = DEFAULT_DEVICE_ID
