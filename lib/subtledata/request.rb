@@ -1,7 +1,8 @@
 module Subtledata
   # Defines HTTP request methods
   module Request
-    DEFAULT_REQ_OPTS = {raw: false, unformatted: false, no_response_wrapper: false, boolean: false}
+    # format_out can be: false, boolean or parse
+    DEFAULT_REQ_OPTS = {raw: false, format_options: true, format_out: false, no_response_wrapper: false }
 
     # Perform an HTTP GET request
     def get(path, options={}, request_opts={})
@@ -30,7 +31,7 @@ module Subtledata
       request_opts = DEFAULT_REQ_OPTS.merge(request_opts)
 
       response = connection(request_opts[:raw]).send(method) do |request|
-        options = formatted_options(options) unless request_opts[:unformatted]
+        options = formatted_options(options) if request_opts[:format_options]
 
         case method
         when :get, :delete
@@ -43,7 +44,7 @@ module Subtledata
 
       return response if request_opts[:raw]
       return response.body if request_opts[:no_response_wrapper]
-      return Response.create( response.body, request_opts[:boolean] )
+      return Response.create( response.body, request_opts[:format_out] )
     end
 
     def formatted_options(options)

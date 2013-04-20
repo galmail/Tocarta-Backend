@@ -19,23 +19,9 @@ module Subtledata
       # Set user GPS location
       def set_gps_location(*args)
         basic_check(args)
-        r = get(@base, { "0105#{@session_token}" => args }, {boolean: true})
+        r = get(@base, { "0105#{@session_token}" => args }, {format_out: 'boolean'})
       end
 
-      private
-
-      def basic_return(output)
-        return true  if output == '1'
-        return false if output == '0'
-      end
-
-      def basic_check(*args)
-        raise ArgumentError, "need @session_token" if     @session_token.nil?
-        raise ArgumentError, "args must be array"  unless args.is_a?(Array)
-        rescue ArgumentError => e
-          puts e.message
-          puts e.backtrace.inspect
-      end
     end
   end
 end
