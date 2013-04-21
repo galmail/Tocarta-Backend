@@ -21,7 +21,15 @@ If database model has changed:
 
 $ heroku rake db:migrate
 
-Also check APIs are working nice at: api.html
+################### Working with the API ######################
+
+Check APIs at: http://localhost:3000/api
+
+To make changes in the API Console:
+
+1. Review and make changes in the file: tocarta-wadl.xml (in the root directory)
+2. Login to https://apigee.com/togo (dev@tocarta.es/tcDevTe4m)
+3. Upload the file and save. Then refresh the API Console Page.
 
 #######################################################
 
