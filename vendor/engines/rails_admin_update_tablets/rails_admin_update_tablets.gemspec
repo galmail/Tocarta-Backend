@@ -7,11 +7,11 @@ require "rails_admin_update_tablets/version"
 Gem::Specification.new do |s|
   s.name        = "rails_admin_update_tablets"
   s.version     = RailsAdminUpdateTablets::VERSION
-  s.authors     = ["TODO: Gal Dubitski"]
-  s.email       = ["TODO: gal@tocarta.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of RailsAdminUpdateTablets."
-  s.description = "TODO: Description of RailsAdminUpdateTablets."
+  s.authors     = ["Gal Dubitski"]
+  s.email       = ["gal@tocarta.com"]
+  s.homepage    = "http://tocarta.es"
+  s.summary     = "Summary of RailsAdminUpdateTablets."
+  s.description = "Description of RailsAdminUpdateTablets."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 

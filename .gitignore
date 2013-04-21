@@ -23,3 +23,8 @@
 
 # Ignore RubyMine IDE generated files.
 .idea/
+
+# Ignore database files
+/db/schema.*
+/config/database.yml
+

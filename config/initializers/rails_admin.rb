@@ -61,7 +61,7 @@ RailsAdmin.config do |config|
     show_in_app
     import do
       visible do
-        bindings[:abstract_model].model.to_s == "Menu"
+        bindings[:abstract_model].model.to_s == "Dish"
       end
     end
     update_tablet do
@@ -201,6 +201,26 @@ RailsAdmin.config do |config|
     end
   end
   
+  ######## DishVariation Model ########
+  
+  config.model DishVariation do
+    label 'Dish Variation'
+    label_plural 'Dish Variations'
+    list do
+      exclude_fields :id, :position
+    end
+  end
+  
+  ######## DishVariationSet Model ########
+  
+  config.model DishVariationSet do
+    label 'Dish Variation Set'
+    label_plural 'Dish Variation Sets'
+    list do
+      exclude_fields :id, :dishes
+    end
+  end
+  
   ######## DishType Model ########
   
   config.model DishType do
@@ -218,11 +238,11 @@ RailsAdmin.config do |config|
     label_plural 'Dishes'
     list do
       exclude_fields :id, :combo, :description, :reviews, :story, :video, :nutrition_facts, :photo
-      exclude_fields :badge_name, :short_title, :order_items, :comments, :dish_variations, :dish_type_associations, :dish_types, :dish_section_associations, :dish_subsection_associations
+      exclude_fields :badge_name, :short_title, :order_items, :comments, :dish_variation_sets, :dish_variation_set_associations, :dish_type_associations, :dish_types, :dish_section_associations, :dish_subsection_associations
     end
     edit do
       exclude_fields :id, :combo, :reviews, :story, :nutrition_facts
-      exclude_fields :order_items, :comments, :dish_variations, :dish_type_associations, :dish_section_associations, :dish_subsection_associations
+      exclude_fields :order_items, :comments, :dish_variation_set_associations, :dish_type_associations, :dish_section_associations, :dish_subsection_associations
       field :rating do
         read_only true
       end
@@ -473,7 +493,7 @@ RailsAdmin.config do |config|
 end
 
 RailsAdminImport.config do |config|
-  config.model Menu do
+  config.model Dish  do
     label :name
   end
 end

@@ -169,32 +169,34 @@
 /* line 213, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra {
   width: 100%;
-  height: 90%;
-  position: relative;
 }
-/* line 218, ../../../styles/matrixmenu/main.scss */
+/* line 216, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-tabs {
   width: 60%;
-  height: 100%;
-  position: relative;
 }
-/* line 223, ../../../styles/matrixmenu/main.scss */
+/* line 219, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-tabs .tab-content {
   width: 100%;
   height: 100%;
+<<<<<<< HEAD
   position: relative !important;
+=======
+>>>>>>> dev
 }
-/* line 230, ../../../styles/matrixmenu/main.scss */
+/* line 225, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-social {
   width: 40%;
-  height: 100%;
-  position: relative;
 }
+<<<<<<< HEAD
 /* line 236, ../../../styles/matrixmenu/main.scss */
+=======
+/* line 229, ../../../styles/matrixmenu/main.scss */
+>>>>>>> dev
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-social .share {
   width: 48px;
   height: 48px;
 }
+<<<<<<< HEAD
 /* line 241, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-social .twitter {
   background-image: url("http://b2badsl.net/twitter_neue_ios_icon_by_theintenseplayer-d5fwil3.png");
@@ -209,6 +211,33 @@
 }
 /* line 251, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishTiledView .tcMatrixMenuMiniDishImageView {
+=======
+/* line 234, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-social .twitter {
+  background-image: url("http://b2badsl.net/twitter_neue_ios_icon_by_theintenseplayer-d5fwil3.png");
+}
+/* line 235, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-social .facebook {
+  background-image: url("http://www.codethemed.com/images/footer-facebook.png");
+}
+/* line 236, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-social .google {
+  background-image: url("http://lydiahutchinson.com/wp-content/uploads/2011/11/Google-Plus-1-icon.png");
+}
+/* line 244, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishTiledView {
+>>>>>>> dev
   position: relative;
-  display: inline-block !important;
+}
+/* line 249, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishTiledTitleView {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  border: 1px solid white;
+  padding: 5px;
+  z-index: 999;
 }

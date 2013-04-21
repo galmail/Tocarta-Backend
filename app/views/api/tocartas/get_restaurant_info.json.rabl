@@ -33,6 +33,10 @@ end
 child @menus do
   attributes :id, :name, :menu_type, :price
   
+  node(:theme, :unless => lambda {|m| m.skin.nil? }) do |menu|
+    menu.skin.theme.name
+  end
+  
   node(:stylesheet, :unless => lambda {|m| m.skin.nil? }) do |menu|
     menu.skin.stylesheet.url.split(ENV['S3_BUCKET']).last
   end
@@ -58,6 +62,15 @@ child @menus do
       attributes :id, :name, :price
       attributes :badge_name, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
       attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
+      
+      
+      child(:dish_variation_sets, :if => lambda { |d| d.dish_variation_sets.length>0 }) do
+        attributes :id, :name
+        child(:dish_variations, :if => lambda { |s| s.dish_variations.length>0 }) do
+          attributes :id, :name
+        end
+      end
+      
       
       node :short_title do |dish|
         if dish.short_title.nil? or dish.short_title==""

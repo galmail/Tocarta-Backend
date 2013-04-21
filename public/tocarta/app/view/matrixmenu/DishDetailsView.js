@@ -7,7 +7,7 @@
  **/
 
 Ext.define('TC.view.matrixmenu.DishDetailsView', {
-    extend : 'Ext.Container',
+    extend : 'Ext.Panel',
     requires: [ 'TC.store.Dishes' ],
     xtype : 'matrixmenu-dishdetailsview',
     
@@ -47,6 +47,7 @@ Ext.define('TC.view.matrixmenu.DishDetailsView', {
                     }
                 },
                 
+                itemId: 'dish-tabs',
                 cls: 'dish-tabs',
                 
                 items:[
@@ -54,11 +55,10 @@ Ext.define('TC.view.matrixmenu.DishDetailsView', {
                     itemId: 'dish-about',
                     cls: 'tab-content',
                     title: 'Acerca del plato',
-                    html: 'Acerca de'
+                    tpl: '{description}'
                 },
                 {
                     itemId: 'dish-comments',
-                    cls: 'tab-content',
                     title: $T.comments,
                     xtype: 'dish-comments-tab'
                 },
@@ -108,14 +108,23 @@ Ext.define('TC.view.matrixmenu.DishDetailsView', {
     
     onInitialize: function()
     {
-        var me = this;
+        var me = this, dataStore = this.getData()[0];
         
         this.getItems().each(function(item)
         {
+<<<<<<< HEAD
             item.setData(me.getData()[0].data);            
         });
         
         this.down('#tcDishCommentsDataItemsId').setStore(me.getData()[0].comments());
+=======
+            item.setData(dataStore.data);            
+        });
+        
+        this.down('#dish-tabs').setHeight(this.getHeight());
+        this.down('#dish-about').setData(dataStore.data);
+        this.down('#tcDishCommentsDataItemsId').setStore(dataStore.comments());
+>>>>>>> dev
     }
     
 

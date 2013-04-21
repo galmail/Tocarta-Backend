@@ -1,0 +1,451 @@
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:apigee="http://api.apigee.com/wadl/2010/07/"
+             xmlns="http://wadl.dev.java.net/2009/02"
+             xsi:schemaLocation="http://wadl.dev.java.net/2009/02 http://apigee.com/schemas/wadl-schema.xsd http://api.apigee.com/wadl/2010/07/ http://apigee.com/schemas/apigee-wadl-extensions.xsd">
+
+    <!-- Base defines the domain and base path of the endpoint -->
+    <resources base="http://beta.tocarta.com/cli">
+
+        <!-- ////////// Tablets/Clients API ////////// -->
+
+        <resource path="/c/validate_license_key.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="key" required="true" type="xsd:string" style="query" default="demo1">
+                <doc>
+                    License Key which can be found in Tablets -> access_key
+                </doc>
+            </param>
+            <method id="validate_license_key" name="GET" apigee:displayName="Validate License Key">
+
+                <apigee:tags>
+                    <apigee:tag primary="true">Tablets</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/validate_license_key.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/validate_license_key">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+
+        <resource path="/c/get_restaurant_info.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="key" required="true" type="xsd:string" style="query" default="demo1">
+                <doc>
+                    License Key which can be found in Tablets -> access_key
+                </doc>
+            </param>
+            <method id="get_restaurant_info" name="GET" apigee:displayName="Get Restaurant Info">
+                <apigee:tags>
+                    <apigee:tag primary="true">Tablets</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/get_restaurant_info.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/get_restaurant_info">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+
+        <resource path="/c/get_images_to_download.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="key" required="true" type="xsd:string" style="query" default="demo1">
+                <doc>
+                    License Key which can be found in Tablets -> access_key
+                </doc>
+            </param>
+            <param name="all" required="false" type="xsd:boolean" style="query" default="false">
+                <doc>
+                    Set to true to get all images
+                </doc>
+            </param>
+            <method id="get_images_to_download" name="GET" apigee:displayName="Get Images to Download">
+                <apigee:tags>
+                    <apigee:tag primary="true">Tablets</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/get_images_to_download.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/get_images_to_download">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+
+        <resource path="/c/confirm_downloaded_images.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="key" required="true" type="xsd:string" style="query" default="demo1">
+                <doc>
+                    License Key which can be found in Tablets -> access_key
+                </doc>
+            </param>
+            <method id="confirm_downloaded_images" name="GET" apigee:displayName="Confirm Downloaded Images">
+                <apigee:tags>
+                    <apigee:tag primary="true">Tablets</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/confirm_downloaded_images.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/confirm_downloaded_images">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+
+        <resource path="/c/call_waiter.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="key" required="true" type="xsd:string" style="query" default="demo1">
+                <doc>
+                    License Key which can be found in Tablets -> access_key
+                </doc>
+            </param>
+            <method id="call_waiter" name="GET" apigee:displayName="Call Waiter">
+                <apigee:tags>
+                    <apigee:tag primary="true">Tablets</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/call_waiter.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/call_waiter">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+
+        <resource path="/c/request_bill.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="key" required="true" type="xsd:string" style="query" default="demo1">
+                <doc>
+                    License Key which can be found in Tablets -> access_key
+                </doc>
+            </param>
+            <method id="request_bill" name="GET" apigee:displayName="Request Bill">
+                <apigee:tags>
+                    <apigee:tag primary="true">Tablets</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/request_bill.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/request_bill">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+
+        <resource path="/c/checkin_table.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="key" required="true" type="xsd:string" style="query" default="demo1">
+                <doc>
+                    License Key which can be found in Tablets -> access_key
+                </doc>
+            </param>
+            <param name="table" required="true" type="xsd:positiveInteger" style="query" default="1">
+                <doc>
+                    Table number
+                </doc>
+            </param>
+            <param name="dinners" required="true" type="xsd:positiveInteger" style="query" default="2">
+                <doc>
+                    Number of people sitting in the table
+                </doc>
+            </param>
+            <param name="language" required="true" type="xsd:string" style="query" default="es">
+                <doc>
+                    Default language
+                </doc>
+            </param>
+            <param name="new_table" required="true" type="xsd:boolean" style="query" default="false">
+                <doc>
+                    Set true if people just checked-in, false otherwise
+                </doc>
+            </param>
+            <method id="checkin_table" name="GET" apigee:displayName="Check-in">
+                <apigee:tags>
+                    <apigee:tag primary="true">Tablets</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/checkin_table.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/checkin_table">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+
+        <resource path="/c/checkout_table.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="key" required="true" type="xsd:string" style="query" default="demo1">
+                <doc>
+                    License Key which can be found in Tablets -> access_key
+                </doc>
+            </param>
+            <method id="checkout_table" name="GET" apigee:displayName="Check-out">
+                <apigee:tags>
+                    <apigee:tag primary="true">Tablets</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/checkout_table.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/checkout_table">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+
+        <resource path="/c/get_sent_order_items.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="key" required="true" type="xsd:string" style="query" default="demo1">
+                <doc>
+                    License Key which can be found in Tablets -> access_key
+                </doc>
+            </param>
+            <method id="get_sent_order_items" name="GET" apigee:displayName="Get Ordered Items">
+                <apigee:tags>
+                    <apigee:tag primary="true">Tablets</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/get_sent_order_items.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/get_sent_order_items">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+
+        <resource path="/c/make_order.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="key" required="true" type="xsd:string" style="query" default="demo1">
+                <doc>
+                    License Key which can be found in Tablets -> access_key
+                </doc>
+            </param>
+            <method id="make_order" name="POST" apigee:displayName="Make Order">
+                <apigee:tags>
+                    <apigee:tag primary="true">Tablets</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/make_order.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/make_order">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+
+        <resource path="/c/im_alive.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="key" required="true" type="xsd:string" style="query" default="demo1">
+                <doc>
+                    License Key which can be found in Tablets -> access_key
+                </doc>
+            </param>
+            <method id="im_alive" name="GET" apigee:displayName="Is tablet alive?">
+                <apigee:tags>
+                    <apigee:tag primary="true">Tablets</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/im_alive.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/im_alive">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+
+        <!-- ////////// Command Center API ////////// -->
+
+        <resource path="/r/get_restaurant_situation.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="key" required="true" type="xsd:string" style="query" default="demo1">
+                <doc>
+                    License Key which can be found in Tablets -> access_key
+                </doc>
+            </param>
+            <param name="num_activities" required="false" type="xsd:positiveInteger" style="query" default="20">
+                <doc>
+                    Max number of activities to display
+                </doc>
+            </param>
+            <method id="get_restaurant_situation" name="GET" apigee:displayName="Get Restaurant Activities">
+                <apigee:tags>
+                    <apigee:tag primary="true">Command Center</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/get_restaurant_situation.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/get_restaurant_situation">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+
+        <resource path="/r/ack_activity.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="key" required="true" type="xsd:string" style="query" default="demo1">
+                <doc>
+                    License Key which can be found in Tablets -> access_key
+                </doc>
+            </param>
+            <param name="activity_id" required="true" type="xsd:positiveInteger" style="query" default="1">
+                <doc>
+                    Activity id to ack
+                </doc>
+            </param>
+            <method id="ack_activity" name="GET" apigee:displayName="Ack Activity">
+                <apigee:tags>
+                    <apigee:tag primary="true">Command Center</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/ack_activity.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/ack_activity">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+
+        <resource path="/r/whos_alive.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="key" required="true" type="xsd:string" style="query" default="demo1">
+                <doc>
+                    License Key which can be found in Tablets -> access_key
+                </doc>
+            </param>
+            <param name="checked" required="false" type="xsd:string" style="query" default="yes">
+                <doc>
+                    Checked property
+                </doc>
+            </param>
+            <method id="whos_alive" name="GET" apigee:displayName="Get Tablets Alive">
+                <apigee:tags>
+                    <apigee:tag primary="true">Command Center</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/whos_alive.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/whos_alive">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+        
+        <!-- ////////// Analytics API ////////// -->
+        
+        <resource path="/a/get_last_comments.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="restaurant_id" required="true" type="xsd:integer" style="query" default="1">
+                <doc>
+                    Restaurant unique ID
+                </doc>
+            </param>
+            <method id="get_last_comments" name="GET" apigee:displayName="Get Last Comments">
+                <apigee:tags>
+                    <apigee:tag primary="true">Analytics</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/get_last_comments.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/get_last_comments">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+        
+        <resource path="/a/waiters_ack_timing.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="restaurant_id" required="true" type="xsd:integer" style="query" default="1">
+                <doc>
+                    Restaurant unique ID
+                </doc>
+            </param>
+            <method id="waiters_ack_timing" name="GET" apigee:displayName="Waiters Timing Performance">
+                <apigee:tags>
+                    <apigee:tag primary="true">Analytics</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/waiters_ack_timing.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/waiters_ack_timing">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+        
+        <resource path="/a/most_ordered_dishes.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="restaurant_id" required="true" type="xsd:integer" style="query" default="1">
+                <doc>
+                    Restaurant unique ID
+                </doc>
+            </param>
+            <method id="most_ordered_dishes" name="GET" apigee:displayName="Most Ordered Dishes">
+                <apigee:tags>
+                    <apigee:tag primary="true">Analytics</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/most_ordered_dishes.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/most_ordered_dishes">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+
+    </resources>
+
+</application>
+

@@ -13,6 +13,7 @@ Ext.define('TC.view.matrixmenu.DishTiledView', {
     config: {
         baseCls: 'tcMatrixMenuDishTiledView',
         
+        layout: 'hbox',
         items: null
 
     },

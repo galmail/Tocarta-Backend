@@ -212,13 +212,9 @@
     
     .dish-extra {
       width: 100%;
-      height: 90%;
-      position: relative;
       
       .dish-tabs {
         width: 60%;
-        height: 100%;
-        position: relative;
         
         .tab-content {
           width: 100%;
@@ -231,7 +227,6 @@
         width: 40%;
         height: 100%;
         position: relative;
-        
         .share
         {
           width: 48px;
@@ -247,11 +242,23 @@
   }
   
   // DishTiledView
-  .tcMatrixMenuDishTiledView .tcMatrixMenuMiniDishImageView
+  .tcMatrixMenuDishTiledView
   {
     position: relative;
-    display: inline-block !important;
   }
+  
+    .tcMatrixMenuDishTiledTitleView
+    {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      background-color: black;
+      color: white;
+      font-weight: bold;
+      border: 1px solid white;
+      padding: 5px;
+      z-index: 999;
+    }
   
 }
 

@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell do |shell|
     packages = "libxslt-dev libxml2-dev sqlite3 libsqlite3-dev"
     shell.inline = "sudo apt-get install #{packages}"
-    shell.inline = "alias 'r=rails'"
+    shell.inline = "echo alias 'r=rails' >> /home/vagrant/.bashrc"
   end
 
 end
