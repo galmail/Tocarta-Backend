@@ -23,7 +23,8 @@ $ bundle install
 
 4. Pull database from server
 
-$ gem install taps
+** Download and install PostgreSQL: http://postgresapp.com **
+
 $ heroku db:pull --app tocarta-admin-staging
 
 5. Start server
