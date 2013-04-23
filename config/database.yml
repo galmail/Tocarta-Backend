@@ -6,7 +6,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: pequecanciones_dev
+  database: tocarta_dev
   pool: 5
   username: postgres
   password: 
@@ -22,7 +22,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: pequecanciones_dev
+  database: tocarta_test
   pool: 5
   username: postgres
   password: 
