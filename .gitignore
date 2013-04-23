@@ -9,6 +9,7 @@
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
+/db/schema.*
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
@@ -23,8 +24,4 @@
 
 # Ignore RubyMine IDE generated files.
 .idea/
-
-# Ignore database files
-/db/schema.*
-/config/database.yml
 
