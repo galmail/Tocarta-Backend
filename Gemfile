@@ -8,6 +8,7 @@ gem 'jquery-rails'
 
 #### Database Setup ####
 group :development do
+  gem 'taps'
   gem 'yaml_db'
   gem 'sqlite3'
   gem 'meta_request' # for rails_panel

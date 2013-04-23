@@ -1,25 +1,55 @@
+################### INTRODUCTION ######################
+
 This project is the whole backend of Tocarta and serves for 2 purposes:
 
 1. For administration purpose
-2. It gives APIs for all tablets
+2. Provide APIs for all tablets and mobile phones
 
-Environments: Staging and (Production+Free)
+################### INSTALLATION ######################
 
-Staging: http://tocarta-admin-staging.herokuapp.com
-Production: http://tocarta-admin.herokuapp.com
-Free Version: http://tocarta-admin-free.herokuapp.com
-Demo: http://tocarta-admin-demo.herokuapp.com
+Please follow these instructions to install the project:
 
-Pushing to environments:
+1. Inside your Workspace, clone the project using GIT
 
-$ git push staging master
-$ git push production master
-$ git push free master
-$ git push demo master
+$ git clone https://<bitbucket_username>@bitbucket.org/tocarta/tocarta-admin.git
 
-If database model has changed:
+2. Switch to dev branch
 
-$ heroku rake db:migrate
+$ git checkout dev
+
+3. Install and config all gems
+
+$ bundle install
+
+4. Pull database from server
+
+** Download and install PostgreSQL: http://postgresapp.com **
+
+$ heroku db:pull --app tocarta-admin-staging
+
+5. Start server
+
+$ rails s
+$ open http://localhost:3000
+
+################### Making changes to the project ######################
+
+Please follow these instructions to make changes to the project:
+
+1. Pull project and merge files if necessary
+
+$ git pull
+
+2. Make sure database migration is up-to-date
+
+$ rake db:migrate
+
+3. Check files before commit and commit changes
+
+$ git status
+$ git add .
+$ git commit -am "introducing feature <----> related to trello_ticket_id <----->"
+$ git push
 
 ################### Working with the API ######################
 
@@ -31,21 +61,34 @@ To make changes in the API Console:
 2. Login to https://apigee.com/togo (dev@tocarta.es/tcDevTe4m)
 3. Upload the file and save. Then refresh the API Console Page.
 
-#######################################################
+################### DEPLOY TO SERVER ######################
 
-Migration Guide
+Please follow these instructions in order to deploy to server:
 
-Move config/initializers/rails_admin.rb to config/rails_admin.rb
-In app/models/dish.rb and app/models/combo.rb comment/uncomment lines with #FIXME and git push
-heroku run rake db:migrate VERSION=20120424225809 --app tocarta-admin-staging 
-heroku run console --app tocarta-admin-staging
-Dish.all.each { |dish| ds = DishSectionAssociation.new; ds.dish = dish; ds.section = dish.section; ds.save; }
-Dish.all.each { |dish| if !dish.subsection.nil?; ds = DishSubsectionAssociation.new; ds.dish = dish; ds.subsection = dish.subsection; ds.save; end; }
-heroku run rake db:migrate --app tocarta-admin-staging
-heroku run console --app tocarta-admin-staging
-Dish.all.each { |dish| dish.chain = Chain.first; dish.save; }
-sections = Section.find(:all, :conditions => { :name => 'Bebidas' })
-sections.each { |sec| sec.dishes.each { |dish| dish.rate_me = false; dish.save; } }
-In app/models/dish.rb and app/models/combo.rb comment/uncomment lines with #FIXME and git push
-Move config/rails_admin.rb to config/initializers/rails_admin.rb
+1. Configure Heroku Remotes
+
+$ git checkout master
+$ heroku git:remote -r heroku-beta -a tocarta-admin-staging
+$ heroku git:remote -r heroku-prod -a tocarta-admin
+
+2. Merge dev into master
+
+$ git checkout dev
+$ git pull
+$ git checkout master
+$ git merge dev
+
+3. Push to Staging and test it
+
+$ git checkout master
+$ git push heroku-beta master
+$ heroku run "rake db:migrate" --app tocarta-admin-staging
+$ open http://beta.tocarta.com
+
+4. Push to Production and test it
+
+$ git checkout master
+$ git push heroku-prod master
+$ heroku run "rake db:migrate" --app tocarta-admin
+$ open http://admin.tocarta.es
 
