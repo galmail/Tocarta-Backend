@@ -63,4 +63,7 @@ TocartaAdmin::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = false
+
+  # reload file sin lib when changed
+  config.watchable_dirs['lib'] = [:rb]
 end

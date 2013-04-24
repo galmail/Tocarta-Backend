@@ -8,13 +8,15 @@ gem 'jquery-rails'
 
 #### Database Setup ####
 group :development do
+  gem 'taps'              # for heroku db:pull
   gem 'yaml_db'
   gem 'sqlite3'
-  gem 'meta_request' # for rails_panel
-  gem 'pry-rails'    # for Pry
+  gem 'meta_request'      # for rails_panel
+  gem 'pry-rails'         # for Pry
   gem "better_errors"
   gem "binding_of_caller" # for better_errors
   gem 'quiet_assets'
+  gem 'rails-erd'         # create DB diagram
 end
 
 group :production do

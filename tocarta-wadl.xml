@@ -5,7 +5,7 @@
              xsi:schemaLocation="http://wadl.dev.java.net/2009/02 http://apigee.com/schemas/wadl-schema.xsd http://api.apigee.com/wadl/2010/07/ http://apigee.com/schemas/apigee-wadl-extensions.xsd">
 
     <!-- Base defines the domain and base path of the endpoint -->
-    <resources base="http://beta.tocarta.com/cli">
+    <resources base="http://localhost:8300/cli">
 
         <!-- ////////// Tablets/Clients API ////////// -->
 
@@ -373,9 +373,9 @@
                 </doc>
             </method>
         </resource>
-        
+
         <!-- ////////// Analytics API ////////// -->
-        
+
         <resource path="/a/get_last_comments.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
@@ -398,7 +398,7 @@
                 </doc>
             </method>
         </resource>
-        
+
         <resource path="/a/waiters_ack_timing.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
@@ -421,7 +421,7 @@
                 </doc>
             </method>
         </resource>
-        
+
         <resource path="/a/most_ordered_dishes.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
@@ -440,6 +440,26 @@
                 <apigee:authentication required="false"/>
                 <apigee:example url="/most_ordered_dishes.{format}"/>
                 <doc apigee:url="http://api.tocarta.com/doc/most_ordered_dishes">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+
+        <!-- ////////// SubtleData API ////////// -->
+
+        <resource path="/sd/get_session_token.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <method id="get_session_tokan" name="GET" apigee:displayName="Get Subtledata session token">
+                <apigee:tags>
+                    <apigee:tag primary="true">Subtledata</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/get_session_token.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/subtledata">
                     This is the documentation for this method...
                 </doc>
             </method>

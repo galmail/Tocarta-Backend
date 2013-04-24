@@ -64263,22 +64263,14 @@ Ext.define('TC.view.help.HelpView', {
 
 Ext.define('TC.view.matrixmenu.MatrixMenu', {
 	extend: 'Ext.Panel',
-	requires: [],
+	
 	xtype: 'matrix-menu',
+	
 	config: {
 		cls: 'tcMatrixMenu',
 		layout: 'vbox',
+		
 		items: [
-			{
-				cls : 'tcMatrixMenuTitle',
-				layout: {
-					type: 'hbox',
-					pack: 'start',
-					align: 'center'
-				},
-				items: [
-				]
-			}
 		]
 	}
 });

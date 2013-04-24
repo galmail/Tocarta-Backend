@@ -65,6 +65,7 @@ GEM
       sass (~> 3.2)
     builder (3.0.4)
     cancan (1.6.9)
+    choice (0.1.6)
     chronic (0.9.0)
     chronic18n (0.0.4)
       chronic (>= 0.2.3)
@@ -179,6 +180,11 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
+    rails-erd (1.1.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      choice (~> 0.1.6)
+      ruby-graphviz (~> 1.0.4)
     rails_admin (0.4.4)
       bootstrap-sass (~> 2.2)
       builder (~> 3.0)
@@ -205,13 +211,19 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     remotipart (1.0.5)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
+    ruby-graphviz (1.0.8)
     safe_yaml (0.7.1)
     sass (3.2.5)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    sequel (3.20.0)
     signature (0.1.6)
+    sinatra (1.0)
+      rack (>= 1.0)
     slop (3.4.4)
     sprockets (2.2.2)
       hike (~> 1.2)
@@ -219,6 +231,11 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.7)
+    taps (0.3.24)
+      rack (>= 1.0.1)
+      rest-client (>= 1.4.0, < 1.7.0)
+      sequel (~> 3.20.0)
+      sinatra (~> 1.0.0)
     thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -267,11 +284,13 @@ DEPENDENCIES
   quiet_assets
   rabl
   rails (= 3.2.13)
+  rails-erd
   rails_admin
   rails_admin_import!
   rails_admin_update_tablets!
   sass-rails (~> 3.2.3)
   sqlite3
+  taps
   thin
   twitter_oauth
   uglifier (>= 1.0.3)
