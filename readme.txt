@@ -77,6 +77,7 @@ $ git checkout dev
 $ git pull
 $ git checkout master
 $ git merge dev
+$ git push
 
 3. Push to Staging and test it
 
