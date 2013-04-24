@@ -225,9 +225,19 @@ RailsAdmin.config do |config|
   
   config.model DishType do
     label 'Food Type'
-    label_plural 'Food Type'
+    label_plural 'Food Types'
     list do
       exclude_fields :id, :position, :dish_class, :dish_type_associations, :dishes
+    end
+  end
+  
+  ######## NutritionFact Model ########
+  
+  config.model NutritionFact do
+    label 'Nutrition Fact'
+    label_plural 'Nutrition Facts'
+    list do
+      exclude_fields :id
     end
   end
   

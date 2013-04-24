@@ -3,10 +3,6 @@
 
 class Dish < ActiveRecord::Base
   before_save :associate_chain
-  # FIXME comment these lines after migration
-  # belongs_to :section
-  # belongs_to :subsection
-  # FIXME uncomment these lines after migration
   has_many :combos, :through => :dish_combo_associations
   has_many :dish_combo_associations
   
@@ -21,6 +17,8 @@ class Dish < ActiveRecord::Base
 	has_many :dish_type_associations
 	has_many :dish_types, :through => :dish_type_associations
 	belongs_to :chain
+	has_one  :nutrition_fact
+	
 	has_attached_file(
 	 :photo,
 	 :path => ":chain_rest_id/img/dishes/:style/dish_:id.:extension",

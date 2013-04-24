@@ -28,6 +28,7 @@ class Ability
       can [:read, :update, :create], Section, :menu => { :restaurant_id => user.chain.restaurants.collect{ |res| res.id }.flatten }
       can [:read, :update, :create], Subsection, :section => { :menu_id => user.chain.restaurants.collect{ |res| res.menus.collect{ |menu| menu.id }}.flatten }
       can [:read, :update, :create], Dish, :chain => { :user_id => user.id }
+      can :manage, NutritionFact, :dish => { :chain_id => user.chain.id }
       can [:read, :update], Comment, :restaurant => { :chain_id => user.chain.id  }
       can [:read, :create], Table, :restaurant => { :chain_id => user.chain.id  }
       can :read, Tablet, :table => { :restaurant_id => user.chain.restaurants.collect{ |res| res.id }.flatten }
@@ -48,6 +49,7 @@ class Ability
       can :manage, Section, :menu => { :restaurant_id => user.chain.restaurants.collect{ |res| res.id }.flatten }
       can :manage, Subsection, :section => { :menu_id => user.chain.restaurants.collect{ |res| res.menus.collect{ |menu| menu.id }}.flatten }
       can :manage, Dish, :chain => { :user_id => user.id }
+      can :manage, NutritionFact, :dish => { :chain_id => user.chain.id }
       can [:read, :update], Comment, :restaurant => { :chain_id => user.chain.id  }
       can :manage, Table, :restaurant => { :chain_id => user.chain.id  }
       can :manage, Tablet, :table => { :restaurant_id => user.chain.restaurants.collect{ |res| res.id }.flatten }

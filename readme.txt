@@ -1,5 +1,3 @@
-
-
 ################### INTRODUCTION ######################
 
 This project is the whole backend of Tocarta and serves for 2 purposes:
