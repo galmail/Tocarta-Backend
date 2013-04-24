@@ -17,8 +17,8 @@ class User < ActiveRecord::Base
     ['admin', 'restaurant', 'distributor']
   end
   
-	has_one :chain
-	has_one :restaurant
+	has_many :chains
+	has_many :restaurants
 	has_one :client
 
   def make_restaurant_demo
