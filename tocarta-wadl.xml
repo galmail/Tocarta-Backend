@@ -5,7 +5,7 @@
              xsi:schemaLocation="http://wadl.dev.java.net/2009/02 http://apigee.com/schemas/wadl-schema.xsd http://api.apigee.com/wadl/2010/07/ http://apigee.com/schemas/apigee-wadl-extensions.xsd">
 
     <!-- Base defines the domain and base path of the endpoint -->
-    <resources base="http://localhost:8300/cli">
+    <resources base="http://beta.tocarta.com/cli">
 
         <!-- ////////// Tablets/Clients API ////////// -->
 
@@ -452,6 +452,11 @@
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
                 <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="key" required="true" type="xsd:string" style="query" default="demo1">
+                <doc>
+                    License Key which can be found in Tablets -> access_key
+                </doc>
             </param>
             <method id="get_session_tokan" name="GET" apigee:displayName="Get Subtledata session token">
                 <apigee:tags>
