@@ -40,7 +40,7 @@ class Ability
       can :read, Theme
       can :read, Skin
       can [:update, :create], Skin, :user_id => user.id
-      can [:read, :update], Chain, :user_id => user.id
+      can [:create, :read, :update], Chain, :user_id => user.id
       can :manage, Restaurant, :chain => { :user_id => user.id }
       can :manage, RestaurantSetting, :restaurant => { :chain_id => user.chain_ids  }
       can :manage, RestaurantBanner, :restaurant => { :chain_id => user.chain_ids  }
