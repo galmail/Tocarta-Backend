@@ -136,7 +136,6 @@
   background-image: -webkit-linear-gradient(#625b5b, #000000, #000000);
   background-image: -moz-linear-gradient(#625b5b, #000000, #000000);
   background-image: -o-linear-gradient(#625b5b, #000000, #000000);
-  background-image: -ms-linear-gradient(#625b5b, #000000, #000000);
   background-image: linear-gradient(#625b5b, #000000, #000000);
 }
 /* line 33, ../../../styles/command_center/messages.scss */
@@ -145,7 +144,6 @@
   background-image: -webkit-linear-gradient(#333333, #625b5b);
   background-image: -moz-linear-gradient(#333333, #625b5b);
   background-image: -o-linear-gradient(#333333, #625b5b);
-  background-image: -ms-linear-gradient(#333333, #625b5b);
   background-image: linear-gradient(#333333, #625b5b);
 }
 /* line 36, ../../../styles/command_center/messages.scss */
@@ -300,7 +298,7 @@
   /* value = (:before left) + (:before border-left) - (:after border-left) */
   border-width: 13px 13px 0;
   border-style: solid;
-  border-color: #fff transparent;
+  border-color: white transparent;
   /* reduce the damage in FF3.0 */
   display: block;
   width: 0;
@@ -329,7 +327,7 @@
   left: -21px;
   /* value = - border-left-width - border-right-width */
   border-width: 9px 21px 9px 0;
-  border-color: transparent #fff;
+  border-color: transparent white;
 }
 
 /**
@@ -355,16 +353,16 @@
 }
 
 /* Portrait */
-@media screen and (orientation:portrait) {
+@media screen and (orientation: portrait) {
   /* line 33, ../../../styles/command_center/main.scss */
   .tcViewport {
-    background: url("../img/common/bg2.png") repeat-x;
+    background: linear-gradient(#ffffff, #f0e2ca);
   }
 }
 /* Landscape */
-@media screen and (orientation:landscape) {
+@media screen and (orientation: landscape) {
   /* line 39, ../../../styles/command_center/main.scss */
   .tcViewport {
-    background: url("../img/common/bg.png") repeat-x;
+    background: linear-gradient(#ffffff, #f0e2ca);
   }
 }

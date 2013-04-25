@@ -31,13 +31,13 @@
 /* Portrait */
 @media screen and (orientation:portrait) {
   .tcViewport {
-    background: url('../img/common/bg2.png') repeat-x;
+    background: linear-gradient(color-stops(#FFFFFF, #F0E2CA));
   }
 }
 /* Landscape */
 @media screen and (orientation:landscape) {
   .tcViewport {
-    background: url('../img/common/bg.png') repeat-x;
+    background: linear-gradient(color-stops(#FFFFFF, #F0E2CA));
   }
 }
 
