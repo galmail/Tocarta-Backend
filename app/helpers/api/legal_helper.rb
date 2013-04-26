@@ -1,0 +1,2 @@
+module Api::LegalHelper
+end
