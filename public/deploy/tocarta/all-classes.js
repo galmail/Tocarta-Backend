@@ -74045,5 +74045,3 @@ Ext.define('TC.view.settings.SettingsView', {
 	
 });
 
-
-

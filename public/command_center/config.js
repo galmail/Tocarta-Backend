@@ -120,12 +120,14 @@ $tc.alertMsg = function(msg,callback){
 	Ext.Msg.alert('',msg,callback);
 }
 
+/*
 Ext.require([
 	'Ext.util.Inflector'
 ], function(){
 	// lets add some pluralizations
 	Ext.util.Inflector.plural(/(orderitem)/i, "order_items");
 });
+*/
 
 $j(document).ready(function(){
 	$j('#tcEnvironmentId').text(CURRENT_ENV);

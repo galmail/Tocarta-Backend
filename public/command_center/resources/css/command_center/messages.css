@@ -133,7 +133,6 @@
   background-image: -webkit-linear-gradient(#625b5b, #000000, #000000);
   background-image: -moz-linear-gradient(#625b5b, #000000, #000000);
   background-image: -o-linear-gradient(#625b5b, #000000, #000000);
-  background-image: -ms-linear-gradient(#625b5b, #000000, #000000);
   background-image: linear-gradient(#625b5b, #000000, #000000);
 }
 /* line 33, ../../../styles/command_center/messages.scss */
@@ -142,7 +141,6 @@
   background-image: -webkit-linear-gradient(#333333, #625b5b);
   background-image: -moz-linear-gradient(#333333, #625b5b);
   background-image: -o-linear-gradient(#333333, #625b5b);
-  background-image: -ms-linear-gradient(#333333, #625b5b);
   background-image: linear-gradient(#333333, #625b5b);
 }
 /* line 36, ../../../styles/command_center/messages.scss */

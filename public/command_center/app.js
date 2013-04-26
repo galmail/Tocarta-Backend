@@ -7,6 +7,7 @@ Ext.Loader.setConfig({ enabled : true });
 Ext.Loader.setPath('TC', 'app');
 
 Ext.require([
+	'Ext.util.Inflector'
 	// 'TC.store.OrderItems'
 	// 'TC.store.Restaurants',
 	// 'TC.store.Menus',

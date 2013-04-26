@@ -1755,31 +1755,39 @@
           "dest": "resources/js/"
       },
       {
-          "src": "lib/pusher/*.js",
+          "src": "lib/pusher/pusher.min.js",
           "dest": "resources/js/"
       },
     	{
-          "src": "lib/jquery/*.js",
+          "src": "lib/jquery/jquery-1.7.1.min.js",
           "dest": "resources/js/"
       },
       {
-          "src": "lib/zepto/*.js",
+          "src": "lib/zepto/zepto.min.js",
           "dest": "resources/js/"
       },
       {
-          "src": "lib/phonegap/*.js",
+          "src": "lib/phonegap/cordova-2.5.0.js",
           "dest": "resources/js/"
       },
       {
-          "src": "resources/css/*.css",
+          "src": "resources/css/application.css",
           "dest": "resources/css/"
       },
       {
-          "src": "resources/i18n/operator/*.js",
+          "src": "resources/i18n/operator/es_operator.js",
           "dest": "resources/js/"
       },
       {
-          "src": "resources/i18n/user/*.js",
+          "src": "resources/i18n/user/es_user.js",
+          "dest": "resources/js/"
+      },
+      {
+          "src": "resources/i18n/user/en_user.js",
+          "dest": "resources/js/"
+      },
+      {
+          "src": "resources/i18n/user/cat_user.js",
           "dest": "resources/js/"
       },
       {
