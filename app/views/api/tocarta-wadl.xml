@@ -5,11 +5,11 @@
              xsi:schemaLocation="http://wadl.dev.java.net/2009/02 http://apigee.com/schemas/wadl-schema.xsd http://api.apigee.com/wadl/2010/07/ http://apigee.com/schemas/apigee-wadl-extensions.xsd">
 
     <!-- Base defines the domain and base path of the endpoint -->
-    <resources base="http://beta.tocarta.com/cli">
+    <resources base="http://beta.tocarta.es">
 
         <!-- ////////// Tablets/Clients API ////////// -->
 
-        <resource path="/c/validate_license_key.{format}">
+        <resource path="/cli/c/validate_license_key.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
@@ -33,7 +33,7 @@
             </method>
         </resource>
 
-        <resource path="/c/get_restaurant_info.{format}">
+        <resource path="/cli/c/get_restaurant_info.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
@@ -56,7 +56,7 @@
             </method>
         </resource>
 
-        <resource path="/c/get_images_to_download.{format}">
+        <resource path="/cli/c/get_images_to_download.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
@@ -84,7 +84,7 @@
             </method>
         </resource>
 
-        <resource path="/c/confirm_downloaded_images.{format}">
+        <resource path="/cli/c/confirm_downloaded_images.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
@@ -107,7 +107,7 @@
             </method>
         </resource>
 
-        <resource path="/c/call_waiter.{format}">
+        <resource path="/cli/c/call_waiter.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
@@ -130,7 +130,7 @@
             </method>
         </resource>
 
-        <resource path="/c/request_bill.{format}">
+        <resource path="/cli/c/request_bill.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
@@ -153,7 +153,7 @@
             </method>
         </resource>
 
-        <resource path="/c/checkin_table.{format}">
+        <resource path="/cli/c/checkin_table.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
@@ -196,7 +196,7 @@
             </method>
         </resource>
 
-        <resource path="/c/checkout_table.{format}">
+        <resource path="/cli/c/checkout_table.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
@@ -219,7 +219,7 @@
             </method>
         </resource>
 
-        <resource path="/c/get_sent_order_items.{format}">
+        <resource path="/cli/c/get_sent_order_items.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
@@ -242,7 +242,7 @@
             </method>
         </resource>
 
-        <resource path="/c/make_order.{format}">
+        <resource path="/cli/c/make_order.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
@@ -265,7 +265,7 @@
             </method>
         </resource>
 
-        <resource path="/c/im_alive.{format}">
+        <resource path="/cli/c/im_alive.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
@@ -290,7 +290,7 @@
 
         <!-- ////////// Command Center API ////////// -->
 
-        <resource path="/r/get_restaurant_situation.{format}">
+        <resource path="/cli/r/get_restaurant_situation.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
@@ -318,7 +318,7 @@
             </method>
         </resource>
 
-        <resource path="/r/ack_activity.{format}">
+        <resource path="/cli/r/ack_activity.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
@@ -346,7 +346,7 @@
             </method>
         </resource>
 
-        <resource path="/r/whos_alive.{format}">
+        <resource path="/cli/r/whos_alive.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
@@ -376,7 +376,7 @@
 
         <!-- ////////// Analytics API ////////// -->
 
-        <resource path="/a/get_last_comments.{format}">
+        <resource path="/cli/a/get_last_comments.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
@@ -399,7 +399,7 @@
             </method>
         </resource>
 
-        <resource path="/a/waiters_ack_timing.{format}">
+        <resource path="/cli/a/waiters_ack_timing.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
@@ -422,7 +422,7 @@
             </method>
         </resource>
 
-        <resource path="/a/most_ordered_dishes.{format}">
+        <resource path="/cli/a/most_ordered_dishes.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
@@ -447,7 +447,7 @@
 
         <!-- ////////// SubtleData API ////////// -->
 
-        <resource path="/sd/get_session_token.{format}">
+        <resource path="/cli/sd/get_session_token.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">
                 <doc>Response format.</doc>
                 <option value="json" mediaType="application/json"/>
@@ -469,6 +469,36 @@
                 </doc>
             </method>
         </resource>
+        
+        <!-- ////////// Legal API ////////// -->
+
+        <resource path="/legal">
+            <param name="rol" required="true" type="xsd:string" default="end_user">
+                <option value="end_user"/>
+                <option value="distributor"/>
+                <option value="restaurant"/>
+            </param>
+            <param name="locale" required="true" type="xsd:string" default="es">
+                <option value="es"/>
+                <option value="en"/>
+            </param>
+            <param name="title" required="true" type="xsd:string" style="query" default="agreement">
+                <doc>Legal Document Title (eg. agreement,terms_of_use,privacy_policy)</doc>
+            </param>
+            <method id="legal" name="GET" apigee:displayName="Get Legal Document">
+                <apigee:tags>
+                    <apigee:tag primary="true">Legal</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/legal"/>
+                <doc apigee:url="http://api.tocarta.com/doc/legal">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+        
+        
+        
 
     </resources>
 

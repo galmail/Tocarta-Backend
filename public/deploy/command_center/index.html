@@ -29,13 +29,49 @@
 		
 		<script type="text/javascript" src="app-all.js"></script>
 		
-		<script type="text/javascript">
+		<!-- <script type="text/javascript">
 			function onBodyLoad(){
       	document.addEventListener("deviceready", TC.app.mainLaunch, false);
 			}
-		</script>
+		</script> -->
 	</head>
-	<body onload="onBodyLoad()">
+	<body>
 		<div style="position: absolute;top: 10px;left: 150px;z-index: 1000;background-color: yellow;padding: 0;margin: 0;" id="tcEnvironmentId"></div>
+		
+		<script type="text/javascript">
+			///// No conflict libraries /////
+			$z = Zepto;
+			$j = jQuery.noConflict();
+			$j(document).ready(function(){
+		    Ext.util.Inflector.plural(/(orderitem)/i, "order_items");
+		    // TC.app.mainLaunch();
+		    // document.addEventListener("deviceready", TC.app.mainLaunch, false);
+		    
+		    /*
+		    try {
+					var lang = JSON.parse(localStorage['setting-1']).language;
+					var i18Script = 'resources/js/'+lang+'_operator.js';
+					$j.getScript(i18Script, function(){
+						alert('x');
+						$j.getScript('app-all.js', function(){
+							alert('y');
+							document.addEventListener("deviceready", TC.app.mainLaunch, false);
+						});
+					});
+				}
+				catch(ex){
+					alert('err');
+					// ignore since there is no language set in localstorage
+					$j.getScript('app-all.js', function(){
+						document.addEventListener("deviceready", TC.app.mainLaunch, false);
+					});
+				}
+				*/
+			});
+		</script>
+		
+		
 	</body>
+	
+	
 </html>
