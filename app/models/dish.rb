@@ -31,7 +31,7 @@ class Dish < ActiveRecord::Base
 	### Validations ###
   
   validates :name, :price, :presence => true
-  validates_attachment_presence :photo
+  #validates_attachment_presence :photo
   validates :badge_name, :length => { :maximum => 11 }
   validate :validate_min_sections
   
