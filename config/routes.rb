@@ -65,6 +65,7 @@ TocartaAdmin::Application.routes.draw do
   # match 'cli/an/:action(.:format)', :controller => 'Api::Analytics'
   match 'cli/sd/:action(.:format)', :controller => 'Api::Subtledata'
   match 'legal(/:action)', :controller => 'Api::Legal'
+  match 'uml(/:action)', :controller => 'uml'
   
   # Twitter and Facebook
   #match '/cli/c/twitter/:action(.:format)', :controller => 'Twitter'
