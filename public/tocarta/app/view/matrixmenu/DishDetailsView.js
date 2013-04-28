@@ -62,7 +62,6 @@ Ext.define('TC.view.matrixmenu.DishDetailsView', {
                 },
                 {
                     itemId: 'dish-comments',
-                    //cls: 'tab-content',
                     title: $T.comments,
                     xtype: 'dish-comments-tab'
                 },
@@ -109,12 +108,10 @@ Ext.define('TC.view.matrixmenu.DishDetailsView', {
     onInitialize: function()
     {
         var me = this, dataStore = this.getData()[0];
-        
         this.getItems().each(function(item)
         {
             item.setData(dataStore.data);            
         });
-        
         this.down('#dish-tabs').setHeight(this.getHeight());
         this.down('#dish-about').setData(dataStore.data);
         this.down('#tcDishCommentsDataItemsId').setStore(dataStore.comments());

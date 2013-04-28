@@ -195,6 +195,6 @@ $tc.getParameterByName = function(name){
 
 $j(document).ready(function(){
 	if(CURRENT_ENV != 'prod' && CURRENT_ENV != 'open'){
-		$j('#tcEnvironmentId').html(CURRENT_ENV + ' <span style="font-size: 10px;">(<a href="#matrixmenu">MatrixMenu</a>)</a>');
+		$j('#tcEnvironmentId').html(CURRENT_ENV + ' <span style="font-size: 10px;">(<a href="#matrixmenu">MatrixMenu</a> | <a href="#slidersurvey">SliderSurvey</a>)');
 	}
 });

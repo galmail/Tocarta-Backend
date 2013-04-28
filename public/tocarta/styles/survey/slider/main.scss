@@ -1,0 +1,29 @@
+/**
+ * Slider Survey main stylesheet
+ **/
+
+.tcSurveySliderContainer {
+  
+  .tcSurveyQuestions {
+    height: 100%;
+    
+    .survey_question {
+      .question_title {
+        font-size: 30px;
+      }
+      .rating .star {
+        width: 72px;
+        height: 72px;
+        background: url("../img/common/icons/star_big_white.png") no-repeat;
+        &.selected {
+          background: url("../img/common/icons/star_big_gold.png") no-repeat;
+        }
+      }
+      
+    }
+    
+  }
+  
+  
+}
+

@@ -41,7 +41,8 @@
 @import 'order/main';
 @import 'settings/main';
 @import 'toolbars/main';
-@import 'survey/main';
+@import 'survey/basic/main';
+@import 'survey/slider/main';
 
 // 4. Include the responsive style fixes
 @import 'skins/classic1024x600';
