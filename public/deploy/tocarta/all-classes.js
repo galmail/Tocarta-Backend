@@ -1,5 +1,5 @@
 /*
-Copyright(c) 2012 Company Name
+Copyright(c) 2011 Company Name
 */
 /**
  * @private
@@ -61274,6 +61274,233 @@ Ext.define('TC.controller.MultiLang', {
   
 });
 
+/* Comentario */
+/**
+ * @class TC.controller.MatrixMenu
+ * @extends Ext.app.Controller
+ * 
+ * Controls the Matrix Menu
+ */
+Ext.define('TC.controller.MatrixMenu', {
+    extend: 'Ext.app.Controller',
+    requires: [],
+    
+    config: {
+      
+      routes: {
+        'cmp1test' : 'cmp1test',
+        'detailstest' : 'detailstest',
+        'tiletest' : 'tiletest',
+        'infinitest' : 'infinitest',
+      },
+      
+      views : [
+      	'TC.view.matrixmenu.DishTiledTitleView',
+        'TC.view.matrixmenu.DishTiledComponentView',
+        'TC.view.matrixmenu.DishTiledView',
+        'TC.view.matrixmenu.DishImageView',
+        'TC.view.matrixmenu.DishTextView',
+        'TC.view.matrixmenu.MiniDishImageView',
+        'TC.view.matrixmenu.MiniDishTextView',
+        'TC.view.matrixmenu.DishDetailsView',
+        'TC.view.matrixmenu.InfiniteMenu'
+	    ],
+      
+      refs: {
+      	// matrix menu
+      	matrixMenu: 'matrix-menu',
+      	matrixCarousel: '#matrix-carousel'
+      },
+      
+    	control: {
+	      matrixMenu: { show: 'matrixMenuShow' }
+	    }
+	    
+    },
+    
+    launch: function(){
+    	console.log('TC.controller.MatrixMenu.launch');
+    },
+    
+    matrixMenuShow: function(){
+    	console.log('TC.controller.MatrixMenu.matrixMenuShow');
+    
+        return this.infinitest();
+    
+        /*
+         * Prueba componentes Nv1
+         */
+        
+        var me = this, dish_views = [];
+        
+        TC.Restaurant.getMainMenu().sections().getAt(0).dishes().each(function(dish)
+        {
+            dish_views.push(me.printDish(dish));
+        });
+        
+        this.getMatrixMenu().setItems(
+        {
+            xtype: 'carousel', 
+            id : 'matrix-carousel',
+            direction : 'horizontal',
+            indicator: false,
+            directionLock : true, 
+            items: dish_views,
+            width: this.getMatrixMenu().element.getWidth(),
+            height: this.getMatrixMenu().element.getHeight(),
+        });
+    },
+    
+    
+    detailstest: function(){
+        console.log('TC.controller.MatrixMenu.detailstest');
+        
+         /*
+         * Prueba DishDetailsView (Nv1)
+         */
+         var dish_details = Ext.create('TC.view.matrixmenu.DishDetailsView', 
+         { 
+             data: [TC.Restaurant.getMainMenu().sections().getAt(0).dishes().getAt(0)],
+            width: this.getMatrixMenu().element.getWidth(),
+            height: this.getMatrixMenu().element.getHeight(),
+             
+         }); 
+         
+         this.getMatrixMenu().setItems(dish_details); 
+    },
+       
+    tiletest: function(){
+        console.log('TC.controller.MatrixMenu.tiletest');
+        
+        /*
+         * Prueba TiledView (Nv2)
+         */
+       this.getMatrixMenu().setItems(this.tiledView(TC.Restaurant.getMainMenu().sections().getAt(0).dishes()));
+    },
+     
+    infinitest: function()
+    {
+        console.log('TC.controller.MatrixMenu.infinitest');
+        
+        /*
+         * Prueba InfinteMenu (Nv3)
+         */
+       var me = this, infinite_items = [];
+       
+       TC.Restaurant.getMainMenu().sections().each(function(section)
+       {
+           if (section.dishes().data.length > 0)
+            infinite_items.push(me.tiledView(section));    
+       });
+       
+       
+        var container_width = this.getMatrixMenu().element.getWidth();
+        var container_height = this.getMatrixMenu().element.getHeight();
+
+        var tile_width = ((container_width * 25) / 100);
+            tile_height = ((container_height * 45) / 100);
+        
+        var infinite_menu = Ext.create('TC.view.matrixmenu.InfiniteMenu', { items: infinite_items });
+            infinite_menu.setWidth(container_width);
+            infinite_menu.setHeight(container_height);
+       
+       this.getMatrixMenu().setItems(infinite_menu);
+    },
+     
+    tiledView: function (section){
+    	console.log('TC.controller.MatrixMenu.tiledView');
+    	
+    	var me = this, dishes = section.dishes(), tiled_data = [], container_width = 0, container_height = 0, priority_sum = 0, priority_avg = 0;
+    	
+    	var container_width = this.getMatrixMenu().element.getWidth();
+    	var container_height = this.getMatrixMenu().element.getHeight();
+
+        var tile_width = ((container_width * 25) / 100);
+            tile_height = ((container_height * 45) / 100);
+            
+        console.log("Tile width:" + tile_width + " de " + container_width);
+        console.log("Tile height:" + tile_height + " de " + container_height);
+        
+        // Pinta el nombre de la seccion
+        tiled_data.push(Ext.create('TC.view.matrixmenu.DishTiledTitleView', {html: section.data.name}));
+        
+        var i = 0;
+        var current_component = null;
+        
+        dishes.each(function(dish)
+        {
+            if (i++ % 2 == 0) 
+            {
+                current_component = Ext.create('TC.view.matrixmenu.DishTiledComponentView');
+                tiled_data.push(current_component);
+            }
+            
+            var dish_view = me.printDish(dish, 'TC.view.matrixmenu.MiniDishImageView');
+                dish_view.setWidth(tile_width + "px");
+                dish_view.setHeight(tile_height + "px");
+                dish_view.element.on('tap', me.handleDishTap, me, dish);
+                
+            current_component.add(dish_view);
+        });
+        
+    	return Ext.create('TC.view.matrixmenu.DishTiledView', { scrollable: false, items: tiled_data });
+    },
+    
+   
+    printDish: function (dish, view){
+    	console.log('TC.controller.MatrixMenu.printDish');
+    	
+    	var dish_view = null;
+    	
+    	if (view != undefined)
+            dish_view = Ext.create(view, { data: [dish] });
+    	else if (dish.data.large_photo_url.length > 0)
+    		dish_view = Ext.create('TC.view.matrixmenu.DishImageView', { data: [dish] });
+	    else
+	    	dish_view = Ext.create('TC.view.matrixmenu.DishTextView', { data: [dish] }); 
+	    
+    
+        /*
+       // Para PRUEBAS: Genera una vista aleatoria para el plato 
+       var randomNumber = Math.floor(Math.random() * 3) % 2;
+       
+       switch (randomNumber)
+       {
+           
+           case 1:
+                dish_view = Ext.create('TC.view.matrixmenu.DishTextView', { data: [dish] });
+           break;
+           
+           default: 
+                dish_view = Ext.create('TC.view.matrixmenu.DishImageView', { data: [dish] });
+           break;
+       }
+       */
+    
+	    return dish_view;
+    },
+    
+    handleDishTap: function(event, element, dish)
+    {
+        console.log("Dish tap handler");
+        console.log(dish.getData());
+        
+        var container_width = this.getMatrixMenu().element.getWidth();
+        var container_height = this.getMatrixMenu().element.getHeight();
+        Ext.Viewport.add([Ext.create('TC.view.matrixmenu.DishDetailsView', 
+        {       
+            centered: true,
+            modal: true,
+            hideOnMaskTap: true,
+            data: [dish],
+            width: container_width, 
+            height: container_height
+        })]);
+        
+    }
+
+});
+
 /**
  * This is a simple way to add an image of any size to your application and have it participate in the layout system
  * like any other component. This component typically takes between 1 and 3 configurations - a {@link #src}, and
@@ -64293,6 +64520,75 @@ Ext.define('TC.view.multilang.PickLanguageView', {
 			pack: 'center'
 		}
 	}
+});
+
+/**
+ * @class TC.view.matrixmenu.DishTiledTitleView
+ * @extends Ext.Container
+ *
+ * Tiled View
+ * @description This container displays a component of the tiled structure
+ **/
+
+Ext.define('TC.view.matrixmenu.DishTiledTitleView', {
+    extend: 'Ext.Panel',
+    xtype: 'matrixmenu-dishtiledtitleview',
+
+    config: {
+        baseCls: 'tcMatrixMenuDishTiledTitleView',
+        
+        html: ''
+
+    },
+
+});
+
+/**
+ * @class TC.view.matrixmenu.DishTiledComponentView
+ * @extends Ext.Container
+ *
+ * Tiled View
+ * @description This container displays a component of the tiled structure
+ **/
+
+Ext.define('TC.view.matrixmenu.DishTiledComponentView', {
+    extend: 'Ext.Container',
+    xtype: 'matrixmenu-dishtiledcomponentview',
+
+    // config: {
+        // baseCls: 'tcMatrixMenuDishTiledComponentView',
+//         
+//         
+        // items: [
+        // ]
+// 
+    // }
+
+});
+
+/**
+ * @class TC.view.matrixmenu.InfiniteMenu
+ * @extends Ext.Panel
+ *
+ * Matrix Menu Panel
+ * @description This panel displays the infinite menu
+ **/
+
+Ext.define('TC.view.matrixmenu.InfiniteMenu', {
+    extend: 'Ext.Panel',
+    
+    xtype: 'infinite-menu',
+    
+    config: {
+        cls: 'tcInfiniteMenu',
+        
+        layout: 'hbox',
+        scrollable: 'horizontal',
+        
+        items: [
+                
+        ]
+    }
 });
 
 /**
@@ -67838,6 +68134,340 @@ Ext.define('TC.view.Viewport', {
 });
 
 /**
+ * @class TC.view.matrixmenu.DishImageView
+ * @extends Ext.Container
+ *
+ * Menu Panel ItemsView
+ *
+ **/
+
+Ext.define('TC.view.matrixmenu.DishImageView', {
+	extend : 'Ext.Container',
+	requires: [ 'TC.store.Dishes' ],
+	xtype : 'matrixmenu-dishimageview',
+	
+	config : {
+		cls: 'tcMatrixMenuDishImageView',
+		layout: 'vbox',
+		listeners: {
+			initialize: 'onInitialize'
+		},
+		
+		items:[
+		{
+			xtype: 'container',
+			tpl: '<img src="{large_photo_url}" />',
+			cls: 'dish-image',
+		},
+		{
+			xtype: 'container',
+			tpl: new Ext.XTemplate(
+					'<div class="dish-name"><p>{name}</p></div>',
+					'<div class="dish-description"><p>{description}</p></div>',
+					'<div class="dish-price"><p>{price}&euro;</p></div>'
+			),
+			cls: 'dish-info'
+		}],
+		
+	},
+	
+	onInitialize: function()
+	{
+		var me = this;
+		
+		// Data hierarchy
+		this.getItems().each(function(item)
+		{
+			item.setData(me.getData()[0].data);
+		});
+	}
+	
+	
+
+});
+
+/**
+ * @class TC.view.matrixmenu.DishTextView
+ * @extends Ext.Container
+ *
+ * Menu Panel ItemsView
+ *
+ **/
+
+Ext.define('TC.view.matrixmenu.DishTextView', {
+	extend : 'Ext.Container',
+	requires: [ 'TC.store.Dishes' ],
+	xtype : 'matrixmenu-dishtextview',
+	
+	config : {
+		cls: 'tcMatrixMenuDishTextView',
+		layout: 'vbox',
+		listeners: {
+			initialize: 'onInitialize'
+		},
+		
+		items:[
+		{
+			xtype: 'container',
+			tpl: '<h1>{name}</h1>',
+			cls: 'dish-name',
+		},
+		{
+			xtype: 'container',
+			tpl: new Ext.XTemplate(
+					'<div class="dish-description"><p>{description}</p></div>',
+					'<div class="dish-price"><p>{price}&euro;</p></div>'
+			),
+			cls: 'dish-info'
+		}],
+		
+	},
+	
+	onInitialize: function()
+	{
+		var me = this;
+		
+		/* Data hierarchy */
+		this.getItems().each(function(item)
+		{
+			item.setData(me.getData()[0].data);
+		});
+	}
+	
+	
+
+});
+
+/**
+ * @class TC.view.matrixmenu.MiniDishImageView
+ * @extends Ext.Container
+ *
+ * Menu Panel ItemsView
+ *
+ **/
+
+Ext.define('TC.view.matrixmenu.MiniDishImageView', {
+	extend : 'Ext.Container',
+	requires: [ 'TC.store.Dishes' ],
+	xtype : 'matrixmenu-minidishimageview',
+	
+	config : {
+		cls: 'tcMatrixMenuMiniDishImageView',
+		layout: 'vbox',
+		listeners: {
+			initialize: 'onInitialize',
+		},
+		
+		items:[
+		{
+			xtype: 'container',
+			tpl: '<img src="{mini_photo_url}" />',
+			cls: 'dish-image',
+		},
+		{
+			xtype: 'container',
+			tpl: new Ext.XTemplate(
+					'<div class="dish-name"><p>{name}</p></div>',
+					'<div class="dish-price"><p>{price}&euro;</p></div>'
+			),
+			cls: 'dish-info'
+		}],
+		
+	},
+	
+	onInitialize: function()
+	{
+		var me = this;
+		
+		/* Data hierarchy */
+		this.getItems().each(function(item)
+		{
+			item.setData(me.getData()[0].data);
+		});
+	}
+	
+	
+
+});
+
+/**
+ * @class TC.view.matrixmenu.MiniDishTextView
+ * @extends Ext.Container
+ *
+ * Menu Panel ItemsView
+ *
+ **/
+
+Ext.define('TC.view.matrixmenu.MiniDishTextView', {
+    extend : 'Ext.Container',
+    requires: [ 'TC.store.Dishes' ],
+    xtype : 'matrixmenu-minidishtextview',
+    
+    config : {
+        cls: 'tcMatrixMenuMiniDishTextView',
+        layout: 'vbox',
+        listeners: {
+		        initialize: 'onInitialize'
+		    },
+        
+        items:[
+        {
+            xtype: 'container',
+            tpl: '<h1>{name}</h1>',
+            cls: 'dish-name',
+        },
+        {
+            xtype: 'container',
+            tpl: new Ext.XTemplate(
+                    '<div class="dish-description"><p>{description}</p></div>',
+                    '<div class="dish-price"><p>{price}&euro;</p></div>'
+            ),
+            cls: 'dish-info'
+        }],
+        
+    },
+    
+    onInitialize: function()
+    {
+        var me = this;
+        
+        /* Data hierarchy */
+        this.getItems().each(function(item)
+        {
+            item.setData(me.getData()[0].data);
+        });
+    }
+    
+    
+
+});
+
+/**
+ * @class TC.view.matrixmenu.DishDetailsView
+ * @extends Ext.Container
+ *
+ * Menu Panel ItemsView
+ *
+ **/
+
+Ext.define('TC.view.matrixmenu.DishDetailsView', {
+    extend : 'Ext.Panel',
+    requires: [ 'TC.store.Dishes' ],
+    xtype : 'matrixmenu-dishdetailsview',
+    
+    config : {
+        cls: 'tcMatrixMenuDishDetailsView',
+        layout: 'vbox',
+        listeners: {
+		        initialize: 'onInitialize'
+		    },
+        
+        items:[
+        {
+            xtype: 'container',
+            tpl: new Ext.XTemplate(
+                    '<div class="dish-name"><p>{name}</p></div>',
+                    '<div class="dish-description"><p>{description}</p></div>',
+                    '<div class="dish-price"><p>{price}&euro;</p></div>'
+            ),
+            cls: 'dish-info',
+        },
+        {
+            xtype: 'container',
+            layout: 'hbox',
+            cls: 'dish-extra',
+            
+            items: [{
+                xtype: 'tabpanel',
+                tabBarPosition: 'top',
+                
+                layout: {
+                    animation: 'fade'
+                },
+                
+                tabBar: {
+                    cls: 'tcDishContainerTabBar',
+                    layout: {
+                        type: 'hbox',
+                        pack: 'start',
+                        align: 'center'
+                    }
+                },
+                
+                itemId: 'dish-tabs',
+                cls: 'dish-tabs',
+                
+                items:[
+                {
+                    itemId: 'dish-about',
+                    cls: 'tab-content',
+                    title: 'Acerca del plato',
+                    tpl: '{description}'
+                },
+                {
+                    itemId: 'dish-comments',
+                    //cls: 'tab-content',
+                    title: $T.comments,
+                    xtype: 'dish-comments-tab'
+                },
+                {
+                    itemId: 'dish-properties',
+                    cls: 'tab-content',
+                    title: 'Datos de nutrición',
+                    html: 'Datos nutricion'
+                },
+                {
+                    itemId: 'dish-video',
+                    title: $T.video,
+                    xtype: 'dish-video-tab'
+                }]
+            },
+            {
+                cls: 'dish-social',
+                xtype: 'container',
+                layout: 'hbox',
+                
+                items: [
+                {
+                    xtype: 'toolbar',
+                    docked: 'top',
+                    title: 'Social',
+                },
+                {
+                    xtype: 'image',
+                    cls: 'share facebook',
+                },
+                {
+                    xtype: 'image',
+                    cls: 'share twitter',
+                },
+                {
+                    xtype: 'image',
+                    cls: 'share google',
+                }]
+            }]
+        }],
+        
+    },
+    
+    onInitialize: function()
+    {
+        var me = this, dataStore = this.getData()[0];
+        
+        this.getItems().each(function(item)
+        {
+            item.setData(dataStore.data);            
+        });
+        
+        this.down('#dish-tabs').setHeight(this.getHeight());
+        this.down('#dish-about').setData(dataStore.data);
+        this.down('#tcDishCommentsDataItemsId').setStore(dataStore.comments());
+    }
+    
+
+});
+
+/**
  * @class Ext.carousel.Carousel
  * @author Jacky Nguyen <jacky@sencha.com>
  *
@@ -70777,6 +71407,28 @@ Ext.define('TC.view.survey.SurveyContainer', {
 		]
 	}
 	
+});
+
+/**
+ * @class TC.view.matrixmenu.DishTiledView
+ * @extends Ext.Container
+ *
+ * Tiled View
+ * @description This container displays products in a tiled structure
+ **/
+
+Ext.define('TC.view.matrixmenu.DishTiledView', {
+    extend: 'Ext.DataView',
+    xtype: 'matrixmenu-dishtiledview',
+
+    // config: {
+        // baseCls: 'tcMatrixMenuDishTiledView',
+//         
+        // layout: 'hbox',
+        // items: null
+// 
+    // }
+
 });
 
 /**
@@ -74044,4 +74696,6 @@ Ext.define('TC.view.settings.SettingsView', {
 	
 	
 });
+
+
 

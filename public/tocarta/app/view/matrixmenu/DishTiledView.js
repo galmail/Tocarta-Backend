@@ -10,12 +10,12 @@ Ext.define('TC.view.matrixmenu.DishTiledView', {
     extend: 'Ext.DataView',
     xtype: 'matrixmenu-dishtiledview',
 
-    config: {
-        baseCls: 'tcMatrixMenuDishTiledView',
-        
-        layout: 'hbox',
-        items: null
-
-    },
+    // config: {
+        // baseCls: 'tcMatrixMenuDishTiledView',
+//         
+        // layout: 'hbox',
+        // items: null
+// 
+    // }
 
 });

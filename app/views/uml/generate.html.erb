@@ -1,0 +1,15 @@
+<h3>Instructions to generate a pretty uml diagram</h3>
+
+<ol>
+	<li>Click <a href="http://yuml.me/diagram/plain/class/draw" target="_blank">this link</a> and copy/paste the code below</li>
+	<li>Set size to small and generate the diagram</li>
+	<li>Paste the resulting diagram in <b>app/assets/images/diagram.png</b></li>
+	<li>Check your <%=link_to 'yUML Diagram', :action=> 'index'%></li>
+</ol>
+
+<div>
+	<%= raw @yuml_code %>
+</div>
+
+
+

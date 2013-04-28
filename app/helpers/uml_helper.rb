@@ -1,0 +1,2 @@
+module UmlHelper
+end
