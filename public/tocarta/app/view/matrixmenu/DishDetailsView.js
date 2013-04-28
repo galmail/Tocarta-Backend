@@ -108,22 +108,13 @@ Ext.define('TC.view.matrixmenu.DishDetailsView', {
     onInitialize: function()
     {
         var me = this, dataStore = this.getData()[0];
-        
         this.getItems().each(function(item)
         {
-<<<<<<< HEAD
-            item.setData(me.getData()[0].data);            
-        });
-        
-        this.down('#tcDishCommentsDataItemsId').setStore(me.getData()[0].comments());
-=======
             item.setData(dataStore.data);            
         });
-        
         this.down('#dish-tabs').setHeight(this.getHeight());
         this.down('#dish-about').setData(dataStore.data);
         this.down('#tcDishCommentsDataItemsId').setStore(dataStore.comments());
->>>>>>> dev
     }
     
 
