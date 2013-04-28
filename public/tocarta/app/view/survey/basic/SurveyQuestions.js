@@ -6,7 +6,7 @@
  * @description This panel display the survey questions
  **/
 
-Ext.define('TC.view.survey.SurveyQuestions', {
+Ext.define('TC.view.survey.basic.SurveyQuestions', {
 	extend: 'Ext.DataView',
 	xtype: 'survey-questions',
 	

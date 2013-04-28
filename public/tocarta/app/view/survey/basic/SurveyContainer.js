@@ -6,8 +6,8 @@
  * @description This panel display the survey
  **/
 
-Ext.define('TC.view.survey.SurveyContainer', {
-	requires: ['TC.view.survey.SurveyDishes','TC.view.survey.SurveyQuestions','TC.view.survey.SurveyComments'],
+Ext.define('TC.view.survey.basic.SurveyContainer', {
+	requires: ['TC.view.survey.basic.SurveyDishes','TC.view.survey.basic.SurveyQuestions','TC.view.survey.basic.SurveyComments'],
 	extend: 'Ext.Panel',
 	xtype: 'survey-container',
 	

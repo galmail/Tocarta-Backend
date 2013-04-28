@@ -1,22 +1,22 @@
 /**
- * @class TC.controller.Survey
+ * @class TC.controller.survey.BasicSurvey
  * @extends Ext.app.Controller
  * 
- * The Survey Controller
- * @description controls the survey
+ * The Basic Survey Controller
+ * @description controls the basic survey, it display dishes, questions and comments
  */
-Ext.define('TC.controller.Survey', {
+Ext.define('TC.controller.survey.BasicSurvey', {
   extend: 'Ext.app.Controller',
   requires: ['TC.store.Comments'],
   config: {
   	routes: {
-      'survey': 'loadSurvey'
+      'basicsurvey': 'loadSurvey'
     },
     views: [
-    	'survey.SurveyContainer',
-    	'survey.SurveyDishes',
-    	'survey.SurveyQuestions',
-    	'survey.SurveyComments'
+    	'survey.basic.SurveyContainer',
+    	'survey.basic.SurveyDishes',
+    	'survey.basic.SurveyQuestions',
+    	'survey.basic.SurveyComments'
     ],   
     refs: {
     	survey: 'survey-container',
@@ -29,11 +29,11 @@ Ext.define('TC.controller.Survey', {
   },
   
   launch: function(){
-  	console.log('TC.controller.Survey.launch');
+  	console.log('TC.controller.BasicSurvey.launch');
   },
   
   submitSurvey: function(){
-  	console.log('TC.controller.Survey.submitSurvey');
+  	console.log('TC.controller.BasicSurvey.submitSurvey');
   	var me = this;
 		$tc.confirmMsg($T.send_survey_question,function(btn){
 			if(btn=="yes"){
@@ -102,7 +102,7 @@ Ext.define('TC.controller.Survey', {
   },
   
   showSurvey: function(survey){
-  	console.log('TC.controller.Survey.showSurvey');
+  	console.log('TC.controller.BasicSurvey.showSurvey');
   	var me = this;
   	// setting order items and questions
   	survey.down('survey-dishes').setStore(TC.SentOrderItems);
@@ -127,7 +127,7 @@ Ext.define('TC.controller.Survey', {
   },
   
   selectAnswer: function(event,a,b){
-  	console.log('TC.controller.Survey.selectAnswer');
+  	console.log('TC.controller.BasicSurvey.selectAnswer');
   	var selectedOption = event.target;
 		var selectedClass = 'x-button-pressed';
 		$j(selectedOption).addClass(selectedClass);
@@ -135,7 +135,7 @@ Ext.define('TC.controller.Survey', {
   },
   
   rate: function(event,a,b){
-  	console.log('TC.controller.Survey.rate');
+  	console.log('TC.controller.BasicSurvey.rate');
   	var star = event.target;
 		var selectedClass = 'selected';
 		$j(star).addClass(selectedClass);
@@ -152,7 +152,7 @@ Ext.define('TC.controller.Survey', {
   },
   
   loadSurvey: function(){
-  	console.log('TC.controller.Survey.loadSurvey');
+  	console.log('TC.controller.BasicSurvey.loadSurvey');
   	TC.switchView({xtype: 'survey-container'});
   }
   

@@ -6,7 +6,7 @@
  * @description This panel display the survey dishes
  **/
 
-Ext.define('TC.view.survey.SurveyDishes', {
+Ext.define('TC.view.survey.basic.SurveyDishes', {
 	extend: 'Ext.DataView',
 	xtype: 'survey-dishes',
 	

@@ -6,7 +6,7 @@
  * @description This panel display the survey comments
  **/
 
-Ext.define('TC.view.survey.SurveyComments', {
+Ext.define('TC.view.survey.basic.SurveyComments', {
 	extend: 'Ext.Panel',
 	xtype: 'survey-comments',
 	config: {

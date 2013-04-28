@@ -1,0 +1,61 @@
+/**
+ * Survey dishes stylesheet
+ **/
+/* line 5, ../../../../styles/survey/basic/dishes.scss */
+.tcSurveyDishes {
+  height: 245px;
+}
+/* line 8, ../../../../styles/survey/basic/dishes.scss */
+.tcSurveyDishes .x-dataview-container {
+  white-space: nowrap;
+}
+/* line 11, ../../../../styles/survey/basic/dishes.scss */
+.tcSurveyDishes .x-dataview-container .x-dataview-item {
+  float: left;
+  overflow: hidden;
+  padding: 10px 19px;
+  padding-top: 7px;
+}
+/* line 16, ../../../../styles/survey/basic/dishes.scss */
+.tcSurveyDishes .x-dataview-container .x-dataview-item:first-child {
+  padding-left: 38px;
+}
+/* line 19, ../../../../styles/survey/basic/dishes.scss */
+.tcSurveyDishes .x-dataview-container .x-dataview-item:last-child {
+  padding-right: 38px;
+}
+/* line 25, ../../../../styles/survey/basic/dishes.scss */
+.tcSurveyDishes .dish_eaten .rating {
+  overflow: hidden;
+}
+/* line 27, ../../../../styles/survey/basic/dishes.scss */
+.tcSurveyDishes .dish_eaten .rating .star {
+  float: left;
+  background: url("../img/common/icons/star_small_white.png") no-repeat;
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+}
+/* line 33, ../../../../styles/survey/basic/dishes.scss */
+.tcSurveyDishes .dish_eaten .rating .star.selected {
+  background: url("../img/common/icons/star_small_gold.png") no-repeat;
+}
+/* line 38, ../../../../styles/survey/basic/dishes.scss */
+.tcSurveyDishes .dish_eaten .dish_photo {
+  border: 1px solid black;
+  margin-top: 5px;
+  width: 191px;
+  height: 126px;
+  display: block;
+  border-radius: 3px;
+}
+/* line 46, ../../../../styles/survey/basic/dishes.scss */
+.tcSurveyDishes .dish_eaten .survey_dish_comment {
+  margin-top: 10px;
+  width: 191px;
+  height: 54px;
+  padding: 2px;
+  margin-left: 0px;
+  background-color: #F2F2F2;
+  font-size: 14px;
+}

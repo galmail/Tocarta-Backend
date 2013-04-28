@@ -9318,34 +9318,34 @@ input[type="search"]::-webkit-search-cancel-button {
 /**
  * Survey dishes stylesheet
  **/
-/* line 5, ../../styles/survey/dishes.scss */
+/* line 5, ../../styles/survey/basic/dishes.scss */
 .tcSurveyDishes {
   height: 245px;
 }
-/* line 8, ../../styles/survey/dishes.scss */
+/* line 8, ../../styles/survey/basic/dishes.scss */
 .tcSurveyDishes .x-dataview-container {
   white-space: nowrap;
 }
-/* line 11, ../../styles/survey/dishes.scss */
+/* line 11, ../../styles/survey/basic/dishes.scss */
 .tcSurveyDishes .x-dataview-container .x-dataview-item {
   float: left;
   overflow: hidden;
   padding: 10px 19px;
   padding-top: 7px;
 }
-/* line 16, ../../styles/survey/dishes.scss */
+/* line 16, ../../styles/survey/basic/dishes.scss */
 .tcSurveyDishes .x-dataview-container .x-dataview-item:first-child {
   padding-left: 38px;
 }
-/* line 19, ../../styles/survey/dishes.scss */
+/* line 19, ../../styles/survey/basic/dishes.scss */
 .tcSurveyDishes .x-dataview-container .x-dataview-item:last-child {
   padding-right: 38px;
 }
-/* line 25, ../../styles/survey/dishes.scss */
+/* line 25, ../../styles/survey/basic/dishes.scss */
 .tcSurveyDishes .dish_eaten .rating {
   overflow: hidden;
 }
-/* line 27, ../../styles/survey/dishes.scss */
+/* line 27, ../../styles/survey/basic/dishes.scss */
 .tcSurveyDishes .dish_eaten .rating .star {
   float: left;
   background: url("../img/common/icons/star_small_white.png") no-repeat;
@@ -9353,11 +9353,11 @@ input[type="search"]::-webkit-search-cancel-button {
   height: 32px;
   margin-right: 8px;
 }
-/* line 33, ../../styles/survey/dishes.scss */
+/* line 33, ../../styles/survey/basic/dishes.scss */
 .tcSurveyDishes .dish_eaten .rating .star.selected {
   background: url("../img/common/icons/star_small_gold.png") no-repeat;
 }
-/* line 38, ../../styles/survey/dishes.scss */
+/* line 38, ../../styles/survey/basic/dishes.scss */
 .tcSurveyDishes .dish_eaten .dish_photo {
   border: 1px solid black;
   margin-top: 5px;
@@ -9366,7 +9366,7 @@ input[type="search"]::-webkit-search-cancel-button {
   display: block;
   border-radius: 3px;
 }
-/* line 46, ../../styles/survey/dishes.scss */
+/* line 46, ../../styles/survey/basic/dishes.scss */
 .tcSurveyDishes .dish_eaten .survey_dish_comment {
   margin-top: 10px;
   width: 191px;
@@ -9380,30 +9380,30 @@ input[type="search"]::-webkit-search-cancel-button {
 /**
  * Survey questions stylesheet
  **/
-/* line 5, ../../styles/survey/questions.scss */
+/* line 5, ../../styles/survey/basic/questions.scss */
 .tcSurveyQuestions {
   padding: 5px 10px;
   height: 169px;
   background: #F1E5D2;
 }
-/* line 9, ../../styles/survey/questions.scss */
+/* line 9, ../../styles/survey/basic/questions.scss */
 .tcSurveyQuestions .survey_question {
   clear: both;
   line-height: 35px;
   overflow: hidden;
   padding-bottom: 5px;
 }
-/* line 14, ../../styles/survey/questions.scss */
+/* line 14, ../../styles/survey/basic/questions.scss */
 .tcSurveyQuestions .survey_question .question_title {
   float: left;
   font-size: 20px;
   margin-top: 10px;
 }
-/* line 19, ../../styles/survey/questions.scss */
+/* line 19, ../../styles/survey/basic/questions.scss */
 .tcSurveyQuestions .survey_question .rating {
   float: right;
 }
-/* line 21, ../../styles/survey/questions.scss */
+/* line 21, ../../styles/survey/basic/questions.scss */
 .tcSurveyQuestions .survey_question .rating .star {
   float: left;
   background: url("../img/common/icons/star_med_white.png") no-repeat;
@@ -9411,7 +9411,7 @@ input[type="search"]::-webkit-search-cancel-button {
   height: 48px;
   margin-left: 4px;
 }
-/* line 27, ../../styles/survey/questions.scss */
+/* line 27, ../../styles/survey/basic/questions.scss */
 .tcSurveyQuestions .survey_question .rating .star.selected {
   background: url("../img/common/icons/star_med_gold.png") no-repeat;
 }
@@ -9571,32 +9571,32 @@ input[type="search"]::-webkit-search-cancel-button {
 /**
  * Survey comments stylesheet
  **/
-/* line 7, ../../styles/survey/comments.scss */
+/* line 7, ../../styles/survey/basic/comments.scss */
 .tcSurveyComments {
   padding: 5px 10px;
   background: #f1e5d0;
   height: 85px;
 }
-/* line 11, ../../styles/survey/comments.scss */
+/* line 11, ../../styles/survey/basic/comments.scss */
 .tcSurveyComments label {
   font-size: 16px;
 }
-/* line 15, ../../styles/survey/comments.scss */
+/* line 15, ../../styles/survey/basic/comments.scss */
 .tcSurveyComments .tcSurveyCommentsNameContainer {
   width: 200px;
 }
-/* line 18, ../../styles/survey/comments.scss */
+/* line 18, ../../styles/survey/basic/comments.scss */
 .tcSurveyComments .tcSurveyCommentsNameContainer .tcSurveyCommentsName input {
   display: block;
   margin-top: 3px;
   height: 36px;
   padding: 0 3px;
 }
-/* line 27, ../../styles/survey/comments.scss */
+/* line 27, ../../styles/survey/basic/comments.scss */
 .tcSurveyComments .tcSurveyCommentsDetailsContainer {
   width: 662px;
 }
-/* line 30, ../../styles/survey/comments.scss */
+/* line 30, ../../styles/survey/basic/comments.scss */
 .tcSurveyComments .tcSurveyCommentsDetailsContainer .tcSurveyCommentsDetails .tcSurveyGeneralComment {
   height: 36px;
   width: 100%;
@@ -9604,7 +9604,7 @@ input[type="search"]::-webkit-search-cancel-button {
   margin-top: 3px;
   padding: 7px 5px;
 }
-/* line 40, ../../styles/survey/comments.scss */
+/* line 40, ../../styles/survey/basic/comments.scss */
 .tcSurveyComments .tcSurveyCommentsBtn.x-button {
   margin-left: 10px;
   margin-top: 24px;
@@ -9616,31 +9616,53 @@ input[type="search"]::-webkit-search-cancel-button {
   background-image: -webkit-linear-gradient(#625b5b, #000000, #000000);
   background-image: linear-gradient(#625b5b, #000000, #000000);
 }
-/* line 48, ../../styles/survey/comments.scss */
+/* line 48, ../../styles/survey/basic/comments.scss */
 .tcSurveyComments .tcSurveyCommentsBtn.x-button.x-button-pressing, .tcSurveyComments .tcSurveyCommentsBtn.x-button.x-button-pressed {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(100%, #625b5b));
   background-image: -webkit-linear-gradient(#333333, #625b5b);
   background-image: linear-gradient(#333333, #625b5b);
 }
-/* line 51, ../../styles/survey/comments.scss */
+/* line 51, ../../styles/survey/basic/comments.scss */
 .tcSurveyComments .tcSurveyCommentsBtn.x-button.x-button-action {
   color: white;
 }
 
-/* line 9, ../../styles/survey/main.scss */
+/* line 9, ../../styles/survey/basic/main.scss */
 .tcSurveyContainer {
   border: 8px solid black;
   border-top: 0;
   border-radius: 8px;
   background: transparent;
 }
-/* line 14, ../../styles/survey/main.scss */
+/* line 14, ../../styles/survey/basic/main.scss */
 .tcSurveyContainer .tcSurveyTitle {
   position: relative;
   background-color: black;
   color: white;
   padding: 3px 5px;
   font-weight: bold;
+}
+
+/**
+ * Slider Survey main stylesheet
+ **/
+/* line 7, ../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyQuestions {
+  height: 100%;
+}
+/* line 11, ../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyQuestions .survey_question .question_title {
+  font-size: 30px;
+}
+/* line 14, ../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyQuestions .survey_question .rating .star {
+  width: 72px;
+  height: 72px;
+  background: url("../img/common/icons/star_big_white.png") no-repeat;
+}
+/* line 18, ../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyQuestions .survey_question .rating .star.selected {
+  background: url("../img/common/icons/star_big_gold.png") no-repeat;
 }
 
 /***

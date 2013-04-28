@@ -303,7 +303,7 @@ Ext.define('TC.controller.Main', {
     
     showSurvey: function(){
     	console.log('TC.controller.Main.showSurvey');
-    	this.redirectTo('survey');
+    	this.redirectTo('basicsurvey');
     },
     
     requestBill: function(){
@@ -334,7 +334,8 @@ Ext.define('TC.controller.Main', {
 			    			Ext.Viewport.unmask();
 			    			if(ok){
 			    				TC.showMsg($T.waiter_bring_bill,'info');
-			    				me.redirectTo('survey');
+			    				if(TC.Restaurant.data.setting.show_survey)
+			    					me.redirectTo('basicsurvey');
 			    			}
 			    			else {
 			    				TC.showMsg($T.comm_error,'error');
