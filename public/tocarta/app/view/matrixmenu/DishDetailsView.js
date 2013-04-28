@@ -14,6 +14,9 @@ Ext.define('TC.view.matrixmenu.DishDetailsView', {
     config : {
         cls: 'tcMatrixMenuDishDetailsView',
         layout: 'vbox',
+        listeners: {
+		        initialize: 'onInitialize'
+		    },
         
         items:[
         {
@@ -101,10 +104,6 @@ Ext.define('TC.view.matrixmenu.DishDetailsView', {
             }]
         }],
         
-    },
-    
-    listeners: {
-        initialize: 'onInitialize'
     },
     
     onInitialize: function()

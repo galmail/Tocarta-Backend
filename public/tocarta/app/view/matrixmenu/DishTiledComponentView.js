@@ -10,13 +10,13 @@ Ext.define('TC.view.matrixmenu.DishTiledComponentView', {
     extend: 'Ext.Container',
     xtype: 'matrixmenu-dishtiledcomponentview',
 
-    config: {
-        baseCls: 'tcMatrixMenuDishTiledComponentView',
-        
-        
-        items: [
-        ]
-
-    },
+    // config: {
+        // baseCls: 'tcMatrixMenuDishTiledComponentView',
+//         
+//         
+        // items: [
+        // ]
+// 
+    // }
 
 });

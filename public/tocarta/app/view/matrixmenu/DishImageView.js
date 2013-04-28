@@ -14,6 +14,9 @@ Ext.define('TC.view.matrixmenu.DishImageView', {
 	config : {
 		cls: 'tcMatrixMenuDishImageView',
 		layout: 'vbox',
+		listeners: {
+			initialize: 'onInitialize'
+		},
 		
 		items:[
 		{
@@ -31,10 +34,6 @@ Ext.define('TC.view.matrixmenu.DishImageView', {
 			cls: 'dish-info'
 		}],
 		
-	},
-	
-	listeners: {
-		initialize: 'onInitialize'
 	},
 	
 	onInitialize: function()
