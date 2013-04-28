@@ -71,6 +71,7 @@ GEM
       chronic (>= 0.2.3)
     chronic_duration (0.9.6)
       numerizer (~> 0.1.1)
+    chunky_png (1.2.8)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.1)
@@ -83,6 +84,10 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
+    compass (0.12.2)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
     daemons (1.1.9)
     debug_inspector (0.0.2)
     devise (2.2.3)
@@ -99,6 +104,7 @@ GEM
     font-awesome-sass-rails (3.0.0.1)
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
+    fssm (0.2.10)
     haml (3.1.7)
     hike (1.2.2)
     httparty (0.10.2)
@@ -270,6 +276,7 @@ DEPENDENCIES
   chronic18n
   chronic_duration
   coffee-rails (~> 3.2.1)
+  compass
   devise
   faraday (~> 0.8.4)
   globalize3!

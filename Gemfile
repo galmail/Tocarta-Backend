@@ -17,6 +17,7 @@ group :development do
   gem "binding_of_caller" # for better_errors
   gem 'quiet_assets'
   gem 'rails-erd'         # create DB diagram
+  gem 'compass'
 end
 
 group :production do
