@@ -270,6 +270,7 @@ class Api::TocartasController < AccessController
       comment.description = comment_obj["description"]
       comment.rating = comment_obj["rating"].to_i if comment_obj["rating"].to_i>0
       comment.save
+      # update dish rating
       if !comment.dish.nil? and !comment.rating.nil?
         comment.dish.update_rating(comment.rating)
       end

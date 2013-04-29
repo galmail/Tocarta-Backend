@@ -64,6 +64,7 @@ TocartaAdmin::Application.routes.draw do
   match 'cli/r/:action(.:format)', :controller => 'Api::CommandCenter'
   # match 'cli/an/:action(.:format)', :controller => 'Api::Analytics'
   match 'cli/sd/:action(.:format)', :controller => 'Api::Subtledata'
+  match 'cli/logger/:action(.:format)', :controller => 'Api::MongoLogger'
   match 'legal(/:action)', :controller => 'Api::Legal'
   match 'uml(/:action)', :controller => 'uml'
   

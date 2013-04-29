@@ -10,6 +10,7 @@ TocartaAdmin::Application.configure do
   
   ENV['NODE_SERVER'] ||= 'http://localhost:5000'
   
+  ENV['MONGOHQ_URL'] ||= 'mongodb://tocarta:tocarta@dharma.mongohq.com:10004/AnalyticsDev'
   
   # Setting up Paperclip
   Paperclip::Attachment.default_options.merge!({

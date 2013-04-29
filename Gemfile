@@ -18,6 +18,8 @@ group :development do
   gem 'quiet_assets'
   gem 'rails-erd'         # create DB diagram
   gem 'compass'
+  gem 'mongo'
+  gem 'bson_ext'
 end
 
 group :production do
