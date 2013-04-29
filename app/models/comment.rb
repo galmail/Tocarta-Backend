@@ -1,4 +1,5 @@
 class Comment < ActiveRecord::Base
+  include MongohqLogger
   belongs_to :dish
   belongs_to :restaurant
   belongs_to :client
@@ -7,12 +8,6 @@ class Comment < ActiveRecord::Base
 	attr_accessible :dish_id, :restaurant_id
 	after_save :logme
 	
-	
 	# TODO capture everytime the comment is approved (or disapproved) and update dish rating
-	
-	def logme
-	  Mongo.log(self)
-	end
-	
 	
 end

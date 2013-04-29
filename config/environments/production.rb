@@ -6,6 +6,8 @@ TocartaAdmin::Application.configure do
   
   ENV['NODE_SERVER'] ||= 'http://tocarta-node.herokuapp.com'
   
+  ENV['MONGOHQ_URL'] ||= 'mongodb://tocarta:tocarta@dharma.mongohq.com:10007/Analytics'
+  
   Paperclip::Attachment.default_options.merge!({
     :storage => :s3,
     :bucket => ENV['S3_BUCKET'],
