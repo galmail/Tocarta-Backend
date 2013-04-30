@@ -9,7 +9,7 @@ body {
 }
 
 
-.login_view {
+.login_view, .singup {
   width: 320px;
   padding: 160px 0 0;
   margin: auto;
@@ -47,7 +47,7 @@ body {
       color: #777;
       font-size: 14px;
     }
-    .input {
+    input {
       font-weight: 200;
       font-size: 24px;
       line-height: 1;
