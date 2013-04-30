@@ -17,6 +17,7 @@ group :development do
   gem "binding_of_caller" # for better_errors
   gem 'quiet_assets'
   gem 'rails-erd'         # create DB diagram
+  gem 'annotate'
 end
 
 group :production do
@@ -34,6 +35,7 @@ gem 'rails_admin_import', :git => "git://github.com/naveed-ahmad/rails_admin_imp
 # gem 'rails_admin', :git => 'git://github.com/tocarta/rails_admin.git'
 gem 'devise'  # authentication
 gem 'cancan'  # authorization
+gem 'rolify'
 
 #### Ruby API Builder Language ####
 gem 'rabl'
