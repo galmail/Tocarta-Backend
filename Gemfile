@@ -83,6 +83,8 @@ group :assets do
 end
 gem 'sass-rails',   '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
+gem "haml-rails"
+gem 'simple_form'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
