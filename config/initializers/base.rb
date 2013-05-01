@@ -1,2 +1,2 @@
 # Load config file
-Application = YAML.load_file("#{Rails.root}/config/application.yml")[Rails.env]
+Application = YAML.load(ERB.new(File.read("#{Rails.root}/config/application.yml")).result)[Rails.env]

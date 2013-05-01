@@ -3,7 +3,8 @@ TocartaAdmin::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   mount RailsAdminImport::Engine => '/rails_admin_import', :as => 'rails_admin_import'
 
-  devise_for :users
+  # Use custom controller
+  devise_for :users, controllers: {:registrations => "users/registrations"}
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

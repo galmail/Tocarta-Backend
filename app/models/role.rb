@@ -3,4 +3,9 @@ class Role < ActiveRecord::Base
   belongs_to :resource, :polymorphic => true
 
   scopify
+  
+  # Clean roles list to use in public views
+  def self.roles_clean
+    Application['roles'] - ['admin']
+  end
 end

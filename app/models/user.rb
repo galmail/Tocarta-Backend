@@ -7,13 +7,17 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable, :recoverable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :rol
 
   after_create :make_restaurant_demo
 
   has_many :chains
   has_many :restaurants
   has_one  :client
+
+  def rol
+    @rol || 'user'
+  end
 
   private
 

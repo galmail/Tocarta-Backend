@@ -6,6 +6,7 @@
       = f.input :email, :required => true, :autofocus => true
       = f.input :password, :required => true
       = f.input :password_confirmation, :required => true
+      = f.input :rol, label: 'Tipo de usuario', :as => :select, :collection => Role.roles_clean, selected: 'user'
     .form-actions
       = f.button :submit, "Sign up"
   = render "devise/shared/links"
