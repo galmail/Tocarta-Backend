@@ -2,21 +2,20 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    
-    
+
     can :access, :rails_admin   # grant access to rails_admin
     can :dashboard              # grant access to the dashboard
-    
+
     #cannot [:update, :destroy], User, :email => 'username@example.com' #testing
-    
+
     alias_action :update, :destroy, :create, :to => :write
-    
-    if user.role == "admin"
+
+    if user.has_role? :admin
       can :manage, :all
       can :update_tablet, :all
       cannot :import, :all
       can :import, [Dish]
-    elsif user.role == "restaurant"
+    elsif user.has_role? :restaurant
       can :read, DishType
       can :read, Theme
       can :read, Skin
@@ -35,7 +34,7 @@ class Ability
       can :read, SurveyQuestion, :chain => { :user_id => user.id }
       can :read, Order, :table => { :restaurant_id => user.chains.collect{ |c| c.restaurants.collect{ |res| res.id }}.flatten }
       cannot :import, :all
-    elsif user.role == "distributor"
+    elsif user.has_role? :distributor
       can :read, DishType
       can :read, Theme
       can :read, Skin

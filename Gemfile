@@ -17,6 +17,8 @@ group :development do
   gem "binding_of_caller" # for better_errors
   gem 'quiet_assets'
   gem 'rails-erd'         # create DB diagram
+  gem 'annotate'
+  # FIXME: estas 3 gemas no parecen adecuadas solo para este grupo
   gem 'compass'
   gem 'mongo'
   gem 'bson_ext'
@@ -37,6 +39,7 @@ gem 'rails_admin_import', :git => "git://github.com/naveed-ahmad/rails_admin_imp
 # gem 'rails_admin', :git => 'git://github.com/tocarta/rails_admin.git'
 gem 'devise'  # authentication
 gem 'cancan'  # authorization
+gem 'rolify'
 
 #### Ruby API Builder Language ####
 gem 'rabl'
@@ -84,6 +87,8 @@ group :assets do
 end
 gem 'sass-rails',   '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
+gem "haml-rails"
+gem 'simple_form'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
