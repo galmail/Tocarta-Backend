@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :rememberable, :trackable, :validatable, :recoverable
+         # :omniauthable, :omniauth_providers => [:facebook]
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :rol
@@ -15,8 +16,19 @@ class User < ActiveRecord::Base
   has_many :restaurants
   has_one  :client
 
+  has_many :authentications, :dependent => :delete_all
+
   def rol
     @rol || 'user'
+  end
+
+  def apply_omniauth(auth)
+    # In previous omniauth, 'user_info' was used in place of 'raw_info'
+    self.email = auth['extra']['raw_info']['email']
+    # Save token
+    authentications.build(:provider => auth['provider'], :uid => auth['uid'], :token => auth['credentials']['token'])
+    # FIXME: use the correct role
+    self.add_role :user
   end
 
   private
