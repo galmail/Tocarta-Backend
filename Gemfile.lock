@@ -116,10 +116,12 @@ GEM
       activesupport (>= 3.1, < 4.1)
       haml (>= 3.1, < 4.1)
       railties (>= 3.1, < 4.1)
+    hashie (2.0.4)
     hike (1.2.2)
     httparty (0.10.2)
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
+    httpauth (0.2.0)
     i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (2.2.1)
@@ -129,6 +131,8 @@ GEM
       jquery-rails
       railties (>= 3.1.0)
     json (1.7.7)
+    jwt (0.1.8)
+      multi_json (>= 1.5)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -151,7 +155,21 @@ GEM
     nokogiri (1.5.6)
     numerizer (0.1.1)
     oauth (0.4.7)
+    oauth2 (0.8.1)
+      faraday (~> 0.8)
+      httpauth (~> 0.1)
+      jwt (~> 0.1.4)
+      multi_json (~> 1.0)
+      rack (~> 1.2)
     oj (2.0.7)
+    omniauth (1.1.4)
+      hashie (>= 1.2, < 3)
+      rack
+    omniauth-facebook (1.4.1)
+      omniauth-oauth2 (~> 1.1.0)
+    omniauth-oauth2 (1.1.1)
+      oauth2 (~> 0.8.0)
+      omniauth (~> 1.0)
     orm_adapter (0.4.0)
     paper_trail (2.7.1)
       activerecord (~> 3.0)
@@ -303,7 +321,10 @@ DEPENDENCIES
   meta_request
   mongo
   newrelic_rpm
+  oauth2
   oj
+  omniauth
+  omniauth-facebook
   paperclip (~> 3.4.0)
   pg
   pry-rails

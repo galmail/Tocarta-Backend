@@ -18,7 +18,7 @@ group :development do
   gem 'quiet_assets'
   gem 'rails-erd'         # create DB diagram
   gem 'annotate'
-  # FIXME: estas 3 gemas no parecen adecuadas solo para este grupo
+  # FIXME: estas 3 gemas no parecen adecuadas para este grupo
   gem 'compass'
   gem 'mongo'
   gem 'bson_ext'
@@ -38,6 +38,9 @@ gem 'rails_admin_import', :git => "git://github.com/naveed-ahmad/rails_admin_imp
 
 # gem 'rails_admin', :git => 'git://github.com/tocarta/rails_admin.git'
 gem 'devise'  # authentication
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'oauth2'
 gem 'cancan'  # authorization
 gem 'rolify'
 
