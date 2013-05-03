@@ -13,5 +13,5 @@ test:
 production:
   <<: *defaults
   fb:
-    app_id: 201952163262122
-    secret_key: f8ba6fee165410f4c97f336ca5ca20af
+    app_id: 112211615526966
+    secret_key: fa30e7003799984805e316ffd7f1a9e2
