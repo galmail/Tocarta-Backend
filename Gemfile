@@ -52,6 +52,8 @@ gem 'oj'
 
 #### HTTP Client used for Subtledata ####
 gem "faraday", "~> 0.8.4"
+gem 'simple_oauth'
+gem 'faraday_middleware'
 
 # JSON gem
 # gem 'json'
