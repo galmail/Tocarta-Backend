@@ -11,7 +11,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource
 
     if resource.save
-      resource.add_role @rol.to_sym
+      resource.add_role @rol.to_sym unless @rol == 'admin'
+
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_up(resource_name, resource)
@@ -29,6 +30,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def update
     super
+  end
+
+  def thanks
+    
+  end
+
+  protected
+
+  # def after_sign_up_path_for(resource)
+    # '/an/example/path'
+  # end
+  # After new user is created we send it to a non-protected view, so flash can be shown
+  def after_inactive_sign_up_path_for(resource)
+    '/users/sign_in'
   end
 
   private
