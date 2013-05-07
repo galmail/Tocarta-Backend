@@ -5,11 +5,11 @@ TocartaAdmin::Application.configure do
   # ENV['S3_KEY'] ||= 'AKIAJCY5PI67O7THQ5MQ'
   # ENV['S3_SECRET'] ||= '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'
   ENV['S3_BUCKET'] ||= 'tocarta-prod'
-  ENV['S3_KEY'] ||= 'AKIAJCY5PI67O7THQ5MQ'
+  ENV['S3_KEY']    ||= 'AKIAJCY5PI67O7THQ5MQ'
   ENV['S3_SECRET'] ||= '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'
-  
+
   ENV['NODE_SERVER'] ||= 'http://localhost:5000'
-  
+
   ENV['MONGOHQ_URL'] ||= 'mongodb://tocarta:tocarta@dharma.mongohq.com:10004/AnalyticsDev'
   
   # Setting up Paperclip
@@ -41,6 +41,16 @@ TocartaAdmin::Application.configure do
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { :host => 'localhost' }
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :user_name => 'tocarta-bdb4b76c00ea2356',
+    :password => '5deabe5fba6b0100',
+    :address => 'mailtrap.io',
+    :port => '2525',
+    :authentication => :plain
+  }
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log

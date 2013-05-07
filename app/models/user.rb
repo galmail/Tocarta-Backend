@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :rememberable, :trackable, :validatable, :recoverable
+         :rememberable, :trackable, :validatable, :recoverable,
+         :confirmable
          # :omniauthable, :omniauth_providers => [:facebook]
 
   # Setup accessible (or protected) attributes for your model
@@ -40,7 +41,7 @@ class User < ActiveRecord::Base
   DEF_SECTION  = Rails.root.join('app','assets','images', 'default_section.png')
   DEF_DISH     = Rails.root.join('app','assets','images', 'default_dish.png')
   def make_restaurant_demo
-    if self.role == 'restaurant' # only for this role
+    if self.has_role? :manager # only for this role
 
       chain = Chain.create(user_id: self.id, name: "Mi Cadena de Restaurantes #{self.email}", logo: DEF_LOGO, email: self.email)
 
