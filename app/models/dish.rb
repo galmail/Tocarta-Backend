@@ -10,15 +10,18 @@ class Dish < ActiveRecord::Base
   has_many :dish_section_associations
   has_many :subsections, :through => :dish_subsection_associations
   has_many :dish_subsection_associations
-	has_many :order_items
-	has_many :comments
-	has_many :dish_variation_set_associations
-	has_many :dish_variation_sets, :through => :dish_variation_set_associations
-	has_many :dish_type_associations
-	has_many :dish_types, :through => :dish_type_associations
-	belongs_to :chain
-	has_one  :nutrition_fact
-	
+  has_many :order_items
+  has_many :comments
+  has_many :dish_variation_set_associations
+  has_many :dish_variation_sets, :through => :dish_variation_set_associations
+  has_many :dish_type_associations
+  has_many :dish_types, :through => :dish_type_associations
+  belongs_to :chain
+  has_one  :nutrition_fact
+
+  has_and_belongs_to_many :food_tags
+  attr_accessible :food_tags_id
+
 	has_attached_file(
 	 :photo,
 	 :path => ":chain_rest_id/img/dishes/:style/dish_:id.:extension",
