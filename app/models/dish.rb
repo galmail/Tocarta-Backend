@@ -5,7 +5,7 @@ class Dish < ActiveRecord::Base
   before_save :associate_chain
   has_many :combos, :through => :dish_combo_associations
   has_many :dish_combo_associations
-  
+
   has_many :sections, :through => :dish_section_associations
   has_many :dish_section_associations
   has_many :subsections, :through => :dish_subsection_associations
@@ -20,7 +20,7 @@ class Dish < ActiveRecord::Base
   has_one  :nutrition_fact
 
   has_and_belongs_to_many :food_tags
-  attr_accessible :food_tags_id
+  attr_accessible :food_tag_ids
 
 	has_attached_file(
 	 :photo,
@@ -30,9 +30,9 @@ class Dish < ActiveRecord::Base
 	translates :name, :description, :story, :short_title, :badge_name, :fallbacks_for_empty_translations => true
 	attr_accessible :name, :active, :position, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts, :short_title, :badge_name, :photo, :rate_me, :chain_id
 	attr_accessible :section_ids, :subsection_ids, :dish_type_ids, :dish_variation_set_ids
-	
-	### Validations ###
-  
+
+    ### Validations ###
+
   validates :name, :price, :presence => true
   #validates_attachment_presence :photo
   validates :badge_name, :length => { :maximum => 11 }
