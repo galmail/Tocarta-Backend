@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: food_tags
+# Table name: ingredients
 #
 #  id         :integer          not null, primary key
 #  name       :string(255)
@@ -8,8 +8,7 @@
 #  updated_at :datetime         not null
 #
 
-class FoodTag < ActiveRecord::Base
+class Ingredient < ActiveRecord::Base
   attr_accessible :name
-
   has_and_belongs_to_many :dishes
 end

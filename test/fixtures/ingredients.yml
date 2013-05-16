@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: food_tags
+# Table name: ingredients
 #
 #  id         :integer          not null, primary key
 #  name       :string(255)
@@ -8,8 +8,10 @@
 #  updated_at :datetime         not null
 #
 
-class FoodTag < ActiveRecord::Base
-  attr_accessible :name
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-  has_and_belongs_to_many :dishes
-end
+one:
+  name: MyString
+
+two:
+  name: MyString

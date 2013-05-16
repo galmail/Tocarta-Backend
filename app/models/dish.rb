@@ -1,5 +1,32 @@
-#!/bin/env ruby
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: dishes
+#
+#  id                 :integer          not null, primary key
+#  name               :string(255)
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  photo_file_name    :string(255)
+#  photo_content_type :string(255)
+#  photo_file_size    :integer
+#  photo_updated_at   :datetime
+#  active             :boolean          default(TRUE)
+#  position           :integer
+#  description        :text
+#  price              :decimal(, )
+#  rating             :decimal(, )
+#  reviews            :integer
+#  story              :text
+#  video              :string(255)
+#  nutrition_facts    :string(255)
+#  badge_name         :string(255)
+#  short_title        :string(255)
+#  rate_me            :boolean          default(TRUE)
+#  chain_id           :integer
+#
+
+#!/bin/env ruby
 
 class Dish < ActiveRecord::Base
   before_save :associate_chain
@@ -19,8 +46,11 @@ class Dish < ActiveRecord::Base
   belongs_to :chain
   has_one  :nutrition_fact
 
+  # Tag strategy
   has_and_belongs_to_many :food_tags
   attr_accessible :food_tag_ids
+  has_and_belongs_to_many :ingredients
+  attr_accessible :ingredient_ids
 
 	has_attached_file(
 	 :photo,
@@ -37,7 +67,7 @@ class Dish < ActiveRecord::Base
   #validates_attachment_presence :photo
   validates :badge_name, :length => { :maximum => 11 }
   validate :validate_min_sections
-  
+
   def badge_name_enum
     if I18n.locale.to_s=="es"
       return ['-----','nuevo', 'recomendado', 'estrella']
