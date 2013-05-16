@@ -3,7 +3,7 @@ class MigrateUserToRolify < ActiveRecord::Migration
     users = User.all
 
     users.each do |u|
-      unless r.role.nil?
+      unless u.role.nil?
         u.add_role u.role.to_sym
       end
     end
