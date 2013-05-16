@@ -1,16 +1,14 @@
 # == Schema Information
 #
-# Table name: orders
+# Table name: ingredients
 #
 #  id         :integer          not null, primary key
-#  tablet_id  :integer
-#  client_id  :integer
 #  name       :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  note       :string(255)
-#  table_id   :integer
-#  total      :decimal(, )
-#  language   :string(255)
 #
 
+class Ingredient < ActiveRecord::Base
+  attr_accessible :name
+  has_and_belongs_to_many :dishes
+end

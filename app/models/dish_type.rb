@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: dish_types
+#
+#  id                :integer          not null, primary key
+#  name              :string(255)
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  icon_file_name    :string(255)
+#  icon_content_type :string(255)
+#  icon_file_size    :integer
+#  icon_updated_at   :datetime
+#  position          :integer
+#  dish_class        :string(255)
+#  description       :string(255)
+#
+
 class DishType < ActiveRecord::Base
 	has_many :dish_type_associations
 	has_many :dishes, :through => :dish_type_associations

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507172612) do
+ActiveRecord::Schema.define(:version => 20130516145832) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -266,6 +266,34 @@ ActiveRecord::Schema.define(:version => 20130507172612) do
   end
 
   add_index "dishes", ["chain_id"], :name => "index_dishes_on_chain_id"
+
+  create_table "dishes_food_tags", :id => false, :force => true do |t|
+    t.integer "dish_id"
+    t.integer "food_tag_id"
+  end
+
+  add_index "dishes_food_tags", ["dish_id", "food_tag_id"], :name => "index_dishes_food_tags_on_dish_id_and_food_tag_id"
+  add_index "dishes_food_tags", ["food_tag_id", "dish_id"], :name => "index_dishes_food_tags_on_food_tag_id_and_dish_id"
+
+  create_table "dishes_ingredients", :id => false, :force => true do |t|
+    t.integer "dish_id"
+    t.integer "ingredient_id"
+  end
+
+  add_index "dishes_ingredients", ["dish_id", "ingredient_id"], :name => "index_dishes_ingredients_on_dish_id_and_ingredient_id"
+  add_index "dishes_ingredients", ["ingredient_id", "dish_id"], :name => "index_dishes_ingredients_on_ingredient_id_and_dish_id"
+
+  create_table "food_tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "ingredients", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "menu_settings", :force => true do |t|
     t.integer  "menu_id"

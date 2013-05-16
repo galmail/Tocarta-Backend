@@ -22,6 +22,7 @@ group :development do
   gem 'compass'
   gem 'mongo'
   gem 'bson_ext'
+  gem 'annotate'
 end
 
 group :production do

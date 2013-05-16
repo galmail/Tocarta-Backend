@@ -27,4 +27,4 @@
 
 # Ignore RubyMine IDE generated files.
 .idea/
-
+*.dump
