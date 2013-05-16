@@ -2,6 +2,7 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
 
+  config.reconfirmable = false
   config.allow_unconfirmed_access_for = 2.days
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
