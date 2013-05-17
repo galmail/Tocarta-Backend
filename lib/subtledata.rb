@@ -1,4 +1,3 @@
-# require File.expand_path('../instagram/error', __FILE__)
 require 'subtledata/configuration'
 require 'subtledata/api'
 require 'subtledata/client'

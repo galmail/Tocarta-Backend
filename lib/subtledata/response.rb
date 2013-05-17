@@ -3,18 +3,19 @@ module Subtledata
     def self.create( response, format_out )
       data = response.split('|')
 
-      # If startup method just retun session token
       if data[0] == '0000'
+        # If startup method just retun session token
         Subtledata.logger.info "* startup response"
         data[1]
       elsif format_out == 'boolean'
+        # Return boolean
         Subtledata.logger.info "* boolean response"
         return true  if data[1] == '1'
         return false if data[1] == '0'
       elsif format_out == 'parse'
+        # Parse the reponse
         Subtledata.logger.info "* parsed response"
         parse_output(data)
-        # data
       else
         Subtledata.logger.info "* general response"
         data
@@ -23,6 +24,7 @@ module Subtledata
 
     private
 
+    # Parse the response to a more human format
     # FIXME: This needs to improve
     def self.parse_output(data)
       if data[1].match(/~/)

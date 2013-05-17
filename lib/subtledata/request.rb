@@ -42,7 +42,7 @@ module Subtledata
         end
       end
 
-      return response if request_opts[:raw]
+      return response      if request_opts[:raw]
       return response.body if request_opts[:no_response_wrapper]
       return Response.create( response.body, request_opts[:format_out] )
     end
