@@ -23,6 +23,8 @@
 
 class User < ActiveRecord::Base
   rolify
+  # FIXME: i think this is dangerous, but is neccesarry for rails_admin
+  attr_accessible :role_ids
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
