@@ -20,4 +20,11 @@ class Role < ActiveRecord::Base
   def self.roles_clean
     Application['roles'] - ['admin']
   end
+
+  # Return a role given a param code
+  def self.code_to_role(r)
+    return 'restaurant'  if r == 'r'
+    return 'distributor' if r == 'd'
+    return 'user'
+  end
 end

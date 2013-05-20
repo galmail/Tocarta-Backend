@@ -1,5 +1,6 @@
 %p On Sing Up you are accepting our terms:
 %ul
+  -# NOTE: podemos filtrar por @rol, nos interesa?
   - Agreement.list.each do |a|
     %li= link_to("Agreement for #{a.rol.humanize}", "#agree_#{a.rol}", :data => {:toggle => 'modal'})
 

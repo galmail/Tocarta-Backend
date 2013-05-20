@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
   DEF_SECTION  = Rails.root.join('app','assets','images', 'default_section.png')
   DEF_DISH     = Rails.root.join('app','assets','images', 'default_dish.png')
   def make_restaurant_demo
-    if self.has_role? :manager # only for this role
+    if self.has_role? :restaurant # only for this role
 
       chain = Chain.create(user_id: self.id, name: "Mi Cadena de Restaurantes #{self.email}", logo: DEF_LOGO, email: self.email)
 
