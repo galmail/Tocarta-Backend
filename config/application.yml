@@ -1,5 +1,5 @@
 defaults: &defaults
-  roles: ['admin', 'restaurant', 'distirbutor', 'user']
+  roles: ['admin', 'restaurant', 'distributor', 'user']
   fb:
     app_id: 201952163262122
     secret_key: f8ba6fee165410f4c97f336ca5ca20af

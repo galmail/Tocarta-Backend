@@ -23,8 +23,8 @@
 
 class User < ActiveRecord::Base
   rolify
-  # FIXME: i think this is dangerous, but is neccesarry for rails_admin
-  attr_accessible :role_ids
+  # NOTE: i think this is dangerous, but is neccesarry for rails_admin
+  attr_accessible :role_ids, :rol
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
          # :omniauthable, :omniauth_providers => [:facebook]
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :rol
+  attr_accessible :email, :password, :password_confirmation, :remember_me
 
   after_create :make_restaurant_demo
 
@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
 
   has_many :authentications, :dependent => :delete_all
 
+  # If no role is defined, we define user by default
   def rol
     @rol || 'user'
   end

@@ -15,4 +15,6 @@
 
 class Agreement < ActiveRecord::Base
   attr_accessible :rol, :locale, :revision, :title, :description, :content
+
+  scope :list, select([:rol, :content])
 end

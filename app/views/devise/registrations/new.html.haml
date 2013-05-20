@@ -7,6 +7,8 @@
       = f.input :password, :required => true
       = f.input :password_confirmation, :required => true
       = f.input :rol, label: 'Tipo de usuario', :as => :select, :collection => Role.roles_clean, selected: 'user'
+    .form-agreement
+      = render "devise/shared/agreements"
     .form-actions
       = f.button :submit, "Sign up"
   = render "devise/shared/links"
