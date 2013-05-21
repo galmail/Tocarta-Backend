@@ -93,6 +93,7 @@ gem 'sass-rails',   '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
 gem "haml-rails"
 gem 'simple_form'
+gem 'country_select'
 gem 'bootstrap-sass'
 
 # To use ActiveModel has_secure_password

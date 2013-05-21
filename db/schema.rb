@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130516145832) do
+ActiveRecord::Schema.define(:version => 20130521084503) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -283,11 +283,27 @@ ActiveRecord::Schema.define(:version => 20130516145832) do
   add_index "dishes_ingredients", ["dish_id", "ingredient_id"], :name => "index_dishes_ingredients_on_dish_id_and_ingredient_id"
   add_index "dishes_ingredients", ["ingredient_id", "dish_id"], :name => "index_dishes_ingredients_on_ingredient_id_and_dish_id"
 
-  create_table "food_tags", :force => true do |t|
+  create_table "food_tag_translations", :force => true do |t|
+    t.integer  "food_tag_id"
+    t.string   "locale"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
+
+  add_index "food_tag_translations", ["food_tag_id"], :name => "index_food_tag_translations_on_food_tag_id"
+  add_index "food_tag_translations", ["locale"], :name => "index_food_tag_translations_on_locale"
+
+  create_table "ingredient_translations", :force => true do |t|
+    t.integer  "ingredient_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "ingredient_translations", ["ingredient_id"], :name => "index_ingredient_translations_on_ingredient_id"
+  add_index "ingredient_translations", ["locale"], :name => "index_ingredient_translations_on_locale"
 
   create_table "ingredients", :force => true do |t|
     t.string   "name"
@@ -608,10 +624,17 @@ ActiveRecord::Schema.define(:version => 20130516145832) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                                            :null => false
     t.datetime "updated_at",                                            :null => false
-    t.string   "role"
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string   "name"
+    t.string   "surname"
+    t.string   "city"
+    t.string   "country"
+    t.date     "birthdate"
+    t.string   "twitter"
+    t.string   "url"
+    t.string   "phone"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
