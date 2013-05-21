@@ -11,4 +11,6 @@
       = render "devise/shared/agreements"
     .form-actions
       = f.button :submit, "Sign up"
-  = render "devise/shared/links"
+      = link_to 'Login with Facebook', '/auth/facebook/', :class => 'btn btn-block'
+
+    = render "devise/shared/links"
