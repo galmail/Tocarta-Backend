@@ -1,31 +1,33 @@
 TocartaAdmin::Application.configure do
-  
-  ENV['S3_BUCKET'] ||= 'tocarta-prod'
-  ENV['S3_KEY'] ||= 'AKIAJCY5PI67O7THQ5MQ'
+
+  # FIXME: change to prod
+  ENV['S3_BUCKET'] ||= 'tocarta-test'
+  ENV['S3_KEY']    ||= 'AKIAJCY5PI67O7THQ5MQ'
   ENV['S3_SECRET'] ||= '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'
-  
+
   ENV['NODE_SERVER'] ||= 'http://tocarta-node.herokuapp.com'
-  
-  ENV['MONGOHQ_URL'] ||= 'mongodb://tocarta:tocarta@dharma.mongohq.com:10007/Analytics'
-  
+
+  # FIXME: change to prod
+  ENV['MONGOHQ_URL'] ||= 'mongodb://tocarta:tocarta@dharma.mongohq.com:10007/AnalyticsDev'
+
   Paperclip::Attachment.default_options.merge!({
     :storage => :s3,
     :bucket => ENV['S3_BUCKET'],
     :s3_credentials => {
-      :access_key_id => ENV['S3_KEY'],
+      :access_key_id     => ENV['S3_KEY'],
       :secret_access_key => ENV['S3_SECRET']
     }
   })
-  
+
   # Setting up Pusher in production
   # Pusher.app_id = '4915'
   # Pusher.key    = 'd20cf40b86a0639e33cc'
   # Pusher.secret = 'f13b3a335cc5627caacc'
-  
+
   Pusher.app_id = '17051'
   Pusher.key    = '7eb8d4a46b4a183f76e7'
   Pusher.secret = 'c5f0ad3864787f78d53f'
-  
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests

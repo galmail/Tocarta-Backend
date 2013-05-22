@@ -1,27 +1,23 @@
 TocartaAdmin::Application.configure do
-  # Settings specified here will take precedence over those in config/application.rb
-  
-  # ENV['S3_BUCKET'] ||= 'tocarta-test'
-  # ENV['S3_KEY'] ||= 'AKIAJCY5PI67O7THQ5MQ'
-  # ENV['S3_SECRET'] ||= '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'
-  ENV['S3_BUCKET'] ||= 'tocarta-prod'
+
+  ENV['S3_BUCKET'] ||= 'tocarta-test'
   ENV['S3_KEY']    ||= 'AKIAJCY5PI67O7THQ5MQ'
   ENV['S3_SECRET'] ||= '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'
 
   ENV['NODE_SERVER'] ||= 'http://localhost:5000'
 
   ENV['MONGOHQ_URL'] ||= 'mongodb://tocarta:tocarta@dharma.mongohq.com:10004/AnalyticsDev'
-  
+ 
   # Setting up Paperclip
   Paperclip::Attachment.default_options.merge!({
     :storage => :s3,
     :bucket => ENV['S3_BUCKET'],
     :s3_credentials => {
-      :access_key_id => ENV['S3_KEY'],
+      :access_key_id     => ENV['S3_KEY'],
       :secret_access_key => ENV['S3_SECRET']
     }
   })
-  
+
   # Setting up Pusher in development
   Pusher.app_id = '17050'
   Pusher.key    = 'c9c649f5255c17685066'
