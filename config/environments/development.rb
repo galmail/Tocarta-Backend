@@ -1,11 +1,8 @@
 TocartaAdmin::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
   
-  # ENV['S3_BUCKET'] ||= 'tocarta-test'
-  # ENV['S3_KEY'] ||= 'AKIAJCY5PI67O7THQ5MQ'
-  # ENV['S3_SECRET'] ||= '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'
-  ENV['S3_BUCKET'] ||= 'tocarta-prod'
-  ENV['S3_KEY']    ||= 'AKIAJCY5PI67O7THQ5MQ'
+  ENV['S3_BUCKET'] ||= 'tocarta-test'
+  ENV['S3_KEY'] ||= 'AKIAJCY5PI67O7THQ5MQ'
   ENV['S3_SECRET'] ||= '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'
 
   ENV['NODE_SERVER'] ||= 'http://localhost:5000'
