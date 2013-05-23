@@ -18,11 +18,9 @@ group :development do
   gem 'quiet_assets'
   gem 'rails-erd'         # create DB diagram
   gem 'annotate'
-  # FIXME: estas 3 gemas no parecen adecuadas para este grupo
-  gem 'compass'
+  # FIXME: estas 2 gemas no parecen adecuadas para este grupo
   gem 'mongo'
   gem 'bson_ext'
-  gem 'annotate'
 end
 
 group :production do
@@ -89,12 +87,15 @@ group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
 end
+
+gem 'sprockets'
 gem 'sass-rails',   '~> 3.2.3'
+gem 'compass'
+gem 'bootstrap-sass'
 gem 'coffee-rails', '~> 3.2.1'
 gem "haml-rails"
 gem 'simple_form'
 gem 'country_select'
-gem 'bootstrap-sass'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

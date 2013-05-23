@@ -342,6 +342,7 @@ DEPENDENCIES
   rolify
   sass-rails (~> 3.2.3)
   simple_form
+  sprockets
   sqlite3
   taps
   thin
