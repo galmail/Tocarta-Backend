@@ -47,8 +47,6 @@ class Dish < ActiveRecord::Base
   has_one  :nutrition_fact
 
   # Tag strategy
-  has_and_belongs_to_many :food_tags
-  attr_accessible :food_tag_ids
   has_and_belongs_to_many :ingredients
   attr_accessible :ingredient_ids
 
