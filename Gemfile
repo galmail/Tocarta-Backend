@@ -91,7 +91,7 @@ end
 gem 'sprockets'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'compass'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 2.3.1.0'
 gem 'coffee-rails', '~> 3.2.1'
 gem "haml-rails"
 gem 'simple_form'
