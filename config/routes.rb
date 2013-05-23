@@ -1,5 +1,9 @@
 TocartaAdmin::Application.routes.draw do
 
+  get "dashboards/index"
+
+  get "dashboards/show"
+
   get "authentications/create"
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'

@@ -15,10 +15,17 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  role                   :string(255)
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
+#  name                   :string(255)
+#  surname                :string(255)
+#  city                   :string(255)
+#  country                :string(255)
+#  birthdate              :date
+#  twitter                :string(255)
+#  url                    :string(255)
+#  phone                  :string(255)
 #
 
 

@@ -18,6 +18,14 @@ group :development do
   gem 'quiet_assets'
   gem 'rails-erd'         # create DB diagram
   gem 'annotate'
+  gem 'guard'
+  gem "guard-bundler", ">= 1.0.0"
+  gem "guard-rails", ">= 0.4.0"
+  gem "guard-rspec"
+  gem "guard-annotate"
+  gem "rb-inotify", ">= 0.9.0", :require => false
+  gem "rb-fsevent", ">= 0.9.3", :require => false
+  gem "rb-fchange", ">= 0.0.6", :require => false
   # FIXME: estas 2 gemas no parecen adecuadas para este grupo
   gem 'mongo'
   gem 'bson_ext'
