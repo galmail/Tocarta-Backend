@@ -1,2 +1,6 @@
 %h1 Dashboards#index
-%p Find me in app/views/dashboards/index.html.haml
+.dashboards.panel
+  %ul
+    - unless @dashboards.nil?
+      - @dashboards.each do |d|
+        %li= link_to d.name, dashboard_path(d)
