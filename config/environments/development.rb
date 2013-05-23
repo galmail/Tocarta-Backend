@@ -5,9 +5,9 @@ TocartaAdmin::Application.configure do
   ENV['S3_KEY'] ||= 'AKIAJCY5PI67O7THQ5MQ'
   ENV['S3_SECRET'] ||= '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'
 
-  ENV['NODE_SERVER'] ||= 'http://localhost:5000'
+  # ENV['NODE_SERVER'] ||= 'http://localhost:5000'
 
-  ENV['MONGOHQ_URL'] ||= 'mongodb://tocarta:tocarta@dharma.mongohq.com:10004/AnalyticsDev'
+  # ENV['MONGOHQ_URL'] ||= 'mongodb://tocarta:tocarta@dharma.mongohq.com:10004/AnalyticsDev'
   
   # Setting up Paperclip
   Paperclip::Attachment.default_options.merge!({

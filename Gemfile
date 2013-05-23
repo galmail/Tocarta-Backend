@@ -18,7 +18,6 @@ group :development do
   gem 'quiet_assets'
   gem 'rails-erd'         # create DB diagram
   gem 'annotate'
-  gem 'guard'
   gem "guard-bundler", ">= 1.0.0"
   gem "guard-rails", ">= 0.4.0"
   gem "guard-rspec"
