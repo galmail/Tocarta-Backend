@@ -1,3 +1,11 @@
-%h1 Dashboards#show
+%h1= "Dashboard #{@dashboard.name}"
 .dashboards.panel
-  %p= @dashboard.name
+  .newest_comments_on_dishes
+    %h2 Newest comments on dishes
+    %ul
+      - unless @newest_comments_on_dishes.nil?
+        - @newest_comments_on_dishes.each do |c|
+          %li
+            = link_to '#' do
+              %span= c.dish.name
+              %span= c.rating

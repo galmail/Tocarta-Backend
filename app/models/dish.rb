@@ -97,5 +97,9 @@ class Dish < ActiveRecord::Base
   def validate_min_sections
     errors.add(:sections, "at least one section must be selected") if sections.length < 1
   end
+
+  def self.with_comments
+    joins(:comments)
+  end
 	
 end

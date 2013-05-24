@@ -26,5 +26,12 @@ class Comment < ActiveRecord::Base
   # after_save :logme
 
   # TODO capture everytime the comment is approved (or disapproved) and update dish rating
+  scope :without_dish,    where(dish_id: nil)
+  scope :with_dish,       joins(:dish)
+  scope :newest,          order('created_at DESC').limit(10)
+
+  def self.by_dish(id)
+    where(dish_id: id)
+  end
 
 end
