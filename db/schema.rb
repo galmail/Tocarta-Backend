@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130426173327) do
+ActiveRecord::Schema.define(:version => 20130524103658) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(:version => 20130426173327) do
     t.text     "content"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "authentications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "token"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "chains", :force => true do |t|
@@ -258,6 +267,50 @@ ActiveRecord::Schema.define(:version => 20130426173327) do
 
   add_index "dishes", ["chain_id"], :name => "index_dishes_on_chain_id"
 
+  create_table "dishes_food_tags", :id => false, :force => true do |t|
+    t.integer "dish_id"
+    t.integer "food_tag_id"
+  end
+
+  add_index "dishes_food_tags", ["dish_id", "food_tag_id"], :name => "index_dishes_food_tags_on_dish_id_and_food_tag_id"
+  add_index "dishes_food_tags", ["food_tag_id", "dish_id"], :name => "index_dishes_food_tags_on_food_tag_id_and_dish_id"
+
+  create_table "dishes_ingredients", :id => false, :force => true do |t|
+    t.integer "dish_id"
+    t.integer "ingredient_id"
+  end
+
+  add_index "dishes_ingredients", ["dish_id", "ingredient_id"], :name => "index_dishes_ingredients_on_dish_id_and_ingredient_id"
+  add_index "dishes_ingredients", ["ingredient_id", "dish_id"], :name => "index_dishes_ingredients_on_ingredient_id_and_dish_id"
+
+  create_table "food_tag_translations", :force => true do |t|
+    t.integer  "food_tag_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "food_tag_translations", ["food_tag_id"], :name => "index_food_tag_translations_on_food_tag_id"
+  add_index "food_tag_translations", ["locale"], :name => "index_food_tag_translations_on_locale"
+
+  create_table "ingredient_translations", :force => true do |t|
+    t.integer  "ingredient_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "ingredient_translations", ["ingredient_id"], :name => "index_ingredient_translations_on_ingredient_id"
+  add_index "ingredient_translations", ["locale"], :name => "index_ingredient_translations_on_locale"
+
+  create_table "ingredients", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "menu_settings", :force => true do |t|
     t.integer  "menu_id"
     t.string   "name"
@@ -363,6 +416,18 @@ ActiveRecord::Schema.define(:version => 20130426173327) do
   add_index "restaurant_activities", ["restaurant_id"], :name => "index_restaurant_activities_on_restaurant_id"
   add_index "restaurant_activities", ["table_id"], :name => "index_restaurant_activities_on_table_id"
 
+  create_table "restaurant_banner_translations", :force => true do |t|
+    t.integer  "restaurant_banner_id"
+    t.string   "locale"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  add_index "restaurant_banner_translations", ["locale"], :name => "index_restaurant_banner_translations_on_locale"
+  add_index "restaurant_banner_translations", ["restaurant_banner_id"], :name => "index_restaurant_banner_translations_on_restaurant_banner_id"
+
   create_table "restaurant_banners", :force => true do |t|
     t.integer  "restaurant_id"
     t.datetime "created_at",                           :null => false
@@ -415,6 +480,17 @@ ActiveRecord::Schema.define(:version => 20130426173327) do
 
   add_index "restaurants", ["chain_id"], :name => "index_restaurants_on_chain_id"
   add_index "restaurants", ["user_id"], :name => "index_restaurants_on_user_id"
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
+  add_index "roles", ["name"], :name => "index_roles_on_name"
 
   create_table "section_translations", :force => true do |t|
     t.integer  "section_id"
@@ -560,10 +636,28 @@ ActiveRecord::Schema.define(:version => 20130426173327) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                                            :null => false
     t.datetime "updated_at",                                            :null => false
-    t.string   "role"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "name"
+    t.string   "surname"
+    t.string   "city"
+    t.string   "country"
+    t.date     "birthdate"
+    t.string   "twitter"
+    t.string   "url"
+    t.string   "phone"
   end
 
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "users_roles", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
+
+  add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
 
 end

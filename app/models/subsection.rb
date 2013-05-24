@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: subsections
+#
+#  id                 :integer          not null, primary key
+#  section_id         :integer
+#  name               :string(255)
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  photo_file_name    :string(255)
+#  photo_content_type :string(255)
+#  photo_file_size    :integer
+#  photo_updated_at   :datetime
+#  active             :boolean          default(TRUE)
+#  position           :integer
+#
+
 class Subsection < ActiveRecord::Base
   belongs_to :section
 	has_many :dishes, :through => :dish_subsection_associations

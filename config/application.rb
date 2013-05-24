@@ -11,20 +11,20 @@ end
 
 module TocartaAdmin
   class Application < Rails::Application
-    
+
+    ### paperclip ###
     IMAGE_MINI_SIZE = "80x53#"
     IMAGE_THUMBNAIL_SIZE = "151x115#"
     IMAGE_MEDIUM_SIZE = "x100" # "x49"
     IMAGE_LARGE_SIZE = "689x474#"
     IMAGE_BANNER_SIZE = "689x474#"
-    
+
     IMAGE_FULL_SIZE = "1024x768#"
-    
+
     ### dish icons ###
-    
     BIG_ICON_SIZE = "20x16#"
     SMALL_ICON_SIZE = "13x10#"
-    
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

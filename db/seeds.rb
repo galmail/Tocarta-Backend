@@ -1,5 +1,12 @@
 if Rails.env.development?
-  admin = User.create! :email => 'user@tocarta.es', :password => 'qwerty', :password_confirmation => 'qwerty'
-  admin.role = 'admin'
+  puts "** Add roles"
+  Application['roles'].each do |r|
+    Role.create! name: r.to_s
+  end
+
+  puts "** Add admin/qwerty"
+  admin = User.create! :email => 'admin@tocarta.es', :password => 'qwerty', :password_confirmation => 'qwerty'
+  admin.add_role :admin
   admin.save
+  # User.update_all(:confirmed_at => Time.now)
 end

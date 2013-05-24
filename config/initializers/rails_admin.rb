@@ -7,12 +7,16 @@ RailsAdmin.config do |config|
   config.authorize_with :cancan
   # config.authenticate_with {}
 
-
   # If your default_local is different from :en, uncomment the following 2 lines and set your default locale here:
   require 'i18n'
   I18n.default_locale = :es
 
   config.current_user_method { current_user } # auto-generated
+
+  config.navigation_static_links = {
+    'Profile' => '/users/edit'
+  }
+
 
   # If you want to track changes on your models:
   # config.audit_with :history, User
@@ -43,11 +47,11 @@ RailsAdmin.config do |config|
 
   # Application wide tried label methods for models' instances
   # config.label_methods << :description # Default is [:name, :title]
-  
+
   config.actions do
     # root actions
     dashboard                     # mandatory
-    # collection actions 
+    # collection actions
     index                         # mandatory
     new
     export
@@ -72,27 +76,24 @@ RailsAdmin.config do |config|
     end
 
   end
-  
-  
-  
 
   #  ==> Global models configuration
   config.models do
     # Configuration here will affect all included models in all scopes, handle with care!
-  
+
     list do
       # Configuration here will affect all included models in list sections (same for show, export, edit, update, create)
       exclude_fields :created_at, :updated_at
-      
+
       fields_of_type :date do
         # Configuration here will affect all date fields, in the list section, for all included models. See README for a comprehensive type list.
       end
 
     end
   end
-  
+
   ######## User Model ########
-  
+
   config.model User do
     label 'Users'
     label_plural 'Users'

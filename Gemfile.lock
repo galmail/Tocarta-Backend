@@ -49,6 +49,8 @@ GEM
     activesupport (3.2.13)
       i18n (= 0.6.1)
       multi_json (~> 1.0)
+    annotate (2.5.0)
+      rake
     arel (3.0.2)
     aws-sdk (1.3.9)
       httparty (~> 0.7)
@@ -63,6 +65,9 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-sass (2.2.2.0)
       sass (~> 3.2)
+    bson (1.8.5)
+    bson_ext (1.8.5)
+      bson (~> 1.8.5)
     builder (3.0.4)
     cancan (1.6.9)
     choice (0.1.6)
@@ -88,6 +93,7 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
+    country_select (1.1.3)
     daemons (1.1.9)
     debug_inspector (0.0.2)
     devise (2.2.3)
@@ -106,10 +112,17 @@ GEM
       sass-rails (>= 3.1.1)
     fssm (0.2.10)
     haml (3.1.7)
+    haml-rails (0.4)
+      actionpack (>= 3.1, < 4.1)
+      activesupport (>= 3.1, < 4.1)
+      haml (>= 3.1, < 4.1)
+      railties (>= 3.1, < 4.1)
+    hashie (2.0.4)
     hike (1.2.2)
     httparty (0.10.2)
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
+    httpauth (0.2.0)
     i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (2.2.1)
@@ -119,6 +132,8 @@ GEM
       jquery-rails
       railties (>= 3.1.0)
     json (1.7.7)
+    jwt (0.1.8)
+      multi_json (>= 1.5)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -131,6 +146,8 @@ GEM
       railties
     method_source (0.8.1)
     mime-types (1.22)
+    mongo (1.8.5)
+      bson (~> 1.8.5)
     multi_json (1.7.2)
     multi_xml (0.5.3)
     multipart-post (1.1.5)
@@ -139,7 +156,21 @@ GEM
     nokogiri (1.5.6)
     numerizer (0.1.1)
     oauth (0.4.7)
+    oauth2 (0.8.1)
+      faraday (~> 0.8)
+      httpauth (~> 0.1)
+      jwt (~> 0.1.4)
+      multi_json (~> 1.0)
+      rack (~> 1.2)
     oj (2.0.7)
+    omniauth (1.1.4)
+      hashie (>= 1.2, < 3)
+      rack
+    omniauth-facebook (1.4.1)
+      omniauth-oauth2 (~> 1.1.0)
+    omniauth-oauth2 (1.1.1)
+      oauth2 (~> 0.8.0)
+      omniauth (~> 1.0)
     orm_adapter (0.4.0)
     paper_trail (2.7.1)
       activerecord (~> 3.0)
@@ -150,6 +181,9 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.0)
       mime-types
+    paperclip-globalize3 (1.0.0)
+      globalize3 (~> 0.3)
+      paperclip (~> 3.3)
     pg (0.14.1)
     polyglot (0.3.3)
     pry (0.9.12)
@@ -219,6 +253,7 @@ GEM
     remotipart (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rolify (3.2.0)
     ruby-graphviz (1.0.8)
     safe_yaml (0.7.1)
     sass (3.2.5)
@@ -228,6 +263,9 @@ GEM
       tilt (~> 1.3)
     sequel (3.20.0)
     signature (0.1.6)
+    simple_form (2.1.0)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     sinatra (1.0)
       rack (>= 1.0)
     slop (3.4.4)
@@ -268,23 +306,33 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate
   aws-sdk (~> 1.3.4)
   better_errors
   binding_of_caller
+  bootstrap-sass
+  bson_ext
   cancan
   chronic
   chronic18n
   chronic_duration
   coffee-rails (~> 3.2.1)
   compass
+  country_select
   devise
   faraday (~> 0.8.4)
   globalize3!
+  haml-rails
   jquery-rails
   meta_request
+  mongo
   newrelic_rpm
+  oauth2
   oj
+  omniauth
+  omniauth-facebook
   paperclip (~> 3.4.0)
+  paperclip-globalize3
   pg
   pry-rails
   pusher
@@ -295,7 +343,9 @@ DEPENDENCIES
   rails_admin
   rails_admin_import!
   rails_admin_update_tablets!
+  rolify
   sass-rails (~> 3.2.3)
+  simple_form
   sqlite3
   taps
   thin

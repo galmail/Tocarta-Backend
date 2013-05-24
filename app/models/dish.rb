@@ -1,24 +1,55 @@
-#!/bin/env ruby
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: dishes
+#
+#  id                 :integer          not null, primary key
+#  name               :string(255)
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  photo_file_name    :string(255)
+#  photo_content_type :string(255)
+#  photo_file_size    :integer
+#  photo_updated_at   :datetime
+#  active             :boolean          default(TRUE)
+#  position           :integer
+#  description        :text
+#  price              :decimal(, )
+#  rating             :decimal(, )
+#  reviews            :integer
+#  story              :text
+#  video              :string(255)
+#  nutrition_facts    :string(255)
+#  badge_name         :string(255)
+#  short_title        :string(255)
+#  rate_me            :boolean          default(TRUE)
+#  chain_id           :integer
+#
+
+#!/bin/env ruby
 
 class Dish < ActiveRecord::Base
   before_save :associate_chain
   has_many :combos, :through => :dish_combo_associations
   has_many :dish_combo_associations
-  
+
   has_many :sections, :through => :dish_section_associations
   has_many :dish_section_associations
   has_many :subsections, :through => :dish_subsection_associations
   has_many :dish_subsection_associations
-	has_many :order_items
-	has_many :comments
-	has_many :dish_variation_set_associations
-	has_many :dish_variation_sets, :through => :dish_variation_set_associations
-	has_many :dish_type_associations
-	has_many :dish_types, :through => :dish_type_associations
-	belongs_to :chain
-	has_one  :nutrition_fact
-	
+  has_many :order_items
+  has_many :comments
+  has_many :dish_variation_set_associations
+  has_many :dish_variation_sets, :through => :dish_variation_set_associations
+  has_many :dish_type_associations
+  has_many :dish_types, :through => :dish_type_associations
+  belongs_to :chain
+  has_one  :nutrition_fact
+
+  # Tag strategy
+  has_and_belongs_to_many :ingredients
+  attr_accessible :ingredient_ids
+
 	has_attached_file(
 	 :photo,
 	 :path => ":chain_rest_id/img/dishes/:style/dish_:id.:extension",
@@ -27,14 +58,14 @@ class Dish < ActiveRecord::Base
 	translates :name, :description, :story, :short_title, :badge_name, :fallbacks_for_empty_translations => true
 	attr_accessible :name, :active, :position, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts, :short_title, :badge_name, :photo, :rate_me, :chain_id
 	attr_accessible :section_ids, :subsection_ids, :dish_type_ids, :dish_variation_set_ids
-	
-	### Validations ###
-  
+
+    ### Validations ###
+
   validates :name, :price, :presence => true
   #validates_attachment_presence :photo
   validates :badge_name, :length => { :maximum => 11 }
   validate :validate_min_sections
-  
+
   def badge_name_enum
     if I18n.locale.to_s=="es"
       return ['-----','nuevo', 'recomendado', 'estrella']

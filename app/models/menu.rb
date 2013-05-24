@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: menus
+#
+#  id            :integer          not null, primary key
+#  restaurant_id :integer
+#  theme_id      :integer
+#  name          :string(255)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  price         :decimal(, )
+#  menu_type     :string(255)
+#  skin_id       :integer
+#
+
 class Menu < ActiveRecord::Base
   belongs_to :restaurant
   belongs_to :skin
@@ -6,7 +21,7 @@ class Menu < ActiveRecord::Base
 	attr_accessible :name, :price, :menu_type, :skin_id, :restaurant_id
 	
 	def menu_type_enum
-    ['main', 'daily']
+    ['main','daily','beverages','wines','desserts']
   end
   
   ### Validations ###

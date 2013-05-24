@@ -1,0 +1,132 @@
+// Place all the styles related to the access controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body
+  color: #333
+  font-family: sans-serif
+  font-size: 12px
+
+#flash
+  width: 100%
+  #flash_notice
+    width: 80%
+    margin-left: 10%
+    padding: 1.5em
+    font-size: 1.5em
+  .alert #flash_notice
+    background: rgba(yellow, 0.6)
+
+.singin, .singup, .passwd
+  width: 320px
+  padding: 160px 0 0
+  margin: auto
+  line-height: 1.4em
+  .tcLogo
+    background: image-url("logo.png") no-repeat
+    width: 165px
+    height: 81px
+    margin-bottom: 20px
+    margin-left: 80px
+  form
+    margin-left: 8px
+    padding: 26px 24px 8px
+    font-weight: normal
+    background: white
+    border: 1px solid #e5e5e5
+    -moz-box-shadow: rgba(200, 200, 200, 0.7) 0 4px 10px -1px
+    -webkit-box-shadow: rgba(200, 200, 200, 0.7) 0 4px 10px -1px
+    box-shadow: rgba(200, 200, 200, 0.7) 0 4px 10px -1px
+    -webkit-border-radius: 3px
+    border-radius: 3px
+    border-width: 1px
+    border-style: solid
+    margin: 0
+    display: block
+    & > div
+      margin-bottom: 0
+    .form-actions
+      border: 0
+      background-color: transparent
+    label
+      color: #777
+      font-size: 14px
+    input, select
+      font-weight: 200
+      font-size: 24px
+      line-height: 1
+      width: 100%
+      height: 40px
+      padding: 3px
+      margin-top: 2px
+      margin-right: 6px
+      margin-bottom: 16px
+      border: 1px solid #e5e5e5
+      background: #FBFBFB
+      outline: 0
+      -moz-box-shadow: inset 1px 1px 2px rgba(200, 200, 200, 0.2)
+      -webkit-box-shadow: inset 1px 1px 2px rgba(200, 200, 200, 0.2)
+      box-shadow: inset 1px 1px 2px rgba(200, 200, 200, 0.2)
+      font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",sans-serif
+      border-color: #DFDFDF
+      color: #555
+      -webkit-border-radius: 3px
+      border-radius: 3px
+      border-width: 1px
+      border-style: solid
+      -moz-box-sizing: border-box
+      -webkit-box-sizing: border-box
+      -ms-box-sizing: border-box
+      box-sizing: border-box
+    .form-submit-block
+      overflow: hidden
+      input.btn
+        width: auto
+        float: right
+      .user_remember_me
+        float: left
+        // width: 100%
+        font-weight: normal
+        // float: left;
+        input
+          color: #555
+        label
+          #user_remember_me
+            width: auto
+            margin-left: 0
+          // width: 90%
+          padding-left: 0
+          font-size: 12px
+          line-height: 46px
+          color: #777
+    input.btn
+      font-size: 13px !important
+      line-height: 16px
+      padding: 6px 12px
+      // float: right
+      border: none
+      font-weight: bold
+      color: white
+      background: black
+      &:active, &:hover
+        background: #ED8A00
+        cursor: pointer
+  .fb
+    // margin-left: 10%
+    margin-top: 2.5em
+    margin-bottom: 2em
+    width: 93%
+    font-size: 13px
+    line-height: 16px
+    border: none
+    font-weight: bold
+    text-align: center
+    a
+      padding: 12px 12px
+      text-decoration: none
+      color: white
+      background: #3b5998
+      &:active, &:hover
+        background: #ED8A00
+        cursor: pointer
+

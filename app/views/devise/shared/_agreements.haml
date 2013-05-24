@@ -1,0 +1,14 @@
+%p On Sing Up you are accepting our terms:
+%ul
+  -# NOTE: podemos filtrar por @rol, nos interesa?
+  - Agreement.list.each do |a|
+    %li= link_to("Agreement for #{a.rol.humanize}", "#agree_#{a.rol}", :data => {:toggle => 'modal'})
+
+- Agreement.list.each do |a|
+  .modal.hide.fade{:id => "agree_#{a.rol}"}
+    .modal-header
+      %h3= "#{a.rol.humanize} #{a.title}"
+    .modal-body
+      %p= raw(a.content)
+      %br
+      %button(class="btn" data-dismiss="modal" aria-hidden="true") Close
