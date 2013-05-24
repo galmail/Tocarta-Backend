@@ -13,9 +13,9 @@ RailsAdmin.config do |config|
 
   config.current_user_method { current_user } # auto-generated
 
-  config.navigation_static_links = {
-    'Profile' => '/users/edit'
-  }
+  # config.navigation_static_links = {
+    # 'Profile' => '/users/edit'
+  # }
 
 
   # If you want to track changes on your models:
