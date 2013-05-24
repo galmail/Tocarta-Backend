@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130521084503) do
+ActiveRecord::Schema.define(:version => 20130524103658) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -415,6 +415,18 @@ ActiveRecord::Schema.define(:version => 20130521084503) do
   add_index "restaurant_activities", ["order_id"], :name => "index_restaurant_activities_on_order_id"
   add_index "restaurant_activities", ["restaurant_id"], :name => "index_restaurant_activities_on_restaurant_id"
   add_index "restaurant_activities", ["table_id"], :name => "index_restaurant_activities_on_table_id"
+
+  create_table "restaurant_banner_translations", :force => true do |t|
+    t.integer  "restaurant_banner_id"
+    t.string   "locale"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  add_index "restaurant_banner_translations", ["locale"], :name => "index_restaurant_banner_translations_on_locale"
+  add_index "restaurant_banner_translations", ["restaurant_banner_id"], :name => "index_restaurant_banner_translations_on_restaurant_banner_id"
 
   create_table "restaurant_banners", :force => true do |t|
     t.integer  "restaurant_id"

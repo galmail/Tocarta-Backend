@@ -76,6 +76,7 @@ gem 'twitter_oauth'
 
 # Translation
 gem 'globalize3', :git => 'git://github.com/svenfuchs/globalize3.git'
+gem 'paperclip-globalize3'
 
 # Smart dates and times
 gem 'chronic'
