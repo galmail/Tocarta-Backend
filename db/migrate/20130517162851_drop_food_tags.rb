@@ -1,7 +1,7 @@
 class DropFoodTags < ActiveRecord::Migration
   def up
     begin
-      drop_table :food_tags if self.table_exists?("combo_types")
+      drop_table :food_tags if self.table_exists?("food_tags")
       FoodTag.drop_translation_table!
     rescue
       
