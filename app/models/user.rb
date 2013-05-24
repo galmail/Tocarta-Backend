@@ -1,3 +1,4 @@
+# encoding: utf-8
 # == Schema Information
 #
 # Table name: users
@@ -37,7 +38,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :name, :surname, :city, :country, :birthdate, :twitter, :url, :phone
 
-  after_create :make_restaurant_demo
+  # after_create :make_restaurant_demo
 
   has_many :chains
   has_many :restaurants
@@ -69,17 +70,36 @@ class User < ActiveRecord::Base
   DEF_DISH     = Rails.root.join('app','assets','images', 'default_dish.png')
   def make_restaurant_demo
     if self.has_role? :restaurant # only for this role
-
-      chain = Chain.create(user_id: self.id, name: "Mi Cadena de Restaurantes #{self.email}", logo: DEF_LOGO, email: self.email)
-
-      restaurant = Restaurant.create(user_id: self.id, chain_id: chain.id, name: 'Mi Restaurante Demo', email: self.email)
-
-      menu = Menu.create(restaurant_id: restaurant.id, name: "Mi Menu", menu_type: 'main')
-
-      section = Section.create(menu_id: menu.id, name: 'Mi Seccion', active: true, photo: DEF_SECTION)
-
-      Dish.create(name: 'principal', photo: DEF_DISH, active: true, rate_me: true, description: 'plato principal', price: 20, chain_id: chain.id, position: 1, section_ids: [section.id])
-      Dish.create(name: 'segundo', photo: DEF_DISH, active: true, rate_me: true, description: 'plato principal', price: 15, chain_id: chain.id, position: 1, section_ids: [section.id])
+      chain = Chain.create(user_id: self.id, name: "Cadena de Restaurantes #{self.email}", logo: DEF_LOGO, email: self.email)
+      restaurant = Restaurant.create(user_id: self.id, chain_id: chain.id, name: "Restaurante #{self.email}", email: self.email)
+      settings = RestaurantSetting.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Settings", num_licenses: 1)
+      # creating 10 tables
+      table = nil
+      10.downto(1) do |i|
+        table = Table.create(restaurant_id: restaurant.id, number: i, name: "#{restaurant.name} - Mesa #{i}")
+      end
+      # creating one tablet with access key the email
+      Tablet.create(table_id: table.id, name: "#{restaurant.name} - Tablet 1", access_key: "#{self.email}", active: true)
+      # creating 3 simple survey questions
+      SurveyQuestion.create(chain_id: chain.id, name: "#{restaurant.name} - servicio", description: "El servicio que le brindamos fue de su agrado?", position: 1, active: true)
+      SurveyQuestion.create(chain_id: chain.id, name: "#{restaurant.name} - comida", description: "Te ha gustado la comida?", position: 2, active: true)
+      SurveyQuestion.create(chain_id: chain.id, name: "#{restaurant.name} - carta", description: "Te ha gustado nuestra carta digital?", position: 3, active: true)
+      # creating 3 restaurant banners
+      RestaurantBanner.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Banner 1", position: 1, active: true, photo: DEF_LOGO)
+      RestaurantBanner.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Banner 2", position: 2, active: true, photo: DEF_LOGO)
+      RestaurantBanner.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Banner 3", position: 3, active: true, photo: DEF_LOGO)
+      # creating menus and menu settings
+      main_menu = Menu.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Carta Principal", menu_type: 'main')
+      daily_menu = Menu.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Menu del Dia", menu_type: 'daily')
+      main_menu_settings = MenuSetting.create(menu_id: main_menu.id, name: "#{main_menu.name} - Settings", active: true)
+      daily_menu_settings = MenuSetting.create(menu_id: daily_menu.id, name: "#{daily_menu.name} - Settings", active: true)
+      # creating 2 sections and 2 dishes for each section
+      section_salads = Section.create(menu_id: menu.id, name: 'Ensaladas', active: true, photo: DEF_SECTION)
+      section_beef = Section.create(menu_id: menu.id, name: 'Carnes', active: true, photo: DEF_SECTION)
+      salad_1 = Dish.create(name: 'Ensalada Capresa', description: 'Nuestra ensalada capresa está hecha a base de lechuga fresca, tomate natural y queso mozzarella.', photo: DEF_DISH, active: true, rate_me: true, price: 7, chain_id: chain.id, position: 1, section_ids: [section_salads.id])
+      salad_2 = Dish.create(name: 'Ensalada Cesar', description: 'La ensalada cesar contiene lechuga, trozos de pollo y salsa cesar con un toque de aceite balsámico.', photo: DEF_DISH, active: true, rate_me: true, price: 8, chain_id: chain.id, position: 2, section_ids: [section_salads.id])
+      beef_1 = Dish.create(name: 'Bife de Chorizo', description: 'Jugosa carne de 500gr hecha al mas auténtico estilo argentino.', photo: DEF_DISH, active: true, rate_me: true, price: 18, chain_id: chain.id, position: 1, section_ids: [section_beef.id])
+      beef_2 = Dish.create(name: 'Hamburguesa Especial', description: 'Una hamburguesa especial de la casa, hecha con 250gr de carne a la parrilla, lechuga, tomate y pepinillos.', photo: DEF_DISH, active: true, rate_me: true, price: 12, chain_id: chain.id, position: 2, section_ids: [section_beef.id])
     end
   end
 
