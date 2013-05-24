@@ -21,7 +21,7 @@ class Menu < ActiveRecord::Base
 	attr_accessible :name, :price, :menu_type, :skin_id, :restaurant_id
 	
 	def menu_type_enum
-    ['main', 'daily']
+    ['main','daily','beverages','wines','desserts']
   end
   
   ### Validations ###
