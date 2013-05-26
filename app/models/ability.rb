@@ -16,8 +16,8 @@ class Ability
       cannot :import, :all
       can :import, [Dish]
     elsif user.has_role? :restaurant
+      can [:read,:create], Ingredient
       can :read, DishType
-      can :read, Theme
       can :read, Skin
       can :read, Chain, :user_id => user.id
       can :read, Restaurant, :chain => { :user_id => user.id }
@@ -35,8 +35,8 @@ class Ability
       can :read, Order, :table => { :restaurant_id => user.chains.collect{ |c| c.restaurants.collect{ |res| res.id }}.flatten }
       cannot :import, :all
     elsif user.has_role? :distributor
+      can [:read,:create], Ingredient
       can :read, DishType
-      can :read, Theme
       can :read, Skin
       can [:update, :create], Skin, :user_id => user.id
       can [:create, :read, :update], Chain, :user_id => user.id
