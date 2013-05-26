@@ -26,6 +26,7 @@ group :development do
 end
 
 group :production do
+  gem 'rails-erd'
   gem 'thin'
   gem 'newrelic_rpm'
 end
