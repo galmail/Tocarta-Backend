@@ -22,6 +22,7 @@ class Restaurant < ActiveRecord::Base
 	has_many :restaurant_activities
 	has_many :restaurant_banners
 	has_many :menus
+	has_many :wines
 	has_many :combos
 	has_many :combo_types
 	has_many :tables

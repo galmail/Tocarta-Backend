@@ -1,0 +1,83 @@
+en:
+  activerecord:
+    models:
+      chain:
+        one: Restaurant Chain
+        other: Restaurant Chains
+      restaurant:
+        one: Restaurant
+        other: Restaurants
+      restaurant_setting:
+        one: Restaurant Settings
+        other: Restaurant Settings
+      menu:
+        one: Menu
+        other: Menus
+      menu_setting:
+        one: Menu Settings
+        other: Menus Settings
+      theme:
+        one: Theme
+        other: Themes
+      skin:
+        one: Skin
+        other: Skins
+      dish_variation:
+        one: Dish Variation
+        other: Dish Variations
+      dish_variation_set:
+        one: Dish Variation Set
+        other: Dish Variation Sets
+      dish_type:
+        one: Food Type
+        other: Food Types
+      nutrition_fact:
+        one: Nutrition Fact
+        other: Nutrition Facts
+      ingredient:
+        one: Ingredient
+        other: Ingredients
+      dish:
+        one: Dish/Beverage
+        other: Dishes/Beverages
+      section:
+        one: Section
+        other: Sections
+      subsection:
+        one: Subsection
+        other: Subsections
+      comment:
+        one: Comment
+        other: Comments
+      table:
+        one: Table
+        other: Tables
+      tablet:
+        one: Tablet
+        other: Tablets
+      survey_question:
+        one: Survey Question
+        other: Survey Questions
+      order:
+        one: Order
+        other: Orders
+ 
+      attributes:
+        restaurant:
+          chain: "Restaurants Chain"
+        comment:
+          created_at:       "Datetime"
+          rating:           "Rating"
+          description:      "Comment"
+          name:             "Customer's Name"
+          dish:             "Dish"
+          survey_question:  "Question"
+          restaurant:       "Restaurant"
+          approved:         "Approved"
+        table:
+          updated_at: "Last Activity"
+        order:
+          created_at:   "Datetime"
+          order_items:  "Order Items"
+          table:        "Table"
+          
