@@ -9,7 +9,7 @@
         %h4.lighter.smaller Newest comments on dishes
       .widget-body
         .widget-main.padding-8
-          %p= debug Comment.to_dish_rating_hash(comments)
+          = chart_tag('col_chart', 300, restaurant: @restaurant)
           %ul
             - comments.each do |c|
               %li

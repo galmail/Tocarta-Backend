@@ -115,6 +115,8 @@ gem 'coffee-rails', '~> 3.2.1'
 gem "haml-rails"
 gem 'simple_form'
 gem 'country_select'
+# gem 'flot-rails', :git => "https://github.com/Kjarrigan/flot-rails.git"
+# gem 'lazy_high_charts'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

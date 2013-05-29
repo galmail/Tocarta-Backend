@@ -34,9 +34,9 @@ class Comment < ActiveRecord::Base
     where(dish_id: id)
   end
 
-  def self.to_dish_rating_hash(comments)
-    comments.inject({}) do |r, v|
-      r[v.dish.name] = v.dish.rating
+  def self.to_dish_rating_array(comments)
+    comments.inject([]) do |r, v|
+      r << [v.dish.name, v.dish.rating.to_i, v.rating]
       r
     end
   end

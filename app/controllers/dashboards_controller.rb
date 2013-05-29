@@ -11,6 +11,23 @@ class DashboardsController < ApplicationController
     @restaurant = Restaurant.find params[:restaurant_id]
   end
 
+  def col_chart
+    comments = Restaurant.find(params[:restaurant]).comments.with_dish.newest
+    render :json => {
+      :type => 'ColumnChart',
+      :cols => [['string', 'Dish'], ['number', 'Average'], ['number', 'Last']],
+      :rows => Comment.to_dish_rating_array(comments),
+      :options => {
+        chartArea: { width: '90%', height: '75%' },
+        # :hAxis => { title: 'dish' },
+        # vAxis: { title: 'Rating' },
+        legend: 'bottom',
+        is3D: true,
+        # animation: { duration: 1000 },
+      }
+    }
+  end
+
   private
 
   def menu_for_current_user
