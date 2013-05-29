@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130523114113) do
+ActiveRecord::Schema.define(:version => 20130526230552) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -425,6 +425,18 @@ ActiveRecord::Schema.define(:version => 20130523114113) do
   add_index "restaurant_activities", ["restaurant_id"], :name => "index_restaurant_activities_on_restaurant_id"
   add_index "restaurant_activities", ["table_id"], :name => "index_restaurant_activities_on_table_id"
 
+  create_table "restaurant_banner_translations", :force => true do |t|
+    t.integer  "restaurant_banner_id"
+    t.string   "locale"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  add_index "restaurant_banner_translations", ["locale"], :name => "index_restaurant_banner_translations_on_locale"
+  add_index "restaurant_banner_translations", ["restaurant_banner_id"], :name => "index_restaurant_banner_translations_on_restaurant_banner_id"
+
   create_table "restaurant_banners", :force => true do |t|
     t.integer  "restaurant_id"
     t.datetime "created_at",                           :null => false
@@ -656,5 +668,78 @@ ActiveRecord::Schema.define(:version => 20130523114113) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
+
+  create_table "wine_detail_translations", :force => true do |t|
+    t.integer  "wine_detail_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.string   "wine_type"
+    t.string   "country"
+    t.string   "region"
+    t.string   "grape_type"
+    t.string   "pairing"
+    t.string   "ideal_temperature"
+    t.string   "color"
+    t.string   "flavor"
+    t.string   "aroma"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "wine_detail_translations", ["locale"], :name => "index_wine_detail_translations_on_locale"
+  add_index "wine_detail_translations", ["wine_detail_id"], :name => "index_wine_detail_translations_on_wine_detail_id"
+
+  create_table "wine_details", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description"
+    t.string   "wine_type"
+    t.string   "wine_cellar"
+    t.integer  "vintage"
+    t.string   "country"
+    t.string   "region"
+    t.string   "grape_type"
+    t.string   "pairing"
+    t.string   "ideal_temperature"
+    t.string   "color"
+    t.string   "flavor"
+    t.string   "aroma"
+    t.integer  "score"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "wine_details", ["country"], :name => "index_wine_details_on_country"
+  add_index "wine_details", ["name"], :name => "index_wine_details_on_name"
+  add_index "wine_details", ["region"], :name => "index_wine_details_on_region"
+  add_index "wine_details", ["score"], :name => "index_wine_details_on_score"
+  add_index "wine_details", ["vintage"], :name => "index_wine_details_on_vintage"
+  add_index "wine_details", ["wine_type"], :name => "index_wine_details_on_wine_type"
+
+  create_table "wine_translations", :force => true do |t|
+    t.integer  "wine_id"
+    t.string   "locale"
+    t.string   "container"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "wine_translations", ["locale"], :name => "index_wine_translations_on_locale"
+  add_index "wine_translations", ["wine_id"], :name => "index_wine_translations_on_wine_id"
+
+  create_table "wines", :force => true do |t|
+    t.integer  "chain_id"
+    t.integer  "restaurant_id"
+    t.integer  "wine_detail_id"
+    t.decimal  "price"
+    t.string   "container"
+    t.boolean  "active",         :default => true
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  add_index "wines", ["chain_id"], :name => "index_wines_on_chain_id"
+  add_index "wines", ["restaurant_id"], :name => "index_wines_on_restaurant_id"
 
 end
