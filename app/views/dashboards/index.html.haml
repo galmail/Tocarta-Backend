@@ -1,6 +1,10 @@
 %h1 Dashboards#index
 .dashboards.panel
   %ul
-    - unless @dashboards.nil?
-      - @dashboards.each do |d|
-        %li= link_to d.name, dashboard_path(d)
+    - unless @chains.nil?
+      - @chains.each do |c|
+        %li= c.name
+        - if c.restaurants.present?
+          %ul
+            - c.restaurants.each do |r|
+              %li= link_to r.name, "/dashboards/#{@dashboard.id}/#{r.id}"

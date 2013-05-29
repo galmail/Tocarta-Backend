@@ -16,25 +16,25 @@ describe DashboardsController do
         response.should be_success
         expect(response).to render_template :index
       end
-      it "populate array of dashboards" do
-        get :index
-        expect(assigns(:dashboards)).to match_array [@db]
-      end
+      # it "populate array of dashboards" do
+        # get :index
+        # expect(assigns(:dashboards)).to match_array [@db]
+      # end
 
     end
 
     describe "GET #show" do
 
-      it "assigns requested @dashboard" do
-        get 'show', id: @db
-        response.should be_success
-        expect(assigns(:dashboard)).to eq @db
-      end
-      it "renders show view" do
-        get 'show', id: @db
-        response.should be_success
-        expect(response).to render_template :show
-      end
+      # it "assigns requested @dashboard" do
+        # get 'show', id: @db
+        # response.should be_success
+        # expect(assigns(:dashboard)).to eq @db
+      # end
+      # it "renders show view" do
+        # get 'show', id: @db
+        # response.should be_success
+        # expect(response).to render_template :show
+      # end
     end
 
   end

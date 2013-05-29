@@ -1,7 +1,8 @@
 TocartaAdmin::Application.routes.draw do
 
-  resources :dashboards, only: [:index, :show]
-  # match "/dashboards" => "dashboards#index"
+  # resources :dashboards, only: [:index, :show]
+  match "/dashboards" => "dashboards#index"
+  match "/dashboards/:id/:restaurant_id" => "dashboards#show"
   # get "dashboards/index"
   # match "/dashboards/:id" => "dashboards#show"
 

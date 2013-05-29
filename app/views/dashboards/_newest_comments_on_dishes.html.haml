@@ -1,0 +1,11 @@
+-# Show a list of last 10 dishes commented & chart of same dishes rating
+- comments = @restaurant.comments.with_dish.newest
+.newest_comments_on_dishes
+  %h2 Newest comments on dishes
+  - unless comments.nil?
+    %p= debug Comment.to_dish_rating_hash(comments)
+    %ul
+      - comments.each do |c|
+        %li
+          %span= c.dish.name + ' | '
+          %span= c.rating
