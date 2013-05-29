@@ -36,7 +36,7 @@ class Comment < ActiveRecord::Base
 
   def self.to_dish_rating_array(comments)
     comments.inject([]) do |r, v|
-      r << [v.dish.name, v.dish.rating.to_i, v.rating]
+      r << [v.dish.name, v.dish.rating.to_i, v.rating, v.dish.comments.count]
       r
     end
   end

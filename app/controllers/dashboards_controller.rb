@@ -11,14 +11,16 @@ class DashboardsController < ApplicationController
     @restaurant = Restaurant.find params[:restaurant_id]
   end
 
-  def col_chart
+  def chart_newest_comments_on_dishes
     comments = Restaurant.find(params[:restaurant]).comments.with_dish.newest
     render :json => {
       :type => 'ColumnChart',
-      :cols => [['string', 'Dish'], ['number', 'Average'], ['number', 'Last']],
+      :cols => [['string', 'Dish'], ['number', 'Average'], ['number', 'Last'], ['number', 'Comments']],
       :rows => Comment.to_dish_rating_array(comments),
       :options => {
         chartArea: { width: '90%', height: '75%' },
+        seriesType: 'bars',
+        series: {2 => {type: 'line'}},
         # :hAxis => { title: 'dish' },
         # vAxis: { title: 'Rating' },
         legend: 'bottom',

@@ -6,12 +6,14 @@
   -else
     .widget-box.span6
       .widget-header.header-color-blue2
-        %h4.lighter.smaller Newest comments on dishes
+        %h4.lighter.smaller Newest comments on dishes (10)
       .widget-body
         .widget-main.padding-8
-          = chart_tag('col_chart', 300, restaurant: @restaurant)
+          = chart_tag('chart_newest_comments_on_dishes', 300, restaurant: @restaurant)
           %ul
             - comments.each do |c|
               %li
-                %span= c.dish.name + ' | '
-                %span= c.rating
+                = c.dish.name
+                - unless c.description.empty?
+                  %ul
+                    %li= c.description
