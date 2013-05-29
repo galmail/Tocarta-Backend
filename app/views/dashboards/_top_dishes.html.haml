@@ -1,0 +1,16 @@
+-# Show a list of top 10 dishes
+- dishes = Dish.to_top_rating_array_by_chain(@restaurant.chain.id) # FIXME: must be restaurant dishes not chain
+.top_dishes
+  - if dishes.nil?
+    %p Not enough data
+  -else
+    .widget-box.span4
+      .widget-header.header-color-blue2
+        %h4.lighter.smaller Top rating dishes
+      .widget-body
+        .widget-main.padding-8
+          = chart_tag('chart_top_dishes', 300, chain: @restaurant.chain)
+          %ul
+            - dishes.each do |d|
+              %li
+                = d[0]

@@ -29,6 +29,24 @@ class DashboardsController < ApplicationController
       }
     }
   end
+  def chart_top_dishes
+    if params[:reverse]
+      dishes = Dish.to_bottom_rating_array_by_chain(params[:chain])
+    else
+      dishes = Dish.to_top_rating_array_by_chain(params[:chain])
+    end
+    render :json => {
+      :type => 'ColumnChart',
+      :cols => [['string', 'Dish'], ['number', 'Average'], ['number', 'Comments']],
+      :rows => dishes,
+      :options => {
+        chartArea: { width: '90%', height: '75%' },
+        seriesType: 'bars',
+        series: {1 => {type: 'line'}},
+        legend: 'bottom',
+      }
+    }
+  end
 
   private
 

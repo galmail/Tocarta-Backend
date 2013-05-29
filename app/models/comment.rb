@@ -34,6 +34,9 @@ class Comment < ActiveRecord::Base
     where(dish_id: id)
   end
 
+  # Create an array with comments
+  # @param [Comment] coments
+  # @return [Array] [Dish.name, Dish.rating, Comment.rating, Dish.comments]
   def self.to_dish_rating_array(comments)
     comments.inject([]) do |r, v|
       r << [v.dish.name, v.dish.rating.to_i, v.rating, v.dish.comments.count]
