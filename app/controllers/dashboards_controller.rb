@@ -1,8 +1,9 @@
 class DashboardsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :dashboards_for_current_user, :only => :index
+  before_filter :menu_for_current_user, only: [:index, :show]
 
   def index
+    @dashboard  = Dashboard.first # FIXME: search for a name?
   end
 
   def show
@@ -12,9 +13,8 @@ class DashboardsController < ApplicationController
 
   private
 
-  def dashboards_for_current_user
+  def menu_for_current_user
     if current_user.has_role? :admin
-      @dashboard  = Dashboard.first # FIXME: search for a name?
       @chains     = Chain.all
     elsif current_user.has_role? :restaurant
     elsif current_user.has_role? :distributor

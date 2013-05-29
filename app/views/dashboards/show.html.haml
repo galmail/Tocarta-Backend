@@ -1,3 +1,6 @@
-%h1= "Dashboard #{@dashboard.name}"
-.dashboards
+.page-header.position-relative
+  %h1 
+    = @dashboard.name.capitalize
+    %small dashboard 
+.dashboards.row-fluid
   = render 'newest_comments_on_dishes'

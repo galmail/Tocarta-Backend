@@ -1,0 +1,85 @@
+.navbar.navbar-inverse
+  .navbar-inner
+    .container-fluid
+      %a.brand{:href => "#"}
+        %small
+          %i.icon-leaf
+          Tocarta Admin
+      %ul.nav.ace-nav.pull-right
+        %li.grey
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            %i.icon-tasks
+            %span.badge.badge-grey 4
+          %ul.pull-right.dropdown-navbar.dropdown-menu.dropdown-caret.dropdown-closer
+            %li.nav-header
+              %i.icon-ok
+              4 Tasks to complete
+            %li
+              %a{:href => "#"}
+              .clearfix
+                %span.pull-left Task Name
+                %span.pull-right 65%
+              .progress.progress-mini
+                .bar{:style => "width:65%"}
+            %li
+              %a{:href => "#"}
+                See tasks with details
+                %i.icon-arrow-right
+        %li.purple
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            %i.icon-bell-alt.icon-only.icon-animated-bell
+            %span.badge.badge-important 8
+          %ul.pull-right.dropdown-navbar.navbar-pink.dropdown-menu.dropdown-caret.dropdown-closer
+            %li.nav-header
+              %i.icon-warning-sign
+              8 Notifications
+            %li
+              %a{:href => "#"}
+              .clearfix
+                %span.pull-left
+                  %i.btn.btn-mini.no-hover.btn-pink.icon-comment
+                  New Comments
+                %span.pull-right.badge.badge-info +12
+            %li
+              %a{:href => "#"}
+                See all notifications
+                %i.icon-arrow-right
+        %li.green
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            %i.icon-envelope-alt.icon-only.icon-animated-vertical
+            %span.badge.badge-success 5
+          %ul.pull-right.dropdown-navbar.dropdown-menu.dropdown-caret.dropdown-closer
+            %li.nav-header
+              %i.icon-envelope
+              5 Messages
+            %li
+              %a{:href => "#"}
+                %img.msg-photo{:alt => "Avatar", :src => "/assets/avatars/avatar.png"}/
+                %span.msg-body
+                  %span.msg-title
+                    %span.blue Alex:
+                    Message Summary
+                  %span.msg-time
+                    %i.icon-time
+                    %span Message Time
+            %li
+              %a{:href => "#"}
+                See all messages
+                %i.icon-arrow-right
+        %li.light-blue.user-profile
+          %a.user-menu.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            %img.nav-user-photo{:alt => "Photo", :src => "/assets/avatars/avatar3.png"}/
+            %span#user_info
+              %small Welcome,
+              = current_user.name || current_user.email.split('@')[0]
+            %i.icon-caret-down
+          %ul#user_menu.pull-right.dropdown-menu.dropdown-yellow.dropdown-caret.dropdown-closer
+            %li
+              %a{:href => edit_user_registration_path}
+                %i.icon-cog
+                Profile
+            %li.divider
+            %li
+              %a{:href => destroy_user_session_path}
+                %i.icon-off
+                Logout

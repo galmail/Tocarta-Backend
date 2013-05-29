@@ -1,11 +1,17 @@
 -# Show a list of last 10 dishes commented & chart of same dishes rating
 - comments = @restaurant.comments.with_dish.newest
 .newest_comments_on_dishes
-  %h2 Newest comments on dishes
-  - unless comments.nil?
-    %p= debug Comment.to_dish_rating_hash(comments)
-    %ul
-      - comments.each do |c|
-        %li
-          %span= c.dish.name + ' | '
-          %span= c.rating
+  - if comments.nil?
+    %p Not enough data
+  -else
+    .widget-box.span6
+      .widget-header.header-color-blue2
+        %h4.lighter.smaller Newest comments on dishes
+      .widget-body
+        .widget-main.padding-8
+          %p= debug Comment.to_dish_rating_hash(comments)
+          %ul
+            - comments.each do |c|
+              %li
+                %span= c.dish.name + ' | '
+                %span= c.rating
