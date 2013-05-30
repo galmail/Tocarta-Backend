@@ -101,5 +101,29 @@ class Dish < ActiveRecord::Base
   def self.with_comments
     joins(:comments)
   end
+
+  def self.by_chain(chain_id)
+    where(chain_id: chain_id)
+  end
+
+  def self.top_rating
+    order('rating DESC')
+  end
+  def self.bottom_rating
+    order('rating ASC')
+  end
+
+  def self.to_top_rating_array_by_chain(chain_id)
+    by_chain(chain_id).with_comments.top_rating.limit(10).inject([]) do |r,v|
+      r << [v.name, v.rating.to_i, v.comments.count]
+      r
+    end
+  end
+  def self.to_bottom_rating_array_by_chain(chain_id)
+    by_chain(chain_id).with_comments.bottom_rating.limit(10).inject([]) do |r,v|
+      r << [v.name, v.rating.to_i, v.comments.count]
+      r
+    end
+  end
 	
 end

@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require gcharts
 //= require bootstrap
-// require bootstrap-modal
 //= require_tree .
+
+

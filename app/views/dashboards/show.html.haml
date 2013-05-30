@@ -1,3 +1,8 @@
-%h1= "Dashboard #{@dashboard.name}"
-.dashboards
+.page-header.position-relative
+  %h1
+    = @restaurant.name
+    %small= 'dashboard ' + @dashboard.name.capitalize
+.dashboards.row-fluid
   = render 'newest_comments_on_dishes'
+  = render 'top_dishes'
+  = render 'bottom_dishes'
