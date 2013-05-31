@@ -1,5 +1,5 @@
 /*
-Copyright(c) 2011 Company Name
+Copyright(c) 2013 Tocarta International SL
 */
 /**
  * @private
@@ -62797,6 +62797,165 @@ Ext.define('TC.store.Comments', {
     }
 });
 
+/**
+ * @class TC.controller.survey.BasicSurvey
+ * @extends Ext.app.Controller
+ * 
+ * The Basic Survey Controller
+ * @description controls the basic survey, it display dishes, questions and comments
+ */
+Ext.define('TC.controller.survey.BasicSurvey', {
+  extend: 'Ext.app.Controller',
+  requires: ['TC.store.Comments'],
+  config: {
+  	routes: {
+      'basicsurvey': 'loadSurvey'
+    },
+    views: [
+    	'survey.basic.SurveyContainer',
+    	'survey.basic.SurveyDishes',
+    	'survey.basic.SurveyQuestions',
+    	'survey.basic.SurveyComments'
+    ],   
+    refs: {
+    	survey: 'survey-container',
+    	submitSurveyButton: 'survey-container button',
+    },
+    control: {
+    	survey: { show: 'showSurvey' },
+    	submitSurveyButton: { tap: 'submitSurvey' }
+    }
+  },
+  
+  launch: function(){
+  	console.log('TC.controller.BasicSurvey.launch');
+  },
+  
+  submitSurvey: function(){
+  	console.log('TC.controller.BasicSurvey.submitSurvey');
+  	var me = this;
+		$tc.confirmMsg($T.send_survey_question,function(btn){
+			if(btn=="yes"){
+				Ext.Viewport.setMasked({xtype: 'loadmask',message: $T.send_survey_loading});
+				var comments_to_send = Ext.create('TC.store.Comments',{
+					proxy: {
+						type: $tc.protocol,
+						url: $tc.url('submit_survey') + '?key=' + TC.Setting.get('key'),
+						writer: {
+			    		type: 'json',
+			    		root: 'survey'
+			    	}
+					}
+				});
+				// get the name of the user
+				var userName = $j('.tcSurveyContainer .userInputNameField:last').val();
+				// get rating of all survey questions
+				$j('.tcSurveyContainer .survey_question').each(function(){
+					var question_id = this.id.split("survey_question_")[1];
+					var rating = $j(this).find('.star.selected').length;
+					if(rating>0){
+						var comment = Ext.create('TC.model.Comment',{
+							survey_question_id: question_id,
+							rating: rating,
+							name: userName
+						});
+						comments_to_send.add(comment);
+					}
+				});
+				// get rating and comments of all dishes
+				$j('.tcSurveyContainer .dish_eaten').each(function(){
+					var dish_id = this.id.split("dish_eaten_")[1];
+					var rating = $j(this).find('.star.selected').length;
+					var dish_comment = $j(this).find('.survey_dish_comment').val();
+					if(rating>0){
+						var comment = Ext.create('TC.model.Comment',{
+							dish_id: dish_id,
+							rating: rating,
+							description: dish_comment,
+							name: userName
+						});
+						comments_to_send.add(comment);
+					}
+				});
+				// get restaurant's experience
+				var restaurant_comment = $j('.tcSurveyGeneralComment:last').val();
+				if(restaurant_comment.length > 0){
+					var comment = Ext.create('TC.model.Comment',{
+						name: userName,
+						description: restaurant_comment
+					});
+					comments_to_send.add(comment);
+				}
+				
+				// submit all comments now
+				comments_to_send.sync();
+				// say thank you and have a nice day
+				setTimeout(function(){
+					Ext.Viewport.unmask();
+					$tc.alertMsg('<p align="center">'+$T.thanks_for_coming+'</p>',function(){
+						me.redirectTo('mainmenu');
+					});
+				},3000);
+			}
+		});
+  },
+  
+  showSurvey: function(survey){
+  	console.log('TC.controller.BasicSurvey.showSurvey');
+  	var me = this;
+  	// setting order items and questions
+  	survey.down('survey-dishes').setStore(TC.SentOrderItems);
+  	// setting scrollbar visible if needed
+  	var items = TC.SentOrderItems.getCount();
+		if(items>4){
+			$j(survey.down('survey-dishes').element.dom).find('.x-scroll-indicator-dark.x-scroll-indicator.x-scroll-indicator-x').css('opacity','0.5 !important');
+		}
+  	
+  	// setting placeholders
+  	$j('.tcSurveyDishes .survey_dish_comment').each(function(){
+  		var placeholder = $j(this).attr('placeholder');
+  		$j(this).watermark(placeholder, {fallback: false});
+  	});
+  	
+  	TC.Restaurant.survey_questions().add(TC.Restaurant.data.survey_questions);
+  	survey.down('survey-questions').setStore(TC.Restaurant.survey_questions());
+  	
+  	// lets bind stuff
+  	$z(document).on($tc.click, '.tcSurveyContainer .rating .star', me.rate);
+  	$z(document).on($tc.click, '.tcSurveyContainer .survey_question .x-segmentedbutton .x-button', me.selectAnswer);
+  },
+  
+  selectAnswer: function(event,a,b){
+  	console.log('TC.controller.BasicSurvey.selectAnswer');
+  	var selectedOption = event.target;
+		var selectedClass = 'x-button-pressed';
+		$j(selectedOption).addClass(selectedClass);
+  	$j(selectedOption).siblings().removeClass(selectedClass);
+  },
+  
+  rate: function(event,a,b){
+  	console.log('TC.controller.BasicSurvey.rate');
+  	var star = event.target;
+		var selectedClass = 'selected';
+		$j(star).addClass(selectedClass);
+		var prevStar = $j(star).prev();
+		while(prevStar.length>0){
+			prevStar.addClass(selectedClass);
+			prevStar = $j(prevStar).prev();
+		}
+		var nextStar = $j(star).next();
+		while(nextStar.length>0){
+			nextStar.removeClass(selectedClass);
+			nextStar = $j(nextStar).next();
+		}
+  },
+  
+  loadSurvey: function(){
+  	console.log('TC.controller.BasicSurvey.loadSurvey');
+  	TC.switchView({xtype: 'survey-container'});
+  }
+  
+});
 
 /**
  * OrderItems Store
@@ -63495,6 +63654,203 @@ Ext.define('TC.model.SurveyQuestion', {
 });
 
 /**
+ * SurveyQuestions Store
+ * 
+ */
+Ext.define('TC.store.SurveyQuestions', {
+    extend  : 'Ext.data.Store',
+    requires: ['TC.model.SurveyQuestion'],
+    config: {
+    	model: 'TC.model.SurveyQuestion'
+    }
+});
+
+/**
+ * @class TC.controller.survey.SliderSurvey
+ * @extends Ext.app.Controller
+ * 
+ * The Slider Survey Controller
+ * @description controls the slider survey, it display carousel with one question at a time.
+ */
+Ext.define('TC.controller.survey.SliderSurvey', {
+  extend: 'Ext.app.Controller',
+  requires: ['TC.store.SurveyQuestions'],
+  config: {
+  	routes: {
+      'slidersurvey': 'loadSurvey'
+    },
+    views: [
+    	'survey.slider.SurveyContainer',
+    	// 'survey.slider.SurveyPage',
+    	'survey.basic.SurveyQuestions',
+    	// 'survey.basic.SurveyComments'
+    ],   
+    refs: {
+    	survey: 'survey-slider-container'
+    },
+    control: {
+    	survey: { show: 'showSurvey' }
+    }
+  },
+  
+  launch: function(){
+  	console.log('TC.controller.survey.SliderSurvey.launch');
+  },
+  
+  submitSurvey: function(){
+  	console.log('TC.controller.survey.SliderSurvey.submitSurvey');
+  	var me = this;
+		$tc.confirmMsg($T.send_survey_question,function(btn){
+			if(btn=="yes"){
+				Ext.Viewport.setMasked({xtype: 'loadmask',message: $T.send_survey_loading});
+				var comments_to_send = Ext.create('TC.store.Comments',{
+					proxy: {
+						type: $tc.protocol,
+						url: $tc.url('submit_survey') + '?key=' + TC.Setting.get('key'),
+						writer: {
+			    		type: 'json',
+			    		root: 'survey'
+			    	}
+					}
+				});
+				// get the name of the user
+				var userName = $j('.tcSurveyContainer .userInputNameField:last').val();
+				// get rating of all survey questions
+				$j('.tcSurveyContainer .survey_question').each(function(){
+					var question_id = this.id.split("survey_question_")[1];
+					var rating = $j(this).find('.star.selected').length;
+					if(rating>0){
+						var comment = Ext.create('TC.model.Comment',{
+							survey_question_id: question_id,
+							rating: rating,
+							name: userName
+						});
+						comments_to_send.add(comment);
+					}
+				});
+				// get rating and comments of all dishes
+				$j('.tcSurveyContainer .dish_eaten').each(function(){
+					var dish_id = this.id.split("dish_eaten_")[1];
+					var rating = $j(this).find('.star.selected').length;
+					var dish_comment = $j(this).find('.survey_dish_comment').val();
+					if(rating>0){
+						var comment = Ext.create('TC.model.Comment',{
+							dish_id: dish_id,
+							rating: rating,
+							description: dish_comment,
+							name: userName
+						});
+						comments_to_send.add(comment);
+					}
+				});
+				// get restaurant's experience
+				var restaurant_comment = $j('.tcSurveyGeneralComment:last').val();
+				if(restaurant_comment.length > 0){
+					var comment = Ext.create('TC.model.Comment',{
+						name: userName,
+						description: restaurant_comment
+					});
+					comments_to_send.add(comment);
+				}
+				
+				// submit all comments now
+				comments_to_send.sync();
+				// say thank you and have a nice day
+				setTimeout(function(){
+					Ext.Viewport.unmask();
+					$tc.alertMsg('<p align="center">'+$T.thanks_for_coming+'</p>',function(){
+						me.redirectTo('mainmenu');
+					});
+				},3000);
+			}
+		});
+  },
+  
+  setupSurvey: function(survey){
+  	console.log('TC.controller.SliderSurvey.setupSurvey');
+  	TC.Restaurant.survey_questions().add(TC.Restaurant.data.survey_questions);
+  	
+  	var carousel = survey.down('#tcSurveySliderCarouselId');
+		var questions_per_page = 2;
+		var question_counter = 0;
+		
+		var survey_pages = [];
+		var survey_page = null;
+  	
+    TC.Restaurant.survey_questions().each(function(question){
+			if(question_counter%questions_per_page==0){
+				survey_page = Ext.create('TC.view.survey.basic.SurveyQuestions');
+				survey_page.setStore(Ext.create('TC.store.SurveyQuestions'));
+				survey_pages.push(survey_page);
+			}
+			survey_page.getStore().add(question);
+			question_counter++;
+    });
+    	
+    carousel.setItems(survey_pages);
+    if(survey_pages.length<2){
+    	carousel.setIndicator(false);
+    }
+    carousel.setActiveItem(0);
+  },
+  
+  
+  showSurvey: function(survey){
+  	console.log('TC.controller.SliderSurvey.showSurvey');
+  	this.setupSurvey(survey);
+  	var me = this;
+  	if(TC.SentOrderItems && TC.SentOrderItems.getCount()>0){
+  		// setting order items and questions
+	  	survey.down('survey-dishes').setStore(TC.SentOrderItems);
+	  	// setting scrollbar visible if needed
+	  	var items = TC.SentOrderItems.getCount();
+			if(items>4){
+				$j(survey.down('survey-dishes').element.dom).find('.x-scroll-indicator-dark.x-scroll-indicator.x-scroll-indicator-x').css('opacity','0.5 !important');
+			}
+			// setting placeholders
+	  	$j('.tcSurveyDishes .survey_dish_comment').each(function(){
+	  		var placeholder = $j(this).attr('placeholder');
+	  		$j(this).watermark(placeholder, {fallback: false});
+	  	});
+  	}
+  	// lets bind stuff
+  	$z(document).on($tc.click, '.tcSurveySliderContainer .rating .star', me.rate);
+  	$z(document).on($tc.click, '.tcSurveySliderContainer .survey_question .x-segmentedbutton .x-button', me.selectAnswer);
+  },
+  
+  selectAnswer: function(event,a,b){
+  	console.log('TC.controller.BasicSurvey.selectAnswer');
+  	var selectedOption = event.target;
+		var selectedClass = 'x-button-pressed';
+		$j(selectedOption).addClass(selectedClass);
+  	$j(selectedOption).siblings().removeClass(selectedClass);
+  },
+  
+  rate: function(event,a,b){
+  	console.log('TC.controller.BasicSurvey.rate');
+  	var star = event.target;
+		var selectedClass = 'selected';
+		$j(star).addClass(selectedClass);
+		var prevStar = $j(star).prev();
+		while(prevStar.length>0){
+			prevStar.addClass(selectedClass);
+			prevStar = $j(prevStar).prev();
+		}
+		var nextStar = $j(star).next();
+		while(nextStar.length>0){
+			nextStar.removeClass(selectedClass);
+			nextStar = $j(nextStar).next();
+		}
+  },
+  
+  loadSurvey: function(){
+  	console.log('TC.controller.survey.SliderSurvey.loadSurvey');
+  	TC.switchView({xtype: 'survey-slider-container'});
+  }
+  
+});
+
+/**
  * Subsection Class
  *
  */
@@ -64141,6 +64497,86 @@ Ext.define('TC.view.order.OrderView', {
 	
 });
 
+/**
+ * @class TC.view.survey.SurveyComments
+ * @extends Ext.Panel
+ *
+ * SurveyComments Panel
+ * @description This panel display the survey comments
+ **/
+
+Ext.define('TC.view.survey.basic.SurveyComments', {
+	extend: 'Ext.Panel',
+	xtype: 'survey-comments',
+	config: {
+		cls: 'tcSurveyComments',
+		layout: 'hbox',
+		items: [
+			{
+				cls: 'tcSurveyCommentsNameContainer',
+				html: [
+					'<div class="tcSurveyCommentsName">',
+						'<label>'+$T.your_name+'</label>',
+						'<input class="userInputNameField" type="text" name="name" placeholder="'+$T.name_example+'" />',
+					'</div>'
+				].join('')
+			},
+			{
+				cls: 'tcSurveyCommentsDetailsContainer',
+				html: [
+					'<div class="tcSurveyCommentsDetails">',
+						'<label>'+$T.your_comment+'</label>',
+						'<input class="tcSurveyGeneralComment" placeholder="'+$T.leave_your_comment_here+'" />',
+					'</div>'
+				].join('')
+			},
+			{
+				cls: 'tcSurveyCommentsBtn',
+				xtype: 'button',
+				ui: 'action',
+				text: $T.submit
+			}
+		]
+	}
+});
+
+
+
+
+/**
+ * @class TC.view.survey.slider.SurveyContainer
+ * @extends Ext.Panel
+ *
+ * SurveyContainer Panel
+ * @description This panel display the survey
+ **/
+
+Ext.define('TC.view.survey.slider.SurveyContainer', {
+	requires: [],
+	extend: 'Ext.Panel',
+	xtype: 'survey-slider-container',
+	
+	config: {
+		cls: 'tcSurveySliderContainer',
+		layout: 'vbox',
+		items: [
+			{
+				html: '<h4>survey title</h4>'
+			},
+			{
+				flex: 1,
+				itemId: 'tcSurveySliderCarouselId',
+				xtype: 'carousel',
+				items: [
+					{ html: 'item1' },
+					{ html: 'item2' }
+				]
+			}
+			
+		]
+	}
+	
+});
 
 /**
  * @class TC.view.help.HelpView
@@ -71101,8 +71537,122 @@ Ext.define('TC.view.sidebar.MenuPanelItemsView', {
 
 });
 
+/**
+ * @class TC.view.survey.SurveyDishes
+ * @extends Ext.DataView
+ *
+ * SurveyDishes DataView
+ * @description This panel display the survey dishes
+ **/
 
+Ext.define('TC.view.survey.basic.SurveyDishes', {
+	extend: 'Ext.DataView',
+	xtype: 'survey-dishes',
+	
+	config: {
+		cls: 'tcSurveyDishes',
+		layout: 'hbox',
+		scrollable: 'horizontal',
+		itemTpl: [
+			'<tpl if="thumbnail_photo_url.length &gt; 0">',
+			'<div id="dish_eaten_{dish_id}" class="dish_eaten">',
+				'<div class="rating">',
+      		'<div class="star"></div>',
+      		'<div class="star"></div>',
+      		'<div class="star"></div>',
+      		'<div class="star"></div>',
+      		'<div class="star"></div>',
+      	'</div>',
+				'<img class="dish_photo" src="{thumbnail_photo_url}" />',
+				'<textarea class="survey_dish_comment" placeholder="'+$T.drop_a_line_on+'<br/>{item_name}"></textarea>',
+			'</div>',
+			'</tpl>'
+   	].join('')
+	}
+	
+});
 
+/**
+ * @class TC.view.survey.SurveyQuestions
+ * @extends Ext.DataView
+ *
+ * SurveyQuestions DataView
+ * @description This panel display the survey questions
+ **/
+
+Ext.define('TC.view.survey.basic.SurveyQuestions', {
+	extend: 'Ext.DataView',
+	xtype: 'survey-questions',
+	
+	config: {
+		cls: 'tcSurveyQuestions',
+		scrollable: false,
+		itemTpl: [
+      '<div id="survey_question_{id}" class="survey_question">',
+      	'<div class="question_title">{description}</div>',
+      	'<tpl if="yes_no_type==true">',
+      		'<div class="x-container x-segmentedbutton x-layout-box-item x-stretched" style="float:right;margin-top:8px;margin-right: 5px;">',
+	      		'<div class="x-inner x-segmentedbutton-inner x-horizontal x-align-stretch x-pack-start x-layout-box">',
+		      		'<div style="float:left;" class="x-button-normal x-button x-layout-box-item x-stretched x-first">',
+			      		'<span style="display: none;" class="x-badge"></span>',
+			      		'<span class="x-button-icon" style="display: none;"></span>',
+			      		'<span style="" class="x-button-label">'+$T.yes_button+'</span>',
+		      		'</div>',
+							'<div style="float:left;" class="x-button-normal x-button x-layout-box-item x-stretched">',
+								'<span style="display: none;" class="x-badge"></span>',
+								'<span class="x-button-icon" style="display: none;"></span>',
+								'<span style="" class="x-button-label">'+$T.maybe_button+'</span>',
+							'</div>',
+							'<div style="float:left;" class="x-button-normal x-button x-layout-box-item x-stretched x-last">',
+								'<span style="display: none;" class="x-badge"></span>',
+								'<span class="x-button-icon" style="display: none;"></span>',
+								'<span style="" class="x-button-label">'+$T.no_button+'</span>',
+							'</div>',
+						'</div>',
+					'</div>',
+				'</tpl>',
+				'<tpl if="yes_no_type==false">',
+      	'<div class="rating">',
+      		'<div class="star"></div>',
+      		'<div class="star"></div>',
+      		'<div class="star"></div>',
+      		'<div class="star"></div>',
+      		'<div class="star"></div>',
+      	'</div>',
+      	'</tpl>',
+      '</div>'
+		].join('')
+	}
+	
+});
+
+/**
+ * @class TC.view.survey.SurveyContainer
+ * @extends Ext.Panel
+ *
+ * SurveyContainer Panel
+ * @description This panel display the survey
+ **/
+
+Ext.define('TC.view.survey.basic.SurveyContainer', {
+	requires: ['TC.view.survey.basic.SurveyDishes','TC.view.survey.basic.SurveyQuestions','TC.view.survey.basic.SurveyComments'],
+	extend: 'Ext.Panel',
+	xtype: 'survey-container',
+	
+	config: {
+		cls: 'tcSurveyContainer',
+		scrollable: false,
+		items: [
+			{ cls: 'tcSurveyTitle tcSurveyTitleDishes', html: '<div>'+$T.comment_dishes_eaten+'</div>' },
+			{ itemId: 'tcSurveyDishesId', xtype: 'survey-dishes' },
+			{ cls: 'tcSurveyTitle', html: '<div>'+$T.your_opinion+'</div>' },
+			{ xtype: 'survey-questions' },
+			{ cls: 'tcSurveyTitle', html: '<div>'+$T.your_name_and_comment+'</div>' },
+			{ xtype: 'survey-comments' }
+		]
+	}
+	
+});
 
 /**
  * @class TC.view.matrixmenu.DishTiledView
