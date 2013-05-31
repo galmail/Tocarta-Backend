@@ -12,8 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require gcharts
 //= require bootstrap
+//= require jquery-ui
+//= require ace-elements.min
+//= require ace.min
+//= require gcharts
 //= require_tree .
 
 

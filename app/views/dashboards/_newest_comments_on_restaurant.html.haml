@@ -1,0 +1,38 @@
+- comments = @restaurant.comments.with_dish.newest
+.newest_comments_on_dishes.span6
+  .widget-box
+    .widget-header
+      %h4.lighter.smaller
+        %i.icon-comment.blue
+        Newst Comments on restaurant
+      .widget-toolbar
+        %a{href: '#', 'data-action' => 'reload'}
+          %i.icon-refresh
+        %a{href: '#', 'data-action' => 'collapse'}
+          %i.icon-chevron-up
+        %a{href: '#', 'data-action' => 'close'}
+          %i.icon-remove
+    .widget-body
+      .widget-main.no-padding
+        - if comments.nil?
+          %p Not enough data
+        - else
+          .dialogs
+            - comments.each do |c|
+              .itemdiv.dialogdiv
+                .user
+                  = image_tag(c.dish.photo || 'default_dish.png')
+                .body
+                  .time
+                    - c.rating.times do
+                      %i.icon-star.orange
+                    %span &nbsp;
+                    %i.icon-time
+                    %span= distance_of_time_in_words_to_now(c.created_at)
+                  .name= c.dish.name
+                  .text
+                    - if c.description.empty?
+                      no comments
+                    - else
+                      %i.icon-quote-left
+                      = c.description

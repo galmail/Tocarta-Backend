@@ -1,50 +1,52 @@
 -# Show a list of top 10 dishes
 .top_dishes.span6
-  #recent-box.widget-box.transparent
+  #top-box.widget-box.transparent
     .widget-header
       %h4.lighter.smaller
-        %i.icon-rss.orange
+        %i.icon-signal.orange
         Top rating dishes
       .widget-toolbar.no-border
-        %ul#recent-tab.nav.nav-tabs
+        %ul.nav.nav-tabs
           %li.active
             %a{"data-toggle" => "tab", :href => "#top-tab"} Top
           %li
             %a{"data-toggle" => "tab", :href => "#bottom-tab"} Bottom
     .widget-body
-      .widget-main.padding-4.tab-content
-        #top-tab.tab-pane.active
-          - dishes = Dish.by_chain(@restaurant.chain_id).with_comments.top_rating.limit(10)
-          - if dishes.nil?
-            %p Not enough data
-          - else
-            .comments
-              - dishes.each do |d|
-                .itemdiv.commentdiv
-                  .user
-                    = image_tag(d.photo || 'default_dish.png')
-                  .body
-                    .name= d.name
-                    .time
-                      - d.rating.to_i.times do
-                        %i.icon-star.orange
-                      %span= " (#{d.rating.to_s})"
-                    .text
-        #bottom-tab.tab-pane
-          - dishes = Dish.by_chain(@restaurant.chain_id).with_comments.bottom_rating.limit(10)
-          - if dishes.nil?
-            %p Not enough data
-          - else
-            .comments
-              - dishes.each do |d|
-                .itemdiv.commentdiv
-                  .user
-                    = image_tag(d.photo || 'default_dish.png')
-                  .body
-                    .name= d.name
-                    .time
-                      - d.rating.to_i.times do
-                        %i.icon-star.orange
-                      %span= " (#{d.rating.to_s})"
-                    .text
-          .hr.hr8
+      .widget-main.padding-4
+        .tab-content.padding-8
+          #top-tab.tab-pane.active
+            - dishes = Dish.by_chain(@restaurant.chain_id).with_comments.top_rating.limit(10)
+            - if dishes.nil?
+              %p Not enough data
+            - else
+              .comments
+                - dishes.each do |d|
+                  .itemdiv.commentdiv
+                    .user
+                      = image_tag(d.photo || 'default_dish.png')
+                    .body
+                      .name= d.name
+                      .time
+                        - d.rating.to_i.times do
+                          %i.icon-star.orange
+                        %span= " (#{d.rating.to_s})"
+                      .text
+            .hr.hr8.hr-double
+          #bottom-tab.tab-pane
+            - dishes = Dish.by_chain(@restaurant.chain_id).with_comments.bottom_rating.limit(10)
+            - if dishes.nil?
+              %p Not enough data
+            - else
+              .comments
+                - dishes.each do |d|
+                  .itemdiv.commentdiv
+                    .user
+                      = image_tag(d.photo || 'default_dish.png')
+                    .body
+                      .name= d.name
+                      .time
+                        - d.rating.to_i.times do
+                          %i.icon-star.orange
+                        %span= " (#{d.rating.to_s})"
+                      .text
+            .hr.hr8.hr-double
