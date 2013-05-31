@@ -16,7 +16,9 @@
 //= require jquery-ui
 //= require ace-elements.min
 //= require ace.min
+//= require jquery.slimscroll.min
 //= require gcharts
+//= require dashboards
 //= require_tree .
 
 
