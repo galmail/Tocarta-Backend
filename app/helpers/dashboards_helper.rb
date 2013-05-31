@@ -7,4 +7,11 @@ module DashboardsHelper
       content_tag(:i, '', class: 'icon-spinner icon-spin orange bigger-150')
     end
   end
+
+  # Use first chain logo as avatar
+  def user_avatar_tag
+    img = current_user.chains.first.logo if current_user.chains.present?
+    img ||= "/assets/avatars/avatar2.png"
+    image_tag(img, alt: "logo", class: 'nav-user-photo')
+  end
 end

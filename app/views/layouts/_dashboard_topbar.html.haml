@@ -3,8 +3,8 @@
     .container-fluid
       %a.brand{:href => "#"}
         %small
-          %i.icon-leaf
-          Tocarta Admin
+          -# %i.icon-leaf
+          Tocarta Analytics
       %ul.nav.ace-nav.pull-right
         %li.grey
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
@@ -68,10 +68,10 @@
                 %i.icon-arrow-right
         %li.light-blue.user-profile
           %a.user-menu.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-            %img.nav-user-photo{:alt => "Photo", :src => "/assets/avatars/avatar3.png"}/
+            = user_avatar_tag
             %span#user_info
               %small Welcome,
-              = current_user.name || current_user.email.split('@')[0]
+              = current_user.name || current_user.email
             %i.icon-caret-down
           %ul#user_menu.pull-right.dropdown-menu.dropdown-yellow.dropdown-caret.dropdown-closer
             %li
@@ -80,6 +80,6 @@
                 Profile
             %li.divider
             %li
-              %a{:href => destroy_user_session_path}
+              = link_to(destroy_user_session_path, method: :delete) do
                 %i.icon-off
                 Logout
