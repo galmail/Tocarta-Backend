@@ -6,6 +6,8 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'jquery-rails'
 
+gem 'rails-erd' # Create DB Diagram (even for production!)
+
 #### Database Setup ####
 group :development do
   gem 'taps'              # for heroku db:pull
@@ -16,7 +18,6 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller" # for better_errors
   gem 'quiet_assets'
-  gem 'rails-erd'         # create DB diagram
   gem 'annotate'
   gem "guard-bundler", ">= 1.0.0"
   gem "guard-rails", ">= 0.4.0"
