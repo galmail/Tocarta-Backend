@@ -16,15 +16,32 @@
 #
 
 class Comment < ActiveRecord::Base
-  include MongohqLogger
+  # include MongohqLogger
   belongs_to :dish
   belongs_to :restaurant
   belongs_to :client
   belongs_to :survey_question
-	attr_accessible :name, :description, :rating, :approved
-	attr_accessible :dish_id, :restaurant_id
-	after_save :logme
-	
-	# TODO capture everytime the comment is approved (or disapproved) and update dish rating
-	
+  attr_accessible :name, :description, :rating, :approved
+  attr_accessible :dish_id, :restaurant_id
+  # after_save :logme
+
+  # TODO capture everytime the comment is approved (or disapproved) and update dish rating
+  scope :without_dish,    where(dish_id: nil)
+  scope :with_dish,       joins(:dish)
+  scope :newest,          order('created_at DESC').limit(10)
+
+  def self.by_dish(id)
+    where(dish_id: id)
+  end
+
+  # Create an array with comments
+  # @param [Comment] coments
+  # @return [Array] [Dish.name, Dish.rating, Comment.rating, Dish.comments]
+  def self.to_dish_rating_array(comments)
+    comments.inject([]) do |r, v|
+      r << [v.dish.name, v.dish.rating.to_i, v.rating, v.dish.comments.count]
+      r
+    end
+  end
+
 end

@@ -1,0 +1,28 @@
+-# Show a list of last 10 dishes commented & chart of same dishes rating
+- comments = @restaurant.comments.with_dish.newest
+.newest_comments_on_dishes
+  - if comments.nil?
+    %p Not enough data
+  - else
+    .span4
+      .widget-box
+        .widget-header
+          %h5 Newest comments
+          .widget-toolbar
+            %a{href: '#', 'data-action' => 'reload'}
+              %i.icon-refresh
+            %a{href: '#', 'data-action' => 'collapse'}
+              %i.icon-chevron-up
+            %a{href: '#', 'data-action' => 'close'}
+              %i.icon-remove
+        .widget-body
+          .widget-main.padding-8
+            = chart_tag('chart_newest_comments_on_dishes', 300, restaurant: @restaurant)
+            %br
+            %ul
+              - comments.each do |c|
+                %li
+                  = c.dish.name
+                  - unless c.description.empty?
+                    %ul
+                      %li= c.description
