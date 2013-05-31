@@ -40,6 +40,7 @@ Ext.define('TC.controller.MainMenu', {
       	dishImg: 'dish-photo-tab #tcDishImgId',
       	dishCommentsTab: 'dish-container tabpanel dish-comments-tab',
       	dishVideoTab: 'dish-container tabpanel dish-video-tab',
+      	dishNutritionFactsTab: 'dish-container tabpanel dish-nutritionfacts-tab',
       	// mini dishes
       	minidishesContainer: 'minidishes-container',
       	minidishesView: 'minidishes-view'
@@ -55,6 +56,7 @@ Ext.define('TC.controller.MainMenu', {
 	      dishVideoTab: { show: 'dishVideoShow' },
 	      addDishButton: { tap: 'addDish' },
 	      dishCommentsTab: { show: 'dishCommentsShow' },
+	      dishNutritionFactsTab: { show: 'dishNutritionFactsShow' },
 	      minidishesView: { itemtap: 'addMiniDish' }
 	    }
 	    
@@ -119,6 +121,11 @@ Ext.define('TC.controller.MainMenu', {
     dishCommentsShow: function(commentsTab){
     	console.log('TC.controller.MainMenu.dishCommentsShow');
     	commentsTab.down('#tcDishCommentsDataItemsId').setStore(commentsTab.getRecord().comments());
+    },
+    
+    dishNutritionFactsShow: function(nutritionfactsTab){
+    	console.log('TC.controller.MainMenu.dishNutritionFactsShow');
+    	nutritionfactsTab.down('#tcDishNutritionFactsDataItemsId').setData(nutritionfactsTab.getRecord().get('nutrition_fact'));
     },
     
     dishTabPanelInitialize: function(tabPanel){
@@ -246,6 +253,27 @@ Ext.define('TC.controller.MainMenu', {
     		else {
     			dishTabPanel.getTabBar().items.items[1].show();
     		}
+	    	
+	    	// hide nutrition tab when there are no nutrition facts
+	    	if(this.getCurrentDish().get('nutrition_fact')){
+    			dishTabPanel.getTabBar().items.items[2].show();
+    		}
+    		else {
+    			dishTabPanel.getTabBar().items.items[2].hide();
+    		}
+    		
+    		// hide tabs if there is only one tab
+    		var _visible_tabs = 0;
+    		Ext.Array.each(dishTabPanel.getTabBar().items.items,function(item){
+    			if(item.isHidden()!=true) _visible_tabs++;
+    		});
+    		if(_visible_tabs<2){
+    			dishTabPanel.getTabBar().hide();
+    		}
+    		else {
+    			dishTabPanel.getTabBar().show();
+    		}
+    		
 	    	
 	    	// set dish record on all items
 	    	Ext.Array.each(dishTabPanel.items.items,function(item){

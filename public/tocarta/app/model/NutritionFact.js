@@ -1,9 +1,9 @@
 /**
- * NutritionFacts Class
+ * NutritionFact Class
  *
  */
 
-Ext.define('TC.model.NutritionFacts', {
+Ext.define('TC.model.NutritionFact', {
 	extend : 'Ext.data.Model',
   fields: [
     {name: "id", type: "int"},
@@ -15,5 +15,7 @@ Ext.define('TC.model.NutritionFacts', {
     {name: "cholesterol", type: "int"},
     {name: "calories", type: "int"}
   ],
-  belongsTo: 'Dish'
+  associations: [
+    {type: 'belongsTo', model: 'TC.model.Dish', name: 'dish'}
+  ]
 });
