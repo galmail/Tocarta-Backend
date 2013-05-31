@@ -120,6 +120,15 @@ ActiveRecord::Schema.define(:version => 20130526230552) do
   add_index "comments", ["restaurant_id"], :name => "index_comments_on_restaurant_id"
   add_index "comments", ["survey_question_id"], :name => "index_comments_on_survey_question_id"
 
+  create_table "dashboards", :force => true do |t|
+    t.string   "name",       :null => false
+    t.text     "options"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "dashboards", ["name"], :name => "index_dashboards_on_name", :unique => true
+
   create_table "dish_combo_associations", :force => true do |t|
     t.integer  "dish_id"
     t.integer  "combo_id"
