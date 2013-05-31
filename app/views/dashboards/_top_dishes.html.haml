@@ -23,7 +23,7 @@
                 - dishes.each do |d|
                   .itemdiv.commentdiv
                     .user
-                      = image_tag(d.photo || 'default_dish.png')
+                      = image_tag(d.photo(:mini) || 'default_dish.png')
                     .body
                       .name= d.name
                       .time
@@ -41,7 +41,7 @@
                 - dishes.each do |d|
                   .itemdiv.commentdiv
                     .user
-                      = image_tag(d.photo || 'default_dish.png')
+                      = image_tag(d.photo(:mini) || 'default_dish.png')
                     .body
                       .name= d.name
                       .time

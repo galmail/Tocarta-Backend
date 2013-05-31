@@ -21,7 +21,7 @@
             - comments.each do |c|
               .itemdiv.dialogdiv
                 .user
-                  = image_tag(c.dish.photo || 'default_dish.png')
+                  = image_tag(c.dish.photo(:mini) || 'default_dish.png')
                 .body
                   .time
                     - c.rating.times do
