@@ -46,6 +46,7 @@ $T = {
 	
 	"photo": "Foto",
 	"comments": "Comentarios",
+	"nutritionfacts": "Datos de Nutrición",
 	"video": "Video",
 	
 	//// TC.view.dish.DishPhoto ////

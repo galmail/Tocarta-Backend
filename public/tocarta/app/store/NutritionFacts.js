@@ -4,8 +4,8 @@
  */
 Ext.define('TC.store.NutritionFacts', {
     extend  : 'Ext.data.Store',
-    requires: ['TC.model.NutritionFacts'],
+    requires: ['TC.model.NutritionFact'],
     config: {
-    	model   : 'TC.model.NutritionFacts'
+    	model   : 'TC.model.NutritionFact'
     }
 });

@@ -15,12 +15,12 @@ Ext.define('TC.model.Dish', {
 	    {name: "name", type: "string"},
 	    {name: "short_title", type: "string"},
 	    {name: "price", type: "float"},
-	    //{name: "dish_types", persist:true},
+	    {name: "nutrition_fact", persist:true},
 	    {name: "description", type: "string"},
 	    {name: "rating", type: "int"},
 	    {name: "story", type: "string"},
 	    {name: "video", type: "string"},
-	    {name: "nutrition_facts", type: "string"},
+	    // {name: "nutrition_fact", type: "string"},
 	    {name: "position", type: "int"},
 	    {name: "mini", type: "string"},
 	    {name: "mini_photo_url", type: "string",
@@ -45,7 +45,8 @@ Ext.define('TC.model.Dish', {
 	  	{type: 'belongsTo', model: 'TC.model.Section', name: 'section'},
 	  	{type: 'belongsTo', model: 'TC.model.Subsection', name: 'subsection'},
 	    {type: 'hasMany', model: 'TC.model.Dishtype', name: 'dishtypes'},
-	    {type: 'hasMany', model: 'TC.model.Comment', name: 'comments'}
+	    {type: 'hasMany', model: 'TC.model.Comment', name: 'comments'},
+	    {type: 'hasOne', model: 'TC.model.NutritionFact', name: 'nutrition_fact'}
 	  ]
 	}
   
