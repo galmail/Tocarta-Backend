@@ -22,6 +22,6 @@ class OrderItem < ActiveRecord::Base
   belongs_to :combo_type
 	attr_accessible :quantity, :note, :name
 	
-	after_save :logme
+	# after_save :logme
 	
 end
