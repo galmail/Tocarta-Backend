@@ -1,4 +1,4 @@
-- comments = @restaurant.comments.with_dish.newest
+- comments = @restaurant.comments.without_dish.newest
 .newest_comments_on_dishes.span6
   .widget-box
     .widget-header
@@ -19,19 +19,20 @@
             - comments.each do |c|
               .itemdiv.dialogdiv
                 .user
-                  = image_tag(c.dish.photo || 'default_dish.png')
+                  = image_tag(@restaurant.chain.logo(:medium) || 'default_dish.png')
                 .body
                   .time
-                    - c.rating.times do
+                    - stars_num = c.rating.nil? ? 0 : c.rating.to_i
+                    - stars_num.times do
                       %i.icon-star.orange
                     %span &nbsp;
                     %i.icon-time
                     %span= distance_of_time_in_words_to_now(c.created_at)
                   .name
-                    = c.dish.name
+                    = c.name.nil? ? 'anonymous' : c.name
                     = c.approved ? label_tag('approved') : label_tag('rejected')
                   .text
-                    - if c.description.empty?
+                    - if c.description.nil?
                       no comments
                     - else
                       %i.icon-quote-left

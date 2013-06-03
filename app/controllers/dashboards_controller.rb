@@ -40,9 +40,10 @@ class DashboardsController < ApplicationController
       :cols => [['string', 'Dish'], ['number', 'Average'], ['number', 'Comments']],
       :rows => dishes,
       :options => {
-        chartArea: { width: '90%', height: '75%' },
+        chartArea: { width: '80%', height: '75%' },
         seriesType: 'bars',
         series: {1 => {type: 'line'}},
+        :hAxis => { title: 'dish' },
         legend: 'bottom',
       }
     }
