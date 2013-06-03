@@ -3,8 +3,8 @@
   .widget-box
     .widget-header
       %h4.lighter.smaller
-        %i.icon-comment.green
-        Newst Comments on dishes
+        %i.icon-comment.blue
+        Newst Comments on restaurant
       .widget-toolbar
         %a{href: '#', 'data-action' => 'reload'}
           %i.icon-refresh
@@ -21,7 +21,7 @@
             - comments.each do |c|
               .itemdiv.dialogdiv
                 .user
-                  = image_tag(c.dish.photo(:mini) || 'default_dish.png')
+                  = image_tag(c.dish.photo || 'default_dish.png')
                 .body
                   .time
                     - c.rating.times do

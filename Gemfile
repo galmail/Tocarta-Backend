@@ -11,6 +11,7 @@ gem 'rails-erd' # Create DB Diagram (even for production!)
 #### Database Setup ####
 group :development do
   gem 'taps'              # for heroku db:pull
+  gem 'rails-erd'         # create DB diagram
   gem 'yaml_db'
   gem 'sqlite3'
   gem 'meta_request'      # for rails_panel
@@ -116,8 +117,6 @@ gem 'coffee-rails', '~> 3.2.1'
 gem "haml-rails"
 gem 'simple_form'
 gem 'country_select'
-# gem 'flot-rails', :git => "https://github.com/Kjarrigan/flot-rails.git"
-# gem 'lazy_high_charts'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

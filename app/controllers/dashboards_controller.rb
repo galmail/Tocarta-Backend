@@ -54,6 +54,7 @@ class DashboardsController < ApplicationController
     if current_user.has_role? :admin
       @chains     = Chain.all
     elsif current_user.has_role? :restaurant
+      @chains     = Chain.all
     elsif current_user.has_role? :distributor
     end
   end
