@@ -10,8 +10,6 @@
           %i.icon-refresh
         %a{href: '#', 'data-action' => 'collapse'}
           %i.icon-chevron-up
-        %a{href: '#', 'data-action' => 'close'}
-          %i.icon-remove
     .widget-body
       .widget-main.no-padding
         - if comments.nil?
@@ -29,10 +27,25 @@
                     %span &nbsp;
                     %i.icon-time
                     %span= distance_of_time_in_words_to_now(c.created_at)
-                  .name= c.dish.name
+                  .name
+                    = c.dish.name
+                    = c.approved ? label_tag('approved') : label_tag('rejected')
                   .text
                     - if c.description.empty?
                       no comments
                     - else
                       %i.icon-quote-left
                       = c.description
+                  .tools
+                    .inline.position-relative
+                      %button.btn.btn-minier.bigger.btn-yellow.dropdown-toggle{"data-toggle" => "dropdown"}
+                        %i.icon-angle-down.icon-only.bigger-120
+                      %ul.dropdown-menu.dropdown-icon-only.dropdown-yellow.pull-right.dropdown-caret.dropdown-close
+                        %li
+                          = link_to('#', class: "tooltip-success", 'data-placement' => 'left', 'data-rel' => 'tooltip') do
+                            %span.green
+                              %i.icon-ok
+                        %li
+                          = link_to('#', class: "tooltip-success", 'data-placement' => 'left', 'data-rel' => 'tooltip') do
+                            %span.orange
+                              %i.icon-remove

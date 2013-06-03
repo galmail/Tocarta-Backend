@@ -14,4 +14,12 @@ module DashboardsHelper
     img ||= "/assets/avatars/avatar2.png"
     image_tag(img, alt: "logo", class: 'nav-user-photo')
   end
+
+  def label_tag(title)
+    if title == 'approved'
+      content_tag(:span, title, class: 'label label-success arrowed-in')
+    else title == 'rejected'
+      content_tag(:span, title, class: 'label label-important')
+    end
+  end
 end
