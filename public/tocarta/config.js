@@ -10,6 +10,7 @@ var CURRENT_ENV = "dev"; // options: mock, dev, staging, open, prod, prod
 if(CURRENT_ENV == "mock"){
 	$tc = {
 		server: 'http://localhost:3000',
+		nodeserver: 'http://analytics.tocarta.es',
 		// online: true, // when online, images should be fetched from a remote server, otherwise from filesystem
 		testing: true, // when testing, images should be fetched from server, otherwise from Amazon
 		s3_path: "http://s3.amazonaws.com/tocarta-test",
@@ -27,7 +28,8 @@ if(CURRENT_ENV == "mock"){
 /*** development (in browser) ***/
 else if(CURRENT_ENV == "dev"){
 	$tc = {
-		server: 'http://localhost:3000',
+		server: 'http://localhost:80',
+		nodeserver: 'http://analytics.tocarta.es',
 		// online: true, // when online, images should be fetched from a remote server, otherwise from filesystem
 		testing: false, // when testing, images should be fetched from server, otherwise from Amazon
 		s3_path: "http://s3.amazonaws.com/tocarta-prod",
@@ -47,6 +49,7 @@ else if(CURRENT_ENV == "dev"){
 else if(CURRENT_ENV == "staging"){
 	$tc = {
 		server: 'http://tocarta-admin-staging.herokuapp.com',
+		nodeserver: 'http://analytics.tocarta.es',
 		// online: false, // when online, images should be fetched from a remote server, otherwise from filesystem
 		testing: false, // when testing, images should be fetched from server, otherwise from Amazon
 		s3_path: "http://s3.amazonaws.com/tocarta-test",
@@ -65,6 +68,7 @@ else if(CURRENT_ENV == "staging"){
 else if(CURRENT_ENV == "open"){
 	$tc = {
 		server: 'http://demo.tocarta.es',
+		nodeserver: 'http://analytics.tocarta.es',
 		// online: false, // when online, images should be fetched from a remote server, otherwise from filesystem
 		testing: false, // when testing, images should be fetched from server, otherwise from Amazon
 		s3_path: "http://s3.amazonaws.com/tocarta-demo",
@@ -83,6 +87,7 @@ else if(CURRENT_ENV == "open"){
 else if(CURRENT_ENV == "prod"){
 	$tc = {
 		server: 'http://admin.tocarta.es',
+		nodeserver: 'http://analytics.tocarta.es',
 		// online: false, // when online, images should be fetched from a remote server, otherwise from filesystem
 		testing: false, // when testing, images should be fetched from server, otherwise from Amazon
 		s3_path: "http://s3.amazonaws.com/tocarta-prod",

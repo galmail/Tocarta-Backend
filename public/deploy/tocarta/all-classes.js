@@ -61995,12 +61995,12 @@ Ext.define('TC.model.Dish', {
 	    {name: "name", type: "string"},
 	    {name: "short_title", type: "string"},
 	    {name: "price", type: "float"},
-	    //{name: "dish_types", persist:true},
+	    {name: "nutrition_fact", persist:true},
 	    {name: "description", type: "string"},
 	    {name: "rating", type: "int"},
 	    {name: "story", type: "string"},
 	    {name: "video", type: "string"},
-	    {name: "nutrition_facts", type: "string"},
+	    // {name: "nutrition_fact", type: "string"},
 	    {name: "position", type: "int"},
 	    {name: "mini", type: "string"},
 	    {name: "mini_photo_url", type: "string",
@@ -62025,7 +62025,8 @@ Ext.define('TC.model.Dish', {
 	  	{type: 'belongsTo', model: 'TC.model.Section', name: 'section'},
 	  	{type: 'belongsTo', model: 'TC.model.Subsection', name: 'subsection'},
 	    {type: 'hasMany', model: 'TC.model.Dishtype', name: 'dishtypes'},
-	    {type: 'hasMany', model: 'TC.model.Comment', name: 'comments'}
+	    {type: 'hasMany', model: 'TC.model.Comment', name: 'comments'},
+	    {type: 'hasOne', model: 'TC.model.NutritionFact', name: 'nutrition_fact'}
 	  ]
 	}
   
@@ -62073,6 +62074,7 @@ Ext.define('TC.controller.MainMenu', {
       	dishImg: 'dish-photo-tab #tcDishImgId',
       	dishCommentsTab: 'dish-container tabpanel dish-comments-tab',
       	dishVideoTab: 'dish-container tabpanel dish-video-tab',
+      	dishNutritionFactsTab: 'dish-container tabpanel dish-nutritionfacts-tab',
       	// mini dishes
       	minidishesContainer: 'minidishes-container',
       	minidishesView: 'minidishes-view'
@@ -62088,6 +62090,7 @@ Ext.define('TC.controller.MainMenu', {
 	      dishVideoTab: { show: 'dishVideoShow' },
 	      addDishButton: { tap: 'addDish' },
 	      dishCommentsTab: { show: 'dishCommentsShow' },
+	      dishNutritionFactsTab: { show: 'dishNutritionFactsShow' },
 	      minidishesView: { itemtap: 'addMiniDish' }
 	    }
 	    
@@ -62152,6 +62155,11 @@ Ext.define('TC.controller.MainMenu', {
     dishCommentsShow: function(commentsTab){
     	console.log('TC.controller.MainMenu.dishCommentsShow');
     	commentsTab.down('#tcDishCommentsDataItemsId').setStore(commentsTab.getRecord().comments());
+    },
+    
+    dishNutritionFactsShow: function(nutritionfactsTab){
+    	console.log('TC.controller.MainMenu.dishNutritionFactsShow');
+    	nutritionfactsTab.down('#tcDishNutritionFactsDataItemsId').setData(nutritionfactsTab.getRecord().get('nutrition_fact'));
     },
     
     dishTabPanelInitialize: function(tabPanel){
@@ -62279,6 +62287,27 @@ Ext.define('TC.controller.MainMenu', {
     		else {
     			dishTabPanel.getTabBar().items.items[1].show();
     		}
+	    	
+	    	// hide nutrition tab when there are no nutrition facts
+	    	if(this.getCurrentDish().get('nutrition_fact')){
+    			dishTabPanel.getTabBar().items.items[2].show();
+    		}
+    		else {
+    			dishTabPanel.getTabBar().items.items[2].hide();
+    		}
+    		
+    		// hide tabs if there is only one tab
+    		var _visible_tabs = 0;
+    		Ext.Array.each(dishTabPanel.getTabBar().items.items,function(item){
+    			if(item.isHidden()!=true) _visible_tabs++;
+    		});
+    		if(_visible_tabs<2){
+    			dishTabPanel.getTabBar().hide();
+    		}
+    		else {
+    			dishTabPanel.getTabBar().show();
+    		}
+    		
 	    	
 	    	// set dish record on all items
 	    	Ext.Array.each(dishTabPanel.items.items,function(item){
@@ -72347,7 +72376,7 @@ Ext.define('TC.view.dish.DishVideo', {
  **/
 
 Ext.define('TC.view.dish.DishContainer', {
-	requires: ['Ext.tab.Panel','TC.view.dish.DishTitle','TC.view.dish.DishPhoto','TC.view.dish.DishComments','TC.view.dish.DishVideo'],
+	requires: ['Ext.tab.Panel','TC.view.dish.DishTitle','TC.view.dish.DishPhoto','TC.view.dish.DishComments','TC.view.dish.DishVideo','TC.view.dish.DishNutritionFacts'],
 	extend: 'Ext.Panel',
 	xtype: 'dish-container',
 	config: {
@@ -72381,6 +72410,10 @@ Ext.define('TC.view.dish.DishContainer', {
 	        {
 	          title: $T.comments,
 	          xtype: 'dish-comments-tab'
+	        },
+	        {
+	          title: $T.nutritionfacts,
+	          xtype: 'dish-nutritionfacts-tab'
 	        },
 	        {
 	          title: $T.video,
