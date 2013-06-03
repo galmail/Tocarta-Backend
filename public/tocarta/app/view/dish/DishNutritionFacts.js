@@ -16,23 +16,46 @@ Ext.define('TC.view.dish.DishNutritionFacts', {
 				itemId: 'tcDishNutritionFactsDataItemsId',
 				tpl: new Ext.XTemplate(
 		    	'<div class="dish-nutritionfacts">',
-			    	'<div class="dish-nutritionfacts-calories">',
-			    		'<span class="label">calories:</span>',
-			    		'<span class="val">{calories}</span>',
+			    	'<div class="block dish-nutritionfacts-calories">',
+			    		'<div class="label">Calories (kcal):</div>',
+			    		'<div class="graph"><div class="graph-bar" style="width: 100%;">{calories}</div></div>',
 		    		'</div>',
-		    		'<div class="dish-nutritionfacts-fats">',
-			    		'<span class="label">fats:</span>',
-			    		'<span class="val">{fats}</span>',
+		    		'<div class="block dish-nutritionfacts-proteins">',
+			    		'<div class="label">Proteins (gr):</div>',
+			    		'<div class="graph"><div class="graph-bar" style="width: {calories:this.proteins_percentage(values.proteins)}%;">{proteins}</div></div>',
 		    		'</div>',
-		    		'<div class="dish-nutritionfacts-carbs">',
-			    		'<span class="label">carbs:</span>',
-			    		'<span class="val">{carbs}</span>',
+		    		'<div class="block dish-nutritionfacts-fats">',
+			    		'<div class="label">Fats (gr):</div>',
+			    		'<div class="graph"><div class="graph-bar" style="width: {calories:this.fat_percentage(values.fats)}%;">{fats}</div></div>',
 		    		'</div>',
-		    		'<div class="dish-nutritionfacts-proteins">',
-			    		'<span class="label">proteins:</span>',
-			    		'<span class="val">{proteins}</span>',
+		    		'<div class="block dish-nutritionfacts-carbs">',
+			    		'<div class="label">Carbs (gr):</div>',
+			    		'<div class="graph"><div class="graph-bar" style="width: {calories:this.carbs_percentage(values.carbs)}%;">{carbs}</div></div>',
 		    		'</div>',
-		  		'</div>')
+		    		// '<div class="block">',
+		    			// '<div class="label">Total:</div>',
+				    	// '<div class="graph">',
+				    		// '<div class="graph-bar fats" style="width: {calories:this.fat_percentage(values.fats)}%;">{fats}</div>',
+				    		// '<div class="graph-bar carbs" style="width: {calories:this.carbs_percentage(values.carbs)}%;">{carbs}</div>',
+				    		// '<div class="graph-bar proteins" style="width: {calories:this.proteins_percentage(values.proteins)}%;">{proteins}</div>',
+				    	// '</div>',
+			    	// '</div>',
+		  		'</div>',
+		  		{
+		  			fat_percentage: function(cal,fats){
+							return Math.floor(((fats*9)/(cal))*100);
+						},
+						carbs_percentage: function(cal,carbs){
+							return Math.floor(((carbs*4)/(cal))*100);
+						},
+						proteins_percentage: function(cal,proteins){
+							return Math.floor(((proteins*4)/(cal))*100);
+						},
+						perc: function(calories,other){
+							return Math.ceil(other*100/calories);
+						}
+					}
+		  		)
 			}
 		]
 	}

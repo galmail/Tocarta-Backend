@@ -62159,6 +62159,13 @@ Ext.define('TC.controller.MainMenu', {
     
     dishNutritionFactsShow: function(nutritionfactsTab){
     	console.log('TC.controller.MainMenu.dishNutritionFactsShow');
+    	// var nutrition_facts_store = Ext.create('TC.store.NutritionFacts',{
+    		// storeId: "NutritionFactsStore" + nutritionfactsTab.getRecord().getId(),
+    		// data: [
+    			// nutritionfactsTab.getRecord().get('nutrition_fact')
+    		// ]
+    	// });
+    	// nutritionfactsTab.down('#tcDishNutritionFactsDataItemsId').setStore(nutrition_facts_store);
     	nutritionfactsTab.down('#tcDishNutritionFactsDataItemsId').setData(nutritionfactsTab.getRecord().get('nutrition_fact'));
     },
     

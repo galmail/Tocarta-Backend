@@ -1,0 +1,55 @@
+/**
+ * Dish Nutrition Facts stylesheet
+ **/
+/* line 5, ../../../styles/dish/nutritionfacts.scss */
+.tcDishNutritionFacts {
+  background: white;
+  /*  The wrapper for the bar */
+  /*  The actual bar itself */
+}
+/* line 11, ../../../styles/dish/nutritionfacts.scss */
+.tcDishNutritionFacts .dish-nutritionfacts {
+  padding: 20px 100px;
+}
+/* line 15, ../../../styles/dish/nutritionfacts.scss */
+.tcDishNutritionFacts .block {
+  overflow: hidden;
+  padding: 10px 0;
+}
+/* line 20, ../../../styles/dish/nutritionfacts.scss */
+.tcDishNutritionFacts .label {
+  float: left;
+  width: 150px;
+}
+/* line 26, ../../../styles/dish/nutritionfacts.scss */
+.tcDishNutritionFacts .graph {
+  height: 1.529411765em;
+  margin-bottom: .470588235em;
+  overflow: hidden;
+  background-color: #e5e5e5;
+  border-radius: .071428571em;
+  text-align: center;
+  font-size: 1em;
+  line-height: 1.5em;
+}
+/* line 39, ../../../styles/dish/nutritionfacts.scss */
+.tcDishNutritionFacts .graph-bar {
+  float: left;
+  width: 0;
+  height: 100%;
+  color: #ffffff;
+  background-color: #0088cc;
+  -webkit-box-sizing: border-box;
+}
+/* line 46, ../../../styles/dish/nutritionfacts.scss */
+.tcDishNutritionFacts .graph-bar.fats {
+  background-color: red;
+}
+/* line 49, ../../../styles/dish/nutritionfacts.scss */
+.tcDishNutritionFacts .graph-bar.carbs {
+  background-color: yellow;
+}
+/* line 52, ../../../styles/dish/nutritionfacts.scss */
+.tcDishNutritionFacts .graph-bar.proteins {
+  background-color: green;
+}

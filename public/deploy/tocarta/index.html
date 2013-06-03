@@ -35,14 +35,16 @@
 					var i18Script = 'resources/js/'+lang+'_user.js';
 					$j.getScript(i18Script, function(){
 						$j.getScript('app-all.js', function(){
-							document.addEventListener("deviceready", TC.app.mainLaunch, false);
+							if(!Ext.os.is.Desktop)
+								document.addEventListener("deviceready", TC.app.mainLaunch, false);
 						});
 					});
 				}
 				catch(ex){
 					// ignore since there is no language set in localstorage
 					$j.getScript('app-all.js', function(){
-						document.addEventListener("deviceready", TC.app.mainLaunch, false);
+						if(!Ext.os.is.Desktop)
+							document.addEventListener("deviceready", TC.app.mainLaunch, false);
 					});
 				}
 			});
