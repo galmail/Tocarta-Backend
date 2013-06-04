@@ -8,6 +8,19 @@ $T = {
 	
 	"back": "Tornar",
 	
+	//// TC.Views.Toolbars.TopToolbar ////
+	
+	"desserts": "Desserts",
+	"main_menu": "Main Menu",
+	"daily_menu": "Daily Menu",
+	"beverages": "Drinks",
+	
+	//// TC.Views.Toolbars.BottomToolbar ////
+	
+	"filter_dishes": "Filtrar Platos",
+	"fill_survey": "Valorar Servicio",
+	"change_lang": "Cambiar Idioma",
+	
 	//// TC.Controller.Main ////
 	
 	"order_is_empty": "La comanda està buida. Triï un plat i afegeixi’l  a la comanda.",
@@ -43,6 +56,7 @@ $T = {
 	"photo": "Foto",
 	"comments": "Comentaris",
 	"video": "Video",
+	"nutritionfacts": "Datos de Nutricion",
 	
 	//// TC.view.dish.DishPhoto ////
 	

@@ -104,7 +104,7 @@ Ext.define('TC.controller.survey.SliderSurvey', {
   	TC.Restaurant.survey_questions().add(TC.Restaurant.data.survey_questions);
   	
   	var carousel = survey.down('#tcSurveySliderCarouselId');
-		var questions_per_page = 2;
+		var questions_per_page = 4;
 		var question_counter = 0;
 		
 		var survey_pages = [];

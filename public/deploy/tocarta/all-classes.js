@@ -61324,34 +61324,26 @@ Ext.define('TC.controller.MatrixMenu', {
     
     matrixMenuShow: function(){
     	console.log('TC.controller.MatrixMenu.matrixMenuShow');
-    
-
-        //return this.infinitest();
-    
-        /*
-         * Prueba componentes Nv1
-         */
-        
-        var me = this, dish_views = [];
-        
-        TC.Restaurant.getMainMenu().sections().getAt(0).dishes().each(function(dish)
-        {
-            dish_views.push(me.printDish(dish));
-        });
-        
-        this.getMatrixMenu().setItems(
-        {
-            xtype: 'carousel', 
-            id : 'matrix-carousel',
-            direction : 'horizontal',
-            indicator: false,
-            directionLock : true, 
-            items: dish_views,
-            width: this.getMatrixMenu().element.getWidth(),
-            height: this.getMatrixMenu().element.getHeight(),
-        });
-        
+      var me = this, dish_views = [];
+      TC.Restaurant.getDessertsMenu().sections().getAt(0).dishes().each(function(dish){
+        dish_views.push(me.printDish(dish));
+      });
+      this.getMatrixMenu().setItems(
+      {
+          xtype: 'carousel', 
+          id : 'matrix-carousel',
+          direction : 'horizontal',
+          indicator: true,
+          directionLock : true, 
+          items: dish_views,
+          width: this.getMatrixMenu().element.getWidth(),
+          height: this.getMatrixMenu().element.getHeight()
+      });
     },
+    
+    
+    
+    
     
     
     detailstest: function(){
@@ -61468,7 +61460,7 @@ Ext.define('TC.controller.MatrixMenu', {
     	var dish_view = null;
     	
     	if (view != undefined)
-            dish_view = Ext.create(view, { data: [dish] });
+         dish_view = Ext.create(view, { data: [dish] });
     	else if (dish.data.large_photo_url.length > 0)
     		dish_view = Ext.create('TC.view.matrixmenu.DishImageView', { data: [dish] });
 	    else
@@ -61717,6 +61709,146 @@ Ext.define('Ext.Img', {
 });
 
 /**
+ * The DelayedTask class provides a convenient way to "buffer" the execution of a method,
+ * performing setTimeout where a new timeout cancels the old timeout. When called, the
+ * task will wait the specified time period before executing. If durng that time period,
+ * the task is called again, the original call will be cancelled. This continues so that
+ * the function is only called a single time for each iteration.
+ *
+ * This method is especially useful for things like detecting whether a user has finished
+ * typing in a text field. An example would be performing validation on a keypress. You can
+ * use this class to buffer the keypress events for a certain number of milliseconds, and
+ * perform only if they stop for that amount of time.
+ *
+ * Using {@link Ext.util.DelayedTask} is very simple:
+ *
+ *     //create the delayed task instance with our callback
+ *     var task = Ext.create('Ext.util.DelayedTask', function() {
+ *         console.log('callback!');
+ *     });
+ *
+ *     task.delay(1500); //the callback function will now be called after 1500ms
+ *
+ *     task.cancel(); //the callback function will never be called now, unless we call delay() again
+ *
+ * ## Example
+ *
+ *     @example
+ *     //create a textfield where we can listen to text
+ *     var field = Ext.create('Ext.field.Text', {
+ *         xtype: 'textfield',
+ *         label: 'Length: 0'
+ *     });
+ *
+ *     //add the textfield into a fieldset
+ *     Ext.Viewport.add({
+ *         xtype: 'formpanel',
+ *         items: [{
+ *             xtype: 'fieldset',
+ *             items: [field],
+ *             instructions: 'Type into the field and watch the count go up after 500ms.'
+ *         }]
+ *     });
+ *
+ *     //create our delayed task with a function that returns the fields length as the fields label
+ *     var task = Ext.create('Ext.util.DelayedTask', function() {
+ *         field.setLabel('Length: ' + field.getValue().length);
+ *     });
+ *
+ *     // Wait 500ms before calling our function. If the user presses another key
+ *     // during that 500ms, it will be cancelled and we'll wait another 500ms.
+ *     field.on('keyup', function() {
+ *         task.delay(500);
+ *     });
+ *
+ * @constructor
+ * The parameters to this constructor serve as defaults and are not required.
+ * @param {Function} fn The default function to call.
+ * @param {Object} scope The default scope (The `this` reference) in which the function is called. If
+ * not specified, `this` will refer to the browser window.
+ * @param {Array} args The default Array of arguments.
+ */
+Ext.define('Ext.util.DelayedTask', {
+    config: {
+        interval: null,
+        delay: null,
+        fn: null,
+        scope: null,
+        args: null
+    },
+
+    constructor: function(fn, scope, args) {
+        var config = {
+            fn: fn,
+            scope: scope,
+            args: args
+        };
+
+        this.initConfig(config);
+    },
+
+    /**
+     * Cancels any pending timeout and queues a new one.
+     * @param {Number} delay The milliseconds to delay
+     * @param {Function} newFn Overrides the original function passed when instantiated.
+     * @param {Object} newScope Overrides the original `scope` passed when instantiated. Remember that if no scope
+     * is specified, `this` will refer to the browser window.
+     * @param {Array} newArgs Overrides the original `args` passed when instantiated.
+     */
+    delay: function(delay, newFn, newScope, newArgs) {
+        var me = this;
+
+        //cancel any existing queued functions
+        me.cancel();
+            
+        //set all the new configurations
+        me.setConfig({
+            delay: delay,
+            fn: newFn,
+            scope: newScope,
+            args: newArgs
+        });
+
+        //create the callback method for this delayed task
+        var call = function() {
+            me.getFn().apply(me.getScope(), me.getArgs() || []);
+            me.cancel();
+        };
+
+        me.setInterval(setInterval(call, me.getDelay()));
+    },
+
+    /**
+     * Cancel the last queued timeout
+     */
+    cancel: function() {
+        this.setInterval(null);
+    },
+
+    /**
+     * @private
+     * Clears the old interval
+     */
+    updateInterval: function(newInterval, oldInterval) {
+        if (oldInterval) {
+            clearInterval(oldInterval);
+        }
+    },
+
+    /**
+     * @private
+     * Changes the value into an array if it isn't one.
+     */
+    applyArgs: function(config) {
+        if (!Ext.isArray(config)) {
+            config = [config];
+        }
+
+        return config;
+    }
+});
+
+/**
  * Combo Class
  * 
  */
@@ -61884,7 +62016,7 @@ Ext.define('TC.model.Banner', {
 	    {name: "large", type: "string"},
 	    {name: "large_photo_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("large");
+	    		return $tc.checkImgUrl(record.get("large"));
 	    	}
 	    }
 	  ],
@@ -61937,7 +62069,7 @@ Ext.define('TC.model.OrderItem', {
 	    {name: "thumbnail", type: "string"},
 	    {name: "thumbnail_photo_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("thumbnail");
+	    		return $tc.checkImgUrl(record.get("thumbnail"));
 	    	}
 	    }
 	  ],
@@ -61965,13 +62097,13 @@ Ext.define('TC.model.Dishtype', {
 	    {name: "small_icon", type: "string"},
 	    {name: "small_icon_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("small_icon");
+	    		return $tc.checkImgUrl(record.get("small_icon"));
 	    	}
 	    },
 	    {name: "big_icon", type: "string"},
 	    {name: "big_icon_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("big_icon");
+	    		return $tc.checkImgUrl(record.get("big_icon"));
 	    	}
 	    }
 	  ]
@@ -62005,19 +62137,19 @@ Ext.define('TC.model.Dish', {
 	    {name: "mini", type: "string"},
 	    {name: "mini_photo_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("mini");
+	    		return $tc.checkImgUrl(record.get("mini"));
 	    	}
 	    },
 	    {name: "thumbnail", type: "string"},
 	    {name: "thumbnail_photo_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("thumbnail");
+	    		return $tc.checkImgUrl(record.get("thumbnail"));
 	    	}
 	    },
 	    {name: "large", type: "string"},
 	    {name: "large_photo_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("large");
+	    		return $tc.checkImgUrl(record.get("large"));
 	    	}
 	    }
 	  ],
@@ -62040,8 +62172,9 @@ Ext.define('TC.model.Dish', {
  */
 Ext.define('TC.controller.MainMenu', {
     extend: 'Ext.app.Controller',
-    requires: ['Ext.Img'],
+    requires: ['Ext.Img','Ext.util.DelayedTask'],
     config: {
+    	currentMenu: null,
       currentSection: null,
       currentSubsection: null,
       currentDish: null,
@@ -62108,6 +62241,10 @@ Ext.define('TC.controller.MainMenu', {
     		me.previousDish();
     		return false;
     	});
+    	$z(document).on('doubleTap','.tcDishPhoto #tcDishImgId',function(el){
+    		me.fullscreenDish(el);
+    		return false;
+    	});
     },
     
     //// WARNING: this function is called from the Main Controller
@@ -62128,10 +62265,17 @@ Ext.define('TC.controller.MainMenu', {
     },
     
     selectFirstItemInItemsView: function(dv){
-    	console.log('TC.controller.MainMenu.selectFirstItemInItemsView');
-    	var pos = 0;
-    	this.displayDishOrMinidishes(dv,pos);
-    	dv.select(pos,false);
+    	console.log('TC.controller.MainMenu.selectFirstItemInItemsView delayed 500ms');
+    	var self = this;
+    	var delayedTask = null;
+    	delayedTask = Ext.create('Ext.util.DelayedTask', function() {
+    		console.log('TC.controller.MainMenu.selectFirstItemInItemsView callback!');
+    		self.displayDishOrMinidishes(dv,0);
+    		dv.select(0,false);
+    		delayedTask.cancel();
+    		delayedTask = null;
+			});
+			delayedTask.delay(500);
     },
     
     restaurantCarouselShow: function(restaurantCarouselPanel){
@@ -62175,9 +62319,10 @@ Ext.define('TC.controller.MainMenu', {
     
     sideBarInitialize: function(listView){
     	console.log('TC.controller.MainMenu.sideBarInitialize');
-    	if(this.getCurrentSection()==null){
-    		if(TC.Restaurant.getMainMenu()){
-    			listView.setStore(TC.Restaurant.getMainMenu().sections());
+    	var self = this;
+    	if(self.getCurrentSection()==null){
+    		if(self.getCurrentMenu()){
+    			listView.setStore(self.getCurrentMenu().sections());
     		}
     	}
     },
@@ -62397,6 +62542,46 @@ Ext.define('TC.controller.MainMenu', {
     	}
     },
     
+    fullscreenDish: function(el){
+    	console.log('TC.controller.MainMenu.fullscreenDish');
+    	var self = this;
+    	var originalImg = el.target.src;//.replace('large','original');
+    	var fullScreenPanel = null;
+    	fullScreenPanel = Ext.create('Ext.Panel', {
+    		fullscreen: true,
+    		centered: true,
+    		width: '100%',
+				height: '100%',
+    		modal: true,
+    		layout: 'vbox',
+    		scrollable: {
+    			direction: 'both',
+    			directionLock: false
+    		},
+    		items: [
+    			{
+    				xtype: 'toolbar',
+    				docked: 'top',
+    				title: self.getCurrentDish().get('name'),
+						items: [
+							{
+								itemId: 'closeButtonId',
+								xtype: 'button',
+								text: $T.close,
+								handler: function(){
+									fullScreenPanel.destroy();
+								}
+							},
+							{ xtype: 'spacer' }
+    				]
+    			},
+    			{
+    				html: '<img src="'+originalImg+'" width="100%" height="100%" />'
+    			}
+    		],
+     	}).show();
+    },
+    
     addMiniDish: function(dataview,position,element){
     	console.log('TC.controller.MainMenu.addMiniDish');
     	if(!TC.Restaurant.data.setting.order_button){
@@ -62539,7 +62724,9 @@ Ext.define('TC.controller.DailyMenu', {
   			var dishes = Ext.create('TC.store.Dishes');
   			section.dishes().each(function(dish){
   				if(dish_counter%dishes_per_page==0){
-  					section_page = Ext.create('TC.view.dailymenu.DailyMenuSectionPage');
+  					section_page = Ext.create('TC.view.dailymenu.DailyMenuSectionPage',{
+  						disableSelection: !TC.Restaurant.data.setting.order_button
+  					});
   					section_page.setStore(Ext.create('TC.store.Dishes'));
   					section_items.push(section_page);
   				}
@@ -62554,6 +62741,13 @@ Ext.define('TC.controller.DailyMenu', {
   				indicator: section_items.length > 1
   			});
   		});
+  		
+  		
+  		// hide badges if order option is not available
+  		Ext.Array.each(me.getDailyMenuTabPanel().getTabBar().items.items,function(tab){
+  			tab.setBadgeText('');
+  			tab.setLabelCls('nobadge-tab-label');
+  		});
     },
     
     selectionChanged: function(itemSelected, selectedDishes, eOpts){
@@ -62562,6 +62756,7 @@ Ext.define('TC.controller.DailyMenu', {
     
     selectDish: function(dishesList,index,dishItem){
     	console.log('TC.controller.MainMenu.selectDish');
+    	if(!TC.Restaurant.data.setting.order_button) return;
     	var dailyMenuTabPanel = this.getDailyMenuTabPanel();
     	var dailyMenuSection = dailyMenuTabPanel.getActiveItem();
     	var dailyMenuSectionPosition = dailyMenuTabPanel.indexOf(dailyMenuSection);
@@ -62709,41 +62904,45 @@ Ext.define('TC.controller.Settings', {
   
   updateMenuButtonTapped: function(btn){
   	console.log('TC.controller.Settings.updateMenuButtonTapped');
+  	this.closeSettings();
+		this.redirectTo('update');
+  	return false;
+  	
   	// show action sheet
-  	if(!this.actions){
-  		this.actions = Ext.Viewport.add({
-  			xtype: 'actionsheet',
-  			items: [
-  				{
-  					text: $TO.update_menu,
-  					scope: this,
-  					handler: function(){
-  						this.actions.hide();
-  						this.closeSettings();
-  						this.redirectTo('update');
-  					}
-  				},
-  				{
-  					text: $TO.update_override_menu,
-  					ui: 'decline',
-  					scope: this,
-  					handler: function(){
-  						this.actions.hide();
-  						this.closeSettings();
-  						this.redirectTo('reset');
-  					}
-  				},
-  				{
-  					text: $TO.cancel,
-  					scope: this,
-  					handler: function(){
-  						this.actions.hide();
-  					}
-  				}
-  			]
-  		});
-  	}
-  	this.actions.show();
+  	// if(!this.actions){
+  		// this.actions = Ext.Viewport.add({
+  			// xtype: 'actionsheet',
+  			// items: [
+  				// {
+  					// text: $TO.update_menu,
+  					// scope: this,
+  					// handler: function(){
+  						// this.actions.hide();
+  						// this.closeSettings();
+  						// this.redirectTo('update');
+  					// }
+  				// },
+  				// {
+  					// text: $TO.update_override_menu,
+  					// ui: 'decline',
+  					// scope: this,
+  					// handler: function(){
+  						// this.actions.hide();
+  						// this.closeSettings();
+  						// this.redirectTo('reset');
+  					// }
+  				// },
+  				// {
+  					// text: $TO.cancel,
+  					// scope: this,
+  					// handler: function(){
+  						// this.actions.hide();
+  					// }
+  				// }
+  			// ]
+  		// });
+  	// }
+  	// this.actions.show();
   },
   
   changeLicenseButtonTapped: function(btn){
@@ -63129,6 +63328,7 @@ Ext.define('TC.controller.Main', {
         'mainmenu': 'loadMainMenu',
         'dailymenu': 'loadDailyMenu',
         'matrixmenu': 'loadMatrixMenu',
+        'beveragesmenu': 'loadBeveragesMenu',
         'home': 'goToHome'
       },
       
@@ -63147,6 +63347,7 @@ Ext.define('TC.controller.Main', {
 	    	orderView: 'order-view',
 	    	helpView: 'help-view',
 	    	filterView: 'filter-view',
+	    	dailymenuView: 'daily-menu',
 	    	topToolbar: 'top-toolbar',
 	    	homeButton: 'top-toolbar #tcHomeBtnId',
 	    	switchLanguageButton: 'top-toolbar #tcSwitchLanguageBtnId',
@@ -63156,6 +63357,12 @@ Ext.define('TC.controller.Main', {
 	    	requestBillButton: 'top-toolbar #tcRequestBillBtnId',
 	    	callWaiterButton: 'top-toolbar #tcCallWaiterBtnId',
 	    	gamesButton: 'top-toolbar #tcGamesBtnId',
+	    	// segmented buttons
+	    	mainmenuButton: 'top-toolbar segmentedbutton #tcMainMenuBtnId',
+	    	dailymenuButton: 'top-toolbar segmentedbutton #tcDailyMenuBtnId',
+	    	beveragesButton: 'top-toolbar segmentedbutton #tcBeveragesBtnId',
+	    	dessertsButton: 'top-toolbar segmentedbutton #tcDessertsBtnId',
+	    	// bottom toolbar
 	    	bottomToolbar: 'bottom-toolbar',
 	    	helpButton: 'bottom-toolbar #tcHelpBtnId',
 	    	loadAppButton: 'bottom-toolbar #tcLoadAppBtnId',
@@ -63170,13 +63377,19 @@ Ext.define('TC.controller.Main', {
 	      homeButton: { tap: 'goToHome' },
 	      helpButton: { tap: 'showHelp' },
 	      showOrderButton: { tap: 'showOrder' },
+	      showSurveyButton: { tap: 'showSurvey' },
 	      requestBillButton: { tap: 'requestBill' },
 	      callWaiterButton: { tap: 'callWaiter' },
 	      gamesButton: { tap: 'playGames' },
+	      // segmented buttons
+	      mainmenuButton: { tap: 'showMainMenu' },
+	      dailymenuButton: { tap: 'showDailyMenu' },
+	      beveragesButton: { tap: 'showBeveragesMenu' },
+	      dessertsButton: { tap: 'showDessertsMenu' },
+
 	      loadAppButton: { tap: 'loadApp' },
 	      updateAppButton: { tap: 'updateApp' },
 	      switchTableButton: { tap: 'switchTable' },
-	      showSurveyButton: { tap: 'showSurvey' },
 	      switchLanguageButton: { tap: 'switchLanguageView' },
 	      switchMenuButton: { tap: 'switchMenu' },
 	      filterButton: { tap: 'showFilterOptions' },
@@ -63240,19 +63453,53 @@ Ext.define('TC.controller.Main', {
     		$tc.loadStylesheet(TC.Restaurant.getMainMenu().get('stylesheet_url'));
     	if(TC.Restaurant.getDailyMenu() && TC.Restaurant.getDailyMenu().get('stylesheet'))
     		$tc.loadStylesheet(TC.Restaurant.getDailyMenu().get('stylesheet_url'));
+    	if(TC.Restaurant.getBeveragesMenu() && TC.Restaurant.getBeveragesMenu().get('stylesheet'))
+    		$tc.loadStylesheet(TC.Restaurant.getBeveragesMenu().get('stylesheet_url'));
+    	if(TC.Restaurant.getDessertsMenu() && TC.Restaurant.getDessertsMenu().get('stylesheet'))
+    		$tc.loadStylesheet(TC.Restaurant.getDessertsMenu().get('stylesheet_url'));
     },
     
     reloadTopToolbar: function(){
     	console.log('TC.controller.Main.reloadTopToolbar');
-    	this.getTopToolbar().setTitle('<img id="tcTopToolbarLogoId" src="'+ TC.Restaurant.get('logo_url') +'"/>');
+    	
+    	// this.getTopToolbar().setTitle('<img id="tcTopToolbarLogoId" src="'+ TC.Restaurant.get('logo_url') +'"/>');
+    	this.getTopToolbar().down('#tcLogoImgId').setHtml('<img id="tcTopToolbarLogoId" src="'+ TC.Restaurant.get('logo_url') +'"/>');
+    	
     	if(TC.Restaurant.data.setting!=null){
-    		this.getTopToolbar().down('#tcSwitchMenuBtnId').setHidden(!TC.Restaurant.getDailyMenu());
+    		// this.getTopToolbar().down('#tcSwitchMenuBtnId').setHidden(!TC.Restaurant.getDailyMenu());
     		this.getTopToolbar().down('#tcGamesBtnId').setHidden(!TC.Restaurant.data.setting.games);
-    		this.getTopToolbar().down('#tcFilterBtnId').setHidden(!TC.Restaurant.data.setting.show_filters);
-    		this.getTopToolbar().down('#tcSwitchLanguageBtnId').setHidden(TC.Restaurant.data.setting.supported_lang.length<3);
+    		// this.getTopToolbar().down('#tcFilterBtnId').setHidden(!TC.Restaurant.data.setting.show_filters);
+    		// this.getTopToolbar().down('#tcSwitchLanguageBtnId').setHidden(TC.Restaurant.data.setting.supported_lang.length<3);
 	    	this.getTopToolbar().down('#tcCallWaiterBtnId').setHidden(!TC.Restaurant.data.setting.call_waiter_button);
 	    	this.getTopToolbar().down('#tcRequestBillBtnId').setHidden(!TC.Restaurant.data.setting.request_bill_button);
 	    	this.getTopToolbar().down('#tcShowOrderBtnId').setHidden(!TC.Restaurant.data.setting.order_button);
+	    	
+	    	
+	    	// segmented buttons
+	    	if(TC.Restaurant.getMainMenu()){
+	    		this.getTopToolbar().down('#tcMainMenuBtnId').setHidden(false);
+	    		this.getTopToolbar().down('#tcMainMenuBtnId').setText(TC.Restaurant.getMainMenu().get('name'));
+	    	}
+	    	if(TC.Restaurant.getDailyMenu()){
+	    		this.getTopToolbar().down('#tcDailyMenuBtnId').setHidden(false);
+	    		this.getTopToolbar().down('#tcDailyMenuBtnId').setText(TC.Restaurant.getDailyMenu().get('name'));
+	    	}
+	    	if(TC.Restaurant.getBeveragesMenu()){
+	    		this.getTopToolbar().down('#tcBeveragesBtnId').setHidden(false);
+	    		this.getTopToolbar().down('#tcBeveragesBtnId').setText(TC.Restaurant.getBeveragesMenu().get('name'));
+	    	}
+	    	if(TC.Restaurant.getDessertsMenu()){
+	    		this.getTopToolbar().down('#tcDessertsBtnId').setHidden(false);
+	    		this.getTopToolbar().down('#tcDessertsBtnId').setText(TC.Restaurant.getDessertsMenu().get('name'));
+	    	}
+	    	
+	    	// bottom toolbar
+	    	this.getBottomToolbar().down('#tcFilterDishesBtnId').setHidden(!TC.Restaurant.data.setting.show_filters);
+	    	this.getBottomToolbar().down('#tcChangeLangBtnId').setHidden(TC.Restaurant.data.setting.supported_lang.length<3);
+	    	
+	    	
+	    	this.getBottomToolbar().down('#tcShowSurveyBtnId').setHidden(!(TC.Restaurant.data.setting.show_survey && !TC.Restaurant.data.setting.order_button));
+	    	
     	}
     },
     
@@ -63372,13 +63619,45 @@ Ext.define('TC.controller.Main', {
     
     showMainMenu: function() {
       console.log('TC.controller.Main.showMainMenu');
-      this.redirectTo('mainmenu');
+      if(window.location.hash.indexOf('mainmenu')<0)
+      	this.redirectTo('mainmenu');
+    },
+    
+    showDailyMenu: function() {
+      console.log('TC.controller.Main.showDailyMenu');
+      if(window.location.hash.indexOf('dailymenu')<0)
+      	this.redirectTo('dailymenu');
+    },
+    
+    showBeveragesMenu: function() {
+      console.log('TC.controller.Main.showBeveragesMenu');
+      if(window.location.hash.indexOf('beveragesmenu')<0)
+      	this.redirectTo('beveragesmenu');
+    },
+    
+    showDessertsMenu: function() {
+      console.log('TC.controller.Main.showDessertsMenu');
+      if(window.location.hash.indexOf('matrixmenu')<0)
+      	this.redirectTo('matrixmenu');
     },
     
     loadMainMenu: function(){
     	if(TC.Restaurant){
     		console.log('TC.controller.Main.loadMainMenu');
     		TC.app.getController("TC.controller.MainMenu").reset(); // reseting the entire controller menu
+    		TC.app.getController("TC.controller.MainMenu").setCurrentMenu(TC.Restaurant.getMainMenu());
+    		this.switchView({xtype: 'main-menu'});
+    	}
+    	else {
+    		this.loadApp();
+    	}
+    },
+    
+    loadBeveragesMenu: function(){
+    	if(TC.Restaurant){
+    		console.log('TC.controller.Main.loadBeveragesMenu');
+    		TC.app.getController("TC.controller.MainMenu").reset(); // reseting the entire controller menu
+    		TC.app.getController("TC.controller.MainMenu").setCurrentMenu(TC.Restaurant.getBeveragesMenu());
     		this.switchView({xtype: 'main-menu'});
     	}
     	else {
@@ -63390,6 +63669,7 @@ Ext.define('TC.controller.Main', {
     	if(TC.Restaurant){
     		console.log('TC.controller.Main.loadDailyMenu');
     		this.switchView({xtype: 'daily-menu'});
+    		this.getDailymenuView().down('#tcDailyMenuAddBtnId').setHidden(!TC.Restaurant.data.setting.order_button);
     	}
     	else {
     		this.loadApp();
@@ -63417,7 +63697,7 @@ Ext.define('TC.controller.Main', {
     
     showSurvey: function(){
     	console.log('TC.controller.Main.showSurvey');
-    	this.redirectTo('basicsurvey');
+    	this.redirectTo('slidersurvey');
     },
     
     requestBill: function(){
@@ -63649,9 +63929,10 @@ Ext.define('TC.controller.Main', {
 	   	var endpoint = $tc.nodeserver;
 	   	var pipe = 'tocarta_lk_'+TC.Setting.get('key')+'_channel';
 			console.log("Connecting to "+endpoint);
-		  var socket = io.connect(endpoint);
+		  TC.socket = io.connect(endpoint);
+		  TC.socket_channel = pipe;
 		  console.log("Listening on "+pipe);
-		  socket.on(pipe, function (data) {
+		  TC.socket.on(pipe, function (data) {
 		  	if(data && data.action){
 		  		console.log('TC.controller.Main._check_for_incoming_messages action: '+data.action);
 		    	if(data.action=="alive"){
@@ -63807,7 +64088,7 @@ Ext.define('TC.controller.survey.SliderSurvey', {
   	TC.Restaurant.survey_questions().add(TC.Restaurant.data.survey_questions);
   	
   	var carousel = survey.down('#tcSurveySliderCarouselId');
-		var questions_per_page = 2;
+		var questions_per_page = 4;
 		var question_counter = 0;
 		
 		var survey_pages = [];
@@ -63904,13 +64185,13 @@ Ext.define('TC.model.Subsection', {
 	    {name: "mini", type: "string"},
 	    {name: "mini_photo_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("mini");
+	    		return $tc.checkImgUrl(record.get("mini"));
 	    	}
 	    },
 	    {name: "thumbnail", type: "string"},
 	    {name: "thumbnail_photo_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("thumbnail");
+	    		return $tc.checkImgUrl(record.get("thumbnail"));
 	    	}
 	    }
 	  ],
@@ -63941,13 +64222,13 @@ Ext.define('TC.model.Section', {
 	    {name: "mini", type: "string"},
 	    {name: "mini_photo_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("mini");
+	    		return $tc.checkImgUrl(record.get("mini"));
 	    	}
 	    },
 	    {name: "thumbnail", type: "string"},
 	    {name: "thumbnail_photo_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("thumbnail");
+	    		return $tc.checkImgUrl(record.get("thumbnail"));
 	    	}
 	    }
 	  ],
@@ -63977,7 +64258,7 @@ Ext.define('TC.model.Menu', {
 	    {name: "stylesheet", type: "string"},
 	    {name: "stylesheet_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("stylesheet");
+	    		return $tc.checkImgUrl(record.get("stylesheet"));
 	    	}
 	    },
 	    {name: "menu_type", type: "string"},
@@ -64034,19 +64315,19 @@ Ext.define('TC.model.Restaurant', {
 	    {name: "logo", type: "string"},
 	    {name: "logo_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("logo");
+	    		return $tc.checkImgUrl(record.get("logo"));
 	    	}
 	    },
 	    {name: "bg", type: "string"},
 	    {name: "bg_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("bg");
+	    		return $tc.checkImgUrl(record.get("bg"));
 	    	}
 	    },
 	    {name: "i18nbg", type: "string"},
 	    {name: "i18nbg_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("i18nbg");
+	    		return $tc.checkImgUrl(record.get("i18nbg"));
 	    	}
 	    },
 	  ],
@@ -64073,7 +64354,22 @@ Ext.define('TC.model.Restaurant', {
   		return (record.get('menu_type')=='daily');
   	});
   	return this.menus().getAt(pos);
+	},
+	
+	getDessertsMenu: function(){
+  	var pos = this.menus().findBy(function(record,id){
+  		return (record.get('menu_type')=='desserts');
+  	});
+  	return this.menus().getAt(pos);
+	},
+	
+	getBeveragesMenu: function(){
+  	var pos = this.menus().findBy(function(record,id){
+  		return (record.get('menu_type')=='beverages');
+  	});
+  	return this.menus().getAt(pos);
 	}
+	
 	
 });
 
@@ -64361,6 +64657,7 @@ Ext.define('TC.controller.Loader', {
 				  			fetchImg(img);
 				     	}
 				     	else {
+				     		$tc.logError("Error downloading image: "+error.target,"app.controller.Loader",270);
 				     		// skip this img then
 				     		console.log("**** download error source: " + error.source);
 				        console.log("**** download error target: " + error.target);
@@ -65023,6 +65320,68 @@ Ext.define('TC.view.dish.DishComments', {
 	}
 });
 /**
+ * @class TC.view.dish.DishNutritionFacts
+ * @extends Ext.Panel
+ *
+ * DishNutritionFacts Panel
+ * @description This panel displays the dish nutrition facts
+ **/
+
+Ext.define('TC.view.dish.DishNutritionFacts', {
+	extend: 'Ext.Panel',
+	xtype: 'dish-nutritionfacts-tab',
+	config: {
+		cls : 'tcDishNutritionFacts',
+		items: [
+			{
+				itemId: 'tcDishNutritionFactsDataItemsId',
+				tpl: new Ext.XTemplate(
+		    	'<div class="dish-nutritionfacts">',
+			    	'<div class="block dish-nutritionfacts-calories">',
+			    		'<div class="label">Calories (kcal):</div>',
+			    		'<div class="graph"><div class="graph-bar" style="width: 100%;">{calories}</div></div>',
+		    		'</div>',
+		    		'<div class="block dish-nutritionfacts-proteins">',
+			    		'<div class="label">Proteins (gr):</div>',
+			    		'<div class="graph"><div class="graph-bar" style="width: {calories:this.proteins_percentage(values.proteins)}%;">{proteins}</div></div>',
+		    		'</div>',
+		    		'<div class="block dish-nutritionfacts-fats">',
+			    		'<div class="label">Fats (gr):</div>',
+			    		'<div class="graph"><div class="graph-bar" style="width: {calories:this.fat_percentage(values.fats)}%;">{fats}</div></div>',
+		    		'</div>',
+		    		'<div class="block dish-nutritionfacts-carbs">',
+			    		'<div class="label">Carbs (gr):</div>',
+			    		'<div class="graph"><div class="graph-bar" style="width: {calories:this.carbs_percentage(values.carbs)}%;">{carbs}</div></div>',
+		    		'</div>',
+		    		// '<div class="block">',
+		    			// '<div class="label">Total:</div>',
+				    	// '<div class="graph">',
+				    		// '<div class="graph-bar fats" style="width: {calories:this.fat_percentage(values.fats)}%;">{fats}</div>',
+				    		// '<div class="graph-bar carbs" style="width: {calories:this.carbs_percentage(values.carbs)}%;">{carbs}</div>',
+				    		// '<div class="graph-bar proteins" style="width: {calories:this.proteins_percentage(values.proteins)}%;">{proteins}</div>',
+				    	// '</div>',
+			    	// '</div>',
+		  		'</div>',
+		  		{
+		  			fat_percentage: function(cal,fats){
+							return Math.floor(((fats*9)/(cal))*100);
+						},
+						carbs_percentage: function(cal,carbs){
+							return Math.floor(((carbs*4)/(cal))*100);
+						},
+						proteins_percentage: function(cal,proteins){
+							return Math.floor(((proteins*4)/(cal))*100);
+						},
+						perc: function(calories,other){
+							return Math.ceil(other*100/calories);
+						}
+					}
+		  		)
+			}
+		]
+	}
+});
+/**
  * DishTypes Store
  * 
  */
@@ -65111,85 +65470,6 @@ Ext.define('TC.view.settings.WaiterLogin', {
 });
 
 /**
- * @class TC.view.toolbars.TopToolbar
- * @extends Ext.Toolbar
- *
- * Top Toolbar
- *
- **/
-
-Ext.define('TC.view.toolbars.TopToolbar', {
-	extend : 'Ext.Toolbar',
-	xtype : 'top-toolbar',
-	config : {
-		cls: 'tcTopToolbar',
-		title : '',
-		items: [
-			{
-				itemId: 'tcHomeBtnId',
-				cls: 'tcBigBtn',
-				xtype: 'button',
-				iconMask: true,
-    		iconCls: 'home'
-			},
-			{
-				itemId: 'tcSwitchMenuBtnId',
-				xtype: 'button',
-				// text: 'menu',
-				iconMask: true,
-    		iconCls: 'tabbed_book',
-    		hidden: true
-			},
-			{
-				itemId: 'tcSwitchLanguageBtnId',
-				xtype: 'button',
-				// text: 'Switch Language',
-				iconMask: true,
-    		iconCls: 'flag'
-			},
-			{
-				itemId: 'tcFilterBtnId',
-				xtype: 'button',
-				// text: 'Filter Dishes',
-				iconMask: true,
-    		iconCls: 'filters',
-    		hidden: true
-			},
-			{ xtype: 'spacer' },
-			{
-				itemId: 'tcGamesBtnId',
-				xtype: 'button',
-				// text: 'Games',
-				iconMask: true,
-    		iconCls: 'games',
-    		hidden: true
-			},
-			{
-				itemId: 'tcCallWaiterBtnId',
-				xtype: 'button',
-				// text: 'Call Waiter'
-				iconMask: true,
-    		iconCls: 'waiter'
-			},
-			{
-				itemId: 'tcRequestBillBtnId',
-				xtype: 'button',
-				// text: 'Request Bill',
-				iconMask: true,
-    		iconCls: 'bill'
-			},
-			{
-				id: 'tcShowOrderBtnId',
-				xtype: 'button',
-				// text: 'Show Order',
-				iconMask: true,
-    		iconCls: 'order'
-			}
-		]
-	}
-});
-
-/**
  * @class TC.view.toolbars.BottomToolbar
  * @extends Ext.Toolbar
  *
@@ -65202,7 +65482,6 @@ Ext.define('TC.view.toolbars.BottomToolbar', {
 	xtype : 'bottom-toolbar',
 	config : {
 		cls: 'tcBottomToolbar',
-		// title : 'Mi BottomToolbar',
 		items : [
 			{
 				id: 'tcHelpBtnId',
@@ -65212,26 +65491,21 @@ Ext.define('TC.view.toolbars.BottomToolbar', {
     		iconCls: 'info',
     		ui: 'plain'
 			},
-			// {
-				// html: '<iframe src="http://www.facebook.com/plugins/like.php?href=http://tocarta.es" scrolling="no" frameborder="0" style="border:none; width:450px; height:80px"></iframe>'
-			// },
-			// {
-				// id: 'tcLoadAppBtnId',
-				// xtype: 'button',
-				// ui: 'action',
-				// text: 'Load App'
-			// },
-			// {
-				// id: 'tcUpdateAppBtnId',
-				// xtype: 'button',
-				// ui: 'action',
-				// text: 'Update App'
-			// },
-			// {
-				// id: 'tcShowSurveyBtnId',
-				// xtype: 'button',
-				// text: 'Survey'
-			// },
+			{
+				id: 'tcChangeLangBtnId',
+				xtype: 'button',
+				text: $T.change_lang
+			},
+			{
+				id: 'tcFilterDishesBtnId',
+				xtype: 'button',
+				text: $T.filter_dishes
+			},
+			{
+				id: 'tcShowSurveyBtnId',
+				xtype: 'button',
+				text: $T.fill_survey
+			},
 			{ xtype: 'spacer' },
 			{
 				id: 'tcSwitchTableBtnId',
@@ -67327,6 +67601,309 @@ Ext.define('Ext.dataview.element.Container', {
 });
 
 /**
+ * SegmentedButton is a container for a group of {@link Ext.Button}s. Generally a SegmentedButton would be
+ * a child of a {@link Ext.Toolbar} and would be used to switch between different views.
+ *
+ * # Useful Properties:
+ *
+ * - {@link #allowMultiple}
+ *
+ * ## Example usage:
+ *
+ *     @example
+ *     var segmentedButton = new Ext.SegmentedButton({
+ *         allowMultiple: true,
+ *         items: [
+ *             {
+ *                 text: 'Option 1'
+ *             },
+ *             {
+ *                 text   : 'Option 2',
+ *                 pressed: true
+ *             },
+ *             {
+ *                 text: 'Option 3'
+ *             }
+ *         ],
+ *         listeners: {
+ *             toggle: function(container, button, pressed){
+ *                 console.log("User toggled the '" + button.text + "' button: " + (pressed ? 'on' : 'off'));
+ *             }
+ *         }
+ *     });
+ *     Ext.Viewport.add(segmentedButton);
+ *
+ */
+Ext.define('Ext.SegmentedButton', {
+    extend: 'Ext.Container',
+    xtype : 'segmentedbutton',
+    requires: ['Ext.Button'],
+
+    config: {
+        // @inherited
+        baseCls: Ext.baseCSSPrefix + 'segmentedbutton',
+
+        /**
+         * @cfg {String} pressedCls
+         * CSS class when a button is in pressed state.
+         * @accessor
+         */
+        pressedCls: Ext.baseCSSPrefix + 'button-pressed',
+
+        /**
+         * @cfg {Boolean} allowMultiple
+         * Allow multiple pressed buttons.
+         * @accessor
+         */
+        allowMultiple: false,
+
+        /**
+         * @cfg {Boolean} allowDepress
+         * Allow toggling the pressed state of each button.
+         * Defaults to true when `allowMultiple` is true.
+         * @accessor
+         */
+        allowDepress: null,
+
+        /**
+         * @cfg {Array} pressedButtons
+         * The pressed buttons for this segmented button.
+         *
+         * You can remove all pressed buttons by calling {@link #setPressedButtons} with an empty array.
+         * @accessor
+         */
+        pressedButtons: null,
+
+        // @inherit
+        layout: {
+            type : 'hbox',
+            align: 'stretch'
+        },
+
+        // @inherited
+        defaultType: 'button'
+    },
+
+    /**
+     * @event toggle
+     * Fires when any child button's pressed state has changed.
+     * @param {Ext.SegmentedButton} this
+     * @param {Ext.Button} button The toggled button
+     * @param {Boolean} isPressed Boolean to indicate if the button was pressed or not
+     */
+
+    initialize: function() {
+        var me = this;
+
+        me.callParent();
+
+        me.on({
+            delegate: '> button',
+            scope   : me,
+            tap: 'onButtonRelease'
+        });
+
+        me.onAfter({
+            delegate: '> button',
+            scope   : me,
+            hiddenchange: 'onButtonHiddenChange'
+        });
+    },
+
+    updateAllowMultiple: function() {
+        if (!this.initialized && !this.getInitialConfig().hasOwnProperty('allowDepress')) {
+            this.setAllowDepress(true);
+        }
+    },
+
+    /**
+     * We override initItems so we can check for the pressed config.
+     */
+    applyItems: function() {
+        var me = this,
+            pressedButtons = [],
+            ln, i, item, items;
+
+        //call the parent first so the items get converted into a MixedCollection
+        me.callParent(arguments);
+
+        items = this.getItems();
+        ln = items.length;
+
+        for (i = 0; i < ln; i++) {
+            item = items.items[i];
+            if (item.getInitialConfig('pressed')) {
+                pressedButtons.push(items.items[i]);
+            }
+        }
+
+        me.updateFirstAndLastCls(items);
+
+        me.setPressedButtons(pressedButtons);
+    },
+
+    /**
+     * Button sets a timeout of 10ms to remove the {@link #pressedCls} on the release event.
+     * We don't want this to happen, so lets return false and cancel the event.
+     * @private
+     */
+    onButtonRelease: function(button) {
+        var me             = this,
+            pressedButtons = me.getPressedButtons(),
+            buttons        = [],
+            alreadyPressed;
+
+        if (!me.getDisabled() && !button.getDisabled()) {
+            //if we allow for multiple pressed buttons, use the existing pressed buttons
+            if (me.getAllowMultiple()) {
+                buttons = pressedButtons.concat(buttons);
+            }
+
+            alreadyPressed = (buttons.indexOf(button) !== -1) || (pressedButtons.indexOf(button) !== -1);
+
+            //if we allow for depressing buttons, and the new pressed button is currently pressed, remove it
+            if (alreadyPressed && me.getAllowDepress()) {
+                Ext.Array.remove(buttons, button);
+            } else if (!alreadyPressed || !me.getAllowDepress()) {
+                buttons.push(button);
+            }
+
+            me.setPressedButtons(buttons);
+
+            Ext.defer(function() {
+                me.fireEvent('toggle', me, button, me.isPressed(button));
+            }, 50);
+        }
+    },
+
+    // @private
+    onButtonHiddenChange: function() {
+        this.updateFirstAndLastCls(this.getItems());
+    },
+
+    // @private
+    updateFirstAndLastCls: function(items) {
+        var ln = items.length,
+            basePrefix = Ext.baseCSSPrefix,
+            item, i;
+
+        //add a first cls to the first non-hidden button
+        for (i = 0; i < ln; i++) {
+            item = items.items[i];
+            if (!item.isHidden()) {
+                item.addCls(basePrefix + 'first');
+                break;
+            }
+        }
+
+        //add a last cls to the last non-hidden button
+        for (i = ln - 1; i >= 0; i--) {
+            item = items.items[i];
+            if (!item.isHidden()) {
+                item.addCls(basePrefix + 'last');
+                break;
+            }
+        }
+    },
+
+    /**
+     * @private
+     */
+    applyPressedButtons: function(newButtons) {
+        var me    = this,
+            array = [],
+            button, ln, i;
+
+        if (Ext.isArray(newButtons)) {
+            ln = newButtons.length;
+            for (i = 0; i< ln; i++) {
+                button = me.getComponent(newButtons[i]);
+                if (button && array.indexOf(button) === -1) {
+                    array.push(button);
+                }
+            }
+        } else {
+            button = me.getComponent(newButtons);
+            if (button && array.indexOf(button) === -1) {
+                array.push(button);
+            }
+        }
+
+        return array;
+    },
+
+    /**
+     * Updates the pressed buttons.
+     * @private
+     */
+    updatePressedButtons: function(newButtons) {
+        var me    = this,
+            items = me.getItems(),
+            pressedCls = me.getPressedCls(),
+            item, button, ln, i;
+
+        //loop through existing items and remove the pressed cls from them
+        ln = items.length;
+        for (i = 0; i < ln; i++) {
+            item = items.items[i];
+            item.removeCls([pressedCls, item.getPressedCls()]);
+        }
+
+        //loop through the new pressed buttons and add the pressed cls to them
+        ln = newButtons.length;
+        for (i = 0; i < ln; i++) {
+            button = newButtons[i];
+            button.addCls(pressedCls);
+        }
+    },
+
+    /**
+     * Returns true if a specified {@link Ext.Button} is pressed
+     * @param {Ext.Button} button The button to check if pressed
+     * @return {Boolean} pressed
+     */
+    isPressed: function(button) {
+        var pressedButtons = this.getPressedButtons();
+        return pressedButtons.indexOf(button) != -1;
+    },
+
+    /**
+     *
+     */
+    doSetDisabled: function(disabled) {
+        var me = this;
+
+        me.items.each(function(item) {
+            item.setDisabled(disabled);
+        }, me);
+
+        me.callParent(arguments);
+    }
+}, function() {
+    var me = this;
+
+    /**
+     * Activates a button.
+     * @param {Number/String/Ext.Button} button. The button to activate.
+     * @param {Boolean} pressed if defined, sets the pressed state of the button,
+     * otherwise the pressed state is toggled.
+     * @param {Boolean} suppressEvents true to suppress toggle events during the action.
+     * If allowMultiple is true, then setPressed will toggle the button state.
+     * @method setPressed
+     * @deprecated 2.0.0 Please use {@link #setPressedButtons} instead
+     */
+    Ext.deprecateClassMethod(me, 'setPressed', 'setPressedButtons');
+
+    /**
+     * Gets the currently pressed button(s).
+     * @method getPressed
+     * @deprecated 2.0.0 Please use {@link #getPressedButtons} instead
+     */
+    Ext.deprecateClassMethod(me, 'getPressed', 'getPressedButtons');
+
+});
+
+/**
  * A DataItem is a container for {@link Ext.dataview.DataView} with useComponents: true. It ties together
  * {@link Ext.data.Model records} to its contained Components via a {@link #dataMap dataMap} configuration.
  *
@@ -68351,66 +68928,6 @@ Ext.define('TC.view.filter.FilterView', {
         	'</div>'		
         ].join('')
       }
-		]
-	}
-	
-	
-});
-
-Ext.define('TC.view.Viewport', {
-	extend : 'Ext.Container',
-	requires : [
-		'TC.view.toolbars.TopToolbar',
-		'TC.view.toolbars.BottomToolbar',
-		'TC.view.toolbars.MsgToolbar',
-		'TC.view.order.OrderView',
-		'TC.view.help.HelpView',
-		'TC.view.multilang.PickLanguageView',
-		'TC.view.filter.FilterView',
-		// 'TC.view.welcome.WelcomeView',
-	],
-	xtype: 'viewport',
-	config : {
-		cls: 'tcViewport',
-		fullscreen : true,
-		layout : 'card',
-		cachedViews: [
-			// Main Menu
-		],
-		
-		items : [
-			{
-				cls: 'tcEmptyScreen',
-				// xtype : 'welcome-screen',
-				// fullscreen: true
-			},
-			{
-				itemId: 'tcTopToolbarId',
-				xtype : 'top-toolbar',
-				docked : 'top'
-			},
-			{
-				itemId: 'tcMsgToolbarId',
-				xtype : 'msg-toolbar',
-				docked : 'top'
-			},
-			{
-				itemId: 'tcBottomToolbarId',
-				xtype : 'bottom-toolbar',
-				docked : 'bottom'
-			},
-			{
-				xtype: 'order-view',
-				hidden: true
-			},
-			{
-				xtype: 'help-view',
-				hidden: true
-			},
-			{
-				xtype: 'filter-view',
-				hidden: true
-			}
 		]
 	}
 	
@@ -70117,6 +70634,183 @@ Ext.define('Ext.navigation.View', {
     reset: function() {
         this.pop(this.getInnerItems().length);
     }
+});
+
+/**
+ * @class TC.view.toolbars.TopToolbar
+ * @extends Ext.Toolbar
+ *
+ * Top Toolbar
+ *
+ **/
+
+Ext.define('TC.view.toolbars.TopToolbar', {
+	extend : 'Ext.Toolbar',
+	xtype : 'top-toolbar',
+	requires: ['Ext.SegmentedButton'],
+	config : {
+		cls: 'tcTopToolbar',
+		title : '',
+		items: [
+			{
+				itemId: 'tcLogoImgId',
+				xtype: 'panel',
+				html: ''
+			},
+			{
+				itemId: 'tcHomeBtnId',
+				hidden: true,
+				cls: 'tcBigBtn',
+				xtype: 'button',
+				iconMask: true,
+    		iconCls: 'home'
+			},
+			{
+				itemId: 'tcSwitchMenuBtnId',
+				hidden: true,
+				xtype: 'button',
+				// text: 'menu',
+				iconMask: true,
+    		iconCls: 'tabbed_book'
+			},
+			{
+				itemId: 'tcSwitchLanguageBtnId',
+				hidden: true,
+				xtype: 'button',
+				// text: 'Switch Language',
+				iconMask: true,
+    		iconCls: 'flag'
+			},
+			{
+				itemId: 'tcFilterBtnId',
+				hidden: true,
+				xtype: 'button',
+				// text: 'Filter Dishes',
+				iconMask: true,
+    		iconCls: 'filters'
+			},
+			{ xtype: 'spacer' },
+			{
+				itemId: 'tcGamesBtnId',
+				hidden: true,
+				xtype: 'button',
+				// text: 'Games',
+				iconMask: true,
+    		iconCls: 'games'
+			},
+			{
+				itemId: 'tcCallWaiterBtnId',
+				hidden: true,
+				xtype: 'button',
+				// text: 'Call Waiter'
+				iconMask: true,
+    		iconCls: 'waiter'
+			},
+			{
+				itemId: 'tcRequestBillBtnId',
+				hidden: true,
+				xtype: 'button',
+				// text: 'Request Bill',
+				iconMask: true,
+    		iconCls: 'bill'
+			},
+			{
+				id: 'tcShowOrderBtnId',
+				hidden: true,
+				xtype: 'button',
+				// text: 'Show Order',
+				iconMask: true,
+    		iconCls: 'order'
+			},
+			{
+				xtype: 'segmentedbutton',
+				allowDepress: false,
+				items: [
+					{
+						itemId: 'tcMainMenuBtnId',
+						hidden: true,
+						text: $T.main_menu,
+						pressed: true
+					},
+					{
+						itemId: 'tcDailyMenuBtnId',
+						hidden: true,
+						text: $T.daily_menu
+					},
+					{
+						itemId: 'tcBeveragesBtnId',
+						hidden: true,
+						text: $T.beverages
+					},
+					{
+						itemId: 'tcDessertsBtnId',
+						hidden: true,
+						text: $T.desserts
+					}
+				]
+			}
+		]
+	}
+});
+
+Ext.define('TC.view.Viewport', {
+	extend : 'Ext.Container',
+	requires : [
+		'TC.view.toolbars.TopToolbar',
+		'TC.view.toolbars.BottomToolbar',
+		'TC.view.toolbars.MsgToolbar',
+		'TC.view.order.OrderView',
+		'TC.view.help.HelpView',
+		'TC.view.multilang.PickLanguageView',
+		'TC.view.filter.FilterView',
+		// 'TC.view.welcome.WelcomeView',
+	],
+	xtype: 'viewport',
+	config : {
+		cls: 'tcViewport',
+		fullscreen : true,
+		layout : 'card',
+		cachedViews: [
+			// Main Menu
+		],
+		
+		items : [
+			{
+				cls: 'tcEmptyScreen',
+				// xtype : 'welcome-screen',
+				// fullscreen: true
+			},
+			{
+				itemId: 'tcTopToolbarId',
+				xtype : 'top-toolbar',
+				docked : 'top'
+			},
+			{
+				itemId: 'tcMsgToolbarId',
+				xtype : 'msg-toolbar',
+				docked : 'top'
+			},
+			{
+				itemId: 'tcBottomToolbarId',
+				xtype : 'bottom-toolbar',
+				docked : 'bottom'
+			},
+			{
+				xtype: 'order-view',
+				hidden: true
+			},
+			{
+				xtype: 'help-view',
+				hidden: true
+			},
+			{
+				xtype: 'filter-view',
+				hidden: true
+			}
+		]
+	}
+	
+	
 });
 
 /**
@@ -74909,7 +75603,7 @@ Ext.define('TC.view.settings.SwitchTable', {
 			     {
 						xtype: 'button',
 						itemId: 'changeTabletIdButtonId',
-						text: $TO.delete_license_key
+						text: $TO.reset_license_key
 			     }
 				]
 			}

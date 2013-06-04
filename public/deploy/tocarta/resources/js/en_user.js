@@ -8,6 +8,19 @@ $T = {
 	
 	"back": "Back",
 	
+	//// TC.Views.Toolbars.TopToolbar ////
+	
+	"desserts": "Desserts",
+	"main_menu": "Main Menu",
+	"daily_menu": "Daily Menu",
+	"beverages": "Drinks",
+	
+	//// TC.Views.Toolbars.BottomToolbar ////
+	
+	"filter_dishes": "Filter Dishes",
+	"fill_survey": "Rate&Review",
+	"change_lang": "Switch Language",
+	
 	//// TC.Controller.Main ////
 	
 	"order_is_empty": "The order is empty, please select some dishes first.",
@@ -47,6 +60,7 @@ $T = {
 	"photo": "Photo",
 	"comments": "Comments",
 	"video": "Video",
+	"nutritionfacts": "Nutrition Facts",
 	
 	//// TC.view.dish.DishPhoto ////
 	
@@ -88,6 +102,10 @@ $T = {
 	"light_icon_explanation": "Light meal",
 	"app_copyright": "Copyright © Tocarta International SL",
 	"tocarta_website": "http://tocarta.com",
+	
+	//// TC.view.survey.SurveyView ////
+	
+	"survey": "Short Survey",
 	
 	//// TC.view.survey.SurveyComments ////
 	

@@ -8,8 +8,10 @@
     height: 100%;
     
     .survey_question {
+      padding: 20px 10px;
       .question_title {
-        font-size: 30px;
+        font-size: 25px;
+        margin-top: 19px;
       }
       .rating .star {
         width: 72px;

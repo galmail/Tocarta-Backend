@@ -110,41 +110,45 @@ Ext.define('TC.controller.Settings', {
   
   updateMenuButtonTapped: function(btn){
   	console.log('TC.controller.Settings.updateMenuButtonTapped');
+  	this.closeSettings();
+		this.redirectTo('update');
+  	return false;
+  	
   	// show action sheet
-  	if(!this.actions){
-  		this.actions = Ext.Viewport.add({
-  			xtype: 'actionsheet',
-  			items: [
-  				{
-  					text: $TO.update_menu,
-  					scope: this,
-  					handler: function(){
-  						this.actions.hide();
-  						this.closeSettings();
-  						this.redirectTo('update');
-  					}
-  				},
-  				{
-  					text: $TO.update_override_menu,
-  					ui: 'decline',
-  					scope: this,
-  					handler: function(){
-  						this.actions.hide();
-  						this.closeSettings();
-  						this.redirectTo('reset');
-  					}
-  				},
-  				{
-  					text: $TO.cancel,
-  					scope: this,
-  					handler: function(){
-  						this.actions.hide();
-  					}
-  				}
-  			]
-  		});
-  	}
-  	this.actions.show();
+  	// if(!this.actions){
+  		// this.actions = Ext.Viewport.add({
+  			// xtype: 'actionsheet',
+  			// items: [
+  				// {
+  					// text: $TO.update_menu,
+  					// scope: this,
+  					// handler: function(){
+  						// this.actions.hide();
+  						// this.closeSettings();
+  						// this.redirectTo('update');
+  					// }
+  				// },
+  				// {
+  					// text: $TO.update_override_menu,
+  					// ui: 'decline',
+  					// scope: this,
+  					// handler: function(){
+  						// this.actions.hide();
+  						// this.closeSettings();
+  						// this.redirectTo('reset');
+  					// }
+  				// },
+  				// {
+  					// text: $TO.cancel,
+  					// scope: this,
+  					// handler: function(){
+  						// this.actions.hide();
+  					// }
+  				// }
+  			// ]
+  		// });
+  	// }
+  	// this.actions.show();
   },
   
   changeLicenseButtonTapped: function(btn){

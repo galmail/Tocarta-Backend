@@ -3,7 +3,7 @@
  * All configuration and variables used in the app
  */
 
-var CURRENT_ENV = "dev"; // options: mock, dev, staging, open, prod, prod
+var CURRENT_ENV = "prod"; // options: mock, dev, staging, open, prod, prod
 // var CURRENT_DEVICE = "ios"; // options: android, ios
 
 /*** development (mocked services) ***/
@@ -28,7 +28,7 @@ if(CURRENT_ENV == "mock"){
 /*** development (in browser) ***/
 else if(CURRENT_ENV == "dev"){
 	$tc = {
-		server: 'http://localhost',
+		server: 'http://localhost:3000',
 		nodeserver: 'http://analytics.tocarta.es',
 		// online: true, // when online, images should be fetched from a remote server, otherwise from filesystem
 		testing: false, // when testing, images should be fetched from server, otherwise from Amazon

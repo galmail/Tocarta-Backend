@@ -27,7 +27,7 @@ $TO = {
 	"update_menu": "Actualizar carta",
 	"update_override_menu": "Volver a descargar toda la carta",
 	"cancel": "Cancelar",
-	"change_license_question": "Seguro que quieres eliminar esta licencia?",
+	"change_license_question": "Seguro que quieres resetear esta licencia?",
 	"waiting_confirmation": "Esperando confirmación...",
 	"comm_error": "Error de conexión, no se ha podido realizar la operación.",
 	"wrong_data_was_introduced": "Algunos de los datos introducidos no son correctos",
@@ -45,7 +45,7 @@ $TO = {
 	
 	"advanced_settings": "Configuración Avanzada",
 	"warning_info": "Utilizar con cautela esta config.",
-	"delete_license_key": "Eliminar Licencia"
-	
+	"delete_license_key": "Eliminar Licencia",
+	"reset_license_key": "Resetear Licencia"
 	
 }

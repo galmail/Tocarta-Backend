@@ -1,6 +1,6 @@
 {
-    "projectName": "Project Name",
-    "licenseText": "Copyright(c) 2011 Company Name",
+    "projectName": "Tocarta Mobile",
+    "licenseText": "Copyright(c) 2013 Tocarta International SL",
     "builds": [
         {
             "name": "All Classes",
@@ -287,10 +287,6 @@
       },
       {
           "src": "lib/socket-io/socket.io.min.js",
-          "dest": "resources/js/"
-      },
-      {
-          "src": "lib/pusher/*.js",
           "dest": "resources/js/"
       },
     	{
