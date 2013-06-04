@@ -1,0 +1,51 @@
+- comments = @restaurant.comments.with_dish.newest
+.newest_comments_on_dishes.span6
+  .widget-box
+    .widget-header
+      %h4.lighter.smaller
+        %i.icon-comment.green
+        Newst Comments on dishes
+      .widget-toolbar
+        %a{href: '#', 'data-action' => 'reload'}
+          %i.icon-refresh
+        %a{href: '#', 'data-action' => 'collapse'}
+          %i.icon-chevron-up
+    .widget-body
+      .widget-main.no-padding
+        - if comments.nil?
+          %p Not enough data
+        - else
+          .dialogs
+            - comments.each do |c|
+              .itemdiv.dialogdiv
+                .user
+                  = image_tag(c.dish.photo(:mini) || 'default_dish.png')
+                .body
+                  .time
+                    - c.rating.times do
+                      %i.icon-star.orange
+                    %span &nbsp;
+                    %i.icon-time
+                    %span= distance_of_time_in_words_to_now(c.created_at)
+                  .name
+                    = c.dish.name
+                    = c.approved ? label_tag('approved') : label_tag('rejected')
+                  .text
+                    - if c.description.empty?
+                      no comments
+                    - else
+                      %i.icon-quote-left
+                      = c.description
+                  .tools
+                    .inline.position-relative
+                      %button.btn.btn-minier.bigger.btn-yellow.dropdown-toggle{"data-toggle" => "dropdown"}
+                        %i.icon-angle-down.icon-only.bigger-120
+                      %ul.dropdown-menu.dropdown-icon-only.dropdown-yellow.pull-right.dropdown-caret.dropdown-close
+                        %li
+                          = link_to('#', class: "tooltip-success", 'data-placement' => 'left', 'data-rel' => 'tooltip') do
+                            %span.green
+                              %i.icon-ok
+                        %li
+                          = link_to('#', class: "tooltip-success", 'data-placement' => 'left', 'data-rel' => 'tooltip') do
+                            %span.orange
+                              %i.icon-remove

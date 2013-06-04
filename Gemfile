@@ -6,9 +6,12 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'jquery-rails'
 
+gem 'rails-erd' # Create DB Diagram (even for production!)
+
 #### Database Setup ####
 group :development do
   gem 'taps'              # for heroku db:pull
+  gem 'rails-erd'         # create DB diagram
   gem 'yaml_db'
   gem 'sqlite3'
   gem 'meta_request'      # for rails_panel
@@ -16,13 +19,28 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller" # for better_errors
   gem 'quiet_assets'
-  gem 'rails-erd'         # create DB diagram
   gem 'annotate'
-  # FIXME: estas 3 gemas no parecen adecuadas para este grupo
-  gem 'compass'
+  gem "guard-bundler", ">= 1.0.0"
+  gem "guard-rails", ">= 0.4.0"
+  gem "guard-rspec"
+  gem "guard-annotate"
+  gem "rb-inotify", ">= 0.9.0", :require => false
+  gem "rb-fsevent", ">= 0.9.3", :require => false
+  gem "rb-fchange", ">= 0.0.6", :require => false
+  # FIXME: estas 2 gemas no parecen adecuadas para este grupo
   gem 'mongo'
   gem 'bson_ext'
-  gem 'annotate'
+end
+
+group :development , :test do
+  gem "rspec-rails" , "~> 2.13.0"
+  gem "factory_girl_rails" , "~> 4.2.1"
+end
+group :test do
+  gem "faker" , "~> 1.1.2"
+  gem "capybara" , "~> 2.0.2"
+  gem "database_cleaner" , "~> 0.9.1"
+  gem "launchy" , "~> 2.2.0"
 end
 
 group :production do
@@ -90,12 +108,18 @@ group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
 end
+
+gem 'sprockets'
 gem 'sass-rails',   '~> 3.2.3'
+gem 'compass'
+gem 'bootstrap-sass', '~> 2.3.1.0'
+gem "font-awesome-rails"
 gem 'coffee-rails', '~> 3.2.1'
 gem "haml-rails"
 gem 'simple_form'
 gem 'country_select'
-gem 'bootstrap-sass'
+gem "chartkick"
+gem 'groupdate'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

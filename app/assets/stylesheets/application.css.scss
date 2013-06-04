@@ -14,5 +14,16 @@
 
 /* @import 'scaffolds'; */
 @import "bootstrap";
+@import "font-awesome";
 
-@import "devise/sessions"
+@import "devise/sessions";
+
+@import "ace";
+@import "ace-responsive";
+@import "ace-skins";
+@import "ace-chosen";
+@import "ace-jquery-ui";
+@import "ace-colorpicker";
+@import "ace-datepicker";
+
+@import "dashboards";
