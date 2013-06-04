@@ -4,7 +4,7 @@
     .widget-header
       %h4.lighter.smaller
         %i.icon-comment.blue
-        Nuevos comentarios en restaurante
+        Últimos comentarios del Restaurante
       .widget-toolbar
         %a{href: '#', 'data-action' => 'reload'}
           %i.icon-refresh
@@ -29,7 +29,7 @@
                     %i.icon-time
                     %span= distance_of_time_in_words_to_now(c.created_at)
                   .name
-                    = c.name.nil? ? 'anonimo' : c.name
+                    = c.name.nil? ? 'Anónimo' : c.name
                   .text
                     - if c.description.nil?
                       ""
