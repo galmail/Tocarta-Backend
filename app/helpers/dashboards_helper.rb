@@ -16,7 +16,7 @@ module DashboardsHelper
 
   def label_tag(title)
     if title == 'approved'
-      content_tag(:span, title, class: 'label label-success arrowed-in-right')
+      content_tag(:span, title, class: 'label label-success arrowed arrowed-in-right')
     else title == 'rejected'
       content_tag(:span, title, class: 'label label-important')
     end

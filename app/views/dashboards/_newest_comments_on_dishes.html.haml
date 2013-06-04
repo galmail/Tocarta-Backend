@@ -4,7 +4,7 @@
     .widget-header
       %h4.lighter.smaller
         %i.icon-comment.green
-        Nuevos comentarios en platos
+        Últimas valoraciones de platos
       .widget-toolbar
         %a{href: '#', 'data-action' => 'reload'}
           %i.icon-refresh
@@ -32,7 +32,7 @@
                     = c.approved ? label_tag('approved') : label_tag('rejected')
                   .text
                     - if c.description.empty?
-                      ""
+                      &nbsp;
                     - else
                       %i.icon-quote-left
                       = c.description
