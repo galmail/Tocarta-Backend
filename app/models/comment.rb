@@ -28,6 +28,7 @@ class Comment < ActiveRecord::Base
   # TODO capture everytime the comment is approved (or disapproved) and update dish rating
   scope :without_dish,    where(dish_id: nil)
   scope :with_dish,       joins(:dish)
+  scope :without_survey,  where(survey_question_id: nil)
   scope :newest,          order('created_at DESC').limit(10)
 
   def self.by_dish(id)
