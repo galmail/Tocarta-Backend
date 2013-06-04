@@ -4,7 +4,7 @@
     .widget-header
       %h4.lighter.smaller
         %i.icon-comment.green
-        Newst Comments on dishes
+        Nuevos comentarios en platos
       .widget-toolbar
         %a{href: '#', 'data-action' => 'reload'}
           %i.icon-refresh
@@ -13,7 +13,7 @@
     .widget-body
       .widget-main.no-padding
         - if comments.nil?
-          %p Not enough data
+          %p No hay bastantes datos
         - else
           .dialogs
             - comments.each do |c|
@@ -32,7 +32,7 @@
                     = c.approved ? label_tag('approved') : label_tag('rejected')
                   .text
                     - if c.description.empty?
-                      no comments
+                      ""
                     - else
                       %i.icon-quote-left
                       = c.description
