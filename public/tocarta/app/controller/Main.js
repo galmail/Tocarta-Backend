@@ -15,6 +15,7 @@ Ext.define('TC.controller.Main', {
         'mainmenu': 'loadMainMenu',
         'dailymenu': 'loadDailyMenu',
         'matrixmenu': 'loadMatrixMenu',
+        'beveragesmenu': 'loadBeveragesMenu',
         'home': 'goToHome'
       },
       
@@ -33,6 +34,7 @@ Ext.define('TC.controller.Main', {
 	    	orderView: 'order-view',
 	    	helpView: 'help-view',
 	    	filterView: 'filter-view',
+	    	dailymenuView: 'daily-menu',
 	    	topToolbar: 'top-toolbar',
 	    	homeButton: 'top-toolbar #tcHomeBtnId',
 	    	switchLanguageButton: 'top-toolbar #tcSwitchLanguageBtnId',
@@ -42,6 +44,12 @@ Ext.define('TC.controller.Main', {
 	    	requestBillButton: 'top-toolbar #tcRequestBillBtnId',
 	    	callWaiterButton: 'top-toolbar #tcCallWaiterBtnId',
 	    	gamesButton: 'top-toolbar #tcGamesBtnId',
+	    	// segmented buttons
+	    	mainmenuButton: 'top-toolbar segmentedbutton #tcMainMenuBtnId',
+	    	dailymenuButton: 'top-toolbar segmentedbutton #tcDailyMenuBtnId',
+	    	beveragesButton: 'top-toolbar segmentedbutton #tcBeveragesBtnId',
+	    	dessertsButton: 'top-toolbar segmentedbutton #tcDessertsBtnId',
+	    	// bottom toolbar
 	    	bottomToolbar: 'bottom-toolbar',
 	    	helpButton: 'bottom-toolbar #tcHelpBtnId',
 	    	loadAppButton: 'bottom-toolbar #tcLoadAppBtnId',
@@ -56,13 +64,19 @@ Ext.define('TC.controller.Main', {
 	      homeButton: { tap: 'goToHome' },
 	      helpButton: { tap: 'showHelp' },
 	      showOrderButton: { tap: 'showOrder' },
+	      showSurveyButton: { tap: 'showSurvey' },
 	      requestBillButton: { tap: 'requestBill' },
 	      callWaiterButton: { tap: 'callWaiter' },
 	      gamesButton: { tap: 'playGames' },
+	      // segmented buttons
+	      mainmenuButton: { tap: 'showMainMenu' },
+	      dailymenuButton: { tap: 'showDailyMenu' },
+	      beveragesButton: { tap: 'showBeveragesMenu' },
+	      dessertsButton: { tap: 'showDessertsMenu' },
+
 	      loadAppButton: { tap: 'loadApp' },
 	      updateAppButton: { tap: 'updateApp' },
 	      switchTableButton: { tap: 'switchTable' },
-	      showSurveyButton: { tap: 'showSurvey' },
 	      switchLanguageButton: { tap: 'switchLanguageView' },
 	      switchMenuButton: { tap: 'switchMenu' },
 	      filterButton: { tap: 'showFilterOptions' },
@@ -126,19 +140,53 @@ Ext.define('TC.controller.Main', {
     		$tc.loadStylesheet(TC.Restaurant.getMainMenu().get('stylesheet_url'));
     	if(TC.Restaurant.getDailyMenu() && TC.Restaurant.getDailyMenu().get('stylesheet'))
     		$tc.loadStylesheet(TC.Restaurant.getDailyMenu().get('stylesheet_url'));
+    	if(TC.Restaurant.getBeveragesMenu() && TC.Restaurant.getBeveragesMenu().get('stylesheet'))
+    		$tc.loadStylesheet(TC.Restaurant.getBeveragesMenu().get('stylesheet_url'));
+    	if(TC.Restaurant.getDessertsMenu() && TC.Restaurant.getDessertsMenu().get('stylesheet'))
+    		$tc.loadStylesheet(TC.Restaurant.getDessertsMenu().get('stylesheet_url'));
     },
     
     reloadTopToolbar: function(){
     	console.log('TC.controller.Main.reloadTopToolbar');
-    	this.getTopToolbar().setTitle('<img id="tcTopToolbarLogoId" src="'+ TC.Restaurant.get('logo_url') +'"/>');
+    	
+    	// this.getTopToolbar().setTitle('<img id="tcTopToolbarLogoId" src="'+ TC.Restaurant.get('logo_url') +'"/>');
+    	this.getTopToolbar().down('#tcLogoImgId').setHtml('<img id="tcTopToolbarLogoId" src="'+ TC.Restaurant.get('logo_url') +'"/>');
+    	
     	if(TC.Restaurant.data.setting!=null){
-    		this.getTopToolbar().down('#tcSwitchMenuBtnId').setHidden(!TC.Restaurant.getDailyMenu());
+    		// this.getTopToolbar().down('#tcSwitchMenuBtnId').setHidden(!TC.Restaurant.getDailyMenu());
     		this.getTopToolbar().down('#tcGamesBtnId').setHidden(!TC.Restaurant.data.setting.games);
-    		this.getTopToolbar().down('#tcFilterBtnId').setHidden(!TC.Restaurant.data.setting.show_filters);
-    		this.getTopToolbar().down('#tcSwitchLanguageBtnId').setHidden(TC.Restaurant.data.setting.supported_lang.length<3);
+    		// this.getTopToolbar().down('#tcFilterBtnId').setHidden(!TC.Restaurant.data.setting.show_filters);
+    		// this.getTopToolbar().down('#tcSwitchLanguageBtnId').setHidden(TC.Restaurant.data.setting.supported_lang.length<3);
 	    	this.getTopToolbar().down('#tcCallWaiterBtnId').setHidden(!TC.Restaurant.data.setting.call_waiter_button);
 	    	this.getTopToolbar().down('#tcRequestBillBtnId').setHidden(!TC.Restaurant.data.setting.request_bill_button);
 	    	this.getTopToolbar().down('#tcShowOrderBtnId').setHidden(!TC.Restaurant.data.setting.order_button);
+	    	
+	    	
+	    	// segmented buttons
+	    	if(TC.Restaurant.getMainMenu()){
+	    		this.getTopToolbar().down('#tcMainMenuBtnId').setHidden(false);
+	    		this.getTopToolbar().down('#tcMainMenuBtnId').setText(TC.Restaurant.getMainMenu().get('name'));
+	    	}
+	    	if(TC.Restaurant.getDailyMenu()){
+	    		this.getTopToolbar().down('#tcDailyMenuBtnId').setHidden(false);
+	    		this.getTopToolbar().down('#tcDailyMenuBtnId').setText(TC.Restaurant.getDailyMenu().get('name'));
+	    	}
+	    	if(TC.Restaurant.getBeveragesMenu()){
+	    		this.getTopToolbar().down('#tcBeveragesBtnId').setHidden(false);
+	    		this.getTopToolbar().down('#tcBeveragesBtnId').setText(TC.Restaurant.getBeveragesMenu().get('name'));
+	    	}
+	    	if(TC.Restaurant.getDessertsMenu()){
+	    		this.getTopToolbar().down('#tcDessertsBtnId').setHidden(false);
+	    		this.getTopToolbar().down('#tcDessertsBtnId').setText(TC.Restaurant.getDessertsMenu().get('name'));
+	    	}
+	    	
+	    	// bottom toolbar
+	    	this.getBottomToolbar().down('#tcFilterDishesBtnId').setHidden(!TC.Restaurant.data.setting.show_filters);
+	    	this.getBottomToolbar().down('#tcChangeLangBtnId').setHidden(TC.Restaurant.data.setting.supported_lang.length<3);
+	    	
+	    	
+	    	this.getBottomToolbar().down('#tcShowSurveyBtnId').setHidden(!(TC.Restaurant.data.setting.show_survey && !TC.Restaurant.data.setting.order_button));
+	    	
     	}
     },
     
@@ -258,13 +306,45 @@ Ext.define('TC.controller.Main', {
     
     showMainMenu: function() {
       console.log('TC.controller.Main.showMainMenu');
-      this.redirectTo('mainmenu');
+      if(window.location.hash.indexOf('mainmenu')<0)
+      	this.redirectTo('mainmenu');
+    },
+    
+    showDailyMenu: function() {
+      console.log('TC.controller.Main.showDailyMenu');
+      if(window.location.hash.indexOf('dailymenu')<0)
+      	this.redirectTo('dailymenu');
+    },
+    
+    showBeveragesMenu: function() {
+      console.log('TC.controller.Main.showBeveragesMenu');
+      if(window.location.hash.indexOf('beveragesmenu')<0)
+      	this.redirectTo('beveragesmenu');
+    },
+    
+    showDessertsMenu: function() {
+      console.log('TC.controller.Main.showDessertsMenu');
+      if(window.location.hash.indexOf('matrixmenu')<0)
+      	this.redirectTo('matrixmenu');
     },
     
     loadMainMenu: function(){
     	if(TC.Restaurant){
     		console.log('TC.controller.Main.loadMainMenu');
     		TC.app.getController("TC.controller.MainMenu").reset(); // reseting the entire controller menu
+    		TC.app.getController("TC.controller.MainMenu").setCurrentMenu(TC.Restaurant.getMainMenu());
+    		this.switchView({xtype: 'main-menu'});
+    	}
+    	else {
+    		this.loadApp();
+    	}
+    },
+    
+    loadBeveragesMenu: function(){
+    	if(TC.Restaurant){
+    		console.log('TC.controller.Main.loadBeveragesMenu');
+    		TC.app.getController("TC.controller.MainMenu").reset(); // reseting the entire controller menu
+    		TC.app.getController("TC.controller.MainMenu").setCurrentMenu(TC.Restaurant.getBeveragesMenu());
     		this.switchView({xtype: 'main-menu'});
     	}
     	else {
@@ -276,6 +356,7 @@ Ext.define('TC.controller.Main', {
     	if(TC.Restaurant){
     		console.log('TC.controller.Main.loadDailyMenu');
     		this.switchView({xtype: 'daily-menu'});
+    		this.getDailymenuView().down('#tcDailyMenuAddBtnId').setHidden(!TC.Restaurant.data.setting.order_button);
     	}
     	else {
     		this.loadApp();
@@ -303,7 +384,7 @@ Ext.define('TC.controller.Main', {
     
     showSurvey: function(){
     	console.log('TC.controller.Main.showSurvey');
-    	this.redirectTo('basicsurvey');
+    	this.redirectTo('slidersurvey');
     },
     
     requestBill: function(){
@@ -535,9 +616,10 @@ Ext.define('TC.controller.Main', {
 	   	var endpoint = $tc.nodeserver;
 	   	var pipe = 'tocarta_lk_'+TC.Setting.get('key')+'_channel';
 			console.log("Connecting to "+endpoint);
-		  var socket = io.connect(endpoint);
+		  TC.socket = io.connect(endpoint);
+		  TC.socket_channel = pipe;
 		  console.log("Listening on "+pipe);
-		  socket.on(pipe, function (data) {
+		  TC.socket.on(pipe, function (data) {
 		  	if(data && data.action){
 		  		console.log('TC.controller.Main._check_for_incoming_messages action: '+data.action);
 		    	if(data.action=="alive"){

@@ -5,6 +5,10 @@
 @media all and (max-width: 1024px) and (max-height: 600px){
   
   /** Remove tabs and empty spaces **/
+  
+  .tcMsgToolbar {
+    position: absolute;
+  }
    
   .tcSidebarBottomToolbar {
     display: none;

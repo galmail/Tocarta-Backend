@@ -8,6 +8,19 @@ $T = {
 	
 	"back": "Volver",
 	
+	//// TC.Views.Toolbars.TopToolbar ////
+	
+	"desserts": "Postres",
+	"main_menu": "Carta Principal",
+	"daily_menu": "Menú del Día",
+	"beverages": "Bebidas",
+	
+	//// TC.Views.Toolbars.BottomToolbar ////
+	
+	"filter_dishes": "Filtrar Platos",
+	"fill_survey": "Valorar Servicio",
+	"change_lang": "Cambiar Idioma",
+	
 	//// TC.Controller.Main ////
 	
 	"order_is_empty": "El pedido está vacío. Elige un plato y agrégalo al pedido.",
@@ -89,6 +102,10 @@ $T = {
 	"light_icon_explanation": "Plato Light",
 	"app_copyright": "Copyright © Tocarta International S.L",
 	"tocarta_website": "http://tocarta.es",
+	
+	//// TC.view.survey.SurveyView ////
+	
+	"survey": "Encuesta de Satisfacción",
 	
 	//// TC.view.survey.SurveyComments ////
 	

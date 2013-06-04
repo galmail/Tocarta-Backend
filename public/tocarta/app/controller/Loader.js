@@ -266,6 +266,7 @@ Ext.define('TC.controller.Loader', {
 				  			fetchImg(img);
 				     	}
 				     	else {
+				     		$tc.logError("Error downloading image: "+error.target,"app.controller.Loader",270);
 				     		// skip this img then
 				     		console.log("**** download error source: " + error.source);
 				        console.log("**** download error target: " + error.target);

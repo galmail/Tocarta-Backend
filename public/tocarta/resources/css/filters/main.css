@@ -3,21 +3,22 @@
  **/
 /* line 9, ../../../styles/filters/main.scss */
 .tcFilterView .tcFilterOptions {
-  width: 150px;
-  height: 100px;
+  width: 280px;
+  height: 400px;
 }
-/* line 12, ../../../styles/filters/main.scss */
+/* line 13, ../../../styles/filters/main.scss */
 .tcFilterView .tcFilterOptions .dish_type_filter {
   overflow: hidden;
   clear: both;
+  line-height: 31px;
 }
-/* line 15, ../../../styles/filters/main.scss */
+/* line 17, ../../../styles/filters/main.scss */
 .tcFilterView .tcFilterOptions .dish_type_filter .dish_type_icon {
   float: left;
   margin-right: 10px;
-  padding-top: 6px;
+  padding-top: 11px;
 }
-/* line 20, ../../../styles/filters/main.scss */
+/* line 22, ../../../styles/filters/main.scss */
 .tcFilterView .tcFilterOptions .dish_type_filter .dish_type_name {
   float: left;
 }

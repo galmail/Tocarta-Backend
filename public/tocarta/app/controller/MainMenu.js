@@ -6,8 +6,9 @@
  */
 Ext.define('TC.controller.MainMenu', {
     extend: 'Ext.app.Controller',
-    requires: ['Ext.Img'],
+    requires: ['Ext.Img','Ext.util.DelayedTask'],
     config: {
+    	currentMenu: null,
       currentSection: null,
       currentSubsection: null,
       currentDish: null,
@@ -74,6 +75,10 @@ Ext.define('TC.controller.MainMenu', {
     		me.previousDish();
     		return false;
     	});
+    	$z(document).on('doubleTap','.tcDishPhoto #tcDishImgId',function(el){
+    		me.fullscreenDish(el);
+    		return false;
+    	});
     },
     
     //// WARNING: this function is called from the Main Controller
@@ -94,10 +99,17 @@ Ext.define('TC.controller.MainMenu', {
     },
     
     selectFirstItemInItemsView: function(dv){
-    	console.log('TC.controller.MainMenu.selectFirstItemInItemsView');
-    	var pos = 0;
-    	this.displayDishOrMinidishes(dv,pos);
-    	dv.select(pos,false);
+    	console.log('TC.controller.MainMenu.selectFirstItemInItemsView delayed 500ms');
+    	var self = this;
+    	var delayedTask = null;
+    	delayedTask = Ext.create('Ext.util.DelayedTask', function() {
+    		console.log('TC.controller.MainMenu.selectFirstItemInItemsView callback!');
+    		self.displayDishOrMinidishes(dv,0);
+    		dv.select(0,false);
+    		delayedTask.cancel();
+    		delayedTask = null;
+			});
+			delayedTask.delay(500);
     },
     
     restaurantCarouselShow: function(restaurantCarouselPanel){
@@ -141,9 +153,10 @@ Ext.define('TC.controller.MainMenu', {
     
     sideBarInitialize: function(listView){
     	console.log('TC.controller.MainMenu.sideBarInitialize');
-    	if(this.getCurrentSection()==null){
-    		if(TC.Restaurant.getMainMenu()){
-    			listView.setStore(TC.Restaurant.getMainMenu().sections());
+    	var self = this;
+    	if(self.getCurrentSection()==null){
+    		if(self.getCurrentMenu()){
+    			listView.setStore(self.getCurrentMenu().sections());
     		}
     	}
     },
@@ -361,6 +374,46 @@ Ext.define('TC.controller.MainMenu', {
     			dv.getScrollable().getScroller().scrollToEnd();
     		}
     	}
+    },
+    
+    fullscreenDish: function(el){
+    	console.log('TC.controller.MainMenu.fullscreenDish');
+    	var self = this;
+    	var originalImg = el.target.src;//.replace('large','original');
+    	var fullScreenPanel = null;
+    	fullScreenPanel = Ext.create('Ext.Panel', {
+    		fullscreen: true,
+    		centered: true,
+    		width: '100%',
+				height: '100%',
+    		modal: true,
+    		layout: 'vbox',
+    		scrollable: {
+    			direction: 'both',
+    			directionLock: false
+    		},
+    		items: [
+    			{
+    				xtype: 'toolbar',
+    				docked: 'top',
+    				title: self.getCurrentDish().get('name'),
+						items: [
+							{
+								itemId: 'closeButtonId',
+								xtype: 'button',
+								text: $T.close,
+								handler: function(){
+									fullScreenPanel.destroy();
+								}
+							},
+							{ xtype: 'spacer' }
+    				]
+    			},
+    			{
+    				html: '<img src="'+originalImg+'" width="100%" height="100%" />'
+    			}
+    		],
+     	}).show();
     },
     
     addMiniDish: function(dataview,position,element){

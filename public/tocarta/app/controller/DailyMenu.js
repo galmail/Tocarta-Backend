@@ -108,7 +108,9 @@ Ext.define('TC.controller.DailyMenu', {
   			var dishes = Ext.create('TC.store.Dishes');
   			section.dishes().each(function(dish){
   				if(dish_counter%dishes_per_page==0){
-  					section_page = Ext.create('TC.view.dailymenu.DailyMenuSectionPage');
+  					section_page = Ext.create('TC.view.dailymenu.DailyMenuSectionPage',{
+  						disableSelection: !TC.Restaurant.data.setting.order_button
+  					});
   					section_page.setStore(Ext.create('TC.store.Dishes'));
   					section_items.push(section_page);
   				}
@@ -123,6 +125,13 @@ Ext.define('TC.controller.DailyMenu', {
   				indicator: section_items.length > 1
   			});
   		});
+  		
+  		
+  		// hide badges if order option is not available
+  		Ext.Array.each(me.getDailyMenuTabPanel().getTabBar().items.items,function(tab){
+  			tab.setBadgeText('');
+  			tab.setLabelCls('nobadge-tab-label');
+  		});
     },
     
     selectionChanged: function(itemSelected, selectedDishes, eOpts){
@@ -131,6 +140,7 @@ Ext.define('TC.controller.DailyMenu', {
     
     selectDish: function(dishesList,index,dishItem){
     	console.log('TC.controller.MainMenu.selectDish');
+    	if(!TC.Restaurant.data.setting.order_button) return;
     	var dailyMenuTabPanel = this.getDailyMenuTabPanel();
     	var dailyMenuSection = dailyMenuTabPanel.getActiveItem();
     	var dailyMenuSectionPosition = dailyMenuTabPanel.indexOf(dailyMenuSection);

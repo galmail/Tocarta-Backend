@@ -15,7 +15,7 @@ Ext.define('TC.model.Menu', {
 	    {name: "stylesheet", type: "string"},
 	    {name: "stylesheet_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("stylesheet");
+	    		return $tc.checkImgUrl(record.get("stylesheet"));
 	    	}
 	    },
 	    {name: "menu_type", type: "string"},

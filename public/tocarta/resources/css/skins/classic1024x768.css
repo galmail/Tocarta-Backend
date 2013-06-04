@@ -5,7 +5,7 @@
   /** Toolbars **/
   /* line 9, ../../../styles/skins/classic1024x768.scss */
   .tcMsgToolbar {
-    position: relative;
+    position: absolute;
   }
 
   /* line 13, ../../../styles/skins/classic1024x768.scss */

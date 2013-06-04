@@ -221,3 +221,10 @@
   color: black;
   height: 35px;
 }
+/* line 59, ../../../styles/toolbars/top-toolbar.scss */
+.x-toolbar.tcTopToolbar .x-segmentedbutton .x-button {
+  width: auto !important;
+  padding: 15px;
+  margin: 0;
+  font-size: 20px;
+}

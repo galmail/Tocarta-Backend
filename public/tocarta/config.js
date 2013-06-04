@@ -28,7 +28,7 @@ if(CURRENT_ENV == "mock"){
 /*** development (in browser) ***/
 else if(CURRENT_ENV == "dev"){
 	$tc = {
-		server: 'http://localhost:80',
+		server: 'http://localhost',
 		nodeserver: 'http://analytics.tocarta.es',
 		// online: true, // when online, images should be fetched from a remote server, otherwise from filesystem
 		testing: false, // when testing, images should be fetched from server, otherwise from Amazon
@@ -101,6 +101,10 @@ else if(CURRENT_ENV == "prod"){
 		time_to_display_msg: 5000,
 		click: 'tap' // click event instead of tap
 	}
+	// overwrite console.log
+	console.log = function(){};
+	// log errors to proxy server
+	window.onerror = $tc.logError;
 }
 else {
 	alert('bad environment!');
@@ -129,6 +133,29 @@ $j.extend($tc,{
 $tc.url = function(method_name){
 	return this.server + this.relPath + this[method_name] + '.json';
 }
+
+$tc.logError = function(msg,url,line){
+	try {
+		Ext.Ajax.request({
+			url: $tc.nodeserver+"/proxy",
+			method: 'GET',
+			params: {
+				error: true,
+				tablet_key: TC.Setting.get('key'),
+				channel: TC.socket_channel,
+				action: {
+					msg: encodeURIComponent(msg),
+					url: encodeURIComponent(url),
+					line: line
+				}
+			}
+		});
+	  return true;
+	}
+	catch(ex){
+		return false;
+	}
+};
 
 $tc.getUri = function(){
 	var me = $tc;
@@ -159,6 +186,13 @@ $tc.formatNumber = function(num){
 
 $tc.confirmMsg = function(msg,callback){
 	Ext.Msg.confirm('',msg,callback);
+}
+
+$tc.checkImgUrl = function(relPath){
+	if(relPath)
+		return $tc.getUri() + relPath;
+	else
+		return "//:0";
 }
 
 $tc.translateSTButtons = function(){

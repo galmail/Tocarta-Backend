@@ -26,11 +26,12 @@ $sidebar-listview-background-active-color: red;
       padding-bottom: 0;
     }
     .item {
-      @include background-image(linear-gradient($tc-btn-gradient-color, $tc-btn-color, $tc-btn-color));
+      // @include background-image(linear-gradient($tc-btn-gradient-color, $tc-btn-color, $tc-btn-color));
     }
     &.x-item-pressed {
       .item {
-        @include background-image(linear-gradient(lighten($tc-btn-color,20%), $tc-btn-gradient-color));
+        background-color: lighten($tc-btn-color,10%);
+        // @include background-image(linear-gradient(lighten($tc-btn-color,20%), $tc-btn-gradient-color));
       }
     }
   }
