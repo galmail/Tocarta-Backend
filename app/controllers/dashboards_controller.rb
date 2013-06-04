@@ -50,6 +50,16 @@ class DashboardsController < ApplicationController
     # }
   end
 
+  def chart_comments_by
+    range = params[:range] ? params[:range] : 'month'
+
+    comments = Restaurant.find(params[:restaurant]).comments.group_by_month(:created_at).count if range == 'month'
+    comments = Restaurant.find(params[:restaurant]).comments.group_by_week(:created_at).count if range == 'week'
+    comments = Restaurant.find(params[:restaurant]).comments.group_by_day(:created_at).count if range == 'day'
+
+    render :json => comments
+  end
+
   private
 
   def menu_for_current_user

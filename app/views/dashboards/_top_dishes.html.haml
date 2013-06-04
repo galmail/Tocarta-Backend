@@ -33,7 +33,6 @@
                           %i.icon-star.orange
                         %span= " (#{d.rating.to_s})"
                       .text
-            .hr.hr8.hr-double
           #bottom-tab-top-box.tab-pane
             - dishes = Dish.by_chain(@restaurant.chain_id).with_comments.bottom_rating.limit(10)
             - if dishes.nil?
@@ -51,7 +50,6 @@
                           %i.icon-star.orange
                         %span= " (#{d.rating.to_s})"
                       .text
-            .hr.hr8.hr-double
           #chart-tab-top-box.tab-pane
             - unless @restaurant.chain.present?
               %p Not enough data
@@ -59,4 +57,4 @@
               .chart
                 -# = chart_tag('chart_top_dishes', 300, chain: @restaurant.chain)
                 = column_chart( dashboards_path( 'chart_top_dishes', {chain: @restaurant.chain}), highChart: 1000 )
-            .hr.hr8.hr-double
+        .hr.hr8.hr-double

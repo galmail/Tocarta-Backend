@@ -124,7 +124,7 @@
 
       // high
       if ("highChart" in opts) {
-        console.log("*** 127", opts.highChart);
+        // console.log("*** 127", opts.highChart);
         setHighChart(options, opts.highChart);
       }
 
@@ -319,7 +319,7 @@
     };
 
     var setHighChart = function(options, high) {
-      console.log( "*** 322 ", high );
+      // console.log( "*** 322 ", high );
       options.high = high;
     };
 
