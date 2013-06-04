@@ -10,6 +10,6 @@
 //= require jquery.dataTables.min
 //= require jquery.dataTables.bootstrap
 //
-//= require gcharts
+// require gcharts
 //= require dashboards
 //= require_tree .

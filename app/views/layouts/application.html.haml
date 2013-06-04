@@ -7,6 +7,11 @@
     = stylesheet_link_tag    "application",    :media => "all"
     /[if lt IE 8]
       = stylesheet_link_tag  "application-ie", :media => "all"
+
+    = javascript_include_tag "application"
+    - if params[:controller] == 'dashboards'
+      = javascript_include_tag "//www.google.com/jsapi", "chartkick-tocarta"
+
     = csrf_meta_tags
   %body
     - if flash.present?
@@ -29,4 +34,3 @@
         #page-content.clearfix
           = yield
 
-    = javascript_include_tag "application"

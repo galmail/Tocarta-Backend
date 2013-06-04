@@ -57,5 +57,6 @@
               %p Not enough data
             - else
               .chart
-                = chart_tag('chart_top_dishes', 300, chain: @restaurant.chain)
+                -# = chart_tag('chart_top_dishes', 300, chain: @restaurant.chain)
+                = column_chart( dashboards_path( 'chart_top_dishes', {chain: @restaurant.chain}), highChart: 1000 )
             .hr.hr8.hr-double

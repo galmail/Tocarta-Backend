@@ -117,6 +117,8 @@ gem 'coffee-rails', '~> 3.2.1'
 gem "haml-rails"
 gem 'simple_form'
 gem 'country_select'
+gem "chartkick"
+gem 'groupdate'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
