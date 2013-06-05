@@ -1,26 +1,61 @@
 /**
  * Slider Survey main stylesheet
  **/
-/* line 7, ../../../../styles/survey/slider/main.scss */
+/* line 5, ../../../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer {
+  background: transparent;
+}
+/* line 8, ../../../../styles/survey/slider/main.scss */
 .tcSurveySliderContainer .tcSurveyQuestions {
   height: 100%;
+  background: transparent;
 }
-/* line 10, ../../../../styles/survey/slider/main.scss */
+/* line 12, ../../../../styles/survey/slider/main.scss */
 .tcSurveySliderContainer .tcSurveyQuestions .survey_question {
   padding: 20px 10px;
 }
-/* line 12, ../../../../styles/survey/slider/main.scss */
+/* line 14, ../../../../styles/survey/slider/main.scss */
 .tcSurveySliderContainer .tcSurveyQuestions .survey_question .question_title {
   font-size: 25px;
   margin-top: 19px;
 }
-/* line 16, ../../../../styles/survey/slider/main.scss */
+/* line 18, ../../../../styles/survey/slider/main.scss */
 .tcSurveySliderContainer .tcSurveyQuestions .survey_question .rating .star {
   width: 72px;
   height: 72px;
   background: url("../img/common/icons/star_big_white.png") no-repeat;
 }
-/* line 20, ../../../../styles/survey/slider/main.scss */
+/* line 22, ../../../../styles/survey/slider/main.scss */
 .tcSurveySliderContainer .tcSurveyQuestions .survey_question .rating .star.selected {
   background: url("../img/common/icons/star_big_gold.png") no-repeat;
+}
+/* line 32, ../../../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyOpinion {
+  padding: 40px;
+}
+/* line 34, ../../../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyOpinion .block {
+  overflow: hidden;
+  padding-bottom: 20px;
+}
+/* line 38, ../../../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyOpinion .left {
+  display: block;
+  float: left;
+  width: 180px;
+  padding: 5px;
+}
+/* line 44, ../../../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyOpinion .right {
+  display: block;
+  padding: 5px;
+  float: left;
+  width: 400px;
+}
+/* line 50, ../../../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyOpinion .tcSurveyOpinionBtn {
+  padding: 10px 20px;
+  font-weight: normal;
+  font-size: 20px;
+  margin-top: 5px;
 }

@@ -37,14 +37,13 @@ Ext.define('TC.controller.Main', {
 	    	dailymenuView: 'daily-menu',
 	    	topToolbar: 'top-toolbar',
 	    	homeButton: 'top-toolbar #tcHomeBtnId',
-	    	switchLanguageButton: 'top-toolbar #tcSwitchLanguageBtnId',
 	    	switchMenuButton: 'top-toolbar #tcSwitchMenuBtnId',
-	    	filterButton: 'top-toolbar #tcFilterBtnId',
 	    	showOrderButton: 'top-toolbar #tcShowOrderBtnId',
 	    	requestBillButton: 'top-toolbar #tcRequestBillBtnId',
 	    	callWaiterButton: 'top-toolbar #tcCallWaiterBtnId',
 	    	gamesButton: 'top-toolbar #tcGamesBtnId',
 	    	// segmented buttons
+	    	segmentedButtonsBar: 'top-toolbar segmentedbutton',
 	    	mainmenuButton: 'top-toolbar segmentedbutton #tcMainMenuBtnId',
 	    	dailymenuButton: 'top-toolbar segmentedbutton #tcDailyMenuBtnId',
 	    	beveragesButton: 'top-toolbar segmentedbutton #tcBeveragesBtnId',
@@ -54,6 +53,8 @@ Ext.define('TC.controller.Main', {
 	    	helpButton: 'bottom-toolbar #tcHelpBtnId',
 	    	loadAppButton: 'bottom-toolbar #tcLoadAppBtnId',
 	    	updateAppButton: 'bottom-toolbar #tcUpdateAppBtnId',
+	    	switchLanguageButton: 'bottom-toolbar #tcChangeLangBtnId',
+	    	filterButton: 'bottom-toolbar #tcFilterDishesBtnId',
 	    	switchTableButton: 'bottom-toolbar #tcSwitchTableBtnId',
 	    	showSurveyButton: 'bottom-toolbar #tcShowSurveyBtnId'
 	    },
@@ -384,6 +385,7 @@ Ext.define('TC.controller.Main', {
     
     showSurvey: function(){
     	console.log('TC.controller.Main.showSurvey');
+    	this.getSegmentedButtonsBar().setPressedButtons([]);
     	this.redirectTo('slidersurvey');
     },
     

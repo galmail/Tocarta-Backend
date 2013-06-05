@@ -16,7 +16,8 @@ Ext.define('TC.view.survey.slider.SurveyContainer', {
 		layout: 'vbox',
 		items: [
 			{
-				html: '<h4>survey title</h4>'
+				html: '<h4>survey title</h4>',
+				hidden: true,
 			},
 			{
 				flex: 1,

@@ -7440,60 +7440,87 @@ input[type="search"]::-webkit-search-cancel-button {
  *   MatrixMenu Stylesheet
  */
 /* line 8, ../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .x-carousel-indicator {
+  position: fixed !important;
+  margin-bottom: 35px;
+}
+/* line 15, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishImageView {
   width: 100%;
   height: 100%;
 }
-/* line 12, ../../styles/matrixmenu/main.scss */
+/* line 19, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishImageView .dish-image img {
   width: 100%;
   height: 100%;
 }
-/* line 17, ../../styles/matrixmenu/main.scss */
+/* line 24, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishImageView .dish-info {
-  bottom: 0px;
-  width: 100%;
-  height: 10%;
-  background-color: rgba(0, 0, 0, 0.1);
   position: absolute;
-  display: inline-block;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
 }
-/* line 25, ../../styles/matrixmenu/main.scss */
-.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-name {
-  width: 40%;
-  display: inline-block;
+/* line 32, ../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-info-container {
+  overflow: hidden;
+  height: 80px;
 }
-/* line 29, ../../styles/matrixmenu/main.scss */
-.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-name p {
+/* line 37, ../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-left {
+  float: left;
+  width: 87%;
+  height: 100%;
+  background-color: white;
+  padding: 5px;
+  opacity: 0.6;
+}
+/* line 44, ../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-left .dish-name {
   font-weight: bold;
+  font-size: 21px;
 }
-/* line 34, ../../styles/matrixmenu/main.scss */
-.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-description {
-  width: 56%;
-  display: inline-block;
+/* line 48, ../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-left .dish-description {
+  font-size: 19px;
+  font-family: "Nova Round",arial,verdana;
+  color: #807b4b;
 }
-/* line 43, ../../styles/matrixmenu/main.scss */
-.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-price {
-  width: 4%;
-  display: inline-block;
+/* line 54, ../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-right {
+  float: right;
+  width: 13%;
+  height: 100%;
+  background-color: black;
+  font-size: 35px;
+  color: white;
+  text-align: center;
+  padding-top: 18px;
+  opacity: 0.8;
 }
-/* line 56, ../../styles/matrixmenu/main.scss */
+/* line 65, ../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-right .dish-price .euro {
+  color: #CB8D8A;
+  font-size: 31px;
+  margin-right: 15px;
+}
+/* line 76, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishTextView {
   width: 100%;
   height: 100%;
 }
-/* line 60, ../../styles/matrixmenu/main.scss */
+/* line 80, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishTextView .dish-name {
   width: 100%;
   height: 100%;
   text-align: center;
 }
-/* line 66, ../../styles/matrixmenu/main.scss */
+/* line 86, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishTextView .dish-name h1 {
   font-weight: bold;
   font-size: 200%;
 }
-/* line 72, ../../styles/matrixmenu/main.scss */
+/* line 92, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishTextView .dish-info {
   bottom: 0px;
   width: 100%;
@@ -7502,86 +7529,86 @@ input[type="search"]::-webkit-search-cancel-button {
   position: absolute;
   display: inline-block;
 }
-/* line 80, ../../styles/matrixmenu/main.scss */
+/* line 100, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishTextView .dish-info .dish-description {
   width: 96%;
   display: inline-block;
 }
-/* line 89, ../../styles/matrixmenu/main.scss */
+/* line 109, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishTextView .dish-info .dish-price {
   width: 4%;
   display: inline-block;
 }
-/* line 104, ../../styles/matrixmenu/main.scss */
+/* line 124, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishImageView {
   width: 100%;
   height: 100%;
 }
-/* line 108, ../../styles/matrixmenu/main.scss */
+/* line 128, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishImageView .dish-image img {
   width: 100%;
   height: 100%;
 }
-/* line 113, ../../styles/matrixmenu/main.scss */
+/* line 133, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishImageView .dish-info {
   bottom: 0px;
   width: 100%;
   position: absolute;
   display: inline-block;
 }
-/* line 119, ../../styles/matrixmenu/main.scss */
+/* line 139, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishImageView .dish-info .dish-name {
   width: 96%;
   display: inline-block;
 }
-/* line 123, ../../styles/matrixmenu/main.scss */
+/* line 143, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishImageView .dish-info .dish-name p {
   font-weight: bold;
 }
-/* line 128, ../../styles/matrixmenu/main.scss */
+/* line 148, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishImageView .dish-info .dish-price {
   width: 4%;
   display: inline-block;
 }
-/* line 141, ../../styles/matrixmenu/main.scss */
+/* line 161, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishTextView {
   width: 100%;
   height: 100%;
 }
-/* line 145, ../../styles/matrixmenu/main.scss */
+/* line 165, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishTextView .dish-name {
   width: 100%;
   height: 100%;
   text-align: center;
 }
-/* line 151, ../../styles/matrixmenu/main.scss */
+/* line 171, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishTextView .dish-name h1 {
   font-weight: bold;
   font-size: 200%;
 }
-/* line 157, ../../styles/matrixmenu/main.scss */
+/* line 177, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishTextView .dish-info {
   bottom: 0px;
   width: 100%;
   position: absolute;
   display: inline-block;
 }
-/* line 163, ../../styles/matrixmenu/main.scss */
+/* line 183, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishTextView .dish-info .dish-description {
   width: 96%;
   display: inline-block;
 }
-/* line 172, ../../styles/matrixmenu/main.scss */
+/* line 192, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishTextView .dish-info .dish-price {
   width: 4%;
   display: inline-block;
 }
-/* line 186, ../../styles/matrixmenu/main.scss */
+/* line 206, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView {
   width: 100%;
   height: 100%;
 }
-/* line 190, ../../styles/matrixmenu/main.scss */
+/* line 210, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-info {
   top: 0px;
   width: 100%;
@@ -7589,63 +7616,63 @@ input[type="search"]::-webkit-search-cancel-button {
   position: relative;
   display: inline-block;
 }
-/* line 197, ../../styles/matrixmenu/main.scss */
+/* line 217, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-info .dish-name {
   width: 35%;
   display: inline-block;
 }
-/* line 202, ../../styles/matrixmenu/main.scss */
+/* line 222, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-info .dish-description {
   width: 50%;
   display: inline-block;
 }
-/* line 207, ../../styles/matrixmenu/main.scss */
+/* line 227, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-info .dish-price {
   width: 5%;
   display: inline-block;
 }
-/* line 213, ../../styles/matrixmenu/main.scss */
+/* line 233, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra {
   width: 100%;
 }
-/* line 216, ../../styles/matrixmenu/main.scss */
+/* line 236, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-tabs {
   width: 60%;
 }
-/* line 219, ../../styles/matrixmenu/main.scss */
+/* line 239, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-tabs .tab-content {
   width: 100%;
   height: 100%;
   position: relative !important;
 }
-/* line 226, ../../styles/matrixmenu/main.scss */
+/* line 246, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-social {
   width: 40%;
   height: 100%;
   position: relative;
 }
-/* line 231, ../../styles/matrixmenu/main.scss */
+/* line 251, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-social .share {
   width: 48px;
   height: 48px;
 }
-/* line 236, ../../styles/matrixmenu/main.scss */
+/* line 256, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-social .twitter {
   background-image: url("http://b2badsl.net/twitter_neue_ios_icon_by_theintenseplayer-d5fwil3.png");
 }
-/* line 237, ../../styles/matrixmenu/main.scss */
+/* line 257, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-social .facebook {
   background-image: url("http://www.codethemed.com/images/footer-facebook.png");
 }
-/* line 238, ../../styles/matrixmenu/main.scss */
+/* line 258, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-social .google {
   background-image: url("http://lydiahutchinson.com/wp-content/uploads/2011/11/Google-Plus-1-icon.png");
 }
-/* line 246, ../../styles/matrixmenu/main.scss */
+/* line 266, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishTiledView {
   position: relative;
 }
-/* line 251, ../../styles/matrixmenu/main.scss */
+/* line 271, ../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishTiledTitleView {
   position: absolute;
   top: 0px;
@@ -8174,7 +8201,7 @@ input[type="search"]::-webkit-search-cancel-button {
 .tcMenuPanel .tcMenuPanelTopBar .x-title {
   color: #B7AE97;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 23px;
   text-shadow: none;
   line-height: 40px;
 }
@@ -9269,9 +9296,9 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 /* line 25, ../../styles/toolbars/top-toolbar.scss */
 .x-toolbar.tcTopToolbar .x-button.x-button-pressing, .x-toolbar.tcTopToolbar .x-button.x-button-pressed {
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(100%, #625b5b));
-  background-image: -webkit-linear-gradient(#333333, #625b5b);
-  background-image: linear-gradient(#333333, #625b5b);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #be0000), color-stop(100%, #625b5b));
+  background-image: -webkit-linear-gradient(#be0000, #625b5b);
+  background-image: linear-gradient(#be0000, #625b5b);
 }
 /* line 28, ../../styles/toolbars/top-toolbar.scss */
 .x-toolbar.tcTopToolbar .x-button .x-icon-mask {
@@ -9311,6 +9338,7 @@ input[type="search"]::-webkit-search-cancel-button {
   padding: 15px;
   margin: 0;
   font-size: 20px;
+  border-radius: 0;
 }
 
 /**
@@ -9331,6 +9359,11 @@ input[type="search"]::-webkit-search-cancel-button {
 /* line 19, ../../styles/toolbars/bottom-toolbar.scss */
 .x-toolbar.tcBottomToolbar #tcHelpBtnId .x-button-icon.x-icon-mask {
   background-image: -webkit-linear-gradient(#6b4c58, #876b76);
+}
+/* line 24, ../../styles/toolbars/bottom-toolbar.scss */
+.x-toolbar.tcBottomToolbar .x-button .x-button-normal {
+  font-size: 20px !important;
+  padding: 10px !important;
 }
 
 /**
@@ -9701,28 +9734,63 @@ input[type="search"]::-webkit-search-cancel-button {
 /**
  * Slider Survey main stylesheet
  **/
-/* line 7, ../../styles/survey/slider/main.scss */
+/* line 5, ../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer {
+  background: transparent;
+}
+/* line 8, ../../styles/survey/slider/main.scss */
 .tcSurveySliderContainer .tcSurveyQuestions {
   height: 100%;
+  background: transparent;
 }
-/* line 10, ../../styles/survey/slider/main.scss */
+/* line 12, ../../styles/survey/slider/main.scss */
 .tcSurveySliderContainer .tcSurveyQuestions .survey_question {
   padding: 20px 10px;
 }
-/* line 12, ../../styles/survey/slider/main.scss */
+/* line 14, ../../styles/survey/slider/main.scss */
 .tcSurveySliderContainer .tcSurveyQuestions .survey_question .question_title {
   font-size: 25px;
   margin-top: 19px;
 }
-/* line 16, ../../styles/survey/slider/main.scss */
+/* line 18, ../../styles/survey/slider/main.scss */
 .tcSurveySliderContainer .tcSurveyQuestions .survey_question .rating .star {
   width: 72px;
   height: 72px;
   background: url("../img/common/icons/star_big_white.png") no-repeat;
 }
-/* line 20, ../../styles/survey/slider/main.scss */
+/* line 22, ../../styles/survey/slider/main.scss */
 .tcSurveySliderContainer .tcSurveyQuestions .survey_question .rating .star.selected {
   background: url("../img/common/icons/star_big_gold.png") no-repeat;
+}
+/* line 32, ../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyOpinion {
+  padding: 40px;
+}
+/* line 34, ../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyOpinion .block {
+  overflow: hidden;
+  padding-bottom: 20px;
+}
+/* line 38, ../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyOpinion .left {
+  display: block;
+  float: left;
+  width: 180px;
+  padding: 5px;
+}
+/* line 44, ../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyOpinion .right {
+  display: block;
+  padding: 5px;
+  float: left;
+  width: 400px;
+}
+/* line 50, ../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyOpinion .tcSurveyOpinionBtn {
+  padding: 10px 20px;
+  font-weight: normal;
+  font-size: 20px;
+  margin-top: 5px;
 }
 
 /***

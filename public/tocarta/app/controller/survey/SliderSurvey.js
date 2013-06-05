@@ -7,7 +7,7 @@
  */
 Ext.define('TC.controller.survey.SliderSurvey', {
   extend: 'Ext.app.Controller',
-  requires: ['TC.store.SurveyQuestions'],
+  requires: ['TC.store.SurveyQuestions','TC.view.survey.slider.SurveyOpinion'],
   config: {
   	routes: {
       'slidersurvey': 'loadSurvey'
@@ -121,9 +121,12 @@ Ext.define('TC.controller.survey.SliderSurvey', {
     });
     	
     carousel.setItems(survey_pages);
-    if(survey_pages.length<2){
-    	carousel.setIndicator(false);
-    }
+    carousel.add(Ext.create('TC.view.survey.slider.SurveyOpinion'));
+    
+    // if(survey_pages.length<2){
+    	// carousel.setIndicator(false);
+    // }
+    
     carousel.setActiveItem(0);
   },
   

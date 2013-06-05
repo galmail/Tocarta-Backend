@@ -61931,6 +61931,56 @@ Ext.define('Ext.ActionSheet', {
 });
 
 /**
+ * @class TC.view.survey.SurveyOpinion
+ * @extends Ext.Panel
+ *
+ * SurveyOpinion Panel
+ * @description This panel display the survey opinion
+ **/
+
+Ext.define('TC.view.survey.slider.SurveyOpinion', {
+	extend: 'Ext.Panel',
+	xtype: 'survey-opinion',
+	config: {
+		cls: 'tcSurveyOpinion',
+		layout: {
+			type: 'vbox',
+			align: 'center'
+		},
+		items: [
+			{
+				cls: 'tcSurveyOpinionNameContainer',
+				html: [
+					'<div class="block tcSurveyOpinionName">',
+						'<label class="left">'+$T.your_name+'</label>',
+						'<input class="right userInputNameField" type="text" name="name" placeholder="'+$T.name_example+'" />',
+					'</div>'
+				].join('')
+			},
+			{
+				cls: 'tcSurveyOpinionDetailsContainer',
+				html: [
+					'<div class="block tcSurveyOpinionDetails">',
+						'<label class="left">'+$T.your_comment+'</label>',
+						'<textarea class="right tcSurveyGeneralOpinion" placeholder="'+$T.leave_your_comment_here+'" rows="4" cols="50"></textarea>',
+						// '<input class="right tcSurveyGeneralOpinion" placeholder="'+$T.leave_your_comment_here+'" />',
+					'</div>'
+				].join('')
+			},
+			{
+				cls: 'tcSurveyOpinionBtn',
+				xtype: 'button',
+				ui: 'action',
+				text: $T.submit
+			}
+		]
+	}
+});
+
+
+
+
+/**
  * Setting Class
  *
  */
@@ -63350,14 +63400,13 @@ Ext.define('TC.controller.Main', {
 	    	dailymenuView: 'daily-menu',
 	    	topToolbar: 'top-toolbar',
 	    	homeButton: 'top-toolbar #tcHomeBtnId',
-	    	switchLanguageButton: 'top-toolbar #tcSwitchLanguageBtnId',
 	    	switchMenuButton: 'top-toolbar #tcSwitchMenuBtnId',
-	    	filterButton: 'top-toolbar #tcFilterBtnId',
 	    	showOrderButton: 'top-toolbar #tcShowOrderBtnId',
 	    	requestBillButton: 'top-toolbar #tcRequestBillBtnId',
 	    	callWaiterButton: 'top-toolbar #tcCallWaiterBtnId',
 	    	gamesButton: 'top-toolbar #tcGamesBtnId',
 	    	// segmented buttons
+	    	segmentedButtonsBar: 'top-toolbar segmentedbutton',
 	    	mainmenuButton: 'top-toolbar segmentedbutton #tcMainMenuBtnId',
 	    	dailymenuButton: 'top-toolbar segmentedbutton #tcDailyMenuBtnId',
 	    	beveragesButton: 'top-toolbar segmentedbutton #tcBeveragesBtnId',
@@ -63367,6 +63416,8 @@ Ext.define('TC.controller.Main', {
 	    	helpButton: 'bottom-toolbar #tcHelpBtnId',
 	    	loadAppButton: 'bottom-toolbar #tcLoadAppBtnId',
 	    	updateAppButton: 'bottom-toolbar #tcUpdateAppBtnId',
+	    	switchLanguageButton: 'bottom-toolbar #tcChangeLangBtnId',
+	    	filterButton: 'bottom-toolbar #tcFilterDishesBtnId',
 	    	switchTableButton: 'bottom-toolbar #tcSwitchTableBtnId',
 	    	showSurveyButton: 'bottom-toolbar #tcShowSurveyBtnId'
 	    },
@@ -63697,6 +63748,7 @@ Ext.define('TC.controller.Main', {
     
     showSurvey: function(){
     	console.log('TC.controller.Main.showSurvey');
+    	this.getSegmentedButtonsBar().setPressedButtons([]);
     	this.redirectTo('slidersurvey');
     },
     
@@ -63991,7 +64043,7 @@ Ext.define('TC.store.SurveyQuestions', {
  */
 Ext.define('TC.controller.survey.SliderSurvey', {
   extend: 'Ext.app.Controller',
-  requires: ['TC.store.SurveyQuestions'],
+  requires: ['TC.store.SurveyQuestions','TC.view.survey.slider.SurveyOpinion'],
   config: {
   	routes: {
       'slidersurvey': 'loadSurvey'
@@ -64105,9 +64157,12 @@ Ext.define('TC.controller.survey.SliderSurvey', {
     });
     	
     carousel.setItems(survey_pages);
-    if(survey_pages.length<2){
-    	carousel.setIndicator(false);
-    }
+    carousel.add(Ext.create('TC.view.survey.slider.SurveyOpinion'));
+    
+    // if(survey_pages.length<2){
+    	// carousel.setIndicator(false);
+    // }
+    
     carousel.setActiveItem(0);
   },
   
@@ -64894,7 +64949,8 @@ Ext.define('TC.view.survey.slider.SurveyContainer', {
 		layout: 'vbox',
 		items: [
 			{
-				html: '<h4>survey title</h4>'
+				html: '<h4>survey title</h4>',
+				hidden: true,
 			},
 			{
 				flex: 1,
@@ -68963,9 +69019,20 @@ Ext.define('TC.view.matrixmenu.DishImageView', {
 		{
 			xtype: 'container',
 			tpl: new Ext.XTemplate(
-					'<div class="dish-name"><p>{name}</p></div>',
-					'<div class="dish-description"><p>{description}</p></div>',
-					'<div class="dish-price"><p>{price}&euro;</p></div>'
+					'<div class="dish-info-container">',
+						'<div class="dish-left">',
+							'<div class="dish-name">{name}</div>',
+							'<div class="dish-description">{description}</div>',
+						'</div>',
+						'<div class="dish-right">',
+							'<div class="dish-price"><span class="euro">&euro;</span><span class="price">{price:this.twoDecimals}</span></div>',
+						'</div>',
+					'</div>',
+					{
+						twoDecimals: function(price) {
+							return $tc.formatNumber(price);
+						}
+					}
 			),
 			cls: 'dish-info'
 		}],

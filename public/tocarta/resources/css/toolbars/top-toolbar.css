@@ -183,11 +183,11 @@
 }
 /* line 25, ../../../styles/toolbars/top-toolbar.scss */
 .x-toolbar.tcTopToolbar .x-button.x-button-pressing, .x-toolbar.tcTopToolbar .x-button.x-button-pressed {
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(100%, #625b5b));
-  background-image: -webkit-linear-gradient(#333333, #625b5b);
-  background-image: -moz-linear-gradient(#333333, #625b5b);
-  background-image: -o-linear-gradient(#333333, #625b5b);
-  background-image: linear-gradient(#333333, #625b5b);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #be0000), color-stop(100%, #625b5b));
+  background-image: -webkit-linear-gradient(#be0000, #625b5b);
+  background-image: -moz-linear-gradient(#be0000, #625b5b);
+  background-image: -o-linear-gradient(#be0000, #625b5b);
+  background-image: linear-gradient(#be0000, #625b5b);
 }
 /* line 28, ../../../styles/toolbars/top-toolbar.scss */
 .x-toolbar.tcTopToolbar .x-button .x-icon-mask {
@@ -227,4 +227,5 @@
   padding: 15px;
   margin: 0;
   font-size: 20px;
+  border-radius: 0;
 }
