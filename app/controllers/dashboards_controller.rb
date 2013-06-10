@@ -42,9 +42,19 @@ class DashboardsController < ApplicationController
   def chart_comments_by
     range = params[:range] ? params[:range] : 'month'
 
-    comments = Restaurant.find(params[:restaurant]).comments.group_by_month(:created_at).count if range == 'month'
-    comments = Restaurant.find(params[:restaurant]).comments.group_by_week(:created_at).count if range == 'week'
-    comments = Restaurant.find(params[:restaurant]).comments.group_by_day(:created_at).count if range == 'day'
+    comments = Restaurant.find(params[:restaurant]).comments.without_survey.group_by_month(:created_at).count if range == 'month'
+    comments = Restaurant.find(params[:restaurant]).comments.without_survey.group_by_week(:created_at).count if range == 'week'
+    comments = Restaurant.find(params[:restaurant]).comments.without_survey.group_by_day(:created_at).count if range == 'day'
+
+    render :json => comments
+  end
+
+  def chart_survey_comments_by
+    range = params[:range] ? params[:range] : 'month'
+
+    comments = Restaurant.find(params[:restaurant]).comments.with_survey.group_by_month('comments.created_at').count if range == 'month'
+    comments = Restaurant.find(params[:restaurant]).comments.with_survey.group_by_week('comments.created_at').count if range == 'week'
+    comments = Restaurant.find(params[:restaurant]).comments.with_survey.group_by_day('comments.created_at').count if range == 'day'
 
     render :json => comments
   end
