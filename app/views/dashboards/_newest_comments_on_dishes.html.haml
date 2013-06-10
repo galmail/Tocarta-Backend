@@ -29,7 +29,7 @@
                     %span= distance_of_time_in_words_to_now(c.created_at)
                   .name
                     = c.dish.name
-                    = c.approved ? label_tag('approved') : label_tag('rejected')
+                    = c.approved ? label_tag('approved',c.id) : label_tag('rejected', c.id)
                   .text
                     - if c.description.empty?
                       &nbsp;
@@ -42,10 +42,10 @@
                         %i.icon-angle-down.icon-only.bigger-120
                       %ul.dropdown-menu.dropdown-icon-only.dropdown-yellow.pull-right.dropdown-caret.dropdown-close
                         %li
-                          = link_to('#', class: "tooltip-success", 'data-placement' => 'left', 'data-rel' => 'tooltip') do
+                          = link_to(dashboards_path(:approve_comment, comment_id: c.id), remote: true, class: "moderation tooltip-success #{c.id}", 'data-placement' => 'left', 'data-rel' => 'tooltip') do
                             %span.green
                               %i.icon-ok
                         %li
-                          = link_to('#', class: "tooltip-success", 'data-placement' => 'left', 'data-rel' => 'tooltip') do
+                          = link_to(dashboards_path(:reject_comment, comment_id: c.id), remote: true, class: "moderation tooltip-success #{c.id}", 'data-placement' => 'left', 'data-rel' => 'tooltip') do
                             %span.orange
                               %i.icon-remove
