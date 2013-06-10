@@ -1,0 +1,3 @@
+var label = $(".newest_comments_on_dishes .label.<%=@comment.id%>");
+label.replaceWith('<%= label_tag('approved', @comment.id) %>');
+

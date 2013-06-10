@@ -1,10 +1,10 @@
-- comments = @restaurant.comments.without_dish.without_survey.newest
+- comments = @restaurant.comments.without_dish.with_survey.newest
 .newest_comments_on_dishes.span6
   .widget-box
     .widget-header
       %h4.lighter.smaller
         %i.icon-comment.blue
-        Últimos comentarios del Restaurante
+        Últimos comentarios en Cuestionario
       .widget-toolbar
         -# %a{href: '#', 'data-action' => 'reload'}
           %i.icon-refresh
@@ -31,6 +31,7 @@
                   .name
                     = c.name.blank? ? 'Anónimo' : c.name
                   .text
+                    %h6= c.survey_question.description
                     - if c.description.nil?
                       &nbsp;
                     - else

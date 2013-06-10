@@ -14,11 +14,11 @@ module DashboardsHelper
     image_tag(img, alt: "logo", class: 'nav-user-photo')
   end
 
-  def label_tag(title)
+  def label_tag(title,comment_id)
     if title == 'approved'
-      content_tag(:span, title, class: 'label label-success arrowed arrowed-in-right')
+      content_tag(:span, title, class: 'label label-success arrowed arrowed-in-right ' + comment_id.to_s)
     else title == 'rejected'
-      content_tag(:span, title, class: 'label label-important')
+      content_tag(:span, title, class: 'label label-important ' + comment_id.to_s)
     end
   end
 end
