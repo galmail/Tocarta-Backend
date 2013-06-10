@@ -29,6 +29,7 @@ class Comment < ActiveRecord::Base
   scope :without_dish,    where(dish_id: nil)
   scope :with_dish,       joins(:dish)
   scope :without_survey,  where(survey_question_id: nil)
+  scope :with_survey,     joins(:survey_question)
   scope :newest,          order('created_at DESC').limit(10)
 
   def self.by_dish(id)
