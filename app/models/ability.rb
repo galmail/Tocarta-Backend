@@ -17,6 +17,7 @@ class Ability
       can :import, [Dish]
     elsif user.has_role? :restaurant
       can :update_tablet, :all
+      can :read, User, :id => user.id
       can [:read,:create], Ingredient
       can :read, DishType
       can :read, Theme
