@@ -1816,7 +1816,7 @@
                     "name": "config.js"
                 },
                 {
-                    "path": "../deploy/tocarta/",
+                    "path": "../deploy/tocarta/1_5/",
                     "name": "all-classes.js"
                 },
                 {
@@ -1866,6 +1866,10 @@
       {
           "src": "resources/img/",
           "dest": "resources/img/"
+      },
+      {
+          "src": "resources/fonts/",
+          "dest": "resources/fonts/"
       }
     ]
 }
