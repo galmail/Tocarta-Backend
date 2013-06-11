@@ -24,7 +24,7 @@ Ext.define('TC.controller.DailyMenu', {
       },
       
     	control: {
-	      dailyMenu: { show: 'dailyMenuShow' },
+	      dailyMenu: { show: 'dailyMenuDelayShow' },
 	      dailyMenuTabPanel: { activeitemchange: 'tabHasChanged' },
 	      dailyMenuSectionPage: { itemtap: 'selectDish', selectionchange: 'selectionChanged' },
 	      dailyMenuAddBtn: { tap: 'addMenu' }
@@ -85,9 +85,16 @@ Ext.define('TC.controller.DailyMenu', {
   		this.combo.dishes().setSorters([{property : 'position',direction: 'ASC'}]);
     },
     
-    dailyMenuShow: function(){
+    dailyMenuDelayShow: function(){
+    	var self = this;
+    	setTimeout(function(){
+    		self.dailyMenuShow(self);
+  		},0);
+    },
+    
+    dailyMenuShow: function(me){
     	console.log('TC.controller.MainMenu.dailyMenuShow');
-    	var me = this;
+    	// var me = this;
     	Ext.Viewport.down('#tcTopToolbarId').show();
   		Ext.Viewport.down('#tcBottomToolbarId').show();
   		var dailyMenu = TC.Restaurant.getDailyMenu();

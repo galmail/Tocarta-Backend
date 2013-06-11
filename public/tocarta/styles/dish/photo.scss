@@ -4,6 +4,10 @@
  * Dish photo stylesheet
  **/
 
+$width-left-panel: 75%;
+$width-right-panel: 25%;
+
+
 .tcDishPhoto {
   // height: 474px;
   background: transparent;
@@ -69,7 +73,7 @@
       .left {
         float: left;
         background-color: white;
-        width: 70%;
+        width: $width-left-panel;
         height: 100%;
         padding: 10px;
         opacity: 0.6;
@@ -77,16 +81,30 @@
         
         }
         .dish-actions {
-        
+          position: absolute;
+          bottom: 10px;
+          width: $width-left-panel;
+          padding-right: 20px;
+          text-align: right;
+          .tcDishActionReview {
+            background-image: url('../img/common/icons/comment_dish.png');
+            width: 35px;
+            height: 35px;
+            display: block;
+            float: right;
+          }
         }
       }
       .right {
         float: right;
-        width: 30%;
+        width: $width-right-panel;
         height: 100%;
         background-color: black;
         opacity: 0.8;
         .dish-price {
+          margin-left: auto;
+          margin-right: auto;
+          width: 122px;
           font-size: 44px;
           color: white;
           text-align: center;

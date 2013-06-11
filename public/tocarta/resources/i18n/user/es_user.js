@@ -68,6 +68,14 @@ $T = {
 	
 	"add": "Agregar",
 	
+	//// TC.view.dish.DishReviewModal ////
+	
+	"rate_review_dish": "Valora y Comenta el Plato",
+	"cancel": "Cancelar",
+	"rating": "Valoración",
+	"submit_dish_rating": "Enviando la valoración...",
+	"dish_rating_submited": "Hemos registrado tu valoración, gracias!",
+	
 	//// TC.view.loading.Loader ////
 	
 	"loading_app": "Cargando la carta...",

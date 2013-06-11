@@ -11,6 +11,7 @@ Ext.define('TC.model.Restaurant', {
 	    {name: "id", type: "int"},
 	    {name: "name", type: "string"},
 	    {name: "num_tables", type: "string"},
+	    {name: "current_locale", type: "string"},
 	    {name: "setting", persist: true},
 	    {name: "menus", persist: true},
 	    {name: "banners", persist: true},

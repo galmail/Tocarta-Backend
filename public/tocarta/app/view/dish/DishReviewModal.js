@@ -21,7 +21,8 @@ Ext.define('TC.view.dish.DishReviewModal', {
 		},
 		items: [
 			{
-				html: 'Please Rate and Review this dish'
+				cls: 'tcDishReviewModalTitle',
+				html: $T.rate_review_dish
 			},
 			// {
 				// tpl: new Ext.XTemplate(
@@ -33,12 +34,15 @@ Ext.define('TC.view.dish.DishReviewModal', {
 			// },
 			{
 				html: [
-				'<div class="rating">',
-      		'<div class="star"></div>',
-      		'<div class="star"></div>',
-      		'<div class="star"></div>',
-      		'<div class="star"></div>',
-      		'<div class="star"></div>',
+				'<div class="block">',
+					'<div class="left ratingTitle">'+$T.rating+'</div>',
+					'<div class="right rating">',
+	      		'<div class="star"></div>',
+	      		'<div class="star"></div>',
+	      		'<div class="star"></div>',
+	      		'<div class="star"></div>',
+	      		'<div class="star"></div>',
+	      	'</div>',
       	'</div>'
       	].join('')
 			},
@@ -67,7 +71,7 @@ Ext.define('TC.view.dish.DishReviewModal', {
 					{
 						cls: 'tcDishReviewModalCancelBtn',
 						xtype: 'button',
-						text: 'Cancel',
+						text: $T.cancel,
 						handler: function(){
 							this.parent.parent.destroy();
 						}

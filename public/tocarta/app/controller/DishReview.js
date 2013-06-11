@@ -38,8 +38,9 @@ Ext.define('TC.controller.DishReview', {
   
   submitReview: function(){
   	console.log('TC.controller.DishReview.submitReview');
+  	if(!$tc.checkConnection()) return false;
   	var me = this;
-		Ext.Viewport.setMasked({xtype: 'loadmask',message: $T.send_survey_loading});
+		Ext.Viewport.setMasked({xtype: 'loadmask',message: $T.submit_dish_rating});
 		var comments_to_send = Ext.create('TC.store.Comments',{
 			proxy: {
 				type: $tc.protocol,
@@ -67,12 +68,13 @@ Ext.define('TC.controller.DishReview', {
 			name: userName
 		});
 		comments_to_send.add(comment);
+		
 		// submit all comments now
 		comments_to_send.sync();
 		// say thank you and have a nice day
 		setTimeout(function(){
 			Ext.Viewport.unmask();
-			$tc.alertMsg('<p align="center">'+$T.thanks_for_helping_us_improve+'</p>',function(){
+			$tc.alertMsg('<p align="center">'+$T.dish_rating_submited+'</p>',function(){
 				if(me.getDishReviewModal())
 					me.getDishReviewModal().destroy();
 			});

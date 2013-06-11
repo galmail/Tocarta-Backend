@@ -34,6 +34,7 @@ Ext.define('TC.controller.survey.SliderSurvey', {
   
   submitSurvey: function(){
   	console.log('TC.controller.survey.SliderSurvey.submitSurvey');
+  	if(!$tc.checkConnection()) return false;
   	var me = this;
 		$tc.confirmMsg($T.send_survey_question,function(btn){
 			if(btn=="yes"){

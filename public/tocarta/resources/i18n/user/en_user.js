@@ -69,6 +69,14 @@ $T = {
 	
 	"add": "Add",
 	
+	//// TC.view.dish.DishReviewModal ////
+	
+	"rate_review_dish": "Rate & Review the Dish",
+	"cancel": "Cancel",
+	"rating": "Rating",
+	"submit_dish_rating": "Sending review...",
+	"dish_rating_submited": "You review was submitted, thank you!",
+	
 	//// TC.view.dailymenu.DailyMenu ////
 	
 	"add_menu": "Add Menu",

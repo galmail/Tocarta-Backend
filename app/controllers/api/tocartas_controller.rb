@@ -14,6 +14,10 @@ class Api::TocartasController < AccessController
     @result = @tablet.save
   end
   
+  def get_supported_langs
+    @langs = @restaurant.restaurant_setting.supported_lang
+  end
+  
   def get_restaurant_info
     # show banners
     sort_and_filter(@restaurant.restaurant_banners,nil,nil,nil,nil)
@@ -72,13 +76,19 @@ class Api::TocartasController < AccessController
       @images << @restaurant.chain.bg.url
     end
     
-    # get the restaurant banners
-    @restaurant.restaurant_banners.each { |banner|
-      if !banner.photo_file_name.nil? and banner.photo_updated_at > last_update
-        @images << banner.photo.url(:banner)
-      end
+    # get the restaurant banners in the supported langs
+    default_locale = I18n.locale
+    supported_langs = @restaurant.restaurant_setting.supported_lang
+    supported_langs.shift()
+    supported_langs.each { |locale|
+      I18n.locale = locale
+      @restaurant.restaurant_banners.each { |banner|
+        if !banner.photo_file_name.nil? and banner.photo_updated_at > last_update
+          @images << banner.photo.url(:banner)
+        end
+      }
     }
-    
+    I18n.locale = default_locale
     # get all the photos of the menus, sections, subsections and dishes
     @restaurant.menus.each { |menu|
       

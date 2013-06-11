@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html manifest="tocarta.appcache">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta charset="utf-8" />
@@ -29,6 +29,9 @@
 			///// No conflict libraries /////
 			$z = Zepto;
 			$j = jQuery.noConflict();
+			$j.ajaxSetup({
+				cache: true
+			});
 			$j(document).ready(function(){
 		    try {
 					var lang = JSON.parse(localStorage['setting-1']).language;

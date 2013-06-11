@@ -156,11 +156,11 @@
 /**
  * Dish photo stylesheet
  **/
-/* line 7, ../../../styles/dish/photo.scss */
+/* line 11, ../../../styles/dish/photo.scss */
 .tcDishPhoto {
   background: transparent;
 }
-/* line 10, ../../../styles/dish/photo.scss */
+/* line 14, ../../../styles/dish/photo.scss */
 .tcDishPhoto .tcBigBadge {
   position: absolute;
   top: 0;
@@ -178,14 +178,14 @@
   width: 133px;
   text-align: center;
 }
-/* line 27, ../../../styles/dish/photo.scss */
+/* line 31, ../../../styles/dish/photo.scss */
 .tcDishPhoto .tcBigBadge .dish-big-badge {
   text-align: center;
   margin-left: -51px;
   width: 101px;
   font-size: 0.7em;
 }
-/* line 35, ../../../styles/dish/photo.scss */
+/* line 39, ../../../styles/dish/photo.scss */
 .tcDishPhoto .tcAddButton {
   position: absolute;
   right: 1px;
@@ -200,7 +200,7 @@
   border-radius: 5px;
   border: none;
 }
-/* line 44, ../../../styles/dish/photo.scss */
+/* line 48, ../../../styles/dish/photo.scss */
 .tcDishPhoto .tcAddButton.x-button-pressing, .tcDishPhoto .tcAddButton.x-button-pressed {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(100%, #625b5b));
   background-image: -webkit-linear-gradient(#333333, #625b5b);
@@ -208,19 +208,19 @@
   background-image: -o-linear-gradient(#333333, #625b5b);
   background-image: linear-gradient(#333333, #625b5b);
 }
-/* line 47, ../../../styles/dish/photo.scss */
+/* line 51, ../../../styles/dish/photo.scss */
 .tcDishPhoto .tcAddButton .x-button-label {
   padding: 5px 0;
   padding-bottom: 7px;
   width: 100px;
 }
-/* line 54, ../../../styles/dish/photo.scss */
+/* line 58, ../../../styles/dish/photo.scss */
 .tcDishPhoto .dish-photo-container .dish-image {
   width: 100%;
   height: 100%;
   border-radius: 5px;
 }
-/* line 61, ../../../styles/dish/photo.scss */
+/* line 65, ../../../styles/dish/photo.scss */
 .tcDishPhoto .dish-photo-container .dish-info {
   clear: both;
   overflow: hidden;
@@ -229,31 +229,50 @@
   position: absolute;
   bottom: 0;
 }
-/* line 69, ../../../styles/dish/photo.scss */
+/* line 73, ../../../styles/dish/photo.scss */
 .tcDishPhoto .dish-photo-container .dish-info .left {
   float: left;
   background-color: white;
-  width: 70%;
+  width: 75%;
   height: 100%;
   padding: 10px;
   opacity: 0.6;
 }
 /* line 83, ../../../styles/dish/photo.scss */
+.tcDishPhoto .dish-photo-container .dish-info .left .dish-actions {
+  position: absolute;
+  bottom: 10px;
+  width: 75%;
+  padding-right: 20px;
+  text-align: right;
+}
+/* line 89, ../../../styles/dish/photo.scss */
+.tcDishPhoto .dish-photo-container .dish-info .left .dish-actions .tcDishActionReview {
+  background-image: url("../img/common/icons/comment_dish.png");
+  width: 35px;
+  height: 35px;
+  display: block;
+  float: right;
+}
+/* line 98, ../../../styles/dish/photo.scss */
 .tcDishPhoto .dish-photo-container .dish-info .right {
   float: right;
-  width: 30%;
+  width: 25%;
   height: 100%;
   background-color: black;
   opacity: 0.8;
 }
-/* line 89, ../../../styles/dish/photo.scss */
+/* line 104, ../../../styles/dish/photo.scss */
 .tcDishPhoto .dish-photo-container .dish-info .right .dish-price {
+  margin-left: auto;
+  margin-right: auto;
+  width: 122px;
   font-size: 44px;
   color: white;
   text-align: center;
   padding-top: 22px;
 }
-/* line 94, ../../../styles/dish/photo.scss */
+/* line 112, ../../../styles/dish/photo.scss */
 .tcDishPhoto .dish-photo-container .dish-info .right .dish-price .euro {
   color: #CB8D8A;
   font-size: 43px;
@@ -461,21 +480,58 @@
 /* line 5, ../../../styles/dish/reviewmodal.scss */
 .tcDishReviewModal {
   background: white;
+  font-family: 'YanoneKaffeesatzThin';
 }
 /* line 9, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .x-inner.x-panel-inner {
+  padding: 20px;
+}
+/* line 13, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .left {
+  float: left;
+  width: 130px;
+}
+/* line 16, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .left.ratingTitle {
+  margin-top: 25px;
+}
+/* line 20, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .right {
+  float: left;
+  width: 360px;
+}
+/* line 24, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .block {
+  overflow: hidden;
+  padding: 10px;
+}
+/* line 29, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .tcDishReviewModalTitle {
+  font-size: 30px;
+  font-family: 'YanoneKaffeesatzRegular';
+}
+/* line 34, ../../../styles/dish/reviewmodal.scss */
 .tcDishReviewModal .rating {
   overflow: hidden;
 }
-/* line 12, ../../../styles/dish/reviewmodal.scss */
+/* line 37, ../../../styles/dish/reviewmodal.scss */
 .tcDishReviewModal .rating .star {
   float: left;
   width: 72px;
   height: 72px;
   background: url("../img/common/icons/star_big_white.png") no-repeat;
 }
-/* line 17, ../../../styles/dish/reviewmodal.scss */
+/* line 42, ../../../styles/dish/reviewmodal.scss */
 .tcDishReviewModal .rating .star.selected {
   background: url("../img/common/icons/star_big_gold.png") no-repeat;
+}
+/* line 48, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .tcDishReviewModalButtons {
+  margin-top: 10px;
+}
+/* line 50, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .tcDishReviewModalButtons .tcDishReviewModalCancelBtn {
+  margin-right: 40px;
 }
 
 /* line 13, ../../../styles/dish/main.scss */

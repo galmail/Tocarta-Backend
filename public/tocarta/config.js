@@ -115,6 +115,7 @@ else {
 $j.extend($tc,{
 	validate_license_key: "validate_license_key",
 	get_restaurant: "get_restaurant_info",
+	supported_langs: "get_supported_langs",
 	get_images_to_download: "get_images_to_download",
 	confirm_downloaded_images: "confirm_downloaded_images",
 	send_order_url: "make_order",
@@ -230,6 +231,20 @@ $tc.getParameterByName = function(name){
     return "";
   else
     return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+$tc.checkConnection = function(){
+	if(navigator && navigator.connection && navigator.connection.type){
+		var conType=navigator.connection.type;
+		if(conType==Connection.NONE || conType==Connection.UNKNOWN){
+			$tc.alertMsg("Connection is not available.",function(){
+				Ext.Viewport.unmask();
+				return false;
+			});
+			return false;
+		}
+	}
+	return true;
 }
 
 $j(document).ready(function(){

@@ -1310,14 +1310,14 @@
                     "path": "app/controller/"
                 },
                 {
+                    "clsName": "TC.controller.DishReview",
+                    "name": "DishReview.js",
+                    "path": "app/controller/"
+                },
+                {
                     "clsName": "Ext.Img",
                     "name": "Img.js",
                     "path": "lib/touch/src/"
-                },
-                {
-                    "clsName": "Ext.util.DelayedTask",
-                    "name": "DelayedTask.js",
-                    "path": "lib/touch/src/util/"
                 },
                 {
                     "clsName": "TC.model.Combo",
@@ -1328,11 +1328,6 @@
                     "clsName": "Ext.ActionSheet",
                     "name": "ActionSheet.js",
                     "path": "lib/touch/src/"
-                },
-                {
-                    "clsName": "TC.view.survey.slider.SurveyOpinion",
-                    "name": "SurveyOpinion.js",
-                    "path": "app/view/survey/slider/"
                 },
                 {
                     "clsName": "TC.model.Setting",
@@ -1470,6 +1465,11 @@
                     "path": "app/view/loading/"
                 },
                 {
+                    "clsName": "TC.view.dish.DishReviewModal",
+                    "name": "DishReviewModal.js",
+                    "path": "app/view/dish/"
+                },
+                {
                     "clsName": "TC.view.order.OrderView",
                     "name": "OrderView.js",
                     "path": "app/view/order/"
@@ -1482,6 +1482,16 @@
                 {
                     "clsName": "TC.view.survey.slider.SurveyContainer",
                     "name": "SurveyContainer.js",
+                    "path": "app/view/survey/slider/"
+                },
+                {
+                    "clsName": "TC.view.survey.slider.SurveyPage",
+                    "name": "SurveyPage.js",
+                    "path": "app/view/survey/slider/"
+                },
+                {
+                    "clsName": "TC.view.survey.slider.SurveyOpinion",
+                    "name": "SurveyOpinion.js",
                     "path": "app/view/survey/slider/"
                 },
                 {

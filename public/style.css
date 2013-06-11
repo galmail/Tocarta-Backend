@@ -1,0 +1,105 @@
+/**
+ * Southeast Asia Skin (Lah Restaurant)
+ **/
+
+/******** TOP TOOLBAR ********/
+
+.x-toolbar.tcTopToolbar {
+  font-family: 'YanoneKaffeesatzThin';
+}
+
+/******** CARTA DE POSTRES ********/
+
+/* Nombre del plato */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-left .dish-name {
+  font-family: 'YanoneKaffeesatzBold';
+}
+/* Descripcion del plato */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-left {
+  opacity: 0.8;
+}
+
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-left .dish-description {
+  font-family: 'YanoneKaffeesatzRegular';
+  font-size: 20px;
+}
+
+/******** FILTROS DE PLATOS ********/
+
+.tcFilterView .tcFilterOptions .dish_type_filter .dish_type_name {
+  font-family: 'YanoneKaffeesatzRegular';
+}
+
+
+/******** MENU DEL DIA ********/
+
+.tcDailyMenu .tcDailyMenuTitleText {
+  font-family: 'YanoneKaffeesatzRegular';
+}
+.tcDailyMenu .tcDailyMenuTabBar {
+  font-family: 'YanoneKaffeesatzThin';
+}
+
+.tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .tcDailyMenuDish .tcDailyMenuDishText .tcDailyMenuDishTitle {
+  font-family: 'YanoneKaffeesatzThin';
+}
+
+.tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .tcDailyMenuDish .tcDailyMenuDishText .tcDailyMenuDishDescription {
+  font-family: 'YanoneKaffeesatzThin';
+}
+
+
+/******** CARTA PRINCIPAL Y BEBIDAS ********/
+
+/* Sidebar */
+
+.tcMenuPanelListView .item .item-title {
+  font-family: 'KandideRegular';
+}
+
+.tcMenuPanel .tcMenuPanelTopBar .x-title {
+  font-family: 'KandideRegular';
+}
+
+.tcMenuPanel .tcMenuPanelTopBar .x-button-back {
+  font-family: 'KandideRegular';
+}
+
+/* Foto del Plato Activo*/
+
+.tcDishPhoto {
+  background: transparent;
+}
+
+.tcDishContainer .tcDishTitle .x-title {
+  font-family: 'YanoneKaffeesatzThin';
+}
+
+.tcDishPhoto .dish-photo-container .dish-info .left {
+  font-family: 'YanoneKaffeesatzRegular';
+  width: 77%;
+}
+.tcDishPhoto .dish-photo-container .dish-info .right {
+  width: 23%;
+}
+
+.tcDishPhoto .dish-photo-container .dish-info .dish-price {
+  font-size: 40px;
+}
+
+.tcDishPhoto .dish-photo-container .dish-info .dish-price .euro {
+  font-size: 33px;
+}
+
+/* Tabs del Plato Activo*/
+.tcDishContainer .tcDishContainerTabBar {
+  font-family: 'YanoneKaffeesatzThin';
+}
+
+
+/******** ICONO DE INFORMACION/AYUDA ********/
+
+/* Ocultamos el icono de informacion/ayuda */
+#tcHelpBtnId {
+  display: none;
+}

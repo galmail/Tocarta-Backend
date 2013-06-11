@@ -45,6 +45,8 @@ $T = {
 	"send_survey_question": "Vol enviar l’enquesta?",
 	"send_survey_loading": "Enviant l’enquesta...",
 	"thanks_for_coming": "Gràcies per venir i esperem<br/>que torni ben aviat!",
+	"thanks_for_helping_us_improve": "Muchas gracias por ayudarnos a mejorar!",
+	"next": "Siguiente",
 	
 	//// TC.view.dish.DishComments ////
 	
@@ -61,6 +63,14 @@ $T = {
 	//// TC.view.dish.DishPhoto ////
 	
 	"add": "Afegir",
+	
+	//// TC.view.dish.DishReviewModal ////
+	
+	"rate_review_dish": "Valora y Comenta el Plato",
+	"cancel": "Cancelar",
+	"rating": "Valoración",
+	"submit_dish_rating": "Enviando la valoración...",
+	"dish_rating_submited": "Hemos registrado tu valoración, gracias!",
 	
 	//// TC.view.loading.Loader ////
 	
@@ -106,12 +116,15 @@ $T = {
 	"name_example": "ex. Laia",
 	"leave_your_comment_here": "Escrigui aquí el seu comentari...",
 	"submit": "Enviar",
+	"your_email": "Tu email:",
+	"email_example": "ej. maria@gmail.com",
 	
 	//// TC.view.survey.SurveyContainer ////
 	
 	"comment_dishes_eaten": "Comenti els plats que ha menjat",
 	"your_opinion": "Ens agradaria conèixer la seva opinió",
 	"your_name_and_comment": "Deixi’ns el seu nom i un comentari",
+	"survey_text": "Tu opinion es importante, ayúdanos a mejorar!",
 	
 	//// TC.view.survey.SurveyDishes ////
 	

@@ -6,7 +6,7 @@
  */
 Ext.define('TC.controller.MainMenu', {
     extend: 'Ext.app.Controller',
-    requires: ['Ext.Img','Ext.util.DelayedTask'],
+    requires: ['Ext.Img'],
     config: {
     	currentMenu: null,
       currentSection: null,
@@ -112,15 +112,11 @@ Ext.define('TC.controller.MainMenu', {
     selectFirstItemInItemsView: function(dv){
     	console.log('TC.controller.MainMenu.selectFirstItemInItemsView delayed 500ms');
     	var self = this;
-    	var delayedTask = null;
-    	delayedTask = Ext.create('Ext.util.DelayedTask', function() {
+    	setTimeout(function(){
     		console.log('TC.controller.MainMenu.selectFirstItemInItemsView callback!');
     		self.displayDishOrMinidishes(dv,0);
     		dv.select(0,false);
-    		delayedTask.cancel();
-    		delayedTask = null;
-			});
-			delayedTask.delay(500);
+    	},0);
     },
     
     restaurantCarouselShow: function(restaurantCarouselPanel){

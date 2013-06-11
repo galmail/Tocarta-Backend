@@ -31,7 +31,7 @@ Ext.define('TC.view.dish.DishPhoto', {
 	    		'<div class="left">',
 	    			'<div class="dish-description">{description}</div>',
 	    			'<div class="dish-actions">',
-	    				'<a class="tcDishActionReview" id="tcDishActionReview_{id}" href="#">Comentar</a>',
+	    				'<a class="tcDishActionReview" id="tcDishActionReview_{id}" href="#"></a>',
 	    			'</div>',
 	    		'</div>',
 	    		'<div class="right">',

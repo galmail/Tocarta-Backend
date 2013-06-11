@@ -4,7 +4,32 @@
 
 .tcDishReviewModal {
   background: white;
+  font-family: 'YanoneKaffeesatzThin';
   
+  .x-inner.x-panel-inner {
+    padding: 20px;
+  }
+  
+  .left {
+    float: left;
+    width: 130px;
+    &.ratingTitle {
+      margin-top: 25px;
+    }
+  }
+  .right {
+    float: left;
+    width: 360px;
+  }
+  .block {
+    overflow: hidden;
+    padding: 10px;
+  }
+  
+  .tcDishReviewModalTitle {
+    font-size: 30px;
+    font-family: 'YanoneKaffeesatzRegular';
+  }
   
   .rating {
     // margin-left: 70px;
@@ -19,5 +44,17 @@
       }
     }
   }
+  
+  .tcDishReviewModalButtons {
+    margin-top: 10px;
+    .tcDishReviewModalCancelBtn {
+      margin-right: 40px;
+    }
+    .tcDishReviewModalSubmitBtn {
+    }
+  }
+  
+  
+  
   
 }

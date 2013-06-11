@@ -15,7 +15,7 @@ Ext.define('TC.view.toolbars.BottomToolbar', {
 			{
 				id: 'tcHelpBtnId',
 				xtype: 'button',
-				// text: 'Show Help',
+				hidden: true,
 				iconMask: true,
     		iconCls: 'info',
     		ui: 'plain'
@@ -23,23 +23,25 @@ Ext.define('TC.view.toolbars.BottomToolbar', {
 			{
 				id: 'tcChangeLangBtnId',
 				xtype: 'button',
+				hidden: true,
 				text: $T.change_lang
 			},
 			{
 				id: 'tcFilterDishesBtnId',
 				xtype: 'button',
+				hidden: true,
 				text: $T.filter_dishes
 			},
 			{
 				id: 'tcShowSurveyBtnId',
 				xtype: 'button',
+				hidden: true,
 				text: $T.fill_survey
 			},
 			{ xtype: 'spacer' },
 			{
 				id: 'tcSwitchTableBtnId',
 				xtype: 'button',
-				// text: 'Switch Table',
 				iconMask: true,
     		icon: 'resources/img/common/logo/minilogo.png',
     		ui: 'plain'

@@ -33,7 +33,7 @@ Ext.define('TC.controller.Loader', {
   		TC.Restaurant = Ext.create('TC.model.Restaurant',{id: 1});
   	}
   	TC.model.Restaurant.setProxy(TC.Restaurant.getLocalProxy());
-  	TC.model.Restaurant.load(1, {
+  	TC.model.Restaurant.load(TC.Restaurant.getId(), {
   		timeout: $tc.timeout,
 	    scope: this,
 	    failure: function(record, operation) {
@@ -77,95 +77,127 @@ Ext.define('TC.controller.Loader', {
   	var me = this;
   	console.log('TC.controller.Loader.appUpdate');
   	TC.switchView('TC.view.loading.Updater');
-  	if(!TC.Restaurant){
-  		TC.Restaurant = Ext.create('TC.model.Restaurant',{id: 1});
+  	if(!TC.Restaurants){
+  		TC.Restaurants = Ext.create('TC.store.Restaurants');
+  		TC.Restaurants.getProxy().clear();
   	}
+  	// if(!TC.Restaurant){
+  		// TC.Restaurant = Ext.create('TC.model.Restaurant',{id: TC.Restaurants.getCount()+1});
+  	// }
   	if(!TC.Setting.data){
   		TC.validateLicenseKey();
   		return false;
   	}
-  	TC.model.Restaurant.setProxy({
-  		type: $tc.protocol,
-  		url: $tc.url('get_restaurant')+'?all='+ fullUpdate +'&key='+TC.Setting.get('key')+'&locale='+TC.Setting.get('language'),
-  	});
-  	Ext.Viewport.setMasked({xtype: 'loadmask',message: $TO.updating_menu});
-  	TC.model.Restaurant.load(1, {
-	    scope: this,
-	    failure: function(record, operation) {
-	      console.log('TC.controller.Loader.appUpdate failure');
-	      Ext.Viewport.unmask();
-	      // error has occurred, ask if user wish to try again (if not go to home)
-	      $tc.confirmMsg($TO.update_menu_failed_question,function(btnPressed){
-	  			if(btnPressed == 'yes'){
-		  			me.redirectTo('update');
-		     	}
-		     	else {
-		     		me.redirectTo('home');
-		     	}
-	     	});
-	    },
-	    success: function(record, operation) {
-	      // set the record
-	      TC.Restaurant = record;
-	      console.log('TC.controller.Loader.appUpdate success');
-	      // remove any instance of restaurant
-	      var _rest = Ext.create('TC.store.Restaurants');
-	      _rest.load(function(){
-	      	_rest.removeAll();
-	      	_rest.sync();
-	      	_rest = null;
-	      });
-	      // and save the new one locally
-	      TC.model.Restaurant.setProxy(TC.Restaurant.getLocalProxy());
-	      TC.Restaurant.save(function(){
-	      	if(Ext.os.is.Desktop){
-	      		Ext.Viewport.unmask();
-	      		console.log('TC.controller.Loader.appUpdate redirecting to load');
-	      		if(!callback){
-	      			me.redirectTo('load');
-	      		}
-	      		else {
-	      			callback();
-	      		}
-	      	}
-	      	else {
-	      		console.log('TC.controller.Loader.appUpdate fetching images...');
-	      		me._fetchImages(fullUpdate,function(ok){
-	      			console.log('TC.controller.Loader.appUpdate redirecting to load');
-	      			Ext.Viewport.unmask();
-	      			if(!ok){
-	      				$tc.confirmMsg($TO.update_download_failed_question,function(btnPressed){
-					  			if(btnPressed == 'yes'){
-						  			me.redirectTo('update');
-						     	}
-						     	else {
-						     		if(!callback){
-				      				me.redirectTo('load');
-				      			}
-				      			else {
-				      				callback();
-				      			}
-						     	}
-					     	});
-	      			}
-				      else {
-				      	if(!callback){
-		      				me.redirectTo('load');
-		      			}
-		      			else {
-		      				callback();
-		      			}
+  	
+  	if(!$tc.checkConnection()) return false;
+  	
+  	// get supported languages and load the entire restaurant for each language
+  	TC.ajaxRequest({
+  		url: $tc.url('supported_langs'),
+  		success: function(response){
+  			var arr = JSON.parse(response.responseText).result;
+  			arr.shift();
+  			var locale_counter = 0;
+  			var rest_id_counter = 0;
+  			TC.Restaurants.removeAll();
+  			TC.Restaurants.sync();
+  			TC.Restaurants.getProxy().clear();
+  			// load the restaurant for each locale in arr and save it to TC.Restaurants
+  			Ext.Array.each(arr,function(current_locale){
+  				Ext.create('TC.model.Restaurant',{id: rest_id_counter++});
+  				TC.model.Restaurant.setProxy({
+			  		type: $tc.protocol,
+			  		url: $tc.url('get_restaurant')+'?all='+ fullUpdate +'&key='+TC.Setting.get('key')+'&locale='+current_locale,
+			  	});
+			  	Ext.Viewport.setMasked({xtype: 'loadmask',message: $TO.updating_menu});
+			  	TC.model.Restaurant.load(rest_id_counter, {
+				    scope: this,
+				    failure: function(record, operation) {
+				      console.log('TC.controller.Loader.appUpdate failure');
+				      Ext.Viewport.unmask();
+				      // error has occurred, ask if user wish to try again (if not go to home)
+				      $tc.confirmMsg($TO.update_menu_failed_question,function(btnPressed){
+				  			if(btnPressed == 'yes'){
+					  			me.redirectTo('update');
+					     	}
+					     	else {
+					     		me.redirectTo('home');
+					     	}
+				     	});
+				    },
+				    success: function(record, operation) {
+				      console.log('TC.controller.Loader.appUpdate success');
+				      var url = operation.getRequest().getUrl();
+				      var this_locale = url.substring(url.indexOf('locale=')+7).split('&')[0];
+				      record.set('current_locale',this_locale);
+				      TC.Restaurants.add(record);
+				      if(this_locale==TC.Setting.get('language')){
+				      	TC.Restaurant = record;
+					      // and save the new one locally
+					      TC.model.Restaurant.setProxy(TC.Restaurant.getLocalProxy());
+					      TC.Restaurant.save(function(){
+					      	if(Ext.os.is.Desktop){
+					      		// Ext.Viewport.unmask();
+					      		// console.log('TC.controller.Loader.appUpdate redirecting to load');
+					      		// if(!callback){
+					      			// me.redirectTo('load');
+					      		// }
+					      		// else {
+					      			// callback();
+					      		// }
+					      	}
+					      	else {
+					      		console.log('TC.controller.Loader.appUpdate fetching images...');
+					      		me._fetchImages(fullUpdate,function(ok){
+					      			console.log('TC.controller.Loader.appUpdate redirecting to load');
+					      			Ext.Viewport.unmask();
+					      			if(!ok){
+					      				$tc.confirmMsg($TO.update_download_failed_question,function(btnPressed){
+									  			if(btnPressed == 'yes'){
+										  			me.redirectTo('update');
+										     	}
+										     	else {
+										     		if(!callback){
+								      				me.redirectTo('load');
+								      			}
+								      			else {
+								      				callback();
+								      			}
+										     	}
+									     	});
+					      			}
+								      else {
+								      	// if(!callback){
+								      		// Ext.Viewport.unmask();
+						      				// me.redirectTo('load');
+						      			// }
+						      			// else {
+						      				// callback();
+						      			// }
+								      }
+					      		});
+					      	}
+					      });
+					    }
+				    },
+				    callback: function(record, operation) {
+				      console.log('TC.controller.Loader.appUpdate callback');
+				      locale_counter++;
+				      if(locale_counter==arr.length){
+				      	console.log('done loading..');
+								Ext.Viewport.unmask();
+		      			me.redirectTo('load');
 				      }
-	      		});
-	      	}
-	      });
-	    },
-	    callback: function(record, operation) {
-	      console.log('TC.controller.Loader.appUpdate callback');
-	    }
-		});
+				    }
+					});
+  			});
+  		},
+  		failure: function(response){
+  			console.log('an error has ocurred........');
+  		}
+  	});
   },
-  
+  	
   appReset: function(){
   	this.appUpdate("yes");
   },
