@@ -9,53 +9,97 @@
 .tcSurveySliderContainer .tcSurveyQuestions {
   height: 100%;
   background: transparent;
+  height: 450px;
+  margin-top: 50px;
 }
-/* line 12, ../../../../styles/survey/slider/main.scss */
+/* line 15, ../../../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyQuestions .x-inner.x-dataview-inner {
+  position: relative;
+}
+/* line 17, ../../../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyQuestions .x-inner.x-dataview-inner .x-dataview-container {
+  position: absolute;
+  top: 50%;
+  height: 450px;
+  margin-top: -245px;
+  left: 50%;
+  margin-left: -500px;
+  width: 1000px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+/* line 30, ../../../../styles/survey/slider/main.scss */
 .tcSurveySliderContainer .tcSurveyQuestions .survey_question {
   padding: 20px 10px;
 }
-/* line 14, ../../../../styles/survey/slider/main.scss */
+/* line 32, ../../../../styles/survey/slider/main.scss */
 .tcSurveySliderContainer .tcSurveyQuestions .survey_question .question_title {
   font-size: 25px;
   margin-top: 19px;
 }
-/* line 18, ../../../../styles/survey/slider/main.scss */
+/* line 36, ../../../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyQuestions .survey_question .rating {
+  margin-left: 70px;
+}
+/* line 38, ../../../../styles/survey/slider/main.scss */
 .tcSurveySliderContainer .tcSurveyQuestions .survey_question .rating .star {
   width: 72px;
   height: 72px;
   background: url("../img/common/icons/star_big_white.png") no-repeat;
 }
-/* line 22, ../../../../styles/survey/slider/main.scss */
+/* line 42, ../../../../styles/survey/slider/main.scss */
 .tcSurveySliderContainer .tcSurveyQuestions .survey_question .rating .star.selected {
   background: url("../img/common/icons/star_big_gold.png") no-repeat;
 }
-/* line 32, ../../../../styles/survey/slider/main.scss */
+/* line 54, ../../../../styles/survey/slider/main.scss */
 .tcSurveySliderContainer .tcSurveyOpinion {
-  padding: 40px;
+  padding: 30px;
+  max-height: 510px;
 }
-/* line 34, ../../../../styles/survey/slider/main.scss */
+/* line 57, ../../../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyOpinion > .x-inner.x-panel-inner {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 10px;
+}
+/* line 62, ../../../../styles/survey/slider/main.scss */
 .tcSurveySliderContainer .tcSurveyOpinion .block {
   overflow: hidden;
   padding-bottom: 20px;
 }
-/* line 38, ../../../../styles/survey/slider/main.scss */
+/* line 66, ../../../../styles/survey/slider/main.scss */
 .tcSurveySliderContainer .tcSurveyOpinion .left {
   display: block;
   float: left;
   width: 180px;
   padding: 5px;
 }
-/* line 44, ../../../../styles/survey/slider/main.scss */
+/* line 72, ../../../../styles/survey/slider/main.scss */
 .tcSurveySliderContainer .tcSurveyOpinion .right {
   display: block;
   padding: 5px;
   float: left;
   width: 400px;
 }
-/* line 50, ../../../../styles/survey/slider/main.scss */
-.tcSurveySliderContainer .tcSurveyOpinion .tcSurveyOpinionBtn {
+/* line 78, ../../../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyOpinion .tcSurveyOpinionText {
+  padding-bottom: 30px;
+  padding-top: 20px;
+  font-size: 22px;
+}
+/* line 83, ../../../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyOpinion .tcSurveyOpinionBackBtn {
+  padding: 10px 15px;
+  font-weight: normal;
+  font-size: 17px;
+  margin: 20px;
+  margin-left: 120px;
+  margin-right: 50px;
+}
+/* line 91, ../../../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyOpinion .tcSurveyOpinionSubmitBtn {
   padding: 10px 20px;
   font-weight: normal;
   font-size: 20px;
-  margin-top: 5px;
+  margin: 20px;
 }

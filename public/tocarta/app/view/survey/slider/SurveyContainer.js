@@ -23,9 +23,8 @@ Ext.define('TC.view.survey.slider.SurveyContainer', {
 				flex: 1,
 				itemId: 'tcSurveySliderCarouselId',
 				xtype: 'carousel',
+				indicator: false,
 				items: [
-					{ html: 'item1' },
-					{ html: 'item2' }
 				]
 			}
 			

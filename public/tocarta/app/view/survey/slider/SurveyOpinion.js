@@ -17,11 +17,24 @@ Ext.define('TC.view.survey.slider.SurveyOpinion', {
 		},
 		items: [
 			{
+				cls: 'tcSurveyOpinionText',
+				html: $T.survey_text
+			},
+			{
 				cls: 'tcSurveyOpinionNameContainer',
 				html: [
 					'<div class="block tcSurveyOpinionName">',
 						'<label class="left">'+$T.your_name+'</label>',
 						'<input class="right userInputNameField" type="text" name="name" placeholder="'+$T.name_example+'" />',
+					'</div>'
+				].join('')
+			},
+			{
+				cls: 'tcSurveyOpinionEmailContainer',
+				html: [
+					'<div class="block tcSurveyOpinionEmail">',
+						'<label class="left">'+$T.your_email+'</label>',
+						'<input class="right userInputNameField" type="email" name="email" placeholder="'+$T.email_example+'" />',
 					'</div>'
 				].join('')
 			},
@@ -36,10 +49,25 @@ Ext.define('TC.view.survey.slider.SurveyOpinion', {
 				].join('')
 			},
 			{
-				cls: 'tcSurveyOpinionBtn',
-				xtype: 'button',
-				ui: 'action',
-				text: $T.submit
+				cls: 'tcSurveyOpinionButtons',
+				layout: 'hbox',
+				items: [
+					{
+						cls: 'tcSurveyOpinionBackBtn',
+						xtype: 'button',
+						text: $T.back,
+						handler: function(){
+							this.parent.parent.parent.previous();
+						}
+					},
+					{
+						itemId: 'tcSurveyOpinionSubmitBtnId',
+						cls: 'tcSurveyOpinionSubmitBtn',
+						xtype: 'button',
+						ui: 'action',
+						text: $T.submit
+					}
+				]
 			}
 		]
 	}

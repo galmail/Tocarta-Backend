@@ -45,6 +45,9 @@ $T = {
 	"send_survey_question": "Would you like to submit the survey?",
 	"send_survey_loading": "Sending the survey...",
 	"thanks_for_coming": "Thank you for coming and<br/>we hope to see you soon!",
+	"thanks_for_helping_us_improve": "Thank you for helping us improve!",
+	"next": "Next",
+	
 	
 	//// TC.Controller.DailyMenu ////
 	
@@ -114,12 +117,15 @@ $T = {
 	"name_example": "eg. alex",
 	"leave_your_comment_here": "Type here your comment...",
 	"submit": "Submit",
+	"your_email": "Your email:",
+	"email_example": "eg. alex@gmail.com",
 	
 	//// TC.view.survey.SurveyContainer ////
 	
 	"comment_dishes_eaten": "Please rate the dishes you have eaten",
 	"your_opinion": "We would like to know your opinion",
 	"your_name_and_comment": "Please leave us your name and comments",
+	"survey_text": "Your opinion is important, help us improve!",
 	
 	//// TC.view.survey.SurveyDishes ////
 	

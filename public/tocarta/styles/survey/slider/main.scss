@@ -9,28 +9,56 @@
     height: 100%;
     background: transparent;
     
+    height: 450px;
+    margin-top: 50px;
+    
+    .x-inner.x-dataview-inner {
+      position: relative;
+      .x-dataview-container {
+        position: absolute;
+        top: 50%;
+        height: 450px;
+        margin-top: -245px;
+        left: 50%;
+        margin-left: -500px;
+        width: 1000px;
+        border: 2px solid black;
+        border-radius: 5px;
+      }
+    }
+    
     .survey_question {
       padding: 20px 10px;
       .question_title {
         font-size: 25px;
         margin-top: 19px;
       }
-      .rating .star {
-        width: 72px;
-        height: 72px;
-        background: url("../img/common/icons/star_big_white.png") no-repeat;
-        &.selected {
-          background: url("../img/common/icons/star_big_gold.png") no-repeat;
+      .rating {
+        margin-left: 70px;
+        .star {
+          width: 72px;
+          height: 72px;
+          background: url("../img/common/icons/star_big_white.png") no-repeat;
+          &.selected {
+            background: url("../img/common/icons/star_big_gold.png") no-repeat;
+          }
         }
       }
-      
     }
+    
+    
     
   }
   
   
   .tcSurveyOpinion {
-    padding: 40px;
+    padding: 30px;
+    max-height: 510px;
+    &>.x-inner.x-panel-inner {
+      border: 2px solid black;
+      border-radius: 5px;
+      padding: 10px;
+    }
     .block {
       overflow: hidden;
       padding-bottom: 20px;
@@ -47,11 +75,24 @@
       float: left;
       width: 400px;
     }
-    .tcSurveyOpinionBtn {
+    .tcSurveyOpinionText {
+      padding-bottom: 30px;
+      padding-top: 20px;
+      font-size: 22px;
+    }
+    .tcSurveyOpinionBackBtn {
+      padding: 10px 15px;
+      font-weight: normal;
+      font-size: 17px;
+      margin: 20px;
+      margin-left: 120px;
+      margin-right: 50px;
+    }
+    .tcSurveyOpinionSubmitBtn {
       padding: 10px 20px;
       font-weight: normal;
       font-size: 20px;
-      margin-top: 5px;
+      margin: 20px;
     }
     
     

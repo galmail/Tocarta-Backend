@@ -66,28 +66,36 @@
       position: absolute;
       bottom: 0;
       // margin-top: -105px;
-      .dish-description {
+      .left {
         float: left;
         background-color: white;
         width: 70%;
         height: 100%;
         padding: 10px;
         opacity: 0.6;
+        .dish-description {
+        
+        }
+        .dish-actions {
+        
+        }
       }
-      .dish-price {
+      .right {
         float: right;
         width: 30%;
         height: 100%;
         background-color: black;
-        font-size: 44px;
-        color: white;
-        text-align: center;
-        padding-top: 22px;
         opacity: 0.8;
-        .euro {
-          color: #CB8D8A;
-          font-size: 43px;
-          margin-right: 15px;
+        .dish-price {
+          font-size: 44px;
+          color: white;
+          text-align: center;
+          padding-top: 22px;
+          .euro {
+            color: #CB8D8A;
+            font-size: 43px;
+            margin-right: 15px;
+          }
         }
       }
     }

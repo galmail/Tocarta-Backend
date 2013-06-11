@@ -227,7 +227,7 @@
   bottom: 0;
 }
 /* line 69, ../../../styles/dish/photo.scss */
-.tcDishPhoto .dish-photo-container .dish-info .dish-description {
+.tcDishPhoto .dish-photo-container .dish-info .left {
   float: left;
   background-color: white;
   width: 70%;
@@ -235,20 +235,23 @@
   padding: 10px;
   opacity: 0.6;
 }
-/* line 77, ../../../styles/dish/photo.scss */
-.tcDishPhoto .dish-photo-container .dish-info .dish-price {
+/* line 83, ../../../styles/dish/photo.scss */
+.tcDishPhoto .dish-photo-container .dish-info .right {
   float: right;
   width: 30%;
   height: 100%;
   background-color: black;
+  opacity: 0.8;
+}
+/* line 89, ../../../styles/dish/photo.scss */
+.tcDishPhoto .dish-photo-container .dish-info .right .dish-price {
   font-size: 44px;
   color: white;
   text-align: center;
   padding-top: 22px;
-  opacity: 0.8;
 }
-/* line 87, ../../../styles/dish/photo.scss */
-.tcDishPhoto .dish-photo-container .dish-info .dish-price .euro {
+/* line 94, ../../../styles/dish/photo.scss */
+.tcDishPhoto .dish-photo-container .dish-info .right .dish-price .euro {
   color: #CB8D8A;
   font-size: 43px;
   margin-right: 15px;

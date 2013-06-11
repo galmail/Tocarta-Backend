@@ -21,7 +21,8 @@ Ext.define('TC.controller.MainMenu', {
 	      'sidebar.MenuPanelListView',
 	      'sidebar.MenuPanelItemsView',
 	      // dishes views
-	      'dish.DishContainer'
+	      'dish.DishContainer',
+	      'dish.DishReviewModal'
 	    ],
       
       refs: {
@@ -67,18 +68,28 @@ Ext.define('TC.controller.MainMenu', {
     	console.log('TC.controller.MainMenu.launch');
     	var me = this;
     	// listen for swipe left, right navigation
-    	$z(document).on('swipeLeft','.tcDishPhoto #tcDishImgId',function(){
+    	$z(document).on('swipeLeft','#tcDishImgId',function(){
     		me.nextDish();
     		return false;
     	});
-    	$z(document).on('swipeRight','.tcDishPhoto #tcDishImgId',function(){
+    	$z(document).on('swipeRight','#tcDishImgId',function(){
     		me.previousDish();
     		return false;
     	});
-    	$z(document).on('doubleTap','.tcDishPhoto #tcDishImgId',function(el){
+    	$z(document).on('doubleTap doubleClick','#tcDishImgId',function(el){
     		me.fullscreenDish(el);
     		return false;
     	});
+    	$z(document).on('tap click','.tcDishActionReview',function(el){
+    		me.dish_review_modal = Ext.create('TC.view.dish.DishReviewModal',{
+    			dishId: el.target.id.split('_')[1]
+    		});
+    		Ext.Viewport.add(me.dish_review_modal);
+	    	me.dish_review_modal.show();
+    		return false;
+    	});
+    	
+    	
     },
     
     //// WARNING: this function is called from the Main Controller

@@ -230,7 +230,7 @@
   bottom: 0;
 }
 /* line 69, ../../../styles/dish/photo.scss */
-.tcDishPhoto .dish-photo-container .dish-info .dish-description {
+.tcDishPhoto .dish-photo-container .dish-info .left {
   float: left;
   background-color: white;
   width: 70%;
@@ -238,20 +238,23 @@
   padding: 10px;
   opacity: 0.6;
 }
-/* line 77, ../../../styles/dish/photo.scss */
-.tcDishPhoto .dish-photo-container .dish-info .dish-price {
+/* line 83, ../../../styles/dish/photo.scss */
+.tcDishPhoto .dish-photo-container .dish-info .right {
   float: right;
   width: 30%;
   height: 100%;
   background-color: black;
+  opacity: 0.8;
+}
+/* line 89, ../../../styles/dish/photo.scss */
+.tcDishPhoto .dish-photo-container .dish-info .right .dish-price {
   font-size: 44px;
   color: white;
   text-align: center;
   padding-top: 22px;
-  opacity: 0.8;
 }
-/* line 87, ../../../styles/dish/photo.scss */
-.tcDishPhoto .dish-photo-container .dish-info .dish-price .euro {
+/* line 94, ../../../styles/dish/photo.scss */
+.tcDishPhoto .dish-photo-container .dish-info .right .dish-price .euro {
   color: #CB8D8A;
   font-size: 43px;
   margin-right: 15px;
@@ -452,50 +455,73 @@
   background-color: green;
 }
 
-/* line 12, ../../../styles/dish/main.scss */
+/**
+ * Dish Rate and Review stylesheet
+ **/
+/* line 5, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal {
+  background: white;
+}
+/* line 9, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .rating {
+  overflow: hidden;
+}
+/* line 12, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .rating .star {
+  float: left;
+  width: 72px;
+  height: 72px;
+  background: url("../img/common/icons/star_big_white.png") no-repeat;
+}
+/* line 17, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .rating .star.selected {
+  background: url("../img/common/icons/star_big_gold.png") no-repeat;
+}
+
+/* line 13, ../../../styles/dish/main.scss */
 .tcDishContainer {
   background: transparent;
 }
-/* line 15, ../../../styles/dish/main.scss */
+/* line 16, ../../../styles/dish/main.scss */
 .tcDishContainer .x-docking-vertical {
   width: 100%;
 }
-/* line 17, ../../../styles/dish/main.scss */
+/* line 18, ../../../styles/dish/main.scss */
 .tcDishContainer .x-docking-vertical .x-container > .x-inner {
   width: 100%;
 }
-/* line 22, ../../../styles/dish/main.scss */
+/* line 23, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishTitle {
   background: transparent;
   border: none;
   padding-top: 2px;
   height: 47px;
 }
-/* line 28, ../../../styles/dish/main.scss */
+/* line 29, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishTitle .x-title {
   color: #000;
 }
-/* line 30, ../../../styles/dish/main.scss */
+/* line 31, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishTitle .x-title .x-innerhtml {
   font-size: 24px;
 }
-/* line 34, ../../../styles/dish/main.scss */
+/* line 35, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishTitle .tcDishTitleIcons {
   width: 120px;
   height: 16px;
 }
-/* line 37, ../../../styles/dish/main.scss */
+/* line 38, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishTitle .tcDishTitleIcons .x-dataview-item {
   display: inline-block;
   margin-right: 3px;
 }
-/* line 43, ../../../styles/dish/main.scss */
+/* line 44, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishContainerTabBar {
   height: 54px;
   background: transparent;
   border: none;
 }
-/* line 47, ../../../styles/dish/main.scss */
+/* line 48, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishContainerTabBar .x-tab {
   background-image: none;
   background-color: #67512d;
@@ -508,11 +534,11 @@
   border-top-width: 0px;
   margin-bottom: 8px;
 }
-/* line 58, ../../../styles/dish/main.scss */
+/* line 59, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishContainerTabBar .x-tab .x-button-icon {
   display: none;
 }
-/* line 61, ../../../styles/dish/main.scss */
+/* line 62, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishContainerTabBar .x-tab .x-button-label {
   font-size: 15px;
   color: white;
@@ -520,11 +546,11 @@
   padding-top: 20px;
   padding-bottom: 14px;
 }
-/* line 68, ../../../styles/dish/main.scss */
+/* line 69, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishContainerTabBar .x-tab.x-tab-active {
   background-color: white;
 }
-/* line 70, ../../../styles/dish/main.scss */
+/* line 71, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishContainerTabBar .x-tab.x-tab-active .x-button-label {
   color: black;
 }
