@@ -1,8 +1,9 @@
 CACHE MANIFEST
-# 2013-06-11 14:57
+# 2013-06-12 12:02
 
 
 CACHE:
+index.html
 ## APP PART ##
 # app-all.js
 
@@ -62,3 +63,7 @@ NETWORK:
 # /cli/
 
 FALLBACK:
+http://s3.amazonaws.com/tocarta-prod/app_assets/resources/js/es_user.js		resources/js/es_user.js
+http://s3.amazonaws.com/tocarta-prod/app_assets/resources/js/en_user.js		resources/js/en_user.js
+http://s3.amazonaws.com/tocarta-prod/app_assets/resources/js/cat_user.js	resources/js/cat_user.js
+

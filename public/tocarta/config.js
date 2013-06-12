@@ -3,7 +3,7 @@
  * All configuration and variables used in the app
  */
 
-var CURRENT_ENV = "dev"; // options: mock, dev, staging, open, prod, prod
+var CURRENT_ENV = "prod"; // options: mock, dev, staging, open, prod, prod
 // var CURRENT_DEVICE = "ios"; // options: android, ios
 
 /*** development (mocked services) ***/

@@ -39,6 +39,8 @@ Ext.define('TC.controller.DishReview', {
   submitReview: function(){
   	console.log('TC.controller.DishReview.submitReview');
   	if(!$tc.checkConnection()) return false;
+  	var rating = $j('.star.selected').length;
+		if(rating==0) return false;
   	var me = this;
 		Ext.Viewport.setMasked({xtype: 'loadmask',message: $T.submit_dish_rating});
 		var comments_to_send = Ext.create('TC.store.Comments',{
@@ -56,11 +58,6 @@ Ext.define('TC.controller.DishReview', {
 		var dishComment = $j('.tcDishReviewModal .tcDishReviewModalOpinion').val();
 		// get rating of the dish
 		var dish_id = this.getDishReviewModal().getDishId();
-		var rating = $j('.star.selected').length;
-		if(rating==0){
-			Ext.Viewport.unmask();
-			return false;
-		}
 		var comment = Ext.create('TC.model.Comment',{
 			dish_id: dish_id,
 			rating: rating,
@@ -68,17 +65,14 @@ Ext.define('TC.controller.DishReview', {
 			name: userName
 		});
 		comments_to_send.add(comment);
-		
 		// submit all comments now
 		comments_to_send.sync();
-		// say thank you and have a nice day
+		// say thank you for rating
 		setTimeout(function(){
 			Ext.Viewport.unmask();
-			$tc.alertMsg('<p align="center">'+$T.dish_rating_submited+'</p>',function(){
-				if(me.getDishReviewModal())
-					me.getDishReviewModal().destroy();
-			});
-		},3000);
+			if(me.getDishReviewModal()) me.getDishReviewModal().destroy();
+			$tc.alertMsg('<p align="center">'+$T.dish_rating_submited+'</p>');
+		},1000);
   },
   
   rate: function(event,a,b){

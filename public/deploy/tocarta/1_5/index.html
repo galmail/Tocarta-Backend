@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html manifest="tocarta.appcache">
+<html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta charset="utf-8" />
@@ -12,7 +12,7 @@
 		<!-- for remote debugging -->
 <!--  		<script src="http://192.168.3.36:8081/target/target-script-min.js"></script> -->
 		
-		<script type="text/javascript" src="resources/js/es_user.js"></script>
+<!-- 		<script type="text/javascript" src="resources/js/es_user.js"></script> -->
 		<script type="text/javascript" src="resources/js/es_operator.js"></script>
 		<script type="text/javascript" src="resources/js/cordova-2.2.0.js"></script>
 		<script type="text/javascript" src="resources/js/jquery-1.7.1.min.js"></script>
@@ -29,27 +29,21 @@
 			///// No conflict libraries /////
 			$z = Zepto;
 			$j = jQuery.noConflict();
-			$j.ajaxSetup({
-				cache: true
-			});
 			$j(document).ready(function(){
+		    var lang = 'es';
 		    try {
-					var lang = JSON.parse(localStorage['setting-1']).language;
-					var i18Script = 'resources/js/'+lang+'_user.js';
-					$j.getScript(i18Script, function(){
-						$j.getScript('app-all.js', function(){
-							if(!Ext.os.is.Desktop)
-								document.addEventListener("deviceready", TC.app.mainLaunch, false);
-						});
-					});
+					lang = JSON.parse(localStorage['setting-1']).language;
 				}
 				catch(ex){
-					// ignore since there is no language set in localstorage
+					console.log('settings are not defined, initiating app with locale='+lang);
+				}
+				var i18Script = 'resources/js/'+lang+'_user.js';
+				$j.getScript(i18Script, function(){
 					$j.getScript('app-all.js', function(){
 						if(!Ext.os.is.Desktop)
 							document.addEventListener("deviceready", TC.app.mainLaunch, false);
 					});
-				}
+				});
 			});
 		</script>
 
