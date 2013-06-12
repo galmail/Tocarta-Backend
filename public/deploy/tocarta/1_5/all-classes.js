@@ -64518,22 +64518,19 @@ Ext.define('TC.controller.Loader', {
   			var arr = JSON.parse(response.responseText).result;
   			arr.shift();
   			var locale_counter = 0;
-  			var rest_id_counter = 0;
   			TC.Restaurants.removeAll();
   			TC.Restaurants.sync();
   			TC.Restaurants.getProxy().clear();
-  			// load the restaurant for each locale in arr and save it to TC.Restaurants
-  			Ext.Viewport.setMasked({xtype: 'loadmask',message: $TO.updating_menu});
-  			Ext.Array.each(arr,function(current_locale){
-  				var current_restaurant = Ext.create('TC.model.Restaurant',{id: rest_id_counter++});
-  				
+  			
+  			var loadRestaurant = function(current_locale,rest_id,_callback){
+  				Ext.Viewport.setMasked({xtype: 'loadmask',message: $TO.updating_menu + " lang="+current_locale});
+  				// Ext.create('TC.model.Restaurant',{id: rest_id_counter++});
   				TC.model.Restaurant.setProxy({
 			  		type: $tc.protocol,
 			  		url: $tc.url('get_restaurant')+'?all='+ fullUpdate +'&key='+TC.Setting.get('key')+'&locale='+current_locale,
 			  		timeout: 20000
 			  	});
-			  	
-			  	TC.model.Restaurant.load(rest_id_counter, {
+			  	TC.model.Restaurant.load(rest_id, {
 				    scope: this,
 				    failure: function(record, operation) {
 				      console.log('TC.controller.Loader.appUpdate failure');
@@ -64560,51 +64557,42 @@ Ext.define('TC.controller.Loader', {
 				      if(this_locale==TC.Setting.get('language')){
 				      	TC.Restaurant = record;
 				      }
-				    },
-				    callback: function(record, operation) {
-				      console.log('TC.controller.Loader.appUpdate callback');
-				      locale_counter++;
-				      if(locale_counter==arr.length){
-				      	console.log('TC.controller.Loader.appUpdate: done loading.');
-								// sync images
-				      	if(TC.Restaurant && TC.Restaurant.get('setting') && TC.Restaurant.get('setting').sync_photos && !Ext.os.is.Desktop){
-				      		console.log('TC.controller.Loader.appUpdate: fetching images...');
-				      		me._fetchImages(fullUpdate,function(ok){
-				      			Ext.Viewport.unmask();
-				      			if(!ok){
-				      				$tc.confirmMsg($TO.update_download_failed_question,function(btnPressed){
-								  			if(btnPressed == 'yes'){
-									  			me.redirectTo('update');
-									     	}
-									     	else {
-									     		if(!callback){
-							      				me.redirectTo('load');
-							      			}
-							      			else {
-							      				callback();
-							      			}
-									     	}
-								     	});
-				      			}
-							      else {
-							      	if(!callback){
-							      		Ext.Viewport.unmask();
-					      				me.redirectTo('load');
-					      			}
-					      			else {
-					      				callback();
-					      			}
-							      }
-							    });
-				      	}
-				      	else {
-				      		Ext.Viewport.unmask();
-				      		me.redirectTo('load');
-				      	}
+				      if(rest_id<arr.length){
+				      	loadRestaurant(arr[rest_id],rest_id+1,_callback);
+				      }
+				      else {
+				      	_callback();
 				      }
 				    }
-					});
-  			});
+				  });
+				};
+				loadRestaurant(arr[0],1,function(){
+					console.log('TC.controller.Loader.appUpdate: done loading.');
+					// sync images
+	      	if(TC.Restaurant && TC.Restaurant.get('setting') && TC.Restaurant.get('setting').sync_photos && !Ext.os.is.Desktop){
+	      		console.log('TC.controller.Loader.appUpdate: fetching images...');
+	      		me._fetchImages(fullUpdate,function(ok){
+	      			Ext.Viewport.unmask();
+	      			if(!ok){
+	      				$tc.confirmMsg($TO.update_download_failed_question,function(btnPressed){
+					  			if(btnPressed == 'yes'){
+						  			me.redirectTo('update');
+						     	}
+						     	else {
+						     		me.redirectTo('load');
+						     	}
+					     	});
+	      			}
+				      else {
+	      				me.redirectTo('load');
+				      }
+				    });
+	      	}
+	      	else {
+	      		Ext.Viewport.unmask();
+	      		me.redirectTo('load');
+	      	}
+				});
   		},
   		failure: function(response){
   			console.log('TC.controller.Loader.appUpdate: an error has ocurred........');
@@ -69239,6 +69227,9 @@ Ext.define('TC.view.matrixmenu.DishImageView', {
 						'<div class="dish-left">',
 							'<div class="dish-name">{name}</div>',
 							'<div class="dish-description">{description}</div>',
+							'<div class="dish-actions">',
+		    				'<a class="tcDishActionReview" id="tcDishActionReview_{id}" href="#"></a>',
+		    			'</div>',
 						'</div>',
 						'<div class="dish-right">',
 							'<div class="dish-price"><span class="euro">&euro;</span><span class="price">{price:this.twoDecimals}</span></div>',

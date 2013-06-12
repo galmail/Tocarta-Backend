@@ -2,14 +2,15 @@
  *   MatrixMenu Stylesheet
  */
 
+$width-left-panel: 87%;
+$width-right-panel: 13%;
+
 .tcMatrixMenu {
-  
   
   .x-carousel-indicator {
     position: fixed !important;
     margin-bottom: 35px;
   }
-  
   
   // DishImageView
   .tcMatrixMenuDishImageView {
@@ -36,7 +37,7 @@
       
       .dish-left {
         float: left;
-        width: 87%;
+        width: $width-left-panel; // 87%
         height: 100%;
         background-color: white;
         padding: 5px;
@@ -47,13 +48,29 @@
         }
         .dish-description {
           font-size: 19px;
+          height: 100%;
+          width: 80%;
           font-family: "Nova Round",arial,verdana;
           color: rgb(128, 123, 75);
+        }
+        .dish-actions {
+          position: absolute;
+          bottom: 5px;
+          width: $width-left-panel;
+          padding-right: 20px;
+          text-align: right;
+          .tcDishActionReview {
+            background-image: url('../img/common/icons/comment_dish.png');
+            width: 35px;
+            height: 35px;
+            display: block;
+            float: right;
+          }
         }
       }
       .dish-right {
         float: right;
-        width: 13%;
+        width: $width-right-panel; // 13%
         height: 100%;
         background-color: black;
         font-size: 35px;
