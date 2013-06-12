@@ -75,12 +75,12 @@ font-family: 'YanoneKaffeesatzThin'; /*KandideRegular*/
   font-family: 'YanoneKaffeesatzThin';
 }
 
-.tcDishPhoto .dish-photo-container .dish-info .dish-description {
+.tcDishPhoto .dish-photo-container .dish-info .left {
   font-family: 'YanoneKaffeesatzRegular';
-  width: 77%;
+  /*  width: 77%;*/
 }
-.tcDishPhoto .dish-photo-container .dish-info .dish-price {
-  width: 23%;
+.tcDishPhoto .dish-photo-container .dish-info .right {
+  /*  width: 23%;*/
 }
 
 .tcDishPhoto .dish-photo-container .dish-info .dish-price {

@@ -30,7 +30,7 @@ $sidebar-listview-background-active-color: red;
     }
     &.x-item-pressed {
       .item {
-        background-color: lighten($tc-btn-color,10%);
+        background-color: lighten($tc-btn-color,20%);
         // @include background-image(linear-gradient(lighten($tc-btn-color,20%), $tc-btn-gradient-color));
       }
     }

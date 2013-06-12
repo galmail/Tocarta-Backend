@@ -33,7 +33,7 @@ $sidebar-itemsview-background-active-color: red;
     }
     &.x-item-pressed {
       .item .item-text {
-        background-color: lighten($tc-btn-active-color,10%);
+        background-color: lighten($tc-btn-active-color,20%);
         // @include background-image(linear-gradient(lighten($tc-btn-color,20%), $tc-btn-gradient-color));
       }
     }
