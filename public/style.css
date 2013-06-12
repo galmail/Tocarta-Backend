@@ -54,15 +54,15 @@
 /* Sidebar */
 
 .tcMenuPanelListView .item .item-title {
-  font-family: 'KandideRegular';
+  font-family: 'YanoneKaffeesatzThin';
 }
 
 .tcMenuPanel .tcMenuPanelTopBar .x-title {
-  font-family: 'KandideRegular';
+  font-family: 'YanoneKaffeesatzThin';
 }
 
 .tcMenuPanel .tcMenuPanelTopBar .x-button-back {
-  font-family: 'KandideRegular';
+font-family: 'YanoneKaffeesatzThin'; /*KandideRegular*/
 }
 
 /* Foto del Plato Activo*/
@@ -75,11 +75,11 @@
   font-family: 'YanoneKaffeesatzThin';
 }
 
-.tcDishPhoto .dish-photo-container .dish-info .left {
+.tcDishPhoto .dish-photo-container .dish-info .dish-description {
   font-family: 'YanoneKaffeesatzRegular';
   width: 77%;
 }
-.tcDishPhoto .dish-photo-container .dish-info .right {
+.tcDishPhoto .dish-photo-container .dish-info .dish-price {
   width: 23%;
 }
 

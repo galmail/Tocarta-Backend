@@ -63418,9 +63418,6 @@ Ext.define('TC.controller.Main', {
     
     launch: function(){
     	console.log('TC.controller.Main.launch');
-    	// this._updateOrderBadge();								// updates the order badge when needed
-    	// this._check_for_incoming_messages();		// check for incoming messages
-    	// this._bindTranslations();
     },
     
     reloadViewport: function(){
@@ -63621,6 +63618,7 @@ Ext.define('TC.controller.Main', {
     
     loadMainMenu: function(){
     	if(TC.Restaurant){
+    		$j('#superloader').hide();
     		console.log('TC.controller.Main.loadMainMenu');
     		TC.app.getController("TC.controller.MainMenu").reset(); // reseting the entire controller menu
     		TC.app.getController("TC.controller.MainMenu").setCurrentMenu(TC.Restaurant.getMainMenu());
@@ -64532,6 +64530,7 @@ Ext.define('TC.controller.Loader', {
   				TC.model.Restaurant.setProxy({
 			  		type: $tc.protocol,
 			  		url: $tc.url('get_restaurant')+'?all='+ fullUpdate +'&key='+TC.Setting.get('key')+'&locale='+current_locale,
+			  		timeout: 20000
 			  	});
 			  	
 			  	TC.model.Restaurant.load(rest_id_counter, {
@@ -64568,7 +64567,7 @@ Ext.define('TC.controller.Loader', {
 				      if(locale_counter==arr.length){
 				      	console.log('TC.controller.Loader.appUpdate: done loading.');
 								// sync images
-				      	if(TC.Restaurant && TC.Restaurant.get('setting') && TC.Restaurant.get('setting').sync && !Ext.os.is.Desktop){
+				      	if(TC.Restaurant && TC.Restaurant.get('setting') && TC.Restaurant.get('setting').sync_photos && !Ext.os.is.Desktop){
 				      		console.log('TC.controller.Loader.appUpdate: fetching images...');
 				      		me._fetchImages(fullUpdate,function(ok){
 				      			Ext.Viewport.unmask();

@@ -128,9 +128,6 @@ Ext.define('TC.controller.Main', {
     
     launch: function(){
     	console.log('TC.controller.Main.launch');
-    	// this._updateOrderBadge();								// updates the order badge when needed
-    	// this._check_for_incoming_messages();		// check for incoming messages
-    	// this._bindTranslations();
     },
     
     reloadViewport: function(){
@@ -331,6 +328,7 @@ Ext.define('TC.controller.Main', {
     
     loadMainMenu: function(){
     	if(TC.Restaurant){
+    		$j('#superloader').hide();
     		console.log('TC.controller.Main.loadMainMenu');
     		TC.app.getController("TC.controller.MainMenu").reset(); // reseting the entire controller menu
     		TC.app.getController("TC.controller.MainMenu").setCurrentMenu(TC.Restaurant.getMainMenu());
