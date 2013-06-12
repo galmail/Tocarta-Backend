@@ -1,0 +1,2 @@
+node(:result) { |m| @langs }
+

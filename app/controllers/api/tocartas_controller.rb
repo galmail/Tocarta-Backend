@@ -14,6 +14,10 @@ class Api::TocartasController < AccessController
     @result = @tablet.save
   end
   
+  def get_supported_langs
+    @langs = @restaurant.restaurant_setting.supported_lang
+  end
+  
   def get_restaurant_info
     # show banners
     sort_and_filter(@restaurant.restaurant_banners,nil,nil,nil,nil)
