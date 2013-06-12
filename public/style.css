@@ -83,11 +83,11 @@ font-family: 'YanoneKaffeesatzThin'; /*KandideRegular*/
   /*  width: 23%;*/
 }
 
-.tcDishPhoto .dish-photo-container .dish-info .dish-price {
+.tcDishPhoto .dish-photo-container .dish-info .right .dish-price {
   font-size: 40px;
 }
 
-.tcDishPhoto .dish-photo-container .dish-info .dish-price .euro {
+.tcDishPhoto .dish-photo-container .dish-info .right .dish-price .euro {
   font-size: 33px;
 }
 
