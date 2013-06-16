@@ -9,12 +9,19 @@
 Ext.define('TC.view.toolbars.TopToolbar', {
 	extend : 'Ext.Toolbar',
 	xtype : 'top-toolbar',
+	requires: ['Ext.SegmentedButton'],
 	config : {
 		cls: 'tcTopToolbar',
 		title : '',
 		items: [
 			{
+				itemId: 'tcLogoImgId',
+				xtype: 'panel',
+				html: ''
+			},
+			{
 				itemId: 'tcHomeBtnId',
+				hidden: true,
 				cls: 'tcBigBtn',
 				xtype: 'button',
 				iconMask: true,
@@ -22,14 +29,15 @@ Ext.define('TC.view.toolbars.TopToolbar', {
 			},
 			{
 				itemId: 'tcSwitchMenuBtnId',
+				hidden: true,
 				xtype: 'button',
 				// text: 'menu',
 				iconMask: true,
-    		iconCls: 'tabbed_book',
-    		hidden: true
+    		iconCls: 'tabbed_book'
 			},
 			{
 				itemId: 'tcSwitchLanguageBtnId',
+				hidden: true,
 				xtype: 'button',
 				// text: 'Switch Language',
 				iconMask: true,
@@ -37,23 +45,24 @@ Ext.define('TC.view.toolbars.TopToolbar', {
 			},
 			{
 				itemId: 'tcFilterBtnId',
+				hidden: true,
 				xtype: 'button',
 				// text: 'Filter Dishes',
 				iconMask: true,
-    		iconCls: 'filters',
-    		hidden: true
+    		iconCls: 'filters'
 			},
 			{ xtype: 'spacer' },
 			{
 				itemId: 'tcGamesBtnId',
+				hidden: true,
 				xtype: 'button',
 				// text: 'Games',
 				iconMask: true,
-    		iconCls: 'games',
-    		hidden: true
+    		iconCls: 'games'
 			},
 			{
 				itemId: 'tcCallWaiterBtnId',
+				hidden: true,
 				xtype: 'button',
 				// text: 'Call Waiter'
 				iconMask: true,
@@ -61,6 +70,7 @@ Ext.define('TC.view.toolbars.TopToolbar', {
 			},
 			{
 				itemId: 'tcRequestBillBtnId',
+				hidden: true,
 				xtype: 'button',
 				// text: 'Request Bill',
 				iconMask: true,
@@ -68,10 +78,38 @@ Ext.define('TC.view.toolbars.TopToolbar', {
 			},
 			{
 				id: 'tcShowOrderBtnId',
+				hidden: true,
 				xtype: 'button',
 				// text: 'Show Order',
 				iconMask: true,
     		iconCls: 'order'
+			},
+			{
+				xtype: 'segmentedbutton',
+				allowDepress: false,
+				items: [
+					{
+						itemId: 'tcMainMenuBtnId',
+						hidden: true,
+						text: $T.main_menu,
+						pressed: true
+					},
+					{
+						itemId: 'tcDailyMenuBtnId',
+						hidden: true,
+						text: $T.daily_menu
+					},
+					{
+						itemId: 'tcBeveragesBtnId',
+						hidden: true,
+						text: $T.beverages
+					},
+					{
+						itemId: 'tcDessertsBtnId',
+						hidden: true,
+						text: $T.desserts
+					}
+				]
 			}
 		]
 	}

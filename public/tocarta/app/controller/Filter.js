@@ -41,6 +41,7 @@ Ext.define('TC.controller.Filter', {
   	var dishType = this.getFilterViewList().getStore().getAt(position);
   	var itemsStore = TC.Restaurant.getMainMenu().getDishesByType(dishType.get('name'));
   	var mainMenuCtrl = TC.app.getController("TC.controller.MainMenu");
+  	if(!mainMenuCtrl.getMenuPanel()) return false;
   	mainMenuCtrl.getMenuPanel().reset();
   	mainMenuCtrl.getMenuPanel().push({
 			itemsClass: 'dishes',

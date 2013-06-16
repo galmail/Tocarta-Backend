@@ -29,16 +29,18 @@ $sidebar-itemsview-background-active-color: red;
       padding-bottom: 0;
     }
     .item .item-text {
-      @include background-image(linear-gradient($tc-btn-gradient-color, $tc-btn-color, $tc-btn-color));
+      // @include background-image(linear-gradient($tc-btn-gradient-color, $tc-btn-color, $tc-btn-color));
     }
     &.x-item-pressed {
       .item .item-text {
-        @include background-image(linear-gradient(lighten($tc-btn-color,20%), $tc-btn-gradient-color));
+        background-color: lighten($tc-btn-active-color,20%);
+        // @include background-image(linear-gradient(lighten($tc-btn-color,20%), $tc-btn-gradient-color));
       }
     }
     &.x-item-selected {
       .item .item-text {
-        @include background-image(linear-gradient($tc-btn-active-gradient-color, $tc-btn-active-color, $tc-btn-active-color));
+        background-color: $tc-btn-active-color;
+        // @include background-image(linear-gradient($tc-btn-active-gradient-color, $tc-btn-active-color, $tc-btn-active-color));
       }
       .item-border {
         border-color: $tc-btn-active-color;

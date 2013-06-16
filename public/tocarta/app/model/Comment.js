@@ -11,6 +11,7 @@ Ext.define('TC.model.Comment', {
       {name: "dish_id", type: "int"},
       {name: "survey_question_id", type: "int"},
       {name: "name", type: "string"},
+      {name: "email", type: "string"},
       {name: "description", type: "string"},
       {name: "rating", type: "int"}
 	  ],

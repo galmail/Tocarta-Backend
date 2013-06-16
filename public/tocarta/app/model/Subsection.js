@@ -16,13 +16,13 @@ Ext.define('TC.model.Subsection', {
 	    {name: "mini", type: "string"},
 	    {name: "mini_photo_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("mini");
+	    		return $tc.checkImgUrl(record.get("mini"));
 	    	}
 	    },
 	    {name: "thumbnail", type: "string"},
 	    {name: "thumbnail_photo_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("thumbnail");
+	    		return $tc.checkImgUrl(record.get("thumbnail"));
 	    	}
 	    }
 	  ],

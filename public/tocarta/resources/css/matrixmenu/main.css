@@ -1,61 +1,106 @@
 /**
  *   MatrixMenu Stylesheet
  */
-/* line 8, ../../../styles/matrixmenu/main.scss */
+/* line 10, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .x-carousel-indicator {
+  position: fixed !important;
+  margin-bottom: 35px;
+}
+/* line 16, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishImageView {
   width: 100%;
   height: 100%;
 }
-/* line 12, ../../../styles/matrixmenu/main.scss */
+/* line 20, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishImageView .dish-image img {
   width: 100%;
   height: 100%;
 }
-/* line 17, ../../../styles/matrixmenu/main.scss */
-.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info {
-  bottom: 0px;
-  width: 100%;
-  height: 10%;
-  background-color: rgba(0, 0, 0, 0.1);
-  position: absolute;
-  display: inline-block;
-}
 /* line 25, ../../../styles/matrixmenu/main.scss */
-.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-name {
-  width: 40%;
-  display: inline-block;
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
 }
-/* line 29, ../../../styles/matrixmenu/main.scss */
-.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-name p {
+/* line 33, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-info-container {
+  overflow: hidden;
+  height: 80px;
+}
+/* line 38, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-left {
+  float: left;
+  width: 87%;
+  height: 100%;
+  background-color: white;
+  padding: 5px;
+  opacity: 0.6;
+}
+/* line 45, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-left .dish-name {
   font-weight: bold;
+  font-size: 21px;
 }
-/* line 34, ../../../styles/matrixmenu/main.scss */
-.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-description {
-  width: 56%;
-  display: inline-block;
-}
-/* line 43, ../../../styles/matrixmenu/main.scss */
-.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-price {
-  width: 4%;
-  display: inline-block;
+/* line 49, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-left .dish-description {
+  font-size: 19px;
+  height: 100%;
+  width: 80%;
+  font-family: "Nova Round",arial,verdana;
+  color: #807b4b;
 }
 /* line 56, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-left .dish-actions {
+  position: absolute;
+  bottom: 5px;
+  width: 87%;
+  padding-right: 20px;
+  text-align: right;
+}
+/* line 62, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-left .dish-actions .tcDishActionReview {
+  background-image: url("../img/common/icons/comment_dish.png");
+  width: 35px;
+  height: 35px;
+  display: block;
+  float: right;
+}
+/* line 71, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-right {
+  float: right;
+  width: 13%;
+  height: 100%;
+  background-color: black;
+  font-size: 35px;
+  color: white;
+  text-align: center;
+  padding-top: 18px;
+  opacity: 0.8;
+}
+/* line 82, ../../../styles/matrixmenu/main.scss */
+.tcMatrixMenu .tcMatrixMenuDishImageView .dish-info .dish-right .dish-price .euro {
+  color: #CB8D8A;
+  font-size: 31px;
+  margin-right: 15px;
+}
+/* line 93, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishTextView {
   width: 100%;
   height: 100%;
 }
-/* line 60, ../../../styles/matrixmenu/main.scss */
+/* line 97, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishTextView .dish-name {
   width: 100%;
   height: 100%;
   text-align: center;
 }
-/* line 66, ../../../styles/matrixmenu/main.scss */
+/* line 103, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishTextView .dish-name h1 {
   font-weight: bold;
   font-size: 200%;
 }
-/* line 72, ../../../styles/matrixmenu/main.scss */
+/* line 109, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishTextView .dish-info {
   bottom: 0px;
   width: 100%;
@@ -64,86 +109,86 @@
   position: absolute;
   display: inline-block;
 }
-/* line 80, ../../../styles/matrixmenu/main.scss */
+/* line 117, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishTextView .dish-info .dish-description {
   width: 96%;
   display: inline-block;
 }
-/* line 89, ../../../styles/matrixmenu/main.scss */
+/* line 126, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishTextView .dish-info .dish-price {
   width: 4%;
   display: inline-block;
 }
-/* line 104, ../../../styles/matrixmenu/main.scss */
+/* line 141, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishImageView {
   width: 100%;
   height: 100%;
 }
-/* line 108, ../../../styles/matrixmenu/main.scss */
+/* line 145, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishImageView .dish-image img {
   width: 100%;
   height: 100%;
 }
-/* line 113, ../../../styles/matrixmenu/main.scss */
+/* line 150, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishImageView .dish-info {
   bottom: 0px;
   width: 100%;
   position: absolute;
   display: inline-block;
 }
-/* line 119, ../../../styles/matrixmenu/main.scss */
+/* line 156, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishImageView .dish-info .dish-name {
   width: 96%;
   display: inline-block;
 }
-/* line 123, ../../../styles/matrixmenu/main.scss */
+/* line 160, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishImageView .dish-info .dish-name p {
   font-weight: bold;
 }
-/* line 128, ../../../styles/matrixmenu/main.scss */
+/* line 165, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishImageView .dish-info .dish-price {
   width: 4%;
   display: inline-block;
 }
-/* line 141, ../../../styles/matrixmenu/main.scss */
+/* line 178, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishTextView {
   width: 100%;
   height: 100%;
 }
-/* line 145, ../../../styles/matrixmenu/main.scss */
+/* line 182, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishTextView .dish-name {
   width: 100%;
   height: 100%;
   text-align: center;
 }
-/* line 151, ../../../styles/matrixmenu/main.scss */
+/* line 188, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishTextView .dish-name h1 {
   font-weight: bold;
   font-size: 200%;
 }
-/* line 157, ../../../styles/matrixmenu/main.scss */
+/* line 194, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishTextView .dish-info {
   bottom: 0px;
   width: 100%;
   position: absolute;
   display: inline-block;
 }
-/* line 163, ../../../styles/matrixmenu/main.scss */
+/* line 200, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishTextView .dish-info .dish-description {
   width: 96%;
   display: inline-block;
 }
-/* line 172, ../../../styles/matrixmenu/main.scss */
+/* line 209, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuMiniDishTextView .dish-info .dish-price {
   width: 4%;
   display: inline-block;
 }
-/* line 186, ../../../styles/matrixmenu/main.scss */
+/* line 223, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView {
   width: 100%;
   height: 100%;
 }
-/* line 190, ../../../styles/matrixmenu/main.scss */
+/* line 227, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-info {
   top: 0px;
   width: 100%;
@@ -151,63 +196,63 @@
   position: relative;
   display: inline-block;
 }
-/* line 197, ../../../styles/matrixmenu/main.scss */
+/* line 234, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-info .dish-name {
   width: 35%;
   display: inline-block;
 }
-/* line 202, ../../../styles/matrixmenu/main.scss */
+/* line 239, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-info .dish-description {
   width: 50%;
   display: inline-block;
 }
-/* line 207, ../../../styles/matrixmenu/main.scss */
+/* line 244, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-info .dish-price {
   width: 5%;
   display: inline-block;
 }
-/* line 213, ../../../styles/matrixmenu/main.scss */
+/* line 250, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra {
   width: 100%;
 }
-/* line 216, ../../../styles/matrixmenu/main.scss */
+/* line 253, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-tabs {
   width: 60%;
 }
-/* line 219, ../../../styles/matrixmenu/main.scss */
+/* line 256, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-tabs .tab-content {
   width: 100%;
   height: 100%;
   position: relative !important;
 }
-/* line 226, ../../../styles/matrixmenu/main.scss */
+/* line 263, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-social {
   width: 40%;
   height: 100%;
   position: relative;
 }
-/* line 231, ../../../styles/matrixmenu/main.scss */
+/* line 268, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-social .share {
   width: 48px;
   height: 48px;
 }
-/* line 236, ../../../styles/matrixmenu/main.scss */
+/* line 273, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-social .twitter {
   background-image: url("http://b2badsl.net/twitter_neue_ios_icon_by_theintenseplayer-d5fwil3.png");
 }
-/* line 237, ../../../styles/matrixmenu/main.scss */
+/* line 274, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-social .facebook {
   background-image: url("http://www.codethemed.com/images/footer-facebook.png");
 }
-/* line 238, ../../../styles/matrixmenu/main.scss */
+/* line 275, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishDetailsView .dish-extra .dish-social .google {
   background-image: url("http://lydiahutchinson.com/wp-content/uploads/2011/11/Google-Plus-1-icon.png");
 }
-/* line 246, ../../../styles/matrixmenu/main.scss */
+/* line 283, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishTiledView {
   position: relative;
 }
-/* line 251, ../../../styles/matrixmenu/main.scss */
+/* line 288, ../../../styles/matrixmenu/main.scss */
 .tcMatrixMenu .tcMatrixMenuDishTiledTitleView {
   position: absolute;
   top: 0px;

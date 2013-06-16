@@ -165,19 +165,20 @@
 /* line 13, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuTitle {
   margin-bottom: 0px;
+  height: 60px;
 }
-/* line 16, ../../../styles/dailymenu/main.scss */
+/* line 17, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuTitleText {
   overflow: hidden;
   font-weight: bold;
   font-size: 24px !important;
 }
-/* line 20, ../../../styles/dailymenu/main.scss */
+/* line 21, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuTitleText > div {
   float: left;
   margin-left: 10px;
 }
-/* line 26, ../../../styles/dailymenu/main.scss */
+/* line 27, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuTabBar {
   background: transparent;
   border: 0;
@@ -186,7 +187,7 @@
   position: relative;
   z-index: 2;
 }
-/* line 33, ../../../styles/dailymenu/main.scss */
+/* line 34, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuTabBar .x-tab {
   height: 2.2em;
   padding: 0.4em 1em;
@@ -197,20 +198,26 @@
   color: white;
   margin-right: 2px;
 }
-/* line 42, ../../../styles/dailymenu/main.scss */
+/* line 43, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuTabBar .x-tab.x-tab-active {
   background: white !important;
   color: black;
   border: 1px solid black;
   border-bottom: 0px;
 }
-/* line 48, ../../../styles/dailymenu/main.scss */
+/* line 49, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuTabBar .x-tab .x-button-label {
   line-height: 1.8em;
   margin-left: 2.2em;
   margin-top: -2em;
 }
-/* line 53, ../../../styles/dailymenu/main.scss */
+/* line 54, ../../../styles/dailymenu/main.scss */
+.tcDailyMenu .tcDailyMenuTabBar .x-tab .nobadge-tab-label {
+  line-height: 1.8em;
+  margin-left: 0;
+  margin-top: 0;
+}
+/* line 59, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuTabBar .x-tab .x-badge {
   position: relative;
   margin-top: 0.5em !important;
@@ -219,16 +226,15 @@
   line-height: 1em;
   background: lightgray;
 }
-/* line 62, ../../../styles/dailymenu/main.scss */
+/* line 68, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuTabBar .x-tab.selected .x-badge {
   background-color: #900;
-  background-image: linear-gradient(#e60000, #b30000 50%, #990000 51%, #800000);
 }
-/* line 66, ../../../styles/dailymenu/main.scss */
+/* line 72, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuTabBar .x-tab.selected .x-button-label {
   margin-top: -1.7em;
 }
-/* line 72, ../../../styles/dailymenu/main.scss */
+/* line 78, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection {
   background-color: white;
   margin: 0;
@@ -237,11 +243,11 @@
   border-radius: 5px;
   border-top-left-radius: 0;
 }
-/* line 80, ../../../styles/dailymenu/main.scss */
+/* line 86, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection .x-carousel-indicator {
   padding-top: 10px;
 }
-/* line 85, ../../../styles/dailymenu/main.scss */
+/* line 91, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .x-dataview-container {
   overflow: hidden;
   margin-top: 10px;
@@ -249,13 +255,13 @@
   height: 90%;
   width: 100%;
 }
-/* line 91, ../../../styles/dailymenu/main.scss */
+/* line 97, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item {
   float: left;
   width: 33%;
   height: 100%;
 }
-/* line 95, ../../../styles/dailymenu/main.scss */
+/* line 101, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item .tcDailyMenuDish {
   margin-right: 5px;
   margin-left: 15px;
@@ -265,7 +271,7 @@
   border-radius: 3px;
   background: black;
 }
-/* line 107, ../../../styles/dailymenu/main.scss */
+/* line 113, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item .tcDailyMenuDish .tcDailyMenuDishPhoto {
   width: 100%;
   min-height: auto;
@@ -274,42 +280,41 @@
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
-/* line 116, ../../../styles/dailymenu/main.scss */
+/* line 122, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item .tcDailyMenuDish .tcDailyMenuDishText {
   padding: 10px 10px;
 }
-/* line 119, ../../../styles/dailymenu/main.scss */
+/* line 125, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item .tcDailyMenuDish .tcDailyMenuDishText .tcDailyMenuDishTitle {
   font-size: 22px;
   margin-bottom: 15px;
 }
-/* line 123, ../../../styles/dailymenu/main.scss */
+/* line 129, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item .tcDailyMenuDish .tcDailyMenuDishText .tcDailyMenuDishDescription {
   font-size: 16px;
 }
-/* line 128, ../../../styles/dailymenu/main.scss */
+/* line 134, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item.x-item-selected .tcDailyMenuDish {
   background-color: #900;
-  background-image: linear-gradient(#e60000, #b30000 50%, #990000 51%, #800000);
 }
-/* line 131, ../../../styles/dailymenu/main.scss */
+/* line 137, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item.x-item-selected .tcDailyMenuDish .tcDailyMenuDishPhoto {
   border: 2px solid #990000;
 }
-/* line 141, ../../../styles/dailymenu/main.scss */
+/* line 147, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection.tcDailyMenuSection50 .tcDailyMenuSectionPage .x-dataview-container {
   padding-top: 10px;
 }
-/* line 143, ../../../styles/dailymenu/main.scss */
+/* line 149, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection.tcDailyMenuSection50 .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item {
   margin-bottom: 10px;
 }
-/* line 145, ../../../styles/dailymenu/main.scss */
+/* line 151, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection.tcDailyMenuSection50 .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item .tcDailyMenuDish {
   width: 300px;
   height: 53px;
 }
-/* line 148, ../../../styles/dailymenu/main.scss */
+/* line 154, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection.tcDailyMenuSection50 .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item .tcDailyMenuDish .tcDailyMenuDishPhoto {
   width: 80px;
   height: inherit;
@@ -318,7 +323,7 @@
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-/* line 156, ../../../styles/dailymenu/main.scss */
+/* line 162, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection.tcDailyMenuSection50 .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item .tcDailyMenuDish .tcDailyMenuDishText {
   float: left;
   margin-top: 0;
@@ -327,7 +332,7 @@
   padding-left: 5px;
   height: 53px;
 }
-/* line 163, ../../../styles/dailymenu/main.scss */
+/* line 169, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection.tcDailyMenuSection50 .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item .tcDailyMenuDish .tcDailyMenuDishText .tcDailyMenuDishTitle {
   font-size: 14px;
   width: 193px;
@@ -335,11 +340,11 @@
   line-height: 19px;
   font-weight: bold;
 }
-/* line 170, ../../../styles/dailymenu/main.scss */
+/* line 176, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuSection.tcDailyMenuSection50 .tcDailyMenuSectionPage .x-dataview-container .x-dataview-item .tcDailyMenuDish .tcDailyMenuDishText .tcDailyMenuDishDescription {
   display: none;
 }
-/* line 181, ../../../styles/dailymenu/main.scss */
+/* line 187, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuAddBtn {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #625b5b), color-stop(50%, #000000), color-stop(100%, #000000));
   background-image: -webkit-linear-gradient(#625b5b, #000000, #000000);
@@ -355,7 +360,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
-/* line 191, ../../../styles/dailymenu/main.scss */
+/* line 197, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuAddBtn.x-button-pressing, .tcDailyMenu .tcDailyMenuAddBtn.x-button-pressed {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(100%, #625b5b));
   background-image: -webkit-linear-gradient(#333333, #625b5b);
@@ -363,7 +368,7 @@
   background-image: -o-linear-gradient(#333333, #625b5b);
   background-image: linear-gradient(#333333, #625b5b);
 }
-/* line 194, ../../../styles/dailymenu/main.scss */
+/* line 200, ../../../styles/dailymenu/main.scss */
 .tcDailyMenu .tcDailyMenuAddBtn .x-button-label {
   padding: 5px 0;
   font-weight: normal;

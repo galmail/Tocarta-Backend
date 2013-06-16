@@ -18,7 +18,7 @@ Ext.define('TC.model.OrderItem', {
 	    {name: "thumbnail", type: "string"},
 	    {name: "thumbnail_photo_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("thumbnail");
+	    		return $tc.checkImgUrl(record.get("thumbnail"));
 	    	}
 	    }
 	  ],

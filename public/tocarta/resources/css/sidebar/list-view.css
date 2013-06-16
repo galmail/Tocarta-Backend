@@ -173,30 +173,18 @@
 .tcMenuPanelListView .x-dataview-item:last-child {
   padding-bottom: 0;
 }
-/* line 28, ../../../styles/sidebar/list-view.scss */
-.tcMenuPanelListView .x-dataview-item .item {
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #625b5b), color-stop(50%, #000000), color-stop(100%, #000000));
-  background-image: -webkit-linear-gradient(#625b5b, #000000, #000000);
-  background-image: -moz-linear-gradient(#625b5b, #000000, #000000);
-  background-image: -o-linear-gradient(#625b5b, #000000, #000000);
-  background-image: linear-gradient(#625b5b, #000000, #000000);
-}
 /* line 32, ../../../styles/sidebar/list-view.scss */
 .tcMenuPanelListView .x-dataview-item.x-item-pressed .item {
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(100%, #625b5b));
-  background-image: -webkit-linear-gradient(#333333, #625b5b);
-  background-image: -moz-linear-gradient(#333333, #625b5b);
-  background-image: -o-linear-gradient(#333333, #625b5b);
-  background-image: linear-gradient(#333333, #625b5b);
+  background-color: #1a1a1a;
 }
-/* line 37, ../../../styles/sidebar/list-view.scss */
+/* line 38, ../../../styles/sidebar/list-view.scss */
 .tcMenuPanelListView .item {
   clear: both;
   overflow: hidden;
   background-color: black;
   border-radius: 5px;
 }
-/* line 42, ../../../styles/sidebar/list-view.scss */
+/* line 43, ../../../styles/sidebar/list-view.scss */
 .tcMenuPanelListView .item .item-thumbnail {
   width: 80px;
   height: 53px;
@@ -206,7 +194,7 @@
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
-/* line 51, ../../../styles/sidebar/list-view.scss */
+/* line 52, ../../../styles/sidebar/list-view.scss */
 .tcMenuPanelListView .item .item-title {
   display: block;
   float: left;
@@ -214,7 +202,7 @@
   padding-left: 6px;
   font-weight: bold;
 }
-/* line 60, ../../../styles/sidebar/list-view.scss */
+/* line 61, ../../../styles/sidebar/list-view.scss */
 .tcMenuPanelListView .x-dataview-item.x-item-pressed .item {
   background-color: red;
 }

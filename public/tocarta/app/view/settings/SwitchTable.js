@@ -96,7 +96,7 @@ Ext.define('TC.view.settings.SwitchTable', {
 			     {
 						xtype: 'button',
 						itemId: 'changeTabletIdButtonId',
-						text: $TO.delete_license_key
+						text: $TO.reset_license_key
 			     }
 				]
 			}

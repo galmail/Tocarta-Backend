@@ -8,6 +8,7 @@ Ext.define('TC.controller.MainMenu', {
     extend: 'Ext.app.Controller',
     requires: ['Ext.Img'],
     config: {
+    	currentMenu: null,
       currentSection: null,
       currentSubsection: null,
       currentDish: null,
@@ -20,7 +21,8 @@ Ext.define('TC.controller.MainMenu', {
 	      'sidebar.MenuPanelListView',
 	      'sidebar.MenuPanelItemsView',
 	      // dishes views
-	      'dish.DishContainer'
+	      'dish.DishContainer',
+	      'dish.DishReviewModal'
 	    ],
       
       refs: {
@@ -40,6 +42,7 @@ Ext.define('TC.controller.MainMenu', {
       	dishImg: 'dish-photo-tab #tcDishImgId',
       	dishCommentsTab: 'dish-container tabpanel dish-comments-tab',
       	dishVideoTab: 'dish-container tabpanel dish-video-tab',
+      	dishNutritionFactsTab: 'dish-container tabpanel dish-nutritionfacts-tab',
       	// mini dishes
       	minidishesContainer: 'minidishes-container',
       	minidishesView: 'minidishes-view'
@@ -55,6 +58,7 @@ Ext.define('TC.controller.MainMenu', {
 	      dishVideoTab: { show: 'dishVideoShow' },
 	      addDishButton: { tap: 'addDish' },
 	      dishCommentsTab: { show: 'dishCommentsShow' },
+	      dishNutritionFactsTab: { show: 'dishNutritionFactsShow' },
 	      minidishesView: { itemtap: 'addMiniDish' }
 	    }
 	    
@@ -64,14 +68,28 @@ Ext.define('TC.controller.MainMenu', {
     	console.log('TC.controller.MainMenu.launch');
     	var me = this;
     	// listen for swipe left, right navigation
-    	$z(document).on('swipeLeft','.tcDishPhoto #tcDishImgId',function(){
+    	$z(document).on('swipeLeft','#tcDishImgId',function(){
     		me.nextDish();
     		return false;
     	});
-    	$z(document).on('swipeRight','.tcDishPhoto #tcDishImgId',function(){
+    	$z(document).on('swipeRight','#tcDishImgId',function(){
     		me.previousDish();
     		return false;
     	});
+    	$z(document).on('doubleTap doubleClick','#tcDishImgId',function(el){
+    		me.fullscreenDish(el);
+    		return false;
+    	});
+    	$z(document).on('tap click','.tcDishActionReview',function(el){
+    		me.dish_review_modal = Ext.create('TC.view.dish.DishReviewModal',{
+    			dishId: el.target.id.split('_')[1]
+    		});
+    		Ext.Viewport.add(me.dish_review_modal);
+	    	me.dish_review_modal.show();
+    		return false;
+    	});
+    	
+    	
     },
     
     //// WARNING: this function is called from the Main Controller
@@ -92,10 +110,13 @@ Ext.define('TC.controller.MainMenu', {
     },
     
     selectFirstItemInItemsView: function(dv){
-    	console.log('TC.controller.MainMenu.selectFirstItemInItemsView');
-    	var pos = 0;
-    	this.displayDishOrMinidishes(dv,pos);
-    	dv.select(pos,false);
+    	console.log('TC.controller.MainMenu.selectFirstItemInItemsView delayed 500ms');
+    	var self = this;
+    	setTimeout(function(){
+    		console.log('TC.controller.MainMenu.selectFirstItemInItemsView callback!');
+    		self.displayDishOrMinidishes(dv,0);
+    		dv.select(0,false);
+    	},0);
     },
     
     restaurantCarouselShow: function(restaurantCarouselPanel){
@@ -121,15 +142,28 @@ Ext.define('TC.controller.MainMenu', {
     	commentsTab.down('#tcDishCommentsDataItemsId').setStore(commentsTab.getRecord().comments());
     },
     
+    dishNutritionFactsShow: function(nutritionfactsTab){
+    	console.log('TC.controller.MainMenu.dishNutritionFactsShow');
+    	// var nutrition_facts_store = Ext.create('TC.store.NutritionFacts',{
+    		// storeId: "NutritionFactsStore" + nutritionfactsTab.getRecord().getId(),
+    		// data: [
+    			// nutritionfactsTab.getRecord().get('nutrition_fact')
+    		// ]
+    	// });
+    	// nutritionfactsTab.down('#tcDishNutritionFactsDataItemsId').setStore(nutrition_facts_store);
+    	nutritionfactsTab.down('#tcDishNutritionFactsDataItemsId').setData(nutritionfactsTab.getRecord().get('nutrition_fact'));
+    },
+    
     dishTabPanelInitialize: function(tabPanel){
     	console.log('TC.controller.MainMenu.dishTabPanelInitialize');
     },
     
     sideBarInitialize: function(listView){
     	console.log('TC.controller.MainMenu.sideBarInitialize');
-    	if(this.getCurrentSection()==null){
-    		if(TC.Restaurant.getMainMenu()){
-    			listView.setStore(TC.Restaurant.getMainMenu().sections());
+    	var self = this;
+    	if(self.getCurrentSection()==null){
+    		if(self.getCurrentMenu()){
+    			listView.setStore(self.getCurrentMenu().sections());
     		}
     	}
     },
@@ -247,6 +281,27 @@ Ext.define('TC.controller.MainMenu', {
     			dishTabPanel.getTabBar().items.items[1].show();
     		}
 	    	
+	    	// hide nutrition tab when there are no nutrition facts
+	    	if(this.getCurrentDish().get('nutrition_fact')){
+    			dishTabPanel.getTabBar().items.items[2].show();
+    		}
+    		else {
+    			dishTabPanel.getTabBar().items.items[2].hide();
+    		}
+    		
+    		// hide tabs if there is only one tab
+    		var _visible_tabs = 0;
+    		Ext.Array.each(dishTabPanel.getTabBar().items.items,function(item){
+    			if(item.isHidden()!=true) _visible_tabs++;
+    		});
+    		if(_visible_tabs<2){
+    			dishTabPanel.getTabBar().hide();
+    		}
+    		else {
+    			dishTabPanel.getTabBar().show();
+    		}
+    		
+	    	
 	    	// set dish record on all items
 	    	Ext.Array.each(dishTabPanel.items.items,function(item){
 	    		item.setRecord(me.getCurrentDish());
@@ -326,6 +381,46 @@ Ext.define('TC.controller.MainMenu', {
     			dv.getScrollable().getScroller().scrollToEnd();
     		}
     	}
+    },
+    
+    fullscreenDish: function(el){
+    	console.log('TC.controller.MainMenu.fullscreenDish');
+    	var self = this;
+    	var originalImg = el.target.src;//.replace('large','original');
+    	var fullScreenPanel = null;
+    	fullScreenPanel = Ext.create('Ext.Panel', {
+    		fullscreen: true,
+    		centered: true,
+    		width: '100%',
+				height: '100%',
+    		modal: true,
+    		layout: 'vbox',
+    		scrollable: {
+    			direction: 'both',
+    			directionLock: false
+    		},
+    		items: [
+    			{
+    				xtype: 'toolbar',
+    				docked: 'top',
+    				title: self.getCurrentDish().get('name'),
+						items: [
+							{
+								itemId: 'closeButtonId',
+								xtype: 'button',
+								text: $T.close,
+								handler: function(){
+									fullScreenPanel.destroy();
+								}
+							},
+							{ xtype: 'spacer' }
+    				]
+    			},
+    			{
+    				html: '<img src="'+originalImg+'" width="100%" height="100%" />'
+    			}
+    		],
+     	}).show();
     },
     
     addMiniDish: function(dataview,position,element){
