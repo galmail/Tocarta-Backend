@@ -1,6 +1,8 @@
 class DashboardsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :menu_for_current_user, only: [:index, :show]
+  
+  layout "dashboards"
 
   def index
     @dashboard  = Dashboard.first # FIXME: search for a name?
