@@ -1,5 +1,8 @@
 TocartaAdmin::Application.routes.draw do
 
+  match "/dashboards(/:action(.:format))" => "Dashboards", :as => :dashboards
+  match "/dashboards/:id/:restaurant_id" => "dashboards#show"
+
   get "authentications/create"
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'

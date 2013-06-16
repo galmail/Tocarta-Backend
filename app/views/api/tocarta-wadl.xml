@@ -32,6 +32,29 @@
                 </doc>
             </method>
         </resource>
+        
+        <resource path="/cli/c/get_supported_langs.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="key" required="true" type="xsd:string" style="query" default="demo1">
+                <doc>
+                    License Key which can be found in Tablets -> access_key
+                </doc>
+            </param>
+            <method id="get_supported_langs" name="GET" apigee:displayName="Get Supported Languages">
+                <apigee:tags>
+                    <apigee:tag primary="true">Tablets</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/get_supported_langs.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/get_supported_langs">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
 
         <resource path="/cli/c/get_restaurant_info.{format}">
             <param name="format" required="true" type="xsd:string" style="template" default="json">

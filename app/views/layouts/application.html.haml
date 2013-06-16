@@ -2,13 +2,35 @@
 %html
   %head
     %title TocartaAdmin
-    = stylesheet_link_tag    "application", :media => "all"
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:400,300", :rel => "stylesheet"}/
+    = stylesheet_link_tag    "application",    :media => "all"
+    /[if lt IE 8]
+      = stylesheet_link_tag  "application-ie", :media => "all"
+
     = javascript_include_tag "application"
+    - if params[:controller] == 'dashboards'
+      = javascript_include_tag "//www.google.com/jsapi", "chartkick-tocarta"
+
     = csrf_meta_tags
-  %body{:style => "width:100%;height:100%;padding:0;"}
+  %body
     - if flash.present?
       #flash.flash
         - flash.each do |name, msg|
           %div{:class => "alert alert-#{name == :notice ? "success" : "error"}"}
             = content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String)
-    = yield
+
+    - if params[:controller] == 'dashboards'
+      = render 'layouts/dashboard_topbar'
+
+    #main-container.container-fluid
+      - if params[:controller] == 'dashboards'
+        %a#menu-toggler{:href => "#"}
+          %span
+        = render 'layouts/dashboard_sidebar'
+
+      #main-content.clearfix
+        #breadcrumbs
+        #page-content.clearfix
+          = yield
+

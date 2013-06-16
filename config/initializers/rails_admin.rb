@@ -15,6 +15,7 @@ RailsAdmin.config do |config|
 
   config.navigation_static_links = {
     # 'Profile' => '/users/edit'
+    'Analytics' => '/dashboards'
   }
 
   # If you want to track changes on your models:

@@ -23,6 +23,6 @@ class Order < ActiveRecord::Base
 	has_many :restaurant_activities
 	attr_accessible :name, :note, :total, :language, :table_id, :tablet_id, :client_id, :order_items
 	
-	after_save :logme
+	# after_save :logme
 	
 end
