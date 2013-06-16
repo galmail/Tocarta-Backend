@@ -21,13 +21,13 @@
             = content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String)
 
     - if params[:controller] == 'dashboards'
-      = render 'layouts/dashboard_topbar'
+      = render :partial => 'layouts/dashboards/dashboard_topbar'
 
     #main-container.container-fluid
       - if params[:controller] == 'dashboards'
         %a#menu-toggler{:href => "#"}
           %span
-        = render 'layouts/dashboard_sidebar'
+        = render :partial => 'layouts/dashboards/dashboard_sidebar'
 
       #main-content.clearfix
         #breadcrumbs
