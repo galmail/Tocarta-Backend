@@ -16,15 +16,15 @@ Ext.define('TC.view.survey.slider.SurveyContainer', {
 		layout: 'vbox',
 		items: [
 			{
-				html: '<h4>survey title</h4>'
+				html: '<h4>survey title</h4>',
+				hidden: true,
 			},
 			{
 				flex: 1,
 				itemId: 'tcSurveySliderCarouselId',
 				xtype: 'carousel',
+				indicator: false,
 				items: [
-					{ html: 'item1' },
-					{ html: 'item2' }
 				]
 			}
 			

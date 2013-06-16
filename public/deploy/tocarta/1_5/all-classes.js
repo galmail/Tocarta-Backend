@@ -61188,6 +61188,7 @@ Ext.define('TC.controller.Filter', {
   	var dishType = this.getFilterViewList().getStore().getAt(position);
   	var itemsStore = TC.Restaurant.getMainMenu().getDishesByType(dishType.get('name'));
   	var mainMenuCtrl = TC.app.getController("TC.controller.MainMenu");
+  	if(!mainMenuCtrl.getMenuPanel()) return false;
   	mainMenuCtrl.getMenuPanel().reset();
   	mainMenuCtrl.getMenuPanel().push({
 			itemsClass: 'dishes',
@@ -61265,7 +61266,8 @@ Ext.define('TC.controller.MultiLang', {
   	if(TC.Setting.get('language')!=lang){
   		TC.Setting.set('language',lang);
 	  	TC.Setting.save();
-	  	this.redirectTo('reload');
+	  	TC.Restaurant = TC.Restaurants.findRecord('current_locale',lang);
+	  	window.location.reload();
   	}
   	else {
   		this.redirectTo('mainmenu');
@@ -61509,6 +61511,103 @@ Ext.define('TC.controller.MatrixMenu', {
 });
 
 /**
+ * @class TC.controller.DishReview
+ * @extends Ext.app.Controller
+ * 
+ * The Dish Rate and Review Controller
+ * @description controls the dish review modal
+ */
+Ext.define('TC.controller.DishReview', {
+  extend: 'Ext.app.Controller',
+  requires: [],
+  config: {
+  	routes: {
+      
+    },
+    views: [
+    	// 'settings.SettingsView'
+    ],   
+    refs: {
+    	dishReviewModal: 'dish-review-modal',
+    	dishReviewSubmitBtn: 'dish-review-modal #tcDishReviewModalSubmitBtnId'
+    },
+    control: {
+    	dishReviewModal: { show: 'dishReviewModalShow' },
+    	dishReviewSubmitBtn: { tap: 'submitReview' }
+    }
+  },
+  
+  launch: function(){
+  	console.log('TC.controller.DishReview.launch');
+  },
+  
+  dishReviewModalShow: function(obj){
+  	console.log('TC.controller.DishReview.dishReviewModalShow');
+  	var me = this;
+  	// listen for rating stars
+  	$z(document).on('tap click', '.tcDishReviewModal .rating .star', me.rate);
+  },
+  
+  submitReview: function(){
+  	console.log('TC.controller.DishReview.submitReview');
+  	if(!$tc.checkConnection()) return false;
+  	var rating = $j('.star.selected').length;
+		if(rating==0) return false;
+  	var me = this;
+		Ext.Viewport.setMasked({xtype: 'loadmask',message: $T.submit_dish_rating});
+		var comments_to_send = Ext.create('TC.store.Comments',{
+			proxy: {
+				type: $tc.protocol,
+				url: $tc.url('submit_survey') + '?key=' + TC.Setting.get('key'),
+				writer: {
+	    		type: 'json',
+	    		root: 'survey'
+	    	}
+			}
+		});
+		// get the name and comment of the user
+		var userName = $j('.tcDishReviewModal .userInputNameField[name=name]').val();
+		var dishComment = $j('.tcDishReviewModal .tcDishReviewModalOpinion').val();
+		// get rating of the dish
+		var dish_id = this.getDishReviewModal().getDishId();
+		var comment = Ext.create('TC.model.Comment',{
+			dish_id: dish_id,
+			rating: rating,
+			description: dishComment,
+			name: userName
+		});
+		comments_to_send.add(comment);
+		// submit all comments now
+		comments_to_send.sync();
+		// say thank you for rating
+		setTimeout(function(){
+			Ext.Viewport.unmask();
+			if(me.getDishReviewModal()) me.getDishReviewModal().destroy();
+			$tc.alertMsg('<p align="center">'+$T.dish_rating_submited+'</p>');
+		},1000);
+  },
+  
+  rate: function(event,a,b){
+  	console.log('TC.controller.DishReview.rate');
+  	var star = event.target;
+		var selectedClass = 'selected';
+		$j(star).addClass(selectedClass);
+		var prevStar = $j(star).prev();
+		while(prevStar.length>0){
+			prevStar.addClass(selectedClass);
+			prevStar = $j(prevStar).prev();
+		}
+		var nextStar = $j(star).next();
+		while(nextStar.length>0){
+			nextStar.removeClass(selectedClass);
+			nextStar = $j(nextStar).next();
+		}
+  }
+  
+  
+});
+
+/**
  * This is a simple way to add an image of any size to your application and have it participate in the layout system
  * like any other component. This component typically takes between 1 and 3 configurations - a {@link #src}, and
  * optionally a {@link #height} and a {@link #width}:
@@ -61709,146 +61808,6 @@ Ext.define('Ext.Img', {
 });
 
 /**
- * The DelayedTask class provides a convenient way to "buffer" the execution of a method,
- * performing setTimeout where a new timeout cancels the old timeout. When called, the
- * task will wait the specified time period before executing. If durng that time period,
- * the task is called again, the original call will be cancelled. This continues so that
- * the function is only called a single time for each iteration.
- *
- * This method is especially useful for things like detecting whether a user has finished
- * typing in a text field. An example would be performing validation on a keypress. You can
- * use this class to buffer the keypress events for a certain number of milliseconds, and
- * perform only if they stop for that amount of time.
- *
- * Using {@link Ext.util.DelayedTask} is very simple:
- *
- *     //create the delayed task instance with our callback
- *     var task = Ext.create('Ext.util.DelayedTask', function() {
- *         console.log('callback!');
- *     });
- *
- *     task.delay(1500); //the callback function will now be called after 1500ms
- *
- *     task.cancel(); //the callback function will never be called now, unless we call delay() again
- *
- * ## Example
- *
- *     @example
- *     //create a textfield where we can listen to text
- *     var field = Ext.create('Ext.field.Text', {
- *         xtype: 'textfield',
- *         label: 'Length: 0'
- *     });
- *
- *     //add the textfield into a fieldset
- *     Ext.Viewport.add({
- *         xtype: 'formpanel',
- *         items: [{
- *             xtype: 'fieldset',
- *             items: [field],
- *             instructions: 'Type into the field and watch the count go up after 500ms.'
- *         }]
- *     });
- *
- *     //create our delayed task with a function that returns the fields length as the fields label
- *     var task = Ext.create('Ext.util.DelayedTask', function() {
- *         field.setLabel('Length: ' + field.getValue().length);
- *     });
- *
- *     // Wait 500ms before calling our function. If the user presses another key
- *     // during that 500ms, it will be cancelled and we'll wait another 500ms.
- *     field.on('keyup', function() {
- *         task.delay(500);
- *     });
- *
- * @constructor
- * The parameters to this constructor serve as defaults and are not required.
- * @param {Function} fn The default function to call.
- * @param {Object} scope The default scope (The `this` reference) in which the function is called. If
- * not specified, `this` will refer to the browser window.
- * @param {Array} args The default Array of arguments.
- */
-Ext.define('Ext.util.DelayedTask', {
-    config: {
-        interval: null,
-        delay: null,
-        fn: null,
-        scope: null,
-        args: null
-    },
-
-    constructor: function(fn, scope, args) {
-        var config = {
-            fn: fn,
-            scope: scope,
-            args: args
-        };
-
-        this.initConfig(config);
-    },
-
-    /**
-     * Cancels any pending timeout and queues a new one.
-     * @param {Number} delay The milliseconds to delay
-     * @param {Function} newFn Overrides the original function passed when instantiated.
-     * @param {Object} newScope Overrides the original `scope` passed when instantiated. Remember that if no scope
-     * is specified, `this` will refer to the browser window.
-     * @param {Array} newArgs Overrides the original `args` passed when instantiated.
-     */
-    delay: function(delay, newFn, newScope, newArgs) {
-        var me = this;
-
-        //cancel any existing queued functions
-        me.cancel();
-            
-        //set all the new configurations
-        me.setConfig({
-            delay: delay,
-            fn: newFn,
-            scope: newScope,
-            args: newArgs
-        });
-
-        //create the callback method for this delayed task
-        var call = function() {
-            me.getFn().apply(me.getScope(), me.getArgs() || []);
-            me.cancel();
-        };
-
-        me.setInterval(setInterval(call, me.getDelay()));
-    },
-
-    /**
-     * Cancel the last queued timeout
-     */
-    cancel: function() {
-        this.setInterval(null);
-    },
-
-    /**
-     * @private
-     * Clears the old interval
-     */
-    updateInterval: function(newInterval, oldInterval) {
-        if (oldInterval) {
-            clearInterval(oldInterval);
-        }
-    },
-
-    /**
-     * @private
-     * Changes the value into an array if it isn't one.
-     */
-    applyArgs: function(config) {
-        if (!Ext.isArray(config)) {
-            config = [config];
-        }
-
-        return config;
-    }
-});
-
-/**
  * Combo Class
  * 
  */
@@ -61929,56 +61888,6 @@ Ext.define('Ext.ActionSheet', {
         defaultType: 'button'
     }
 });
-
-/**
- * @class TC.view.survey.SurveyOpinion
- * @extends Ext.Panel
- *
- * SurveyOpinion Panel
- * @description This panel display the survey opinion
- **/
-
-Ext.define('TC.view.survey.slider.SurveyOpinion', {
-	extend: 'Ext.Panel',
-	xtype: 'survey-opinion',
-	config: {
-		cls: 'tcSurveyOpinion',
-		layout: {
-			type: 'vbox',
-			align: 'center'
-		},
-		items: [
-			{
-				cls: 'tcSurveyOpinionNameContainer',
-				html: [
-					'<div class="block tcSurveyOpinionName">',
-						'<label class="left">'+$T.your_name+'</label>',
-						'<input class="right userInputNameField" type="text" name="name" placeholder="'+$T.name_example+'" />',
-					'</div>'
-				].join('')
-			},
-			{
-				cls: 'tcSurveyOpinionDetailsContainer',
-				html: [
-					'<div class="block tcSurveyOpinionDetails">',
-						'<label class="left">'+$T.your_comment+'</label>',
-						'<textarea class="right tcSurveyGeneralOpinion" placeholder="'+$T.leave_your_comment_here+'" rows="4" cols="50"></textarea>',
-						// '<input class="right tcSurveyGeneralOpinion" placeholder="'+$T.leave_your_comment_here+'" />',
-					'</div>'
-				].join('')
-			},
-			{
-				cls: 'tcSurveyOpinionBtn',
-				xtype: 'button',
-				ui: 'action',
-				text: $T.submit
-			}
-		]
-	}
-});
-
-
-
 
 /**
  * Setting Class
@@ -62089,6 +61998,7 @@ Ext.define('TC.model.Comment', {
       {name: "dish_id", type: "int"},
       {name: "survey_question_id", type: "int"},
       {name: "name", type: "string"},
+      {name: "email", type: "string"},
       {name: "description", type: "string"},
       {name: "rating", type: "int"}
 	  ],
@@ -62222,7 +62132,7 @@ Ext.define('TC.model.Dish', {
  */
 Ext.define('TC.controller.MainMenu', {
     extend: 'Ext.app.Controller',
-    requires: ['Ext.Img','Ext.util.DelayedTask'],
+    requires: ['Ext.Img'],
     config: {
     	currentMenu: null,
       currentSection: null,
@@ -62237,7 +62147,8 @@ Ext.define('TC.controller.MainMenu', {
 	      'sidebar.MenuPanelListView',
 	      'sidebar.MenuPanelItemsView',
 	      // dishes views
-	      'dish.DishContainer'
+	      'dish.DishContainer',
+	      'dish.DishReviewModal'
 	    ],
       
       refs: {
@@ -62283,18 +62194,28 @@ Ext.define('TC.controller.MainMenu', {
     	console.log('TC.controller.MainMenu.launch');
     	var me = this;
     	// listen for swipe left, right navigation
-    	$z(document).on('swipeLeft','.tcDishPhoto #tcDishImgId',function(){
+    	$z(document).on('swipeLeft','#tcDishImgId',function(){
     		me.nextDish();
     		return false;
     	});
-    	$z(document).on('swipeRight','.tcDishPhoto #tcDishImgId',function(){
+    	$z(document).on('swipeRight','#tcDishImgId',function(){
     		me.previousDish();
     		return false;
     	});
-    	$z(document).on('doubleTap','.tcDishPhoto #tcDishImgId',function(el){
+    	$z(document).on('doubleTap doubleClick','#tcDishImgId',function(el){
     		me.fullscreenDish(el);
     		return false;
     	});
+    	$z(document).on('tap click','.tcDishActionReview',function(el){
+    		me.dish_review_modal = Ext.create('TC.view.dish.DishReviewModal',{
+    			dishId: el.target.id.split('_')[1]
+    		});
+    		Ext.Viewport.add(me.dish_review_modal);
+	    	me.dish_review_modal.show();
+    		return false;
+    	});
+    	
+    	
     },
     
     //// WARNING: this function is called from the Main Controller
@@ -62317,15 +62238,11 @@ Ext.define('TC.controller.MainMenu', {
     selectFirstItemInItemsView: function(dv){
     	console.log('TC.controller.MainMenu.selectFirstItemInItemsView delayed 500ms');
     	var self = this;
-    	var delayedTask = null;
-    	delayedTask = Ext.create('Ext.util.DelayedTask', function() {
+    	setTimeout(function(){
     		console.log('TC.controller.MainMenu.selectFirstItemInItemsView callback!');
     		self.displayDishOrMinidishes(dv,0);
     		dv.select(0,false);
-    		delayedTask.cancel();
-    		delayedTask = null;
-			});
-			delayedTask.delay(500);
+    	},0);
     },
     
     restaurantCarouselShow: function(restaurantCarouselPanel){
@@ -62690,7 +62607,7 @@ Ext.define('TC.controller.DailyMenu', {
       },
       
     	control: {
-	      dailyMenu: { show: 'dailyMenuShow' },
+	      dailyMenu: { show: 'dailyMenuDelayShow' },
 	      dailyMenuTabPanel: { activeitemchange: 'tabHasChanged' },
 	      dailyMenuSectionPage: { itemtap: 'selectDish', selectionchange: 'selectionChanged' },
 	      dailyMenuAddBtn: { tap: 'addMenu' }
@@ -62751,9 +62668,16 @@ Ext.define('TC.controller.DailyMenu', {
   		this.combo.dishes().setSorters([{property : 'position',direction: 'ASC'}]);
     },
     
-    dailyMenuShow: function(){
+    dailyMenuDelayShow: function(){
+    	var self = this;
+    	setTimeout(function(){
+    		self.dailyMenuShow(self);
+  		},0);
+    },
+    
+    dailyMenuShow: function(me){
     	console.log('TC.controller.MainMenu.dailyMenuShow');
-    	var me = this;
+    	// var me = this;
     	Ext.Viewport.down('#tcTopToolbarId').show();
   		Ext.Viewport.down('#tcBottomToolbarId').show();
   		var dailyMenu = TC.Restaurant.getDailyMenu();
@@ -62911,6 +62835,7 @@ Ext.define('TC.controller.Settings', {
   
   saveSettingsTapped: function(){
   	console.log('TC.controller.Settings.saveSettings');
+  	if(!$tc.checkConnection()) return false;
   	var me = this;
   	// get settings
   	var setting = this.getSwitchTableView().getRecord();
@@ -62954,6 +62879,7 @@ Ext.define('TC.controller.Settings', {
   
   updateMenuButtonTapped: function(btn){
   	console.log('TC.controller.Settings.updateMenuButtonTapped');
+  	if(!$tc.checkConnection()) return false;
   	this.closeSettings();
 		this.redirectTo('update');
   	return false;
@@ -62997,6 +62923,7 @@ Ext.define('TC.controller.Settings', {
   
   changeLicenseButtonTapped: function(btn){
   	console.log('TC.controller.Settings.changeLicenseButton');
+  	if(!$tc.checkConnection()) return false;
   	var me = this;
   	$tc.confirmMsg($TO.change_license_question,function(btn){
   		if(btn=="yes"){
@@ -63103,8 +63030,8 @@ Ext.define('TC.controller.survey.BasicSurvey', {
     	'survey.basic.SurveyComments'
     ],   
     refs: {
-    	survey: 'survey-container',
-    	submitSurveyButton: 'survey-container button',
+    	survey: 'survey-basic-container',
+    	submitSurveyButton: 'survey-basic-container button',
     },
     control: {
     	survey: { show: 'showSurvey' },
@@ -63491,9 +63418,6 @@ Ext.define('TC.controller.Main', {
     
     launch: function(){
     	console.log('TC.controller.Main.launch');
-    	// this._updateOrderBadge();								// updates the order badge when needed
-    	// this._check_for_incoming_messages();		// check for incoming messages
-    	// this._bindTranslations();
     },
     
     reloadViewport: function(){
@@ -63694,6 +63618,7 @@ Ext.define('TC.controller.Main', {
     
     loadMainMenu: function(){
     	if(TC.Restaurant){
+    		$j('#superloader').hide();
     		console.log('TC.controller.Main.loadMainMenu');
     		TC.app.getController("TC.controller.MainMenu").reset(); // reseting the entire controller menu
     		TC.app.getController("TC.controller.MainMenu").setCurrentMenu(TC.Restaurant.getMainMenu());
@@ -63856,6 +63781,8 @@ Ext.define('TC.controller.Main', {
 	  	var _params = Ext.apply({
 	  		key: TC.Setting.get('key')
 	  	},options.params);
+	  	
+	  	if(!$tc.checkConnection()) return false;
 	  	
 	  	Ext.Ajax.request({
 		    url: options.url,
@@ -64043,22 +63970,24 @@ Ext.define('TC.store.SurveyQuestions', {
  */
 Ext.define('TC.controller.survey.SliderSurvey', {
   extend: 'Ext.app.Controller',
-  requires: ['TC.store.SurveyQuestions','TC.view.survey.slider.SurveyOpinion'],
+  requires: ['TC.store.SurveyQuestions'],
   config: {
   	routes: {
       'slidersurvey': 'loadSurvey'
     },
     views: [
     	'survey.slider.SurveyContainer',
-    	// 'survey.slider.SurveyPage',
+    	'survey.slider.SurveyPage',
     	'survey.basic.SurveyQuestions',
-    	// 'survey.basic.SurveyComments'
+    	'survey.slider.SurveyOpinion'
     ],   
     refs: {
-    	survey: 'survey-slider-container'
+    	survey: 'survey-slider-container',
+    	submitBtn: 'survey-opinion #tcSurveyOpinionSubmitBtnId'
     },
     control: {
-    	survey: { show: 'showSurvey' }
+    	survey: { show: 'showSurvey' },
+    	submitBtn: { tap: 'submitSurvey' }
     }
   },
   
@@ -64068,6 +63997,7 @@ Ext.define('TC.controller.survey.SliderSurvey', {
   
   submitSurvey: function(){
   	console.log('TC.controller.survey.SliderSurvey.submitSurvey');
+  	if(!$tc.checkConnection()) return false;
   	var me = this;
 		$tc.confirmMsg($T.send_survey_question,function(btn){
 			if(btn=="yes"){
@@ -64082,41 +64012,50 @@ Ext.define('TC.controller.survey.SliderSurvey', {
 			    	}
 					}
 				});
-				// get the name of the user
-				var userName = $j('.tcSurveyContainer .userInputNameField:last').val();
+				
+				// get the name email and comment of the user
+				var userName = $j('.tcSurveyOpinion .userInputNameField[name=name]').val();
+				var userEmail = $j('.tcSurveyOpinion .userInputNameField[name=email]').val();
+				
 				// get rating of all survey questions
-				$j('.tcSurveyContainer .survey_question').each(function(){
+				$j('.tcSurveySliderContainer .survey_question').each(function(){
 					var question_id = this.id.split("survey_question_")[1];
 					var rating = $j(this).find('.star.selected').length;
 					if(rating>0){
 						var comment = Ext.create('TC.model.Comment',{
 							survey_question_id: question_id,
 							rating: rating,
-							name: userName
+							name: userName,
+							email: userEmail
 						});
 						comments_to_send.add(comment);
 					}
 				});
+				
+				
+				
 				// get rating and comments of all dishes
-				$j('.tcSurveyContainer .dish_eaten').each(function(){
-					var dish_id = this.id.split("dish_eaten_")[1];
-					var rating = $j(this).find('.star.selected').length;
-					var dish_comment = $j(this).find('.survey_dish_comment').val();
-					if(rating>0){
-						var comment = Ext.create('TC.model.Comment',{
-							dish_id: dish_id,
-							rating: rating,
-							description: dish_comment,
-							name: userName
-						});
-						comments_to_send.add(comment);
-					}
-				});
+				// $j('.tcSurveyContainer .dish_eaten').each(function(){
+					// var dish_id = this.id.split("dish_eaten_")[1];
+					// var rating = $j(this).find('.star.selected').length;
+					// var dish_comment = $j(this).find('.survey_dish_comment').val();
+					// if(rating>0){
+						// var comment = Ext.create('TC.model.Comment',{
+							// dish_id: dish_id,
+							// rating: rating,
+							// description: dish_comment,
+							// name: userName
+						// });
+						// comments_to_send.add(comment);
+					// }
+				// });
+				
 				// get restaurant's experience
-				var restaurant_comment = $j('.tcSurveyGeneralComment:last').val();
+				var restaurant_comment = $j('.tcSurveyOpinion .tcSurveyGeneralOpinion').val();
 				if(restaurant_comment.length > 0){
 					var comment = Ext.create('TC.model.Comment',{
 						name: userName,
+						email: userEmail,
 						description: restaurant_comment
 					});
 					comments_to_send.add(comment);
@@ -64127,7 +64066,7 @@ Ext.define('TC.controller.survey.SliderSurvey', {
 				// say thank you and have a nice day
 				setTimeout(function(){
 					Ext.Viewport.unmask();
-					$tc.alertMsg('<p align="center">'+$T.thanks_for_coming+'</p>',function(){
+					$tc.alertMsg('<p align="center">'+$T.thanks_for_helping_us_improve+'</p>',function(){
 						me.redirectTo('mainmenu');
 					});
 				},3000);
@@ -64144,15 +64083,19 @@ Ext.define('TC.controller.survey.SliderSurvey', {
 		var question_counter = 0;
 		
 		var survey_pages = [];
-		var survey_page = null;
+		var survey_questions = null;
   	
     TC.Restaurant.survey_questions().each(function(question){
 			if(question_counter%questions_per_page==0){
-				survey_page = Ext.create('TC.view.survey.basic.SurveyQuestions');
-				survey_page.setStore(Ext.create('TC.store.SurveyQuestions'));
+				survey_questions = Ext.create('TC.view.survey.basic.SurveyQuestions');
+				survey_questions.setStore(Ext.create('TC.store.SurveyQuestions'));
+				var survey_page = Ext.create('TC.view.survey.slider.SurveyPage',{
+					// first_page: (survey_pages.length==0)
+				});
+				survey_page.insert(0,survey_questions);
 				survey_pages.push(survey_page);
 			}
-			survey_page.getStore().add(question);
+			survey_questions.getStore().add(question);
 			question_counter++;
     });
     	
@@ -64363,6 +64306,7 @@ Ext.define('TC.model.Restaurant', {
 	    {name: "id", type: "int"},
 	    {name: "name", type: "string"},
 	    {name: "num_tables", type: "string"},
+	    {name: "current_locale", type: "string"},
 	    {name: "setting", persist: true},
 	    {name: "menus", persist: true},
 	    {name: "banners", persist: true},
@@ -64474,36 +64418,66 @@ Ext.define('TC.controller.Loader', {
   
   appLoad: function(callback){
   	console.log('TC.controller.Loader.appLoad');
+  	var self = this;
   	TC.switchView('TC.view.loading.Loader');
-  	if(!TC.Restaurant){
-  		TC.Restaurant = Ext.create('TC.model.Restaurant',{id: 1});
-  	}
-  	TC.model.Restaurant.setProxy(TC.Restaurant.getLocalProxy());
-  	TC.model.Restaurant.load(1, {
-  		timeout: $tc.timeout,
-	    scope: this,
-	    failure: function(record, operation) {
-	      console.log('TC.controller.Loader.appLoad failure');
-	    },
-	    success: function(record, operation) {
-	      console.log('TC.controller.Loader.appLoad success');
-	    },
-	    callback: function(record, operation) {
-	      if(record==null){
-	      	console.log('TC.controller.Loader.appLoad redirecting to update');
-	      	this.redirectTo('update');
-	      }
-	      else {
-	      	// set record
-	      	TC.Restaurant = record;
-	      	console.log('TC.controller.Loader.appLoad redirecting to home');
+  	// load restaurants from localstorage
+  	if(!TC.Restaurants || TC.Restaurants.getCount()==0){
+  		TC.Restaurants = Ext.create('TC.store.Restaurants');
+  		TC.Restaurants.load(function(){
+  			if(TC.Restaurants.getCount()==0){
+  				console.log('TC.controller.Loader.appLoad: redirecting to update');
+  				self.redirectTo('update');
+  			}
+  			else {
+  				// assign the default restaurant
+  				TC.Restaurant = TC.Restaurants.findRecord('current_locale',TC.Setting.get('language'));
+  				console.log('TC.controller.Loader.appLoad: redirecting to home');
 	      	// reload all
-	      	this.fireReloadEvent();
+	      	self.fireReloadEvent();
 	      	// redirect to home
-	      	this.redirectTo('home');
-	      }
-	    }
-		});
+	      	self.redirectTo('home');
+  			}
+  		});
+  	}
+  	else {
+			// assign the default restaurant
+			TC.Restaurant = TC.Restaurants.findRecord('current_locale',TC.Setting.get('language'));
+			console.log('TC.controller.Loader.appLoad: redirecting to home');
+    	// reload all
+    	self.fireReloadEvent();
+    	// redirect to home
+    	self.redirectTo('home');
+		}
+  	
+  	// if(!TC.Restaurant){
+  		// TC.Restaurant = Ext.create('TC.model.Restaurant',{id: 1});
+  	// }
+  	// TC.model.Restaurant.setProxy(TC.Restaurant.getLocalProxy());
+  	// TC.model.Restaurant.load(TC.Restaurant.getId(), {
+  		// timeout: $tc.timeout,
+	    // scope: this,
+	    // failure: function(record, operation) {
+	      // console.log('TC.controller.Loader.appLoad failure');
+	    // },
+	    // success: function(record, operation) {
+	      // console.log('TC.controller.Loader.appLoad success');
+	    // },
+	    // callback: function(record, operation) {
+	      // if(record==null){
+	      	// console.log('TC.controller.Loader.appLoad redirecting to update');
+	      	// this.redirectTo('update');
+	      // }
+	      // else {
+	      	// // set record
+	      	// TC.Restaurant = record;
+	      	// console.log('TC.controller.Loader.appLoad redirecting to home');
+	      	// // reload all
+	      	// this.fireReloadEvent();
+	      	// // redirect to home
+	      	// this.redirectTo('home');
+	      // }
+	    // }
+		// });
   },
   
   fireReloadEvent: function(){
@@ -64523,61 +64497,81 @@ Ext.define('TC.controller.Loader', {
   	var me = this;
   	console.log('TC.controller.Loader.appUpdate');
   	TC.switchView('TC.view.loading.Updater');
-  	if(!TC.Restaurant){
-  		TC.Restaurant = Ext.create('TC.model.Restaurant',{id: 1});
+  	if(!TC.Restaurants){
+  		TC.Restaurants = Ext.create('TC.store.Restaurants');
+  		TC.Restaurants.getProxy().clear();
   	}
+  	// if(!TC.Restaurant){
+  		// TC.Restaurant = Ext.create('TC.model.Restaurant',{id: TC.Restaurants.getCount()+1});
+  	// }
   	if(!TC.Setting.data){
   		TC.validateLicenseKey();
   		return false;
   	}
-  	TC.model.Restaurant.setProxy({
-  		type: $tc.protocol,
-  		url: $tc.url('get_restaurant')+'?all='+ fullUpdate +'&key='+TC.Setting.get('key')+'&locale='+TC.Setting.get('language'),
-  	});
-  	Ext.Viewport.setMasked({xtype: 'loadmask',message: $TO.updating_menu});
-  	TC.model.Restaurant.load(1, {
-	    scope: this,
-	    failure: function(record, operation) {
-	      console.log('TC.controller.Loader.appUpdate failure');
-	      Ext.Viewport.unmask();
-	      // error has occurred, ask if user wish to try again (if not go to home)
-	      $tc.confirmMsg($TO.update_menu_failed_question,function(btnPressed){
-	  			if(btnPressed == 'yes'){
-		  			me.redirectTo('update');
-		     	}
-		     	else {
-		     		me.redirectTo('home');
-		     	}
-	     	});
-	    },
-	    success: function(record, operation) {
-	      // set the record
-	      TC.Restaurant = record;
-	      console.log('TC.controller.Loader.appUpdate success');
-	      // remove any instance of restaurant
-	      var _rest = Ext.create('TC.store.Restaurants');
-	      _rest.load(function(){
-	      	_rest.removeAll();
-	      	_rest.sync();
-	      	_rest = null;
-	      });
-	      // and save the new one locally
-	      TC.model.Restaurant.setProxy(TC.Restaurant.getLocalProxy());
-	      TC.Restaurant.save(function(){
-	      	if(Ext.os.is.Desktop){
-	      		Ext.Viewport.unmask();
-	      		console.log('TC.controller.Loader.appUpdate redirecting to load');
-	      		if(!callback){
-	      			me.redirectTo('load');
-	      		}
-	      		else {
-	      			callback();
-	      		}
-	      	}
-	      	else {
-	      		console.log('TC.controller.Loader.appUpdate fetching images...');
+  	
+  	if(!$tc.checkConnection()) return false;
+  	
+  	// get supported languages and load the entire restaurant for each language
+  	TC.ajaxRequest({
+  		url: $tc.url('supported_langs'),
+  		success: function(response){
+  			var arr = JSON.parse(response.responseText).result;
+  			arr.shift();
+  			var locale_counter = 0;
+  			TC.Restaurants.removeAll();
+  			TC.Restaurants.sync();
+  			TC.Restaurants.getProxy().clear();
+  			
+  			var loadRestaurant = function(current_locale,rest_id,_callback){
+  				Ext.Viewport.setMasked({xtype: 'loadmask',message: $TO.updating_menu + " lang="+current_locale});
+  				// Ext.create('TC.model.Restaurant',{id: rest_id_counter++});
+  				TC.model.Restaurant.setProxy({
+			  		type: $tc.protocol,
+			  		url: $tc.url('get_restaurant')+'?all='+ fullUpdate +'&key='+TC.Setting.get('key')+'&locale='+current_locale,
+			  		timeout: 20000
+			  	});
+			  	TC.model.Restaurant.load(rest_id, {
+				    scope: this,
+				    failure: function(record, operation) {
+				      console.log('TC.controller.Loader.appUpdate failure');
+				      Ext.Viewport.unmask();
+				      // error has occurred, ask if user wish to try again (if not go to home)
+				      $tc.confirmMsg($TO.update_menu_failed_question,function(btnPressed){
+				  			if(btnPressed == 'yes'){
+					  			me.redirectTo('update');
+					     	}
+					     	else {
+					     		me.redirectTo('home');
+					     	}
+				     	});
+				    },
+				    success: function(record, operation) {
+				      console.log('TC.controller.Loader.appUpdate success');
+				      var url = operation.getRequest().getUrl();
+				      var this_locale = url.substring(url.indexOf('locale=')+7).split('&')[0];
+				      record.set('current_locale',this_locale);
+				      record.setProxy(record.getLocalProxy());
+				      record.save();
+				      TC.Restaurants.add(record);
+				      // set default restaurant
+				      if(this_locale==TC.Setting.get('language')){
+				      	TC.Restaurant = record;
+				      }
+				      if(rest_id<arr.length){
+				      	loadRestaurant(arr[rest_id],rest_id+1,_callback);
+				      }
+				      else {
+				      	_callback();
+				      }
+				    }
+				  });
+				};
+				loadRestaurant(arr[0],1,function(){
+					console.log('TC.controller.Loader.appUpdate: done loading.');
+					// sync images
+	      	if(TC.Restaurant && TC.Restaurant.get('setting') && TC.Restaurant.get('setting').sync_photos && !Ext.os.is.Desktop){
+	      		console.log('TC.controller.Loader.appUpdate: fetching images...');
 	      		me._fetchImages(fullUpdate,function(ok){
-	      			console.log('TC.controller.Loader.appUpdate redirecting to load');
 	      			Ext.Viewport.unmask();
 	      			if(!ok){
 	      				$tc.confirmMsg($TO.update_download_failed_question,function(btnPressed){
@@ -64585,33 +64579,27 @@ Ext.define('TC.controller.Loader', {
 						  			me.redirectTo('update');
 						     	}
 						     	else {
-						     		if(!callback){
-				      				me.redirectTo('load');
-				      			}
-				      			else {
-				      				callback();
-				      			}
+						     		me.redirectTo('load');
 						     	}
 					     	});
 	      			}
 				      else {
-				      	if(!callback){
-		      				me.redirectTo('load');
-		      			}
-		      			else {
-		      				callback();
-		      			}
+	      				me.redirectTo('load');
 				      }
-	      		});
+				    });
 	      	}
-	      });
-	    },
-	    callback: function(record, operation) {
-	      console.log('TC.controller.Loader.appUpdate callback');
-	    }
-		});
+	      	else {
+	      		Ext.Viewport.unmask();
+	      		me.redirectTo('load');
+	      	}
+				});
+  		},
+  		failure: function(response){
+  			console.log('TC.controller.Loader.appUpdate: an error has ocurred........');
+  		}
+  	});
   },
-  
+  	
   appReset: function(){
   	this.appUpdate("yes");
   },
@@ -64771,6 +64759,97 @@ Ext.define('TC.view.loading.Updater', {
 	}
 });
 
+/**
+ * @class TC.view.dish.DishReviewModal
+ * @extends Ext.Panel
+ *
+ * DishReviewModal Panel
+ * @description This modal allow user to rate and review a dish
+ **/
+
+Ext.define('TC.view.dish.DishReviewModal', {
+	extend: 'Ext.Panel',
+	xtype: 'dish-review-modal',
+	config: {
+		cls : 'tcDishReviewModal',
+		dishId: null,
+		centered: true,
+		modal: true,
+		hideOnMaskTap: true,
+		layout: {
+			type: 'vbox',
+			align: 'center'
+		},
+		items: [
+			{
+				cls: 'tcDishReviewModalTitle',
+				html: $T.rate_review_dish
+			},
+			// {
+				// tpl: new Ext.XTemplate(
+    			// '<div class="dish-info">',
+    				// '<span class="dish-title">{name}</span>',
+	    			// '<img class="dish-photo" src="{thumbnail_photo_url}"/>',
+	    		// '</div>'
+	    	// )
+			// },
+			{
+				html: [
+				'<div class="block">',
+					'<div class="left ratingTitle">'+$T.rating+'</div>',
+					'<div class="right rating">',
+	      		'<div class="star"></div>',
+	      		'<div class="star"></div>',
+	      		'<div class="star"></div>',
+	      		'<div class="star"></div>',
+	      		'<div class="star"></div>',
+	      	'</div>',
+      	'</div>'
+      	].join('')
+			},
+			{
+				cls: 'tcDishReviewModalNameContainer',
+				html: [
+					'<div class="block tcDishReviewModalName">',
+						'<label class="left">'+$T.your_name+'</label>',
+						'<input class="right userInputNameField" type="text" name="name" placeholder="'+$T.name_example+'" />',
+					'</div>'
+				].join('')
+			},
+			{
+				cls: 'tcDishReviewModalDetailsContainer',
+				html: [
+					'<div class="block tcDishReviewModalDetails">',
+						'<label class="left">'+$T.your_comment+'</label>',
+						'<textarea class="right tcDishReviewModalOpinion" placeholder="'+$T.leave_your_comment_here+'" rows="4" cols="50"></textarea>',
+					'</div>'
+				].join('')
+			},
+			{
+				cls: 'tcDishReviewModalButtons',
+				layout: 'hbox',
+				items: [
+					{
+						cls: 'tcDishReviewModalCancelBtn',
+						xtype: 'button',
+						text: $T.cancel,
+						handler: function(){
+							this.parent.parent.destroy();
+						}
+					},
+					{
+						itemId: 'tcDishReviewModalSubmitBtnId',
+						cls: 'tcDishReviewModalSubmitBtn',
+						xtype: 'button',
+						ui: 'action',
+						text: $T.submit
+					}
+				]
+			}
+			
+		]
+	}
+});
 /**
  * @class TC.view.order.OrderView
  * @extends Ext.Panel
@@ -64956,9 +65035,8 @@ Ext.define('TC.view.survey.slider.SurveyContainer', {
 				flex: 1,
 				itemId: 'tcSurveySliderCarouselId',
 				xtype: 'carousel',
+				indicator: false,
 				items: [
-					{ html: 'item1' },
-					{ html: 'item2' }
 				]
 			}
 			
@@ -64966,6 +65044,123 @@ Ext.define('TC.view.survey.slider.SurveyContainer', {
 	}
 	
 });
+
+/**
+ * @class TC.view.survey.slider.SurveyPage
+ * @extends Ext.DataView
+ *
+ * SurveyDishes DataView
+ * @description This panel display the survey dishes
+ **/
+
+Ext.define('TC.view.survey.slider.SurveyPage', {
+	// requires: ['TC.view.dailymenu.DailyMenuDish'],
+	// extend: 'Ext.DataView',
+	extend: 'Ext.Panel',
+	xtype: 'survey-slider-page',
+	config: {
+		cls: 'tcSurveySliderPage',
+		firstPage: true,
+		layout: {
+			type: 'vbox',
+			align: 'center'
+		},
+		items: [
+			{
+				xtype: 'button',
+				text: 'Back',
+				hidden: true,
+				handler: function(){
+					this.parent.parent.previous();
+				}
+			},
+			{
+				xtype: 'button',
+				text: $T.next,
+				handler: function(){
+					this.parent.parent.next();
+				}
+			}
+		]
+	}
+});
+/**
+ * @class TC.view.survey.SurveyOpinion
+ * @extends Ext.Panel
+ *
+ * SurveyOpinion Panel
+ * @description This panel display the survey opinion
+ **/
+
+Ext.define('TC.view.survey.slider.SurveyOpinion', {
+	extend: 'Ext.Panel',
+	xtype: 'survey-opinion',
+	config: {
+		cls: 'tcSurveyOpinion',
+		layout: {
+			type: 'vbox',
+			align: 'center'
+		},
+		items: [
+			{
+				cls: 'tcSurveyOpinionText',
+				html: $T.survey_text
+			},
+			{
+				cls: 'tcSurveyOpinionNameContainer',
+				html: [
+					'<div class="block tcSurveyOpinionName">',
+						'<label class="left">'+$T.your_name+'</label>',
+						'<input class="right userInputNameField" type="text" name="name" placeholder="'+$T.name_example+'" />',
+					'</div>'
+				].join('')
+			},
+			{
+				cls: 'tcSurveyOpinionEmailContainer',
+				html: [
+					'<div class="block tcSurveyOpinionEmail">',
+						'<label class="left">'+$T.your_email+'</label>',
+						'<input class="right userInputNameField" type="email" name="email" placeholder="'+$T.email_example+'" />',
+					'</div>'
+				].join('')
+			},
+			{
+				cls: 'tcSurveyOpinionDetailsContainer',
+				html: [
+					'<div class="block tcSurveyOpinionDetails">',
+						'<label class="left">'+$T.your_comment+'</label>',
+						'<textarea class="right tcSurveyGeneralOpinion" placeholder="'+$T.leave_your_comment_here+'" rows="4" cols="50"></textarea>',
+						// '<input class="right tcSurveyGeneralOpinion" placeholder="'+$T.leave_your_comment_here+'" />',
+					'</div>'
+				].join('')
+			},
+			{
+				cls: 'tcSurveyOpinionButtons',
+				layout: 'hbox',
+				items: [
+					{
+						cls: 'tcSurveyOpinionBackBtn',
+						xtype: 'button',
+						text: $T.back,
+						handler: function(){
+							this.parent.parent.parent.previous();
+						}
+					},
+					{
+						itemId: 'tcSurveyOpinionSubmitBtnId',
+						cls: 'tcSurveyOpinionSubmitBtn',
+						xtype: 'button',
+						ui: 'action',
+						text: $T.submit
+					}
+				]
+			}
+		]
+	}
+});
+
+
+
 
 /**
  * @class TC.view.help.HelpView
@@ -65304,10 +65499,17 @@ Ext.define('TC.view.dish.DishPhoto', {
     	'<div class="dish-photo-container">',
 	    	'<img id="tcDishImgId" class="dish-image" src="{large_photo_url}"/>',
 	    	'<div class="dish-info">',
-	    		'<div class="dish-description">{description}</div>',
-	    		'<div class="dish-price">',
-	    			'<span class="euro">€</span>',
-	    			'<span class="price">{price:this.twoDecimals}</span>',
+	    		'<div class="left">',
+	    			'<div class="dish-description">{description}</div>',
+	    			'<div class="dish-actions">',
+	    				'<a class="tcDishActionReview" id="tcDishActionReview_{id}" href="#"></a>',
+	    			'</div>',
+	    		'</div>',
+	    		'<div class="right">',
+		    		'<div class="dish-price">',
+		    			'<span class="euro">€</span>',
+		    			'<span class="price">{price:this.twoDecimals}</span>',
+		    		'</div>',
 	    		'</div>',
     		'</div>',
   		'</div>',
@@ -65542,7 +65744,7 @@ Ext.define('TC.view.toolbars.BottomToolbar', {
 			{
 				id: 'tcHelpBtnId',
 				xtype: 'button',
-				// text: 'Show Help',
+				hidden: true,
 				iconMask: true,
     		iconCls: 'info',
     		ui: 'plain'
@@ -65550,23 +65752,25 @@ Ext.define('TC.view.toolbars.BottomToolbar', {
 			{
 				id: 'tcChangeLangBtnId',
 				xtype: 'button',
+				hidden: true,
 				text: $T.change_lang
 			},
 			{
 				id: 'tcFilterDishesBtnId',
 				xtype: 'button',
+				hidden: true,
 				text: $T.filter_dishes
 			},
 			{
 				id: 'tcShowSurveyBtnId',
 				xtype: 'button',
+				hidden: true,
 				text: $T.fill_survey
 			},
 			{ xtype: 'spacer' },
 			{
 				id: 'tcSwitchTableBtnId',
 				xtype: 'button',
-				// text: 'Switch Table',
 				iconMask: true,
     		icon: 'resources/img/common/logo/minilogo.png',
     		ui: 'plain'
@@ -69023,6 +69227,9 @@ Ext.define('TC.view.matrixmenu.DishImageView', {
 						'<div class="dish-left">',
 							'<div class="dish-name">{name}</div>',
 							'<div class="dish-description">{description}</div>',
+							'<div class="dish-actions">',
+		    				'<a class="tcDishActionReview" id="tcDishActionReview_{id}" href="#"></a>',
+		    			'</div>',
 						'</div>',
 						'<div class="dish-right">',
 							'<div class="dish-price"><span class="euro">&euro;</span><span class="price">{price:this.twoDecimals}</span></div>',
@@ -72434,7 +72641,7 @@ Ext.define('TC.view.survey.basic.SurveyQuestions', {
 Ext.define('TC.view.survey.basic.SurveyContainer', {
 	requires: ['TC.view.survey.basic.SurveyDishes','TC.view.survey.basic.SurveyQuestions','TC.view.survey.basic.SurveyComments'],
 	extend: 'Ext.Panel',
-	xtype: 'survey-container',
+	xtype: 'survey-basic-container',
 	
 	config: {
 		cls: 'tcSurveyContainer',

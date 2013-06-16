@@ -12,6 +12,7 @@
   }
   .tcDailyMenuTitle {
     margin-bottom: 0px;
+    height: 60px;
   }
   .tcDailyMenuTitleText {
     overflow: hidden;
@@ -50,6 +51,11 @@
         margin-left: 2.2em;
         margin-top: -2em;
       }
+      .nobadge-tab-label {
+        line-height: 1.8em;
+        margin-left: 0;
+        margin-top: 0;
+      }
       .x-badge {
         position: relative;
         margin-top: 0.5em !important;
@@ -61,7 +67,7 @@
       &.selected {
         .x-badge {
           background-color: #900;
-          background-image: linear-gradient(#E60000, #B30000 50%, #900 51%, maroon);
+          // background-image: linear-gradient(#E60000, #B30000 50%, #900 51%, maroon);
         }
         .x-button-label {
           margin-top: -1.7em;
@@ -127,7 +133,7 @@
           }
           &.x-item-selected .tcDailyMenuDish {
             background-color: #900;
-            background-image: linear-gradient(#E60000, #B30000 50%, #900 51%, maroon);
+            // background-image: linear-gradient(#E60000, #B30000 50%, #900 51%, maroon);
             .tcDailyMenuDishPhoto {
               border: 2px solid #900;
             }

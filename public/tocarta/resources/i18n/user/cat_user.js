@@ -8,6 +8,19 @@ $T = {
 	
 	"back": "Tornar",
 	
+	//// TC.Views.Toolbars.TopToolbar ////
+	
+	"desserts": "Desserts",
+	"main_menu": "Main Menu",
+	"daily_menu": "Daily Menu",
+	"beverages": "Drinks",
+	
+	//// TC.Views.Toolbars.BottomToolbar ////
+	
+	"filter_dishes": "Filtrar Platos",
+	"fill_survey": "Valorar Servicio",
+	"change_lang": "Cambiar Idioma",
+	
 	//// TC.Controller.Main ////
 	
 	"order_is_empty": "La comanda està buida. Triï un plat i afegeixi’l  a la comanda.",
@@ -32,6 +45,8 @@ $T = {
 	"send_survey_question": "Vol enviar l’enquesta?",
 	"send_survey_loading": "Enviant l’enquesta...",
 	"thanks_for_coming": "Gràcies per venir i esperem<br/>que torni ben aviat!",
+	"thanks_for_helping_us_improve": "Muchas gracias por ayudarnos a mejorar!",
+	"next": "Siguiente",
 	
 	//// TC.view.dish.DishComments ////
 	
@@ -43,10 +58,19 @@ $T = {
 	"photo": "Foto",
 	"comments": "Comentaris",
 	"video": "Video",
+	"nutritionfacts": "Datos de Nutricion",
 	
 	//// TC.view.dish.DishPhoto ////
 	
 	"add": "Afegir",
+	
+	//// TC.view.dish.DishReviewModal ////
+	
+	"rate_review_dish": "Valora y Comenta el Plato",
+	"cancel": "Cancelar",
+	"rating": "Valoración",
+	"submit_dish_rating": "Enviando la valoración...",
+	"dish_rating_submited": "Hemos registrado tu valoración, gracias!",
 	
 	//// TC.view.loading.Loader ////
 	
@@ -92,12 +116,15 @@ $T = {
 	"name_example": "ex. Laia",
 	"leave_your_comment_here": "Escrigui aquí el seu comentari...",
 	"submit": "Enviar",
+	"your_email": "Tu email:",
+	"email_example": "ej. maria@gmail.com",
 	
 	//// TC.view.survey.SurveyContainer ////
 	
 	"comment_dishes_eaten": "Comenti els plats que ha menjat",
 	"your_opinion": "Ens agradaria conèixer la seva opinió",
 	"your_name_and_comment": "Deixi’ns el seu nom i un comentari",
+	"survey_text": "Tu opinion es importante, ayúdanos a mejorar!",
 	
 	//// TC.view.survey.SurveyDishes ////
 	

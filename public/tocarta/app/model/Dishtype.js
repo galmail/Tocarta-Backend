@@ -13,13 +13,13 @@ Ext.define('TC.model.Dishtype', {
 	    {name: "small_icon", type: "string"},
 	    {name: "small_icon_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("small_icon");
+	    		return $tc.checkImgUrl(record.get("small_icon"));
 	    	}
 	    },
 	    {name: "big_icon", type: "string"},
 	    {name: "big_icon_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("big_icon");
+	    		return $tc.checkImgUrl(record.get("big_icon"));
 	    	}
 	    }
 	  ]

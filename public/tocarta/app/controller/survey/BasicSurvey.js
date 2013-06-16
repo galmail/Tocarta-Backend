@@ -19,8 +19,8 @@ Ext.define('TC.controller.survey.BasicSurvey', {
     	'survey.basic.SurveyComments'
     ],   
     refs: {
-    	survey: 'survey-container',
-    	submitSurveyButton: 'survey-container button',
+    	survey: 'survey-basic-container',
+    	submitSurveyButton: 'survey-basic-container button',
     },
     control: {
     	survey: { show: 'showSurvey' },

@@ -17,3 +17,8 @@
 .x-toolbar.tcBottomToolbar #tcHelpBtnId .x-button-icon.x-icon-mask {
   background-image: -webkit-linear-gradient(#6b4c58, #876b76);
 }
+/* line 24, ../../../styles/toolbars/bottom-toolbar.scss */
+.x-toolbar.tcBottomToolbar .x-button .x-button-normal {
+  font-size: 20px !important;
+  padding: 10px !important;
+}

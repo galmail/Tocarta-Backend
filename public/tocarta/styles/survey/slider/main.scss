@@ -3,26 +3,104 @@
  **/
 
 .tcSurveySliderContainer {
+  background: transparent;
   
   .tcSurveyQuestions {
     height: 100%;
+    background: transparent;
     
-    .survey_question {
-      .question_title {
-        font-size: 30px;
+    height: 450px;
+    margin-top: 50px;
+    
+    .x-inner.x-dataview-inner {
+      position: relative;
+      .x-dataview-container {
+        position: absolute;
+        top: 50%;
+        height: 450px;
+        margin-top: -245px;
+        left: 50%;
+        margin-left: -500px;
+        width: 1000px;
+        border: 2px solid black;
+        border-radius: 5px;
       }
-      .rating .star {
-        width: 72px;
-        height: 72px;
-        background: url("../img/common/icons/star_big_white.png") no-repeat;
-        &.selected {
-          background: url("../img/common/icons/star_big_gold.png") no-repeat;
-        }
-      }
-      
     }
     
+    .survey_question {
+      padding: 20px 10px;
+      .question_title {
+        font-size: 25px;
+        margin-top: 19px;
+      }
+      .rating {
+        margin-left: 70px;
+        .star {
+          width: 72px;
+          height: 72px;
+          background: url("../img/common/icons/star_big_white.png") no-repeat;
+          &.selected {
+            background: url("../img/common/icons/star_big_gold.png") no-repeat;
+          }
+        }
+      }
+    }
+    
+    
+    
   }
+  
+  
+  .tcSurveyOpinion {
+    padding: 30px;
+    max-height: 510px;
+    &>.x-inner.x-panel-inner {
+      border: 2px solid black;
+      border-radius: 5px;
+      padding: 10px;
+    }
+    .block {
+      overflow: hidden;
+      padding-bottom: 20px;
+    }
+    .left {
+      display: block;
+      float: left;
+      width: 180px;
+      padding: 5px;
+    }
+    .right {
+      display: block;
+      padding: 5px;
+      float: left;
+      width: 400px;
+    }
+    .tcSurveyOpinionText {
+      padding-bottom: 30px;
+      padding-top: 20px;
+      font-size: 22px;
+    }
+    .tcSurveyOpinionBackBtn {
+      padding: 10px 15px;
+      font-weight: normal;
+      font-size: 17px;
+      margin: 20px;
+      margin-left: 120px;
+      margin-right: 50px;
+    }
+    .tcSurveyOpinionSubmitBtn {
+      padding: 10px 20px;
+      font-weight: normal;
+      font-size: 20px;
+      margin: 20px;
+    }
+    
+    
+  }
+  
+  
+  
+  
   
   
 }

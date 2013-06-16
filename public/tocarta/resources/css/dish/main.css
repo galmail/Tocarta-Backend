@@ -156,11 +156,11 @@
 /**
  * Dish photo stylesheet
  **/
-/* line 7, ../../../styles/dish/photo.scss */
+/* line 11, ../../../styles/dish/photo.scss */
 .tcDishPhoto {
   background: transparent;
 }
-/* line 10, ../../../styles/dish/photo.scss */
+/* line 14, ../../../styles/dish/photo.scss */
 .tcDishPhoto .tcBigBadge {
   position: absolute;
   top: 0;
@@ -178,14 +178,14 @@
   width: 133px;
   text-align: center;
 }
-/* line 27, ../../../styles/dish/photo.scss */
+/* line 31, ../../../styles/dish/photo.scss */
 .tcDishPhoto .tcBigBadge .dish-big-badge {
   text-align: center;
   margin-left: -51px;
   width: 101px;
   font-size: 0.7em;
 }
-/* line 35, ../../../styles/dish/photo.scss */
+/* line 39, ../../../styles/dish/photo.scss */
 .tcDishPhoto .tcAddButton {
   position: absolute;
   right: 1px;
@@ -200,7 +200,7 @@
   border-radius: 5px;
   border: none;
 }
-/* line 44, ../../../styles/dish/photo.scss */
+/* line 48, ../../../styles/dish/photo.scss */
 .tcDishPhoto .tcAddButton.x-button-pressing, .tcDishPhoto .tcAddButton.x-button-pressed {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(100%, #625b5b));
   background-image: -webkit-linear-gradient(#333333, #625b5b);
@@ -208,19 +208,19 @@
   background-image: -o-linear-gradient(#333333, #625b5b);
   background-image: linear-gradient(#333333, #625b5b);
 }
-/* line 47, ../../../styles/dish/photo.scss */
+/* line 51, ../../../styles/dish/photo.scss */
 .tcDishPhoto .tcAddButton .x-button-label {
   padding: 5px 0;
   padding-bottom: 7px;
   width: 100px;
 }
-/* line 54, ../../../styles/dish/photo.scss */
+/* line 58, ../../../styles/dish/photo.scss */
 .tcDishPhoto .dish-photo-container .dish-image {
   width: 100%;
   height: 100%;
   border-radius: 5px;
 }
-/* line 61, ../../../styles/dish/photo.scss */
+/* line 65, ../../../styles/dish/photo.scss */
 .tcDishPhoto .dish-photo-container .dish-info {
   clear: both;
   overflow: hidden;
@@ -229,29 +229,51 @@
   position: absolute;
   bottom: 0;
 }
-/* line 69, ../../../styles/dish/photo.scss */
-.tcDishPhoto .dish-photo-container .dish-info .dish-description {
+/* line 73, ../../../styles/dish/photo.scss */
+.tcDishPhoto .dish-photo-container .dish-info .left {
   float: left;
   background-color: white;
-  width: 70%;
+  width: 75%;
   height: 100%;
   padding: 10px;
   opacity: 0.6;
 }
-/* line 77, ../../../styles/dish/photo.scss */
-.tcDishPhoto .dish-photo-container .dish-info .dish-price {
+/* line 83, ../../../styles/dish/photo.scss */
+.tcDishPhoto .dish-photo-container .dish-info .left .dish-actions {
+  position: absolute;
+  bottom: 10px;
+  width: 75%;
+  padding-right: 20px;
+  text-align: right;
+}
+/* line 89, ../../../styles/dish/photo.scss */
+.tcDishPhoto .dish-photo-container .dish-info .left .dish-actions .tcDishActionReview {
+  background-image: url("../img/common/icons/comment_dish.png");
+  width: 35px;
+  height: 35px;
+  display: block;
   float: right;
-  width: 30%;
+}
+/* line 98, ../../../styles/dish/photo.scss */
+.tcDishPhoto .dish-photo-container .dish-info .right {
+  float: right;
+  width: 25%;
   height: 100%;
   background-color: black;
+  opacity: 0.8;
+}
+/* line 104, ../../../styles/dish/photo.scss */
+.tcDishPhoto .dish-photo-container .dish-info .right .dish-price {
+  margin-left: auto;
+  margin-right: auto;
+  width: 122px;
   font-size: 44px;
   color: white;
   text-align: center;
   padding-top: 22px;
-  opacity: 0.8;
 }
-/* line 87, ../../../styles/dish/photo.scss */
-.tcDishPhoto .dish-photo-container .dish-info .dish-price .euro {
+/* line 112, ../../../styles/dish/photo.scss */
+.tcDishPhoto .dish-photo-container .dish-info .right .dish-price .euro {
   color: #CB8D8A;
   font-size: 43px;
   margin-right: 15px;
@@ -396,50 +418,166 @@
   font-weight: bold;
 }
 
-/* line 11, ../../../styles/dish/main.scss */
+/**
+ * Dish Nutrition Facts stylesheet
+ **/
+/* line 5, ../../../styles/dish/nutritionfacts.scss */
+.tcDishNutritionFacts {
+  background: white;
+  /*  The wrapper for the bar */
+  /*  The actual bar itself */
+}
+/* line 11, ../../../styles/dish/nutritionfacts.scss */
+.tcDishNutritionFacts .dish-nutritionfacts {
+  padding: 20px 100px;
+}
+/* line 15, ../../../styles/dish/nutritionfacts.scss */
+.tcDishNutritionFacts .block {
+  overflow: hidden;
+  padding: 10px 0;
+}
+/* line 20, ../../../styles/dish/nutritionfacts.scss */
+.tcDishNutritionFacts .label {
+  float: left;
+  width: 150px;
+}
+/* line 26, ../../../styles/dish/nutritionfacts.scss */
+.tcDishNutritionFacts .graph {
+  height: 1.529411765em;
+  margin-bottom: .470588235em;
+  overflow: hidden;
+  background-color: #e5e5e5;
+  border-radius: .071428571em;
+  text-align: center;
+  font-size: 1em;
+  line-height: 1.5em;
+}
+/* line 39, ../../../styles/dish/nutritionfacts.scss */
+.tcDishNutritionFacts .graph-bar {
+  float: left;
+  width: 0;
+  height: 100%;
+  color: #ffffff;
+  background-color: #0088cc;
+  -webkit-box-sizing: border-box;
+}
+/* line 46, ../../../styles/dish/nutritionfacts.scss */
+.tcDishNutritionFacts .graph-bar.fats {
+  background-color: red;
+}
+/* line 49, ../../../styles/dish/nutritionfacts.scss */
+.tcDishNutritionFacts .graph-bar.carbs {
+  background-color: yellow;
+}
+/* line 52, ../../../styles/dish/nutritionfacts.scss */
+.tcDishNutritionFacts .graph-bar.proteins {
+  background-color: green;
+}
+
+/**
+ * Dish Rate and Review stylesheet
+ **/
+/* line 5, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal {
+  background: white;
+  font-family: 'YanoneKaffeesatzThin';
+}
+/* line 9, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .x-inner.x-panel-inner {
+  padding: 20px;
+}
+/* line 13, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .left {
+  float: left;
+  width: 130px;
+}
+/* line 16, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .left.ratingTitle {
+  margin-top: 25px;
+}
+/* line 20, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .right {
+  float: left;
+  width: 360px;
+}
+/* line 24, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .block {
+  overflow: hidden;
+  padding: 10px;
+}
+/* line 29, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .tcDishReviewModalTitle {
+  font-size: 30px;
+  font-family: 'YanoneKaffeesatzRegular';
+}
+/* line 34, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .rating {
+  overflow: hidden;
+}
+/* line 37, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .rating .star {
+  float: left;
+  width: 72px;
+  height: 72px;
+  background: url("../img/common/icons/star_big_white.png") no-repeat;
+}
+/* line 42, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .rating .star.selected {
+  background: url("../img/common/icons/star_big_gold.png") no-repeat;
+}
+/* line 48, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .tcDishReviewModalButtons {
+  margin-top: 10px;
+}
+/* line 50, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .tcDishReviewModalButtons .tcDishReviewModalCancelBtn {
+  margin-right: 40px;
+}
+
+/* line 13, ../../../styles/dish/main.scss */
 .tcDishContainer {
   background: transparent;
 }
-/* line 14, ../../../styles/dish/main.scss */
+/* line 16, ../../../styles/dish/main.scss */
 .tcDishContainer .x-docking-vertical {
   width: 100%;
 }
-/* line 16, ../../../styles/dish/main.scss */
+/* line 18, ../../../styles/dish/main.scss */
 .tcDishContainer .x-docking-vertical .x-container > .x-inner {
   width: 100%;
 }
-/* line 21, ../../../styles/dish/main.scss */
+/* line 23, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishTitle {
   background: transparent;
   border: none;
   padding-top: 2px;
   height: 47px;
 }
-/* line 27, ../../../styles/dish/main.scss */
+/* line 29, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishTitle .x-title {
   color: #000;
 }
-/* line 29, ../../../styles/dish/main.scss */
+/* line 31, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishTitle .x-title .x-innerhtml {
   font-size: 24px;
 }
-/* line 33, ../../../styles/dish/main.scss */
+/* line 35, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishTitle .tcDishTitleIcons {
   width: 120px;
   height: 16px;
 }
-/* line 36, ../../../styles/dish/main.scss */
+/* line 38, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishTitle .tcDishTitleIcons .x-dataview-item {
   display: inline-block;
   margin-right: 3px;
 }
-/* line 42, ../../../styles/dish/main.scss */
+/* line 44, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishContainerTabBar {
   height: 54px;
   background: transparent;
   border: none;
 }
-/* line 46, ../../../styles/dish/main.scss */
+/* line 48, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishContainerTabBar .x-tab {
   background-image: none;
   background-color: #67512d;
@@ -452,11 +590,11 @@
   border-top-width: 0px;
   margin-bottom: 8px;
 }
-/* line 57, ../../../styles/dish/main.scss */
+/* line 59, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishContainerTabBar .x-tab .x-button-icon {
   display: none;
 }
-/* line 60, ../../../styles/dish/main.scss */
+/* line 62, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishContainerTabBar .x-tab .x-button-label {
   font-size: 15px;
   color: white;
@@ -464,11 +602,11 @@
   padding-top: 20px;
   padding-bottom: 14px;
 }
-/* line 67, ../../../styles/dish/main.scss */
+/* line 69, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishContainerTabBar .x-tab.x-tab-active {
   background-color: white;
 }
-/* line 69, ../../../styles/dish/main.scss */
+/* line 71, ../../../styles/dish/main.scss */
 .tcDishContainer .tcDishContainerTabBar .x-tab.x-tab-active .x-button-label {
   color: black;
 }

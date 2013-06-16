@@ -1,0 +1,69 @@
+CACHE MANIFEST
+# 2013-06-12 12:02
+
+
+CACHE:
+index.html
+## APP PART ##
+# app-all.js
+
+## CSS PART ##
+# resources/css/application.css
+
+## IMG PART ##
+# resources/img/common/bg-app.jpg
+# resources/img/common/bg.png
+# resources/img/common/bg2.png
+# resources/img/common/icons/comment_dish.png
+# resources/img/common/icons/delete_black2.png
+# resources/img/common/icons/star_big_gold.png
+# resources/img/common/icons/star_big_white.png
+# resources/img/common/icons/star_med_gold.png
+# resources/img/common/icons/star_med_white.png
+# resources/img/common/icons/star_mini_gold.png
+# resources/img/common/icons/star_mini_white.png
+# resources/img/common/icons/star_small_gold.png
+# resources/img/common/icons/star_small_white.png
+# resources/img/common/logo/minilogo.png
+# resources/img/flags/bt-cat.png
+# resources/img/flags/bt-en.png
+# resources/img/flags/bt-es.png
+# resources/img/flags/bt-fr-hover.png
+# resources/img/flags/bt-fr.png
+# resources/img/flags/bt-gb-hover.png
+# resources/img/flags/bt-ger-hover.png
+# resources/img/flags/bt-gr.png
+# resources/img/flags/bt-spain-hover.png
+
+## JS PART ##
+# resources/js/cat_user.js
+# resources/js/en_user.js
+# resources/js/es_user.js
+# resources/js/es_operator.js
+# resources/js/ChildBrowser.js
+# resources/js/cordova-1.7.0.js
+# resources/js/cordova-2.2.0.js
+# resources/js/cordova-2.5.0.js
+# resources/js/cordova-2.7.0.js
+# resources/js/FBConnect.js
+# resources/js/jquery-1.7.1.min.js
+# resources/js/jquery.i18n.properties-min-1.0.9.js
+# resources/js/jquery.watermark.min.js
+# resources/js/sencha-touch.js
+# resources/js/sencha-touch-debug.js
+# resources/js/socket.io.min.js
+# resources/js/zepto.min.js
+
+## FONTS PART ##
+
+
+# Resources that require the user to be online.
+NETWORK:
+# http://analytics.tocarta.es
+# /cli/
+
+FALLBACK:
+http://s3.amazonaws.com/tocarta-prod/app_assets/resources/js/es_user.js		resources/js/es_user.js
+http://s3.amazonaws.com/tocarta-prod/app_assets/resources/js/en_user.js		resources/js/en_user.js
+http://s3.amazonaws.com/tocarta-prod/app_assets/resources/js/cat_user.js	resources/js/cat_user.js
+

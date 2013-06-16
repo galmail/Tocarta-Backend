@@ -7,7 +7,7 @@
  **/
 
 Ext.define('TC.view.dish.DishContainer', {
-	requires: ['Ext.tab.Panel','TC.view.dish.DishTitle','TC.view.dish.DishPhoto','TC.view.dish.DishComments','TC.view.dish.DishVideo'],
+	requires: ['Ext.tab.Panel','TC.view.dish.DishTitle','TC.view.dish.DishPhoto','TC.view.dish.DishComments','TC.view.dish.DishVideo','TC.view.dish.DishNutritionFacts'],
 	extend: 'Ext.Panel',
 	xtype: 'dish-container',
 	config: {
@@ -41,6 +41,10 @@ Ext.define('TC.view.dish.DishContainer', {
 	        {
 	          title: $T.comments,
 	          xtype: 'dish-comments-tab'
+	        },
+	        {
+	          title: $T.nutritionfacts,
+	          xtype: 'dish-nutritionfacts-tab'
 	        },
 	        {
 	          title: $T.video,
