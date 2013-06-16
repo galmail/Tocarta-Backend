@@ -1,32 +1,32 @@
 /** YanoneKaffeesatz **/
 @font-face {
   font-family: 'YanoneKaffeesatzThin';
-  src: url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.eot");
-  src: url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.eot?#iefix") format("embedded-opentype"), url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.woff") format("woff"), url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.ttf") format("truetype"), url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.svg#YanoneKaffeesatzLight") format("svg");
+  src: url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.eot");
+  src: url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.woff") format("woff"), url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.ttf") format("truetype"), url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.svg#YanoneKaffeesatzLight") format("svg");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'YanoneKaffeesatzLight';
-  src: url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.eot");
-  src: url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.eot?#iefix") format("embedded-opentype"), url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.woff") format("woff"), url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.ttf") format("truetype"), url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.svg#YanoneKaffeesatzLight") format("svg");
+  src: url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.eot");
+  src: url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.woff") format("woff"), url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.ttf") format("truetype"), url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Light-webfont.svg#YanoneKaffeesatzLight") format("svg");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'YanoneKaffeesatzRegular';
-  src: url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Regular-webfont.eot");
-  src: url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Regular-webfont.woff") format("woff"), url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Regular-webfont.ttf") format("truetype"), url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Regular-webfont.svg#YanoneKaffeesatzRegular") format("svg");
+  src: url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Regular-webfont.eot");
+  src: url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Regular-webfont.woff") format("woff"), url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Regular-webfont.ttf") format("truetype"), url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Regular-webfont.svg#YanoneKaffeesatzRegular") format("svg");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'YanoneKaffeesatzBold';
-  src: url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Bold-webfont.eot");
-  src: url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Bold-webfont.eot?#iefix") format("embedded-opentype"), url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Bold-webfont.woff") format("woff"), url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Bold-webfont.ttf") format("truetype"), url("Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Bold-webfont.svg#YanoneKaffeesatzBold") format("svg");
+  src: url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Bold-webfont.eot");
+  src: url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Bold-webfont.woff") format("woff"), url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Bold-webfont.ttf") format("truetype"), url("../fonts/Yanone-Kaffeesatz-fontfacekit/YanoneKaffeesatz-Bold-webfont.svg#YanoneKaffeesatzBold") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -34,16 +34,16 @@
 /** Qlassik_TB-webfont **/
 @font-face {
   font-family: 'QlassikMediumRegular';
-  src: url("Qlassik_TB-webfont/Qlassik_TB-webfont.eot");
-  src: url("Qlassik_TB-webfont/Qlassik_TB-webfont.eot?iefix") format("eot"), url("Qlassik_TB-webfont/Qlassik_TB-webfont.woff") format("woff"), url("Qlassik_TB-webfont/Qlassik_TB-webfont.ttf") format("truetype"), url("Qlassik_TB-webfont/Qlassik_TB-webfont.svg#webfontdLeQUlTY") format("svg");
+  src: url("../fonts/Qlassik_TB-webfont/Qlassik_TB-webfont.eot");
+  src: url("../fonts/Qlassik_TB-webfont/Qlassik_TB-webfont.eot?iefix") format("eot"), url("../fonts/Qlassik_TB-webfont/Qlassik_TB-webfont.woff") format("woff"), url("../fonts/Qlassik_TB-webfont/Qlassik_TB-webfont.ttf") format("truetype"), url("../fonts/Qlassik_TB-webfont/Qlassik_TB-webfont.svg#webfontdLeQUlTY") format("svg");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'QlassikBoldRegular';
-  src: url("Qlassik_TB-webfont/QlassikBold_TB-webfont.eot");
-  src: url("Qlassik_TB-webfont/QlassikBold_TB-webfont.eot?iefix") format("eot"), url("Qlassik_TB-webfont/QlassikBold_TB-webfont.woff") format("woff"), url("Qlassik_TB-webfont/QlassikBold_TB-webfont.ttf") format("truetype"), url("Qlassik_TB-webfont/QlassikBold_TB-webfont.svg#webfontDLSNh18m") format("svg");
+  src: url("../fonts/Qlassik_TB-webfont/QlassikBold_TB-webfont.eot");
+  src: url("../fonts/Qlassik_TB-webfont/QlassikBold_TB-webfont.eot?iefix") format("eot"), url("../fonts/Qlassik_TB-webfont/QlassikBold_TB-webfont.woff") format("woff"), url("../fonts/Qlassik_TB-webfont/QlassikBold_TB-webfont.ttf") format("truetype"), url("../fonts/Qlassik_TB-webfont/QlassikBold_TB-webfont.svg#webfontDLSNh18m") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -51,8 +51,8 @@
 /** megalopolisextra-webfont **/
 @font-face {
   font-family: 'MEgalopolisExtraRegular';
-  src: url("megalopolisextra-webfont/megalopolisextra-webfont.eot");
-  src: url("megalopolisextra-webfont/megalopolisextra-webfont.eot?#iefix") format("embedded-opentype"), url("megalopolisextra-webfont/megalopolisextra-webfont.woff") format("woff"), url("megalopolisextra-webfont/megalopolisextra-webfont.ttf") format("truetype"), url("megalopolisextra-webfont/megalopolisextra-webfont.svg#MEgalopolisExtraRegular") format("svg");
+  src: url("../fonts/megalopolisextra-webfont/megalopolisextra-webfont.eot");
+  src: url("../fonts/megalopolisextra-webfont/megalopolisextra-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/megalopolisextra-webfont/megalopolisextra-webfont.woff") format("woff"), url("../fonts/megalopolisextra-webfont/megalopolisextra-webfont.ttf") format("truetype"), url("../fonts/megalopolisextra-webfont/megalopolisextra-webfont.svg#MEgalopolisExtraRegular") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -60,8 +60,17 @@
 /** ArchitectsDaughter **/
 @font-face {
   font-family: 'ArchitectsDaughterRegular';
-  src: url("ArchitectsDaughter/ArchitectsDaughter-webfont.eot");
-  src: url("ArchitectsDaughter/ArchitectsDaughter-webfont.eot?#iefix") format("embedded-opentype"), url("ArchitectsDaughter/ArchitectsDaughter-webfont.woff") format("woff"), url("ArchitectsDaughter/ArchitectsDaughter-webfont.ttf") format("truetype"), url("ArchitectsDaughter/ArchitectsDaughter-webfont.svg#ArchitectsDaughterRegular") format("svg");
+  src: url("../fonts/ArchitectsDaughter/ArchitectsDaughter-webfont.eot");
+  src: url("../fonts/ArchitectsDaughter/ArchitectsDaughter-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/ArchitectsDaughter/ArchitectsDaughter-webfont.woff") format("woff"), url("../fonts/ArchitectsDaughter/ArchitectsDaughter-webfont.ttf") format("truetype"), url("../fonts/ArchitectsDaughter/ArchitectsDaughter-webfont.svg#ArchitectsDaughterRegular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/** Kandide **/
+@font-face {
+  font-family: 'KandideRegular';
+  src: url("../fonts/Kandide/kandide-regular_ok-webfont.eot");
+  src: url("../fonts/Kandide/kandide-regular_ok-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/Kandide/kandide-regular_ok-webfont.woff") format("woff"), url("../fonts/Kandide/kandide-regular_ok-webfont.ttf") format("truetype"), url("../fonts/Kandide/kandide-regular_ok-webfont.svg") format("svg");
   font-weight: normal;
   font-style: normal;
 }

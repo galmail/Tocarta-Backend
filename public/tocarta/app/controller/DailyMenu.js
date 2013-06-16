@@ -24,7 +24,7 @@ Ext.define('TC.controller.DailyMenu', {
       },
       
     	control: {
-	      dailyMenu: { show: 'dailyMenuShow' },
+	      dailyMenu: { show: 'dailyMenuDelayShow' },
 	      dailyMenuTabPanel: { activeitemchange: 'tabHasChanged' },
 	      dailyMenuSectionPage: { itemtap: 'selectDish', selectionchange: 'selectionChanged' },
 	      dailyMenuAddBtn: { tap: 'addMenu' }
@@ -85,9 +85,16 @@ Ext.define('TC.controller.DailyMenu', {
   		this.combo.dishes().setSorters([{property : 'position',direction: 'ASC'}]);
     },
     
-    dailyMenuShow: function(){
+    dailyMenuDelayShow: function(){
+    	var self = this;
+    	setTimeout(function(){
+    		self.dailyMenuShow(self);
+  		},0);
+    },
+    
+    dailyMenuShow: function(me){
     	console.log('TC.controller.MainMenu.dailyMenuShow');
-    	var me = this;
+    	// var me = this;
     	Ext.Viewport.down('#tcTopToolbarId').show();
   		Ext.Viewport.down('#tcBottomToolbarId').show();
   		var dailyMenu = TC.Restaurant.getDailyMenu();
@@ -108,7 +115,9 @@ Ext.define('TC.controller.DailyMenu', {
   			var dishes = Ext.create('TC.store.Dishes');
   			section.dishes().each(function(dish){
   				if(dish_counter%dishes_per_page==0){
-  					section_page = Ext.create('TC.view.dailymenu.DailyMenuSectionPage');
+  					section_page = Ext.create('TC.view.dailymenu.DailyMenuSectionPage',{
+  						disableSelection: !TC.Restaurant.data.setting.order_button
+  					});
   					section_page.setStore(Ext.create('TC.store.Dishes'));
   					section_items.push(section_page);
   				}
@@ -123,6 +132,13 @@ Ext.define('TC.controller.DailyMenu', {
   				indicator: section_items.length > 1
   			});
   		});
+  		
+  		
+  		// hide badges if order option is not available
+  		Ext.Array.each(me.getDailyMenuTabPanel().getTabBar().items.items,function(tab){
+  			tab.setBadgeText('');
+  			tab.setLabelCls('nobadge-tab-label');
+  		});
     },
     
     selectionChanged: function(itemSelected, selectedDishes, eOpts){
@@ -131,6 +147,7 @@ Ext.define('TC.controller.DailyMenu', {
     
     selectDish: function(dishesList,index,dishItem){
     	console.log('TC.controller.MainMenu.selectDish');
+    	if(!TC.Restaurant.data.setting.order_button) return;
     	var dailyMenuTabPanel = this.getDailyMenuTabPanel();
     	var dailyMenuSection = dailyMenuTabPanel.getActiveItem();
     	var dailyMenuSectionPosition = dailyMenuTabPanel.indexOf(dailyMenuSection);

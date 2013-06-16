@@ -18,7 +18,6 @@ RailsAdmin.config do |config|
     'Analytics' => '/dashboards'
   }
 
-
   # If you want to track changes on your models:
   # config.audit_with :history, User
 

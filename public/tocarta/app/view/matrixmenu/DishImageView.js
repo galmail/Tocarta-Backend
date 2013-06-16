@@ -27,9 +27,23 @@ Ext.define('TC.view.matrixmenu.DishImageView', {
 		{
 			xtype: 'container',
 			tpl: new Ext.XTemplate(
-					'<div class="dish-name"><p>{name}</p></div>',
-					'<div class="dish-description"><p>{description}</p></div>',
-					'<div class="dish-price"><p>{price}&euro;</p></div>'
+					'<div class="dish-info-container">',
+						'<div class="dish-left">',
+							'<div class="dish-name">{name}</div>',
+							'<div class="dish-description">{description}</div>',
+							'<div class="dish-actions">',
+		    				'<a class="tcDishActionReview" id="tcDishActionReview_{id}" href="#"></a>',
+		    			'</div>',
+						'</div>',
+						'<div class="dish-right">',
+							'<div class="dish-price"><span class="euro">&euro;</span><span class="price">{price:this.twoDecimals}</span></div>',
+						'</div>',
+					'</div>',
+					{
+						twoDecimals: function(price) {
+							return $tc.formatNumber(price);
+						}
+					}
 			),
 			cls: 'dish-info'
 		}],

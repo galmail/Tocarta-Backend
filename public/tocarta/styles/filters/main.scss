@@ -7,15 +7,17 @@
 .tcFilterView {
   
   .tcFilterOptions {
-    width: 150px;
-    height: 100px;
+    width: 280px;
+    height: 400px;
+    
     .dish_type_filter {
       overflow: hidden;
       clear: both;
+      line-height: 31px;
       .dish_type_icon {
         float: left;
         margin-right: 10px;
-        padding-top: 6px;
+        padding-top: 11px;
       }
       .dish_type_name {
         float: left;

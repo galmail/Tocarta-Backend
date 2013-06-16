@@ -63,7 +63,8 @@ Ext.define('TC.controller.MultiLang', {
   	if(TC.Setting.get('language')!=lang){
   		TC.Setting.set('language',lang);
 	  	TC.Setting.save();
-	  	this.redirectTo('reload');
+	  	TC.Restaurant = TC.Restaurants.findRecord('current_locale',lang);
+	  	window.location.reload();
   	}
   	else {
   		this.redirectTo('mainmenu');

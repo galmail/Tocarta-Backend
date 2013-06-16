@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130526230552) do
+ActiveRecord::Schema.define(:version => 20130612110535) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(:version => 20130526230552) do
     t.text     "description"
     t.integer  "rating"
     t.boolean  "approved",           :default => true
+    t.string   "email"
   end
 
   add_index "comments", ["client_id"], :name => "index_comments_on_client_id"
@@ -470,6 +471,7 @@ ActiveRecord::Schema.define(:version => 20130526230552) do
     t.integer  "access_key",          :default => 1111
     t.boolean  "show_filters",        :default => false
     t.string   "supported_lang"
+    t.boolean  "sync_photos"
   end
 
   add_index "restaurant_settings", ["restaurant_id"], :name => "index_restaurant_settings_on_restaurant_id"

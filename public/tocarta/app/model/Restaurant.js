@@ -11,6 +11,7 @@ Ext.define('TC.model.Restaurant', {
 	    {name: "id", type: "int"},
 	    {name: "name", type: "string"},
 	    {name: "num_tables", type: "string"},
+	    {name: "current_locale", type: "string"},
 	    {name: "setting", persist: true},
 	    {name: "menus", persist: true},
 	    {name: "banners", persist: true},
@@ -18,19 +19,19 @@ Ext.define('TC.model.Restaurant', {
 	    {name: "logo", type: "string"},
 	    {name: "logo_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("logo");
+	    		return $tc.checkImgUrl(record.get("logo"));
 	    	}
 	    },
 	    {name: "bg", type: "string"},
 	    {name: "bg_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("bg");
+	    		return $tc.checkImgUrl(record.get("bg"));
 	    	}
 	    },
 	    {name: "i18nbg", type: "string"},
 	    {name: "i18nbg_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("i18nbg");
+	    		return $tc.checkImgUrl(record.get("i18nbg"));
 	    	}
 	    },
 	  ],
@@ -57,6 +58,21 @@ Ext.define('TC.model.Restaurant', {
   		return (record.get('menu_type')=='daily');
   	});
   	return this.menus().getAt(pos);
+	},
+	
+	getDessertsMenu: function(){
+  	var pos = this.menus().findBy(function(record,id){
+  		return (record.get('menu_type')=='desserts');
+  	});
+  	return this.menus().getAt(pos);
+	},
+	
+	getBeveragesMenu: function(){
+  	var pos = this.menus().findBy(function(record,id){
+  		return (record.get('menu_type')=='beverages');
+  	});
+  	return this.menus().getAt(pos);
 	}
+	
 	
 });

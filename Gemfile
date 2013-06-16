@@ -44,6 +44,7 @@ group :test do
 end
 
 group :production do
+  gem 'rails-erd' # so it wont crash in production
   gem 'thin'
   gem 'newrelic_rpm'
 end
