@@ -19,7 +19,7 @@
           #top-tab-top-box.tab-pane.active
             - dishes = Dish.by_chain(@restaurant.chain_id).with_comments.top_rating.limit(10)
             - if dishes.nil?
-              %p No hay bastantes datos
+              %p No hay suficientes datos
             - else
               .comments
                 - dishes.each do |d|
@@ -36,7 +36,7 @@
           #bottom-tab-top-box.tab-pane
             - dishes = Dish.by_chain(@restaurant.chain_id).with_comments.bottom_rating.limit(10)
             - if dishes.nil?
-              %p No hay bastantes datos
+              %p No hay suficientes datos
             - else
               .comments
                 - dishes.each do |d|
@@ -52,7 +52,7 @@
                       .text
           #chart-tab-top-box.tab-pane
             - unless @restaurant.chain.present?
-              %p No hay bastantes datos
+              %p No hay suficientes datos
             - else
               .chart
                 -# = chart_tag('chart_top_dishes', 300, chain: @restaurant.chain)
