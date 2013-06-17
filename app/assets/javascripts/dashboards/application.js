@@ -1,6 +1,7 @@
 /* JQuery Plugins */
 
 //= require jquery.min
+//= require jquery_ujs
 //= require jquery-ui-1.10.3.custom.min
 //= require jquery.ui.touch-punch.min
 //= require jquery.autosize-min
