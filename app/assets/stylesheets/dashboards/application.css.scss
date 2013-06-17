@@ -2,6 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "bootstrap";
+@import "font-awesome";
+
+@import "ace";
+@import "ace-responsive";
+@import "ace-skins";
+@import "ace-chosen";
+@import "ace-jquery-ui";
+@import "ace-colorpicker";
+@import "ace-datepicker";
+
 .dashboards {
   .row-fluid {
     margin-bottom: 10px;

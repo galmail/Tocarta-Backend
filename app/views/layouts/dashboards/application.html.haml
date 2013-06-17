@@ -1,12 +1,12 @@
 !!!
 %html
   %head
-    %title TocartaAdmin
+    %title Tocarta Analytics
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:400,300", :rel => "stylesheet"}/
-    = stylesheet_link_tag    "application",    :media => "all"
+    = stylesheet_link_tag    "dashboards/application",    :media => "all"
     /[if lt IE 8]
-      = stylesheet_link_tag  "application-ie", :media => "all"
+      = stylesheet_link_tag  "dashboards/application-ie", :media => "all"
 
     = javascript_include_tag "application"
     - if params[:controller] == 'dashboards'
