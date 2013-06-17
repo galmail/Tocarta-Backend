@@ -58,6 +58,13 @@ $T = {
 	"dish_evaluation": "Evaluación general del plato",
 	"anonymous": "anónimo",
 	
+	//// TC.view.dish.DishNutritionFacts ////
+	
+	"calories": "Calorías",
+	"proteins": "Proteinas",
+	"fats": "Grasas",
+	"carbs": "Carbohidratos",
+	
 	//// TC.view.dish.DishContainer ////
 	
 	"photo": "Foto",
