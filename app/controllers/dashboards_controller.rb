@@ -1,6 +1,8 @@
 class DashboardsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :menu_for_current_user, only: [:index, :show]
+  
+  layout "dashboards/application"
 
   def index
     @dashboard  = Dashboard.first # FIXME: search for a name?
@@ -29,23 +31,54 @@ class DashboardsController < ApplicationController
       }
     }
   end
+
   def chart_top_dishes
     if params[:reverse]
-      dishes = Dish.to_bottom_rating_array_by_chain(params[:chain])
+      dishes = Dish.to_bottom_rating_hash_by_chain(params[:chain])
     else
-      dishes = Dish.to_top_rating_array_by_chain(params[:chain])
+      dishes = Dish.to_top_rating_hash_by_chain(params[:chain])
     end
-    render :json => {
-      :type => 'ColumnChart',
-      :cols => [['string', 'Dish'], ['number', 'Average'], ['number', 'Comments']],
-      :rows => dishes,
-      :options => {
-        chartArea: { width: '90%', height: '75%' },
-        seriesType: 'bars',
-        series: {1 => {type: 'line'}},
-        legend: 'bottom',
-      }
-    }
+    render :json => dishes
+  end
+
+  def chart_comments_by
+    range = params[:range] ? params[:range] : 'month'
+
+    comments = Restaurant.find(params[:restaurant]).comments.without_survey.group_by_month(:created_at).count if range == 'month'
+    comments = Restaurant.find(params[:restaurant]).comments.without_survey.group_by_week(:created_at).count if range == 'week'
+    comments = Restaurant.find(params[:restaurant]).comments.without_survey.group_by_day(:created_at).count if range == 'day'
+
+    render :json => comments
+  end
+
+  def chart_survey_comments_by
+    range = params[:range] ? params[:range] : 'month'
+
+    comments = Restaurant.find(params[:restaurant]).comments.with_survey.group_by_month('comments.created_at').count if range == 'month'
+    comments = Restaurant.find(params[:restaurant]).comments.with_survey.group_by_week('comments.created_at').count if range == 'week'
+    comments = Restaurant.find(params[:restaurant]).comments.with_survey.group_by_day('comments.created_at').count if range == 'day'
+
+    render :json => comments
+  end
+
+  # FIXME: Here temporary, this must be in comments controller
+  def approve_comment
+    @comment = Comment.find params[:comment_id]
+    @comment.approved = true
+    if @comment.save
+      respond_to do |format|
+        format.js {render 'approve_comment'}
+      end
+    end
+  end
+  def reject_comment
+    @comment = Comment.find params[:comment_id]
+    @comment.approved = false
+    if @comment.save
+      respond_to do |format|
+        format.js {render 'reject_comment'}
+      end
+    end
   end
 
   private
@@ -54,6 +87,7 @@ class DashboardsController < ApplicationController
     if current_user.has_role? :admin
       @chains     = Chain.all
     elsif current_user.has_role? :restaurant
+      @chains     = current_user.chains
     elsif current_user.has_role? :distributor
     end
   end

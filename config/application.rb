@@ -66,6 +66,14 @@ module TocartaAdmin
     # in your app. As such, your models will need to explicitly whitelist or blacklist accessible
     # parameters by using an attr_accessible or attr_protected declaration.
     # config.active_record.whitelist_attributes = true
+    
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'analytics', 'avatars')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'analytics', 'css')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'analytics', 'fonts')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'analytics', 'icons')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'analytics', 'images')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'analytics', 'img')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'analytics', 'js')
 
     config.assets.initialize_on_precompile = false
 

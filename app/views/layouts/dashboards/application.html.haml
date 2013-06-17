@@ -1,0 +1,33 @@
+!!!
+%html
+  %head
+    %title Tocarta Analytics
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:400,300", :rel => "stylesheet"}/
+    = stylesheet_link_tag    "dashboards/application",    :media => "all"
+    /[if lt IE 8]
+      = stylesheet_link_tag  "dashboards/application-ie", :media => "all"
+
+    = javascript_include_tag "dashboards/application"
+    = javascript_include_tag "//www.google.com/jsapi", "dashboards/chartkick-tocarta"
+
+    = csrf_meta_tags
+  %body
+    - if flash.present?
+      #flash.flash
+        - flash.each do |name, msg|
+          %div{:class => "alert alert-#{name == :notice ? "success" : "error"}"}
+            = content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String)
+    
+    = render :partial => 'layouts/dashboards/dashboard_topbar'
+
+    #main-container.container-fluid
+      %a#menu-toggler{:href => "#"}
+        %span
+      = render :partial => 'layouts/dashboards/dashboard_sidebar'
+
+      #main-content.clearfix
+        #breadcrumbs
+        #page-content.clearfix
+          = yield
+

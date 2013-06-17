@@ -16,12 +16,16 @@ class Ability
       cannot :import, :all
       can :import, [Dish]
     elsif user.has_role? :restaurant
+      can :update_tablet, :all
+      can :read, User, :id => user.id
       can [:read,:create], Ingredient
       can :read, DishType
-      can :read, Skin
+      can :read, Theme
+      can [:read, :update], Skin
       can :read, Chain, :user_id => user.id
       can :read, Restaurant, :chain => { :user_id => user.id }
       can [:read, :update], RestaurantSetting, :restaurant => { :chain_id => user.chain_ids  }
+      can :manage, RestaurantBanner, :restaurant => { :chain_id => user.chain_ids  }
       can :read, Menu, :restaurant => { :chain_id => user.chain_ids  }
       can [:read, :update], MenuSetting, :menu => { :restaurant_id => user.chains.collect{ |c| c.restaurants.collect{ |res| res.id }}.flatten }
       can [:read, :update, :create], Section, :menu => { :restaurant_id => user.chains.collect{ |c| c.restaurants.collect{ |res| res.id }}.flatten }
@@ -31,10 +35,11 @@ class Ability
       can [:read, :update], Comment, :restaurant => { :chain_id => user.chain_ids  }
       can [:read, :create], Table, :restaurant => { :chain_id => user.chain_ids  }
       can :read, Tablet, :table => { :restaurant_id => user.chains.collect{ |c| c.restaurants.collect{ |res| res.id }}.flatten }
-      can :read, SurveyQuestion, :chain => { :user_id => user.id }
+      can [:read,:update], SurveyQuestion, :chain => { :user_id => user.id }
       can :read, Order, :table => { :restaurant_id => user.chains.collect{ |c| c.restaurants.collect{ |res| res.id }}.flatten }
       cannot :import, :all
     elsif user.has_role? :distributor
+      can :update_tablet, :all
       can [:read,:create], Ingredient
       can :read, DishType
       can :read, Skin

@@ -9,6 +9,7 @@ gem 'jquery-rails'
 #### Database Setup ####
 group :development do
   gem 'taps'              # for heroku db:pull
+  gem 'rails-erd'         # create DB diagram
   gem 'yaml_db'
   gem 'sqlite3'
   gem 'meta_request'      # for rails_panel
@@ -26,6 +27,7 @@ group :development do
 end
 
 group :production do
+  gem 'rails-erd' # so it wont crash in production
   gem 'thin'
   gem 'newrelic_rpm'
 end
@@ -95,7 +97,8 @@ gem 'coffee-rails', '~> 3.2.1'
 gem "haml-rails"
 gem 'simple_form'
 gem 'country_select'
-gem 'bootstrap-sass'
+gem "chartkick"
+gem 'groupdate'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -1,7 +1,6 @@
 TocartaAdmin::Application.routes.draw do
 
   match "/dashboards(/:action(.:format))" => "Dashboards", :as => :dashboards
-  # match "/dashboards" => "dashboards#index"
   match "/dashboards/:id/:restaurant_id" => "dashboards#show"
 
   get "authentications/create"

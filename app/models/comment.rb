@@ -11,6 +11,7 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  description        :text
+#  email              :string(255)
 #  rating             :integer
 #  approved           :boolean          default(TRUE)
 #
@@ -21,13 +22,15 @@ class Comment < ActiveRecord::Base
   belongs_to :restaurant
   belongs_to :client
   belongs_to :survey_question
-  attr_accessible :name, :description, :rating, :approved
+  attr_accessible :name, :description, :rating, :approved, :email
   attr_accessible :dish_id, :restaurant_id
   # after_save :logme
 
   # TODO capture everytime the comment is approved (or disapproved) and update dish rating
   scope :without_dish,    where(dish_id: nil)
   scope :with_dish,       joins(:dish)
+  scope :without_survey,  where(survey_question_id: nil)
+  scope :with_survey,     joins(:survey_question)
   scope :newest,          order('created_at DESC').limit(10)
 
   def self.by_dish(id)

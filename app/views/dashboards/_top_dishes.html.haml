@@ -1,25 +1,60 @@
 -# Show a list of top 10 dishes
-- dishes = Dish.to_top_rating_array_by_chain(@restaurant.chain.id) # FIXME: must be restaurant dishes not chain
-.top_dishes
-  - if dishes.nil?
-    %p Not enough data
-  - else
-    .span4
-      .widget-box
-        .widget-header
-          %h5 Top rating dishes
-          .widget-toolbar
-            %a{href: '#', 'data-action' => 'reload'}
-              %i.icon-refresh
-            %a{href: '#', 'data-action' => 'collapse'}
-              %i.icon-chevron-up
-            %a{href: '#', 'data-action' => 'close'}
-              %i.icon-remove
-        .widget-body
-          .widget-main.padding-8
-            = chart_tag('chart_top_dishes', 300, chain: @restaurant.chain)
-            %br
-            %ul
-              - dishes.each do |d|
-                %li
-                  = d[0]
+.top_dishes.span6
+  #top-box.widget-box.transparent
+    .widget-header
+      %h4.lighter.smaller
+        %i.icon-signal.orange
+        Top platos
+      .widget-toolbar.no-border
+        %ul.nav.nav-tabs
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#top-tab-top-box"} Top
+          %li
+            %a{"data-toggle" => "tab", :href => "#chart-tab-top-box"} Chart
+          %li
+            %a{"data-toggle" => "tab", :href => "#bottom-tab-top-box"} Bottom
+    .widget-body
+      .widget-main.padding-4
+        .tab-content.padding-8
+          #top-tab-top-box.tab-pane.active
+            - dishes = Dish.by_chain(@restaurant.chain_id).with_comments.top_rating.limit(10)
+            - if dishes.nil?
+              %p No hay bastantes datos
+            - else
+              .comments
+                - dishes.each do |d|
+                  .itemdiv.commentdiv
+                    .user
+                      = image_tag(d.photo(:mini) || 'default_dish.png')
+                    .body
+                      .name= d.name
+                      .time
+                        - d.rating.to_i.times do
+                          %i.icon-star.orange
+                        %span= " (#{d.rating.to_s})"
+                      .text
+          #bottom-tab-top-box.tab-pane
+            - dishes = Dish.by_chain(@restaurant.chain_id).with_comments.bottom_rating.limit(10)
+            - if dishes.nil?
+              %p No hay bastantes datos
+            - else
+              .comments
+                - dishes.each do |d|
+                  .itemdiv.commentdiv
+                    .user
+                      = image_tag(d.photo(:mini) || 'default_dish.png')
+                    .body
+                      .name= d.name
+                      .time
+                        - d.rating.to_i.times do
+                          %i.icon-star.orange
+                        %span= " (#{d.rating.to_s})"
+                      .text
+          #chart-tab-top-box.tab-pane
+            - unless @restaurant.chain.present?
+              %p No hay bastantes datos
+            - else
+              .chart
+                -# = chart_tag('chart_top_dishes', 300, chain: @restaurant.chain)
+                = column_chart( dashboards_path( 'chart_top_dishes', {chain: @restaurant.chain}), highChart: 1000 )
+        .hr.hr8.hr-double

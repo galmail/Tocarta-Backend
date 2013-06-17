@@ -1,6 +1,6 @@
 class Api::TocartasController < AccessController
   #skip_before_filter  :verify_authenticity_token
-  before_filter :cors_set_access_control_headers, :identify_tablet, :setup_language
+  before_filter :identify_tablet, :setup_language #, :cors_set_access_control_headers
   
   def im_alive
     @result = false
@@ -76,19 +76,26 @@ class Api::TocartasController < AccessController
       @images << @restaurant.chain.bg.url
     end
     
-    # get the restaurant banners in the supported langs
+    # get the restaurant banners in multiple languages
     default_locale = I18n.locale
-    supported_langs = @restaurant.restaurant_setting.supported_lang
-    supported_langs.shift()
-    supported_langs.each { |locale|
-      I18n.locale = locale
-      @restaurant.restaurant_banners.each { |banner|
-        if !banner.photo_file_name.nil? and banner.photo_updated_at > last_update
-          @images << banner.photo.url(:banner)
-        end
+    begin
+      langs = @restaurant.restaurant_setting.supported_lang
+      langs.shift
+      langs.each { |lang|
+        # setup locale now
+        I18n.locale,params[:locale] = lang,lang
+        @restaurant.restaurant_banners.each { |banner|
+          if !banner.photo_file_name.nil? and banner.photo_updated_at > last_update
+            @images << banner.photo.url(:banner)
+          end
+        }
       }
-    }
-    I18n.locale = default_locale
+    rescue Exception=>e
+      # handle e
+      puts "An error ocurred line 92 of tocartas_controller"
+    end
+    I18n.locale,params[:locale] =  default_locale,default_locale 
+    
     # get all the photos of the menus, sections, subsections and dishes
     @restaurant.menus.each { |menu|
       

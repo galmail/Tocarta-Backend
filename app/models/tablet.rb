@@ -36,8 +36,12 @@ class Tablet < ActiveRecord::Base
 	end
 	
 	def send_update_notification
-	  Net::HTTP.get(URI.parse("http://tocarta-node.herokuapp.com/proxy?channel=tocarta_lk_#{self.access_key}_channel&action=update"))
-	  Pusher["tocarta_lk_#{self.access_key}_channel"].trigger('update',{})
+	  begin
+	    Net::HTTP.get(URI.parse("#{ENV['NODE_SERVER']}/proxy?channel=tocarta_lk_#{self.access_key}_channel&action=update"))
+	  rescue
+	    logger.fatal "Could not send_update_notification to node server!"
+	  end
+	  # Pusher["tocarta_lk_#{self.access_key}_channel"].trigger('update',{})
 	end
 	
 end

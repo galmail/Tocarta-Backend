@@ -113,15 +113,15 @@ class Dish < ActiveRecord::Base
     order('rating ASC')
   end
 
-  def self.to_top_rating_array_by_chain(chain_id)
-    by_chain(chain_id).with_comments.top_rating.limit(10).inject([]) do |r,v|
-      r << [v.name, v.rating.to_i, v.comments.count]
+  def self.to_top_rating_hash_by_chain(chain_id)
+    by_chain(chain_id).with_comments.top_rating.limit(10).inject({}) do |r,v|
+      r[v.name] = v.rating.to_i
       r
     end
   end
-  def self.to_bottom_rating_array_by_chain(chain_id)
-    by_chain(chain_id).with_comments.bottom_rating.limit(10).inject([]) do |r,v|
-      r << [v.name, v.rating.to_i, v.comments.count]
+  def self.to_bottom_rating_hash_by_chain(chain_id)
+    by_chain(chain_id).with_comments.top_rating.limit(10).inject({}) do |r,v|
+      r[v.name] = v.rating.to_i
       r
     end
   end

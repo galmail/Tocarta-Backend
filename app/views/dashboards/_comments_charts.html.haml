@@ -1,0 +1,30 @@
+.comments_charts.span6
+  #comments_charts-box.widget-box.transparent
+    .widget-header
+      %h4.lighter.smaller
+        %i.icon-signal.orange
+        Comentarios por:
+      .widget-toolbar.no-border
+        %ul.nav.nav-tabs
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#month-tab-comments_charts-box"} Mes
+          %li
+            %a{"data-toggle" => "tab", :href => "#week-tab-comments_charts-box"} Semana
+          %li
+            %a{"data-toggle" => "tab", :href => "#day-tab-comments_charts-box"} Día
+    .widget-body
+      .widget-main.padding-4
+        .tab-content.padding-8
+          - unless @restaurant.comments.present?
+            %p No hay bastantes datos
+          - else
+            #month-tab-comments_charts-box.tab-pane.active
+              .chart
+                = line_chart( dashboards_path( 'chart_comments_by', {range: 'month', restaurant: @restaurant}) )
+            #week-tab-comments_charts-box.tab-pane
+              .chart
+                = line_chart( dashboards_path( 'chart_comments_by', {range: 'week', restaurant: @restaurant}) )
+            #day-tab-comments_charts-box.tab-pane
+              .chart
+                = line_chart( dashboards_path( 'chart_comments_by', {range: 'day', restaurant: @restaurant}) )
+          .hr.hr8.hr-double
