@@ -284,6 +284,7 @@ class Api::TocartasController < AccessController
       comment.dish = Dish.find(:first,:conditions => {:id => comment_obj["dish_id"].to_i})
       comment.survey_question = SurveyQuestion.find(:first,:conditions => {:id => comment_obj["survey_question_id"].to_i})
       comment.name = comment_obj["name"]
+      comment.email = comment_obj["email"]
       comment.description = comment_obj["description"]
       comment.rating = comment_obj["rating"].to_i if comment_obj["rating"].to_i>0
       comment.save

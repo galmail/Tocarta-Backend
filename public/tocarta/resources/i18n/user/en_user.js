@@ -57,6 +57,7 @@ $T = {
 	
 	"last_comments": "Last Comments",
 	"dish_evaluation": "Dish Rating",
+	"anonymous": "anonymous",
 	
 	//// TC.view.dish.DishContainer ////
 	
