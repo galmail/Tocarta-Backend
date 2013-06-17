@@ -4,6 +4,9 @@ defaults: &defaults
     app_id: 201952163262122
     secret_key: f8ba6fee165410f4c97f336ca5ca20af
 
+staging:
+  <<: *defaults
+
 development:
   <<: *defaults
 
