@@ -46,7 +46,7 @@ Ext.define('TC.view.dish.DishComments', {
               	'<tpl if="rating &gt; 3"><li class="current"></tpl><tpl if="rating &lt; 4"><li class=""></tpl><a href="#"></a></li>',
               	'<tpl if="rating &gt; 4"><li class="current"></tpl><tpl if="rating &lt; 5"><li class=""></tpl><a href="#"></a></li>',
               '</ul>',
-              '<span class="dish_comment_author">{name}</span>',
+              '<span class="dish_comment_author"><tpl if="name.length==0">'+$T.anonymous+'</tpl>{name}</span>',
             '</div>',
             '<div class="dish_comment_text">{description}</div>',
         	'</div>'

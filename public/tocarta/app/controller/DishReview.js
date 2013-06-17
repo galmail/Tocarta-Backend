@@ -42,7 +42,13 @@ Ext.define('TC.controller.DishReview', {
   	var rating = $j('.star.selected').length;
 		if(rating==0) return false;
   	var me = this;
-		Ext.Viewport.setMasked({xtype: 'loadmask',message: $T.submit_dish_rating});
+  	// get the name and comment of the user
+		var userName = $j('.tcDishReviewModal .userInputNameField[name=name]').val();
+		var dishComment = $j('.tcDishReviewModal .tcDishReviewModalOpinion').val();
+  	var dish_id = this.getDishReviewModal().getDishId();
+  	// destroy modal and submit comment
+  	me.getDishReviewModal().destroy();
+  	Ext.Viewport.setMasked({xtype: 'loadmask',message: $T.submit_dish_rating});
 		var comments_to_send = Ext.create('TC.store.Comments',{
 			proxy: {
 				type: $tc.protocol,
@@ -53,11 +59,6 @@ Ext.define('TC.controller.DishReview', {
 	    	}
 			}
 		});
-		// get the name and comment of the user
-		var userName = $j('.tcDishReviewModal .userInputNameField[name=name]').val();
-		var dishComment = $j('.tcDishReviewModal .tcDishReviewModalOpinion').val();
-		// get rating of the dish
-		var dish_id = this.getDishReviewModal().getDishId();
 		var comment = Ext.create('TC.model.Comment',{
 			dish_id: dish_id,
 			rating: rating,
@@ -70,7 +71,6 @@ Ext.define('TC.controller.DishReview', {
 		// say thank you for rating
 		setTimeout(function(){
 			Ext.Viewport.unmask();
-			if(me.getDishReviewModal()) me.getDishReviewModal().destroy();
 			$tc.alertMsg('<p align="center">'+$T.dish_rating_submited+'</p>');
 		},1000);
   },

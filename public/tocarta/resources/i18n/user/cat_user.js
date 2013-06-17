@@ -52,6 +52,7 @@ $T = {
 	
 	"last_comments": "Darrers comentaris",
 	"dish_evaluation": "Avaluació general del plat",
+	"anonymous": "anónimo",
 	
 	//// TC.view.dish.DishContainer ////
 	
