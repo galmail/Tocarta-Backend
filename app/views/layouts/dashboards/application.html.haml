@@ -8,9 +8,8 @@
     /[if lt IE 8]
       = stylesheet_link_tag  "dashboards/application-ie", :media => "all"
 
-    = javascript_include_tag "application"
-    - if params[:controller] == 'dashboards'
-      = javascript_include_tag "//www.google.com/jsapi", "chartkick-tocarta"
+    = javascript_include_tag "dashboards/application"
+    = javascript_include_tag "//www.google.com/jsapi", "dashboards/chartkick-tocarta"
 
     = csrf_meta_tags
   %body
@@ -19,15 +18,13 @@
         - flash.each do |name, msg|
           %div{:class => "alert alert-#{name == :notice ? "success" : "error"}"}
             = content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String)
-
-    - if params[:controller] == 'dashboards'
-      = render :partial => 'layouts/dashboards/dashboard_topbar'
+    
+    = render :partial => 'layouts/dashboards/dashboard_topbar'
 
     #main-container.container-fluid
-      - if params[:controller] == 'dashboards'
-        %a#menu-toggler{:href => "#"}
-          %span
-        = render :partial => 'layouts/dashboards/dashboard_sidebar'
+      %a#menu-toggler{:href => "#"}
+        %span
+      = render :partial => 'layouts/dashboards/dashboard_sidebar'
 
       #main-content.clearfix
         #breadcrumbs
