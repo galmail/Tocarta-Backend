@@ -283,6 +283,7 @@ class Api::TocartasController < AccessController
       comment.restaurant = @restaurant
       comment.dish = Dish.find(:first,:conditions => {:id => comment_obj["dish_id"].to_i})
       comment.survey_question = SurveyQuestion.find(:first,:conditions => {:id => comment_obj["survey_question_id"].to_i})
+      comment.tablet = @tablet
       comment.name = comment_obj["name"]
       comment.email = comment_obj["email"]
       comment.description = comment_obj["description"]

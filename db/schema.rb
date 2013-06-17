@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130612110821) do
+ActiveRecord::Schema.define(:version => 20130617121246) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -114,12 +114,14 @@ ActiveRecord::Schema.define(:version => 20130612110821) do
     t.integer  "rating"
     t.boolean  "approved",           :default => true
     t.string   "email"
+    t.integer  "tablet_id"
   end
 
   add_index "comments", ["client_id"], :name => "index_comments_on_client_id"
   add_index "comments", ["dish_id"], :name => "index_comments_on_dish_id"
   add_index "comments", ["restaurant_id"], :name => "index_comments_on_restaurant_id"
   add_index "comments", ["survey_question_id"], :name => "index_comments_on_survey_question_id"
+  add_index "comments", ["tablet_id"], :name => "index_comments_on_tablet_id"
 
   create_table "dashboards", :force => true do |t|
     t.string   "name",       :null => false
