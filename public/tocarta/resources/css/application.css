@@ -7918,7 +7918,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 /* line 32, ../../styles/sidebar/list-view.scss */
 .tcMenuPanelListView .x-dataview-item.x-item-pressed .item {
-  background-color: #1a1a1a;
+  background-color: #333333;
 }
 /* line 38, ../../styles/sidebar/list-view.scss */
 .tcMenuPanelListView .item {
@@ -8130,7 +8130,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 /* line 35, ../../styles/sidebar/items-view.scss */
 .tcMenuPanelItemsView .x-dataview-item.x-item-pressed .item .item-text {
-  background-color: #be0000;
+  background-color: #f10000;
 }
 /* line 41, ../../styles/sidebar/items-view.scss */
 .tcMenuPanelItemsView .x-dataview-item.x-item-selected .item .item-text {
@@ -8744,38 +8744,39 @@ input[type="search"]::-webkit-search-cancel-button {
 /* line 20, ../../styles/dish/reviewmodal.scss */
 .tcDishReviewModal .right {
   float: left;
-  width: 360px;
+  width: 370px;
+  padding: 5px;
 }
-/* line 24, ../../styles/dish/reviewmodal.scss */
+/* line 25, ../../styles/dish/reviewmodal.scss */
 .tcDishReviewModal .block {
   overflow: hidden;
   padding: 10px;
 }
-/* line 29, ../../styles/dish/reviewmodal.scss */
+/* line 30, ../../styles/dish/reviewmodal.scss */
 .tcDishReviewModal .tcDishReviewModalTitle {
   font-size: 30px;
   font-family: 'YanoneKaffeesatzRegular';
 }
-/* line 34, ../../styles/dish/reviewmodal.scss */
+/* line 35, ../../styles/dish/reviewmodal.scss */
 .tcDishReviewModal .rating {
   overflow: hidden;
 }
-/* line 37, ../../styles/dish/reviewmodal.scss */
+/* line 38, ../../styles/dish/reviewmodal.scss */
 .tcDishReviewModal .rating .star {
   float: left;
   width: 72px;
   height: 72px;
   background: url("../img/common/icons/star_big_white.png") no-repeat;
 }
-/* line 42, ../../styles/dish/reviewmodal.scss */
+/* line 43, ../../styles/dish/reviewmodal.scss */
 .tcDishReviewModal .rating .star.selected {
   background: url("../img/common/icons/star_big_gold.png") no-repeat;
 }
-/* line 48, ../../styles/dish/reviewmodal.scss */
+/* line 49, ../../styles/dish/reviewmodal.scss */
 .tcDishReviewModal .tcDishReviewModalButtons {
   margin-top: 10px;
 }
-/* line 50, ../../styles/dish/reviewmodal.scss */
+/* line 51, ../../styles/dish/reviewmodal.scss */
 .tcDishReviewModal .tcDishReviewModalButtons .tcDishReviewModalCancelBtn {
   margin-right: 40px;
 }
