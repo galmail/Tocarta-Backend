@@ -196,6 +196,14 @@ Ext.define('TC.controller.MainMenu', {
     	if(dataview.getItemsClass()=='sections'){
     		// we are in sections
     		me.setCurrentSection(dataview.getStore().getAt(position));
+    		
+    		$tc.logme({
+	    		action: 'view_section',
+	    		data: {
+	    			section_id: me.getCurrentSection().getId()
+	    		}
+	    	});
+    		
     		if(me.getCurrentSection().subsections().getCount()==0){
     			// show dishes
     			if(me.getCurrentSection().dishes().getCount()>0){

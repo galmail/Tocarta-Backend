@@ -135,6 +135,18 @@ $tc.url = function(method_name){
 	return this.server + this.relPath + this[method_name] + '.json';
 }
 
+$tc.logme = function(info){
+	setTimeout(function(){
+		console.log('*** logging info in background...');
+		Ext.create('TC.model.Logger',{
+			action: info.action,
+			data: info.data,
+			timestamp: Date.now(),
+			device_id: TC.Setting.get('key')
+		}).log();
+	},500);
+}
+
 $tc.logError = function(msg,url,line){
 	try {
 		Ext.Ajax.request({
