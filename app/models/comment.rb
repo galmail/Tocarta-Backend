@@ -6,6 +6,7 @@
 #  dish_id            :integer
 #  restaurant_id      :integer
 #  client_id          :integer
+#  tablet_id          :integer
 #  survey_question_id :integer
 #  name               :string(255)
 #  created_at         :datetime         not null
@@ -21,9 +22,10 @@ class Comment < ActiveRecord::Base
   belongs_to :dish
   belongs_to :restaurant
   belongs_to :client
+  belongs_to :tablet
   belongs_to :survey_question
   attr_accessible :name, :description, :rating, :approved, :email
-  attr_accessible :dish_id, :restaurant_id
+  attr_accessible :dish_id, :restaurant_id, :tablet_id
   # after_save :logme
 
   # TODO capture everytime the comment is approved (or disapproved) and update dish rating
