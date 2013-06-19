@@ -1,13 +1,15 @@
 .survey_comments_charts.infobox-container.span6
-  .infobox.infobox-orange2
-    .infobox-chart
-      sparkline
-    .infobox-data
-      %span.infobox-data-number 1000
-      .infobox-content texto
-    .badge.badge-success
-      10%
-      %i.icon-arrow-up
+  - surveys = @restaurant.comments.with_survey.group_by{ |c| c.survey_question_id }
+  - surveys.each do |k, v|
+    .infobox.infobox-orange2
+      .infobox-chart
+        %span.sparkline{'data-values' => v.map(&:rating).join(',')}
+      .infobox-data
+        %span.infobox-data-number= k.to_s
+        .infobox-content= SurveyQuestion.find(k).description
+      .badge.badge-success
+        10%
+        %i.icon-arrow-up
 
 -# .survey_comments_charts.span6
   #survey_comments_charts-box.widget-box.transparent
