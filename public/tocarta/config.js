@@ -29,7 +29,7 @@ if(CURRENT_ENV == "mock"){
 else if(CURRENT_ENV == "dev"){
 	$tc = {
 		server: 'http://localhost:3000',
-		nodeserver: 'http://analytics.tocarta.es',
+		nodeserver: 'http://localhost:5000',
 		// online: true, // when online, images should be fetched from a remote server, otherwise from filesystem
 		testing: false, // when testing, images should be fetched from server, otherwise from Amazon
 		s3_path: "http://s3.amazonaws.com/tocarta-prod",

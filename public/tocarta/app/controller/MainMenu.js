@@ -139,18 +139,25 @@ Ext.define('TC.controller.MainMenu', {
     
     dishCommentsShow: function(commentsTab){
     	console.log('TC.controller.MainMenu.dishCommentsShow');
+    	var self = this;
+    	$tc.logme({
+    		action: 'view_dish_comments',
+    		data: {
+    			dish_id: self.getCurrentDish().getId()
+    		}
+    	});
     	commentsTab.down('#tcDishCommentsDataItemsId').setStore(commentsTab.getRecord().comments());
     },
     
     dishNutritionFactsShow: function(nutritionfactsTab){
     	console.log('TC.controller.MainMenu.dishNutritionFactsShow');
-    	// var nutrition_facts_store = Ext.create('TC.store.NutritionFacts',{
-    		// storeId: "NutritionFactsStore" + nutritionfactsTab.getRecord().getId(),
-    		// data: [
-    			// nutritionfactsTab.getRecord().get('nutrition_fact')
-    		// ]
-    	// });
-    	// nutritionfactsTab.down('#tcDishNutritionFactsDataItemsId').setStore(nutrition_facts_store);
+    	var self = this;
+    	$tc.logme({
+    		action: 'view_dish_nutrition_facts',
+    		data: {
+    			dish_id: self.getCurrentDish().getId()
+    		}
+    	});
     	nutritionfactsTab.down('#tcDishNutritionFactsDataItemsId').setData(nutritionfactsTab.getRecord().get('nutrition_fact'));
     },
     
@@ -240,6 +247,14 @@ Ext.define('TC.controller.MainMenu', {
     	else if(dataview.getItemsClass()=='subsections'){
     		// we are in subsections
     		me.setCurrentSubsection(dataview.getStore().getAt(position));
+    		
+    		$tc.logme({
+	    		action: 'view_subsection',
+	    		data: {
+	    			subsection_id: me.getCurrentSubsection().getId()
+	    		}
+	    	});
+    		
     		// show dishes
     		if(me.getCurrentSubsection().dishes().getCount()>0){
     			me.getMenuPanel().push({
@@ -263,6 +278,13 @@ Ext.define('TC.controller.MainMenu', {
     		// getting the dish
     		this.setCurrentDish(dataview.getStore().getAt(position));
 	    	var dishContainer = this.getDishContainer();
+	    	
+	    	$tc.logme({
+	    		action: 'view_dish',
+	    		data: {
+	    			dish_id: me.getCurrentDish().getId()
+	    		}
+	    	});
 	    	
 	    	// set dishTitle
 	    	var dishTitle = dishContainer.down('#tcDishTitleId');

@@ -17,8 +17,50 @@ Ext.define('TC.store.Logs', {
 			},
 			remoteProxy: {
 				type: 'ajax',
-        url : $tc.nodeserver+"/proxy"
+        url: $tc.nodeserver+"/proxy",
+        writer: {
+	    		type: 'json',
+	    		root: 'logs'
+	    	}
 			},
-			autoLoad: true
+			listeners: {
+				beforesync: function(){
+					console.log('fires before sync....');
+				},
+				write: function(self){
+					console.log('fires after successful write to proxy....');
+					if(self && (self.getProxy().alias[0] == "proxy.ajax")){
+						console.log('cleaning up local logs and starting over...');
+						self.setProxy(self.getLocalProxy());
+						self.load(function(){
+							self.removed = self.getData().items;
+							self.sync();
+						});
+						// self.LOCK_SYNC = false;
+					}
+				},
+				load: function(self){
+					console.log('fires after load...');
+					self.NUM_LOGS = self.getCount();
+				}
+			}
+    },
+    
+    NUM_LOGS: 0,
+    MAX_LOGS: 9999,
+		MIN_LOGS_TO_SYNC: 10, 
+    LOCK_SYNC: false,
+    
+    setup: function(){
+    	console.log('setup logs');
+    	this.load(function(){
+    		// clear log store to save memory
+    		TC.logs.clearData();
+    	});
+    },
+    
+    sumLog: function(){
+    	this.NUM_LOGS++;
     }
+    
 });

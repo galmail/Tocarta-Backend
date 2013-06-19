@@ -275,6 +275,7 @@ Ext.define('TC.controller.Main', {
     
     loadApp: function(){
     	console.log('TC.controller.Main.loadApp');
+    	$j('#superloader').hide();
     	if(TC.Setting.get('key')!=null){
     		this.redirectTo('load');
     	}
@@ -330,6 +331,15 @@ Ext.define('TC.controller.Main', {
     	if(TC.Restaurant){
     		$j('#superloader').hide();
     		console.log('TC.controller.Main.loadMainMenu');
+    		
+    		$tc.logme({
+	    		action: 'view_menu',
+	    		data: {
+	    			menu_id: TC.Restaurant.getMainMenu().getId(),
+	    			menu_type: 'main-menu'
+	    		}
+	    	});
+    		
     		TC.app.getController("TC.controller.MainMenu").reset(); // reseting the entire controller menu
     		TC.app.getController("TC.controller.MainMenu").setCurrentMenu(TC.Restaurant.getMainMenu());
     		this.switchView({xtype: 'main-menu'});
@@ -342,6 +352,15 @@ Ext.define('TC.controller.Main', {
     loadBeveragesMenu: function(){
     	if(TC.Restaurant){
     		console.log('TC.controller.Main.loadBeveragesMenu');
+    		
+    		$tc.logme({
+	    		action: 'view_menu',
+	    		data: {
+	    			menu_id: TC.Restaurant.getBeveragesMenu().getId(),
+	    			menu_type: 'beverages-menu'
+	    		}
+	    	});
+    		
     		TC.app.getController("TC.controller.MainMenu").reset(); // reseting the entire controller menu
     		TC.app.getController("TC.controller.MainMenu").setCurrentMenu(TC.Restaurant.getBeveragesMenu());
     		this.switchView({xtype: 'main-menu'});
@@ -354,6 +373,15 @@ Ext.define('TC.controller.Main', {
     loadDailyMenu: function(){
     	if(TC.Restaurant){
     		console.log('TC.controller.Main.loadDailyMenu');
+    		
+    		$tc.logme({
+	    		action: 'view_menu',
+	    		data: {
+	    			menu_id: TC.Restaurant.getDailyMenu().getId(),
+	    			menu_type: 'daily-menu'
+	    		}
+	    	});
+    		
     		this.switchView({xtype: 'daily-menu'});
     		this.getDailymenuView().down('#tcDailyMenuAddBtnId').setHidden(!TC.Restaurant.data.setting.order_button);
     	}
@@ -365,6 +393,15 @@ Ext.define('TC.controller.Main', {
     loadMatrixMenu: function(){
     	if(TC.Restaurant){
     		console.log('TC.controller.Main.loadMatrixMenu');
+    		
+    		$tc.logme({
+	    		action: 'view_menu',
+	    		data: {
+	    			menu_id: TC.Restaurant.getDessertsMenu().getId(),
+	    			menu_type: 'desserts-menu'
+	    		}
+	    	});
+    		
     		this.switchView({xtype: 'matrix-menu'});
     	}
     	else {
