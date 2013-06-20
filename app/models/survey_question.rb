@@ -15,9 +15,16 @@
 
 class SurveyQuestion < ActiveRecord::Base
   belongs_to :chain
-	has_many :comments
-	translates :name, :description, :fallbacks_for_empty_translations => true
-	attr_accessible :name, :description, :position, :active, :yes_no_type, :chain_id
+  has_many :comments
+  translates :name, :description, :fallbacks_for_empty_translations => true
+  attr_accessible :name, :description, :position, :active, :yes_no_type, :chain_id
+
+  def update_rating_average!
+    num_comments = self.comments.length
+    rate = self.comments.average(:rating)
+    self.rating = rate.blank? ? 0 : rate
+    self.save
+  end
 end
 
 

@@ -1,15 +1,28 @@
+- surveys = @restaurant.comments.with_survey.group_by{ |c| c.survey_question }
 .survey_comments_charts.infobox-container.span6
-  - surveys = @restaurant.comments.with_survey.group_by{ |c| c.survey_question_id }
-  - surveys.each do |k, v|
-    .infobox.infobox-orange2.full_width
-      .infobox-chart
-        %span.sparkline{'data-values' => v.sample(10).map(&:rating).join(',')}
-      .infobox-data
-        %span.infobox-data-number= k.to_s
-        .infobox-content= SurveyQuestion.find(k).description
-      .badge.badge-success
-        10%
-        %i.icon-arrow-up
+  .widget-box
+    .widget-header
+      %h4.lighter.smaller
+        %i.icon-comment.blue
+        Valoración del Cuestionario
+      .widget-toolbar
+        %a{href: '#', 'data-action' => 'collapse'}
+          %i.icon-chevron-up
+    .widget-body
+      .widget-main.no-padding
+        - if surveys.blank?
+          %p No hay bastantes datos
+        - else
+          - surveys.each do |sq, cs|
+            .infobox.infobox-orange2.full_width
+              .infobox-chart
+                %span.sparkline{'data-values' => cs.sample(10).map(&:rating).join(',')}
+              .infobox-data
+                %span.infobox-data-number= sprintf( "%5.2f", sq.rating )
+                .infobox-content= sq.description
+              .badge.badge-success
+                10%
+                %i.icon-arrow-up
 
 -# .survey_comments_charts.span6
   #survey_comments_charts-box.widget-box.transparent

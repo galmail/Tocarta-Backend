@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130617121246) do
+ActiveRecord::Schema.define(:version => 20130620094228) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -604,6 +604,7 @@ ActiveRecord::Schema.define(:version => 20130617121246) do
     t.integer  "position"
     t.boolean  "active",      :default => true
     t.boolean  "yes_no_type", :default => false
+    t.decimal  "rating"
   end
 
   add_index "survey_questions", ["chain_id"], :name => "index_survey_questions_on_chain_id"
