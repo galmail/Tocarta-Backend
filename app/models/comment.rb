@@ -42,6 +42,10 @@ class Comment < ActiveRecord::Base
     where(dish_id: id)
   end
 
+  def self.by_restaurant(id)
+    where(restaurant_id: id)
+  end
+
   # Create an array with comments
   # @param [Comment] coments
   # @return [Array] [Dish.name, Dish.rating, Comment.rating, Dish.comments]
