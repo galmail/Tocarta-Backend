@@ -23,11 +23,21 @@ class SurveyQuestion < ActiveRecord::Base
   scope :newest,          order('created_at DESC').limit(10)
 
   def self.by_restaurant(id)
-    self.with_comments.merge( Comment.by_restaurant(id) )
+    self.with_comments.merge( Comment.by_restaurant(id) ).uniq
+  end
+
+  # @param restaurant_id [Integer] the restaurant id
+  # @return [Array] the rating values of each comment
+  def newest_comments_by_restaurant_to_values(restaurant_id)
+    self.comments.by_restaurant(restaurant_id).newest.pluck(:rating)
+  end
+
+  def last_week_avg_rating(restaurant_id, weeks = 1)
+    time_range = (weeks.week.ago..Time.now)
+    self.comments.by_restaurant(restaurant_id).where(created_at: time_range).average(:rating)
   end
 
   def update_rating_average!
-    num_comments = self.comments.length
     rate = self.comments.average(:rating)
     self.rating = rate.blank? ? 0 : rate
     self.save
