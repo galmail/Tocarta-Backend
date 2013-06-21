@@ -32,9 +32,17 @@ class SurveyQuestion < ActiveRecord::Base
     self.comments.by_restaurant(restaurant_id).newest.pluck(:rating)
   end
 
-  def last_week_avg_rating(restaurant_id, weeks = 1)
-    time_range = (weeks.week.ago..Time.now)
-    self.comments.by_restaurant(restaurant_id).where(created_at: time_range).average(:rating)
+  def last_week_rating_diff(restaurant_id)
+    last_week_range = (2.week.ago..1.week.ago)
+    this_week_range = (1.week.ago..Time.now)
+    last = self.comments.by_restaurant(restaurant_id).where(created_at: last_week_range).average(:rating)
+    this = self.comments.by_restaurant(restaurant_id).where(created_at: this_week_range).average(:rating)
+
+    last = last.blank? ? 0.1 : last
+    this = this.blank? ? 0.1 : this
+
+    result = (this - last) * 100.0 / last
+    result = result >= 0 ? result : 0.0
   end
 
   def update_rating_average!

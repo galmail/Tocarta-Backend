@@ -20,9 +20,19 @@
               .infobox-data
                 %span.infobox-data-number= sprintf( "%5.2f", sq.rating )
                 .infobox-content= sq.description
-              .badge.badge-success
-                10%
-                %i.icon-arrow-up
+              - diff = sq.last_week_rating_diff(@restaurant.id)
+              - if diff > 0
+                .badge.badge-success
+                  = number_to_percentage(diff, precision: 1)
+                  %i.icon-arrow-up
+              - if diff < 0
+                .badge.badge-important
+                  = number_to_percentage(diff, precision: 1)
+                  %i.icon-arrow-down
+              - if diff == 0
+                .badge.badge-warning
+                  = number_to_percentage(diff, precision: 1)
+                  %i.icon-arrow-right
 
 -# OLD widget
 -# .survey_comments_charts.span6

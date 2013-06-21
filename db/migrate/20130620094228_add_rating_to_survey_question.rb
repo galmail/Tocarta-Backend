@@ -1,7 +1,7 @@
 class AddRatingToSurveyQuestion < ActiveRecord::Migration
   def up
     change_table :survey_questions do |t|
-      t.decimal :rating, default: 0
+      t.decimal :rating, default: 0, precision: 5
     end
   end
   def down
