@@ -127,7 +127,8 @@ Ext.define('TC.controller.MainMenu', {
       banners.each(function(banner){
         items.push({
         	xtype: 'image',
-        	src: banner.get('large_photo_url')
+        	src: banner.get('large_photo_url'),
+        	banner_id: banner.getId()
         });
       });
       carousel.setItems(items);

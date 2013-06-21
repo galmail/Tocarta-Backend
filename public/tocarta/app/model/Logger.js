@@ -43,7 +43,7 @@ Ext.define('TC.model.Logger', {
 				// set all records to dirty
     		Ext.Array.each(records,function(log){ log.setDirty(true); });
     		// send records to server
-				console.log('*** sending logs to server...');
+				console.log('*** sending '+records.length+' logs to server...');
 				TC.logs.setProxy(TC.logs.getRemoteProxy());
 				TC.logs.sync();
 				TC.logs.removeAll(true);

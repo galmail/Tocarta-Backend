@@ -60973,6 +60973,61 @@ Ext.define('Ext.data.reader.Array', {
     }
 });
 /**
+ * Logger Class
+ *
+ */
+
+Ext.define('TC.model.Logger', {
+	extend : 'Ext.data.Model',
+	config: {
+		fields: [
+	    {name: "id", type: "int"},
+	    {name: "timestamp", type: "int"},
+	    {name: "device_id", type: "string"},
+	    {name: "action", type: "string"},
+	    {name: "data", type: "object"}
+	  ],
+	  proxy: {
+			type: 'localstorage',
+			id  : 'logger'
+		}
+	},
+	
+	log: function(){
+		var _logs = TC.logs.NUM_LOGS;
+		if(_logs>TC.logs.MAX_LOGS) return false;
+		// TC.logs.add(this);
+		this.save(); TC.logs.sumLog(); _logs++;
+		if(_logs>=TC.logs.MIN_LOGS_TO_SYNC && _logs%TC.logs.MIN_LOGS_TO_SYNC==0) this.sync_logs();
+	},
+	
+	/**
+	 * This function send all logs to the logging/analytics server
+	 */
+	sync_logs: function(){
+		// check if connection is on
+		if(!$tc.checkConnection()) return false;
+		// starting to sync
+		// TC.logs.LOCK_SYNC = true;
+		setTimeout(function(){
+			console.log('*** preparing to send logs to server...');
+			TC.logs.removeAll(true);
+			TC.logs.setProxy(TC.logs.getLocalProxy());
+			TC.logs.load(function(records, operation, success) {
+				// set all records to dirty
+    		Ext.Array.each(records,function(log){ log.setDirty(true); });
+    		// send records to server
+				console.log('*** sending '+records.length+' logs to server...');
+				TC.logs.setProxy(TC.logs.getRemoteProxy());
+				TC.logs.sync();
+				TC.logs.removeAll(true);
+			});
+		},100);
+	}
+	
+});
+
+/**
  * @class TC.controller.Order
  * @extends Ext.app.Controller
  * 
@@ -61554,7 +61609,13 @@ Ext.define('TC.controller.DishReview', {
   	var rating = $j('.star.selected').length;
 		if(rating==0) return false;
   	var me = this;
-		Ext.Viewport.setMasked({xtype: 'loadmask',message: $T.submit_dish_rating});
+  	// get the name and comment of the user
+		var userName = $j('.tcDishReviewModal .userInputNameField[name=name]').val();
+		var dishComment = $j('.tcDishReviewModal .tcDishReviewModalOpinion').val();
+  	var dish_id = this.getDishReviewModal().getDishId();
+  	// destroy modal and submit comment
+  	me.getDishReviewModal().destroy();
+  	Ext.Viewport.setMasked({xtype: 'loadmask',message: $T.submit_dish_rating});
 		var comments_to_send = Ext.create('TC.store.Comments',{
 			proxy: {
 				type: $tc.protocol,
@@ -61565,11 +61626,6 @@ Ext.define('TC.controller.DishReview', {
 	    	}
 			}
 		});
-		// get the name and comment of the user
-		var userName = $j('.tcDishReviewModal .userInputNameField[name=name]').val();
-		var dishComment = $j('.tcDishReviewModal .tcDishReviewModalOpinion').val();
-		// get rating of the dish
-		var dish_id = this.getDishReviewModal().getDishId();
 		var comment = Ext.create('TC.model.Comment',{
 			dish_id: dish_id,
 			rating: rating,
@@ -61582,7 +61638,6 @@ Ext.define('TC.controller.DishReview', {
 		// say thank you for rating
 		setTimeout(function(){
 			Ext.Viewport.unmask();
-			if(me.getDishReviewModal()) me.getDishReviewModal().destroy();
 			$tc.alertMsg('<p align="center">'+$T.dish_rating_submited+'</p>');
 		},1000);
   },
@@ -61605,6 +61660,73 @@ Ext.define('TC.controller.DishReview', {
   }
   
   
+});
+
+/**
+ * Logs Store
+ * 
+ */
+Ext.define('TC.store.Logs', {
+    extend  : 'Ext.data.Store',
+    requires: ['TC.model.Logger'],
+    config: {
+    	model   : 'TC.model.Logger',
+    	proxy: {
+				type: 'localstorage',
+				id  : 'logger'
+			},
+    	localProxy: {
+				type: 'localstorage',
+				id  : 'logger'
+			},
+			remoteProxy: {
+				type: 'ajax',
+        url: $tc.nodeserver+"/proxy",
+        writer: {
+	    		type: 'json',
+	    		root: 'logs'
+	    	}
+			},
+			listeners: {
+				beforesync: function(){
+					console.log('fires before sync....');
+				},
+				write: function(self){
+					console.log('fires after successful write to proxy....');
+					if(self && (self.getProxy().alias[0] == "proxy.ajax")){
+						console.log('cleaning up local logs and starting over...');
+						self.setProxy(self.getLocalProxy());
+						self.load(function(){
+							self.removed = self.getData().items;
+							self.sync();
+						});
+						// self.LOCK_SYNC = false;
+					}
+				},
+				load: function(self){
+					console.log('fires after load...');
+					self.NUM_LOGS = self.getCount();
+				}
+			}
+    },
+    
+    NUM_LOGS: 0,
+    MAX_LOGS: 9999,
+		MIN_LOGS_TO_SYNC: 4, 
+    LOCK_SYNC: false,
+    
+    setup: function(){
+    	console.log('setup logs');
+    	this.load(function(){
+    		// clear log store to save memory
+    		TC.logs.clearData();
+    	});
+    },
+    
+    sumLog: function(){
+    	this.NUM_LOGS++;
+    }
+    
 });
 
 /**
@@ -62253,7 +62375,8 @@ Ext.define('TC.controller.MainMenu', {
       banners.each(function(banner){
         items.push({
         	xtype: 'image',
-        	src: banner.get('large_photo_url')
+        	src: banner.get('large_photo_url'),
+        	banner_id: banner.getId()
         });
       });
       carousel.setItems(items);
@@ -62265,18 +62388,25 @@ Ext.define('TC.controller.MainMenu', {
     
     dishCommentsShow: function(commentsTab){
     	console.log('TC.controller.MainMenu.dishCommentsShow');
+    	var self = this;
+    	$tc.logme({
+    		action: 'view_dish_comments',
+    		data: {
+    			dish_id: self.getCurrentDish().getId()
+    		}
+    	});
     	commentsTab.down('#tcDishCommentsDataItemsId').setStore(commentsTab.getRecord().comments());
     },
     
     dishNutritionFactsShow: function(nutritionfactsTab){
     	console.log('TC.controller.MainMenu.dishNutritionFactsShow');
-    	// var nutrition_facts_store = Ext.create('TC.store.NutritionFacts',{
-    		// storeId: "NutritionFactsStore" + nutritionfactsTab.getRecord().getId(),
-    		// data: [
-    			// nutritionfactsTab.getRecord().get('nutrition_fact')
-    		// ]
-    	// });
-    	// nutritionfactsTab.down('#tcDishNutritionFactsDataItemsId').setStore(nutrition_facts_store);
+    	var self = this;
+    	$tc.logme({
+    		action: 'view_dish_nutrition_facts',
+    		data: {
+    			dish_id: self.getCurrentDish().getId()
+    		}
+    	});
     	nutritionfactsTab.down('#tcDishNutritionFactsDataItemsId').setData(nutritionfactsTab.getRecord().get('nutrition_fact'));
     },
     
@@ -62322,6 +62452,14 @@ Ext.define('TC.controller.MainMenu', {
     	if(dataview.getItemsClass()=='sections'){
     		// we are in sections
     		me.setCurrentSection(dataview.getStore().getAt(position));
+    		
+    		$tc.logme({
+	    		action: 'view_section',
+	    		data: {
+	    			section_id: me.getCurrentSection().getId()
+	    		}
+	    	});
+    		
     		if(me.getCurrentSection().subsections().getCount()==0){
     			// show dishes
     			if(me.getCurrentSection().dishes().getCount()>0){
@@ -62358,6 +62496,14 @@ Ext.define('TC.controller.MainMenu', {
     	else if(dataview.getItemsClass()=='subsections'){
     		// we are in subsections
     		me.setCurrentSubsection(dataview.getStore().getAt(position));
+    		
+    		$tc.logme({
+	    		action: 'view_subsection',
+	    		data: {
+	    			subsection_id: me.getCurrentSubsection().getId()
+	    		}
+	    	});
+    		
     		// show dishes
     		if(me.getCurrentSubsection().dishes().getCount()>0){
     			me.getMenuPanel().push({
@@ -62381,6 +62527,13 @@ Ext.define('TC.controller.MainMenu', {
     		// getting the dish
     		this.setCurrentDish(dataview.getStore().getAt(position));
 	    	var dishContainer = this.getDishContainer();
+	    	
+	    	$tc.logme({
+	    		action: 'view_dish',
+	    		data: {
+	    			dish_id: me.getCurrentDish().getId()
+	    		}
+	    	});
 	    	
 	    	// set dishTitle
 	    	var dishTitle = dishContainer.down('#tcDishTitleId');
@@ -63565,6 +63718,7 @@ Ext.define('TC.controller.Main', {
     
     loadApp: function(){
     	console.log('TC.controller.Main.loadApp');
+    	$j('#superloader').hide();
     	if(TC.Setting.get('key')!=null){
     		this.redirectTo('load');
     	}
@@ -63620,6 +63774,15 @@ Ext.define('TC.controller.Main', {
     	if(TC.Restaurant){
     		$j('#superloader').hide();
     		console.log('TC.controller.Main.loadMainMenu');
+    		
+    		$tc.logme({
+	    		action: 'view_menu',
+	    		data: {
+	    			menu_id: TC.Restaurant.getMainMenu().getId(),
+	    			menu_type: 'main-menu'
+	    		}
+	    	});
+    		
     		TC.app.getController("TC.controller.MainMenu").reset(); // reseting the entire controller menu
     		TC.app.getController("TC.controller.MainMenu").setCurrentMenu(TC.Restaurant.getMainMenu());
     		this.switchView({xtype: 'main-menu'});
@@ -63632,6 +63795,15 @@ Ext.define('TC.controller.Main', {
     loadBeveragesMenu: function(){
     	if(TC.Restaurant){
     		console.log('TC.controller.Main.loadBeveragesMenu');
+    		
+    		$tc.logme({
+	    		action: 'view_menu',
+	    		data: {
+	    			menu_id: TC.Restaurant.getBeveragesMenu().getId(),
+	    			menu_type: 'beverages-menu'
+	    		}
+	    	});
+    		
     		TC.app.getController("TC.controller.MainMenu").reset(); // reseting the entire controller menu
     		TC.app.getController("TC.controller.MainMenu").setCurrentMenu(TC.Restaurant.getBeveragesMenu());
     		this.switchView({xtype: 'main-menu'});
@@ -63644,6 +63816,15 @@ Ext.define('TC.controller.Main', {
     loadDailyMenu: function(){
     	if(TC.Restaurant){
     		console.log('TC.controller.Main.loadDailyMenu');
+    		
+    		$tc.logme({
+	    		action: 'view_menu',
+	    		data: {
+	    			menu_id: TC.Restaurant.getDailyMenu().getId(),
+	    			menu_type: 'daily-menu'
+	    		}
+	    	});
+    		
     		this.switchView({xtype: 'daily-menu'});
     		this.getDailymenuView().down('#tcDailyMenuAddBtnId').setHidden(!TC.Restaurant.data.setting.order_button);
     	}
@@ -63655,6 +63836,15 @@ Ext.define('TC.controller.Main', {
     loadMatrixMenu: function(){
     	if(TC.Restaurant){
     		console.log('TC.controller.Main.loadMatrixMenu');
+    		
+    		$tc.logme({
+	    		action: 'view_menu',
+	    		data: {
+	    			menu_id: TC.Restaurant.getDessertsMenu().getId(),
+	    			menu_type: 'desserts-menu'
+	    		}
+	    	});
+    		
     		this.switchView({xtype: 'matrix-menu'});
     	}
     	else {
@@ -65568,7 +65758,7 @@ Ext.define('TC.view.dish.DishComments', {
               	'<tpl if="rating &gt; 3"><li class="current"></tpl><tpl if="rating &lt; 4"><li class=""></tpl><a href="#"></a></li>',
               	'<tpl if="rating &gt; 4"><li class="current"></tpl><tpl if="rating &lt; 5"><li class=""></tpl><a href="#"></a></li>',
               '</ul>',
-              '<span class="dish_comment_author">{name}</span>',
+              '<span class="dish_comment_author"><tpl if="name.length==0">'+$T.anonymous+'</tpl>{name}</span>',
             '</div>',
             '<div class="dish_comment_text">{description}</div>',
         	'</div>'
@@ -65596,19 +65786,19 @@ Ext.define('TC.view.dish.DishNutritionFacts', {
 				tpl: new Ext.XTemplate(
 		    	'<div class="dish-nutritionfacts">',
 			    	'<div class="block dish-nutritionfacts-calories">',
-			    		'<div class="label">Calories (kcal):</div>',
+			    		'<div class="label">'+$T.calories+' (kcal):</div>',
 			    		'<div class="graph"><div class="graph-bar" style="width: 100%;">{calories}</div></div>',
 		    		'</div>',
 		    		'<div class="block dish-nutritionfacts-proteins">',
-			    		'<div class="label">Proteins (gr):</div>',
+			    		'<div class="label">'+$T.proteins+' (gr):</div>',
 			    		'<div class="graph"><div class="graph-bar" style="width: {calories:this.proteins_percentage(values.proteins)}%;">{proteins}</div></div>',
 		    		'</div>',
 		    		'<div class="block dish-nutritionfacts-fats">',
-			    		'<div class="label">Fats (gr):</div>',
+			    		'<div class="label">'+$T.fats+' (gr):</div>',
 			    		'<div class="graph"><div class="graph-bar" style="width: {calories:this.fat_percentage(values.fats)}%;">{fats}</div></div>',
 		    		'</div>',
 		    		'<div class="block dish-nutritionfacts-carbs">',
-			    		'<div class="label">Carbs (gr):</div>',
+			    		'<div class="label">'+$T.carbs+' (gr):</div>',
 			    		'<div class="graph"><div class="graph-bar" style="width: {calories:this.carbs_percentage(values.carbs)}%;">{carbs}</div></div>',
 		    		'</div>',
 		    		// '<div class="block">',
@@ -70453,7 +70643,18 @@ Ext.define('TC.view.restaurantinfo.RestaurantCarousel', {
 			{
 				flex: 1,
 				itemId: 'tcRestCarouselId',
-				xtype: 'carousel'
+				xtype: 'carousel',
+				listeners: {
+					activeitemchange: function(carousel,new_value){
+						console.log('carousel changed... log banner view');
+						$tc.logme({
+			    		action: 'view_restaurant_banner',
+			    		data: {
+			    			banner_id: new_value.banner_id
+			    		}
+			    	});
+					}
+				}
 			},
 			{
 				cls: 'tcRestaurantCarouselBottomToolbar',

@@ -48,7 +48,7 @@ Ext.define('TC.store.Logs', {
     
     NUM_LOGS: 0,
     MAX_LOGS: 9999,
-		MIN_LOGS_TO_SYNC: 10, 
+		MIN_LOGS_TO_SYNC: 4, 
     LOCK_SYNC: false,
     
     setup: function(){

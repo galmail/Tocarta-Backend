@@ -3,7 +3,7 @@
  * All configuration and variables used in the app
  */
 
-var CURRENT_ENV = "dev"; // options: mock, dev, staging, open, prod, prod
+var CURRENT_ENV = "prod"; // options: mock, dev, staging, open, prod, prod
 // var CURRENT_DEVICE = "ios"; // options: android, ios
 
 /*** development (mocked services) ***/
@@ -102,7 +102,7 @@ else if(CURRENT_ENV == "prod"){
 		click: 'tap' // click event instead of tap
 	}
 	// overwrite console.log
-	console.log = function(){};
+	// console.log = function(){};
 	// log errors to proxy server
 	window.onerror = $tc.logError;
 }
@@ -137,14 +137,13 @@ $tc.url = function(method_name){
 
 $tc.logme = function(info){
 	setTimeout(function(){
-		console.log('*** logging info in background...');
 		Ext.create('TC.model.Logger',{
 			action: info.action,
 			data: info.data,
 			timestamp: Date.now(),
 			device_id: TC.Setting.get('key')
 		}).log();
-	},500);
+	},200);
 }
 
 $tc.logError = function(msg,url,line){

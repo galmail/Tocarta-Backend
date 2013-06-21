@@ -1290,6 +1290,11 @@
                     "path": "lib/touch/src/data/reader/"
                 },
                 {
+                    "clsName": "TC.model.Logger",
+                    "name": "Logger.js",
+                    "path": "app/model/"
+                },
+                {
                     "clsName": "TC.controller.Order",
                     "name": "Order.js",
                     "path": "app/controller/"
@@ -1313,6 +1318,11 @@
                     "clsName": "TC.controller.DishReview",
                     "name": "DishReview.js",
                     "path": "app/controller/"
+                },
+                {
+                    "clsName": "TC.store.Logs",
+                    "name": "Logs.js",
+                    "path": "app/store/"
                 },
                 {
                     "clsName": "Ext.Img",
@@ -1816,7 +1826,7 @@
                 }
             ]
         },
-        {
+         {
             "name": "Application - Production",
             "target": "app-all.js",
             "compress": true,
@@ -1826,7 +1836,7 @@
                     "name": "config.js"
                 },
                 {
-                    "path": "../deploy/tocarta/1_5/",
+                    "path": "../deploy/tocarta/1_5_1/",
                     "name": "all-classes.js"
                 },
                 {
