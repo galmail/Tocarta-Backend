@@ -1,16 +1,40 @@
+- surveys = SurveyQuestion.by_restaurant(@restaurant.id)
 .survey_comments_charts.infobox-container.span6
-  - surveys = @restaurant.comments.with_survey.group_by{ |c| c.survey_question_id }
-  - surveys.each do |k, v|
-    .infobox.infobox-orange2.full_width
-      .infobox-chart
-        %span.sparkline{'data-values' => v.sample(10).map(&:rating).join(',')}
-      .infobox-data
-        %span.infobox-data-number= k.to_s
-        .infobox-content= SurveyQuestion.find(k).description
-      .badge.badge-success
-        10%
-        %i.icon-arrow-up
+  .widget-box
+    .widget-header
+      %h4.lighter.smaller
+        %i.icon-comment.blue
+        Valoración del Cuestionario
+      .widget-toolbar
+        %a{href: '#', 'data-action' => 'collapse'}
+          %i.icon-chevron-up
+    .widget-body
+      .widget-main.no-padding
+        - if surveys.blank?
+          %p No hay bastantes datos
+        - else
+          - surveys.each do |sq|
+            .infobox.infobox-orange2.full_width
+              .infobox-chart
+                %span.sparkline{'data-values' => sq.newest_comments_by_restaurant_to_values(@restaurant.id).join(',')}
+              .infobox-data
+                %span.infobox-data-number= sprintf( "%5.2f", sq.rating )
+                .infobox-content= sq.description
+              - diff = sq.last_week_rating_diff(@restaurant.id)
+              - if diff > 0
+                .badge.badge-success
+                  = number_to_percentage(diff, precision: 1)
+                  %i.icon-arrow-up
+              - if diff < 0
+                .badge.badge-important
+                  = number_to_percentage(diff, precision: 1)
+                  %i.icon-arrow-down
+              - if diff == 0
+                .badge.badge-warning
+                  = number_to_percentage(diff, precision: 1)
+                  %i.icon-arrow-right
 
+-# OLD widget
 -# .survey_comments_charts.span6
   #survey_comments_charts-box.widget-box.transparent
     .widget-header

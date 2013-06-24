@@ -1,6 +1,6 @@
 $ ->
   # Add scroll to widgets
-  $(".dialogs,.comments").slimScroll height: "300px"
+  $(".dialogs,.comments,.survey_comments_charts .widget-body").slimScroll height: "300px"
 
   # Sparklines
   $(".sparkline").each ->
