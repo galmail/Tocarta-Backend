@@ -440,12 +440,12 @@ ActiveRecord::Schema.define(:version => 20130620094228) do
   add_index "restaurant_activities", ["table_id"], :name => "index_restaurant_activities_on_table_id"
 
   create_table "restaurant_banner_translations", :force => true do |t|
-    t.integer  "restaurant_banner_id", :null => false
-    t.string   "locale",               :null => false
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.integer  "restaurant_banner_id"
+    t.string   "locale"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   add_index "restaurant_banner_translations", ["locale"], :name => "index_restaurant_banner_translations_on_locale"
@@ -598,13 +598,13 @@ ActiveRecord::Schema.define(:version => 20130620094228) do
   create_table "survey_questions", :force => true do |t|
     t.integer  "chain_id"
     t.string   "name"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                                                   :null => false
+    t.datetime "updated_at",                                                   :null => false
     t.text     "description"
     t.integer  "position"
-    t.boolean  "active",      :default => true
-    t.boolean  "yes_no_type", :default => false
-    t.decimal  "rating"
+    t.boolean  "active",                                    :default => true
+    t.boolean  "yes_no_type",                               :default => false
+    t.decimal  "rating",      :precision => 5, :scale => 0, :default => 0
   end
 
   add_index "survey_questions", ["chain_id"], :name => "index_survey_questions_on_chain_id"
@@ -686,10 +686,8 @@ ActiveRecord::Schema.define(:version => 20130620094228) do
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
 
   create_table "wine_detail_translations", :force => true do |t|
-    t.integer  "wine_detail_id",    :null => false
-    t.string   "locale",            :null => false
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.integer  "wine_detail_id"
+    t.string   "locale"
     t.string   "name"
     t.text     "description"
     t.string   "wine_type"
@@ -701,6 +699,8 @@ ActiveRecord::Schema.define(:version => 20130620094228) do
     t.string   "color"
     t.string   "flavor"
     t.string   "aroma"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   add_index "wine_detail_translations", ["locale"], :name => "index_wine_detail_translations_on_locale"
@@ -734,11 +734,11 @@ ActiveRecord::Schema.define(:version => 20130620094228) do
   add_index "wine_details", ["wine_type"], :name => "index_wine_details_on_wine_type"
 
   create_table "wine_translations", :force => true do |t|
-    t.integer  "wine_id",    :null => false
-    t.string   "locale",     :null => false
+    t.integer  "wine_id"
+    t.string   "locale"
+    t.string   "container"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "container"
   end
 
   add_index "wine_translations", ["locale"], :name => "index_wine_translations_on_locale"
