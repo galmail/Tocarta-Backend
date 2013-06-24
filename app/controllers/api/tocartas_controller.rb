@@ -1,23 +1,23 @@
 class Api::TocartasController < AccessController
   #skip_before_filter  :verify_authenticity_token
   before_filter :identify_tablet, :setup_language #, :cors_set_access_control_headers
-  
+
   def im_alive
     @result = false
     @tablet.alive = Time.now
     @result = @tablet.save
   end
-  
+
   def reset_license
     @tablet.activated = false
     @tablet.last_menu_sync = nil
     @result = @tablet.save
   end
-  
+
   def get_supported_langs
     @langs = @restaurant.restaurant_setting.supported_lang
   end
-  
+
   def get_restaurant_info
     # show banners
     sort_and_filter(@restaurant.restaurant_banners,nil,nil,nil,nil)
@@ -45,18 +45,17 @@ class Api::TocartasController < AccessController
             sort_and_filter(dish.comments,:created_at,:approved,true,MAX_COMMENTS_PER_DISH)
           }
         }
-      } 
+      }
     }
   end
-  
-  
+
   def get_images_to_download
     @images = []
     last_update = 10.years.ago
     if @tablet.last_menu_sync!=nil and params[:all]!="yes"
       last_update = @tablet.last_menu_sync
     end
-    
+
     # get all common icons
     DishType.all.each { |dish_type|
       if !dish_type.icon_file_name.nil? and dish_type.icon_updated_at > last_update
@@ -64,7 +63,7 @@ class Api::TocartasController < AccessController
         @images << dish_type.icon.url(:big_icon)
       end
     }
-    
+
     # get the chain logo and backgrounds
     if !@restaurant.chain.logo_file_name.nil? and @restaurant.chain.logo_updated_at > last_update
       @images << @restaurant.chain.logo.url(:medium)
@@ -75,7 +74,7 @@ class Api::TocartasController < AccessController
     if !@restaurant.chain.bg_file_name.nil? and @restaurant.chain.bg_updated_at > last_update
       @images << @restaurant.chain.bg.url
     end
-    
+
     # get the restaurant banners in multiple languages
     default_locale = I18n.locale
     begin
@@ -95,14 +94,14 @@ class Api::TocartasController < AccessController
       puts "An error ocurred line 92 of tocartas_controller"
     end
     I18n.locale,params[:locale] =  default_locale,default_locale 
-    
+
     # get all the photos of the menus, sections, subsections and dishes
     @restaurant.menus.each { |menu|
-      
+
       if !menu.skin.nil? and menu.skin.stylesheet_updated_at > last_update
         @images << menu.skin.stylesheet.url
       end
-      
+
       menu.sections.each { |section|
         if !section.photo_file_name.nil? and section.photo_updated_at > last_update
           @images << section.photo.url(:mini)
@@ -124,7 +123,7 @@ class Api::TocartasController < AccessController
       }
     }
   end
-  
+
   def confirm_downloaded_images
     @tablet.last_menu_sync = Time.now
     if @tablet.save
@@ -133,7 +132,7 @@ class Api::TocartasController < AccessController
       @result = false
     end
   end
-  
+
   def call_waiter
     @result = false
     # insert new activity
@@ -148,7 +147,7 @@ class Api::TocartasController < AccessController
     @table.status = restaurant_activity.name
     @table.save
   end
-  
+
   def request_bill
     @result = false
     # insert new activity
@@ -163,27 +162,27 @@ class Api::TocartasController < AccessController
     @table.status = restaurant_activity.name
     @table.save
   end
-  
+
   def checkin_table
     @result = false
     validate_params(['table','dinners','language','new_table'])
     # this tablet now belongs to the new table
     table = @restaurant.tables.select { |tb| tb.number==params[:table].to_i }.first
     return false if table.nil?
-    
+
     @tablet.table = table
     @tablet.save
-    
+
     if params[:new_table]!="true"
       @result = true
       return true
     end
-    
+
     @table = @tablet.table
     @table.dinners = params[:dinners]
     @table.language = params[:language]
     @table.save
-    
+
     # insert new activity
     restaurant_activity = RestaurantActivity.new
     restaurant_activity.restaurant = @restaurant
@@ -193,7 +192,7 @@ class Api::TocartasController < AccessController
     @table.status = restaurant_activity.name
     @table.save
   end
-  
+
   def checkout_table
     @result = false
     # get last checkedin activity of this table
@@ -205,7 +204,7 @@ class Api::TocartasController < AccessController
     @table.status = restaurant_activity.name
     @table.save
   end
-  
+
   def get_sent_order_items
     # get all orders since last checked in
     activity = RestaurantActivity.find(:first,:conditions => {:table_id => @table.id, :name => "checked"}, :order => "updated_at DESC")
@@ -216,7 +215,7 @@ class Api::TocartasController < AccessController
       }.flatten.uniq { |order_item| order_item.dish.id  }
     end
   end
-  
+
   def make_order
     @result = false
     validate_params(['order'])
@@ -227,11 +226,11 @@ class Api::TocartasController < AccessController
     order.table = @table
     order.total = order_obj["total"]
     order.save
-    
+
     if order_obj["order_items"].class.to_s.downcase != "array"
       order_obj["order_items"] = [ order_obj["order_items"] ]
     end
-    
+
     order_obj["order_items"].each { |order_item_obj|
       order_item = OrderItem.new
       order_item.order = order

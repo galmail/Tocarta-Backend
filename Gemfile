@@ -51,6 +51,7 @@ gem 'rolify'
 gem 'rabl'
 # gem 'yajl-ruby'
 gem 'oj'
+gem 'msgpack', '~> 0.4.5'
 
 
 #### HTTP Client used for Subtledata ####
