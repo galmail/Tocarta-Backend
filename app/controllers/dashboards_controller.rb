@@ -51,6 +51,14 @@ class DashboardsController < ApplicationController
     render :json => comments
   end
 
+  # This action is used to load remote content to comments widget
+  def content_chart_comments_by
+    # @dashboard  = Dashboard.find  params[:id]
+    @restaurant = Restaurant.find params[:restaurant_id]
+    @range      = params[:range]
+    render layout: false
+  end
+
   def chart_survey_comments_by
     range = params[:range] ? params[:range] : 'month'
 
