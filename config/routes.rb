@@ -2,6 +2,7 @@ TocartaAdmin::Application.routes.draw do
 
   match "/dashboards(/:action(.:format))" => "Dashboards", :as => :dashboards
   match "/dashboards/:id/:restaurant_id" => "dashboards#show"
+  match "/dashboards/:id/:restaurant_id/content_chart_comments_by/:range" => "dashboards#content_chart_comments_by"
 
   get "authentications/create"
 

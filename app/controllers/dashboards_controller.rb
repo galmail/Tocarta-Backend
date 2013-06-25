@@ -51,6 +51,13 @@ class DashboardsController < ApplicationController
     render :json => comments
   end
 
+  def content_chart_comments_by
+    # @dashboard  = Dashboard.find  params[:id]
+    @restaurant = Restaurant.find params[:restaurant_id]
+    @range      = params[:range]
+    render layout: false
+  end
+
   def chart_survey_comments_by
     range = params[:range] ? params[:range] : 'month'
 
