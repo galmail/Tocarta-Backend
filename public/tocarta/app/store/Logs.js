@@ -28,16 +28,18 @@ Ext.define('TC.store.Logs', {
 					console.log('fires before sync....');
 				},
 				write: function(self){
-					console.log('fires after successful write to proxy....');
-					if(self && (self.getProxy().alias[0] == "proxy.ajax")){
+					console.log('fires after successful write to proxy: ' + self.getProxy().alias[0]);
+					// if(self && (self.getProxy().alias[0] == "proxy.ajax")){
 						console.log('cleaning up local logs and starting over...');
 						self.setProxy(self.getLocalProxy());
-						self.load(function(){
-							self.removed = self.getData().items;
-							self.sync();
-						});
-						// self.LOCK_SYNC = false;
-					}
+						self.clearLocalStorageLogs();
+						self.NUM_LOGS = 0;
+						self.LOCK_SYNC = false;
+						// self.load(function(){
+							// self.removed = self.getData().items;
+							// self.sync();
+						// });
+					// }
 				},
 				load: function(self){
 					console.log('fires after load...');
@@ -61,6 +63,23 @@ Ext.define('TC.store.Logs', {
     
     sumLog: function(){
     	this.NUM_LOGS++;
+    },
+    
+    clearLocalStorageLogs: function(){
+    	var counter = 0;
+    	try {
+    		counter = parseInt(window.localStorage.getItem('logger-counter'));
+    	}
+    	catch(ex){
+    		// nothing to delete, exit
+    		return false;
+    	}
+    	window.localStorage.removeItem('logger');
+    	for(var i=1;i<=counter;i++){
+    		window.localStorage.removeItem('logger-'+i);
+    	}
+    	window.localStorage.removeItem('logger-counter');
+    	return true;
     }
     
 });

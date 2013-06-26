@@ -60995,8 +60995,8 @@ Ext.define('TC.model.Logger', {
 	
 	log: function(){
 		var _logs = TC.logs.NUM_LOGS;
-		if(_logs>TC.logs.MAX_LOGS) return false;
-		// TC.logs.add(this);
+		if(_logs>TC.logs.MAX_LOGS || TC.logs.LOCK_SYNC) return false;
+		console.log("saving log");
 		this.save(); TC.logs.sumLog(); _logs++;
 		if(_logs>=TC.logs.MIN_LOGS_TO_SYNC && _logs%TC.logs.MIN_LOGS_TO_SYNC==0) this.sync_logs();
 	},
@@ -61005,13 +61005,14 @@ Ext.define('TC.model.Logger', {
 	 * This function send all logs to the logging/analytics server
 	 */
 	sync_logs: function(){
+		console.log("syncing logs now!!!!!!!");
 		// check if connection is on
 		if(!$tc.checkConnection()) return false;
 		// starting to sync
-		// TC.logs.LOCK_SYNC = true;
-		setTimeout(function(){
+		TC.logs.LOCK_SYNC = true;
+		// setTimeout(function(){
 			console.log('*** preparing to send logs to server...');
-			TC.logs.removeAll(true);
+			// TC.logs.removeAll(true);
 			TC.logs.setProxy(TC.logs.getLocalProxy());
 			TC.logs.load(function(records, operation, success) {
 				// set all records to dirty
@@ -61020,9 +61021,9 @@ Ext.define('TC.model.Logger', {
 				console.log('*** sending '+records.length+' logs to server...');
 				TC.logs.setProxy(TC.logs.getRemoteProxy());
 				TC.logs.sync();
-				TC.logs.removeAll(true);
+				// TC.logs.removeAll(true);
 			});
-		},100);
+		// },100);
 	}
 	
 });
@@ -61251,6 +61252,14 @@ Ext.define('TC.controller.Filter', {
 			xtype : 'menu-panel-itemsview',
 			store : itemsStore
 		});
+		
+		$tc.logme({
+  		action: 'filter_dish',
+  		data: {
+  			dish_type_id: dishType.getId()
+  		}
+  	});
+		
   }
   
   
@@ -61394,14 +61403,20 @@ Ext.define('TC.controller.MatrixMenu', {
           directionLock : true, 
           items: dish_views,
           width: this.getMatrixMenu().element.getWidth(),
-          height: this.getMatrixMenu().element.getHeight()
+          height: this.getMatrixMenu().element.getHeight(),
+          listeners: {
+						activeitemchange: function(carousel,new_value){
+							console.log('dessert changed... logging new item');
+							$tc.logme({
+				    		action: 'view_dish',
+				    		data: {
+				    			dish_id: parseInt(new_value.getId().split('dish_')[1])
+				    		}
+				    	});
+						}
+					}
       });
     },
-    
-    
-    
-    
-    
     
     detailstest: function(){
         console.log('TC.controller.MatrixMenu.detailstest');
@@ -61519,7 +61534,10 @@ Ext.define('TC.controller.MatrixMenu', {
     	if (view != undefined)
          dish_view = Ext.create(view, { data: [dish] });
     	else if (dish.data.large_photo_url.length > 0)
-    		dish_view = Ext.create('TC.view.matrixmenu.DishImageView', { data: [dish] });
+    		dish_view = Ext.create('TC.view.matrixmenu.DishImageView',{
+    			id: 'dish_'+dish.getId(),
+    			data: [dish]
+    		});
 	    else
 	    	dish_view = Ext.create('TC.view.matrixmenu.DishTextView', { data: [dish] }); 
 	    
@@ -61692,16 +61710,18 @@ Ext.define('TC.store.Logs', {
 					console.log('fires before sync....');
 				},
 				write: function(self){
-					console.log('fires after successful write to proxy....');
-					if(self && (self.getProxy().alias[0] == "proxy.ajax")){
+					console.log('fires after successful write to proxy: ' + self.getProxy().alias[0]);
+					// if(self && (self.getProxy().alias[0] == "proxy.ajax")){
 						console.log('cleaning up local logs and starting over...');
 						self.setProxy(self.getLocalProxy());
-						self.load(function(){
-							self.removed = self.getData().items;
-							self.sync();
-						});
-						// self.LOCK_SYNC = false;
-					}
+						self.clearLocalStorageLogs();
+						self.NUM_LOGS = 0;
+						self.LOCK_SYNC = false;
+						// self.load(function(){
+							// self.removed = self.getData().items;
+							// self.sync();
+						// });
+					// }
 				},
 				load: function(self){
 					console.log('fires after load...');
@@ -61725,6 +61745,23 @@ Ext.define('TC.store.Logs', {
     
     sumLog: function(){
     	this.NUM_LOGS++;
+    },
+    
+    clearLocalStorageLogs: function(){
+    	var counter = 0;
+    	try {
+    		counter = parseInt(window.localStorage.getItem('logger-counter'));
+    	}
+    	catch(ex){
+    		// nothing to delete, exit
+    		return false;
+    	}
+    	window.localStorage.removeItem('logger');
+    	for(var i=1;i<=counter;i++){
+    		window.localStorage.removeItem('logger-'+i);
+    	}
+    	window.localStorage.removeItem('logger-counter');
+    	return true;
     }
     
 });

@@ -21,8 +21,8 @@ Ext.define('TC.model.Logger', {
 	
 	log: function(){
 		var _logs = TC.logs.NUM_LOGS;
-		if(_logs>TC.logs.MAX_LOGS) return false;
-		// TC.logs.add(this);
+		if(_logs>TC.logs.MAX_LOGS || TC.logs.LOCK_SYNC) return false;
+		console.log("saving log");
 		this.save(); TC.logs.sumLog(); _logs++;
 		if(_logs>=TC.logs.MIN_LOGS_TO_SYNC && _logs%TC.logs.MIN_LOGS_TO_SYNC==0) this.sync_logs();
 	},
@@ -31,13 +31,14 @@ Ext.define('TC.model.Logger', {
 	 * This function send all logs to the logging/analytics server
 	 */
 	sync_logs: function(){
+		console.log("syncing logs now!!!!!!!");
 		// check if connection is on
 		if(!$tc.checkConnection()) return false;
 		// starting to sync
-		// TC.logs.LOCK_SYNC = true;
-		setTimeout(function(){
+		TC.logs.LOCK_SYNC = true;
+		// setTimeout(function(){
 			console.log('*** preparing to send logs to server...');
-			TC.logs.removeAll(true);
+			// TC.logs.removeAll(true);
 			TC.logs.setProxy(TC.logs.getLocalProxy());
 			TC.logs.load(function(records, operation, success) {
 				// set all records to dirty
@@ -46,9 +47,9 @@ Ext.define('TC.model.Logger', {
 				console.log('*** sending '+records.length+' logs to server...');
 				TC.logs.setProxy(TC.logs.getRemoteProxy());
 				TC.logs.sync();
-				TC.logs.removeAll(true);
+				// TC.logs.removeAll(true);
 			});
-		},100);
+		// },100);
 	}
 	
 });
