@@ -41,7 +41,7 @@ class SurveyQuestion < ActiveRecord::Base
     last = last.blank? ? 0.1 : last
     this = this.blank? ? 0.1 : this
 
-    result = (this - last) * 100.0 / last
+    result = (this - last) * 20
     result = result >= 0 ? result : 0.0
   end
 
