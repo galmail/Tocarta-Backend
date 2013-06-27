@@ -30,6 +30,19 @@ TocartaAdmin::Application.configure do
   
   # Settings specified here will take precedence over those in config/application.rb
 
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { :host => 'tocarta.es' }
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :user_name => ENV['SMTP_USER'],
+    :password => ENV['SMTP_PASS'],
+    :address => ENV['SMTP_ADDRESS'],
+    :port => ENV['SMTP_PORT'],
+    :authentication => ENV['SMTP_AUTH'],
+    :domain => ENV['SMTP_DOMAIN'],
+    :enable_starttls_auto => true
+  }
+
   # Code is not reloaded between requests
   config.cache_classes = true
 

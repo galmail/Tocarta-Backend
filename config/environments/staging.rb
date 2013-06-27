@@ -18,6 +18,19 @@ TocartaAdmin::Application.configure do
     }
   })
 
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { :host => 'beta.tocarta.es' }
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :user_name => ENV['SMTP_USER'],
+    :password => ENV['SMTP_PASS'],
+    :address => ENV['SMTP_ADDRESS'],
+    :port => ENV['SMTP_PORT'],
+    :authentication => ENV['SMTP_AUTH'],
+    :domain => ENV['SMTP_DOMAIN'],
+    :enable_starttls_auto => true
+  }
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
