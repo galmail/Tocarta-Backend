@@ -16,16 +16,24 @@ PUSHER_URL: http://c9c649f5255c17685066:02fbd38ac9ef7d72457e@api.pusherapp.com/a
 
 SMTP_USER: tocarta-bdb4b76c00ea2356
 SMTP_PASS: 5deabe5fba6b0100
-SMTP_address: mailtrap.io
+SMTP_ADDRESS: mailtrap.io
 SMTP_PORT: 2525
 SMTP_AUTH: plain
 SMTP_DOMAIN: tocarta.local
 
-#development:
+EMAIL_ADMIN: admin@tocarta.local
+
+# development:
+  # SMTP_USER: app3296327@heroku.com
+  # SMTP_PASS: UrupOBiK9IvqGpBiNIeyqw
+  # SMTP_address: smtp.mandrillapp.com
+  # SMTP_PORT: 587
+  # SMTP_AUTH: login
+  # SMTP_DOMAIN: beta.tocarta.es
 staging:
   SMTP_USER: app3296327@heroku.com
   SMTP_PASS: UrupOBiK9IvqGpBiNIeyqw
-  SMTP_address: smtp.mandrillapp.com
+  SMTP_ADDRESS: smtp.mandrillapp.com
   SMTP_PORT: 587
   SMTP_AUTH: login
   SMTP_DOMAIN: beta.tocarta.es
@@ -38,12 +46,14 @@ staging:
   # MANDRILL_USERNAME=app3296327@heroku.com
 
 production:
-  SMTP_USER: app3296327@heroku.com
-  SMTP_PASS: UrupOBiK9IvqGpBiNIeyqw
-  SMTP_address: smtp.mandrillapp.com
+  SMTP_USER: app3296414@heroku.com
+  SMTP_PASS: ohUtZ1pkdAubl9gkMGRz1g
+  SMTP_ADDRESS: smtp.mandrillapp.com
   SMTP_PORT: 587
   SMTP_AUTH: login
   SMTP_DOMAIN: tocarta.es
+
+  EMAIL_ADMIN: admin@tocarta.es
 
   FB_APP_ID: 112211615526966
   FB_SECRET_KEY: fa30e7003799984805e316ffd7f1a9e2

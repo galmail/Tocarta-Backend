@@ -37,8 +37,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :rememberable, :trackable, :validatable, :recoverable,
-         :confirmable
+         :rememberable, :trackable, :validatable, :recoverable
+         # , :confirmable
          # :omniauthable, :omniauth_providers => [:facebook]
 
   # Setup accessible (or protected) attributes for your model
@@ -67,6 +67,21 @@ class User < ActiveRecord::Base
     self.add_role :user
   end
 
+  def valid_password?(password)
+    if super
+      return true
+    else
+      if self.invalid_password_count >= 2
+        self.invalid_password_count = 0
+        NotificationMailer.invalid_passwords(self).deliver
+      else
+        self.invalid_password_count += 1
+      end
+      self.save
+
+      return false
+    end
+  end
   private
 
   # Create a restaurant and dependencies (chain, section, menu)
