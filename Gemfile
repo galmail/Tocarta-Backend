@@ -100,6 +100,7 @@ gem 'simple_form'
 gem 'country_select'
 gem "chartkick"
 gem 'groupdate'
+gem "figaro"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

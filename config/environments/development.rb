@@ -1,9 +1,10 @@
 TocartaAdmin::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
   
-  ENV['S3_BUCKET'] ||= 'tocarta-test'
-  ENV['S3_KEY'] ||= 'AKIAJCY5PI67O7THQ5MQ'
-  ENV['S3_SECRET'] ||= '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'
+  # Defined in config/application.yml
+  # ENV['S3_BUCKET'] ||= 'tocarta-test'
+  # ENV['S3_KEY'] ||= 'AKIAJCY5PI67O7THQ5MQ'
+  # ENV['S3_SECRET'] ||= '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'
 
   # ENV['NODE_SERVER'] ||= 'http://localhost:5000'
 
@@ -19,10 +20,11 @@ TocartaAdmin::Application.configure do
     }
   })
   
+  # Defined in config/application.yml
   # Setting up Pusher in development
-  Pusher.app_id = '17050'
-  Pusher.key    = 'c9c649f5255c17685066'
-  Pusher.secret = '02fbd38ac9ef7d72457e'
+  # Pusher.app_id = '17050'
+  # Pusher.key    = 'c9c649f5255c17685066'
+  # Pusher.secret = '02fbd38ac9ef7d72457e'
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
@@ -42,11 +44,11 @@ TocartaAdmin::Application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost' }
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-    :user_name => 'tocarta-bdb4b76c00ea2356',
-    :password => '5deabe5fba6b0100',
-    :address => 'mailtrap.io',
-    :port => '2525',
-    :authentication => :plain
+    :user_name => ENV['SMTP_USER'],
+    :password => ENV['SMTP_PASS'],
+    :address => ENV['SMTP_ADDRESS'],
+    :port => ENV['SMTP_PORT'],
+    :authentication => ENV['SMTP_AUTH']
   }
 
   # Print deprecation notices to the Rails logger

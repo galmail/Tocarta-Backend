@@ -1,20 +1,45 @@
-defaults: &defaults
-  roles: ['admin', 'restaurant', 'distributor', 'user']
-  fb:
-    app_id: 201952163262122
-    secret_key: f8ba6fee165410f4c97f336ca5ca20af
+ROLES: admin,restaurant,distributor,user
 
+FB_APP_ID: 201952163262122
+FB_SECRET_KEY: f8ba6fee165410f4c97f336ca5ca20af
+
+MANDRILL_APIKEY: UrupOBiK9IvqGpBiNIeyqw
+
+S3_BUCKET: tocarta-test
+S3_KEY: AKIAJCY5PI67O7THQ5MQ
+S3_SECRET: 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
+
+MONGOHQ_URL: mongodb://tocarta:tocarta@dharma.mongohq.com:10004/AnalyticsDev
+
+# KEY:SECRET /app/APP_ID
+PUSHER_URL: http://c9c649f5255c17685066:02fbd38ac9ef7d72457e@api.pusherapp.com/app/17050
+
+SMTP_USER: tocarta-bdb4b76c00ea2356
+SMTP_PASS: 5deabe5fba6b0100
+SMTP_address: mailtrap.io
+SMTP_PORT: 2525
+SMTP_AUTH: plain
+
+#development:
 staging:
-  <<: *defaults
+  NODE_SERVER: http://tocarta-node-staging.herokuapp.com
 
-development:
-  <<: *defaults
-
-test:
-  <<: *defaults
+  # Auto-configured by Heroku
+  # PUSHER_URL: http://449b8fa529c34a194683:effe5c8e950edd944cc3@api.pusherapp.com/apps/17049
+  # MANDRILL_APIKEY=UrupOBiK9IvqGpBiNIeyqw
+  # MANDRILL_USERNAME=app3296327@heroku.com
 
 production:
-  <<: *defaults
-  fb:
-    app_id: 112211615526966
-    secret_key: fa30e7003799984805e316ffd7f1a9e2
+  FB_APP_ID: 112211615526966
+  FB_SECRET_KEY: fa30e7003799984805e316ffd7f1a9e2
+
+  S3_BUCKET: tocarta-prod
+  S3_KEY: AKIAJCY5PI67O7THQ5MQ
+  S3_SECRET: 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
+
+  NODE_SERVER: http://tocarta-node.herokuapp.com
+
+  MONGOHQ_URL: mongodb://tocarta:tocarta@dharma.mongohq.com:10007/Analytics
+
+  # Auto-configured by Heroku
+  # PUSHER_URL: http://7eb8d4a46b4a183f76e7:c5f0ad3864787f78d53f@api.pusherapp.com/app/17051
