@@ -39,17 +39,17 @@ TocartaAdmin::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { :host => 'localhost' }
-  ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
-    :user_name => ENV['SMTP_USER'],
-    :password => ENV['SMTP_PASS'],
-    :address => ENV['SMTP_ADDRESS'],
-    :port => ENV['SMTP_PORT'],
-    :authentication => ENV['SMTP_AUTH']
-  }
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.delivery_method = :smtp
+	config.action_mailer.smtp_settings = {
+	  :user_name => ENV['SMTP_USER'],
+	  :password => ENV['SMTP_PASS'],
+	  :address => ENV['SMTP_ADDRESS'],
+	  :port => ENV['SMTP_PORT'],
+	  :authentication => ENV['SMTP_AUTH']
+	}
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
