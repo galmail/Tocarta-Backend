@@ -1,3 +1,4 @@
+# TODO: add errors file
 require 'subtledata/configuration'
 require 'subtledata/api'
 require 'subtledata/client'
