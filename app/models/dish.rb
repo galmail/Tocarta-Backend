@@ -82,7 +82,7 @@ class Dish < ActiveRecord::Base
     end
   end
   
-	def update_rating(comment_rating)
+  def update_rating(comment_rating)
     num_comments = self.comments.length-1           # total number of comments (should filter only those comments that left)
     self.rating ||= 0                               # actual dish rating
     rate = ((num_comments.to_f*self.rating)+comment_rating.to_f)/(num_comments.to_f+1)

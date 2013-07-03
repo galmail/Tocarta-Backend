@@ -1,7 +1,11 @@
+object @restaurant
+cache  @restaurant, expires_in: 30.minutes
+
 ### restaurant setting ###
 
-node :name do @restaurant.name end
-node :logo do @restaurant.chain.logo.url(:medium).split(ENV['S3_BUCKET']).last end
+attribute :name
+# node :name do @restaurant.name end
+node :logo   do @restaurant.chain.logo.url(:medium).split(ENV['S3_BUCKET']).last end
 node :i18nbg do @restaurant.chain.i18nbg.url.split(ENV['S3_BUCKET']).last end
 
 if @restaurant.chain.bg.file?

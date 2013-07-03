@@ -23,6 +23,7 @@ require 'net/http'
 class Tablet < ActiveRecord::Base
   belongs_to :table
 	has_many :orders
+	has_many :comments
 	attr_accessible :name, :active, :activated, :access_key, :display_size, :device_brand, :device_name, :device_os, :last_menu_sync, :alive, :table_id
 	after_initialize :init
 	

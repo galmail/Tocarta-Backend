@@ -2,6 +2,8 @@ TocartaAdmin::Application.routes.draw do
 
   match "/dashboards(/:action(.:format))" => "Dashboards", :as => :dashboards
   match "/dashboards/:id/:restaurant_id" => "dashboards#show"
+  # Necesary for remote load of tabs on comments widget
+  match "/dashboards/:id/:restaurant_id/content_chart_comments_by/:range" => "dashboards#content_chart_comments_by"
 
   get "authentications/create"
 
@@ -9,7 +11,7 @@ TocartaAdmin::Application.routes.draw do
   mount RailsAdminImport::Engine => '/rails_admin_import', :as => 'rails_admin_import'
 
   # Use custom controller
-  devise_for :users, controllers: {:registrations => "users/registrations"}
+  devise_for :users, controllers: {registrations: "users/registrations"}
   match '/auth/:provider/callback' => 'authentications#create'
 
   # The priority is based upon order of creation:

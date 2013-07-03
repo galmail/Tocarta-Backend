@@ -9,9 +9,9 @@
           %li.active
             %a{"data-toggle" => "tab", :href => "#month-tab-comments_charts-box"} Mes
           %li
-            %a{"data-toggle" => "tab", :href => "#week-tab-comments_charts-box"} Semana
+            %a.ajaxTab{"data-toggle" => "tab", "data-tabUrl" => "/dashboards/#{@dashboard.id}/#{@restaurant.id}/content_chart_comments_by/week", :href => "#day-tab-comments_charts-box"} Semana
           %li
-            %a{"data-toggle" => "tab", :href => "#day-tab-comments_charts-box"} Día
+            %a.ajaxTab{"data-toggle" => "tab", "data-tabUrl" => "/dashboards/#{@dashboard.id}/#{@restaurant.id}/content_chart_comments_by/day", :href => "#day-tab-comments_charts-box"} Día
     .widget-body
       .widget-main.padding-4
         .tab-content.padding-8
@@ -22,9 +22,9 @@
               .chart
                 = line_chart( dashboards_path( 'chart_comments_by', {range: 'month', restaurant: @restaurant}) )
             #week-tab-comments_charts-box.tab-pane
-              .chart
-                = line_chart( dashboards_path( 'chart_comments_by', {range: 'week', restaurant: @restaurant}) )
+              -# .chart
+                = line_chart( dashboards_path( 'chart_comments_by', {range: 'week', restaurant: @restaurant}), library: {width: 420, height: 300} )
             #day-tab-comments_charts-box.tab-pane
-              .chart
+              -# .chart
                 = line_chart( dashboards_path( 'chart_comments_by', {range: 'day', restaurant: @restaurant}) )
           .hr.hr8.hr-double

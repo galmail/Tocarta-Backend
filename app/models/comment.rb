@@ -6,6 +6,7 @@
 #  dish_id            :integer
 #  restaurant_id      :integer
 #  client_id          :integer
+#  tablet_id          :integer
 #  survey_question_id :integer
 #  name               :string(255)
 #  created_at         :datetime         not null
@@ -21,10 +22,14 @@ class Comment < ActiveRecord::Base
   belongs_to :dish
   belongs_to :restaurant
   belongs_to :client
+  belongs_to :tablet
   belongs_to :survey_question
   attr_accessible :name, :description, :rating, :approved, :email
-  attr_accessible :dish_id, :restaurant_id
+  attr_accessible :dish_id, :restaurant_id, :tablet_id
   # after_save :logme
+
+  after_save :update_survey_rating,
+    :if => Proc.new { |comment| comment.survey_question.present? }
 
   # TODO capture everytime the comment is approved (or disapproved) and update dish rating
   scope :without_dish,    where(dish_id: nil)
@@ -37,6 +42,10 @@ class Comment < ActiveRecord::Base
     where(dish_id: id)
   end
 
+  def self.by_restaurant(id)
+    where(restaurant_id: id)
+  end
+
   # Create an array with comments
   # @param [Comment] coments
   # @return [Array] [Dish.name, Dish.rating, Comment.rating, Dish.comments]
@@ -45,6 +54,12 @@ class Comment < ActiveRecord::Base
       r << [v.dish.name, v.dish.rating.to_i, v.rating, v.dish.comments.count]
       r
     end
+  end
+
+  private
+
+  def update_survey_rating
+    self.survey_question.update_rating_average!
   end
 
 end

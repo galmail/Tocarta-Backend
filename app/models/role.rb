@@ -18,7 +18,7 @@ class Role < ActiveRecord::Base
   
   # Clean roles list to use in public views
   def self.roles_clean
-    Application['roles'] - ['admin']
+    ENV['ROLES'] - ['admin']
   end
 
   # Return a role given a param code

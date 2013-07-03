@@ -52,6 +52,7 @@ class User < ActiveRecord::Base
   has_one  :client
 
   has_many :authentications, :dependent => :delete_all
+  has_many :connection_logs, dependent: :destroy
 
   # If no role is defined, we define user by default
   def rol
@@ -67,6 +68,21 @@ class User < ActiveRecord::Base
     self.add_role :user
   end
 
+  def valid_password?(password)
+    if super
+      return true
+    else
+      if self.invalid_password_count >= 2
+        self.invalid_password_count = 0
+        NotificationMailer.invalid_passwords(self).deliver
+      else
+        self.invalid_password_count += 1
+      end
+      self.save
+
+      return false
+    end
+  end
   private
 
   # Create a restaurant and dependencies (chain, section, menu)

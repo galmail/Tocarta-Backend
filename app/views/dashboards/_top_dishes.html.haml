@@ -4,12 +4,12 @@
     .widget-header
       %h4.lighter.smaller
         %i.icon-signal.orange
-        Top platos
+        Valoración Platos
       .widget-toolbar.no-border
         %ul.nav.nav-tabs
           %li.active
             %a{"data-toggle" => "tab", :href => "#top-tab-top-box"} Top
-          %li
+          -# %li
             %a{"data-toggle" => "tab", :href => "#chart-tab-top-box"} Chart
           %li
             %a{"data-toggle" => "tab", :href => "#bottom-tab-top-box"} Bottom
@@ -50,7 +50,7 @@
                           %i.icon-star.orange
                         %span= " (#{d.rating.to_s})"
                       .text
-          #chart-tab-top-box.tab-pane
+          -# #chart-tab-top-box.tab-pane
             - unless @restaurant.chain.present?
               %p No hay suficientes datos
             - else

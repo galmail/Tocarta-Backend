@@ -302,11 +302,11 @@ RailsAdmin.config do |config|
   config.model Comment do
     weight 140
     list do
-      include_fields :created_at, :rating, :description, :name, :dish, :survey_question, :approved, :restaurant
+      include_fields :created_at, :rating, :description, :name, :email, :dish, :tablet, :survey_question, :approved, :restaurant
       exclude_fields :id, :client
     end
     edit do
-      include_fields :created_at, :rating, :description, :name, :dish, :survey_question, :approved, :restaurant
+      include_fields :created_at, :rating, :description, :name, :email, :dish, :tablet, :survey_question, :approved, :restaurant
       exclude_fields :id, :client
     end
   end

@@ -2,6 +2,8 @@ require 'net/http'
 
 class AccessController < ApplicationController
 
+  
+
   def validate_license_key
     @result = false
     if !@tablet.activated
