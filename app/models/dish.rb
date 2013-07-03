@@ -57,7 +57,7 @@ class Dish < ActiveRecord::Base
 	)
 	translates :name, :description, :story, :short_title, :badge_name, :fallbacks_for_empty_translations => true
 	attr_accessible :name, :active, :position, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts, :short_title, :badge_name, :photo, :rate_me, :chain_id
-	attr_accessible :section_ids, :subsection_ids, :dish_type_ids, :dish_variation_set_ids
+	attr_accessible :section_ids, :subsection_ids, :dish_type_ids, :dish_variation_set_ids, :sd_dish_id
 
     ### Validations ###
 
