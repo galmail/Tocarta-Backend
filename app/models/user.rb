@@ -52,6 +52,7 @@ class User < ActiveRecord::Base
   has_one  :client
 
   has_many :authentications, :dependent => :delete_all
+  has_many :connection_logs, dependent: :destroy
 
   # If no role is defined, we define user by default
   def rol
