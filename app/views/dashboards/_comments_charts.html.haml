@@ -3,20 +3,20 @@
     .widget-header
       %h4.lighter.smaller
         %i.icon-signal.orange
-        Comentarios por:
+        =t('widgets.comments_charts.title')
       .widget-toolbar.no-border
         %ul.nav.nav-tabs
           %li.active
-            %a{"data-toggle" => "tab", :href => "#month-tab-comments_charts-box"} Mes
+            %a{"data-toggle" => "tab", :href => "#month-tab-comments_charts-box"}= t('widgets.month')
           %li
-            %a.ajaxTab{"data-toggle" => "tab", "data-tabUrl" => "/dashboards/#{@dashboard.id}/#{@restaurant.id}/content_chart_comments_by/week", :href => "#day-tab-comments_charts-box"} Semana
+            %a.ajaxTab{"data-toggle" => "tab", "data-tabUrl" => "/dashboards/#{@dashboard.id}/#{@restaurant.id}/content_chart_comments_by/week", :href => "#day-tab-comments_charts-box"}= t('widgets.week')
           %li
-            %a.ajaxTab{"data-toggle" => "tab", "data-tabUrl" => "/dashboards/#{@dashboard.id}/#{@restaurant.id}/content_chart_comments_by/day", :href => "#day-tab-comments_charts-box"} Día
+            %a.ajaxTab{"data-toggle" => "tab", "data-tabUrl" => "/dashboards/#{@dashboard.id}/#{@restaurant.id}/content_chart_comments_by/day", :href => "#day-tab-comments_charts-box"}= t('widgets.day')
     .widget-body
       .widget-main.padding-4
         .tab-content.padding-8
           - unless @restaurant.comments.present?
-            %p No hay suficientes datos
+            %p= t('widgets.no_data')
           - else
             #month-tab-comments_charts-box.tab-pane.active
               .chart
