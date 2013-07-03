@@ -1,10 +1,10 @@
 - comments = @restaurant.comments.without_dish.with_survey.newest
-.newest_comments_on_dishes.span6
+.newest_comments_on_survey.span6
   .widget-box
     .widget-header
       %h4.lighter.smaller
         %i.icon-comment.blue
-        Últimos comentarios en Cuestionario
+        = t('widgets.newest_comments_on_survey.title')
       .widget-toolbar
         -# %a{href: '#', 'data-action' => 'reload'}
           %i.icon-refresh
@@ -13,7 +13,7 @@
     .widget-body
       .widget-main.no-padding
         - if comments.nil?
-          %p No hay bastantes datos
+          %p= t('widgets.no_data')
         - else
           .dialogs
             - comments.each do |c|
@@ -29,7 +29,7 @@
                     %i.icon-time
                     %span= distance_of_time_in_words_to_now(c.created_at)
                   .name
-                    = c.name.blank? ? 'Anónimo' : c.name
+                    = c.name.blank? ? t('widgets.anonymous') : c.name
                   .text
                     %h6= c.survey_question.description
                     - if c.description.nil?

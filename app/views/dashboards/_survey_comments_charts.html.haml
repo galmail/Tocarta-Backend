@@ -4,14 +4,14 @@
     .widget-header
       %h4.lighter.smaller
         %i.icon-comment.blue
-        Valoración del Cuestionario
+        = t('widgets.survey_comments_charts.title')
       .widget-toolbar
         %a{href: '#', 'data-action' => 'collapse'}
           %i.icon-chevron-up
     .widget-body
       .widget-main.no-padding
         - if surveys.blank?
-          %p No hay bastantes datos
+          %p= t('widget.no_data')
         - else
           - surveys.each do |sq|
             .infobox.infobox-orange2.full_width
@@ -19,7 +19,7 @@
                 %span.sparkline{'data-values' => sq.newest_comments_by_restaurant_to_values(@restaurant.id).join(',')}
               .infobox-data
                 %span.infobox-data-number= sprintf( "%5.2f", sq.rating )
-                .infobox-content= sq.description
+                .infobox-content= sq.name
               - diff = sq.last_week_rating_diff(@restaurant.id)
               - if diff > 0
                 .badge.badge-success

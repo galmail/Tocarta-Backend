@@ -1,0 +1,27 @@
+es:
+  widgets:
+    no_data: No hay bastantes datos
+    anonymous: Anónimo
+    day: día
+    week: semana
+    month: mes
+    top: mejores
+    bottom: peores
+
+    newest_comments_on_dishes:
+      title: Últimos comentarios del Restaurante
+
+    newest_comments_on_dishes:
+      title: Últimas valoraciones de platos
+
+    comments_charts:
+      title: Comentarios por
+
+    top_dishes:
+      title: Valoración Platos
+
+    newest_comments_on_survey:
+      title: Últimos comentarios en Cuestionario
+
+    survey_comments_charts:
+      title: Valoración del Cuestionario
