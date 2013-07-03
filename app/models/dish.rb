@@ -47,8 +47,6 @@ class Dish < ActiveRecord::Base
   has_one  :nutrition_fact
 
   # Tag strategy
-  has_and_belongs_to_many :food_tags
-  attr_accessible :food_tag_ids
   has_and_belongs_to_many :ingredients
   attr_accessible :ingredient_ids
 
@@ -84,7 +82,7 @@ class Dish < ActiveRecord::Base
     end
   end
   
-	def update_rating(comment_rating)
+  def update_rating(comment_rating)
     num_comments = self.comments.length-1           # total number of comments (should filter only those comments that left)
     self.rating ||= 0                               # actual dish rating
     rate = ((num_comments.to_f*self.rating)+comment_rating.to_f)/(num_comments.to_f+1)
@@ -98,6 +96,34 @@ class Dish < ActiveRecord::Base
   
   def validate_min_sections
     errors.add(:sections, "at least one section must be selected") if sections.length < 1
+  end
+
+  def self.with_comments
+    joins(:comments)
+  end
+
+  def self.by_chain(chain_id)
+    where(chain_id: chain_id)
+  end
+
+  def self.top_rating
+    order('rating DESC')
+  end
+  def self.bottom_rating
+    order('rating ASC')
+  end
+
+  def self.to_top_rating_hash_by_chain(chain_id)
+    by_chain(chain_id).with_comments.top_rating.limit(10).inject({}) do |r,v|
+      r[v.name] = v.rating.to_i
+      r
+    end
+  end
+  def self.to_bottom_rating_hash_by_chain(chain_id)
+    by_chain(chain_id).with_comments.top_rating.limit(10).inject({}) do |r,v|
+      r[v.name] = v.rating.to_i
+      r
+    end
   end
 	
 end

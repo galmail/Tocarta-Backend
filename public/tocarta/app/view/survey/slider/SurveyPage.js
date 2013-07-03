@@ -8,15 +8,32 @@
 
 Ext.define('TC.view.survey.slider.SurveyPage', {
 	// requires: ['TC.view.dailymenu.DailyMenuDish'],
-	extend: 'Ext.DataView',
+	// extend: 'Ext.DataView',
+	extend: 'Ext.Panel',
 	xtype: 'survey-slider-page',
 	config: {
 		cls: 'tcSurveySliderPage',
-		allowDeselect: true,
-		scrollable: false,
-		itemTpl: [
-			'<div class="tcSurveySliderQuestion">',
-			'</div>'
-		].join('')
+		firstPage: true,
+		layout: {
+			type: 'vbox',
+			align: 'center'
+		},
+		items: [
+			{
+				xtype: 'button',
+				text: 'Back',
+				hidden: true,
+				handler: function(){
+					this.parent.parent.previous();
+				}
+			},
+			{
+				xtype: 'button',
+				text: $T.next,
+				handler: function(){
+					this.parent.parent.next();
+				}
+			}
+		]
 	}
 });

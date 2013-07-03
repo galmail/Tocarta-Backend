@@ -1,0 +1,61 @@
+/**
+ * Dish Rate and Review stylesheet
+ **/
+
+.tcDishReviewModal {
+  background: white;
+  font-family: 'YanoneKaffeesatzThin';
+  
+  .x-inner.x-panel-inner {
+    padding: 20px;
+  }
+  
+  .left {
+    float: left;
+    width: 130px;
+    &.ratingTitle {
+      margin-top: 25px;
+    }
+  }
+  .right {
+    float: left;
+    width: 370px;
+    padding: 5px;
+  }
+  .block {
+    overflow: hidden;
+    padding: 10px;
+  }
+  
+  .tcDishReviewModalTitle {
+    font-size: 30px;
+    font-family: 'YanoneKaffeesatzRegular';
+  }
+  
+  .rating {
+    // margin-left: 70px;
+    overflow: hidden;
+    .star {
+      float: left;
+      width: 72px;
+      height: 72px;
+      background: url("../img/common/icons/star_big_white.png") no-repeat;
+      &.selected {
+        background: url("../img/common/icons/star_big_gold.png") no-repeat;
+      }
+    }
+  }
+  
+  .tcDishReviewModalButtons {
+    margin-top: 10px;
+    .tcDishReviewModalCancelBtn {
+      margin-right: 40px;
+    }
+    .tcDishReviewModalSubmitBtn {
+    }
+  }
+  
+  
+  
+  
+}

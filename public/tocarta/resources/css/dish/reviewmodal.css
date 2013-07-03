@@ -1,0 +1,60 @@
+/**
+ * Dish Rate and Review stylesheet
+ **/
+/* line 5, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal {
+  background: white;
+  font-family: 'YanoneKaffeesatzThin';
+}
+/* line 9, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .x-inner.x-panel-inner {
+  padding: 20px;
+}
+/* line 13, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .left {
+  float: left;
+  width: 130px;
+}
+/* line 16, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .left.ratingTitle {
+  margin-top: 25px;
+}
+/* line 20, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .right {
+  float: left;
+  width: 370px;
+  padding: 5px;
+}
+/* line 25, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .block {
+  overflow: hidden;
+  padding: 10px;
+}
+/* line 30, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .tcDishReviewModalTitle {
+  font-size: 30px;
+  font-family: 'YanoneKaffeesatzRegular';
+}
+/* line 35, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .rating {
+  overflow: hidden;
+}
+/* line 38, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .rating .star {
+  float: left;
+  width: 72px;
+  height: 72px;
+  background: url("../img/common/icons/star_big_white.png") no-repeat;
+}
+/* line 43, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .rating .star.selected {
+  background: url("../img/common/icons/star_big_gold.png") no-repeat;
+}
+/* line 49, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .tcDishReviewModalButtons {
+  margin-top: 10px;
+}
+/* line 51, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .tcDishReviewModalButtons .tcDishReviewModalCancelBtn {
+  margin-right: 40px;
+}

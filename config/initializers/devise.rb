@@ -210,3 +210,13 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
 end
+
+Warden::Manager.after_authentication do |user,auth,opts|
+  KEEP = 20
+  user.connection_logs.build(ip: user.current_sign_in_ip)
+  user.save
+
+  if user.connection_logs.count > KEEP
+    ConnectionLog.purge_by_user!(user,KEEP)
+  end
+end

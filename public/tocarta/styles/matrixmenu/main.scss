@@ -2,7 +2,15 @@
  *   MatrixMenu Stylesheet
  */
 
+$width-left-panel: 87%;
+$width-right-panel: 13%;
+
 .tcMatrixMenu {
+  
+  .x-carousel-indicator {
+    position: fixed !important;
+    margin-bottom: 35px;
+  }
   
   // DishImageView
   .tcMatrixMenuDishImageView {
@@ -15,40 +23,69 @@
     }
     
     .dish-info {
-      bottom: 0px;
-      width: 100%;
-      height: 10%;
-      background-color: rgba(0,0,0,0.10);
       position: absolute;
-      display: inline-block;
+      bottom: 0;
+      width: 100%;
+      height: 80px;
       
-      .dish-name {
-        width: 40%;
-        display: inline-block;
-        
-        p {
+      // background-color: rgba(0,0,0,0.10);
+      // display: inline-block;
+      .dish-info-container {
+        overflow: hidden;
+        height: 80px;
+      }
+      
+      .dish-left {
+        float: left;
+        width: $width-left-panel; // 87%
+        height: 100%;
+        background-color: white;
+        padding: 5px;
+        opacity: 0.6;
+        .dish-name {
           font-weight: bold;
+          font-size: 21px;
+        }
+        .dish-description {
+          font-size: 19px;
+          height: 100%;
+          width: 80%;
+          font-family: "Nova Round",arial,verdana;
+          color: rgb(128, 123, 75);
+        }
+        .dish-actions {
+          position: absolute;
+          bottom: 5px;
+          width: $width-left-panel;
+          padding-right: 20px;
+          text-align: right;
+          .tcDishActionReview {
+            background-image: url('../img/common/icons/comment_dish.png');
+            width: 35px;
+            height: 35px;
+            display: block;
+            float: right;
+          }
         }
       }
-      
-      .dish-description {
-        width: 56%;
-        display: inline-block;
-        
-        p {
-         // font-weight: bold;
+      .dish-right {
+        float: right;
+        width: $width-right-panel; // 13%
+        height: 100%;
+        background-color: black;
+        font-size: 35px;
+        color: white;
+        text-align: center;
+        padding-top: 18px;
+        opacity: 0.8;
+        .dish-price {
+          .euro {
+            color: #CB8D8A;
+            font-size: 31px;
+            margin-right: 15px;
+          }
         }
       }
-      
-      .dish-price {
-        width: 4%;
-        display: inline-block;
-        
-        p {
-         // font-weight: bold;
-        }
-      }
-    
     }
   }
   

@@ -1,0 +1,39 @@
+- comments = @restaurant.comments.without_dish.with_survey.newest
+.newest_comments_on_survey.span6
+  .widget-box
+    .widget-header
+      %h4.lighter.smaller
+        %i.icon-comment.blue
+        = t('widgets.newest_comments_on_survey.title')
+      .widget-toolbar
+        -# %a{href: '#', 'data-action' => 'reload'}
+          %i.icon-refresh
+        %a{href: '#', 'data-action' => 'collapse'}
+          %i.icon-chevron-up
+    .widget-body
+      .widget-main.no-padding
+        - if comments.nil?
+          %p= t('widgets.no_data')
+        - else
+          .dialogs
+            - comments.each do |c|
+              .itemdiv.dialogdiv
+                .user
+                  = image_tag(@restaurant.chain.logo(:medium) || 'default_dish.png')
+                .body
+                  .time
+                    - stars_num = c.rating.nil? ? 0 : c.rating.to_i
+                    - stars_num.times do
+                      %i.icon-star.orange
+                    %span &nbsp;
+                    %i.icon-time
+                    %span= distance_of_time_in_words_to_now(c.created_at)
+                  .name
+                    = c.name.blank? ? t('widgets.anonymous') : c.name
+                  .text
+                    %h6= c.survey_question.description
+                    - if c.description.nil?
+                      &nbsp;
+                    - else
+                      %i.icon-quote-left
+                      = c.description

@@ -1,12 +1,13 @@
 TocartaAdmin::Application.configure do
   
-  ENV['S3_BUCKET'] ||= 'tocarta-prod'
-  ENV['S3_KEY'] ||= 'AKIAJCY5PI67O7THQ5MQ'
-  ENV['S3_SECRET'] ||= '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'
+  # Defined in config/application.yml
+  # ENV['S3_BUCKET'] ||= 'tocarta-prod'
+  # ENV['S3_KEY'] ||= 'AKIAJCY5PI67O7THQ5MQ'
+  # ENV['S3_SECRET'] ||= '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'
   
-  ENV['NODE_SERVER'] ||= 'http://tocarta-node.herokuapp.com'
+  # ENV['NODE_SERVER'] ||= 'http://tocarta-node.herokuapp.com'
   
-  ENV['MONGOHQ_URL'] ||= 'mongodb://tocarta:tocarta@dharma.mongohq.com:10007/Analytics'
+  # ENV['MONGOHQ_URL'] ||= 'mongodb://tocarta:tocarta@dharma.mongohq.com:10007/Analytics'
   
   Paperclip::Attachment.default_options.merge!({
     :storage => :s3,
@@ -22,11 +23,25 @@ TocartaAdmin::Application.configure do
   # Pusher.key    = 'd20cf40b86a0639e33cc'
   # Pusher.secret = 'f13b3a335cc5627caacc'
   
-  Pusher.app_id = '17051'
-  Pusher.key    = '7eb8d4a46b4a183f76e7'
-  Pusher.secret = 'c5f0ad3864787f78d53f'
+  # Defined in config/application.yml
+  # Pusher.app_id = '17051'
+  # Pusher.key    = '7eb8d4a46b4a183f76e7'
+  # Pusher.secret = 'c5f0ad3864787f78d53f'
   
   # Settings specified here will take precedence over those in config/application.rb
+
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { :host => 'tocarta.es' }
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :user_name => ENV['SMTP_USER'],
+    :password => ENV['SMTP_PASS'],
+    :address => ENV['SMTP_ADDRESS'],
+    :port => ENV['SMTP_PORT'],
+    :authentication => ENV['SMTP_AUTH'],
+    :domain => ENV['SMTP_DOMAIN'],
+    :enable_starttls_auto => true
+  }
 
   # Code is not reloaded between requests
   config.cache_classes = true
@@ -74,7 +89,7 @@ TocartaAdmin::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
-  config.assets.precompile += %w( rails_admin/tocarta_admin.css )
+  config.assets.precompile += %w( rails_admin/tocarta_admin.css dashboards/application-ie.css dashboards/chartkick-tocarta.js )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false

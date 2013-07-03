@@ -1,6 +1,6 @@
 if Rails.env.development?
   puts "** Add roles"
-  Application['roles'].each do |r|
+  ENV['ROLES'].split(',').each do |r|
     Role.create! name: r.to_s
   end
 

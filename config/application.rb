@@ -67,6 +67,14 @@ module TocartaAdmin
     # parameters by using an attr_accessible or attr_protected declaration.
     # config.active_record.whitelist_attributes = true
     
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'analytics', 'avatars')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'analytics', 'css')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'analytics', 'fonts')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'analytics', 'icons')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'analytics', 'images')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'analytics', 'img')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'analytics', 'js')
+
     config.assets.initialize_on_precompile = false
 
     # Enable the asset pipeline
@@ -74,5 +82,10 @@ module TocartaAdmin
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.generators do |g|
+      g.test_framework :rspec
+      g.fixture_replacement :factory_girl, dir: "spec/factories"
+    end
   end
 end

@@ -9,6 +9,7 @@ gem 'jquery-rails'
 #### Database Setup ####
 group :development do
   gem 'taps'              # for heroku db:pull
+  gem 'rails-erd'         # create DB diagram
   gem 'yaml_db'
   gem 'sqlite3'
   gem 'meta_request'      # for rails_panel
@@ -26,6 +27,7 @@ group :development do
 end
 
 group :production do
+  gem 'rails-erd' # so it wont crash in production
   gem 'thin'
   gem 'newrelic_rpm'
 end
@@ -49,6 +51,7 @@ gem 'rolify'
 gem 'rabl'
 # gem 'yajl-ruby'
 gem 'oj'
+gem 'msgpack', '~> 0.4.5'
 
 
 #### HTTP Client used for Subtledata ####
@@ -76,6 +79,7 @@ gem 'twitter_oauth'
 
 # Translation
 gem 'globalize3', :git => 'git://github.com/svenfuchs/globalize3.git'
+gem 'paperclip-globalize3'
 
 # Smart dates and times
 gem 'chronic'
@@ -93,6 +97,10 @@ gem 'sass-rails',   '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
 gem "haml-rails"
 gem 'simple_form'
+gem 'country_select'
+gem "chartkick"
+gem 'groupdate'
+gem "figaro"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

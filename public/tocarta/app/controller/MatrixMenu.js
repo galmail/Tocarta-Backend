@@ -48,34 +48,26 @@ Ext.define('TC.controller.MatrixMenu', {
     
     matrixMenuShow: function(){
     	console.log('TC.controller.MatrixMenu.matrixMenuShow');
-    
-
-        //return this.infinitest();
-    
-        /*
-         * Prueba componentes Nv1
-         */
-        
-        var me = this, dish_views = [];
-        
-        TC.Restaurant.getMainMenu().sections().getAt(0).dishes().each(function(dish)
-        {
-            dish_views.push(me.printDish(dish));
-        });
-        
-        this.getMatrixMenu().setItems(
-        {
-            xtype: 'carousel', 
-            id : 'matrix-carousel',
-            direction : 'horizontal',
-            indicator: false,
-            directionLock : true, 
-            items: dish_views,
-            width: this.getMatrixMenu().element.getWidth(),
-            height: this.getMatrixMenu().element.getHeight(),
-        });
-        
+      var me = this, dish_views = [];
+      TC.Restaurant.getDessertsMenu().sections().getAt(0).dishes().each(function(dish){
+        dish_views.push(me.printDish(dish));
+      });
+      this.getMatrixMenu().setItems(
+      {
+          xtype: 'carousel', 
+          id : 'matrix-carousel',
+          direction : 'horizontal',
+          indicator: true,
+          directionLock : true, 
+          items: dish_views,
+          width: this.getMatrixMenu().element.getWidth(),
+          height: this.getMatrixMenu().element.getHeight()
+      });
     },
+    
+    
+    
+    
     
     
     detailstest: function(){
@@ -192,7 +184,7 @@ Ext.define('TC.controller.MatrixMenu', {
     	var dish_view = null;
     	
     	if (view != undefined)
-            dish_view = Ext.create(view, { data: [dish] });
+         dish_view = Ext.create(view, { data: [dish] });
     	else if (dish.data.large_photo_url.length > 0)
     		dish_view = Ext.create('TC.view.matrixmenu.DishImageView', { data: [dish] });
 	    else

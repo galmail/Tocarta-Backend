@@ -12,7 +12,7 @@ Ext.define('TC.model.Banner', {
 	    {name: "large", type: "string"},
 	    {name: "large_photo_url", type: "string",
 	    	convert: function(value, record){
-	    		return $tc.getUri() + record.get("large");
+	    		return $tc.checkImgUrl(record.get("large"));
 	    	}
 	    }
 	  ],

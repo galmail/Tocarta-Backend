@@ -1,0 +1,87 @@
+es:
+  activerecord:
+    models:
+      chain:
+        one: Cadena de Restaurantes
+        other: Cadenas de Restaurantes
+      restaurant:
+        one: Restaurante
+        other: Restaurantes
+      restaurant_setting:
+        one: Ajustes del Restaurante
+        other: Ajustes del Restaurante
+      menu:
+        one: Carta
+        other: Cartas
+      menu_setting:
+        one: Ajustes de la Carta
+        other: Ajustes de Carta
+      theme:
+        one: Theme
+        other: Themes
+      skin:
+        one: Estilo de Carta
+        other: Estilos de Cartas
+      dish_variation:
+        one: Dish Variation
+        other: Dish Variations
+      dish_variation_set:
+        one: Dish Variation Set
+        other: Dish Variation Sets
+      dish_type:
+        one: Tipo de Comida
+        other: Tipos de Comida
+      nutrition_fact:
+        one: Dato de Nutrición
+        other: Datos de Nutrición
+      ingredient:
+        one: Ingrediente
+        other: Ingredientes
+      dish:
+        one: Plato/Bebida
+        other: Platos/Bebidas
+      section:
+        one: Seccion
+        other: Secciones
+      subsection:
+        one: Subsección
+        other: Subsecciones
+      comment:
+        one: Comentario
+        other: Comentarios
+      table:
+        one: Mesa
+        other: Mesas
+      tablet:
+        one: Tableta
+        other: Tabletas
+      survey_question:
+        one: Pregunta de Encuesta
+        other: Preguntas de Encuesta
+      order:
+        one: Pedido
+        other: Pedidos
+ 
+      attributes:
+        restaurant:
+          chain: "Cadena de Restaurantes"
+        comment:
+          created_at:       "Fecha/Hora"
+          rating:           "Valoración"
+          description:      "Comentario"
+          name:             "Nombre del Cliente"
+          dish:             "Plato"
+          survey_question:  "Pregunta"
+          restaurant:       "Restaurante"
+          approved:         "Aprobado"
+        table:
+          updated_at: "Última Actividad"
+        order:
+          created_at:   "Fecha/Hora"
+          order_items:  "Items del Pedido"
+          table:        "Mesa"
+          
+          
+          
+      
+          

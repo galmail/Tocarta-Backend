@@ -1,0 +1,30 @@
+.comments_charts.span6
+  #comments_charts-box.widget-box.transparent
+    .widget-header
+      %h4.lighter.smaller
+        %i.icon-signal.orange
+        =t('widgets.comments_charts.title')
+      .widget-toolbar.no-border
+        %ul.nav.nav-tabs
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#month-tab-comments_charts-box"}= t('widgets.month')
+          %li
+            %a.ajaxTab{"data-toggle" => "tab", "data-tabUrl" => "/dashboards/#{@dashboard.id}/#{@restaurant.id}/content_chart_comments_by/week", :href => "#day-tab-comments_charts-box"}= t('widgets.week')
+          %li
+            %a.ajaxTab{"data-toggle" => "tab", "data-tabUrl" => "/dashboards/#{@dashboard.id}/#{@restaurant.id}/content_chart_comments_by/day", :href => "#day-tab-comments_charts-box"}= t('widgets.day')
+    .widget-body
+      .widget-main.padding-4
+        .tab-content.padding-8
+          - unless @restaurant.comments.present?
+            %p= t('widgets.no_data')
+          - else
+            #month-tab-comments_charts-box.tab-pane.active
+              .chart
+                = line_chart( dashboards_path( 'chart_comments_by', {range: 'month', restaurant: @restaurant}) )
+            #week-tab-comments_charts-box.tab-pane
+              -# .chart
+                = line_chart( dashboards_path( 'chart_comments_by', {range: 'week', restaurant: @restaurant}), library: {width: 420, height: 300} )
+            #day-tab-comments_charts-box.tab-pane
+              -# .chart
+                = line_chart( dashboards_path( 'chart_comments_by', {range: 'day', restaurant: @restaurant}) )
+          .hr.hr8.hr-double

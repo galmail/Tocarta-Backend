@@ -1,0 +1,67 @@
+- surveys = SurveyQuestion.by_restaurant(@restaurant.id)
+.survey_comments_charts.infobox-container.span6
+  .widget-box
+    .widget-header
+      %h4.lighter.smaller
+        %i.icon-comment.blue
+        = t('widgets.survey_comments_charts.title')
+      .widget-toolbar
+        %a{href: '#', 'data-action' => 'collapse'}
+          %i.icon-chevron-up
+    .widget-body
+      .widget-main.no-padding
+        - if surveys.blank?
+          %p= t('widget.no_data')
+        - else
+          - surveys.each do |sq|
+            .infobox.infobox-orange2.full_width
+              .infobox-chart
+                %span.sparkline{'data-values' => sq.newest_comments_by_restaurant_to_values(@restaurant.id).join(',')}
+              .infobox-data
+                %span.infobox-data-number= sprintf( "%5.2f", sq.rating )
+                .infobox-content= sq.name
+              - diff = sq.last_week_rating_diff(@restaurant.id)
+              - if diff > 0
+                .badge.badge-success
+                  = number_to_percentage(diff, precision: 1)
+                  %i.icon-arrow-up
+              - if diff < 0
+                .badge.badge-important
+                  = number_to_percentage(diff, precision: 1)
+                  %i.icon-arrow-down
+              - if diff == 0
+                .badge.badge-warning
+                  = number_to_percentage(diff, precision: 1)
+                  %i.icon-arrow-right
+
+-# OLD widget
+-# .survey_comments_charts.span6
+  #survey_comments_charts-box.widget-box.transparent
+    .widget-header
+      %h4.lighter.smaller
+        %i.icon-signal.orange
+        Comentarios de Cuestionario:
+      .widget-toolbar.no-border
+        %ul.nav.nav-tabs
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#month-tab-survey_comments_charts-box"} Mes
+          %li
+            %a{"data-toggle" => "tab", :href => "#week-tab-survey_comments_charts-box"} Semana
+          %li
+            %a{"data-toggle" => "tab", :href => "#day-tab-survey_comments_charts-box"} Día
+    .widget-body
+      .widget-main.padding-4
+        .tab-content.padding-8
+          - unless @restaurant.comments.present?
+            %p No hay suficientes datos
+          - else
+            #month-tab-survey_comments_charts-box.tab-pane.active
+              .chart
+                = line_chart( dashboards_path( 'chart_survey_comments_by', {range: 'month', restaurant: @restaurant}) )
+            #week-tab-survey_comments_charts-box.tab-pane
+              .chart
+                = line_chart( dashboards_path( 'chart_survey_comments_by', {range: 'week', restaurant: @restaurant}) )
+            #day-tab-survey_comments_charts-box.tab-pane
+              .chart
+                = line_chart( dashboards_path( 'chart_survey_comments_by', {range: 'day', restaurant: @restaurant}) )
+          .hr.hr8.hr-double

@@ -10,6 +10,7 @@ var CURRENT_ENV = "dev"; // options: mock, dev, staging, open, prod, prod
 if(CURRENT_ENV == "mock"){
 	$tc = {
 		server: 'http://localhost:3000',
+		nodeserver: 'http://analytics.tocarta.es',
 		// online: true, // when online, images should be fetched from a remote server, otherwise from filesystem
 		testing: true, // when testing, images should be fetched from server, otherwise from Amazon
 		s3_path: "http://s3.amazonaws.com/tocarta-test",
@@ -28,6 +29,7 @@ if(CURRENT_ENV == "mock"){
 else if(CURRENT_ENV == "dev"){
 	$tc = {
 		server: 'http://localhost:3000',
+		nodeserver: 'http://analytics.tocarta.es',
 		// online: true, // when online, images should be fetched from a remote server, otherwise from filesystem
 		testing: false, // when testing, images should be fetched from server, otherwise from Amazon
 		s3_path: "http://s3.amazonaws.com/tocarta-prod",
@@ -47,6 +49,7 @@ else if(CURRENT_ENV == "dev"){
 else if(CURRENT_ENV == "staging"){
 	$tc = {
 		server: 'http://tocarta-admin-staging.herokuapp.com',
+		nodeserver: 'http://analytics.tocarta.es',
 		// online: false, // when online, images should be fetched from a remote server, otherwise from filesystem
 		testing: false, // when testing, images should be fetched from server, otherwise from Amazon
 		s3_path: "http://s3.amazonaws.com/tocarta-test",
@@ -65,6 +68,7 @@ else if(CURRENT_ENV == "staging"){
 else if(CURRENT_ENV == "open"){
 	$tc = {
 		server: 'http://demo.tocarta.es',
+		nodeserver: 'http://analytics.tocarta.es',
 		// online: false, // when online, images should be fetched from a remote server, otherwise from filesystem
 		testing: false, // when testing, images should be fetched from server, otherwise from Amazon
 		s3_path: "http://s3.amazonaws.com/tocarta-demo",
@@ -83,6 +87,7 @@ else if(CURRENT_ENV == "open"){
 else if(CURRENT_ENV == "prod"){
 	$tc = {
 		server: 'http://admin.tocarta.es',
+		nodeserver: 'http://analytics.tocarta.es',
 		// online: false, // when online, images should be fetched from a remote server, otherwise from filesystem
 		testing: false, // when testing, images should be fetched from server, otherwise from Amazon
 		s3_path: "http://s3.amazonaws.com/tocarta-prod",
@@ -96,6 +101,10 @@ else if(CURRENT_ENV == "prod"){
 		time_to_display_msg: 5000,
 		click: 'tap' // click event instead of tap
 	}
+	// overwrite console.log
+	console.log = function(){};
+	// log errors to proxy server
+	window.onerror = $tc.logError;
 }
 else {
 	alert('bad environment!');
@@ -106,6 +115,7 @@ else {
 $j.extend($tc,{
 	validate_license_key: "validate_license_key",
 	get_restaurant: "get_restaurant_info",
+	supported_langs: "get_supported_langs",
 	get_images_to_download: "get_images_to_download",
 	confirm_downloaded_images: "confirm_downloaded_images",
 	send_order_url: "make_order",
@@ -124,6 +134,29 @@ $j.extend($tc,{
 $tc.url = function(method_name){
 	return this.server + this.relPath + this[method_name] + '.json';
 }
+
+$tc.logError = function(msg,url,line){
+	try {
+		Ext.Ajax.request({
+			url: $tc.nodeserver+"/proxy",
+			method: 'GET',
+			params: {
+				error: true,
+				tablet_key: TC.Setting.get('key'),
+				channel: TC.socket_channel,
+				action: {
+					msg: encodeURIComponent(msg),
+					url: encodeURIComponent(url),
+					line: line
+				}
+			}
+		});
+	  return true;
+	}
+	catch(ex){
+		return false;
+	}
+};
 
 $tc.getUri = function(){
 	var me = $tc;
@@ -154,6 +187,13 @@ $tc.formatNumber = function(num){
 
 $tc.confirmMsg = function(msg,callback){
 	Ext.Msg.confirm('',msg,callback);
+}
+
+$tc.checkImgUrl = function(relPath){
+	if(relPath)
+		return $tc.getUri() + relPath;
+	else
+		return "//:0";
 }
 
 $tc.translateSTButtons = function(){
@@ -191,6 +231,20 @@ $tc.getParameterByName = function(name){
     return "";
   else
     return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+$tc.checkConnection = function(){
+	if(navigator && navigator.connection && navigator.connection.type){
+		var conType=navigator.connection.type;
+		if(conType==Connection.NONE || conType==Connection.UNKNOWN){
+			$tc.alertMsg("Connection is not available.",function(){
+				Ext.Viewport.unmask();
+				return false;
+			});
+			return false;
+		}
+	}
+	return true;
 }
 
 $j(document).ready(function(){

@@ -1,0 +1,60 @@
+-# Show a list of top 10 dishes
+.top_dishes.span6
+  #top-box.widget-box.transparent
+    .widget-header
+      %h4.lighter.smaller
+        %i.icon-signal.orange
+        = t('widgets.top_dishes.title')
+      .widget-toolbar.no-border
+        %ul.nav.nav-tabs
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#top-tab-top-box"}= t('widgets.top')
+          -# %li
+            %a{"data-toggle" => "tab", :href => "#chart-tab-top-box"} Chart
+          %li
+            %a{"data-toggle" => "tab", :href => "#bottom-tab-top-box"}= t('widgets.bottom')
+    .widget-body
+      .widget-main.padding-4
+        .tab-content.padding-8
+          #top-tab-top-box.tab-pane.active
+            - dishes = Dish.by_chain(@restaurant.chain_id).with_comments.top_rating.limit(10)
+            - if dishes.nil?
+              %p= t('widgets.no_data')
+            - else
+              .comments
+                - dishes.each do |d|
+                  .itemdiv.commentdiv
+                    .user
+                      = image_tag(d.photo(:mini) || 'default_dish.png')
+                    .body
+                      .name= d.name
+                      .time
+                        - d.rating.to_i.times do
+                          %i.icon-star.orange
+                        %span= " (#{d.rating.to_s})"
+                      .text
+          #bottom-tab-top-box.tab-pane
+            - dishes = Dish.by_chain(@restaurant.chain_id).with_comments.bottom_rating.limit(10)
+            - if dishes.nil?
+              %p= t('widgets.no_data')
+            - else
+              .comments
+                - dishes.each do |d|
+                  .itemdiv.commentdiv
+                    .user
+                      = image_tag(d.photo(:mini) || 'default_dish.png')
+                    .body
+                      .name= d.name
+                      .time
+                        - d.rating.to_i.times do
+                          %i.icon-star.orange
+                        %span= " (#{d.rating.to_s})"
+                      .text
+          -# #chart-tab-top-box.tab-pane
+            - unless @restaurant.chain.present?
+              %p No hay suficientes datos
+            - else
+              .chart
+                -# = chart_tag('chart_top_dishes', 300, chain: @restaurant.chain)
+                = column_chart( dashboards_path( 'chart_top_dishes', {chain: @restaurant.chain}), highChart: 1000 )
+        .hr.hr8.hr-double

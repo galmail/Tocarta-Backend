@@ -12,6 +12,7 @@
 #  last_menu_sync      :datetime
 #  multilang_homepage  :boolean          default(FALSE)
 #  games               :boolean          default(FALSE)
+#  sync_photos         :boolean          default(FALSE)
 #  call_waiter_button  :boolean          default(TRUE)
 #  order_button        :boolean          default(TRUE)
 #  request_bill_button :boolean          default(TRUE)
@@ -26,7 +27,7 @@ class RestaurantSetting < ActiveRecord::Base
   belongs_to :restaurant
 	serialize :supported_lang, Array
 	attr_accessible :name, :num_licenses, :default_language, :last_menu_sync, :access_key, :supported_lang
-	attr_accessible :multilang_homepage, :games, :call_waiter_button, :order_button, :request_bill_button, :show_help_button, :show_survey, :show_filters
+	attr_accessible :multilang_homepage, :games, :sync_photos, :call_waiter_button, :order_button, :request_bill_button, :show_help_button, :show_survey, :show_filters
 	attr_accessible :restaurant_id
 	
 	def supported_lang_enum

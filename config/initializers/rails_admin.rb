@@ -14,9 +14,9 @@ RailsAdmin.config do |config|
   config.current_user_method { current_user } # auto-generated
 
   config.navigation_static_links = {
-    'Profile' => '/users/edit'
+    # 'Profile' => '/users/edit'
+    'Analytics' => '/dashboards'
   }
-
 
   # If you want to track changes on your models:
   # config.audit_with :history, User
@@ -109,8 +109,7 @@ RailsAdmin.config do |config|
   ######## Chain Model ########
   
   config.model Chain do
-    label 'Chain'
-    label_plural 'Chains'
+    weight 10
     list do
       exclude_fields :id, :user, :address, :note, :survey_questions
     end
@@ -119,21 +118,17 @@ RailsAdmin.config do |config|
   ######## Restaurant Model ########
   
   config.model Restaurant do
-    label 'Restaurant'
-    label_plural 'Restaurants'
+    weight 20
     list do
       exclude_fields :id, :user, :note, :restaurant_activities, :restaurant_banners, :menus, :combos, :combo_types, :tables, :comments, :restaurant_setting
-      field :chain do
-        label "Chain"
-      end
     end
   end
   
   ######## RestaurantSetting Model ########
   
   config.model RestaurantSetting do
-    label 'Settings'
-    label_plural 'Settings'
+    parent Restaurant
+    weight 2010
     list do
       exclude_fields :id, :name, :default_language, :last_menu_sync, :multilang_homepage, :games
     end
@@ -156,8 +151,7 @@ RailsAdmin.config do |config|
   ######## Menu Model ########
   
   config.model Menu do
-    label 'Menu'
-    label_plural 'Menus'
+    weight 30
     list do
       exclude_fields :id, :theme, :menu_setting, :sections
     end
@@ -166,8 +160,8 @@ RailsAdmin.config do |config|
   ######## MenuSetting Model ########
   
   config.model MenuSetting do
-    label 'Menu Setting'
-    label_plural 'Menu Settings'
+    parent Menu
+    weight 3010
     list do
       exclude_fields :id, :priority, :trigger_activation, :last_time_changed
     end
@@ -179,8 +173,9 @@ RailsAdmin.config do |config|
   ######## Theme Model ########
   
   config.model Theme do
-    label 'Theme'
-    label_plural 'Themes'
+    weight 60
+    # label 'Theme'
+    # label_plural 'Themes'
     list do
       exclude_fields :id, :css, :created_at, :menus
     end
@@ -192,8 +187,8 @@ RailsAdmin.config do |config|
   ######## Skin Model ########
   
   config.model Skin do
-    label 'Skin'
-    label_plural 'Skins'
+    parent Menu
+    weight 3020
     list do
       exclude_fields :id, :created_at, :menus, :user, :stylesheet
     end
@@ -205,8 +200,9 @@ RailsAdmin.config do |config|
   ######## DishVariation Model ########
   
   config.model DishVariation do
-    label 'Dish Variation'
-    label_plural 'Dish Variations'
+    weight 80
+    # label 'Dish Variation'
+    # label_plural 'Dish Variations'
     list do
       exclude_fields :id, :position
     end
@@ -215,8 +211,9 @@ RailsAdmin.config do |config|
   ######## DishVariationSet Model ########
   
   config.model DishVariationSet do
-    label 'Dish Variation Set'
-    label_plural 'Dish Variation Sets'
+    weight 90
+    # label 'Dish Variation Set'
+    # label_plural 'Dish Variation Sets'
     list do
       exclude_fields :id, :dishes
     end
@@ -225,8 +222,9 @@ RailsAdmin.config do |config|
   ######## DishType Model ########
   
   config.model DishType do
-    label 'Food Type'
-    label_plural 'Food Types'
+    weight 100
+    # label 'Food Type'
+    # label_plural 'Food Types'
     list do
       exclude_fields :id, :position, :dish_class, :dish_type_associations, :dishes
     end
@@ -235,8 +233,18 @@ RailsAdmin.config do |config|
   ######## NutritionFact Model ########
   
   config.model NutritionFact do
-    label 'Nutrition Fact'
-    label_plural 'Nutrition Facts'
+    parent Dish
+    weight 305010
+    list do
+      exclude_fields :id
+    end
+  end
+  
+  ######## Ingredient Model ########
+  
+  config.model Ingredient do
+    parent Dish
+    weight 305020
     list do
       exclude_fields :id
     end
@@ -245,8 +253,8 @@ RailsAdmin.config do |config|
   ######## Dish Model ########
   
   config.model Dish do
-    label 'Dish'
-    label_plural 'Dishes'
+    parent Menu
+    weight 3050
     list do
       exclude_fields :id, :combo, :description, :reviews, :story, :video, :nutrition_facts, :photo
       exclude_fields :badge_name, :short_title, :order_items, :comments, :dish_variation_sets, :dish_variation_set_associations, :dish_type_associations, :dish_types, :dish_section_associations, :dish_subsection_associations
@@ -263,8 +271,8 @@ RailsAdmin.config do |config|
   ######## Section Model ########
   
   config.model Section do
-    label 'Section'
-    label_plural 'Sections'
+    parent Menu
+    weight 3030
     object_label_method do
       :section_label_method
     end
@@ -279,8 +287,8 @@ RailsAdmin.config do |config|
   ######## Subsection Model ########
   
   config.model Subsection do
-    label 'Subsection'
-    label_plural 'Subsections'
+    parent Menu
+    weight 3040
     list do
       exclude_fields :id, :dishes, :dish_subsection_associations
     end
@@ -292,95 +300,33 @@ RailsAdmin.config do |config|
   ######## Comment Model ########
   
   config.model Comment do
-    label 'Comment'
-    label_plural 'Comments'
+    weight 140
     list do
-      include_fields :created_at, :rating, :description, :name, :dish, :survey_question, :approved, :restaurant
+      include_fields :created_at, :rating, :description, :name, :email, :dish, :tablet, :survey_question, :approved, :restaurant
       exclude_fields :id, :client
-      field :created_at do
-        label "Datetime"
-      end
-      field :rating do
-        label "Rating"
-      end
-      field :description do
-        label "Comment"
-      end
-      field :name do
-        label "Client's name"
-      end
-      field :dish do
-        label "Dish"
-      end
-      field :survey_question do
-        label "Survet Question"
-      end
-      field :restaurant do
-        label "Restaurant"
-      end
-      field :approved do
-        label "Approved"
-      end
     end
     edit do
-      include_fields :created_at, :rating, :description, :name, :dish, :survey_question, :approved, :restaurant
+      include_fields :created_at, :rating, :description, :name, :email, :dish, :tablet, :survey_question, :approved, :restaurant
       exclude_fields :id, :client
-      field :created_at do
-        label "Datetime"
-        read_only true
-      end
-      field :rating do
-        label "Rating"
-        read_only true
-      end
-      field :description do
-        label "Comment"
-        read_only true
-      end
-      field :name do
-        label "Client's name"
-        read_only true
-      end
-      field :dish do
-        label "Dish"
-        read_only true
-      end
-      field :survey_question do
-        label "Survey Question"
-        read_only true
-      end
-      field :restaurant do
-        label "Restaurant"
-        read_only true
-      end
-      field :approved do
-        label "Approved"
-      end
     end
   end
   
   ######## Table Model ########
   
   config.model Table do
-    label 'Table'
-    label_plural 'Tables'
+    parent Restaurant
+    weight 2030
     object_label_method do
       :table_label_method
     end
     list do
       exclude_fields :id, :name, :language, :orders, :restaurant_activities
       include_fields :updated_at
-      field :updated_at do
-        label 'Last Activity'
-      end
       sort_by :updated_at
     end
     show do
       exclude_fields :id, :name, :language, :orders, :restaurant_activities
       include_fields :updated_at
-      field :updated_at do
-        label 'Last Activity'
-      end
     end
     create do
       exclude_fields :id, :name, :language, :status, :dinners, :tablets, :orders, :restaurant_activities
@@ -390,8 +336,8 @@ RailsAdmin.config do |config|
   ######## Tablet Model ########
   
   config.model Tablet do
-    label 'Tablet'
-    label_plural 'Tablets'
+    parent Restaurant
+    weight 2040
     list do
       exclude_fields :id, :orders, :activated, :access_key, :display_size, :device_brand, :device_name, :device_os, :alive
     end
@@ -403,8 +349,8 @@ RailsAdmin.config do |config|
   ######## SurveyQuestion Model ########
   
   config.model SurveyQuestion do
-    label 'Survey Question'
-    label_plural 'Survey Questions'
+    parent Restaurant
+    weight 2020
     list do
       exclude_fields :id, :chain, :comments
       sort_by :position
@@ -417,23 +363,13 @@ RailsAdmin.config do |config|
   ######## Order Model ########
   
   config.model Order do
-    label 'Order'
-    label_plural 'Orders'
+    weight 180
     object_label_method do
       :order_label_method
     end
     list do
       exclude_fields :tablet, :client, :restaurant_activities, :name, :note, :language
       include_fields :created_at
-      field :created_at do
-        label "Datetime"
-      end
-      field :order_items do
-        label "Order Items"
-      end
-      field :table do
-        label "Table"
-      end
     end
     show do
       exclude_fields :client, :restaurant_activities, :name, :note, :language

@@ -46,6 +46,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # Get role from params
   def get_rol
-    @rol = params['user'].delete('rol') unless params['user'].nil?
+    if params['r']
+      @rol = Role.code_to_role params.delete('r')
+    elsif params['user']
+      @rol = params['user'].delete('rol')
+    end
   end
 end

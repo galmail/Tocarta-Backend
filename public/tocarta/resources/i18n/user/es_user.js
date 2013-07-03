@@ -8,6 +8,19 @@ $T = {
 	
 	"back": "Volver",
 	
+	//// TC.Views.Toolbars.TopToolbar ////
+	
+	"desserts": "Postres",
+	"main_menu": "Carta Principal",
+	"daily_menu": "Menú del Día",
+	"beverages": "Bebidas",
+	
+	//// TC.Views.Toolbars.BottomToolbar ////
+	
+	"filter_dishes": "Filtrar Platos",
+	"fill_survey": "Valorar Servicio",
+	"change_lang": "Cambiar Idioma",
+	
 	//// TC.Controller.Main ////
 	
 	"order_is_empty": "El pedido está vacío. Elige un plato y agrégalo al pedido.",
@@ -32,6 +45,8 @@ $T = {
 	"send_survey_question": "Quieres enviar la encuesta?",
 	"send_survey_loading": "Enviando la encuesta...",
 	"thanks_for_coming": "Gracias por venir y esperamos<br/>que vuelvas pronto!",
+	"thanks_for_helping_us_improve": "Muchas gracias por ayudarnos a mejorar!",
+	"next": "Siguiente",
 	
 	//// TC.Controller.DailyMenu ////
 	
@@ -41,16 +56,33 @@ $T = {
 	
 	"last_comments": "Últimos Comentarios",
 	"dish_evaluation": "Evaluación general del plato",
+	"anonymous": "anónimo",
+	
+	//// TC.view.dish.DishNutritionFacts ////
+	
+	"calories": "Calorías",
+	"proteins": "Proteinas",
+	"fats": "Grasas",
+	"carbs": "Carbohidratos",
 	
 	//// TC.view.dish.DishContainer ////
 	
 	"photo": "Foto",
 	"comments": "Comentarios",
+	"nutritionfacts": "Datos de Nutrición",
 	"video": "Video",
 	
 	//// TC.view.dish.DishPhoto ////
 	
 	"add": "Agregar",
+	
+	//// TC.view.dish.DishReviewModal ////
+	
+	"rate_review_dish": "Valora y Comenta el Plato",
+	"cancel": "Cancelar",
+	"rating": "Valoración",
+	"submit_dish_rating": "Enviando la valoración...",
+	"dish_rating_submited": "Hemos registrado tu valoración, gracias!",
 	
 	//// TC.view.loading.Loader ////
 	
@@ -89,19 +121,26 @@ $T = {
 	"app_copyright": "Copyright © Tocarta International S.L",
 	"tocarta_website": "http://tocarta.es",
 	
+	//// TC.view.survey.SurveyView ////
+	
+	"survey": "Encuesta de Satisfacción",
+	
 	//// TC.view.survey.SurveyComments ////
 	
 	"your_name": "Tu nombre:",
 	"your_comment": "Tu comentario:",
-	"name_example": "ej. maría",
+	"name_example": "ej. María",
 	"leave_your_comment_here": "Escribe aquí tu comentario...",
 	"submit": "Enviar",
+	"your_email": "Tu email:",
+	"email_example": "ej. maria@gmail.com",
 	
 	//// TC.view.survey.SurveyContainer ////
 	
 	"comment_dishes_eaten": "Comenta los platos que has comido",
 	"your_opinion": "Nos gustaría conocer tu opinión",
 	"your_name_and_comment": "Déjanos tu nombre y un comentario",
+	"survey_text": "Tu opinion es importante, ayúdanos a mejorar!",
 	
 	//// TC.view.survey.SurveyDishes ////
 	

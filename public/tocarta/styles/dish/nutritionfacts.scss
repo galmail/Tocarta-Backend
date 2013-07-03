@@ -1,0 +1,58 @@
+/**
+ * Dish Nutrition Facts stylesheet
+ **/
+
+.tcDishNutritionFacts {
+  
+  // border: 2px solid black;
+  // border-radius: 5px 5px 0px 5px;
+  background: white;
+  
+  .dish-nutritionfacts {
+    padding: 20px 100px; 
+  }
+  
+  .block {
+    overflow: hidden;
+    padding: 10px 0;
+  }
+  
+  .label {
+    float: left;
+    width: 180px;
+  }
+
+  /*  The wrapper for the bar */
+  .graph {
+      height: 1.529411765em;
+      margin-bottom: .470588235em;
+      overflow: hidden;
+      background-color: #e5e5e5;
+      border-radius: .071428571em;
+      text-align: center;
+      
+      font-size: 1em;
+      line-height: 1.5em;      
+  }
+  
+  /*  The actual bar itself */
+  .graph-bar {
+      float: left;
+      width: 0;
+      height: 100%;
+      color: #ffffff;
+      background-color: #0088cc;
+      -webkit-box-sizing: border-box;
+      &.fats {
+        background-color: red;
+      }
+      &.carbs {
+        background-color: yellow;
+      }
+      &.proteins {
+        background-color: green;
+      }
+  }
+  
+}
+

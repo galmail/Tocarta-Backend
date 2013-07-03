@@ -1,0 +1,39 @@
+#sidebar
+  #sidebar-shortcuts
+    #sidebar-shortcuts-large
+      %button.btn.btn-small.btn-success
+        %i.icon-signal
+      %button.btn.btn-small.btn-info
+        %i.icon-pencil
+      %button.btn.btn-small.btn-warning
+        %i.icon-group
+      %button.btn.btn-small.btn-danger
+        %i.icon-cogs
+    #sidebar-shortcuts-mini
+      %span.btn.btn-success
+      %span.btn.btn-info
+      %span.btn.btn-warning
+      %span.btn.btn-danger
+
+  %ul.nav.nav-list
+    %li
+      %a{:href => "/dashboards"}
+        %i.icon-dashboard
+        %span Dashboard
+    - unless @chains.nil?
+      - @chains.each do |c|
+        %li
+          %a.dropdown-toggle{:href => "#"}
+            %i.icon-desktop
+            %span= c.name
+            %b.arrow.icon-angle-down
+          - if c.restaurants.present?
+            %ul.submenu
+              - c.restaurants.each do |r|
+                %li
+                  %a{:href => "/dashboards/#{@dashboard.id}/#{r.id}"}
+                    %i.icon-double-angle-right
+                    = r.name
+
+  #sidebar-collapse
+    %i.icon-double-angle-left

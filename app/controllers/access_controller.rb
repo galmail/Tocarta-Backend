@@ -2,6 +2,8 @@ require 'net/http'
 
 class AccessController < ApplicationController
 
+  
+
   def validate_license_key
     @result = false
     if !@tablet.activated
@@ -14,6 +16,13 @@ class AccessController < ApplicationController
   private
   
   MAX_COMMENTS_PER_DISH = 10
+  
+  def cors_set_access_control_headers
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Headers'] = 'X-Requested-With'
+    headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
+    headers['Access-Control-Max-Age'] = "1728000"
+  end
   
   def identify_tablet
     @tablet = Tablet.where("access_key = ? AND active = ?", params[:key], true).first
@@ -68,14 +77,22 @@ class AccessController < ApplicationController
   def trigger_activity(restaurant_activity)
     # Call HTTP GET proxy with channel and action
     enc_activity = URI.encode(setup_activity(restaurant_activity))
-    Net::HTTP.get(URI.parse("#{ENV['NODE_SERVER']}/proxy?channel=tocarta_restaurant_#{@restaurant.id}_channel&action="+enc_activity))
-    Pusher["tocarta_restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
+    begin
+      Net::HTTP.get(URI.parse("#{ENV['NODE_SERVER']}/proxy?channel=tocarta_restaurant_#{@restaurant.id}_channel&action="+enc_activity))
+      # Pusher["tocarta_restaurant_#{@restaurant.id}_channel"].trigger('activity', setup_activity(restaurant_activity))
+    rescue
+      logger.fatal "Could not trigger_activity to node server!"
+    end
   end
   
   def trigger_tablet(key,message)
     # Call HTTP GET proxy with channel and action
-    Net::HTTP.get(URI.parse("#{ENV['NODE_SERVER']}/proxy?channel=tocarta_lk_#{key}_channel&action=#{message}"))
-    Pusher["tocarta_lk_#{key}_channel"].trigger(message,{})
+    begin
+      Net::HTTP.get(URI.parse("#{ENV['NODE_SERVER']}/proxy?channel=tocarta_lk_#{key}_channel&action=#{message}"))
+    rescue
+      logger.fatal "Could not trigger_tablet to node server!"
+    end
+    # Pusher["tocarta_lk_#{key}_channel"].trigger(message,{})
   end
   
   def sort_and_filter(items,sort_attr,filter_attr,reverse_sort,limit)

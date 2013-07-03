@@ -1,0 +1,19 @@
+.page-header.position-relative
+  %h1 
+    Dashboards
+    %small Select the restaurant you want to watch
+.dashboards.row-fluid
+  - if @chains.nil?
+    %p.well You don't have acces to any dashboard
+  - else
+    .widget-box.span6
+      .widget-header.header-color-blue2
+        %h4.lighter.smaller Choose Restaurant
+      .widget-body
+        .widget-main.padding-8
+          %ul.nav.nav-list
+            - @chains.each do |c|
+              %li.nav-header= c.name
+              - if c.restaurants.present?
+                - c.restaurants.each do |r|
+                  %li= link_to r.name, "/dashboards/#{@dashboard.id}/#{r.id}"
