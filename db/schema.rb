@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130702230704) do
+ActiveRecord::Schema.define(:version => 20130703145915) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -282,6 +282,7 @@ ActiveRecord::Schema.define(:version => 20130702230704) do
     t.string   "short_title"
     t.boolean  "rate_me",            :default => true
     t.integer  "chain_id"
+    t.integer  "sd_dish_id"
   end
 
   add_index "dishes", ["chain_id"], :name => "index_dishes_on_chain_id"
@@ -500,13 +501,14 @@ ActiveRecord::Schema.define(:version => 20130702230704) do
     t.integer  "user_id"
     t.integer  "chain_id"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.string   "manager"
     t.string   "email"
     t.string   "address"
     t.string   "phone"
     t.text     "note"
+    t.integer  "sd_location_id"
   end
 
   add_index "restaurants", ["chain_id"], :name => "index_restaurants_on_chain_id"
@@ -546,6 +548,7 @@ ActiveRecord::Schema.define(:version => 20130702230704) do
     t.integer  "position"
     t.boolean  "hasBigSubsections",  :default => false
     t.integer  "dishes_per_page",    :default => 0
+    t.integer  "sd_category_id"
   end
 
   add_index "sections", ["menu_id"], :name => "index_sections_on_menu_id"

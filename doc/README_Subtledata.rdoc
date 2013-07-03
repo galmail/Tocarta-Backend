@@ -28,5 +28,11 @@ Configuration can be in a initializer like this:
   sd.auth_user %w(name04 1234 0 0 1234567890)
 
 * Get Menu categories
+** 611 is location id in our example
 
   sd.get_menu_categories %w(611 0 1 0 0)
+
+* Get Menu items for location by category
+** 3803 is category id (sadnwiches)
+
+  sd.get_menu_items_for_location_by_category %w(611 3803 1 0)
