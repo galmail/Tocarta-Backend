@@ -15,6 +15,7 @@ class Ability
       can :update_tablet, :all
       cannot :import, :all
       can :import, [Dish]
+      can :sd_menu_import, [Restaurant]
     elsif user.has_role? :restaurant
       can :update_tablet, :all
       can :read, User, :id => user.id
@@ -38,6 +39,7 @@ class Ability
       can [:read,:update], SurveyQuestion, :chain => { :user_id => user.id }
       can :read, Order, :table => { :restaurant_id => user.chains.collect{ |c| c.restaurants.collect{ |res| res.id }}.flatten }
       cannot :import, :all
+      cannot :sd_menu_import, [Restaurant]
     elsif user.has_role? :distributor
       can :update_tablet, :all
       can [:read,:create], Ingredient

@@ -43,6 +43,10 @@ es:
       item: "Elemento"
       message: "Mensaje"
     actions:
+      sd_menu_import: 
+        menu: "Importar Menú"
+        restaurant: "Importar Menú"
+        title: "Importar Menú de SutbleData"
       import:
         dish: "Importar"
         menu: "Importar"

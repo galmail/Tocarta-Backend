@@ -1,8 +1,13 @@
 # RailsAdmin config file. Generated on March 15, 2012 10:25
 # See github.com/sferik/rails_admin for more informations
-
+require Rails.root.join('lib', 'rails_admin_sd_menu_import.rb')
 
 RailsAdmin.config do |config|
+
+  config.actions do
+    sd_menu_import do
+    end
+  end
 
   config.authorize_with :cancan
   # config.authenticate_with {}
