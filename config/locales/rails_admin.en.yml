@@ -44,6 +44,10 @@ en:
       item: "Item"
       message: "Message"
     actions:
+      sd_menu_import: 
+        menu: "Menu Import"
+        restaurant: "Menu Import"
+        title: "Import Menu from SutbleData"
       dashboard:
         title: "Site administration"
         menu: "Dashboard"
