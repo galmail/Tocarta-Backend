@@ -1,5 +1,5 @@
 object @restaurant
-cache  @restaurant, expires_in: 2.minutes #if first intent gets timeout, the second time it will work 
+# cache  @restaurant, expires_in: 2.minutes #if first intent gets timeout, the second time it will work 
 
 ### restaurant setting ###
 
