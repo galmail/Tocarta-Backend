@@ -56,13 +56,14 @@ class Restaurant < ActiveRecord::Base
       logger.info "********* create sections"
       sd_categories[1].each do |category|
         #TODO: Get photo from SD if defined
-        sect = menu.sections.create!(name: category[1], photo: File.new(def_section_img, 'r'), sd_category_id: category[0])
+        sect = Section.create(menu_id: menu.id, name: category[1], photo: File.new(def_section_img, 'r'), sd_category_id: category[0])
 
         logger.info "********* get sd dishes"
         sd_dishes = sd.get_menu_items_for_location_by_category [location, category[0], 1, 0], true
         logger.info "********* create dishes"
         sd_dishes[1].each do |dish|
-          dish = sect.dishes.build( name: dish[1], description: dish[2], price: dish[3], sd_dish_id: dish[0] )
+          current_dish = Dish.create(chain_id: self.chain.id , name: dish[1], description: dish[2], price: dish[3], sd_dish_id: dish[0])
+          current_dish.sections << sect
         end
       end
 

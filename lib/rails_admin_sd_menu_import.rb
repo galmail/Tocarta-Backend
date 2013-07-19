@@ -28,12 +28,12 @@ module RailsAdmin
 
         register_instance_option :controller do
           Proc.new do
-            if @object.import_sd_menu!
+            if !@object.nil?
+              @object.import_sd_menu!
               flash[:notice] = "Menú importado."
             else
               flash[:error] = "Problema importando."
             end
-
             redirect_to back_or_index
           end
         end

@@ -64,7 +64,7 @@ class Dish < ActiveRecord::Base
   validates :name, :price, :presence => true
   #validates_attachment_presence :photo
   validates :badge_name, :length => { :maximum => 11 }
-  validate :validate_min_sections
+  # validate :validate_min_sections
 
   def badge_name_enum
     if I18n.locale.to_s=="es"
@@ -91,7 +91,11 @@ class Dish < ActiveRecord::Base
   end
   
   def associate_chain
-    self.chain = self.sections.first.menu.restaurant.chain
+    begin
+      self.chain = self.sections.first.menu.restaurant.chain
+    rescue Exception=>e
+      # do nothing
+    end
   end
   
   def validate_min_sections
