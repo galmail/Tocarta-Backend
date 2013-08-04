@@ -3,7 +3,7 @@
  * All configuration and variables used in the app
  */
 
-var CURRENT_ENV = "prod"; // options: mock, dev, staging, open, prod, prod
+var CURRENT_ENV = "dev"; // options: mock, dev, staging, open, prod, prod
 // var CURRENT_DEVICE = "ios"; // options: android, ios
 
 /*** development (mocked services) ***/
@@ -214,8 +214,14 @@ $tc.translateSTButtons = function(){
 	Ext.Msg.setShowAnimation(null);
 }
 
-$tc.alertMsg = function(msg,callback){
+$tc.alertMsg = function(msg,callback,cls){
 	Ext.Msg.alert('',msg,callback);
+	if(cls){
+		Ext.Msg.setCls(cls);
+	}
+	else {
+		Ext.Msg.setCls('');
+	}
 }
 
 $tc.loadScript = function(filename){
