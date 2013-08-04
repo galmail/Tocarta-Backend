@@ -61,7 +61,7 @@ $T = {
 	//// TC.view.dish.DishNutritionFacts ////
 	
 	"calories": "Calorías",
-	"proteins": "Proteinas",
+	"proteins": "Proteínas",
 	"fats": "Grasas",
 	"carbs": "Carbohidratos",
 	

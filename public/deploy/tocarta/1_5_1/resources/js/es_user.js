@@ -56,6 +56,14 @@ $T = {
 	
 	"last_comments": "Últimos Comentarios",
 	"dish_evaluation": "Evaluación general del plato",
+	"anonymous": "anónimo",
+	
+	//// TC.view.dish.DishNutritionFacts ////
+	
+	"calories": "Calorías",
+	"proteins": "Proteínas",
+	"fats": "Grasas",
+	"carbs": "Carbohidratos",
 	
 	//// TC.view.dish.DishContainer ////
 	
