@@ -25,13 +25,16 @@ Ext.require([
 		
 		requires: ['Ext.io.Controller'],
 		controllers: ['Loader','MainMenu','DailyMenu','Order','Filter','Settings','survey.BasicSurvey','survey.SliderSurvey','Main','MultiLang','MatrixMenu','DishReview'],
-		//models     : ['ComboType','Comment','Dish'],
-		//stores: ['Menus'],
+		models     : ['Logger'],
+		stores: ['Logs'],
 		//views: ['Viewport'],
 		//autoCreateViewport: true,
 		
 		mainLaunch: function(){
 			console.log('TC.app.mainLaunch');
+			// prepare logger
+			TC.logs = Ext.create('TC.store.Logs');
+			TC.logs.setup();
 			// For Desktop Version
 			if(Ext.os.deviceType.toLowerCase() == 'desktop' && this.launched){
 				console.log('TC.app.mainLaunch: desktop version');

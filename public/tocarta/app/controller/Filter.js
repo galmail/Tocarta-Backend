@@ -49,6 +49,14 @@ Ext.define('TC.controller.Filter', {
 			xtype : 'menu-panel-itemsview',
 			store : itemsStore
 		});
+		
+		$tc.logme({
+  		action: 'filter_dish',
+  		data: {
+  			dish_type_id: dishType.getId()
+  		}
+  	});
+		
   }
   
   

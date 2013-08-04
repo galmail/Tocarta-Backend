@@ -22,7 +22,18 @@ Ext.define('TC.view.restaurantinfo.RestaurantCarousel', {
 			{
 				flex: 1,
 				itemId: 'tcRestCarouselId',
-				xtype: 'carousel'
+				xtype: 'carousel',
+				listeners: {
+					activeitemchange: function(carousel,new_value){
+						console.log('carousel changed... log banner view');
+						$tc.logme({
+			    		action: 'view_restaurant_banner',
+			    		data: {
+			    			banner_id: new_value.banner_id
+			    		}
+			    	});
+					}
+				}
 			},
 			{
 				cls: 'tcRestaurantCarouselBottomToolbar',

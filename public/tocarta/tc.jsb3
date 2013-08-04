@@ -1290,7 +1290,12 @@
                     "clsName": "Ext.data.reader.Array"
                 },
                 {
-                    "path": "app/controller/",
+                		"path": "app/model/",
+                    "name": "Logger.js",
+                    "clsName": "TC.model.Logger"
+                },
+                {
+                		"path": "app/controller/",
                     "name": "Order.js",
                     "clsName": "TC.controller.Order"
                 },
@@ -1313,6 +1318,11 @@
                     "path": "app/controller/",
                     "name": "DishReview.js",
                     "clsName": "TC.controller.DishReview"
+                },
+                {
+                    "clsName": "TC.store.Logs",
+                    "name": "Logs.js",
+                    "path": "app/store/"
                 },
                 {
                     "path": "lib/touch/src/",
@@ -1820,26 +1830,26 @@
                     "clsName": "TC.view.settings.SettingsView"
                 }
             ]
-        },
-        {
-            "name": "Application - Production",
-            "target": "app-all.js",
-            "compress": true,
-            "files": [
-            		{
-                    "path": "",
-                    "name": "config.js"
-                },
-                {
-                    "path": "../deploy/tocarta/1_5_2/",
-                    "name": "all-classes.js"
-                },
-                {
-                    "path": "",
-                    "name": "app.js"
-                }
-            ]
-        }
+      	},
+	       {
+	          "name": "Application - Production",
+	          "target": "app-all.js",
+	          "compress": true,
+	          "files": [
+	          		{
+	                  "path": "",
+	                  "name": "config.js"
+	              },
+	              {
+	                  "path": "../deploy/tocarta/1_5_2/",
+	                  "name": "all-classes.js"
+	              },
+	              {
+	                  "path": "",
+	                  "name": "app.js"
+	              }
+	          ]
+	      }
     ],
     "resources": [
     	{

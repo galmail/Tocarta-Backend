@@ -61,14 +61,20 @@ Ext.define('TC.controller.MatrixMenu', {
           directionLock : true, 
           items: dish_views,
           width: this.getMatrixMenu().element.getWidth(),
-          height: this.getMatrixMenu().element.getHeight()
+          height: this.getMatrixMenu().element.getHeight(),
+          listeners: {
+						activeitemchange: function(carousel,new_value){
+							console.log('dessert changed... logging new item');
+							$tc.logme({
+				    		action: 'view_dish',
+				    		data: {
+				    			dish_id: parseInt(new_value.getId().split('dish_')[1])
+				    		}
+				    	});
+						}
+					}
       });
     },
-    
-    
-    
-    
-    
     
     detailstest: function(){
         console.log('TC.controller.MatrixMenu.detailstest');
@@ -186,7 +192,10 @@ Ext.define('TC.controller.MatrixMenu', {
     	if (view != undefined)
          dish_view = Ext.create(view, { data: [dish] });
     	else if (dish.data.large_photo_url.length > 0)
-    		dish_view = Ext.create('TC.view.matrixmenu.DishImageView', { data: [dish] });
+    		dish_view = Ext.create('TC.view.matrixmenu.DishImageView',{
+    			id: 'dish_'+dish.getId(),
+    			data: [dish]
+    		});
 	    else
 	    	dish_view = Ext.create('TC.view.matrixmenu.DishTextView', { data: [dish] }); 
 	    

@@ -72,7 +72,7 @@ Ext.define('TC.view.survey.slider.SurveyOpinion', {
 			{
 				itemId: 'tcSurveyOpinionLegalId',
 				tpl: new Ext.XTemplate(
-					'<div class="tcSurveyOpinionLegalMessage">'+$T.on_button_pressed+' \''+$T.submit+'\' '+$T.you_accept+' <a href="javascript:$tc.alertMsg(\'{safe_content}\');">'+$T.terms_of_use+'</a></div>'
+					'<div class="tcSurveyOpinionLegalMessage">'+$T.on_button_pressed+' \''+$T.submit+'\' '+$T.you_accept+' <a href="javascript:$tc.alertMsg(\'{safe_content}\',null,\'small_font\');">'+$T.terms_of_use+'</a></div>'
 				)
 			}
 		]

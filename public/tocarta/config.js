@@ -29,7 +29,7 @@ if(CURRENT_ENV == "mock"){
 else if(CURRENT_ENV == "dev"){
 	$tc = {
 		server: 'http://localhost:3000',
-		nodeserver: 'http://analytics.tocarta.es',
+		nodeserver: 'http://localhost:5000',
 		// online: true, // when online, images should be fetched from a remote server, otherwise from filesystem
 		testing: false, // when testing, images should be fetched from server, otherwise from Amazon
 		s3_path: "http://s3.amazonaws.com/tocarta-prod",
@@ -102,7 +102,7 @@ else if(CURRENT_ENV == "prod"){
 		click: 'tap' // click event instead of tap
 	}
 	// overwrite console.log
-	console.log = function(){};
+	// console.log = function(){};
 	// log errors to proxy server
 	window.onerror = $tc.logError;
 }
@@ -133,6 +133,17 @@ $j.extend($tc,{
 
 $tc.url = function(method_name){
 	return this.server + this.relPath + this[method_name] + '.json';
+}
+
+$tc.logme = function(info){
+	setTimeout(function(){
+		Ext.create('TC.model.Logger',{
+			action: info.action,
+			data: info.data,
+			timestamp: Date.now(),
+			device_id: TC.Setting.get('key')
+		}).log();
+	},200);
 }
 
 $tc.logError = function(msg,url,line){
@@ -203,8 +214,14 @@ $tc.translateSTButtons = function(){
 	Ext.Msg.setShowAnimation(null);
 }
 
-$tc.alertMsg = function(msg,callback){
+$tc.alertMsg = function(msg,callback,cls){
 	Ext.Msg.alert('',msg,callback);
+	if(cls){
+		Ext.Msg.setCls(cls);
+	}
+	else {
+		Ext.Msg.setCls('');
+	}
 }
 
 $tc.loadScript = function(filename){

@@ -60973,6 +60973,62 @@ Ext.define('Ext.data.reader.Array', {
     }
 });
 /**
+ * Logger Class
+ *
+ */
+
+Ext.define('TC.model.Logger', {
+	extend : 'Ext.data.Model',
+	config: {
+		fields: [
+	    {name: "id", type: "int"},
+	    {name: "timestamp", type: "int"},
+	    {name: "device_id", type: "string"},
+	    {name: "action", type: "string"},
+	    {name: "data", type: "object"}
+	  ],
+	  proxy: {
+			type: 'localstorage',
+			id  : 'logger'
+		}
+	},
+	
+	log: function(){
+		var _logs = TC.logs.NUM_LOGS;
+		if(_logs>TC.logs.MAX_LOGS || TC.logs.LOCK_SYNC) return false;
+		console.log("saving log");
+		this.save(); TC.logs.sumLog(); _logs++;
+		if(_logs>=TC.logs.MIN_LOGS_TO_SYNC && _logs%TC.logs.MIN_LOGS_TO_SYNC==0) this.sync_logs();
+	},
+	
+	/**
+	 * This function send all logs to the logging/analytics server
+	 */
+	sync_logs: function(){
+		console.log("syncing logs now!!!!!!!");
+		// check if connection is on
+		if(!$tc.checkConnection()) return false;
+		// starting to sync
+		TC.logs.LOCK_SYNC = true;
+		// setTimeout(function(){
+			console.log('*** preparing to send logs to server...');
+			// TC.logs.removeAll(true);
+			TC.logs.setProxy(TC.logs.getLocalProxy());
+			TC.logs.load(function(records, operation, success) {
+				// set all records to dirty
+    		Ext.Array.each(records,function(log){ log.setDirty(true); });
+    		// send records to server
+				console.log('*** sending '+records.length+' logs to server...');
+				TC.logs.setProxy(TC.logs.getRemoteProxy());
+				TC.logs.sync();
+				// TC.logs.removeAll(true);
+			});
+		// },100);
+	}
+	
+});
+
+/**
  * @class TC.controller.Order
  * @extends Ext.app.Controller
  * 
@@ -61196,6 +61252,14 @@ Ext.define('TC.controller.Filter', {
 			xtype : 'menu-panel-itemsview',
 			store : itemsStore
 		});
+		
+		$tc.logme({
+  		action: 'filter_dish',
+  		data: {
+  			dish_type_id: dishType.getId()
+  		}
+  	});
+		
   }
   
   
@@ -61339,14 +61403,20 @@ Ext.define('TC.controller.MatrixMenu', {
           directionLock : true, 
           items: dish_views,
           width: this.getMatrixMenu().element.getWidth(),
-          height: this.getMatrixMenu().element.getHeight()
+          height: this.getMatrixMenu().element.getHeight(),
+          listeners: {
+						activeitemchange: function(carousel,new_value){
+							console.log('dessert changed... logging new item');
+							$tc.logme({
+				    		action: 'view_dish',
+				    		data: {
+				    			dish_id: parseInt(new_value.getId().split('dish_')[1])
+				    		}
+				    	});
+						}
+					}
       });
     },
-    
-    
-    
-    
-    
     
     detailstest: function(){
         console.log('TC.controller.MatrixMenu.detailstest');
@@ -61464,7 +61534,10 @@ Ext.define('TC.controller.MatrixMenu', {
     	if (view != undefined)
          dish_view = Ext.create(view, { data: [dish] });
     	else if (dish.data.large_photo_url.length > 0)
-    		dish_view = Ext.create('TC.view.matrixmenu.DishImageView', { data: [dish] });
+    		dish_view = Ext.create('TC.view.matrixmenu.DishImageView',{
+    			id: 'dish_'+dish.getId(),
+    			data: [dish]
+    		});
 	    else
 	    	dish_view = Ext.create('TC.view.matrixmenu.DishTextView', { data: [dish] }); 
 	    
@@ -61607,6 +61680,92 @@ Ext.define('TC.controller.DishReview', {
   }
   
   
+});
+
+/**
+ * Logs Store
+ * 
+ */
+Ext.define('TC.store.Logs', {
+    extend  : 'Ext.data.Store',
+    requires: ['TC.model.Logger'],
+    config: {
+    	model   : 'TC.model.Logger',
+    	proxy: {
+				type: 'localstorage',
+				id  : 'logger'
+			},
+    	localProxy: {
+				type: 'localstorage',
+				id  : 'logger'
+			},
+			remoteProxy: {
+				type: 'ajax',
+        url: $tc.nodeserver+"/proxy",
+        writer: {
+	    		type: 'json',
+	    		root: 'logs'
+	    	}
+			},
+			listeners: {
+				beforesync: function(){
+					console.log('fires before sync....');
+				},
+				write: function(self){
+					console.log('fires after successful write to proxy: ' + self.getProxy().alias[0]);
+					// if(self && (self.getProxy().alias[0] == "proxy.ajax")){
+						console.log('cleaning up local logs and starting over...');
+						self.setProxy(self.getLocalProxy());
+						self.clearLocalStorageLogs();
+						self.NUM_LOGS = 0;
+						self.LOCK_SYNC = false;
+						// self.load(function(){
+							// self.removed = self.getData().items;
+							// self.sync();
+						// });
+					// }
+				},
+				load: function(self){
+					console.log('fires after load...');
+					self.NUM_LOGS = self.getCount();
+				}
+			}
+    },
+    
+    NUM_LOGS: 0,
+    MAX_LOGS: 9999,
+		MIN_LOGS_TO_SYNC: 4, 
+    LOCK_SYNC: false,
+    
+    setup: function(){
+    	console.log('setup logs');
+    	this.load(function(){
+    		// clear log store to save memory
+    		TC.logs.clearData();
+    	});
+    },
+    
+    sumLog: function(){
+    	this.NUM_LOGS++;
+    },
+    
+    clearLocalStorageLogs: function(){
+    	var counter = 0;
+    	try {
+    		counter = parseInt(window.localStorage.getItem('logger-counter'));
+    	}
+    	catch(ex){
+    		// nothing to delete, exit
+    		return false;
+    	}
+    	window.localStorage.removeItem('logger');
+    	for(var i=1;i<=counter;i++){
+    		window.localStorage.removeItem('logger-'+i);
+    	}
+    	window.localStorage.removeItem('logger-counter');
+    	return true;
+    }
+    
 });
 
 /**
@@ -62286,7 +62445,8 @@ Ext.define('TC.controller.MainMenu', {
       banners.each(function(banner){
         items.push({
         	xtype: 'image',
-        	src: banner.get('large_photo_url')
+        	src: banner.get('large_photo_url'),
+        	banner_id: banner.getId()
         });
       });
       carousel.setItems(items);
@@ -62298,18 +62458,25 @@ Ext.define('TC.controller.MainMenu', {
     
     dishCommentsShow: function(commentsTab){
     	console.log('TC.controller.MainMenu.dishCommentsShow');
+    	var self = this;
+    	$tc.logme({
+    		action: 'view_dish_comments',
+    		data: {
+    			dish_id: self.getCurrentDish().getId()
+    		}
+    	});
     	commentsTab.down('#tcDishCommentsDataItemsId').setStore(commentsTab.getRecord().comments());
     },
     
     dishNutritionFactsShow: function(nutritionfactsTab){
     	console.log('TC.controller.MainMenu.dishNutritionFactsShow');
-    	// var nutrition_facts_store = Ext.create('TC.store.NutritionFacts',{
-    		// storeId: "NutritionFactsStore" + nutritionfactsTab.getRecord().getId(),
-    		// data: [
-    			// nutritionfactsTab.getRecord().get('nutrition_fact')
-    		// ]
-    	// });
-    	// nutritionfactsTab.down('#tcDishNutritionFactsDataItemsId').setStore(nutrition_facts_store);
+    	var self = this;
+    	$tc.logme({
+    		action: 'view_dish_nutrition_facts',
+    		data: {
+    			dish_id: self.getCurrentDish().getId()
+    		}
+    	});
     	nutritionfactsTab.down('#tcDishNutritionFactsDataItemsId').setData(nutritionfactsTab.getRecord().get('nutrition_fact'));
     },
     
@@ -62355,6 +62522,14 @@ Ext.define('TC.controller.MainMenu', {
     	if(dataview.getItemsClass()=='sections'){
     		// we are in sections
     		me.setCurrentSection(dataview.getStore().getAt(position));
+    		
+    		$tc.logme({
+	    		action: 'view_section',
+	    		data: {
+	    			section_id: me.getCurrentSection().getId()
+	    		}
+	    	});
+    		
     		if(me.getCurrentSection().subsections().getCount()==0){
     			// show dishes
     			if(me.getCurrentSection().dishes().getCount()>0){
@@ -62391,6 +62566,14 @@ Ext.define('TC.controller.MainMenu', {
     	else if(dataview.getItemsClass()=='subsections'){
     		// we are in subsections
     		me.setCurrentSubsection(dataview.getStore().getAt(position));
+    		
+    		$tc.logme({
+	    		action: 'view_subsection',
+	    		data: {
+	    			subsection_id: me.getCurrentSubsection().getId()
+	    		}
+	    	});
+    		
     		// show dishes
     		if(me.getCurrentSubsection().dishes().getCount()>0){
     			me.getMenuPanel().push({
@@ -62414,6 +62597,13 @@ Ext.define('TC.controller.MainMenu', {
     		// getting the dish
     		this.setCurrentDish(dataview.getStore().getAt(position));
 	    	var dishContainer = this.getDishContainer();
+	    	
+	    	$tc.logme({
+	    		action: 'view_dish',
+	    		data: {
+	    			dish_id: me.getCurrentDish().getId()
+	    		}
+	    	});
 	    	
 	    	// set dishTitle
 	    	var dishTitle = dishContainer.down('#tcDishTitleId');
@@ -63598,6 +63788,7 @@ Ext.define('TC.controller.Main', {
     
     loadApp: function(){
     	console.log('TC.controller.Main.loadApp');
+    	$j('#superloader').hide();
     	if(TC.Setting.get('key')!=null){
     		this.redirectTo('load');
     	}
@@ -63653,6 +63844,15 @@ Ext.define('TC.controller.Main', {
     	if(TC.Restaurant){
     		$j('#superloader').hide();
     		console.log('TC.controller.Main.loadMainMenu');
+    		
+    		$tc.logme({
+	    		action: 'view_menu',
+	    		data: {
+	    			menu_id: TC.Restaurant.getMainMenu().getId(),
+	    			menu_type: 'main-menu'
+	    		}
+	    	});
+    		
     		TC.app.getController("TC.controller.MainMenu").reset(); // reseting the entire controller menu
     		TC.app.getController("TC.controller.MainMenu").setCurrentMenu(TC.Restaurant.getMainMenu());
     		this.switchView({xtype: 'main-menu'});
@@ -63665,6 +63865,15 @@ Ext.define('TC.controller.Main', {
     loadBeveragesMenu: function(){
     	if(TC.Restaurant){
     		console.log('TC.controller.Main.loadBeveragesMenu');
+    		
+    		$tc.logme({
+	    		action: 'view_menu',
+	    		data: {
+	    			menu_id: TC.Restaurant.getBeveragesMenu().getId(),
+	    			menu_type: 'beverages-menu'
+	    		}
+	    	});
+    		
     		TC.app.getController("TC.controller.MainMenu").reset(); // reseting the entire controller menu
     		TC.app.getController("TC.controller.MainMenu").setCurrentMenu(TC.Restaurant.getBeveragesMenu());
     		this.switchView({xtype: 'main-menu'});
@@ -63677,6 +63886,15 @@ Ext.define('TC.controller.Main', {
     loadDailyMenu: function(){
     	if(TC.Restaurant){
     		console.log('TC.controller.Main.loadDailyMenu');
+    		
+    		$tc.logme({
+	    		action: 'view_menu',
+	    		data: {
+	    			menu_id: TC.Restaurant.getDailyMenu().getId(),
+	    			menu_type: 'daily-menu'
+	    		}
+	    	});
+    		
     		this.switchView({xtype: 'daily-menu'});
     		this.getDailymenuView().down('#tcDailyMenuAddBtnId').setHidden(!TC.Restaurant.data.setting.order_button);
     	}
@@ -63688,6 +63906,15 @@ Ext.define('TC.controller.Main', {
     loadMatrixMenu: function(){
     	if(TC.Restaurant){
     		console.log('TC.controller.Main.loadMatrixMenu');
+    		
+    		$tc.logme({
+	    		action: 'view_menu',
+	    		data: {
+	    			menu_id: TC.Restaurant.getDessertsMenu().getId(),
+	    			menu_type: 'desserts-menu'
+	    		}
+	    	});
+    		
     		this.switchView({xtype: 'matrix-menu'});
     	}
     	else {
@@ -65217,7 +65444,7 @@ Ext.define('TC.view.survey.slider.SurveyOpinion', {
 			{
 				itemId: 'tcSurveyOpinionLegalId',
 				tpl: new Ext.XTemplate(
-					'<div class="tcSurveyOpinionLegalMessage">'+$T.on_button_pressed+' \''+$T.submit+'\' '+$T.you_accept+' <a href="javascript:$tc.alertMsg(\'{safe_content}\');">'+$T.terms_of_use+'</a></div>'
+					'<div class="tcSurveyOpinionLegalMessage">'+$T.on_button_pressed+' \''+$T.submit+'\' '+$T.you_accept+' <a href="javascript:$tc.alertMsg(\'{safe_content}\',null,\'small_font\');">'+$T.terms_of_use+'</a></div>'
 				)
 			}
 		]
@@ -70518,7 +70745,18 @@ Ext.define('TC.view.restaurantinfo.RestaurantCarousel', {
 			{
 				flex: 1,
 				itemId: 'tcRestCarouselId',
-				xtype: 'carousel'
+				xtype: 'carousel',
+				listeners: {
+					activeitemchange: function(carousel,new_value){
+						console.log('carousel changed... log banner view');
+						$tc.logme({
+			    		action: 'view_restaurant_banner',
+			    		data: {
+			    			banner_id: new_value.banner_id
+			    		}
+			    	});
+					}
+				}
 			},
 			{
 				cls: 'tcRestaurantCarouselBottomToolbar',
