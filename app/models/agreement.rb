@@ -14,7 +14,12 @@
 #
 
 class Agreement < ActiveRecord::Base
-  attr_accessible :rol, :locale, :revision, :title, :description, :content
-
+  belongs_to  :chain
+  attr_accessible :rol, :locale, :revision, :title, :description, :content, :legal_type, :chain_id
   scope :list, select([:rol, :content, :title])
+  
+  def legal_type_enum
+    ['share_policy','opinate_policy','terms_of_use','privacy_policy']
+  end
+  
 end

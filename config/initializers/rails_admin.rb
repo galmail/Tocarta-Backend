@@ -91,6 +91,15 @@ RailsAdmin.config do |config|
 
     end
   end
+  
+  ######## Agreement Model ########
+  
+  config.model Agreement do
+    weight 999
+    list do
+      exclude_fields :id
+    end
+  end
 
   ######## User Model ########
 

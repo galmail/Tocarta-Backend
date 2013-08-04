@@ -20,6 +20,7 @@ Ext.define('TC.controller.survey.SliderSurvey', {
     ],   
     refs: {
     	survey: 'survey-slider-container',
+    	surveyLegalBox: 'survey-legal',
     	submitBtn: 'survey-opinion #tcSurveyOpinionSubmitBtnId'
     },
     control: {
@@ -146,11 +147,14 @@ Ext.define('TC.controller.survey.SliderSurvey', {
     carousel.setActiveItem(0);
   },
   
-  
   showSurvey: function(survey){
   	console.log('TC.controller.SliderSurvey.showSurvey');
   	this.setupSurvey(survey);
   	var me = this;
+  	
+  	if(TC.Restaurant.getShareAgreement())
+  		survey.down('#tcSurveyOpinionLegalId').setData(TC.Restaurant.getShareAgreement().data);
+  	
   	if(TC.SentOrderItems && TC.SentOrderItems.getCount()>0){
   		// setting order items and questions
 	  	survey.down('survey-dishes').setStore(TC.SentOrderItems);

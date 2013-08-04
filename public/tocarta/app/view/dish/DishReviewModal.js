@@ -84,8 +84,14 @@ Ext.define('TC.view.dish.DishReviewModal', {
 						text: $T.submit
 					}
 				]
+			},
+			{
+				itemId: 'tcDishReviewModalLegalId',
+				tpl: new Ext.XTemplate(
+					'<div class="tcDishReviewLegalMessage">'+$T.on_button_pressed+' \''+$T.submit+'\' '+$T.you_accept+' <a href="javascript:$z(\'.tcDishReviewLegalText\').toggle();">'+$T.terms_of_use+'</a></div>',
+					'<div class="tcDishReviewLegalText">{content}</div>'
+				)
 			}
-			
 		]
 	}
 });

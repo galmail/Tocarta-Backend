@@ -55,7 +55,16 @@
     }
   }
   
+  .tcDishReviewLegalMessage {
+    padding-top: 20px;
+    text-align: center;
+  }
   
-  
+  .tcDishReviewLegalText {
+    width: 500px;
+    text-align: justify;
+    padding-top: 20px;
+    display: none;
+  }
   
 }

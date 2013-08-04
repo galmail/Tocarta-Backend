@@ -103,3 +103,8 @@
   font-size: 20px;
   margin: 20px;
 }
+/* line 97, ../../../../styles/survey/slider/main.scss */
+.tcSurveySliderContainer .tcSurveyOpinion .tcSurveyOpinionLegalMessage {
+  padding-top: 5px;
+  text-align: center;
+}

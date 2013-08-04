@@ -534,6 +534,18 @@
 .tcDishReviewModal .tcDishReviewModalButtons .tcDishReviewModalCancelBtn {
   margin-right: 40px;
 }
+/* line 58, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .tcDishReviewLegalMessage {
+  padding-top: 20px;
+  text-align: center;
+}
+/* line 63, ../../../styles/dish/reviewmodal.scss */
+.tcDishReviewModal .tcDishReviewLegalText {
+  width: 500px;
+  text-align: justify;
+  padding-top: 20px;
+  display: none;
+}
 
 /* line 13, ../../../styles/dish/main.scss */
 .tcDishContainer {
