@@ -243,16 +243,17 @@
 /* line 9, ../../../styles/main/messages.scss */
 .x-msgbox {
   z-index: 10000 !important;
+  max-width: 90%;
 }
-/* line 11, ../../../styles/main/messages.scss */
+/* line 12, ../../../styles/main/messages.scss */
 .x-msgbox > .x-docking-vertical {
   background-color: white;
 }
-/* line 14, ../../../styles/main/messages.scss */
+/* line 15, ../../../styles/main/messages.scss */
 .x-msgbox .x-msgbox-title {
   display: none;
 }
-/* line 17, ../../../styles/main/messages.scss */
+/* line 18, ../../../styles/main/messages.scss */
 .x-msgbox .x-body {
   background: transparent;
   border: none;
@@ -260,13 +261,13 @@
   color: #222;
   font-size: 20px;
 }
-/* line 24, ../../../styles/main/messages.scss */
+/* line 25, ../../../styles/main/messages.scss */
 .x-msgbox .x-msgbox-buttons {
   background: transparent;
   border: none;
   margin-bottom: 20px;
 }
-/* line 28, ../../../styles/main/messages.scss */
+/* line 29, ../../../styles/main/messages.scss */
 .x-msgbox .x-msgbox-buttons .x-button {
   color: gray;
   margin: 0 10px;
@@ -279,7 +280,7 @@
   background-image: -o-linear-gradient(#625b5b, #000000, #000000);
   background-image: linear-gradient(#625b5b, #000000, #000000);
 }
-/* line 35, ../../../styles/main/messages.scss */
+/* line 36, ../../../styles/main/messages.scss */
 .x-msgbox .x-msgbox-buttons .x-button.x-button-pressing, .x-msgbox .x-msgbox-buttons .x-button.x-button-pressed {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(100%, #625b5b));
   background-image: -webkit-linear-gradient(#333333, #625b5b);
@@ -287,21 +288,21 @@
   background-image: -o-linear-gradient(#333333, #625b5b);
   background-image: linear-gradient(#333333, #625b5b);
 }
-/* line 38, ../../../styles/main/messages.scss */
+/* line 39, ../../../styles/main/messages.scss */
 .x-msgbox .x-msgbox-buttons .x-button.x-button-action {
   color: white;
 }
-/* line 43, ../../../styles/main/messages.scss */
+/* line 44, ../../../styles/main/messages.scss */
 .x-msgbox .x-field-text {
   margin-top: 10px;
 }
-/* line 46, ../../../styles/main/messages.scss */
+/* line 47, ../../../styles/main/messages.scss */
 .x-msgbox .x-field-input {
   border: 2px solid black;
   border-radius: 5px;
 }
 
-/* line 52, ../../../styles/main/messages.scss */
+/* line 53, ../../../styles/main/messages.scss */
 .x-mask-message {
   font-size: 16px;
 }

@@ -5,7 +5,7 @@
 
 Ext.define('TC.model.Restaurant', {
 	extend : 'Ext.data.Model',
-	requires: ['TC.model.Menu','TC.model.Banner','TC.model.SurveyQuestion'],
+	requires: ['TC.model.Menu','TC.model.Banner','TC.model.Agreement','TC.model.SurveyQuestion'],
 	config: {
 		fields: [
 	    {name: "id", type: "int"},
@@ -15,6 +15,7 @@ Ext.define('TC.model.Restaurant', {
 	    {name: "setting", persist: true},
 	    {name: "menus", persist: true},
 	    {name: "banners", persist: true},
+	    {name: "agreements", persist: true},
 	    {name: "survey_questions", persist: true},
 	    {name: "logo", type: "string"},
 	    {name: "logo_url", type: "string",
@@ -38,6 +39,7 @@ Ext.define('TC.model.Restaurant', {
 	  associations: [
 	    {type: 'hasMany', model: 'TC.model.Menu', name: 'menus'},
 	    {type: 'hasMany', model: 'TC.model.Banner', name: 'banners'},
+	    {type: 'hasMany', model: 'TC.model.Agreement', name: 'agreements'},
 	    {type: 'hasMany', model: 'TC.model.SurveyQuestion', name: 'survey_questions'}
 	  ],
 	  localProxy: {
@@ -72,6 +74,20 @@ Ext.define('TC.model.Restaurant', {
   		return (record.get('menu_type')=='beverages');
   	});
   	return this.menus().getAt(pos);
+	},
+	
+	getOpinateAgreement: function(){
+		var pos = this.agreements().findBy(function(record,id){
+  		return (record.get('legal_type')=='opinate_policy' && record.get('locale')==TC.Setting.get('language'));
+  	});
+  	return this.agreements().getAt(pos);
+	},
+	
+	getShareAgreement: function(){
+		var pos = this.agreements().findBy(function(record,id){
+  		return (record.get('legal_type')=='share_policy' && record.get('locale')==TC.Setting.get('language'));
+  	});
+  	return this.agreements().getAt(pos);
 	}
 	
 	

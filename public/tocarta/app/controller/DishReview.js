@@ -13,7 +13,7 @@ Ext.define('TC.controller.DishReview', {
       
     },
     views: [
-    	// 'settings.SettingsView'
+    	'dish.DishReviewModal'
     ],   
     refs: {
     	dishReviewModal: 'dish-review-modal',
@@ -29,9 +29,11 @@ Ext.define('TC.controller.DishReview', {
   	console.log('TC.controller.DishReview.launch');
   },
   
-  dishReviewModalShow: function(obj){
+  dishReviewModalShow: function(dishReviewModal){
   	console.log('TC.controller.DishReview.dishReviewModalShow');
   	var me = this;
+  	if(TC.Restaurant.getOpinateAgreement())
+  		dishReviewModal.down('#tcDishReviewModalLegalId').setData(TC.Restaurant.getOpinateAgreement().data);
   	// listen for rating stars
   	$z(document).on('tap click', '.tcDishReviewModal .rating .star', me.rate);
   },

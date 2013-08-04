@@ -29,7 +29,7 @@ class Chain < ActiveRecord::Base
   has_many :restaurants
   has_many :wines
   has_many :dish_variation_sets
-
+  has_many :agreements
   has_many :survey_questions
   has_attached_file(
     :logo,

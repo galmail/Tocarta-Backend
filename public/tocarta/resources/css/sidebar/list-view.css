@@ -175,7 +175,7 @@
 }
 /* line 32, ../../../styles/sidebar/list-view.scss */
 .tcMenuPanelListView .x-dataview-item.x-item-pressed .item {
-  background-color: #1a1a1a;
+  background-color: #333333;
 }
 /* line 38, ../../../styles/sidebar/list-view.scss */
 .tcMenuPanelListView .item {

@@ -13,8 +13,14 @@ if @restaurant.chain.bg.file?
 end
 
 
+### restaurant settings ###
+
 child @restaurant.restaurant_setting => :setting do
   attributes :multilang_homepage, :games, :sync_photos, :call_waiter_button, :order_button, :request_bill_button, :show_help_button, :show_survey, :show_filters, :access_key, :supported_lang
+end
+
+child @restaurant.chain.agreements => :agreements do
+  attributes :legal_type, :locale, :revision, :title, :content
 end
 
 ### restaurant banners ###
