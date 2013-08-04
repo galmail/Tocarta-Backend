@@ -97,7 +97,10 @@ RailsAdmin.config do |config|
   config.model Agreement do
     weight 999
     list do
-      exclude_fields :id
+      exclude_fields :id, :rol, :description
+    end
+    edit do
+      exclude_fields :id, :rol, :description
     end
   end
 
