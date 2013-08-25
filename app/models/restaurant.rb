@@ -51,19 +51,28 @@ class Restaurant < ActiveRecord::Base
       menu = self.menus.create!(menu_type: 'main', name: 'Imported menu')
 
       logger.info "********* get sd categories"
-      sd_categories = sd.get_menu_categories [location, 0, 1, 0, 0]
+      # sd_categories = sd.get_menu_categories [location, 0, 1, 0, 0]
+      sd_categories = sd.get_local_pos_categories_for_location_by_parent_category [location, 0]
+      
+
 
       logger.info "********* create sections"
       sd_categories[1].each do |category|
         #TODO: Get photo from SD if defined
-        sect = Section.create(menu_id: menu.id, name: category[1], photo: File.new(def_section_img, 'r'), sd_category_id: category[0])
+        # sect = Section.create(menu_id: menu.id, name: category[1], photo: File.new(def_section_img, 'r'), sd_category_id: category[0])
+        
+        sect = Section.create(menu_id: menu.id, sd_category_id: category[0], name: category[2], photo: File.new(def_section_img, 'r'))
 
         logger.info "********* get sd dishes"
-        sd_dishes = sd.get_menu_items_for_location_by_category [location, category[0], 1, 0], true
+        # sd_dishes = sd.get_menu_items_for_location_by_category [location, category[0], 1, 0], true
+        sd_dishes = sd.get_items_for_location_by_local_pos_category [location, category[0]]
+        
         logger.info "********* create dishes"
-        sd_dishes[1].each do |dish|
-          current_dish = Dish.create(chain_id: self.chain.id , name: dish[1], description: dish[2], price: dish[3], sd_dish_id: dish[0])
-          current_dish.sections << sect
+        if !sd_dishes.nil? and !sd_dishes[1].nil? 
+          sd_dishes[1].each do |dish|
+            current_dish = Dish.create(chain_id: self.chain.id , name: dish[1], price: dish[2], sd_dish_id: dish[0])
+            current_dish.sections << sect
+          end
         end
       end
 

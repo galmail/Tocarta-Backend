@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130703145915) do
+ActiveRecord::Schema.define(:version => 20130804171613) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -22,7 +22,11 @@ ActiveRecord::Schema.define(:version => 20130703145915) do
     t.text     "content"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "chain_id"
+    t.string   "legal_type"
   end
+
+  add_index "agreements", ["chain_id"], :name => "index_agreements_on_chain_id"
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
