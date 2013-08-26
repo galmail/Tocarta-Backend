@@ -16,19 +16,19 @@
 class Menu < ActiveRecord::Base
   belongs_to :restaurant
   belongs_to :skin
-	has_one :menu_setting
-	has_many :sections
-	attr_accessible :name, :price, :menu_type, :skin_id, :restaurant_id
-	translates :name, :fallbacks_for_empty_translations => true
-	
-	def menu_type_enum
+  has_one :menu_setting
+  has_many :sections
+  attr_accessible :name, :price, :menu_type, :skin_id, :restaurant_id
+  translates :name, :fallbacks_for_empty_translations => true
+
+  def menu_type_enum
     ['main','daily','beverages','wines','desserts']
   end
-  
+
   ### Validations ###
-  
+
   validates :menu_type, :restaurant_id, :presence => true
-	
+
 	def activated
 	  settings = self.menu_setting
 	  

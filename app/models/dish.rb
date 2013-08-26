@@ -57,14 +57,14 @@ class Dish < ActiveRecord::Base
 	)
 	translates :name, :description, :story, :short_title, :badge_name, :fallbacks_for_empty_translations => true
 	attr_accessible :name, :active, :position, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts, :short_title, :badge_name, :photo, :rate_me, :chain_id
-	attr_accessible :section_ids, :subsection_ids, :dish_type_ids, :dish_variation_set_ids
+	attr_accessible :section_ids, :subsection_ids, :dish_type_ids, :dish_variation_set_ids, :sd_dish_id
 
     ### Validations ###
 
   validates :name, :price, :presence => true
   #validates_attachment_presence :photo
   validates :badge_name, :length => { :maximum => 11 }
-  validate :validate_min_sections
+  # validate :validate_min_sections
 
   def badge_name_enum
     if I18n.locale.to_s=="es"
@@ -91,7 +91,11 @@ class Dish < ActiveRecord::Base
   end
   
   def associate_chain
-    self.chain = self.sections.first.menu.restaurant.chain
+    begin
+      self.chain = self.sections.first.menu.restaurant.chain
+    rescue Exception=>e
+      # do nothing
+    end
   end
   
   def validate_min_sections

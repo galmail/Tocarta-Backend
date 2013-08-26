@@ -1,4 +1,4 @@
-# require File.expand_path('../instagram/error', __FILE__)
+# TODO: add errors file
 require 'subtledata/configuration'
 require 'subtledata/api'
 require 'subtledata/client'

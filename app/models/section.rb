@@ -19,21 +19,21 @@
 
 class Section < ActiveRecord::Base
   belongs_to :menu
-	has_many :dishes, :through => :dish_section_associations
+  has_many :dishes, :through => :dish_section_associations
   has_many :dish_section_associations
-	has_many :subsections
-	has_attached_file(
-	 :photo,
-	 :path => ":chain_rest_id/img/sections/:style/section_:id.:extension",
-	 :styles => { :mini => TocartaAdmin::Application::IMAGE_MINI_SIZE, :thumb => TocartaAdmin::Application::IMAGE_THUMBNAIL_SIZE }
-	)
-	translates :name, :fallbacks_for_empty_translations => true
-	attr_accessible :name, :active, :position, :photo, :hasBigSubsections, :dishes_per_page
-	attr_accessible :menu_id
-	
-	### Validations ###
-  
+  has_many :subsections
+  has_attached_file(
+    :photo,
+    :path => ":chain_rest_id/img/sections/:style/section_:id.:extension",
+    :styles => { :mini => TocartaAdmin::Application::IMAGE_MINI_SIZE, :thumb => TocartaAdmin::Application::IMAGE_THUMBNAIL_SIZE }
+  )
+  translates :name, :fallbacks_for_empty_translations => true
+  attr_accessible :name, :active, :position, :photo, :hasBigSubsections, :dishes_per_page
+  attr_accessible :menu_id, :sd_category_id
+
+  ### Validations ###
+
   validates :menu_id, :presence => true
-	validates_attachment_presence :photo
-	
+  validates_attachment_presence :photo
+
 end
