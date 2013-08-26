@@ -62,14 +62,25 @@ class Restaurant < ActiveRecord::Base
         # sect = Section.create(menu_id: menu.id, name: category[1], photo: File.new(def_section_img, 'r'), sd_category_id: category[0])
         
         sect = Section.create(menu_id: menu.id, sd_category_id: category[0], name: category[2], photo: File.new(def_section_img, 'r'))
+        
+        # get modifiers of that section
+        # get_modifiers_for_location_by_local_pos_category
+        
 
         logger.info "********* get sd dishes"
         # sd_dishes = sd.get_menu_items_for_location_by_category [location, category[0], 1, 0], true
         sd_dishes = sd.get_items_for_location_by_local_pos_category [location, category[0]]
         
         logger.info "********* create dishes"
-        if !sd_dishes.nil? and !sd_dishes[1].nil? 
+        if !sd_dishes.nil? and !sd_dishes[1].nil?
           sd_dishes[1].each do |dish|
+            
+            
+            # get dish description / details / attributes
+            # get dish modifiers (create the modifiers if necesary)
+            
+            
+            
             current_dish = Dish.create(chain_id: self.chain.id , name: dish[1], price: dish[2], sd_dish_id: dish[0])
             current_dish.sections << sect
           end

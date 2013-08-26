@@ -35,15 +35,38 @@ module Subtledata
       
       ################# POS Methods #################
       
+      def get_local_pos_categories_for_location_by_parent_category(args, description = false)
+        basic_check(args)
+        meth = '0280'
+        r = get(@base, { "#{meth}#{@session_token}" => args }, { format_out: 'parse' } )
+      end
+      
       def get_items_for_location_by_local_pos_category(args, description = false)
         basic_check(args)
         meth = '0281'
         r = get(@base, { "#{meth}#{@session_token}" => args }, { format_out: 'parse' } )
       end
       
-      def get_local_pos_categories_for_location_by_parent_category(args, description = false)
+      def get_modifiers_for_location_by_local_pos_category(args, description = false)
         basic_check(args)
-        meth = '0280'
+        meth = '0282'
+        r = get(@base, { "#{meth}#{@session_token}" => args }, { format_out: 'parse' } )
+      end
+      
+      def get_attributes_for_item(args, description = false)
+        basic_check(args)
+        meth = '0290'
+        r = get(@base, { "#{meth}#{@session_token}" => args }, { format_out: 'parse' } )
+      end
+      
+      def get_bundled_local_pos_modifiers_for_item(args, description = false)
+        basic_check(args)
+        meth = '0223'
+        r = get(@base, { "#{meth}#{@session_token}" => args }, { format_out: 'parse' } )
+      end
+      
+      def general(args, meth)
+        basic_check(args)
         r = get(@base, { "#{meth}#{@session_token}" => args }, { format_out: 'parse' } )
       end
       
