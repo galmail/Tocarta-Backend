@@ -453,6 +453,9 @@ end
 
 RailsAdminImport.config do |config|
   config.model Dish  do
+    # excluded_fields do
+      # [:translation]
+    # end
     label :name
   end
 end
