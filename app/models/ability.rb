@@ -44,6 +44,7 @@ class Ability
       can [:read,:create], Ingredient
       can [:read, :update, :create], Agreement, :chain => { :user_id => user.id  }
       can :read, DishType
+      can :read, Theme
       can :read, Skin
       can [:update, :create], Skin, :user_id => user.id
       can [:create, :read, :update], Chain, :user_id => user.id
