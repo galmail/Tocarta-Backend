@@ -29,7 +29,8 @@ module RailsAdmin
         register_instance_option :controller do
           Proc.new do
             if !@object.nil?
-              @object.import_sd_menu!
+              puts "***** Importando SD menu! ++++++++++"
+              # @object.import_sd_menu!
               flash[:notice] = "Menú importado."
             else
               flash[:error] = "Problema importando."

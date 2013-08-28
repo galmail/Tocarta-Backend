@@ -45,6 +45,11 @@ class Dish < ActiveRecord::Base
   has_many :dish_types, :through => :dish_type_associations
   belongs_to :chain
   has_one  :nutrition_fact
+  
+  
+  has_many :modifier_lists, :through => :dish_modifier_list_associations
+  has_many :dish_modifier_list_associations
+  attr_accessible :modifier_list_ids
 
   # Tag strategy
   has_and_belongs_to_many :ingredients

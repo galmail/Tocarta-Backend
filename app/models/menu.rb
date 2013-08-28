@@ -16,8 +16,9 @@
 class Menu < ActiveRecord::Base
   belongs_to :restaurant
   belongs_to :skin
-  has_one :menu_setting
-  has_many :sections
+  has_one :menu_setting, :dependent => :destroy
+  has_many :sections, :dependent => :destroy
+  
   attr_accessible :name, :price, :menu_type, :skin_id, :restaurant_id
   translates :name, :fallbacks_for_empty_translations => true
 

@@ -22,6 +22,8 @@ class Restaurant < ActiveRecord::Base
   has_many :restaurant_activities
   has_many :restaurant_banners
   has_many :menus
+  has_many :waiters
+  has_many :modifiers
   has_many :wines
   has_many :combos
   has_many :combo_types
@@ -53,8 +55,6 @@ class Restaurant < ActiveRecord::Base
       logger.info "********* get sd categories"
       # sd_categories = sd.get_menu_categories [location, 0, 1, 0, 0]
       sd_categories = sd.get_local_pos_categories_for_location_by_parent_category [location, 0]
-      
-
 
       logger.info "********* create sections"
       sd_categories[1].each do |category|
@@ -63,9 +63,17 @@ class Restaurant < ActiveRecord::Base
         
         sect = Section.create(menu_id: menu.id, sd_category_id: category[0], name: category[2], photo: File.new(def_section_img, 'r'))
         
+        logger.info "********* get sd modifiers"
         # get modifiers of that section
-        # get_modifiers_for_location_by_local_pos_category
+        sd_modifiers = sd.get_modifiers_for_location_by_local_pos_category [location, category[0]]
         
+        if !sd_modifiers.nil? and !sd_modifiers[1].nil?
+          # create the modifier list
+          mod_list = ModifierList.create(restaurant_id: self.id, name: category[2])
+          sd_modifiers[1].each do |modifier|
+            Modifier.create(restaurant_id: self.id, modifier_list_id: mod_list.id, sd_modifierid: modifier[0], name: modifier[1], description: modifier[2], price: modifier[3])
+          end
+        end
 
         logger.info "********* get sd dishes"
         # sd_dishes = sd.get_menu_items_for_location_by_category [location, category[0], 1, 0], true

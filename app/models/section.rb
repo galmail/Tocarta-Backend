@@ -19,9 +19,10 @@
 
 class Section < ActiveRecord::Base
   belongs_to :menu
-  has_many :dishes, :through => :dish_section_associations
-  has_many :dish_section_associations
-  has_many :subsections
+  has_many :dishes, :through => :dish_section_associations, :dependent => :destroy
+  has_many :dish_section_associations, :dependent => :destroy
+  has_many :subsections, :dependent => :destroy
+  
   has_attached_file(
     :photo,
     :path => ":chain_rest_id/img/sections/:style/section_:id.:extension",

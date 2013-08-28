@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130804171613) do
+ActiveRecord::Schema.define(:version => 20130828234421) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -152,6 +152,16 @@ ActiveRecord::Schema.define(:version => 20130804171613) do
 
   add_index "dish_combo_associations", ["combo_id"], :name => "index_dish_combo_associations_on_combo_id"
   add_index "dish_combo_associations", ["dish_id"], :name => "index_dish_combo_associations_on_dish_id"
+
+  create_table "dish_modifier_list_associations", :force => true do |t|
+    t.integer  "dish_id"
+    t.integer  "modifier_list_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "dish_modifier_list_associations", ["dish_id"], :name => "index_dish_modifier_list_associations_on_dish_id"
+  add_index "dish_modifier_list_associations", ["modifier_list_id"], :name => "index_dish_modifier_list_associations_on_modifier_list_id"
 
   create_table "dish_section_associations", :force => true do |t|
     t.integer  "dish_id"
@@ -377,6 +387,31 @@ ActiveRecord::Schema.define(:version => 20130804171613) do
   add_index "menus", ["restaurant_id"], :name => "index_menus_on_restaurant_id"
   add_index "menus", ["skin_id"], :name => "index_menus_on_skin_id"
   add_index "menus", ["theme_id"], :name => "index_menus_on_theme_id"
+
+  create_table "modifier_lists", :force => true do |t|
+    t.integer  "restaurant_id"
+    t.string   "name"
+    t.boolean  "is_mandatory",   :default => false
+    t.boolean  "is_multioption", :default => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+  end
+
+  add_index "modifier_lists", ["restaurant_id"], :name => "index_modifier_lists_on_restaurant_id"
+
+  create_table "modifiers", :force => true do |t|
+    t.integer  "restaurant_id"
+    t.string   "name"
+    t.integer  "sd_modifierid"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "modifier_list_id"
+    t.string   "description"
+    t.decimal  "price"
+  end
+
+  add_index "modifiers", ["modifier_list_id"], :name => "index_modifiers_on_modifier_list_id"
+  add_index "modifiers", ["restaurant_id"], :name => "index_modifiers_on_restaurant_id"
 
   create_table "nutrition_facts", :force => true do |t|
     t.integer  "dish_id"
@@ -699,6 +734,25 @@ ActiveRecord::Schema.define(:version => 20130804171613) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
+
+  create_table "waiters", :force => true do |t|
+    t.integer  "restaurant_id"
+    t.string   "username"
+    t.string   "password"
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.date     "birthday"
+    t.string   "mobile_number"
+    t.string   "device_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "sd_userid"
+    t.integer  "sd_employeeid"
+  end
+
+  add_index "waiters", ["restaurant_id"], :name => "index_waiters_on_restaurant_id"
 
   create_table "wine_detail_translations", :force => true do |t|
     t.integer  "wine_detail_id"

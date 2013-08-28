@@ -1,5 +1,8 @@
 TocartaAdmin::Application.routes.draw do
 
+  match "/import/:restaurant_id" => "importsd#index"
+  match "/import/:restaurant_id/go" => "importsd#import"
+
   match "/dashboards(/:action(.:format))" => "Dashboards", :as => :dashboards
   match "/dashboards/:id/:restaurant_id" => "dashboards#show"
   # Necesary for remote load of tabs on comments widget
