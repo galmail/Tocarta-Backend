@@ -2,8 +2,6 @@ require 'net/http'
 
 class AccessController < ApplicationController
 
-  
-
   def validate_license_key
     @result = false
     if !@tablet.activated
@@ -12,7 +10,7 @@ class AccessController < ApplicationController
       @result = true
     end
   end
-
+  
   private
   
   MAX_COMMENTS_PER_DISH = 10
@@ -24,14 +22,22 @@ class AccessController < ApplicationController
     headers['Access-Control-Max-Age'] = "1728000"
   end
   
-  def identify_tablet
-    @tablet = Tablet.where("access_key = ? AND active = ?", params[:key], true).first
-    #@tablet = Tablet.find(:first, :conditions => { :access_key => params[:key] , :active => true })
-    if @tablet.nil?
-      render :text => "You dont have access with this license.", :status => :forbidden
-    else
-      @table = @tablet.table
-      @restaurant = @table.restaurant
+  def identify_device
+    if params[:key]
+      @tablet = Tablet.where("access_key = ? AND active = ?", params[:key], true).first
+      if @tablet.nil?
+        render :text => "You dont have access with this license.", :status => :forbidden
+      else
+        @table = @tablet.table
+        @restaurant = @table.restaurant
+      end
+    elsif params[:mwkey]
+      @waiter = Waiter.where("key = ? AND active = ?", params[:mwkey], true).first
+      if @waiter.nil?
+        render :text => "You dont have access with this license.", :status => :forbidden
+      else
+        @restaurant = @waiter.restaurant
+      end
     end
   end
   

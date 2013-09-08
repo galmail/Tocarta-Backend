@@ -72,6 +72,7 @@ child @menus do
       attributes :id, :name, :price
       attributes :badge_name, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
       attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
+      attributes :sd_dish_id, :unless => lambda { |dish| dish.sd_dish_id.nil? or dish.sd_dish_id=="" }
       
       child(:nutrition_fact, :if => lambda { |d| !d.nutrition_fact.nil? }) do
         attributes :calories, :carbs, :fats, :cholesterol, :proteins
@@ -140,6 +141,7 @@ child @menus do
         attributes :id, :name, :price
         attributes :badge_name, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
         attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
+        attributes :sd_dish_id, :unless => lambda { |dish| dish.sd_dish_id.nil? or dish.sd_dish_id=="" }
         
         child(:nutrition_fact, :if => lambda { |d| !d.nutrition_fact.nil? }) do
           attributes :calories, :carbs, :fats, :cholesterol, :proteins

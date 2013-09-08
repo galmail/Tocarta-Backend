@@ -1,0 +1,1 @@
+node(:result) { |m| @result }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130828234421) do
+ActiveRecord::Schema.define(:version => 20130908213157) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -746,10 +746,12 @@ ActiveRecord::Schema.define(:version => 20130828234421) do
     t.date     "birthday"
     t.string   "mobile_number"
     t.string   "device_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.integer  "sd_userid"
     t.integer  "sd_employeeid"
+    t.string   "key"
+    t.boolean  "active",        :default => true
   end
 
   add_index "waiters", ["restaurant_id"], :name => "index_waiters_on_restaurant_id"

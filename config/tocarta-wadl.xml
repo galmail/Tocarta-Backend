@@ -6,6 +6,49 @@
 
     <!-- Base defines the domain and base path of the endpoint -->
     <resources base="http://beta.tocarta.es">
+        
+        <!-- ////////// meWaiter API ////////// -->
+
+        <resource path="/cli/mw/login.{format}">
+            <param name="format" required="true" type="xsd:string" style="template" default="json">
+                <doc>Response format.</doc>
+                <option value="json" mediaType="application/json"/>
+                <option value="xml" mediaType="application/xml"/>
+            </param>
+            <param name="mwkey" required="true" type="xsd:string" style="query" default="w1">
+                <doc>
+                    Waiter Access Key which can be found under Waiters -> access_key
+                </doc>
+            </param>
+            <param name="device_id" required="true" type="xsd:string" style="query" default="0">
+                <doc>
+                    Device Unique ID
+                </doc>
+            </param>
+            <method id="login" name="GET" apigee:displayName="Login">
+                <apigee:tags>
+                    <apigee:tag primary="true">meWaiter</apigee:tag>
+                </apigee:tags>
+                <apigee:authentication required="false"/>
+                <apigee:example url="/login.{format}"/>
+                <doc apigee:url="http://api.tocarta.com/doc/login">
+                    This is the documentation for this method...
+                </doc>
+            </method>
+        </resource>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
         <!-- ////////// Tablets/Clients API ////////// -->
 

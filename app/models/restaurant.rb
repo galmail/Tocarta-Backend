@@ -24,6 +24,7 @@ class Restaurant < ActiveRecord::Base
   has_many :menus
   has_many :waiters
   has_many :modifiers
+  has_many :modifier_lists
   has_many :wines
   has_many :combos
   has_many :combo_types
@@ -82,13 +83,6 @@ class Restaurant < ActiveRecord::Base
         logger.info "********* create dishes"
         if !sd_dishes.nil? and !sd_dishes[1].nil?
           sd_dishes[1].each do |dish|
-            
-            
-            # get dish description / details / attributes
-            # get dish modifiers (create the modifiers if necesary)
-            
-            
-            
             current_dish = Dish.create(chain_id: self.chain.id , name: dish[1], price: dish[2], sd_dish_id: dish[0])
             current_dish.sections << sect
           end
