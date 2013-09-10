@@ -1,5 +1,6 @@
 object @restaurant
-###### cache  @restaurant, expires_in: 30.minutes
+
+cache [@cachekey, @restaurant], expires_in: 1.minutes
 
 ### restaurant setting ###
 
@@ -59,7 +60,7 @@ child @menus do
   end
 
   child :sections do
-    attributes :id, :name, :hasBigSubsections, :dishes_per_page    
+    attributes :id, :name, :hasBigSubsections, :dishes_per_page
     node(:mini, :unless => lambda {|s|
         s.photo_file_name.nil?
       }) do |section|
