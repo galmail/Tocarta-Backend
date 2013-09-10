@@ -3,8 +3,8 @@ Rabl.configure do |config|
   config.enable_json_callbacks = true
   config.include_child_root    = false
 
-  config.cache_all_output = false #Rails.env.production?
-  config.cache_sources    = false #Rails.env.production?
+  config.cache_all_output = Rails.env.production?
+  config.cache_sources    = Rails.env.production?
   config.view_paths       = [Rails.root.join('app/views')]
 
   # Commented as these are defaults
