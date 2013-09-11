@@ -19,7 +19,13 @@ class Api::TocartasController < AccessController
   end
 
   def get_restaurant_info
+    if @restaurant.name == 'Sushibar Restaurant'
+      @cachetime = 12.weeks
+    else
+      @cachetime = 2.minutes
+    end
     @cachekey = "rest#{@restaurant.id}/locale#{I18n.locale}"
+    
     # show banners
     sort_and_filter(@restaurant.restaurant_banners,nil,nil,nil,nil)
     # show survey questions
