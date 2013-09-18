@@ -165,7 +165,7 @@ RailsAdmin.config do |config|
   config.model Menu do
     weight 30
     list do
-      exclude_fields :id, :theme, :menu_setting, :sections
+      exclude_fields :id, :menu_setting, :sections
     end
   end
   

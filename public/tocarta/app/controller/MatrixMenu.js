@@ -10,6 +10,8 @@ Ext.define('TC.controller.MatrixMenu', {
     requires: [],
     
     config: {
+    	
+    	currentMenu: null,
       
       routes: {
         'cmp1test' : 'cmp1test',
@@ -49,7 +51,7 @@ Ext.define('TC.controller.MatrixMenu', {
     matrixMenuShow: function(){
     	console.log('TC.controller.MatrixMenu.matrixMenuShow');
       var me = this, dish_views = [];
-      TC.Restaurant.getDessertsMenu().sections().getAt(0).dishes().each(function(dish){
+      this.getCurrentMenu().sections().getAt(0).dishes().each(function(dish){
         dish_views.push(me.printDish(dish));
       });
       this.getMatrixMenu().setItems(

@@ -95,6 +95,21 @@ Ext.define('TC.view.toolbars.TopToolbar', {
 						pressed: true
 					},
 					{
+						itemId: 'tcSpecialMenuBtnId',
+						hidden: true,
+						text: $T.special_menu
+					},
+					{
+						itemId: 'tcSamplingMenuBtnId',
+						hidden: true,
+						text: $T.sampling_menu
+					},
+					{
+						itemId: 'tcKidsMenuBtnId',
+						hidden: true,
+						text: $T.kids_menu
+					},
+					{
 						itemId: 'tcDailyMenuBtnId',
 						hidden: true,
 						text: $T.daily_menu
@@ -103,6 +118,11 @@ Ext.define('TC.view.toolbars.TopToolbar', {
 						itemId: 'tcBeveragesBtnId',
 						hidden: true,
 						text: $T.beverages
+					},
+					{
+						itemId: 'tcWinesBtnId',
+						hidden: true,
+						text: $T.wines
 					},
 					{
 						itemId: 'tcDessertsBtnId',

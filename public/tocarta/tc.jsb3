@@ -1841,7 +1841,7 @@
 	                  "name": "config.js"
 	              },
 	              {
-	                  "path": "../deploy/tocarta/1_5_2/",
+	                  "path": "../deploy/tocarta/1_5_3/",
 	                  "name": "all-classes.js"
 	              },
 	              {

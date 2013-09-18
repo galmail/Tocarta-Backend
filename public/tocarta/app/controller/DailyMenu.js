@@ -9,6 +9,8 @@ Ext.define('TC.controller.DailyMenu', {
     requires: ['TC.model.Combo'],
     
     config: {
+    	
+      currentMenu: null,
       
       views : [
       	
@@ -76,7 +78,7 @@ Ext.define('TC.controller.DailyMenu', {
     	});
     	dailyMenuTabPanel.getTabBar().setActiveTab(0);
     	// create a new combo
-  		var dailyMenu = TC.Restaurant.getDailyMenu();
+  		var dailyMenu = this.getCurrentMenu();
   		this.combo = Ext.create('TC.model.Combo',{
   			id: TC.LastOrder.order_items().getCount()+1,
   			name: dailyMenu.get('name'),
@@ -97,7 +99,7 @@ Ext.define('TC.controller.DailyMenu', {
     	// var me = this;
     	Ext.Viewport.down('#tcTopToolbarId').show();
   		Ext.Viewport.down('#tcBottomToolbarId').show();
-  		var dailyMenu = TC.Restaurant.getDailyMenu();
+  		var dailyMenu = this.getCurrentMenu();
   		this.getDailyMenu().down('#tcDailyMenuTitleId').setRecord(dailyMenu);
   		// create a new combo
   		this.combo = Ext.create('TC.model.Combo',{
