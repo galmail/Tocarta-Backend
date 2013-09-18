@@ -15,7 +15,6 @@ Ext.define('TC.controller.Main', {
         'mainmenu': 'loadMainMenu',
         'dailymenu': 'loadDailyMenu',
         'matrixmenu': 'loadMatrixMenu',
-        'beveragesmenu': 'loadBeveragesMenu',
         'home': 'goToHome'
       },
       
@@ -48,6 +47,12 @@ Ext.define('TC.controller.Main', {
 	    	dailymenuButton: 'top-toolbar segmentedbutton #tcDailyMenuBtnId',
 	    	beveragesButton: 'top-toolbar segmentedbutton #tcBeveragesBtnId',
 	    	dessertsButton: 'top-toolbar segmentedbutton #tcDessertsBtnId',
+	    	
+	    	winesButton: 'top-toolbar segmentedbutton #tcWinesBtnId',
+	    	specialmenuButton: 'top-toolbar segmentedbutton #tcSpecialMenuBtnId',
+	    	samplingmenuButton: 'top-toolbar segmentedbutton #tcSamplingMenuBtnId',
+	    	kidsmenuButton: 'top-toolbar segmentedbutton #tcKidsMenuBtnId',
+	    	
 	    	// bottom toolbar
 	    	bottomToolbar: 'bottom-toolbar',
 	    	helpButton: 'bottom-toolbar #tcHelpBtnId',
@@ -74,6 +79,11 @@ Ext.define('TC.controller.Main', {
 	      dailymenuButton: { tap: 'showDailyMenu' },
 	      beveragesButton: { tap: 'showBeveragesMenu' },
 	      dessertsButton: { tap: 'showDessertsMenu' },
+	      
+	      winesButton: { tap: 'showWinesMenu' },
+	      specialmenuButton: { tap: 'showSpecialMenu' },
+	      samplingmenuButton: { tap: 'showSamplingMenu' },
+	      kidsmenuButton: { tap: 'showKidsMenu' },
 
 	      loadAppButton: { tap: 'loadApp' },
 	      updateAppButton: { tap: 'updateApp' },
@@ -165,6 +175,18 @@ Ext.define('TC.controller.Main', {
 	    		this.getTopToolbar().down('#tcMainMenuBtnId').setHidden(false);
 	    		this.getTopToolbar().down('#tcMainMenuBtnId').setText(TC.Restaurant.getMainMenu().get('name'));
 	    	}
+	    	if(TC.Restaurant.getSpecialMenu()){
+	    		this.getTopToolbar().down('#tcSpecialMenuBtnId').setHidden(false);
+	    		this.getTopToolbar().down('#tcSpecialMenuBtnId').setText(TC.Restaurant.getSpecialMenu().get('name'));
+	    	}
+	    	if(TC.Restaurant.getSamplingMenu()){
+	    		this.getTopToolbar().down('#tcSamplingMenuBtnId').setHidden(false);
+	    		this.getTopToolbar().down('#tcSamplingMenuBtnId').setText(TC.Restaurant.getSamplingMenu().get('name'));
+	    	}
+	    	if(TC.Restaurant.getKidsMenu()){
+	    		this.getTopToolbar().down('#tcKidsMenuBtnId').setHidden(false);
+	    		this.getTopToolbar().down('#tcKidsMenuBtnId').setText(TC.Restaurant.getKidsMenu().get('name'));
+	    	}
 	    	if(TC.Restaurant.getDailyMenu()){
 	    		this.getTopToolbar().down('#tcDailyMenuBtnId').setHidden(false);
 	    		this.getTopToolbar().down('#tcDailyMenuBtnId').setText(TC.Restaurant.getDailyMenu().get('name'));
@@ -172,6 +194,10 @@ Ext.define('TC.controller.Main', {
 	    	if(TC.Restaurant.getBeveragesMenu()){
 	    		this.getTopToolbar().down('#tcBeveragesBtnId').setHidden(false);
 	    		this.getTopToolbar().down('#tcBeveragesBtnId').setText(TC.Restaurant.getBeveragesMenu().get('name'));
+	    	}
+	    	if(TC.Restaurant.getWinesMenu()){
+	    		this.getTopToolbar().down('#tcWinesBtnId').setHidden(false);
+	    		this.getTopToolbar().down('#tcWinesBtnId').setText(TC.Restaurant.getWinesMenu().get('name'));
 	    	}
 	    	if(TC.Restaurant.getDessertsMenu()){
 	    		this.getTopToolbar().down('#tcDessertsBtnId').setHidden(false);
@@ -303,45 +329,91 @@ Ext.define('TC.controller.Main', {
     		viewport.remove(oldItem);
 		},
     
+    
+    ////////////////// show menus //////////////////
+    
+    showMenu: function(menu){
+    	if(menu.get('theme')=='Modern'){
+    		// if(window.location.hash.indexOf('dailymenu')<0){
+    			// TC.app.getController("TC.controller.MainMenu").reset();
+    			TC.app.getController("TC.controller.DailyMenu").setCurrentMenu(menu);
+    			this.loadDailyMenu(menu);
+    		// }
+    	}
+    	else if(menu.get('theme')=='Minimalist'){
+    		// if(window.location.hash.indexOf('matrixmenu')<0){
+    			TC.app.getController("TC.controller.MatrixMenu").setCurrentMenu(menu);
+    			this.loadMatrixMenu(menu);
+    		// }
+    	}
+    	else { // if(menu.get('theme')=='Classic'){
+    		// if(window.location.hash.indexOf('mainmenu')<0){
+    			TC.app.getController("TC.controller.MainMenu").reset();
+    			TC.app.getController("TC.controller.MainMenu").setCurrentMenu(menu);
+    			this.loadMainMenu(menu);
+    		// }
+    	}
+    },
+    
     showMainMenu: function() {
       console.log('TC.controller.Main.showMainMenu');
-      if(window.location.hash.indexOf('mainmenu')<0)
-      	this.redirectTo('mainmenu');
+      this.showMenu(TC.Restaurant.getMainMenu());
     },
     
     showDailyMenu: function() {
       console.log('TC.controller.Main.showDailyMenu');
-      if(window.location.hash.indexOf('dailymenu')<0)
-      	this.redirectTo('dailymenu');
+      this.showMenu(TC.Restaurant.getDailyMenu());
     },
     
     showBeveragesMenu: function() {
       console.log('TC.controller.Main.showBeveragesMenu');
-      if(window.location.hash.indexOf('beveragesmenu')<0)
-      	this.redirectTo('beveragesmenu');
+      this.showMenu(TC.Restaurant.getBeveragesMenu());
     },
     
     showDessertsMenu: function() {
       console.log('TC.controller.Main.showDessertsMenu');
-      if(window.location.hash.indexOf('matrixmenu')<0)
-      	this.redirectTo('matrixmenu');
+      this.showMenu(TC.Restaurant.getDessertsMenu());
     },
     
-    loadMainMenu: function(){
+    showWinesMenu: function() {
+      console.log('TC.controller.Main.showWinesMenu');
+      this.showMenu(TC.Restaurant.getWinesMenu());
+    },
+    
+    showSpecialMenu: function() {
+      console.log('TC.controller.Main.showSpecialMenu');
+      this.showMenu(TC.Restaurant.getSpecialMenu());
+    },
+    
+    showSamplingMenu: function() {
+      console.log('TC.controller.Main.showSamplingMenu');
+      this.showMenu(TC.Restaurant.getSamplingMenu());
+    },
+    
+    showKidsMenu: function() {
+      console.log('TC.controller.Main.showKidsMenu');
+      this.showMenu(TC.Restaurant.getKidsMenu());
+    },
+    
+    ////////////////// load menus //////////////////
+    
+    loadMainMenu: function(menu){
     	if(TC.Restaurant){
     		$j('#superloader').hide();
     		console.log('TC.controller.Main.loadMainMenu');
-    		
+    		var _m = menu;
+    		if(!menu){
+    			_m = TC.Restaurant.getMainMenu();
+    			TC.app.getController("TC.controller.MainMenu").reset(); // reseting the entire controller menu
+    			TC.app.getController("TC.controller.MainMenu").setCurrentMenu(_m);
+    		}
     		$tc.logme({
 	    		action: 'view_menu',
 	    		data: {
-	    			menu_id: TC.Restaurant.getMainMenu().getId(),
+	    			menu_id: _m.getId(),
 	    			menu_type: 'main-menu'
 	    		}
 	    	});
-    		
-    		TC.app.getController("TC.controller.MainMenu").reset(); // reseting the entire controller menu
-    		TC.app.getController("TC.controller.MainMenu").setCurrentMenu(TC.Restaurant.getMainMenu());
     		this.switchView({xtype: 'main-menu'});
     	}
     	else {
@@ -349,39 +421,20 @@ Ext.define('TC.controller.Main', {
     	}
     },
     
-    loadBeveragesMenu: function(){
-    	if(TC.Restaurant){
-    		console.log('TC.controller.Main.loadBeveragesMenu');
-    		
-    		$tc.logme({
-	    		action: 'view_menu',
-	    		data: {
-	    			menu_id: TC.Restaurant.getBeveragesMenu().getId(),
-	    			menu_type: 'beverages-menu'
-	    		}
-	    	});
-    		
-    		TC.app.getController("TC.controller.MainMenu").reset(); // reseting the entire controller menu
-    		TC.app.getController("TC.controller.MainMenu").setCurrentMenu(TC.Restaurant.getBeveragesMenu());
-    		this.switchView({xtype: 'main-menu'});
-    	}
-    	else {
-    		this.loadApp();
-    	}
-    },
-    
-    loadDailyMenu: function(){
+    loadDailyMenu: function(menu){
     	if(TC.Restaurant){
     		console.log('TC.controller.Main.loadDailyMenu');
-    		
+    		var _m = menu;
+    		if(!menu){
+    			_m = TC.Restaurant.getMainMenu();
+    		}
     		$tc.logme({
 	    		action: 'view_menu',
 	    		data: {
-	    			menu_id: TC.Restaurant.getDailyMenu().getId(),
+	    			menu_id: _m.getId(),
 	    			menu_type: 'daily-menu'
 	    		}
 	    	});
-    		
     		this.switchView({xtype: 'daily-menu'});
     		this.getDailymenuView().down('#tcDailyMenuAddBtnId').setHidden(!TC.Restaurant.data.setting.order_button);
     	}
@@ -390,18 +443,20 @@ Ext.define('TC.controller.Main', {
     	}
     },
     
-    loadMatrixMenu: function(){
+    loadMatrixMenu: function(menu){
     	if(TC.Restaurant){
     		console.log('TC.controller.Main.loadMatrixMenu');
-    		
+    		var _m = menu;
+    		if(!menu){
+    			_m = TC.Restaurant.getMainMenu();
+    		}
     		$tc.logme({
 	    		action: 'view_menu',
 	    		data: {
-	    			menu_id: TC.Restaurant.getDessertsMenu().getId(),
-	    			menu_type: 'desserts-menu'
+	    			menu_id: _m.getId(),
+	    			menu_type: 'matrix-menu'
 	    		}
 	    	});
-    		
     		this.switchView({xtype: 'matrix-menu'});
     	}
     	else {

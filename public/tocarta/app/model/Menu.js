@@ -19,6 +19,7 @@ Ext.define('TC.model.Menu', {
 	    	}
 	    },
 	    {name: "menu_type", type: "string"},
+	    {name: "theme", type: "string"},
 	    {name: "price", type: "float"},
 	    {name: "valid_from_hour", type: "float"},
 	    {name: "valid_till_hour", type: "float"},
