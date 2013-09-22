@@ -35,8 +35,12 @@ test:
 
 # Heroku overwrites this
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: tocarta_prod
   pool: 5
-  timeout: 5000
+  username: postgres
+  password: 
+  template: template0
+  host: localhost
   

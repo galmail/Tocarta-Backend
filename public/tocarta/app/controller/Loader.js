@@ -119,7 +119,7 @@ Ext.define('TC.controller.Loader', {
   		return false;
   	}
   	
-  	if(!$tc.checkConnection()) return false;
+  	if(!$tc.checkConnection(true)) return false;
   	
   	// get supported languages and load the entire restaurant for each language
   	TC.ajaxRequest({

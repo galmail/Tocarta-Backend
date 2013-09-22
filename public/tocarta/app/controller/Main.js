@@ -584,7 +584,7 @@ Ext.define('TC.controller.Main', {
 	  		key: TC.Setting.get('key')
 	  	},options.params);
 	  	
-	  	if(!$tc.checkConnection()) return false;
+	  	if(!$tc.checkConnection(false)) return false;
 	  	
 	  	Ext.Ajax.request({
 		    url: options.url,
