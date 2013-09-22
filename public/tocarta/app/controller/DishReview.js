@@ -40,7 +40,7 @@ Ext.define('TC.controller.DishReview', {
   
   submitReview: function(){
   	console.log('TC.controller.DishReview.submitReview');
-  	if(!$tc.checkConnection()) return false;
+  	if(!$tc.checkConnection(true)) return false;
   	var rating = $j('.star.selected').length;
 		if(rating==0) return false;
   	var me = this;

@@ -67,7 +67,7 @@ Ext.define('TC.controller.Settings', {
   
   saveSettingsTapped: function(){
   	console.log('TC.controller.Settings.saveSettings');
-  	if(!$tc.checkConnection()) return false;
+  	if(!$tc.checkConnection(true)) return false;
   	var me = this;
   	// get settings
   	var setting = this.getSwitchTableView().getRecord();
@@ -111,7 +111,7 @@ Ext.define('TC.controller.Settings', {
   
   updateMenuButtonTapped: function(btn){
   	console.log('TC.controller.Settings.updateMenuButtonTapped');
-  	if(!$tc.checkConnection()) return false;
+  	if(!$tc.checkConnection(true)) return false;
   	this.closeSettings();
 		this.redirectTo('update');
   	return false;
@@ -155,7 +155,7 @@ Ext.define('TC.controller.Settings', {
   
   changeLicenseButtonTapped: function(btn){
   	console.log('TC.controller.Settings.changeLicenseButton');
-  	if(!$tc.checkConnection()) return false;
+  	if(!$tc.checkConnection(true)) return false;
   	var me = this;
   	$tc.confirmMsg($TO.change_license_question,function(btn){
   		if(btn=="yes"){

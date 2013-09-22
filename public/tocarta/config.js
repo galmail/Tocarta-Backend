@@ -250,14 +250,16 @@ $tc.getParameterByName = function(name){
     return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-$tc.checkConnection = function(){
+$tc.checkConnection = function(showMsg){
 	if(navigator && navigator.connection && navigator.connection.type){
 		var conType=navigator.connection.type;
 		if(conType==Connection.NONE || conType==Connection.UNKNOWN){
-			$tc.alertMsg("Connection is not available.",function(){
-				Ext.Viewport.unmask();
-				return false;
-			});
+			if(showMsg){
+				$tc.alertMsg("Connection is not available.",function(){
+					Ext.Viewport.unmask();
+					return false;
+				});
+			}
 			return false;
 		}
 	}
