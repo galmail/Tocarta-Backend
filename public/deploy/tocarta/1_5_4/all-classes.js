@@ -64893,10 +64893,14 @@ Ext.define('TC.controller.Loader', {
   			var loadRestaurant = function(current_locale,rest_id,_callback){
   				Ext.Viewport.setMasked({xtype: 'loadmask',message: $TO.updating_menu + " lang="+current_locale});
   				// Ext.create('TC.model.Restaurant',{id: rest_id_counter++});
+  				var _timeout = 20000;
+  				if(Ext.os.deviceType=="Desktop"){
+  					_timeout = 40000;
+  				}
   				TC.model.Restaurant.setProxy({
 			  		type: $tc.protocol,
 			  		url: $tc.url('get_restaurant')+'?all='+ fullUpdate +'&key='+TC.Setting.get('key')+'&locale='+current_locale,
-			  		timeout: 20000
+			  		timeout: _timeout
 			  	});
 			  	TC.model.Restaurant.load(rest_id, {
 				    scope: this,
