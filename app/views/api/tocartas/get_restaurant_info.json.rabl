@@ -1,5 +1,5 @@
 object @restaurant
-###### cache  @restaurant, expires_in: 30.minutes
+cache [@cachekey, @restaurant], expires_in: @cachetime
 
 ### restaurant setting ###
 
