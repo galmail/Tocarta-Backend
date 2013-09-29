@@ -1,6 +1,10 @@
 class Api::TocartasController < AccessController
   #skip_before_filter  :verify_authenticity_token
-  before_filter :identify_tablet, :setup_language #, :cors_set_access_control_headers
+  before_filter :identify_tablet, :setup_language, :except => [:hello]
+  
+  def hello
+    @result = true
+  end
 
   def im_alive
     @result = false
