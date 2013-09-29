@@ -1,6 +1,11 @@
 class Api::MeWaiterController < AccessController
   
-  before_filter :identify_device, :setup_language
+  before_filter :identify_device, :setup_language, :except => [:hello]
+  before_filter :authenticate_user!
+  
+  def hello
+    @result = true
+  end
   
   def login
     ok = false

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130908213157) do
+ActiveRecord::Schema.define(:version => 20130929093255) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -722,6 +722,7 @@ ActiveRecord::Schema.define(:version => 20130908213157) do
     t.string   "url"
     t.string   "phone"
     t.integer  "invalid_password_count",                :default => 0
+    t.string   "authentication_token"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

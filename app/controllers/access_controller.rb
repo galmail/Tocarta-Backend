@@ -38,6 +38,12 @@ class AccessController < ApplicationController
       else
         @restaurant = @waiter.restaurant
       end
+    elsif params[:auth_token]
+      if current_user.nil?
+        render :text => "You dont have access with this license.", :status => :forbidden
+      else
+        @restaurant = current_user.restaurants.first
+      end
     end
   end
   

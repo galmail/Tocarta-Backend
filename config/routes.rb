@@ -14,8 +14,11 @@ TocartaAdmin::Application.routes.draw do
   mount RailsAdminImport::Engine => '/rails_admin_import', :as => 'rails_admin_import'
 
   # Use custom controller
-  devise_for :users, controllers: {registrations: "users/registrations"}
+  devise_for :users, :controllers => {:registrations => "users/registrations",:sessions => "users/sessions"}
   match '/auth/:provider/callback' => 'authentications#create'
+  
+  # match "login(.:format)", :controller => 'Users::Sessions', :action => 'create'
+  # match "logout(.:format)", :controller => 'Users::Sessions', :action => 'destroy'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

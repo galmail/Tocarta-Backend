@@ -1,9 +1,9 @@
 class Api::TocartasController < AccessController
   #skip_before_filter  :verify_authenticity_token
-  before_filter :identify_tablet, :setup_language, :except => [:hello]
+  before_filter :identify_device, :setup_language, :except => [:hello]
   
   def hello
-    @result = true
+    @result = false
   end
   
   def im_alive
