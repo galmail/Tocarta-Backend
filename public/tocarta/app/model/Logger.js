@@ -33,7 +33,7 @@ Ext.define('TC.model.Logger', {
 	sync_logs: function(){
 		console.log("syncing logs now!!!!!!!");
 		// check if connection is on
-		if(!$tc.checkConnection()) return false;
+		if(!$tc.checkConnection(false)) return false;
 		// starting to sync
 		TC.logs.LOCK_SYNC = true;
 		// setTimeout(function(){
