@@ -18,12 +18,13 @@ class Menu < ActiveRecord::Base
   belongs_to :skin
   has_one :menu_setting, :dependent => :destroy
   has_many :sections, :dependent => :destroy
+  belongs_to :theme
   
-  attr_accessible :name, :price, :menu_type, :skin_id, :restaurant_id
+  attr_accessible :name, :price, :menu_type, :skin_id, :theme_id, :restaurant_id
   translates :name, :fallbacks_for_empty_translations => true
 
   def menu_type_enum
-    ['main','daily','beverages','wines','desserts']
+    ['main','daily','beverages','wines','desserts','special','sampling','kids']
   end
 
   ### Validations ###

@@ -3,7 +3,7 @@ class Api::TocartasController < AccessController
   before_filter :identify_device, :setup_language, :except => [:hello]
   
   def hello
-    @result = false
+    @result = true
   end
   
   def im_alive
@@ -29,6 +29,7 @@ class Api::TocartasController < AccessController
       @cachetime = 2.minutes
     end
     @cachekey = "rest#{@restaurant.id}/locale#{I18n.locale}"
+
     # show banners
     sort_and_filter(@restaurant.restaurant_banners,nil,nil,nil,nil)
     # show survey questions

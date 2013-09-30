@@ -76,6 +76,34 @@ Ext.define('TC.model.Restaurant', {
   	return this.menus().getAt(pos);
 	},
 	
+	getWinesMenu: function(){
+  	var pos = this.menus().findBy(function(record,id){
+  		return (record.get('menu_type')=='wines');
+  	});
+  	return this.menus().getAt(pos);
+	},
+	
+	getSpecialMenu: function(){
+  	var pos = this.menus().findBy(function(record,id){
+  		return (record.get('menu_type')=='special');
+  	});
+  	return this.menus().getAt(pos);
+	},
+	
+	getSamplingMenu: function(){
+  	var pos = this.menus().findBy(function(record,id){
+  		return (record.get('menu_type')=='sampling');
+  	});
+  	return this.menus().getAt(pos);
+	},
+	
+	getKidsMenu: function(){
+  	var pos = this.menus().findBy(function(record,id){
+  		return (record.get('menu_type')=='kids');
+  	});
+  	return this.menus().getAt(pos);
+	},
+	
 	getOpinateAgreement: function(){
 		var pos = this.agreements().findBy(function(record,id){
   		return (record.get('legal_type')=='opinate_policy' && record.get('locale')==TC.Setting.get('language'));

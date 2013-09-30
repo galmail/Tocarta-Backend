@@ -41,7 +41,7 @@ module RailsAdmin
                 object.send_update_notification
               end
             end
-            flash[:notice] = "Push Notification Update Sent. Update changes may take effect only after 2 minutes."
+            flash[:notice] = "Push Notification Update Sent. Make sure to preview new updates on the simulator."
             redirect_to back_or_index
           end
         end

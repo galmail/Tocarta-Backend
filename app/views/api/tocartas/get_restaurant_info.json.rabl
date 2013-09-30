@@ -1,8 +1,6 @@
 object @restaurant
 cache [@cachekey, @restaurant], expires_in: @cachetime
 
-### restaurant setting ###
-
 attribute :name
 # node :name do @restaurant.name end
 node :logo   do @restaurant.chain.logo.url(:medium).split(ENV['S3_BUCKET']).last end
@@ -43,8 +41,8 @@ end
 child @menus do
   attributes :id, :name, :menu_type, :price
   
-  node(:theme, :unless => lambda {|m| m.skin.nil? }) do |menu|
-    menu.skin.theme.name
+  node(:theme, :unless => lambda {|m| m.theme.nil? }) do |menu|
+    menu.theme.name
   end
   
   node(:stylesheet, :unless => lambda {|m| m.skin.nil? }) do |menu|
@@ -59,7 +57,7 @@ child @menus do
   end
 
   child :sections do
-    attributes :id, :name, :hasBigSubsections, :dishes_per_page    
+    attributes :id, :name, :hasBigSubsections, :dishes_per_page
     node(:mini, :unless => lambda {|s|
         s.photo_file_name.nil?
       }) do |section|
