@@ -18,6 +18,9 @@
 #
 
 class Section < ActiveRecord::Base
+  include Utils
+  before_save :generate_sid
+  
   belongs_to :menu
   has_many :dishes, :through => :dish_section_associations, :dependent => :destroy
   has_many :dish_section_associations, :dependent => :destroy
@@ -30,7 +33,7 @@ class Section < ActiveRecord::Base
   )
   translates :name, :fallbacks_for_empty_translations => true
   attr_accessible :name, :active, :position, :photo, :hasBigSubsections, :dishes_per_page
-  attr_accessible :menu_id, :sd_category_id
+  attr_accessible :menu_id, :sd_category_id, :sid
 
   ### Validations ###
 

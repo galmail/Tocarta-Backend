@@ -14,13 +14,16 @@
 #
 
 class Menu < ActiveRecord::Base
+  include Utils
+  before_save :generate_sid
+  
   belongs_to :restaurant
   belongs_to :skin
   has_one :menu_setting, :dependent => :destroy
   has_many :sections, :dependent => :destroy
   belongs_to :theme
   
-  attr_accessible :name, :price, :menu_type, :skin_id, :theme_id, :restaurant_id
+  attr_accessible :name, :price, :menu_type, :sid, :skin_id, :theme_id, :restaurant_id
   translates :name, :fallbacks_for_empty_translations => true
 
   def menu_type_enum

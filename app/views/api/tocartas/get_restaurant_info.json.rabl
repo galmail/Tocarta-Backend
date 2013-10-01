@@ -39,7 +39,7 @@ end
 ### restaurant menus ###
 
 child @menus do
-  attributes :id, :name, :menu_type, :price
+  attributes :id, :sid, :name, :menu_type, :price
   
   node(:theme, :unless => lambda {|m| m.theme.nil? }) do |menu|
     menu.theme.name
@@ -57,7 +57,7 @@ child @menus do
   end
 
   child :sections do
-    attributes :id, :name, :hasBigSubsections, :dishes_per_page
+    attributes :id, :sid, :name, :hasBigSubsections, :dishes_per_page
     node(:mini, :unless => lambda {|s|
         s.photo_file_name.nil?
       }) do |section|
@@ -67,7 +67,7 @@ child @menus do
       section.photo.url(:thumb).split(ENV['S3_BUCKET']).last
     end
     child(:dishes, :if => lambda { |s| s.subsections.length==0 }) do
-      attributes :id, :name, :price
+      attributes :id, :sid, :name, :price
       attributes :badge_name, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
       attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
       attributes :sd_dish_id, :unless => lambda { |dish| dish.sd_dish_id.nil? or dish.sd_dish_id=="" }
@@ -125,7 +125,7 @@ child @menus do
     end
     
     child :subsections do
-      attributes :id, :name
+      attributes :id, :sid, :name
       node :short_title do |subsection|
         subsection.name
       end
@@ -136,7 +136,7 @@ child @menus do
         subsection.photo.url(:thumb).split(ENV['S3_BUCKET']).last
       end
       child :dishes do
-        attributes :id, :name, :price
+        attributes :id, :sid, :name, :price
         attributes :badge_name, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
         attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
         attributes :sd_dish_id, :unless => lambda { |dish| dish.sd_dish_id.nil? or dish.sd_dish_id=="" }

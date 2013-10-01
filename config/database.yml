@@ -8,7 +8,7 @@ development:
   encoding: unicode
   database: tocarta_dev
   pool: 5
-  username: postgres
+  username: gal
   password: 
   template: template0
   host: localhost

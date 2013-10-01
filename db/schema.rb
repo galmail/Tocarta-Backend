@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130929093255) do
+ActiveRecord::Schema.define(:version => 20131001142938) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -297,6 +297,7 @@ ActiveRecord::Schema.define(:version => 20130929093255) do
     t.boolean  "rate_me",            :default => true
     t.integer  "chain_id"
     t.integer  "sd_dish_id"
+    t.string   "sid"
   end
 
   add_index "dishes", ["chain_id"], :name => "index_dishes_on_chain_id"
@@ -382,6 +383,7 @@ ActiveRecord::Schema.define(:version => 20130929093255) do
     t.decimal  "price"
     t.string   "menu_type"
     t.integer  "skin_id"
+    t.string   "sid"
   end
 
   add_index "menus", ["restaurant_id"], :name => "index_menus_on_restaurant_id"
@@ -395,6 +397,7 @@ ActiveRecord::Schema.define(:version => 20130929093255) do
     t.boolean  "is_multioption", :default => false
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
+    t.string   "sid"
   end
 
   add_index "modifier_lists", ["restaurant_id"], :name => "index_modifier_lists_on_restaurant_id"
@@ -408,6 +411,7 @@ ActiveRecord::Schema.define(:version => 20130929093255) do
     t.integer  "modifier_list_id"
     t.string   "description"
     t.decimal  "price"
+    t.string   "sid"
   end
 
   add_index "modifiers", ["modifier_list_id"], :name => "index_modifiers_on_modifier_list_id"
@@ -588,6 +592,7 @@ ActiveRecord::Schema.define(:version => 20130929093255) do
     t.boolean  "hasBigSubsections",  :default => false
     t.integer  "dishes_per_page",    :default => 0
     t.integer  "sd_category_id"
+    t.string   "sid"
   end
 
   add_index "sections", ["menu_id"], :name => "index_sections_on_menu_id"
@@ -629,6 +634,7 @@ ActiveRecord::Schema.define(:version => 20130929093255) do
     t.datetime "photo_updated_at"
     t.boolean  "active",             :default => true
     t.integer  "position"
+    t.string   "sid"
   end
 
   add_index "subsections", ["section_id"], :name => "index_subsections_on_section_id"

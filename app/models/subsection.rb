@@ -16,6 +16,9 @@
 #
 
 class Subsection < ActiveRecord::Base
+  include Utils
+  before_save :generate_sid
+  
   belongs_to :section
 	has_many :dishes, :through => :dish_subsection_associations
   has_many :dish_subsection_associations
@@ -25,6 +28,6 @@ class Subsection < ActiveRecord::Base
 	 :styles => { :mini => TocartaAdmin::Application::IMAGE_MINI_SIZE, :thumb => TocartaAdmin::Application::IMAGE_THUMBNAIL_SIZE }
 	)
 	translates :name, :fallbacks_for_empty_translations => true
-	attr_accessible :active, :position, :photo, :name
+	attr_accessible :active, :position, :photo, :name, :sid
 	attr_accessible :section_id
 end
