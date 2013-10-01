@@ -25,7 +25,7 @@ class Api::TocartasController < AccessController
   def get_restaurant_info
     @cachetime = 16.weeks    
     # if its on the simulator, should expire restaurant object
-    if request.user_agent.include?('Chrome')
+    if request.user_agent and request.user_agent.include?('Chrome')
       @restaurant.touch
     end
     @cachekey = "rest#{@restaurant.id}/locale#{I18n.locale}"
