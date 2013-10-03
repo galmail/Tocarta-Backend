@@ -34,7 +34,7 @@ class Api::MeWaiterController < AccessController
   
   
   def modifiers
-    @modifier_lists = @restaurant.modifier_lists
+    @modifier_list_sets = @restaurant.modifier_list_sets
   end
   
 end

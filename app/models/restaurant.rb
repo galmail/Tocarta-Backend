@@ -25,6 +25,7 @@ class Restaurant < ActiveRecord::Base
   has_many :waiters
   has_many :modifiers
   has_many :modifier_lists
+  has_many :modifier_list_sets
   has_many :wines
   has_many :combos
   has_many :combo_types

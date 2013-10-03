@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131001142938) do
+ActiveRecord::Schema.define(:version => 20131003124732) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -153,16 +153,6 @@ ActiveRecord::Schema.define(:version => 20131001142938) do
   add_index "dish_combo_associations", ["combo_id"], :name => "index_dish_combo_associations_on_combo_id"
   add_index "dish_combo_associations", ["dish_id"], :name => "index_dish_combo_associations_on_dish_id"
 
-  create_table "dish_modifier_list_associations", :force => true do |t|
-    t.integer  "dish_id"
-    t.integer  "modifier_list_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  add_index "dish_modifier_list_associations", ["dish_id"], :name => "index_dish_modifier_list_associations_on_dish_id"
-  add_index "dish_modifier_list_associations", ["modifier_list_id"], :name => "index_dish_modifier_list_associations_on_modifier_list_id"
-
   create_table "dish_section_associations", :force => true do |t|
     t.integer  "dish_id"
     t.integer  "section_id"
@@ -277,13 +267,13 @@ ActiveRecord::Schema.define(:version => 20131001142938) do
 
   create_table "dishes", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.boolean  "active",             :default => true
+    t.boolean  "active",               :default => true
     t.integer  "position"
     t.text     "description"
     t.decimal  "price"
@@ -294,13 +284,15 @@ ActiveRecord::Schema.define(:version => 20131001142938) do
     t.string   "nutrition_facts"
     t.string   "badge_name"
     t.string   "short_title"
-    t.boolean  "rate_me",            :default => true
+    t.boolean  "rate_me",              :default => true
     t.integer  "chain_id"
     t.integer  "sd_dish_id"
     t.string   "sid"
+    t.integer  "modifier_list_set_id"
   end
 
   add_index "dishes", ["chain_id"], :name => "index_dishes_on_chain_id"
+  add_index "dishes", ["modifier_list_set_id"], :name => "index_dishes_on_modifier_list_set_id"
 
   create_table "dishes_food_tags", :id => false, :force => true do |t|
     t.integer "dish_id"
@@ -389,6 +381,24 @@ ActiveRecord::Schema.define(:version => 20131001142938) do
   add_index "menus", ["restaurant_id"], :name => "index_menus_on_restaurant_id"
   add_index "menus", ["skin_id"], :name => "index_menus_on_skin_id"
   add_index "menus", ["theme_id"], :name => "index_menus_on_theme_id"
+
+  create_table "modifier_list_set_associations", :force => true do |t|
+    t.integer "modifier_list_id"
+    t.integer "modifier_list_set_id"
+  end
+
+  add_index "modifier_list_set_associations", ["modifier_list_id"], :name => "index_modifier_list_set_associations_on_modifier_list_id"
+  add_index "modifier_list_set_associations", ["modifier_list_set_id"], :name => "index_modifier_list_set_associations_on_modifier_list_set_id"
+
+  create_table "modifier_list_sets", :force => true do |t|
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "restaurant_id"
+    t.string   "name"
+    t.string   "sid"
+  end
+
+  add_index "modifier_list_sets", ["restaurant_id"], :name => "index_modifier_list_sets_on_restaurant_id"
 
   create_table "modifier_lists", :force => true do |t|
     t.integer  "restaurant_id"

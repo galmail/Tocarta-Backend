@@ -44,7 +44,14 @@ class Users::SessionsController < Devise::SessionsController
   protected
 
   def invalid_login_attempt
-    render :json=> {:success=>false, :message=>"Error with your login or password"}, :status=>401
+    respond_to do |format|
+      format.html {
+        flash[:error] = "Invalid Email or Password."
+        redirect_to root_url
+      }
+      format.json { render :json => {:success=>false, :message=>"Error with your login or password"}, :status=>401 }
+      format.xml  { render :xml  => {:success=>false, :message=>"Error with your login or password"}, :status=>401 }
+    end
   end
   
 end
