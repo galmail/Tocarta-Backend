@@ -1,7 +1,7 @@
 object @restaurant
 cache [@cachekey, @restaurant], expires_in: @cachetime
 
-attribute :name
+attribute :name, :pos_ip_address
 # node :name do @restaurant.name end
 node :logo   do @restaurant.chain.logo.url(:medium).split(ENV['S3_BUCKET']).last end
 node :i18nbg do @restaurant.chain.i18nbg.url.split(ENV['S3_BUCKET']).last end

@@ -31,7 +31,7 @@ class Restaurant < ActiveRecord::Base
   has_many :combo_types
   has_many :tables
   has_many :comments
-  attr_accessible :name, :manager, :email, :address, :phone, :note, :suggestions, :chain_id, :user_id, :sd_location_id
+  attr_accessible :name, :manager, :email, :address, :phone, :note, :suggestions, :chain_id, :user_id, :sd_location_id, :pos_ip_address
   validates :chain_id, :presence => true
 
   def tablets
