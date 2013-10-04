@@ -30,6 +30,10 @@ class RestaurantSetting < ActiveRecord::Base
 	attr_accessible :multilang_homepage, :games, :sync_photos, :call_waiter_button, :order_button, :request_bill_button, :show_help_button, :show_survey, :show_filters
 	attr_accessible :restaurant_id
 	
+	def default_language_enum
+	  return self.supported_lang_enum
+	end
+	
 	def supported_lang_enum
     [ [ 'English', "en" ], [ 'French', "fr" ], [ 'Spanish', "es" ], [ 'Catalan', "cat" ] ]
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131003140522) do
+ActiveRecord::Schema.define(:version => 20131003174555) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -533,7 +533,7 @@ ActiveRecord::Schema.define(:version => 20131003140522) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.integer  "num_licenses"
-    t.string   "default_language"
+    t.string   "default_language",    :default => "es"
     t.datetime "last_menu_sync"
     t.boolean  "multilang_homepage",  :default => false
     t.boolean  "games",               :default => false

@@ -7,10 +7,12 @@ class Api::MeWaiterController < AccessController
   end
   
   def load_pos_ip_address
-    return false unless !params[:ip].nil? and params[:ip].length>0 
-    @restaurant.pos_ip_address = params[:ip]
-    @restaurant.save
-    @result = true
+    @result = false
+    if !params[:ip].nil? and params[:ip].length>0
+      @restaurant.pos_ip_address = params[:ip]
+      @restaurant.save
+      @result = true
+    end
   end
   
   def login

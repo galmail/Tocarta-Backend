@@ -147,10 +147,10 @@ RailsAdmin.config do |config|
     parent Restaurant
     weight 2010
     list do
-      exclude_fields :id, :name, :default_language, :last_menu_sync, :multilang_homepage, :games
+      exclude_fields :id, :name, :last_menu_sync, :multilang_homepage, :games
     end
     update do
-      exclude_fields :id, :name, :default_language, :last_menu_sync, :multilang_homepage, :games, :restaurant
+      exclude_fields :id, :name, :last_menu_sync, :multilang_homepage, :games, :restaurant
       field :num_licenses do
         read_only true
       end
@@ -161,7 +161,7 @@ RailsAdmin.config do |config|
       end
     end
     create do
-      exclude_fields :id, :default_language, :last_menu_sync, :multilang_homepage, :games
+      exclude_fields :id, :last_menu_sync, :multilang_homepage, :games
     end
   end
   
