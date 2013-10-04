@@ -106,6 +106,28 @@ else if(CURRENT_ENV == "prod"){
 	// log errors to proxy server
 	window.onerror = $tc.logError;
 }
+
+/*** beta ***/
+else if(CURRENT_ENV == "beta"){
+	$tc = {
+		server: 'http://beta.tocarta.es',
+		nodeserver: 'http://analytics.tocarta.es',
+		// online: false, // when online, images should be fetched from a remote server, otherwise from filesystem
+		testing: false, // when testing, images should be fetched from server, otherwise from Amazon
+		s3_path: "http://s3.amazonaws.com/tocarta-prod",
+		protocol: 'ajax', // Options: jsonp, ajax
+		timeout: 8000,
+		pusherKey: 'd20cf40b86a0639e33cc',
+  	fullPath: null,
+  	relPath: '/cli/c/',
+		currentTable: 1,
+  	defaultLanguage: 'es',
+		time_to_display_msg: 5000,
+		click: 'tap' // click event instead of tap
+	}
+	window.onerror = $tc.logError;
+}
+
 else {
 	alert('bad environment!');
 }
