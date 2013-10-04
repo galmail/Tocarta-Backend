@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131003174555) do
+ActiveRecord::Schema.define(:version => 20131004142313) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -408,8 +408,10 @@ ActiveRecord::Schema.define(:version => 20131003174555) do
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
     t.string   "sid"
+    t.integer  "modifier_id"
   end
 
+  add_index "modifier_lists", ["modifier_id"], :name => "index_modifier_lists_on_modifier_id"
   add_index "modifier_lists", ["restaurant_id"], :name => "index_modifier_lists_on_restaurant_id"
 
   create_table "modifiers", :force => true do |t|
