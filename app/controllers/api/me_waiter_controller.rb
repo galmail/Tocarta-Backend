@@ -54,6 +54,17 @@ class Api::MeWaiterController < AccessController
     @floors = @restaurant.floors
   end
   
+  def payments
+    @payments = @restaurant.payments
+  end
+  
+  def user_info
+    @waiter
+  end
+  
+  def app_info
+    @waiter_app = @waiter.waiter_app
+  end
   
   
 end

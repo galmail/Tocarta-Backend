@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131011105621) do
+ActiveRecord::Schema.define(:version => 20131011115817) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -484,6 +484,16 @@ ActiveRecord::Schema.define(:version => 20131011105621) do
   add_index "orders", ["table_id"], :name => "index_orders_on_table_id"
   add_index "orders", ["tablet_id"], :name => "index_orders_on_tablet_id"
 
+  create_table "payments", :force => true do |t|
+    t.integer  "restaurant_id"
+    t.string   "name"
+    t.string   "sid"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "payments", ["restaurant_id"], :name => "index_payments_on_restaurant_id"
+
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
     t.string   "username"
@@ -769,6 +779,18 @@ ActiveRecord::Schema.define(:version => 20131011105621) do
 
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
 
+  create_table "waiter_apps", :force => true do |t|
+    t.string   "name"
+    t.string   "version"
+    t.string   "os"
+    t.text     "terms_of_use"
+    t.text     "privacy_policy"
+    t.text     "whats_new"
+    t.string   "link_to_store"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "waiters", :force => true do |t|
     t.integer  "restaurant_id"
     t.string   "username"
@@ -786,9 +808,11 @@ ActiveRecord::Schema.define(:version => 20131011105621) do
     t.integer  "sd_employeeid"
     t.string   "key"
     t.boolean  "active",        :default => true
+    t.integer  "waiter_app_id"
   end
 
   add_index "waiters", ["restaurant_id"], :name => "index_waiters_on_restaurant_id"
+  add_index "waiters", ["waiter_app_id"], :name => "index_waiters_on_waiter_app_id"
 
   create_table "wine_detail_translations", :force => true do |t|
     t.integer  "wine_detail_id"

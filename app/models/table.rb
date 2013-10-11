@@ -27,6 +27,6 @@ class Table < ActiveRecord::Base
 	### Validations ###
   
   validates :restaurant_id, :number, :presence => true
-  validates :number, :uniqueness => { :scope => :restaurant_id }
+  validates :number, :uniqueness => { :scope => [:restaurant_id, :floor_id] }
 	
 end
