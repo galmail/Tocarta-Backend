@@ -15,10 +15,11 @@
 
 class Table < ActiveRecord::Base
   belongs_to :restaurant
+  belongs_to :floor
 	has_many :tablets
 	has_many :orders
 	has_many :restaurant_activities
-	attr_accessible :name, :number, :status, :dinners, :language, :restaurant_id
+	attr_accessible :name, :sid, :number, :status, :dinners, :language, :restaurant_id, :floor_id
 	
 	### Validations ###
   

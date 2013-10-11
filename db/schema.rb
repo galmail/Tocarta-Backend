@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131004142313) do
+ActiveRecord::Schema.define(:version => 20131011105621) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -309,6 +309,16 @@ ActiveRecord::Schema.define(:version => 20131004142313) do
 
   add_index "dishes_ingredients", ["dish_id", "ingredient_id"], :name => "index_dishes_ingredients_on_dish_id_and_ingredient_id"
   add_index "dishes_ingredients", ["ingredient_id", "dish_id"], :name => "index_dishes_ingredients_on_ingredient_id_and_dish_id"
+
+  create_table "floors", :force => true do |t|
+    t.integer  "restaurant_id"
+    t.string   "name"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "sid"
+  end
+
+  add_index "floors", ["restaurant_id"], :name => "index_floors_on_restaurant_id"
 
   create_table "food_tag_translations", :force => true do |t|
     t.integer  "food_tag_id"
@@ -687,8 +697,11 @@ ActiveRecord::Schema.define(:version => 20131004142313) do
     t.string   "status"
     t.integer  "dinners"
     t.string   "language"
+    t.integer  "floor_id"
+    t.string   "sid"
   end
 
+  add_index "tables", ["floor_id"], :name => "index_tables_on_floor_id"
   add_index "tables", ["restaurant_id"], :name => "index_tables_on_restaurant_id"
 
   create_table "tablets", :force => true do |t|

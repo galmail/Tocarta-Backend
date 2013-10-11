@@ -50,4 +50,10 @@ class Api::MeWaiterController < AccessController
     @suggestions = @restaurant.suggestions
   end
   
+  def tables
+    @floors = @restaurant.floors
+  end
+  
+  
+  
 end
