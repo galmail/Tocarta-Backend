@@ -23,7 +23,7 @@ class Menu < ActiveRecord::Base
 	translates :name, :fallbacks_for_empty_translations => true
 	
 	def menu_type_enum
-    ['main','daily','beverages','wines','desserts','special','sampling','kids']
+    ['main','special','sampling','kids','daily','beverages','wines','desserts']
   end
   
   ### Validations ###
