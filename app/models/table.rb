@@ -14,6 +14,9 @@
 #
 
 class Table < ActiveRecord::Base
+  include Utils
+  before_save :generate_sid
+  
   belongs_to :restaurant
   belongs_to :floor
 	has_many :tablets
