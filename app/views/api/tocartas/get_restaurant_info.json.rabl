@@ -68,6 +68,7 @@ child @menus do
     end
     child(:dishes, :if => lambda { |s| s.subsections.length==0 }) do
       attributes :id, :sid, :name, :price
+      attributes :tax_included, :unless => lambda { |dish| dish.tax_included }
       attributes :badge_name, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
       attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
       attributes :sd_dish_id, :unless => lambda { |dish| dish.sd_dish_id.nil? or dish.sd_dish_id=="" }
@@ -137,6 +138,7 @@ child @menus do
       end
       child :dishes do
         attributes :id, :sid, :name, :price
+        attributes :tax_included, :unless => lambda { |dish| dish.tax_included }
         attributes :badge_name, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
         attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
         attributes :sd_dish_id, :unless => lambda { |dish| dish.sd_dish_id.nil? or dish.sd_dish_id=="" }

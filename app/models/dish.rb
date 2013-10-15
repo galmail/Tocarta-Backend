@@ -62,7 +62,7 @@ class Dish < ActiveRecord::Base
 	 :styles => { :large => TocartaAdmin::Application::IMAGE_LARGE_SIZE, :thumb => TocartaAdmin::Application::IMAGE_THUMBNAIL_SIZE, :mini => TocartaAdmin::Application::IMAGE_MINI_SIZE }
 	)
 	translates :name, :description, :story, :short_title, :badge_name, :fallbacks_for_empty_translations => true
-	attr_accessible :name, :active, :position, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts, :short_title, :badge_name, :photo, :rate_me, :chain_id
+	attr_accessible :name, :active, :tax_included, :position, :description, :price, :rating, :reviews, :story, :video, :nutrition_facts, :short_title, :badge_name, :photo, :rate_me, :chain_id
 	attr_accessible :section_ids, :subsection_ids, :dish_type_ids, :dish_variation_set_ids, :sd_dish_id, :sid
 
     ### Validations ###

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131011115817) do
+ActiveRecord::Schema.define(:version => 20131015111617) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -289,6 +289,7 @@ ActiveRecord::Schema.define(:version => 20131011115817) do
     t.integer  "sd_dish_id"
     t.string   "sid"
     t.integer  "modifier_list_set_id"
+    t.boolean  "tax_included",         :default => true
   end
 
   add_index "dishes", ["chain_id"], :name => "index_dishes_on_chain_id"
