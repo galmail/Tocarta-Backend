@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131015111617) do
+ActiveRecord::Schema.define(:version => 20131015130522) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -507,6 +507,18 @@ ActiveRecord::Schema.define(:version => 20131015111617) do
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
+
+  create_table "resources", :force => true do |t|
+    t.integer  "restaurant_id"
+    t.string   "name"
+    t.string   "key"
+    t.text     "value"
+    t.boolean  "is_image",      :default => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  add_index "resources", ["restaurant_id"], :name => "index_resources_on_restaurant_id"
 
   create_table "restaurant_activities", :force => true do |t|
     t.integer  "restaurant_id"

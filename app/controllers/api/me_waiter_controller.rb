@@ -66,5 +66,9 @@ class Api::MeWaiterController < AccessController
     @waiter_app = @waiter.waiter_app
   end
   
+  def pos_resources
+    @resources = @restaurant.resources
+  end
+  
   
 end

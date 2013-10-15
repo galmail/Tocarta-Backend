@@ -23,6 +23,7 @@ class Restaurant < ActiveRecord::Base
   has_many :restaurant_banners
   has_many :menus
   has_many :waiters
+  has_many :resources
   has_many :modifiers
   has_many :modifier_lists
   has_many :modifier_list_sets
