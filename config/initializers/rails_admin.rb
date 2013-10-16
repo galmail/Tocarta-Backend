@@ -3,6 +3,8 @@
 require Rails.root.join('lib', 'rails_admin_sd_menu_import.rb')
 
 RailsAdmin.config do |config|
+  
+  config.yell_for_non_accessible_fields = false
 
   config.actions do
     sd_menu_import do
@@ -116,10 +118,10 @@ RailsAdmin.config do |config|
     label_plural 'Users'
     object_label_method :email
     list do
-      exclude_fields :id, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :current_sign_in_ip, :restaurant, :client
+      exclude_fields :id, :connection_logs, :authentications, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :current_sign_in_ip, :restaurant, :client
     end
     edit do
-      exclude_fields :id, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :current_sign_in_ip, :restaurant, :client
+      exclude_fields :id, :connection_logs, :authentications, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :current_sign_in_ip, :restaurant, :client
     end
   end
   

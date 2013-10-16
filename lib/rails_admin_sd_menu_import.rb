@@ -15,7 +15,7 @@ module RailsAdmin
         # Only if @restuarant have location defined
         register_instance_option :visible? do
           puts "**********  #{bindings[:controller]}"
-          authorized? && bindings[:abstract_model].model.to_s == "Restaurant" && bindings[:object].sd_location_id
+          authorized? && bindings[:abstract_model].model.to_s == "Restaurant" #&& bindings[:object].sd_location_id
         end
 
         register_instance_option :member? do

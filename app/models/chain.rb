@@ -26,11 +26,11 @@
 
 class Chain < ActiveRecord::Base
   belongs_to :user
-  has_many :restaurants
+  has_many :restaurants, :dependent => :destroy
   has_many :wines
-  has_many :dish_variation_sets
-  has_many :agreements
-  has_many :survey_questions
+  has_many :dish_variation_sets, :dependent => :destroy
+  has_many :agreements, :dependent => :destroy
+  has_many :survey_questions, :dependent => :destroy
   has_attached_file(
     :logo,
     :path => "chain_:id/img/:style/chain_:id.:extension",

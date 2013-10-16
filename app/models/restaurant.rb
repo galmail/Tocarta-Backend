@@ -18,22 +18,22 @@
 class Restaurant < ActiveRecord::Base
   belongs_to :user
   belongs_to :chain
-  has_one  :restaurant_setting
-  has_many :restaurant_activities
-  has_many :restaurant_banners
-  has_many :menus
-  has_many :waiters
-  has_many :resources
+  has_one  :restaurant_setting, :dependent => :destroy
+  has_many :restaurant_activities, :dependent => :destroy
+  has_many :restaurant_banners, :dependent => :destroy
+  has_many :waiters, :dependent => :destroy
+  has_many :resources, :dependent => :destroy
+  has_many :menus, :dependent => :destroy
   has_many :modifiers
   has_many :modifier_lists
   has_many :modifier_list_sets
   has_many :wines
-  has_many :combos
-  has_many :combo_types
-  has_many :tables
-  has_many :floors
-  has_many :payments
-  has_many :comments
+  has_many :combos, :dependent => :destroy
+  has_many :combo_types, :dependent => :destroy
+  has_many :tables, :dependent => :destroy
+  has_many :floors, :dependent => :destroy
+  has_many :payments, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
   attr_accessible :name, :manager, :email, :address, :phone, :note, :suggestions, :chain_id, :user_id, :sd_location_id, :pos_ip_address
   validates :chain_id, :presence => true
 
@@ -102,13 +102,14 @@ class Restaurant < ActiveRecord::Base
     # clone chain
     new_chain = self.chain.dup
     new_chain.user = user
-    new_chain.name << " #{user.email}"
+    new_chain.name = "#{user.email} #{self.chain.name}"
     new_chain.save
     # clone this restaurant and assign to user
     new_rest = self.dup
     new_rest.chain = new_chain
     new_rest.user = user
-    new_rest.name << " #{user.email}"
+    new_rest.name = "#{user.email} #{self.name}"
+    new_rest.pos_ip_address = nil
     new_rest.save
     # clone restaurant setting and assign to user
     new_rest_setting = self.restaurant_setting.dup
@@ -157,11 +158,13 @@ class Restaurant < ActiveRecord::Base
       new_menu.restaurant = new_rest
       new_menu.save
       
-      new_menu_setting = menu.menu_setting.dup
-      new_menu_setting.menu = new_menu
-      new_menu_setting.save
-      new_menu.menu_setting = new_menu_setting
-      new_menu.save
+      unless menu.menu_setting.nil?
+        new_menu_setting = menu.menu_setting.dup
+        new_menu_setting.menu = new_menu
+        new_menu_setting.save
+        new_menu.menu_setting = new_menu_setting
+        new_menu.save
+      end
       
       # clone sections, subsections and dishes
       new_menu.sections.clear
@@ -177,10 +180,12 @@ class Restaurant < ActiveRecord::Base
             new_subsection.section = new_section
             new_subsection.save
             new_section.subsections << new_subsection
+            puts "************* COPY DISHES TO SUBSECTION *************"
             copy_dishes_to_subsection(new_subsection,subsection.dishes)
           }
           new_section.save
         else
+          puts "************* COPY DISHES TO SECTION *************"
           copy_dishes_to_section(new_section,section.dishes)
         end
       }
@@ -199,8 +204,7 @@ class Restaurant < ActiveRecord::Base
       new_dish.sections.clear
       new_dish.sections << new_section
       new_dish.save
-      new_section.dishes << new_dish
-      #TODO clone modifiers 
+      copy_modifiers_to_dish(new_dish,dish.modifier_list_set)
     }
     new_section.save
   end
@@ -214,9 +218,38 @@ class Restaurant < ActiveRecord::Base
       new_dish.subsections << new_subsection
       new_dish.sections << new_subsection.section
       new_dish.save
-      new_subsection.dishes << new_dish
+      copy_modifiers_to_dish(new_dish,dish.modifier_list_set)
     }
     new_subsection.save
+  end
+  
+  def copy_modifiers_to_dish(new_dish,modifier_list_set)
+    return false if modifier_list_set.nil?
+    new_rest = new_dish.sections.first.menu.restaurant
+    
+    new_dish.modifier_list_set = nil
+    new_dish.save
+    
+    modifier_list_set.modifier_lists.each { |mod_list|
+      
+      new_mod_list = mod_list.dup
+      new_mod_list.restaurant = new_rest
+      new_mod_list.modifier_list_sets.clear
+      new_mod_list.modifiers.clear
+      new_mod_list.save
+      
+      unless mod_list.modifiers.nil? or mod_list.modifiers.empty?
+        mod_list.modifiers.each { |modifier|
+          new_modifier = modifier.dup
+          new_modifier.restaurant = new_rest
+          new_modifier.modifier_list = new_mod_list
+          new_modifier.save
+        }
+      end
+      
+    }
+    
+    new_dish.save
   end
   
   def assign_dishes_to_section(new_section,dishes)
@@ -233,5 +266,11 @@ class Restaurant < ActiveRecord::Base
       dish.save
     }
   end
+  
+  
+  
+  
+  
+  
   
 end
