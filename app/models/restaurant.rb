@@ -97,5 +97,141 @@ class Restaurant < ActiveRecord::Base
       self.save!
     end
   end
-
+  
+  def clone_me(user)
+    # clone chain
+    new_chain = self.chain.dup
+    new_chain.user = user
+    new_chain.name << " #{user.email}"
+    new_chain.save
+    # clone this restaurant and assign to user
+    new_rest = self.dup
+    new_rest.chain = new_chain
+    new_rest.user = user
+    new_rest.name << " #{user.email}"
+    new_rest.save
+    # clone restaurant setting and assign to user
+    new_rest_setting = self.restaurant_setting.dup
+    new_rest_setting.restaurant = new_rest
+    new_rest_setting.save
+    # clone tables and floors
+    new_rest.floors.clear
+    self.floors.each { |floor|
+      new_floor = floor.dup
+      new_floor.restaurant = new_rest
+      new_floor.save
+      new_floor.tables.clear
+      floor.tables.each { |table|
+        new_table = table.dup
+        new_table.floor = new_floor
+        new_table.restaurant = new_rest
+        new_table.save
+        new_floor.tables << new_table
+      }
+      new_floor.save
+      new_rest.floors << new_floor
+    }
+    new_rest.save
+    # clone waiter accounts
+    new_rest.waiters.clear
+    self.waiters.each { |waiter|
+      new_waiter = waiter.dup
+      new_waiter.restaurant = new_rest
+      new_waiter.save
+      new_rest.waiters << new_waiter
+    }
+    new_rest.save
+    # clone resources (tickets)
+    new_rest.resources.clear
+    self.resources.each { |resource|
+      new_resource = resource.dup
+      new_resource.restaurant = new_rest
+      new_resource.save
+      new_rest.resources << new_resource
+    }
+    new_rest.save
+    # clone menus
+    new_rest.menus.clear
+    self.menus.each { |menu|
+      new_menu = menu.dup
+      new_menu.restaurant = new_rest
+      new_menu.save
+      
+      new_menu_setting = menu.menu_setting.dup
+      new_menu_setting.menu = new_menu
+      new_menu_setting.save
+      new_menu.menu_setting = new_menu_setting
+      new_menu.save
+      
+      # clone sections, subsections and dishes
+      new_menu.sections.clear
+      menu.sections.each { |section|
+        new_section = section.dup
+        new_section.menu = new_menu
+        new_section.save
+        new_menu.sections << new_section
+        unless section.subsections.nil? or section.subsections.empty?
+          new_section.subsections.clear
+          section.subsections.each { |subsection|
+            new_subsection = subsection.dup
+            new_subsection.section = new_section
+            new_subsection.save
+            new_section.subsections << new_subsection
+            copy_dishes_to_subsection(new_subsection,subsection.dishes)
+          }
+          new_section.save
+        else
+          copy_dishes_to_section(new_section,section.dishes)
+        end
+      }
+      new_menu.save
+      new_rest.menus << new_menu
+    }
+    new_rest.save
+  end
+  
+  private
+  
+  def copy_dishes_to_section(new_section,dishes)
+    new_section.dishes.clear
+    dishes.each { |dish|
+      new_dish = dish.dup
+      new_dish.sections.clear
+      new_dish.sections << new_section
+      new_dish.save
+      new_section.dishes << new_dish
+      #TODO clone modifiers 
+    }
+    new_section.save
+  end
+  
+  def copy_dishes_to_subsection(new_subsection,dishes)
+    new_subsection.dishes.clear
+    dishes.each { |dish|
+      new_dish = dish.dup
+      new_dish.subsections.clear
+      new_dish.sections.clear
+      new_dish.subsections << new_subsection
+      new_dish.sections << new_subsection.section
+      new_dish.save
+      new_subsection.dishes << new_dish
+    }
+    new_subsection.save
+  end
+  
+  def assign_dishes_to_section(new_section,dishes)
+    dishes.each { |dish|
+      dish.sections << new_section
+      dish.save
+    }
+  end
+  
+  def assign_dishes_to_subsection(new_subsection,dishes)
+    dishes.each { |dish|
+      dish.subsections << new_subsection
+      dish.sections << new_subsection.section
+      dish.save
+    }
+  end
+  
 end

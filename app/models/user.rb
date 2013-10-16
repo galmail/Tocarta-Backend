@@ -31,7 +31,7 @@
 
 class User < ActiveRecord::Base
   rolify
-  # NOTE: i think this is dangerous, but is neccesarry for rails_admin
+  # NOTE: i think this is dangerous, but is neccesary for rails_admin
   attr_accessible :role_ids, :rol
 
   # Include default devise modules. Others available are:
@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :name, :surname, :city, :country, :birthdate, :twitter, :url, :phone
 
-  # after_create :make_restaurant_demo
+  after_create :clone_mw_restaurant_demo
 
   has_many :chains
   has_many :restaurants
@@ -123,6 +123,38 @@ class User < ActiveRecord::Base
       salad_2 = Dish.create(name: 'Ensalada Cesar', description: 'La ensalada cesar contiene lechuga, trozos de pollo y salsa cesar con un toque de aceite balsámico.', photo: DEF_DISH, active: true, rate_me: true, price: 8, chain_id: chain.id, position: 2, section_ids: [section_salads.id])
       beef_1 = Dish.create(name: 'Bife de Chorizo', description: 'Jugosa carne de 500gr hecha al mas auténtico estilo argentino.', photo: DEF_DISH, active: true, rate_me: true, price: 18, chain_id: chain.id, position: 1, section_ids: [section_beef.id])
       beef_2 = Dish.create(name: 'Hamburguesa Especial', description: 'Una hamburguesa especial de la casa, hecha con 250gr de carne a la parrilla, lechuga, tomate y pepinillos.', photo: DEF_DISH, active: true, rate_me: true, price: 12, chain_id: chain.id, position: 2, section_ids: [section_beef.id])
+    end
+  end
+  
+  CHAIN_DEMO_NAME = 'Wogaboo'
+  RESTAURANT_DEMO_NAME = 'Wogaboo Las Tablas'
+  
+  def clone_mw_restaurant_demo
+    Restaurant.find_by_name(RESTAURANT_DEMO_NAME).clone_me(self)
+  end
+    
+  
+  
+  # Create new Restaurant for meWaiter
+  def create_mw_restaurant
+    if self.has_role? :restaurant
+      chain = Chain.create(user_id: self.id, name: "Restaurantes #{self.email}", logo: DEF_LOGO, email: self.email)
+      restaurant = Restaurant.create(user_id: self.id, chain_id: chain.id, name: "Restaurante #{self.email}", email: self.email)
+      settings = RestaurantSetting.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Ajustes", num_licenses: 1)
+      # creating 8 tables in la terraza
+      floor = Floor.create(name: 'Terraza',restaurant_id: restaurant.id)
+      8.downto(1) do |i|
+        Table.create(restaurant_id: restaurant.id, floor_id: floor.id, number: i, name: "#{floor.name} Mesa #{i}")
+      end
+      # creating 8 tables in main area
+      floor = Floor.create(name: 'Principal',restaurant_id: restaurant.id)
+      8.downto(1) do |i|
+        Table.create(restaurant_id: restaurant.id, floor_id: floor.id, number: i, name: "#{floor.name} Mesa #{i}")
+      end
+      # creating one waiter access
+      Waiter.create(restaurant_id: restaurant.id, first_name: self.name, last_name: self.surname, email: self.email, password: 'demo', key: self.email, active: true)
+      #TODO create resources (tickets)
+      #TODO create menus, sections, subsections, dishes and modifiers
     end
   end
 
