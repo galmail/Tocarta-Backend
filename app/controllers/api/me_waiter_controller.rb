@@ -70,5 +70,9 @@ class Api::MeWaiterController < AccessController
     @resources = @restaurant.resources
   end
   
+  def discounts
+    @discounts = @restaurant.discounts
+  end
+  
   
 end

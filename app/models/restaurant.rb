@@ -24,6 +24,7 @@ class Restaurant < ActiveRecord::Base
   has_many :waiters, :dependent => :destroy
   has_many :resources, :dependent => :destroy
   has_many :menus, :dependent => :destroy
+  has_many :discounts, :dependent => :destroy
   has_many :modifiers
   has_many :modifier_lists
   has_many :modifier_list_sets
