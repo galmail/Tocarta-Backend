@@ -32,7 +32,8 @@ class Api::MeWaiterController < AccessController
         :location_id => @restaurant.sd_location_id,
         :device_id => @waiter.device_id,
         :user_id => @waiter.sd_userid,
-        :employee_id => @waiter.sd_employeeid
+        :employee_id => @waiter.sd_employeeid,
+        :role => @waiter.role
       }
     else
       @result = {
