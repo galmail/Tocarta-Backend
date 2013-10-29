@@ -43,6 +43,7 @@ class Dish < ActiveRecord::Base
   has_many :dish_subsection_associations
   has_many :order_items
   has_many :comments
+  has_many :discounts
   has_many :dish_variation_set_associations
   has_many :dish_variation_sets, :through => :dish_variation_set_associations
   has_many :dish_type_associations

@@ -22,6 +22,7 @@ class Section < ActiveRecord::Base
   before_save :generate_sid
   
   belongs_to :menu
+  has_many :discounts
   has_many :dishes, :through => :dish_section_associations, :dependent => :destroy
   has_many :dish_section_associations, :dependent => :destroy
   has_many :subsections, :dependent => :destroy

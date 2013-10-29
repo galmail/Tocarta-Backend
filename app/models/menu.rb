@@ -19,6 +19,7 @@ class Menu < ActiveRecord::Base
   
   belongs_to :restaurant
   belongs_to :skin
+  has_many :discounts
   has_one :menu_setting, :dependent => :destroy
   has_many :sections, :dependent => :destroy
   belongs_to :theme

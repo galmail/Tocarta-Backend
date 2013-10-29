@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131024175942) do
+ActiveRecord::Schema.define(:version => 20131029120352) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -143,6 +143,17 @@ ActiveRecord::Schema.define(:version => 20131024175942) do
 
   add_index "dashboards", ["name"], :name => "index_dashboards_on_name", :unique => true
 
+  create_table "discount_translations", :force => true do |t|
+    t.integer  "discount_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "discount_translations", ["discount_id"], :name => "index_discount_translations_on_discount_id"
+  add_index "discount_translations", ["locale"], :name => "index_discount_translations_on_locale"
+
   create_table "discounts", :force => true do |t|
     t.integer  "restaurant_id"
     t.string   "sid"
@@ -150,11 +161,20 @@ ActiveRecord::Schema.define(:version => 20131024175942) do
     t.string   "note"
     t.string   "dtype"
     t.decimal  "amount"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "active",        :default => true
+    t.integer  "menu_id"
+    t.integer  "section_id"
+    t.integer  "subsection_id"
+    t.integer  "dish_id"
   end
 
+  add_index "discounts", ["dish_id"], :name => "index_discounts_on_dish_id"
+  add_index "discounts", ["menu_id"], :name => "index_discounts_on_menu_id"
   add_index "discounts", ["restaurant_id"], :name => "index_discounts_on_restaurant_id"
+  add_index "discounts", ["section_id"], :name => "index_discounts_on_section_id"
+  add_index "discounts", ["subsection_id"], :name => "index_discounts_on_subsection_id"
 
   create_table "dish_combo_associations", :force => true do |t|
     t.integer  "dish_id"
@@ -498,12 +518,25 @@ ActiveRecord::Schema.define(:version => 20131024175942) do
   add_index "orders", ["table_id"], :name => "index_orders_on_table_id"
   add_index "orders", ["tablet_id"], :name => "index_orders_on_tablet_id"
 
+  create_table "payment_translations", :force => true do |t|
+    t.integer  "payment_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "payment_translations", ["locale"], :name => "index_payment_translations_on_locale"
+  add_index "payment_translations", ["payment_id"], :name => "index_payment_translations_on_payment_id"
+
   create_table "payments", :force => true do |t|
     t.integer  "restaurant_id"
     t.string   "name"
     t.string   "sid"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "active",        :default => true
+    t.string   "key"
   end
 
   add_index "payments", ["restaurant_id"], :name => "index_payments_on_restaurant_id"

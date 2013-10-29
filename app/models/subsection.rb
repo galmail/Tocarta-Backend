@@ -20,8 +20,10 @@ class Subsection < ActiveRecord::Base
   before_save :generate_sid
   
   belongs_to :section
+  has_many :discounts
 	has_many :dishes, :through => :dish_subsection_associations
   has_many :dish_subsection_associations
+  
 	has_attached_file(
 	 :photo,
 	 :path => ":chain_rest_id/img/subsections/:style/subsection_:id.:extension",
