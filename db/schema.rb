@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131029120352) do
+ActiveRecord::Schema.define(:version => 20131030101107) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -168,6 +168,7 @@ ActiveRecord::Schema.define(:version => 20131029120352) do
     t.integer  "section_id"
     t.integer  "subsection_id"
     t.integer  "dish_id"
+    t.integer  "position"
   end
 
   add_index "discounts", ["dish_id"], :name => "index_discounts_on_dish_id"
@@ -537,6 +538,7 @@ ActiveRecord::Schema.define(:version => 20131029120352) do
     t.datetime "updated_at",                      :null => false
     t.boolean  "active",        :default => true
     t.string   "key"
+    t.integer  "position"
   end
 
   add_index "payments", ["restaurant_id"], :name => "index_payments_on_restaurant_id"
