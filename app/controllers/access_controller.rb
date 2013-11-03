@@ -113,9 +113,9 @@ class AccessController < ApplicationController
     sort_attr = sort_attr || :position
     filter_attr = filter_attr || :active
     items.sort_by!{|item|
-      item_position = 0
+      item_position = 9999
       if item[sort_attr].is_a?(Numeric) == false
-        item_position = 0
+        item_position = 9999
       else
         item_position = item[sort_attr]
       end

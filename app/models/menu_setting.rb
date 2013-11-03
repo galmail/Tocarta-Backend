@@ -8,7 +8,6 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  active             :boolean
-#  priority           :integer
 #  trigger_activation :datetime
 #  last_time_changed  :datetime
 #  from_day           :string(255)
@@ -19,7 +18,7 @@
 
 class MenuSetting < ActiveRecord::Base
   belongs_to :menu
-	attr_accessible :name, :active, :priority, :trigger_activation, :last_time_changed, :menu_id
+	attr_accessible :name, :active, :trigger_activation, :last_time_changed, :menu_id
 	attr_accessible :from_day, :to_day, :from_time, :to_time
 	
 	### Validations ###

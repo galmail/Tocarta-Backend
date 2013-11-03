@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131103173549) do
+ActiveRecord::Schema.define(:version => 20131103181534) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -389,7 +389,6 @@ ActiveRecord::Schema.define(:version => 20131103173549) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.boolean  "active"
-    t.integer  "priority"
     t.datetime "trigger_activation"
     t.datetime "last_time_changed"
     t.string   "from_day"

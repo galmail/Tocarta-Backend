@@ -43,7 +43,17 @@ class Restaurant < ActiveRecord::Base
   end
 
   def active_menus
-    self.menus.select { |menu| menu.activated }
+    # filter menus
+    self.menus.reject!{|menu| !menu.activated }
+    # sort menus
+    self.menus.sort_by!{|item|
+      item_position = 9999
+      if item[:position].is_a?(Numeric) == false
+        item_position = 9999
+      else
+        item_position = item[:position]
+      end
+    }
   end
 
   def import_sd_menu!
