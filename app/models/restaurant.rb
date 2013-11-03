@@ -54,6 +54,7 @@ class Restaurant < ActiveRecord::Base
         item_position = item[:position]
       end
     }
+    return self.menus
   end
 
   def import_sd_menu!
