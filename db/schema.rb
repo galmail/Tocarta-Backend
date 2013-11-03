@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131030101107) do
+ActiveRecord::Schema.define(:version => 20131103173549) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -421,6 +421,7 @@ ActiveRecord::Schema.define(:version => 20131030101107) do
     t.string   "menu_type"
     t.integer  "skin_id"
     t.string   "sid"
+    t.integer  "position"
   end
 
   add_index "menus", ["restaurant_id"], :name => "index_menus_on_restaurant_id"
