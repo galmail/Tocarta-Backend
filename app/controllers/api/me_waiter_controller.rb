@@ -72,7 +72,7 @@ class Api::MeWaiterController < AccessController
   end
   
   def discounts
-    @discounts = @restaurant.discounts
+    @discounts = @restaurant.active_discounts
   end
   
   
