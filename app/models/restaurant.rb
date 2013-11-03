@@ -42,11 +42,11 @@ class Restaurant < ActiveRecord::Base
     self.tables.collect { |table| table.tablets }.flatten.select { |tablet| tablet.active }
   end
   
-  def active_discounts
+  def active_list(aList)
     # filter discounts
-    self.discounts.reject!{|d| !d.active }
+    aList.reject!{|d| !d.active }
     # sort menus
-    self.discounts.sort_by!{|item|
+    aList.sort_by!{|item|
       item_position = 9999
       if item[:position].is_a?(Numeric) == false
         item_position = 9999
@@ -54,7 +54,7 @@ class Restaurant < ActiveRecord::Base
         item_position = item[:position]
       end
     }
-    return self.discounts
+    return aList
   end
 
   def active_menus
