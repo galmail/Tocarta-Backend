@@ -1,7 +1,12 @@
 source 'https://rubygems.org'
 
+ruby '1.9.2'
+
 #### Ruby on Rails ####
 gem 'rails', '3.2.13'
+
+# https://devcenter.heroku.com/articles/ruby-support#injected-plugins
+gem 'rails_12factor'
 
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'jquery-rails'

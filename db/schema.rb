@@ -389,7 +389,6 @@ ActiveRecord::Schema.define(:version => 20131118090601) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.boolean  "active"
-    t.integer  "priority"
     t.datetime "trigger_activation"
     t.datetime "last_time_changed"
     t.string   "from_day"
@@ -421,6 +420,7 @@ ActiveRecord::Schema.define(:version => 20131118090601) do
     t.string   "menu_type"
     t.integer  "skin_id"
     t.string   "sid"
+    t.integer  "position"
   end
 
   add_index "menus", ["restaurant_id"], :name => "index_menus_on_restaurant_id"

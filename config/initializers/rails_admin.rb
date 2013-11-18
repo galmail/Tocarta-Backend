@@ -182,10 +182,10 @@ RailsAdmin.config do |config|
     parent Menu
     weight 3010
     list do
-      exclude_fields :id, :priority, :trigger_activation, :last_time_changed
+      exclude_fields :id, :trigger_activation, :last_time_changed
     end
     edit do
-      exclude_fields :id, :priority, :trigger_activation, :last_time_changed
+      exclude_fields :id, :trigger_activation, :last_time_changed
     end
   end
   

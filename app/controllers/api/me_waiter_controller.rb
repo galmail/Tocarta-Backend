@@ -56,7 +56,7 @@ class Api::MeWaiterController < AccessController
   end
   
   def payments
-    @payments = @restaurant.payments
+    @payments = @restaurant.active_list(@restaurant.payments)
   end
   
   def user_info
@@ -72,7 +72,7 @@ class Api::MeWaiterController < AccessController
   end
   
   def discounts
-    @discounts = @restaurant.discounts
+    @discounts = @restaurant.active_list(@restaurant.discounts)
   end
   
   
