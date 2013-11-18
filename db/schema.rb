@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130804171613) do
+ActiveRecord::Schema.define(:version => 20131118090601) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -143,6 +143,40 @@ ActiveRecord::Schema.define(:version => 20130804171613) do
 
   add_index "dashboards", ["name"], :name => "index_dashboards_on_name", :unique => true
 
+  create_table "discount_translations", :force => true do |t|
+    t.integer  "discount_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "discount_translations", ["discount_id"], :name => "index_discount_translations_on_discount_id"
+  add_index "discount_translations", ["locale"], :name => "index_discount_translations_on_locale"
+
+  create_table "discounts", :force => true do |t|
+    t.integer  "restaurant_id"
+    t.string   "sid"
+    t.string   "name"
+    t.string   "note"
+    t.string   "dtype"
+    t.decimal  "amount"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "active",        :default => true
+    t.integer  "menu_id"
+    t.integer  "section_id"
+    t.integer  "subsection_id"
+    t.integer  "dish_id"
+    t.integer  "position"
+  end
+
+  add_index "discounts", ["dish_id"], :name => "index_discounts_on_dish_id"
+  add_index "discounts", ["menu_id"], :name => "index_discounts_on_menu_id"
+  add_index "discounts", ["restaurant_id"], :name => "index_discounts_on_restaurant_id"
+  add_index "discounts", ["section_id"], :name => "index_discounts_on_section_id"
+  add_index "discounts", ["subsection_id"], :name => "index_discounts_on_subsection_id"
+
   create_table "dish_combo_associations", :force => true do |t|
     t.integer  "dish_id"
     t.integer  "combo_id"
@@ -267,13 +301,13 @@ ActiveRecord::Schema.define(:version => 20130804171613) do
 
   create_table "dishes", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.boolean  "active",             :default => true
+    t.boolean  "active",               :default => true
     t.integer  "position"
     t.text     "description"
     t.decimal  "price"
@@ -284,11 +318,16 @@ ActiveRecord::Schema.define(:version => 20130804171613) do
     t.string   "nutrition_facts"
     t.string   "badge_name"
     t.string   "short_title"
-    t.boolean  "rate_me",            :default => true
+    t.boolean  "rate_me",              :default => true
     t.integer  "chain_id"
+    t.integer  "sd_dish_id"
+    t.string   "sid"
+    t.integer  "modifier_list_set_id"
+    t.boolean  "tax_included",         :default => true
   end
 
   add_index "dishes", ["chain_id"], :name => "index_dishes_on_chain_id"
+  add_index "dishes", ["modifier_list_set_id"], :name => "index_dishes_on_modifier_list_set_id"
 
   create_table "dishes_food_tags", :id => false, :force => true do |t|
     t.integer "dish_id"
@@ -305,6 +344,16 @@ ActiveRecord::Schema.define(:version => 20130804171613) do
 
   add_index "dishes_ingredients", ["dish_id", "ingredient_id"], :name => "index_dishes_ingredients_on_dish_id_and_ingredient_id"
   add_index "dishes_ingredients", ["ingredient_id", "dish_id"], :name => "index_dishes_ingredients_on_ingredient_id_and_dish_id"
+
+  create_table "floors", :force => true do |t|
+    t.integer  "restaurant_id"
+    t.string   "name"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "sid"
+  end
+
+  add_index "floors", ["restaurant_id"], :name => "index_floors_on_restaurant_id"
 
   create_table "food_tag_translations", :force => true do |t|
     t.integer  "food_tag_id"
@@ -371,11 +420,59 @@ ActiveRecord::Schema.define(:version => 20130804171613) do
     t.decimal  "price"
     t.string   "menu_type"
     t.integer  "skin_id"
+    t.string   "sid"
   end
 
   add_index "menus", ["restaurant_id"], :name => "index_menus_on_restaurant_id"
   add_index "menus", ["skin_id"], :name => "index_menus_on_skin_id"
   add_index "menus", ["theme_id"], :name => "index_menus_on_theme_id"
+
+  create_table "modifier_list_set_associations", :force => true do |t|
+    t.integer "modifier_list_id"
+    t.integer "modifier_list_set_id"
+  end
+
+  add_index "modifier_list_set_associations", ["modifier_list_id"], :name => "index_modifier_list_set_associations_on_modifier_list_id"
+  add_index "modifier_list_set_associations", ["modifier_list_set_id"], :name => "index_modifier_list_set_associations_on_modifier_list_set_id"
+
+  create_table "modifier_list_sets", :force => true do |t|
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "restaurant_id"
+    t.string   "name"
+    t.string   "sid"
+  end
+
+  add_index "modifier_list_sets", ["restaurant_id"], :name => "index_modifier_list_sets_on_restaurant_id"
+
+  create_table "modifier_lists", :force => true do |t|
+    t.integer  "restaurant_id"
+    t.string   "name"
+    t.boolean  "is_mandatory",   :default => false
+    t.boolean  "is_multioption", :default => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.string   "sid"
+    t.integer  "modifier_id"
+  end
+
+  add_index "modifier_lists", ["modifier_id"], :name => "index_modifier_lists_on_modifier_id"
+  add_index "modifier_lists", ["restaurant_id"], :name => "index_modifier_lists_on_restaurant_id"
+
+  create_table "modifiers", :force => true do |t|
+    t.integer  "restaurant_id"
+    t.string   "name"
+    t.integer  "sd_modifierid"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "modifier_list_id"
+    t.string   "description"
+    t.decimal  "price"
+    t.string   "sid"
+  end
+
+  add_index "modifiers", ["modifier_list_id"], :name => "index_modifiers_on_modifier_list_id"
+  add_index "modifiers", ["restaurant_id"], :name => "index_modifiers_on_restaurant_id"
 
   create_table "nutrition_facts", :force => true do |t|
     t.integer  "dish_id"
@@ -422,6 +519,30 @@ ActiveRecord::Schema.define(:version => 20130804171613) do
   add_index "orders", ["table_id"], :name => "index_orders_on_table_id"
   add_index "orders", ["tablet_id"], :name => "index_orders_on_tablet_id"
 
+  create_table "payment_translations", :force => true do |t|
+    t.integer  "payment_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "payment_translations", ["locale"], :name => "index_payment_translations_on_locale"
+  add_index "payment_translations", ["payment_id"], :name => "index_payment_translations_on_payment_id"
+
+  create_table "payments", :force => true do |t|
+    t.integer  "restaurant_id"
+    t.string   "name"
+    t.string   "sid"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "active",        :default => true
+    t.string   "key"
+    t.integer  "position"
+  end
+
+  add_index "payments", ["restaurant_id"], :name => "index_payments_on_restaurant_id"
+
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
     t.string   "username"
@@ -434,6 +555,18 @@ ActiveRecord::Schema.define(:version => 20130804171613) do
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
+
+  create_table "resources", :force => true do |t|
+    t.integer  "restaurant_id"
+    t.string   "name"
+    t.string   "key"
+    t.text     "value"
+    t.boolean  "is_image",      :default => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  add_index "resources", ["restaurant_id"], :name => "index_resources_on_restaurant_id"
 
   create_table "restaurant_activities", :force => true do |t|
     t.integer  "restaurant_id"
@@ -483,7 +616,7 @@ ActiveRecord::Schema.define(:version => 20130804171613) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.integer  "num_licenses"
-    t.string   "default_language"
+    t.string   "default_language",    :default => "es"
     t.datetime "last_menu_sync"
     t.boolean  "multilang_homepage",  :default => false
     t.boolean  "games",               :default => false
@@ -504,13 +637,16 @@ ActiveRecord::Schema.define(:version => 20130804171613) do
     t.integer  "user_id"
     t.integer  "chain_id"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.string   "manager"
     t.string   "email"
     t.string   "address"
     t.string   "phone"
     t.text     "note"
+    t.integer  "sd_location_id"
+    t.text     "suggestions"
+    t.string   "pos_ip_address"
   end
 
   add_index "restaurants", ["chain_id"], :name => "index_restaurants_on_chain_id"
@@ -550,6 +686,8 @@ ActiveRecord::Schema.define(:version => 20130804171613) do
     t.integer  "position"
     t.boolean  "hasBigSubsections",  :default => false
     t.integer  "dishes_per_page",    :default => 0
+    t.integer  "sd_category_id"
+    t.string   "sid"
   end
 
   add_index "sections", ["menu_id"], :name => "index_sections_on_menu_id"
@@ -591,6 +729,7 @@ ActiveRecord::Schema.define(:version => 20130804171613) do
     t.datetime "photo_updated_at"
     t.boolean  "active",             :default => true
     t.integer  "position"
+    t.string   "sid"
   end
 
   add_index "subsections", ["section_id"], :name => "index_subsections_on_section_id"
@@ -629,8 +768,11 @@ ActiveRecord::Schema.define(:version => 20130804171613) do
     t.string   "status"
     t.integer  "dinners"
     t.string   "language"
+    t.integer  "floor_id"
+    t.string   "sid"
   end
 
+  add_index "tables", ["floor_id"], :name => "index_tables_on_floor_id"
   add_index "tables", ["restaurant_id"], :name => "index_tables_on_restaurant_id"
 
   create_table "tablets", :force => true do |t|
@@ -660,18 +802,18 @@ ActiveRecord::Schema.define(:version => 20130804171613) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string   "email",                                    :default => "", :null => false
+    t.string   "encrypted_password",        :limit => 128, :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                         :default => 0
+    t.integer  "sign_in_count",                            :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -683,7 +825,9 @@ ActiveRecord::Schema.define(:version => 20130804171613) do
     t.string   "twitter"
     t.string   "url"
     t.string   "phone"
-    t.integer  "invalid_password_count",                :default => 0
+    t.integer  "invalid_password_count",                   :default => 0
+    t.string   "authentication_token"
+    t.boolean  "provision_demo_restaurant"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
@@ -696,6 +840,42 @@ ActiveRecord::Schema.define(:version => 20130804171613) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
+
+  create_table "waiter_apps", :force => true do |t|
+    t.string   "name"
+    t.string   "version"
+    t.string   "os"
+    t.text     "terms_of_use"
+    t.text     "privacy_policy"
+    t.text     "whats_new"
+    t.string   "link_to_store"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "waiters", :force => true do |t|
+    t.integer  "restaurant_id"
+    t.string   "username"
+    t.string   "password"
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.date     "birthday"
+    t.string   "mobile_number"
+    t.string   "device_id"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "sd_userid"
+    t.integer  "sd_employeeid"
+    t.string   "key"
+    t.boolean  "active",        :default => true
+    t.integer  "waiter_app_id"
+    t.string   "role"
+  end
+
+  add_index "waiters", ["restaurant_id"], :name => "index_waiters_on_restaurant_id"
+  add_index "waiters", ["waiter_app_id"], :name => "index_waiters_on_waiter_app_id"
 
   create_table "wine_detail_translations", :force => true do |t|
     t.integer  "wine_detail_id"
