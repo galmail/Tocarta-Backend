@@ -29,6 +29,7 @@ class Section < ActiveRecord::Base
   
   has_attached_file(
     :photo,
+    :default_url => '/default_images/section_demo_:style.jpg',
     :path => ":chain_rest_id/img/sections/:style/section_:id.:extension",
     :styles => { :mini => TocartaAdmin::Application::IMAGE_MINI_SIZE, :thumb => TocartaAdmin::Application::IMAGE_THUMBNAIL_SIZE }
   )
@@ -39,6 +40,6 @@ class Section < ActiveRecord::Base
   ### Validations ###
 
   validates :menu_id, :presence => true
-  validates_attachment_presence :photo
+  #validates_attachment_presence :photo
 
 end

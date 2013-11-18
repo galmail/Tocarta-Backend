@@ -33,6 +33,7 @@ class Chain < ActiveRecord::Base
   has_many :survey_questions, :dependent => :destroy
   has_attached_file(
     :logo,
+    :default_url => '/default_images/chain_demo_logo.jpg',
     :path => "chain_:id/img/:style/chain_:id.:extension",
     :styles => { :medium => TocartaAdmin::Application::IMAGE_MEDIUM_SIZE }
   )
@@ -51,7 +52,7 @@ class Chain < ActiveRecord::Base
   attr_accessor   :delete_bg
   before_validation { self.bg.clear if self.delete_bg == '1' }
 
-  validates_attachment_presence :logo
+  #validates_attachment_presence :logo
   validates :user_id, :presence => true
 
 end
