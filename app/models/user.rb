@@ -97,7 +97,7 @@ class User < ActiveRecord::Base
     
     chain = Chain.create(user_id: self.id, name: "Cadena de Restaurantes #{self.email}", email: self.email)
     restaurant = Restaurant.create(user_id: self.id, chain_id: chain.id, name: "Restaurante #{self.email}", email: self.email)
-    settings = RestaurantSetting.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Ajustes", num_licenses: 1)
+    settings = RestaurantSetting.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Ajustes", num_licenses: 1, supported_lang: ["", "es"])
     
     # creating 10 tables
     table = nil
