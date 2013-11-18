@@ -52,6 +52,7 @@ class Dish < ActiveRecord::Base
 
 	has_attached_file(
 	 :photo,
+	 :default_url => '/default_images/dish_demo_:style.jpg',
 	 :path => ":chain_rest_id/img/dishes/:style/dish_:id.:extension",
 	 :styles => { :large => TocartaAdmin::Application::IMAGE_LARGE_SIZE, :thumb => TocartaAdmin::Application::IMAGE_THUMBNAIL_SIZE, :mini => TocartaAdmin::Application::IMAGE_MINI_SIZE }
 	)

@@ -87,17 +87,17 @@ class User < ActiveRecord::Base
   # Create a restaurant and dependencies (chain, section, menu)
   # FIXME: This is not the best place for this
   # TODO: default images must be set in views is they not exist with a helper
-  DEF_LOGO     = Rails.root.join('app','assets','images', 'default_restaurant_logo.png')
-  DEF_SECTION  = Rails.root.join('app','assets','images', 'default_section.png')
-  DEF_DISH     = Rails.root.join('app','assets','images', 'default_dish.png')
+  #DEF_LOGO     = Rails.root.join('app','assets','images', 'default_restaurant_logo.png')
+  #DEF_SECTION  = Rails.root.join('app','assets','images', 'default_section.png')
+  #DEF_DISH     = Rails.root.join('app','assets','images', 'default_dish.png')
   
   def make_restaurant_demo
     return false unless self.provision_demo_restaurant
     return false unless self.has_role? :restaurant or self.has_role? :distributor
     
-    chain = Chain.create(user_id: self.id, name: "Cadena de Restaurantes #{self.email}", logo: DEF_LOGO, email: self.email)
+    chain = Chain.create(user_id: self.id, name: "Cadena de Restaurantes #{self.email}", email: self.email)
     restaurant = Restaurant.create(user_id: self.id, chain_id: chain.id, name: "Restaurante #{self.email}", email: self.email)
-    settings = RestaurantSetting.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Settings", num_licenses: 1)
+    settings = RestaurantSetting.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Ajustes", num_licenses: 1)
     
     # creating 10 tables
     table = nil
@@ -114,27 +114,27 @@ class User < ActiveRecord::Base
     SurveyQuestion.create(chain_id: chain.id, name: "#{restaurant.name} - carta", description: "Te ha gustado nuestra carta digital?", position: 3, active: true)
     
     # creating 3 restaurant banners
-    RestaurantBanner.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Banner 1", position: 1, active: true, photo: DEF_LOGO)
-    RestaurantBanner.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Banner 2", position: 2, active: true, photo: DEF_LOGO)
-    RestaurantBanner.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Banner 3", position: 3, active: true, photo: DEF_LOGO)
+    RestaurantBanner.create(restaurant_id: restaurant.id, name: "Banner 1", position: 1, active: true)
+    RestaurantBanner.create(restaurant_id: restaurant.id, name: "Banner 2", position: 2, active: true)
+    RestaurantBanner.create(restaurant_id: restaurant.id, name: "Banner 3", position: 3, active: true)
     
     # creating menus and menu settings
-    main_menu = Menu.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Carta Principal", menu_type: 'main')
-    daily_menu = Menu.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Menu del Dia", menu_type: 'daily')
-    main_menu_settings = MenuSetting.create(menu_id: main_menu.id, name: "#{main_menu.name} - Settings", active: true)
-    daily_menu_settings = MenuSetting.create(menu_id: daily_menu.id, name: "#{daily_menu.name} - Settings", active: true)
+    main_menu = Menu.create(restaurant_id: restaurant.id, name: "Carta Principal", menu_type: 'main')
+    daily_menu = Menu.create(restaurant_id: restaurant.id, name: "Menu del Dia", menu_type: 'daily')
+    main_menu_settings = MenuSetting.create(menu_id: main_menu.id, name: "#{main_menu.name} - Ajustes", active: true)
+    daily_menu_settings = MenuSetting.create(menu_id: daily_menu.id, name: "#{daily_menu.name} - Ajustes", active: true)
     
     # creating sections for main menu and daily menu
-    section_salads = Section.create(menu_id: main_menu.id, name: 'Ensaladas', active: true, photo: DEF_SECTION)
-    section_beef = Section.create(menu_id: main_menu.id, name: 'Carnes', active: true, photo: DEF_SECTION)
-    section_firsts = Section.create(menu_id: daily_menu.id, name: 'Primeros', active: true, photo: DEF_SECTION)
-    section_seconds = Section.create(menu_id: daily_menu.id, name: 'Segundos', active: true, photo: DEF_SECTION)
+    section_salads = Section.create(menu_id: main_menu.id, name: 'Ensaladas', active: true)
+    section_beef = Section.create(menu_id: main_menu.id, name: 'Carnes', active: true)
+    section_firsts = Section.create(menu_id: daily_menu.id, name: 'Primeros', active: true)
+    section_seconds = Section.create(menu_id: daily_menu.id, name: 'Segundos', active: true)
     
     # creating dishes for these menus
-    salad_1 = Dish.create(name: 'Ensalada Capresa', description: 'Nuestra ensalada capresa está hecha a base de lechuga fresca, tomate natural y queso mozzarella.', photo: DEF_DISH, active: true, rate_me: true, price: 7, chain_id: chain.id, position: 1, section_ids: [section_salads.id, section_firsts.id])
-    salad_2 = Dish.create(name: 'Ensalada Cesar', description: 'La ensalada cesar contiene lechuga, trozos de pollo y salsa cesar con un toque de aceite balsámico.', photo: DEF_DISH, active: true, rate_me: true, price: 8, chain_id: chain.id, position: 2, section_ids: [section_salads.id, section_firsts.id])
-    beef_1 = Dish.create(name: 'Bife de Chorizo', description: 'Jugosa carne de 500gr hecha al mas auténtico estilo argentino.', photo: DEF_DISH, active: true, rate_me: true, price: 18, chain_id: chain.id, position: 1, section_ids: [section_beef.id, section_seconds.id])
-    beef_2 = Dish.create(name: 'Hamburguesa Especial', description: 'Una hamburguesa especial de la casa, hecha con 250gr de carne a la parrilla, lechuga, tomate y pepinillos.', photo: DEF_DISH, active: true, rate_me: true, price: 12, chain_id: chain.id, position: 2, section_ids: [section_beef.id, section_seconds.id])
+    salad_1 = Dish.create(name: 'Ensalada Capresa', description: 'Nuestra ensalada capresa está hecha a base de lechuga fresca, tomate natural y queso mozzarella.', active: true, rate_me: true, price: 7, chain_id: chain.id, position: 1, section_ids: [section_salads.id, section_firsts.id])
+    salad_2 = Dish.create(name: 'Ensalada Cesar', description: 'La ensalada cesar contiene lechuga, trozos de pollo y salsa cesar con un toque de aceite balsámico.', active: true, rate_me: true, price: 8, chain_id: chain.id, position: 2, section_ids: [section_salads.id, section_firsts.id])
+    beef_1 = Dish.create(name: 'Bife de Chorizo', description: 'Jugosa carne de 500gr hecha al mas auténtico estilo argentino.', active: true, rate_me: true, price: 18, chain_id: chain.id, position: 1, section_ids: [section_beef.id, section_seconds.id])
+    beef_2 = Dish.create(name: 'Hamburguesa Especial', description: 'Una hamburguesa especial de la casa, hecha con 250gr de carne a la parrilla, lechuga, tomate y pepinillos.', active: true, rate_me: true, price: 12, chain_id: chain.id, position: 2, section_ids: [section_beef.id, section_seconds.id])
     
     return true
   end
