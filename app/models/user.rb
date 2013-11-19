@@ -93,7 +93,7 @@ class User < ActiveRecord::Base
     
     chain = Chain.create(user_id: self.id, name: "Cadena de Restaurantes #{self.email}", email: self.email)
     restaurant = Restaurant.create(user_id: self.id, chain_id: chain.id, name: "Restaurante #{self.email}", email: self.email)
-    settings = RestaurantSetting.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Ajustes", num_licenses: 1, supported_lang: ["", "es"])
+    settings = RestaurantSetting.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Ajustes", num_licenses: 1, supported_lang: ["", "es"], call_waiter_button: false, order_button: false, request_bill_button: false, show_help_button: false, sync_photos: true)
     
     # creating 10 tables
     table = nil
@@ -116,21 +116,29 @@ class User < ActiveRecord::Base
     
     # creating menus and menu settings
     main_menu = Menu.create(restaurant_id: restaurant.id, name: "Carta Principal", menu_type: 'main')
-    daily_menu = Menu.create(restaurant_id: restaurant.id, name: "Menu del Dia", menu_type: 'daily')
+    daily_menu = Menu.create(restaurant_id: restaurant.id, name: "Menu del Dia", menu_type: 'daily', price: 10.5, theme_id: Theme.find_by_name("Modern").id)
+    desserts_menu = Menu.create(restaurant_id: restaurant.id, name: "Carta de Postres", menu_type: 'desserts', theme_id: Theme.find_by_name("Minimalist").id)
+    
     main_menu_settings = MenuSetting.create(menu_id: main_menu.id, name: "#{main_menu.name} - Ajustes", active: true)
     daily_menu_settings = MenuSetting.create(menu_id: daily_menu.id, name: "#{daily_menu.name} - Ajustes", active: true)
+    desserts_menu_settings = MenuSetting.create(menu_id: desserts_menu.id, name: "#{desserts_menu.name} - Ajustes", active: true)
     
     # creating sections for main menu and daily menu
     section_salads = Section.create(menu_id: main_menu.id, name: 'Ensaladas', active: true)
     section_beef = Section.create(menu_id: main_menu.id, name: 'Carnes', active: true)
     section_firsts = Section.create(menu_id: daily_menu.id, name: 'Primeros', active: true)
     section_seconds = Section.create(menu_id: daily_menu.id, name: 'Segundos', active: true)
+    section_desserts = Section.create(menu_id: daily_menu.id, name: 'Postres', active: true)
+    section_special_desserts = Section.create(menu_id: desserts_menu.id, name: 'Postres', active: true)
     
     # creating dishes for these menus
     salad_1 = Dish.create(name: 'Ensalada Capresa', description: 'Nuestra ensalada capresa está hecha a base de lechuga fresca, tomate natural y queso mozzarella.', active: true, rate_me: true, price: 7, chain_id: chain.id, position: 1, section_ids: [section_salads.id, section_firsts.id])
     salad_2 = Dish.create(name: 'Ensalada Cesar', description: 'La ensalada cesar contiene lechuga, trozos de pollo y salsa cesar con un toque de aceite balsámico.', active: true, rate_me: true, price: 8, chain_id: chain.id, position: 2, section_ids: [section_salads.id, section_firsts.id])
     beef_1 = Dish.create(name: 'Bife de Chorizo', description: 'Jugosa carne de 500gr hecha al mas auténtico estilo argentino.', active: true, rate_me: true, price: 18, chain_id: chain.id, position: 1, section_ids: [section_beef.id, section_seconds.id])
     beef_2 = Dish.create(name: 'Hamburguesa Especial', description: 'Una hamburguesa especial de la casa, hecha con 250gr de carne a la parrilla, lechuga, tomate y pepinillos.', active: true, rate_me: true, price: 12, chain_id: chain.id, position: 2, section_ids: [section_beef.id, section_seconds.id])
+    dessert_1 = Dish.create(name: 'Bomba de Chocolate', description: 'Una auténtica explosión del más rico chocolate.', active: true, rate_me: true, price: 5, chain_id: chain.id, position: 1, section_ids: [section_desserts.id, section_special_desserts.id])
+    dessert_2 = Dish.create(name: 'Cheese Cake', description: 'La clásica tarta de queso hecha cada día por nuestro chef con un toque tradicional.', active: true, rate_me: true, price: 5, chain_id: chain.id, position: 2, section_ids: [section_desserts.id, section_special_desserts.id])
+    
     
     return true
   end

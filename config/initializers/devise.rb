@@ -1,6 +1,8 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
+  
+  config.secret_key = '197536fe0369619cf5a4baf0fccd5fe397cac385cbbc2c21e706bc273308c69d255a5021085c2c694aac11f3dc2e0a7e1864762cd07b872014c5444788231285'
 
   config.reconfirmable = false
   config.allow_unconfirmed_access_for = 2.days
