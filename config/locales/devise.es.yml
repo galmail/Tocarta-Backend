@@ -8,6 +8,8 @@ es:
         a recibir un correo con instrucciones sobre cómo confirmar tu cuenta en unos
         pocos minutos.
     failure:
+      user:
+        not_found_in_database: Usuario o contraseña erronea.
       already_authenticated: Ya has iniciado una sesión.
       inactive: Tu cuenta aún no ha sido activada.
       invalid: Contraseña o Correo inválidos.

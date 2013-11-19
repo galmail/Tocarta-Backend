@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '1.9.3'
+
 #### Ruby on Rails ####
 gem 'rails', '3.2.13'
 
@@ -78,7 +80,8 @@ gem 'pusher'
 gem 'twitter_oauth'
 
 # Translation
-gem 'globalize3', :git => 'git://github.com/svenfuchs/globalize3.git'
+gem 'globalize', '~> 3.0.0'
+#gem 'globalize3', :git => 'git://github.com/svenfuchs/globalize3.git'
 gem 'paperclip-globalize3'
 
 # Smart dates and times

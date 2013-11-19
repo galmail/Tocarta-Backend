@@ -26,14 +26,14 @@ end
 
 child @restaurant.restaurant_banners => :banners do
   attributes :id, :name
-  node(:large, :unless => lambda {|b| b.photo_file_name.nil? }) do |banner|
+  node(:large, :unless => lambda {|b| b.photo.nil? }) do |banner|
     banner.photo.url(:banner).split(ENV['S3_BUCKET']).last
   end
 end
 
 ### restaurant survey questions ###
 
-child	@restaurant.chain.survey_questions => :survey_questions do
+child @restaurant.chain.survey_questions => :survey_questions do
 	attributes :id, :name, :description, :yes_no_type
 end
 
@@ -60,11 +60,11 @@ child @menus do
   child :sections do
     attributes :id, :name, :hasBigSubsections, :dishes_per_page
     node(:mini, :unless => lambda {|s|
-        s.photo_file_name.nil?
+        s.photo.nil?
       }) do |section|
       section.photo.url(:mini).split(ENV['S3_BUCKET']).last
     end
-    node(:thumbnail, :unless => lambda {|s| s.photo_file_name.nil? }) do |section|
+    node(:thumbnail, :unless => lambda {|s| s.photo.nil? }) do |section|
       section.photo.url(:thumb).split(ENV['S3_BUCKET']).last
     end
     child(:dishes, :if => lambda { |s| s.subsections.length==0 }) do
@@ -99,13 +99,13 @@ child @menus do
         end
       end
       node(:rating, :unless => lambda {|d| d.rating.nil? }) do |dish| dish.rating.round end
-      node(:mini, :unless => lambda {|d| d.photo_file_name.nil? }) do |dish|
+      node(:mini, :unless => lambda {|d| d.photo.nil? }) do |dish|
         dish.photo.url(:mini).split(ENV['S3_BUCKET']).last
       end
-      node(:thumbnail, :unless => lambda {|d| d.photo_file_name.nil? }) do |dish|
+      node(:thumbnail, :unless => lambda {|d| d.photo.nil? }) do |dish|
         dish.photo.url(:thumb).split(ENV['S3_BUCKET']).last
       end
-      node(:large, :unless => lambda {|d| d.photo_file_name.nil? }) do |dish|
+      node(:large, :unless => lambda {|d| d.photo.nil? }) do |dish|
         dish.photo.url(:large).split(ENV['S3_BUCKET']).last
       end
       child :comments do
