@@ -2,7 +2,7 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
   
-  config.secret_key = '197536fe0369619cf5a4baf0fccd5fe397cac385cbbc2c21e706bc273308c69d255a5021085c2c694aac11f3dc2e0a7e1864762cd07b872014c5444788231285'
+  config.secret_key = 'a915e1eaafbc7614d48249cd9d8d3adad5c96421debefc2ff5f0d156acf172ad3f612b651e726330e36608bae13c7a20289a1b7e88a60e034810e13d221d7b32'
 
   config.reconfirmable = false
   config.allow_unconfirmed_access_for = 2.days
