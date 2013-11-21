@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131118090601) do
+ActiveRecord::Schema.define(:version => 20131120225826) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -351,8 +351,10 @@ ActiveRecord::Schema.define(:version => 20131118090601) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.string   "sid"
+    t.integer  "printer_id"
   end
 
+  add_index "floors", ["printer_id"], :name => "index_floors_on_printer_id"
   add_index "floors", ["restaurant_id"], :name => "index_floors_on_restaurant_id"
 
   create_table "food_tag_translations", :force => true do |t|
@@ -421,8 +423,10 @@ ActiveRecord::Schema.define(:version => 20131118090601) do
     t.integer  "skin_id"
     t.string   "sid"
     t.integer  "position"
+    t.integer  "printer_id"
   end
 
+  add_index "menus", ["printer_id"], :name => "index_menus_on_printer_id"
   add_index "menus", ["restaurant_id"], :name => "index_menus_on_restaurant_id"
   add_index "menus", ["skin_id"], :name => "index_menus_on_skin_id"
   add_index "menus", ["theme_id"], :name => "index_menus_on_theme_id"
@@ -542,6 +546,18 @@ ActiveRecord::Schema.define(:version => 20131118090601) do
   end
 
   add_index "payments", ["restaurant_id"], :name => "index_payments_on_restaurant_id"
+
+  create_table "printers", :force => true do |t|
+    t.integer "restaurant_id"
+    t.string  "name"
+    t.string  "model"
+    t.string  "ip_and_port"
+    t.integer "number"
+    t.boolean "primary_backup_printer",   :default => false
+    t.boolean "secondary_backup_printer", :default => false
+  end
+
+  add_index "printers", ["restaurant_id"], :name => "index_printers_on_restaurant_id"
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
@@ -688,9 +704,11 @@ ActiveRecord::Schema.define(:version => 20131118090601) do
     t.integer  "dishes_per_page",    :default => 0
     t.integer  "sd_category_id"
     t.string   "sid"
+    t.integer  "printer_id"
   end
 
   add_index "sections", ["menu_id"], :name => "index_sections_on_menu_id"
+  add_index "sections", ["printer_id"], :name => "index_sections_on_printer_id"
 
   create_table "skins", :force => true do |t|
     t.integer  "theme_id"
@@ -730,8 +748,10 @@ ActiveRecord::Schema.define(:version => 20131118090601) do
     t.boolean  "active",             :default => true
     t.integer  "position"
     t.string   "sid"
+    t.integer  "printer_id"
   end
 
+  add_index "subsections", ["printer_id"], :name => "index_subsections_on_printer_id"
   add_index "subsections", ["section_id"], :name => "index_subsections_on_section_id"
 
   create_table "survey_question_translations", :force => true do |t|

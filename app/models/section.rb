@@ -21,11 +21,12 @@ class Section < ActiveRecord::Base
   include Utils
   before_save :generate_sid
   
-  belongs_to :menu
-  has_many :discounts
-  has_many :dishes, :through => :dish_section_associations, :dependent => :destroy
-  has_many :dish_section_associations, :dependent => :destroy
-  has_many :subsections, :dependent => :destroy
+  belongs_to  :menu
+  belongs_to  :printer
+  has_many    :discounts
+  has_many    :dishes, :through => :dish_section_associations, :dependent => :destroy
+  has_many    :dish_section_associations, :dependent => :destroy
+  has_many    :subsections, :dependent => :destroy
   
   has_attached_file(
     :photo,
@@ -35,7 +36,7 @@ class Section < ActiveRecord::Base
   )
   translates :name, :fallbacks_for_empty_translations => true
   attr_accessible :name, :active, :position, :photo, :hasBigSubsections, :dishes_per_page
-  attr_accessible :menu_id, :sd_category_id, :sid
+  attr_accessible :menu_id, :printer_id, :sd_category_id, :sid
 
   ### Validations ###
 

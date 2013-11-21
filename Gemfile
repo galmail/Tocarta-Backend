@@ -47,7 +47,7 @@ gem 'rails_admin_update_tablets', :path => "vendor/engines/rails_admin_update_ta
 gem 'rails_admin_import', :git => "git://github.com/naveed-ahmad/rails_admin_import.git"
 
 # gem 'rails_admin', :git => 'git://github.com/tocarta/rails_admin.git'
-gem 'devise'  # authentication
+gem 'devise', '3.1.1'  # authentication
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'oauth2'

@@ -97,7 +97,7 @@ GEM
       debugger-ruby_core_source (~> 1.2.3)
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.3)
-    devise (3.2.1)
+    devise (3.1.1)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -180,7 +180,7 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    oj (2.2.2)
+    oj (2.2.3)
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
@@ -345,7 +345,7 @@ DEPENDENCIES
   compass
   country_select
   debugger
-  devise
+  devise (= 3.1.1)
   faraday (~> 0.8.4)
   figaro
   globalize (~> 3.0.0)

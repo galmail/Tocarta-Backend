@@ -41,6 +41,10 @@ end
 child @menus do
   attributes :id, :sid, :name, :position, :menu_type, :price
   
+  node(:printer_id, :unless => lambda {|m| m.printer.nil? }) do |menu|
+    menu.printer.number
+  end
+  
   node(:theme, :unless => lambda {|m| m.theme.nil? }) do |menu|
     menu.theme.name
   end
@@ -58,6 +62,11 @@ child @menus do
 
   child :sections do
     attributes :id, :sid, :name, :position, :hasBigSubsections, :dishes_per_page
+    
+    node(:printer_id, :unless => lambda {|s| s.printer.nil? }) do |section|
+      section.printer.number
+    end
+    
     node(:mini, :unless => lambda {|s|
         s.photo.nil?
       }) do |section|
@@ -127,6 +136,11 @@ child @menus do
     
     child :subsections do
       attributes :id, :sid, :position, :name
+      
+      node(:printer_id, :unless => lambda {|s| s.printer.nil? }) do |subsection|
+        subsection.printer.number
+      end
+      
       node :short_title do |subsection|
         subsection.name
       end

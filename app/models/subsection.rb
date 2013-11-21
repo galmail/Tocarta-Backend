@@ -19,10 +19,11 @@ class Subsection < ActiveRecord::Base
   include Utils
   before_save :generate_sid
   
-  belongs_to :section
-  has_many :discounts
-	has_many :dishes, :through => :dish_subsection_associations
-  has_many :dish_subsection_associations
+  belongs_to  :section
+  belongs_to  :printer
+  has_many    :discounts
+	has_many    :dishes, :through => :dish_subsection_associations
+  has_many    :dish_subsection_associations
   
 	has_attached_file(
 	 :photo,
@@ -31,5 +32,5 @@ class Subsection < ActiveRecord::Base
 	)
 	translates :name, :fallbacks_for_empty_translations => true
 	attr_accessible :active, :position, :photo, :name, :sid
-	attr_accessible :section_id
+	attr_accessible :section_id, :printer_id
 end
