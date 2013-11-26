@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :surname, :city, :country, :birthdate, :twitter, :url, :phone
   attr_accessible :connection_log_ids, :authentication_ids
 
-  #after_create :clone_mw_restaurant_demo
+  after_create :clone_mw_restaurant_demo
 
   has_many :chains
   has_many :restaurants
