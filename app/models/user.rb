@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :surname, :city, :country, :birthdate, :twitter, :url, :phone
   attr_accessible :connection_log_ids, :authentication_ids
 
-  after_create :clone_mw_restaurant_demo
+  after_create :make_restaurant_demo
 
   has_many :chains
   has_many :restaurants
@@ -95,14 +95,22 @@ class User < ActiveRecord::Base
     restaurant = Restaurant.create(user_id: self.id, chain_id: chain.id, name: "Restaurante #{self.email}", email: self.email)
     settings = RestaurantSetting.create(restaurant_id: restaurant.id, name: "#{restaurant.name} - Ajustes", num_licenses: 1, supported_lang: ["", "es"], call_waiter_button: false, order_button: false, request_bill_button: false, show_help_button: false, sync_photos: true)
     
+    printer = Printer.create(restaurant_id: restaurant.id, name: "Default Printer", model: "Unknown", ip_and_port: "192.168.1.10:9100", primary_backup_printer: true)
+    
+    # creating 1 floor
+    floor = Floor.create(restaurant_id: restaurant.id, printer_id: printer.id, name: "Comedor")
+    
     # creating 10 tables
     table = nil
     10.downto(1) do |i|
-      table = Table.create(restaurant_id: restaurant.id, number: i, name: "#{restaurant.name} - Mesa #{i}")
+      table = Table.create(floor_id: floor.id, restaurant_id: restaurant.id, number: i, name: "#{restaurant.name} - Mesa #{i}")
     end
     
     # creating one tablet with access key the email
     Tablet.create(table_id: table.id, name: "#{restaurant.name} - Tablet 1", access_key: "#{self.email}", active: true)
+    
+    # creating one waiter
+    Waiter.create(restaurant_id: restaurant.id, username: "#{self.email}", password: "#{self.password}", email: "#{self.email}", role: "manager", active: true, first_name: "#{self.name}", last_name: "#{self.surname}", key: "#{self.email}")
     
     # creating 3 simple survey questions
     SurveyQuestion.create(chain_id: chain.id, name: "#{restaurant.name} - servicio", description: "El servicio que le brindamos fue de su agrado?", position: 1, active: true)
