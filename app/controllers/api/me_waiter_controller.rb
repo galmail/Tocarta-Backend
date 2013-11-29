@@ -23,7 +23,8 @@ class Api::MeWaiterController < AccessController
       @waiter.save
       ok = true
     else
-      ok = (@waiter.device_id == params[:device_id])
+      #ok = (@waiter.device_id == params[:device_id])
+      ok = true
     end
     
     if ok
