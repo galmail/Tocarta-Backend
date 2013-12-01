@@ -39,7 +39,13 @@ end
 ### restaurant menus ###
 
 child @menus do
-  attributes :id, :sid, :name, :position, :menu_type, :price
+  attributes :id, :name, :position, :menu_type, :price
+  
+  parent_menu = nil
+  node(:sid) do |menu|
+    parent_menu = menu
+    menu.sid
+  end
   
   node(:printer_id, :unless => lambda {|m| m.printer.nil? }) do |menu|
     menu.printer.number
@@ -61,11 +67,15 @@ child @menus do
   end
 
   child :sections do
-    attributes :id, :sid, :position, :hasBigSubsections, :dishes_per_page
+    attributes :id, :position, :hasBigSubsections, :dishes_per_page
     parent_section = nil
     node(:name) do |section|
       parent_section = section
       section.name
+    end
+    
+    node :sid do |section|
+      section.complex_sid(parent_menu)
     end
     
     node(:printer_id, :unless => lambda {|s| s.printer.nil? }) do |section|
@@ -80,7 +90,6 @@ child @menus do
     node(:thumbnail, :unless => lambda {|s| s.photo.nil? }) do |section|
       section.photo.url(:thumb).split(ENV['S3_BUCKET']).last
     end
-    
     
     child(:dishes, :if => lambda { |s| s.subsections.length==0 }) do
       attributes :id, :name, :position, :price
@@ -147,12 +156,16 @@ child @menus do
     end
     
     child :subsections do
-      attributes :id, :sid, :position
+      attributes :id, :position
       
       parent_subsection = nil
       node(:name) do |subsection|
         parent_subsection = subsection
         subsection.name
+      end
+      
+      node :sid do |subsection|
+        subsection.complex_sid(parent_section)
       end
       
       node(:printer_id, :unless => lambda {|s| s.printer.nil? }) do |subsection|

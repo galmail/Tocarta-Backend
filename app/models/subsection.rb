@@ -33,4 +33,9 @@ class Subsection < ActiveRecord::Base
 	translates :name, :fallbacks_for_empty_translations => true
 	attr_accessible :active, :position, :photo, :name, :sid
 	attr_accessible :section_id, :printer_id
+	
+	def complex_sid(parent)
+    return "#{self.sid}+#{parent.sid}"
+  end
+	
 end

@@ -42,5 +42,9 @@ class Section < ActiveRecord::Base
 
   validates :menu_id, :presence => true
   #validates_attachment_presence :photo
+  
+  def complex_sid(parent)
+    return "#{self.sid}+#{parent.sid}"
+  end
 
 end
