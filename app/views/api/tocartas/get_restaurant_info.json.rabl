@@ -61,7 +61,12 @@ child @menus do
   end
 
   child :sections do
-    attributes :id, :sid, :name, :position, :hasBigSubsections, :dishes_per_page
+    attributes :id, :sid, :position, :hasBigSubsections, :dishes_per_page
+    parent_section = nil
+    node(:name) do |section|
+      parent_section = section
+      section.name
+    end
     
     node(:printer_id, :unless => lambda {|s| s.printer.nil? }) do |section|
       section.printer.number
@@ -75,8 +80,15 @@ child @menus do
     node(:thumbnail, :unless => lambda {|s| s.photo.nil? }) do |section|
       section.photo.url(:thumb).split(ENV['S3_BUCKET']).last
     end
+    
+    
     child(:dishes, :if => lambda { |s| s.subsections.length==0 }) do
-      attributes :id, :sid, :name, :position, :price
+      attributes :id, :name, :position, :price
+      
+      node :sid do |d|
+      	d.complex_sid(parent_section)
+      end      
+      
       attributes :tax_included, :unless => lambda { |dish| dish.tax_included }
       attributes :badge_name, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
       attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
@@ -135,7 +147,13 @@ child @menus do
     end
     
     child :subsections do
-      attributes :id, :sid, :position, :name
+      attributes :id, :sid, :position
+      
+      parent_subsection = nil
+      node(:name) do |subsection|
+        parent_subsection = subsection
+        subsection.name
+      end
       
       node(:printer_id, :unless => lambda {|s| s.printer.nil? }) do |subsection|
         subsection.printer.number
@@ -151,7 +169,12 @@ child @menus do
         subsection.photo.url(:thumb).split(ENV['S3_BUCKET']).last
       end
       child :dishes do
-        attributes :id, :sid, :name, :position, :price
+        attributes :id, :name, :position, :price
+        
+        node :sid do |d|
+	      	d.complex_sid(parent_subsection)
+	      end
+        
         attributes :tax_included, :unless => lambda { |dish| dish.tax_included }
         attributes :badge_name, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
         attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }

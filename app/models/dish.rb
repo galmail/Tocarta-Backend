@@ -73,6 +73,10 @@ class Dish < ActiveRecord::Base
   #validates_attachment_presence :photo
   validates :badge_name, :length => { :maximum => 11 }
   # validate :validate_min_sections
+  
+  def complex_sid(parent)
+    return "#{self.sid}+#{parent.sid}"
+  end
 
   def badge_name_enum
     if I18n.locale.to_s=="es"
