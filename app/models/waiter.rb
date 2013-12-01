@@ -6,8 +6,9 @@ class Waiter < ActiveRecord::Base
   attr_accessible :sd_userid, :sd_employeeid
   attr_accessible :restaurant_id, :waiter_app_id
   
-  validates :username, :presence => true
+  validates :username, :presence => true, :uniqueness => true
   validates :username, :password, :length => { :minimum => 4 }
+  validates :key, :presence => true, :uniqueness => true
   
   def role_enum
     return ['waiter','manager']
