@@ -98,10 +98,10 @@ child @menus do
       	d.complex_sid(parent_section)
       end      
       
-      attributes :tax_included, :unless => lambda { |dish| dish.tax_included }
-      attributes :badge_name, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
-      attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
-      attributes :sd_dish_id, :unless => lambda { |dish| dish.sd_dish_id.nil? or dish.sd_dish_id=="" }
+      attributes :tax_included#androidbug, :unless => lambda { |dish| dish.tax_included }
+      attributes :badge_name#androidbug, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
+      attributes :video#androidbug, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
+      attributes :sd_dish_id#androidbug, :unless => lambda { |dish| dish.sd_dish_id.nil? or dish.sd_dish_id=="" }
       
       child(:nutrition_fact, :if => lambda { |d| !d.nutrition_fact.nil? }) do
         attributes :calories, :carbs, :fats, :cholesterol, :proteins
@@ -188,10 +188,10 @@ child @menus do
 	      	d.complex_sid(parent_subsection)
 	      end
         
-        attributes :tax_included, :unless => lambda { |dish| dish.tax_included }
-        attributes :badge_name, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
-        attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
-        attributes :sd_dish_id, :unless => lambda { |dish| dish.sd_dish_id.nil? or dish.sd_dish_id=="" }
+        attributes :tax_included#androidbug, :unless => lambda { |dish| dish.tax_included }
+        attributes :badge_name#androidbug, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
+        attributes :video#androidbug, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
+        attributes :sd_dish_id#androidbug, :unless => lambda { |dish| dish.sd_dish_id.nil? or dish.sd_dish_id=="" }
         
         child(:nutrition_fact, :if => lambda { |d| !d.nutrition_fact.nil? }) do
           attributes :calories, :carbs, :fats, :cholesterol, :proteins
