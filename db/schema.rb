@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131120225826) do
+ActiveRecord::Schema.define(:version => 20131204235131) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -416,14 +416,15 @@ ActiveRecord::Schema.define(:version => 20131120225826) do
     t.integer  "restaurant_id"
     t.integer  "theme_id"
     t.string   "name"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.decimal  "price"
     t.string   "menu_type"
     t.integer  "skin_id"
     t.string   "sid"
     t.integer  "position"
     t.integer  "printer_id"
+    t.boolean  "tax_included",  :default => true
   end
 
   add_index "menus", ["printer_id"], :name => "index_menus_on_printer_id"
