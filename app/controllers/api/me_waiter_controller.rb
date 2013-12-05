@@ -53,7 +53,12 @@ class Api::MeWaiterController < AccessController
   end
   
   def tables
-    @floors = @restaurant.floors
+    @floors = []
+    @restaurant.floors.each { |f|
+      f.tables.sort! { |x,y| x.number <=> y.number }
+      @floors.push(f)
+    }
+    return @floors
   end
   
   def payments
