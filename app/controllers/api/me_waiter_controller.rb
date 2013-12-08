@@ -54,6 +54,7 @@ class Api::MeWaiterController < AccessController
   
   def tables
     @floors = []
+    @restaurant.floors.sort! { |x,y| x.name <=> y.name }
     @restaurant.floors.each { |f|
       f.tables.sort! { |x,y| x.number <=> y.number }
       @floors.push(f)

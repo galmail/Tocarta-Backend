@@ -70,11 +70,13 @@ RailsAdmin.config do |config|
     delete
     history_show
     show_in_app
+    
     import do
       visible do
-        bindings[:abstract_model].model.to_s == "Dish"
+        ["Restaurant","Waiter","Payment","Discount","Printer","Menu","Section","Subsection","Dish"].include?(bindings[:abstract_model].model.to_s)
       end
     end
+    
     update_tablet do
       # Make it visible only for tablets model.
       visible do
@@ -459,10 +461,60 @@ RailsAdmin.config do |config|
 end
 
 RailsAdminImport.config do |config|
-  config.model Dish  do
-    # excluded_fields do
-      # [:translation]
-    # end
+  
+  ############ Restaurants ############
+  
+  config.model Restaurant do
+    excluded_fields do
+      [
+       :note, :suggestions, :sd_location_id, :pos_ip_address,
+       :restaurant_activity, :restaurant_banner, :waiter, :resource, :menu, :discount,
+       :modifier, :modifier_list, :modifier_list_set, :wine, :combo, :combo_type, :table, :floor, :payment, :comment
+      ]
+    end
     label :name
   end
+  
+  ############ Waiters ############
+  
+  config.model Waiter do
+    excluded_fields do
+      [
+       :username, :password, :role, :device_id, :birthday, :active,
+       :sd_userid, :sd_employeeid, :waiter_app_id, :waiter_app
+      ]
+    end
+    label :name
+  end
+  
+  ############ Discounts ############
+  
+  config.model Discount do
+    excluded_fields do
+      [:translation,
+       :sid
+      ]
+    end
+    label :name
+  end
+  
+  ############ Dishes ############
+  
+  config.model Dish do
+    excluded_fields do
+      [:translation,
+       :photo, :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at,
+       :active, :tax_included, :rating, :reviews, :story, :video, :nutrition_facts, :short_title, :badge_name, :rate_me, :sid, :sd_dish_id,
+       :modifier_list_set_id, :modifier_list_set, :combo,
+       :dish_combo_association, :section, :dish_section_association, :subsection, :dish_subsection_association, :order_item, :comment, :discount, :dish_variation_set_association, :dish_variation_set,
+       :dish_type_association, :dish_type, :ingredient
+      ]
+    end
+    label :name
+  end
+  
+  
+  
+  
+  
 end

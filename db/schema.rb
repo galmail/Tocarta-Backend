@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131204235131) do
+ActiveRecord::Schema.define(:version => 20131208202935) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -879,9 +879,6 @@ ActiveRecord::Schema.define(:version => 20131204235131) do
     t.string   "username"
     t.string   "password"
     t.string   "email"
-    t.string   "first_name"
-    t.string   "middle_name"
-    t.string   "last_name"
     t.date     "birthday"
     t.string   "mobile_number"
     t.string   "device_id"
@@ -893,6 +890,7 @@ ActiveRecord::Schema.define(:version => 20131204235131) do
     t.boolean  "active",        :default => true
     t.integer  "waiter_app_id"
     t.string   "role"
+    t.string   "name"
   end
 
   add_index "waiters", ["restaurant_id"], :name => "index_waiters_on_restaurant_id"

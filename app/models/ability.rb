@@ -13,8 +13,8 @@ class Ability
     if user.has_role? :admin
       can :manage, :all
       can :update_tablet, :all
-      cannot :import, :all
-      can :import, [Dish]
+      can :import, :all
+      #can :import, [Restaurant,Dish]
       can :sd_menu_import, [Restaurant]
     elsif user.has_role? :restaurant
       can :update_tablet, :all
