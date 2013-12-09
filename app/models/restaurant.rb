@@ -36,7 +36,10 @@ class Restaurant < ActiveRecord::Base
   has_many :payments, :dependent => :destroy
   has_many :comments, :dependent => :destroy
   attr_accessible :name, :manager, :email, :address, :phone, :note, :suggestions, :chain_id, :user_id, :sd_location_id, :pos_ip_address
+  
+  ### Validations
   validates :chain_id, :presence => true
+  validates :name, :presence => true, :uniqueness => true
 
   def tablets
     self.tables.collect { |table| table.tablets }.flatten.select { |tablet| tablet.active }

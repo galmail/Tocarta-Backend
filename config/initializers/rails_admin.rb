@@ -498,6 +498,41 @@ RailsAdminImport.config do |config|
     label :name
   end
   
+  ############ Payments ############
+  
+  config.model Payment do
+    excluded_fields do
+      [:translation,
+       :sid
+      ]
+    end
+    label :name
+  end
+  
+  ############ Printers ############
+  
+  config.model Printer do
+    excluded_fields do
+      [
+       :ip_and_port, :secondary_backup_printer,
+       :menu, :section, :subsection, :floor
+      ]
+    end
+    label :name
+  end
+  
+  ############ Menus ############
+  
+  config.model Menu do
+    excluded_fields do
+      [:translation,
+       :sid, :discount, :section, :skin, :theme
+      ]
+    end
+    label :name
+  end
+  
+  
   ############ Dishes ############
   
   config.model Dish do

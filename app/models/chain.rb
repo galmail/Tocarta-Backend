@@ -54,5 +54,6 @@ class Chain < ActiveRecord::Base
 
   #validates_attachment_presence :logo
   validates :user_id, :presence => true
+  validates :name, :presence => true, :uniqueness => true
 
 end
