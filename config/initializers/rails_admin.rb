@@ -526,12 +526,36 @@ RailsAdminImport.config do |config|
   config.model Menu do
     excluded_fields do
       [:translation,
-       :sid, :discount, :section, :skin, :theme
+       :discount, :section, :skin, :theme, :theme_id, :skin_id
       ]
     end
     label :name
   end
   
+  ############ Sections ############
+  
+  config.model Section do
+    excluded_fields do
+      [:translation,
+       :photo, :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at,
+       :sd_category_id, :hasBigSubsections, :dishes_per_page,
+       :discount, :dish, :dish_section_association, :subsection
+      ]
+    end
+    label :name
+  end
+  
+  ############ Subsections ############
+  
+  config.model Subsection do
+    excluded_fields do
+      [:translation,
+       :photo, :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at,
+       :discount, :dish, :dish_subsection_association
+      ]
+    end
+    label :name
+  end
   
   ############ Dishes ############
   
@@ -539,9 +563,9 @@ RailsAdminImport.config do |config|
     excluded_fields do
       [:translation,
        :photo, :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at,
-       :active, :tax_included, :rating, :reviews, :story, :video, :nutrition_facts, :short_title, :badge_name, :rate_me, :sid, :sd_dish_id,
+       :rating, :reviews, :story, :video, :nutrition_facts, :short_title, :badge_name, :rate_me, :sd_dish_id,
        :modifier_list_set_id, :modifier_list_set, :combo,
-       :dish_combo_association, :section, :dish_section_association, :subsection, :dish_subsection_association, :order_item, :comment, :discount, :dish_variation_set_association, :dish_variation_set,
+       :dish_combo_association, :dish_section_association, :dish_subsection_association, :order_item, :comment, :discount, :dish_variation_set_association, :dish_variation_set,
        :dish_type_association, :dish_type, :ingredient
       ]
     end

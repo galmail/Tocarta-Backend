@@ -81,10 +81,5 @@ class Menu < ActiveRecord::Base
     }
     return dishtypes.uniq
   end
-
-  def before_import_save(row, map)
-    self.set_permalink
-    self.import_nested_data(row, map)
-  end
 	
 end
