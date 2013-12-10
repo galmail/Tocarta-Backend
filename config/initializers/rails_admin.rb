@@ -73,7 +73,7 @@ RailsAdmin.config do |config|
     
     import do
       visible do
-        ["Restaurant","Waiter","Payment","Discount","Printer","Floor","Table","Menu","Section","Subsection","Dish"].include?(bindings[:abstract_model].model.to_s)
+        ["Restaurant","Waiter","Resource","Payment","Discount","Printer","Floor","Table","Menu","Section","Subsection","Dish"].include?(bindings[:abstract_model].model.to_s)
       end
     end
     
@@ -515,6 +515,16 @@ RailsAdminImport.config do |config|
       [
        :ip_and_port, :secondary_backup_printer,
        :menu, :section, :subsection, :floor
+      ]
+    end
+    label :name
+  end
+  
+  ############ Resources ############
+  
+  config.model Resource do
+    excluded_fields do
+      [
       ]
     end
     label :name
