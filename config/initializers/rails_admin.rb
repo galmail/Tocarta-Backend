@@ -491,8 +491,7 @@ RailsAdminImport.config do |config|
   
   config.model Discount do
     excluded_fields do
-      [:translation,
-       :sid
+      [:translation
       ]
     end
     label :name

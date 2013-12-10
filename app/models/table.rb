@@ -16,6 +16,7 @@
 class Table < ActiveRecord::Base
   include Utils
   before_save :generate_sid
+  after_save  :setup_name
   
   belongs_to :restaurant
   belongs_to :floor
@@ -28,5 +29,12 @@ class Table < ActiveRecord::Base
   
   validates :restaurant_id, :number, :presence => true
   validates :number, :uniqueness => { :scope => [:restaurant_id, :floor_id] }
+  
+  def setup_name
+    if self.name.nil?
+      self.name = "Mesa #{self.number}"
+      self.save
+    end
+  end
 	
 end
