@@ -50,12 +50,12 @@ child @menus do
     menu.skin.stylesheet.url.split(ENV['S3_BUCKET']).last
   end
   
-  child :dishtypes => :dishtypes do
-    attributes :id, :name, :description
-    node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
-      dt.icon.url(:small_icon).split(ENV['S3_BUCKET']).last
-    end
-  end
+  # child :dishtypes => :dishtypes do
+    # attributes :id, :name, :description
+    # node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
+      # dt.icon.url(:small_icon).split(ENV['S3_BUCKET']).last
+    # end
+  # end
 
   child :sections do
     attributes :id, :name, :hasBigSubsections, :dishes_per_page
@@ -70,18 +70,18 @@ child @menus do
     child(:dishes, :if => lambda { |s| s.subsections.length==0 }) do
       attributes :id, :name, :price
       attributes :badge_name, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
-      attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
+      # attributes :video, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
       
-      child(:nutrition_fact, :if => lambda { |d| !d.nutrition_fact.nil? }) do
-        attributes :calories, :carbs, :fats, :cholesterol, :proteins
-      end
+      # child(:nutrition_fact, :if => lambda { |d| !d.nutrition_fact.nil? }) do
+        # attributes :calories, :carbs, :fats, :cholesterol, :proteins
+      # end
       
-      child(:dish_variation_sets, :if => lambda { |d| d.dish_variation_sets.length>0 }) do
-        attributes :id, :name
-        child(:dish_variations, :if => lambda { |s| s.dish_variations.length>0 }) do
-          attributes :id, :name
-        end
-      end
+      # child(:dish_variation_sets, :if => lambda { |d| d.dish_variation_sets.length>0 }) do
+        # attributes :id, :name
+        # child(:dish_variations, :if => lambda { |s| s.dish_variations.length>0 }) do
+          # attributes :id, :name
+        # end
+      # end
       
       
       node :short_title do |dish|
@@ -98,7 +98,7 @@ child @menus do
           dish.description
         end
       end
-      node(:rating, :unless => lambda {|d| d.rating.nil? }) do |dish| dish.rating.round end
+      # node(:rating, :unless => lambda {|d| d.rating.nil? }) do |dish| dish.rating.round end
       node(:mini, :unless => lambda {|d| d.photo.nil? }) do |dish|
         dish.photo.url(:mini).split(ENV['S3_BUCKET']).last
       end
@@ -108,19 +108,19 @@ child @menus do
       node(:large, :unless => lambda {|d| d.photo.nil? }) do |dish|
         dish.photo.url(:large).split(ENV['S3_BUCKET']).last
       end
-      child :comments do
-        attributes :id, :name, :description, :rating
-      end
+      # child :comments do
+        # attributes :id, :name, :description, :rating
+      # end
 
-      child :dish_types => :dishtypes do
-        attributes :name
-        node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
-          dt.icon.url(:small_icon).split(ENV['S3_BUCKET']).last
-        end
-        node(:big_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
-          dt.icon.url(:big_icon).split(ENV['S3_BUCKET']).last
-        end
-      end
+      # child :dish_types => :dishtypes do
+        # attributes :name
+        # node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
+          # dt.icon.url(:small_icon).split(ENV['S3_BUCKET']).last
+        # end
+        # node(:big_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
+          # dt.icon.url(:big_icon).split(ENV['S3_BUCKET']).last
+        # end
+      # end
 
     end
     
@@ -158,7 +158,7 @@ child @menus do
             dish.description
           end
         end
-        node(:rating, :unless => lambda {|d| d.rating.nil? }) do |dish| dish.rating.round end
+        # node(:rating, :unless => lambda {|d| d.rating.nil? }) do |dish| dish.rating.round end
         node(:mini, :unless => lambda {|d| d.photo_file_name.nil? }) do |dish|
           dish.photo.url(:mini).split(ENV['S3_BUCKET']).last
         end
@@ -168,19 +168,19 @@ child @menus do
         node(:large, :unless => lambda {|d| d.photo_file_name.nil? }) do |dish|
           dish.photo.url(:large).split(ENV['S3_BUCKET']).last
         end
-        child :comments do
-          attributes :id, :name, :description, :rating
-        end
+        # child :comments do
+          # attributes :id, :name, :description, :rating
+        # end
         
-        child :dish_types => :dishtypes do
-          attributes :name
-          node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
-            dt.icon.url(:small_icon).split(ENV['S3_BUCKET']).last
-          end
-          node(:big_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
-            dt.icon.url(:big_icon).split(ENV['S3_BUCKET']).last
-          end
-        end
+        # child :dish_types => :dishtypes do
+          # attributes :name
+          # node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
+            # dt.icon.url(:small_icon).split(ENV['S3_BUCKET']).last
+          # end
+          # node(:big_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
+            # dt.icon.url(:big_icon).split(ENV['S3_BUCKET']).last
+          # end
+        # end
         
       end
     end
