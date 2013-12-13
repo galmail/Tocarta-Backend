@@ -46,6 +46,15 @@ class Api::MeWaiterController < AccessController
   
   def modifiers
     @modifier_list_sets = @restaurant.modifier_list_sets
+    # for each modifier_list_set get dishes from subsections, sections and menus.
+    @restaurant.modifier_list_sets.each { |mlistset|
+      dishes = []
+      dishes.concat(mlistset.dishes)
+      dishes.concat(mlistset.subsections.collect { |s| s.dishes }.flatten)
+      dishes.concat(mlistset.sections.collect { |s| s.dishes }.flatten)
+      dishes.concat(mlistset.menus.collect { |m| m.sections.collect { |s| s.dishes } }.flatten)
+      mlistset.dishes = dishes.uniq { |d| d.sid }
+    }
   end
   
   def suggestions

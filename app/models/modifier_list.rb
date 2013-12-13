@@ -13,4 +13,16 @@ class ModifierList < ActiveRecord::Base
   attr_accessible :name, :is_mandatory, :is_multioption, :modifier_ids, :sid
   attr_accessible :restaurant_id, :modifier_id
   
+  
+  def before_import_save(row, map)
+    mlistset_association = ModifierListSetAssociation.new
+    mlistset_association.modifier_list = self
+    mlistset_association.modifier_list_set = ModifierListSet.find_by_sid row[6]
+    begin
+      mlistset_association.save
+    rescue
+      # already associated, do nothing...
+    end
+  end
+  
 end

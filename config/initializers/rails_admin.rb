@@ -73,7 +73,7 @@ RailsAdmin.config do |config|
     
     import do
       visible do
-        ["Restaurant","Waiter","Resource","Payment","Discount","Printer","Floor","Table","Menu","Section","Subsection","Dish"].include?(bindings[:abstract_model].model.to_s)
+        ["Restaurant","Waiter","Resource","Payment","Discount","Printer","Floor","Table","Menu","Section","Subsection","Dish","ModifierListSet","ModifierList","Modifier"].include?(bindings[:abstract_model].model.to_s)
       end
     end
     
@@ -605,8 +605,35 @@ RailsAdminImport.config do |config|
     label :name
   end
   
+  ############ ModifierListSets ############
   
+  config.model ModifierListSet do
+    excluded_fields do
+      [
+      ]
+    end
+    label :name
+  end
   
+  ############ ModifierList ############
   
+  config.model ModifierList do
+    excluded_fields do
+      [
+        :selected_modifier
+      ]
+    end
+    label :name
+  end
+  
+  ############ Modifier ############
+  
+  config.model Modifier do
+    excluded_fields do
+      [
+      ]
+    end
+    label :name
+  end
   
 end

@@ -28,6 +28,8 @@ class Section < ActiveRecord::Base
   has_many    :dish_section_associations, :dependent => :destroy
   has_many    :subsections, :dependent => :destroy
   
+  belongs_to :modifier_list_set
+  
   has_attached_file(
     :photo,
     :default_url => '/default_images/section_demo_:style.jpg',
@@ -36,7 +38,7 @@ class Section < ActiveRecord::Base
   )
   translates :name, :fallbacks_for_empty_translations => true
   attr_accessible :name, :active, :position, :photo, :hasBigSubsections, :dishes_per_page
-  attr_accessible :menu_id, :printer_id, :sd_category_id, :sid
+  attr_accessible :menu_id, :printer_id, :sd_category_id, :sid, :modifier_list_set_id
 
   ### Validations ###
 

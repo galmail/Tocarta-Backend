@@ -25,6 +25,8 @@ class Subsection < ActiveRecord::Base
 	has_many    :dishes, :through => :dish_subsection_associations
   has_many    :dish_subsection_associations
   
+  belongs_to  :modifier_list_set
+  
 	has_attached_file(
 	 :photo,
 	 :path => ":chain_rest_id/img/subsections/:style/subsection_:id.:extension",
@@ -32,7 +34,7 @@ class Subsection < ActiveRecord::Base
 	)
 	translates :name, :fallbacks_for_empty_translations => true
 	attr_accessible :active, :position, :photo, :name, :sid
-	attr_accessible :section_id, :printer_id
+	attr_accessible :section_id, :printer_id, :modifier_list_set_id
 	
 	def complex_sid(parent)
     return "#{self.sid}+#{parent.sid}"

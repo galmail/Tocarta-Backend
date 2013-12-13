@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131208202935) do
+ActiveRecord::Schema.define(:version => 20131212145931) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -416,17 +416,19 @@ ActiveRecord::Schema.define(:version => 20131208202935) do
     t.integer  "restaurant_id"
     t.integer  "theme_id"
     t.string   "name"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.decimal  "price"
     t.string   "menu_type"
     t.integer  "skin_id"
     t.string   "sid"
     t.integer  "position"
     t.integer  "printer_id"
-    t.boolean  "tax_included",  :default => true
+    t.boolean  "tax_included",         :default => true
+    t.integer  "modifier_list_set_id"
   end
 
+  add_index "menus", ["modifier_list_set_id"], :name => "index_menus_on_modifier_list_set_id"
   add_index "menus", ["printer_id"], :name => "index_menus_on_printer_id"
   add_index "menus", ["restaurant_id"], :name => "index_menus_on_restaurant_id"
   add_index "menus", ["skin_id"], :name => "index_menus_on_skin_id"
@@ -693,22 +695,24 @@ ActiveRecord::Schema.define(:version => 20131208202935) do
   create_table "sections", :force => true do |t|
     t.integer  "menu_id"
     t.string   "name"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.boolean  "active",             :default => true
+    t.boolean  "active",               :default => true
     t.integer  "position"
-    t.boolean  "hasBigSubsections",  :default => false
-    t.integer  "dishes_per_page",    :default => 0
+    t.boolean  "hasBigSubsections",    :default => false
+    t.integer  "dishes_per_page",      :default => 0
     t.integer  "sd_category_id"
     t.string   "sid"
     t.integer  "printer_id"
+    t.integer  "modifier_list_set_id"
   end
 
   add_index "sections", ["menu_id"], :name => "index_sections_on_menu_id"
+  add_index "sections", ["modifier_list_set_id"], :name => "index_sections_on_modifier_list_set_id"
   add_index "sections", ["printer_id"], :name => "index_sections_on_printer_id"
 
   create_table "skins", :force => true do |t|
@@ -740,18 +744,20 @@ ActiveRecord::Schema.define(:version => 20131208202935) do
   create_table "subsections", :force => true do |t|
     t.integer  "section_id"
     t.string   "name"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.boolean  "active",             :default => true
+    t.boolean  "active",               :default => true
     t.integer  "position"
     t.string   "sid"
     t.integer  "printer_id"
+    t.integer  "modifier_list_set_id"
   end
 
+  add_index "subsections", ["modifier_list_set_id"], :name => "index_subsections_on_modifier_list_set_id"
   add_index "subsections", ["printer_id"], :name => "index_subsections_on_printer_id"
   add_index "subsections", ["section_id"], :name => "index_subsections_on_section_id"
 

@@ -25,7 +25,9 @@ class Menu < ActiveRecord::Base
   has_many    :sections, :dependent => :destroy
   belongs_to  :theme
   
-  attr_accessible :name, :price, :position, :tax_included, :menu_type, :sid, :skin_id, :theme_id, :restaurant_id, :printer_id
+  belongs_to :modifier_list_set
+  
+  attr_accessible :name, :price, :position, :tax_included, :menu_type, :sid, :skin_id, :theme_id, :restaurant_id, :printer_id, :modifier_list_set_id
   translates :name, :fallbacks_for_empty_translations => true
 
   def menu_type_enum
