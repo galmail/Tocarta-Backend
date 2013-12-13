@@ -297,4 +297,20 @@ class Restaurant < ActiveRecord::Base
     }
   end
   
+  
+  def before_import_save(row, map)
+    return false unless !Restaurant.find_by_name(row[0]).nil?
+    rest_setting = RestaurantSetting.new
+    rest_setting.name = "Ajustes #{row[0]}"
+    rest_setting.restaurant = Restaurant.find_by_name(row[0])
+    rest_setting.num_licenses = 1
+    rest_setting.access_key = "1111"
+    rest_setting.default_language = "es"
+    begin
+      rest_setting.save
+    rescue
+      # already exist, do nothing...
+    end
+  end
+  
 end
