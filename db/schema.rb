@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131212145931) do
+ActiveRecord::Schema.define(:version => 20131213131032) do
 
   create_table "agreements", :force => true do |t|
     t.string   "rol"
@@ -558,6 +558,7 @@ ActiveRecord::Schema.define(:version => 20131212145931) do
     t.integer "number"
     t.boolean "primary_backup_printer",   :default => false
     t.boolean "secondary_backup_printer", :default => false
+    t.string  "sid"
   end
 
   add_index "printers", ["restaurant_id"], :name => "index_printers_on_restaurant_id"
