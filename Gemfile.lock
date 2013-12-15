@@ -1,5 +1,6 @@
-PATH
-  remote: vendor/engines/rails_admin_import
+GIT
+  remote: git://github.com/galmail/rails_admin_import.git
+  revision: 0a434e6b706de6b3ff32b985bbbf80ad225c48fa
   specs:
     rails_admin_import (0.1.8)
 
