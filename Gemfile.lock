@@ -1,6 +1,5 @@
-GIT
-  remote: git://github.com/stephskardal/rails_admin_import.git
-  revision: 90f967a3700f803670cc59da916cd06999a9aebf
+PATH
+  remote: vendor/engines/rails_admin_import
   specs:
     rails_admin_import (0.1.8)
 
