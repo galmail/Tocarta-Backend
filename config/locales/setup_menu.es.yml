@@ -1,0 +1,4 @@
+views:
+  labels:
+    setupmenu:
+      msg: "Please paste your Google Spreadsheet Menu here"

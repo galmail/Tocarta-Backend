@@ -1,6 +1,14 @@
 GIT
-  remote: git://github.com/galmail/rails_admin_import.git
-  revision: 0a434e6b706de6b3ff32b985bbbf80ad225c48fa
+  remote: git://github.com/galmail/google-drive-ruby.git
+  revision: 0491c4a27fc4ef7c017a442b04616569f7aac18a
+  specs:
+    google_drive (0.3.6)
+      nokogiri (>= 1.4.4, != 1.5.2, != 1.5.1)
+      oauth (>= 0.3.6)
+      oauth2 (>= 0.5.0)
+
+PATH
+  remote: vendor/engines/rails_admin_import
   specs:
     rails_admin_import (0.1.8)
 
@@ -89,6 +97,8 @@ GEM
       fssm (>= 0.2.7)
       sass (~> 3.1)
     country_select (1.2.0)
+    css3-progress-bar-rails (0.5.0)
+      rails (>= 3.1)
     daemons (1.1.9)
     debug_inspector (0.0.2)
     debugger (1.6.2)
@@ -344,11 +354,13 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   compass
   country_select
+  css3-progress-bar-rails
   debugger
   devise (= 3.1.1)
   faraday (~> 0.8.4)
   figaro
   globalize (~> 3.0.0)
+  google_drive!
   groupdate
   haml-rails
   jquery-rails

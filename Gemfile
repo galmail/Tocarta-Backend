@@ -44,8 +44,9 @@ gem 'pg'
 #### Rails Admin Setup ####
 gem 'rails_admin'
 gem 'rails_admin_update_tablets', :path => "vendor/engines/rails_admin_update_tablets"
-#gem 'rails_admin_import', :git => "git://github.com/naveed-ahmad/rails_admin_import.git"
-gem 'rails_admin_import', :git => "git://github.com/galmail/rails_admin_import.git"
+gem 'rails_admin_import', :path => "vendor/engines/rails_admin_import"
+#gem 'rails_admin_import', :git => "git://github.com/galmail/rails_admin_import.git"
+gem 'google_drive', :git => "git://github.com/galmail/google-drive-ruby.git"
 
 # gem 'rails_admin', :git => 'git://github.com/tocarta/rails_admin.git'
 gem 'devise', '3.1.1'  # authentication
@@ -67,6 +68,8 @@ gem "faraday", "~> 0.8.4"
 
 # JSON gem
 # gem 'json'
+
+gem 'css3-progress-bar-rails'
 
 #### Paperclip and Amazon S3 ####
 # gem 'paperclip', '~> 2.7'
