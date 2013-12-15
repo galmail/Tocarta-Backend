@@ -16,6 +16,7 @@
 #
 
 class Restaurant < ActiveRecord::Base
+  after_save  :create_rest_settings
   belongs_to :user
   belongs_to :chain
   has_one  :restaurant_setting, :dependent => :destroy
@@ -225,6 +226,21 @@ class Restaurant < ActiveRecord::Base
     new_rest.save
   end
   
+  def create_rest_settings
+    rest_setting = RestaurantSetting.new
+    rest_setting.name = "Ajustes #{self.name}"
+    rest_setting.restaurant = self
+    rest_setting.num_licenses = 1
+    rest_setting.access_key = "1111"
+    rest_setting.default_language = "es"
+    rest_setting.supported_lang = ["", "es"]
+    begin
+      rest_setting.save
+    rescue
+      # already exist, do nothing...
+    end
+  end
+  
   private
   
   def copy_dishes_to_section(new_section,dishes)
@@ -295,22 +311,6 @@ class Restaurant < ActiveRecord::Base
       dish.sections << new_subsection.section
       dish.save
     }
-  end
-  
-  
-  def before_import_save(row, map)
-    return false unless !Restaurant.find_by_name(row[0]).nil?
-    rest_setting = RestaurantSetting.new
-    rest_setting.name = "Ajustes #{row[0]}"
-    rest_setting.restaurant = Restaurant.find_by_name(row[0])
-    rest_setting.num_licenses = 1
-    rest_setting.access_key = "1111"
-    rest_setting.default_language = "es"
-    begin
-      rest_setting.save
-    rescue
-      # already exist, do nothing...
-    end
   end
   
 end
