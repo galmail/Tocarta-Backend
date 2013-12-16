@@ -7,8 +7,9 @@ GIT
       oauth (>= 0.3.6)
       oauth2 (>= 0.5.0)
 
-PATH
-  remote: vendor/engines/rails_admin_import
+GIT
+  remote: git://github.com/galmail/rails_admin_import.git
+  revision: 7de0c0448695aaf462d40c675d4339b5e1d161f1
   specs:
     rails_admin_import (0.1.8)
 
