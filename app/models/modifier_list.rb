@@ -13,6 +13,9 @@ class ModifierList < ActiveRecord::Base
   attr_accessible :name, :is_mandatory, :is_multioption, :modifier_ids, :sid
   attr_accessible :restaurant_id, :modifier_id
   
+  def complex_sid(parent)
+    return "#{self.sid}+#{parent.sid}"
+  end
   
   def before_import_save(row, map)
     mlistset_association = ModifierListSetAssociation.new

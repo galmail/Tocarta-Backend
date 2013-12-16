@@ -7,4 +7,16 @@ class Modifier < ActiveRecord::Base
   
   attr_accessible :name, :sd_modifierid, :description, :price, :sid
   attr_accessible :restaurant_id, :modifier_list_id
+  
+  
+  def complex_sid(parent_mlistset)
+    if !self.modifier_list.nil? and !parent_mlistset.nil?
+      return "#{self.sid}+#{self.modifier_list.sid}+#{parent_mlistset.sid}"
+    elsif !self.modifier_list.nil?
+      return "#{self.sid}+#{self.modifier_list.sid}"
+    else
+      return "#{self.sid}"
+    end
+  end
+  
 end

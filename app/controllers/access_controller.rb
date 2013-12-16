@@ -43,6 +43,7 @@ class AccessController < ApplicationController
         render :text => "You dont have access with this license.", :status => :forbidden
       else
         @restaurant = current_user.restaurants.first
+        @restaurant.mwpos = true
       end
     else
       render :text => "You dont have access with this license.", :status => :forbidden

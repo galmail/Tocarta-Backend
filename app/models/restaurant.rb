@@ -37,6 +37,7 @@ class Restaurant < ActiveRecord::Base
   has_many :payments, :dependent => :destroy
   has_many :comments, :dependent => :destroy
   attr_accessible :name, :manager, :email, :address, :phone, :note, :suggestions, :chain_id, :user_id, :sd_location_id, :pos_ip_address
+  attr_accessor :mwpos
   
   ### Validations
   validates :chain_id, :presence => true
@@ -63,7 +64,7 @@ class Restaurant < ActiveRecord::Base
 
   def active_menus
     # filter menus
-    self.menus.reject!{|menu| !menu.activated }
+    self.menus.reject!{|menu| !menu.activated } unless self.mwpos
     # sort menus
     self.menus.sort_by!{|item|
       item_position = 9999
