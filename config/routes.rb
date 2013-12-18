@@ -1,5 +1,23 @@
 TocartaAdmin::Application.routes.draw do
 
+  api_version(:module => "V1", :path => {:value => "v1"}, :defaults => {:format => "json"}, :default => true) do
+    #resources :pruebas
+    match 'cli/c/:action(.:format)', :controller => 'Tocartas'
+    match 'cli/mw/:action(.:format)', :controller => 'MeWaiter'
+    match 'cli/r/:action(.:format)', :controller => 'CommandCenter'
+    match 'cli/sd/:action(.:format)', :controller => 'Subtledata'
+    match 'legal(/:action)', :controller => 'Legal'
+  end
+
+  api_version(:module => "V2", :path => {:value => "v2"}, :defaults => {:format => "json"}) do
+    #resources :pruebas
+    match 'cli/c/:action(.:format)', :controller => 'Tocartas'
+    match 'cli/mw/:action(.:format)', :controller => 'MeWaiter'
+    match 'cli/r/:action(.:format)', :controller => 'CommandCenter'
+    match 'cli/sd/:action(.:format)', :controller => 'Subtledata'
+    match 'legal(/:action)', :controller => 'Legal'
+  end
+
   match "/import/:restaurant_id" => "importsd#index"
   match "/import/:restaurant_id/go" => "importsd#import"
   
@@ -78,12 +96,6 @@ TocartaAdmin::Application.routes.draw do
   # API for Tocartas
   match 'api(/:action)', :controller => 'Api'
   match 'ftp(/:action)', :controller => 'Ftp'
-  match 'cli/c/:action(.:format)', :controller => 'Api::Tocartas'
-  match 'cli/r/:action(.:format)', :controller => 'Api::CommandCenter'
-  # match 'cli/an/:action(.:format)', :controller => 'Api::Analytics'
-  match 'cli/sd/:action(.:format)', :controller => 'Api::Subtledata'
-  match 'cli/mw/:action(.:format)', :controller => 'Api::MeWaiter'
-  match 'legal(/:action)', :controller => 'Api::Legal'
   match 'uml(/:action)', :controller => 'uml'
   
   # Twitter and Facebook

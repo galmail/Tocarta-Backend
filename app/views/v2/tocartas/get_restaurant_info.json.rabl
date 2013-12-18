@@ -1,0 +1,241 @@
+object @restaurant
+cache [@cachekey, @restaurant], expires_in: @cachetime
+
+attribute :name, :pos_ip_address
+# node :name do @restaurant.name end
+node :logo   do @restaurant.chain.logo.url(:medium).split(ENV['S3_BUCKET']).last end
+node :i18nbg do @restaurant.chain.i18nbg.url.split(ENV['S3_BUCKET']).last end
+
+if @restaurant.chain.bg.file?
+  node :bg do @restaurant.chain.bg.url.split(ENV['S3_BUCKET']).last end
+end
+
+
+### restaurant settings ###
+
+child @restaurant.restaurant_setting => :setting do
+  attributes :multilang_homepage, :games, :sync_photos, :call_waiter_button, :order_button, :request_bill_button, :show_help_button, :show_survey, :show_filters, :access_key, :supported_lang
+end
+
+child @restaurant.chain.agreements => :agreements do
+  attributes :legal_type, :locale, :revision, :title, :content
+end
+
+### restaurant banners ###
+
+child @restaurant.restaurant_banners => :banners do
+  attributes :id, :name
+  node(:large, :unless => lambda {|b| b.photo.nil? }) do |banner|
+    banner.photo.url(:banner).split(ENV['S3_BUCKET']).last
+  end
+end
+
+### restaurant survey questions ###
+
+child	@restaurant.chain.survey_questions => :survey_questions do
+	attributes :id, :name, :description, :yes_no_type
+end
+
+### restaurant menus ###
+
+child @menus do
+  attributes :id, :name, :position, :menu_type, :price
+  
+  parent_menu = nil
+  node(:sid) do |menu|
+    parent_menu = menu
+    menu.sid
+  end
+  
+  node(:printer_id, :unless => lambda {|m| m.printer.nil? }) do |menu|
+    menu.printer.number
+  end
+  
+  node(:theme, :unless => lambda {|m| m.theme.nil? }) do |menu|
+    menu.theme.name
+  end
+  
+  node(:stylesheet, :unless => lambda {|m| m.skin.nil? }) do |menu|
+    menu.skin.stylesheet.url.split(ENV['S3_BUCKET']).last
+  end
+  
+  child :dishtypes => :dishtypes do
+    attributes :id, :name, :description
+    node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
+      dt.icon.url(:small_icon).split(ENV['S3_BUCKET']).last
+    end
+  end
+
+  child :sections do
+    attributes :id, :position, :hasBigSubsections, :dishes_per_page
+    parent_section = nil
+    node(:name) do |section|
+      parent_section = section
+      section.name
+    end
+    
+    node :sid do |section|
+      section.complex_sid(parent_menu)
+    end
+    
+    node(:printer_id, :unless => lambda {|s| s.printer.nil? }) do |section|
+      section.printer.number
+    end
+    
+    node(:mini, :unless => lambda {|s|
+        s.photo.nil?
+      }) do |section|
+      section.photo.url(:mini).split(ENV['S3_BUCKET']).last
+    end
+    node(:thumbnail, :unless => lambda {|s| s.photo.nil? }) do |section|
+      section.photo.url(:thumb).split(ENV['S3_BUCKET']).last
+    end
+    
+    child(:dishes, :if => lambda { |s| s.subsections.length==0 }) do
+      attributes :id, :name, :position, :price
+      
+      node :sid do |d|
+      	d.complex_sid(parent_section)
+      end      
+      
+      attributes :tax_included#androidbug, :unless => lambda { |dish| dish.tax_included }
+      attributes :badge_name#androidbug, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
+      attributes :video#androidbug, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
+      attributes :sd_dish_id#androidbug, :unless => lambda { |dish| dish.sd_dish_id.nil? or dish.sd_dish_id=="" }
+      
+      child(:nutrition_fact, :if => lambda { |d| !d.nutrition_fact.nil? }) do
+        attributes :calories, :carbs, :fats, :cholesterol, :proteins
+      end
+      
+      child(:dish_variation_sets, :if => lambda { |d| d.dish_variation_sets.length>0 }) do
+        attributes :id, :name
+        child(:dish_variations, :if => lambda { |s| s.dish_variations.length>0 }) do
+          attributes :id, :name
+        end
+      end
+      
+      
+      node :short_title do |dish|
+        if dish.short_title.nil? or dish.short_title==""
+          dish.name
+        else
+          dish.short_title
+        end
+      end
+      node :description do |dish|
+        if dish.description.nil?
+          dish.name
+        else
+          dish.description
+        end
+      end
+      node(:rating, :unless => lambda {|d| d.rating.nil? }) do |dish| dish.rating.round end
+      node(:mini, :unless => lambda {|d| d.photo.nil? }) do |dish|
+        dish.photo.url(:mini).split(ENV['S3_BUCKET']).last
+      end
+      node(:thumbnail, :unless => lambda {|d| d.photo.nil? }) do |dish|
+        dish.photo.url(:thumb).split(ENV['S3_BUCKET']).last
+      end
+      node(:large, :unless => lambda {|d| d.photo.nil? }) do |dish|
+        dish.photo.url(:large).split(ENV['S3_BUCKET']).last
+      end
+      child :comments do
+        attributes :id, :name, :description, :rating
+      end
+
+      child :dish_types => :dishtypes do
+        attributes :name
+        node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
+          dt.icon.url(:small_icon).split(ENV['S3_BUCKET']).last
+        end
+        node(:big_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
+          dt.icon.url(:big_icon).split(ENV['S3_BUCKET']).last
+        end
+      end
+
+    end
+    
+    child :subsections do
+      attributes :id, :position
+      
+      parent_subsection = nil
+      node(:name) do |subsection|
+        parent_subsection = subsection
+        subsection.name
+      end
+      
+      node :sid do |subsection|
+        subsection.complex_sid(parent_section)
+      end
+      
+      node(:printer_id, :unless => lambda {|s| s.printer.nil? }) do |subsection|
+        subsection.printer.number
+      end
+      
+      node :short_title do |subsection|
+        subsection.name
+      end
+      node(:mini, :unless => lambda {|s| s.photo.nil? }) do |subsection|
+        subsection.photo.url(:mini).split(ENV['S3_BUCKET']).last
+      end
+      node(:thumbnail, :unless => lambda {|s| s.photo.nil? }) do |subsection|
+        subsection.photo.url(:thumb).split(ENV['S3_BUCKET']).last
+      end
+      child :dishes do
+        attributes :id, :name, :position, :price
+        
+        node :sid do |d|
+	      	d.complex_sid(parent_subsection)
+	      end
+        
+        attributes :tax_included#androidbug, :unless => lambda { |dish| dish.tax_included }
+        attributes :badge_name#androidbug, :unless => lambda { |dish| dish.badge_name.nil? or dish.badge_name=="" or dish.badge_name.include? "-" }
+        attributes :video#androidbug, :unless => lambda { |dish| dish.video.nil? or dish.video=="" }
+        attributes :sd_dish_id#androidbug, :unless => lambda { |dish| dish.sd_dish_id.nil? or dish.sd_dish_id=="" }
+        
+        child(:nutrition_fact, :if => lambda { |d| !d.nutrition_fact.nil? }) do
+          attributes :calories, :carbs, :fats, :cholesterol, :proteins
+        end
+        
+        node :short_title do |dish|
+          if dish.short_title.nil? or dish.short_title==""
+            dish.name
+          else
+            dish.short_title
+          end
+        end
+        node :description do |dish|
+          if dish.description.nil?
+            dish.name
+          else
+            dish.description
+          end
+        end
+        node(:rating, :unless => lambda {|d| d.rating.nil? }) do |dish| dish.rating.round end
+        node(:mini, :unless => lambda {|d| d.photo.nil? }) do |dish|
+          dish.photo.url(:mini).split(ENV['S3_BUCKET']).last
+        end
+        node(:thumbnail, :unless => lambda {|d| d.photo.nil? }) do |dish|
+          dish.photo.url(:thumb).split(ENV['S3_BUCKET']).last
+        end
+        node(:large, :unless => lambda {|d| d.photo.nil? }) do |dish|
+          dish.photo.url(:large).split(ENV['S3_BUCKET']).last
+        end
+        child :comments do
+          attributes :id, :name, :description, :rating
+        end
+        
+        child :dish_types => :dishtypes do
+          attributes :name
+          node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
+            dt.icon.url(:small_icon).split(ENV['S3_BUCKET']).last
+          end
+          node(:big_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
+            dt.icon.url(:big_icon).split(ENV['S3_BUCKET']).last
+          end
+        end
+        
+      end
+    end
+  end
+end

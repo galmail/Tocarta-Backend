@@ -1,4 +1,4 @@
-class Api::CommandCenterController < AccessController
+class V1::CommandCenterController < AccessController
   before_filter :identify_device, :setup_language
   
   MAX_NUM_ACTIVITIES_TO_LOAD = 50

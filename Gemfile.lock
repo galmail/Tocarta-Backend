@@ -13,6 +13,14 @@ GIT
   specs:
     rails_admin_import (0.1.8)
 
+GIT
+  remote: git://github.com/galmail/versionist.git
+  revision: d125a90052d4641d88fa599fa7d5e80387921590
+  specs:
+    versionist (1.2.1)
+      rails (>= 3)
+      yard (~> 0.7)
+
 PATH
   remote: vendor/engines/rails_admin_update_tablets
   specs:
@@ -337,6 +345,7 @@ GEM
     warden (1.2.3)
       rack (>= 1.0)
     yaml_db (0.2.3)
+    yard (0.8.7.3)
 
 PLATFORMS
   ruby
@@ -394,4 +403,5 @@ DEPENDENCIES
   thin
   twitter_oauth
   uglifier (>= 1.0.3)
+  versionist!
   yaml_db

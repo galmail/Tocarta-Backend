@@ -1,4 +1,4 @@
-class Api::SubtledataController < AccessController
+class V1::SubtledataController < AccessController
   before_filter :identify_device, :setup_language
 
   def get_session_token
