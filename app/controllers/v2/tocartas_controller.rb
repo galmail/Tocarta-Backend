@@ -1,4 +1,4 @@
-class V1::TocartasController < AccessController
+class V2::TocartasController < AccessController
   #skip_before_filter  :verify_authenticity_token
   before_filter :identify_device, :setup_language, :except => [:hello]
   

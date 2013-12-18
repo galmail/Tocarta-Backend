@@ -1,4 +1,4 @@
-class Api::MeWaiterController < AccessController
+class V2::MeWaiterController < AccessController
   
   before_filter :identify_device, :setup_language, :except => [:hello]
   

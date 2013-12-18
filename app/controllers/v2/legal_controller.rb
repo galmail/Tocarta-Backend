@@ -1,4 +1,4 @@
-class V1::LegalController < AccessController
+class V2::LegalController < AccessController
   
   # Returns the Agreement
   def index
