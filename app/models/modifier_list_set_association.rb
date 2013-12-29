@@ -6,5 +6,7 @@ class ModifierListSetAssociation < ActiveRecord::Base
   
   #validates :modifier_list_id, :uniqueness => { :scope => [:modifier_list_set_id] }
   validates_uniqueness_of :modifier_list_id, :scope => :modifier_list_set_id
+  validates :modifier_list_id, :presence => true
+  validates :modifier_list_set, :presence => true
   
 end
