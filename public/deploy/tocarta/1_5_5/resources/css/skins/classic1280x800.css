@@ -1,0 +1,41 @@
+/***
+ * Classic Theme and Responsive Style for 1280x800
+ */
+@media all and (min-width: 1280px) and (min-height: 800px) {
+  /** Toolbars **/
+  /* line 9, ../../../styles/skins/classic1280x800.scss */
+  .tcMsgToolbar {
+    position: absolute;
+  }
+
+  /* line 13, ../../../styles/skins/classic1280x800.scss */
+  .x-toolbar.tcTopToolbar {
+    height: 105px;
+  }
+
+  /* line 17, ../../../styles/skins/classic1280x800.scss */
+  .x-toolbar.tcBottomToolbar {
+    height: 70px;
+  }
+
+  /** Dish Photo **/
+  /* line 28, ../../../styles/skins/classic1280x800.scss */
+  .tcDishPhoto .dish-photo-container .dish-info .dish-description {
+    width: 80%;
+  }
+  /* line 31, ../../../styles/skins/classic1280x800.scss */
+  .tcDishPhoto .dish-photo-container .dish-info .dish-price {
+    width: 20%;
+  }
+
+  /** Survey **/
+  /* line 39, ../../../styles/skins/classic1280x800.scss */
+  .tcSurveyQuestions {
+    height: 159px;
+  }
+
+  /* line 43, ../../../styles/skins/classic1280x800.scss */
+  .tcSurveyComments {
+    height: 104px;
+  }
+}

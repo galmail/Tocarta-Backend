@@ -35,5 +35,5 @@ Steps for production
 3. Run jsb3 script (to compress and deploy js and css)
 
 $> sencha create jsb -a index.html -p tc.jsb3
-$> sencha build -p tc.jsb3 -d ../deploy/tocarta/1_5_4 -v
+$> sencha build -p tc.jsb3 -d ../deploy/tocarta/1_5_5 -v
 

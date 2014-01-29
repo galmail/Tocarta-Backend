@@ -14,18 +14,36 @@
     margin: 20px;
     &.en {
       background-image: url('../img/flags/bt-en.png');
+      &:active {
+        background-image: url('../img/flags/bt-en-active.png');
+      }
     }
     &.es {
       background-image: url('../img/flags/bt-es.png');
+      &:active {
+        background-image: url('../img/flags/bt-es-active.png');
+      }
     }
     &.cat {
       background-image: url('../img/flags/bt-cat.png');
     }
     &.fr {
       background-image: url('../img/flags/bt-fr.png');
+      &:active {
+        background-image: url('../img/flags/bt-fr-active.png');
+      }
     }
     &.gr {
       background-image: url('../img/flags/bt-gr.png');
+      &:active {
+        background-image: url('../img/flags/bt-gr-active.png');
+      }
+    }
+    &.ru {
+      background-image: url('../img/flags/bt-ru.png');
+      &:active {
+        background-image: url('../img/flags/bt-ru-active.png');
+      }
     }
   }
 }

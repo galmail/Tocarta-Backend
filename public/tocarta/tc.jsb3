@@ -1,5 +1,5 @@
 {
-    "projectName": "Tocarta Mobile",
+    "projectName": "Tocarta Mobile 1.5.5",
     "licenseText": "Copyright(c) 2013 Tocarta International SL",
     "builds": [
         {
@@ -1841,7 +1841,7 @@
 	                  "name": "config.js"
 	              },
 	              {
-	                  "path": "../deploy/tocarta/1_5_4/",
+	                  "path": "../deploy/tocarta/1_5_5/",
 	                  "name": "all-classes.js"
 	              },
 	              {
@@ -1865,27 +1865,27 @@
           "dest": "resources/js/"
       },
     	{
-          "src": "lib/jquery/*.js",
+          "src": "lib/jquery/",
           "dest": "resources/js/"
       },
       {
-          "src": "lib/zepto/*.js",
+          "src": "lib/zepto/",
           "dest": "resources/js/"
       },
       {
-          "src": "lib/phonegap/*.js",
+          "src": "lib/phonegap/",
           "dest": "resources/js/"
       },
       {
-          "src": "resources/css/*.css",
+          "src": "resources/css/",
           "dest": "resources/css/"
       },
       {
-          "src": "resources/i18n/operator/*.js",
+          "src": "resources/i18n/operator/",
           "dest": "resources/js/"
       },
       {
-          "src": "resources/i18n/user/*.js",
+          "src": "resources/i18n/user/",
           "dest": "resources/js/"
       },
       {
