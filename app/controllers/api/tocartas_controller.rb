@@ -251,7 +251,6 @@ class Api::TocartasController < AccessController
         combo.restaurant = @restaurant
         combo.dishes = []
         order_item_obj["combo_dishes"].each { |combo_dish_obj|
-          puts "Processing combo dish id = " << combo_dish_obj["id"]
           dish = Dish.find(:first,:conditions => {:id => combo_dish_obj["id"]})
           combo.dishes.push(dish) unless dish.nil?
         }
