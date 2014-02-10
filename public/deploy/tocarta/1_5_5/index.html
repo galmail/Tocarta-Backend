@@ -45,6 +45,9 @@
 					$j.getScript('app-all.js', function(){
 						if(!Ext.os.is.Desktop && !Ext.browser.is.Safari)
 							document.addEventListener("deviceready", TC.app.mainLaunch, false);
+						else {
+							TC.app.mainLaunch();
+						}
 					});
 				});
 			});
