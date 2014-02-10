@@ -183,7 +183,7 @@ Ext.define('TC.controller.Loader', {
 				loadRestaurant(arr[0],1,function(){
 					console.log('TC.controller.Loader.appUpdate: done loading.');
 					// sync images
-	      	if(TC.Restaurant && TC.Restaurant.get('setting') && TC.Restaurant.get('setting').sync_photos && !Ext.os.is.Desktop){
+	      	if(TC.Restaurant && TC.Restaurant.get('setting') && TC.Restaurant.get('setting').sync_photos && !Ext.os.is.Desktop && !Ext.browser.is.Safari){
 	      		console.log('TC.controller.Loader.appUpdate: fetching images...');
 	      		me._fetchImages(fullUpdate,function(ok){
 	      			Ext.Viewport.unmask();

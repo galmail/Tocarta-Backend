@@ -17,13 +17,13 @@ if(CURRENT_ENV == "mock"){
 		images_path: '/www/resources/img/',
 		pusherKey: 'c9c649f5255c17685066',
 		timeout: 5000,
-  	fullPath: null,
-  	relPath: '/www/services/',
-  	currentTable: 1,
-  	defaultLanguage: 'es',
+  		fullPath: null,
+  		relPath: '/www/services/',
+  		currentTable: 1,
+  		defaultLanguage: 'es',
 		time_to_display_msg: 5000,
 		click: 'click' // click event instead of tap
-	}
+	};
 }
 /*** development (in browser) ***/
 else if(CURRENT_ENV == "dev"){
@@ -37,13 +37,13 @@ else if(CURRENT_ENV == "dev"){
 		pusherKey: 'c9c649f5255c17685066',
 		protocol: 'ajax', // Options: jsonp, ajax
 		timeout: 8000,
-  	fullPath: null,
-  	relPath: '/cli/c/',
+  		fullPath: null,
+  		relPath: '/cli/c/',
 		currentTable: 1,
-  	defaultLanguage: 'es',
+  		defaultLanguage: 'es',
 		time_to_display_msg: 5000,
 		click: 'click' // click event instead of tap
-	}
+	};
 }
 /*** staging (in iPad) ***/
 else if(CURRENT_ENV == "staging"){
@@ -56,13 +56,13 @@ else if(CURRENT_ENV == "staging"){
 		protocol: 'ajax', // Options: jsonp, ajax
 		timeout: 8000,
 		pusherKey: 'c9c649f5255c17685066',
-  	fullPath: null,
-  	relPath: '/cli/c/',
+  		fullPath: null,
+  		relPath: '/cli/c/',
 		currentTable: 1,
-  	defaultLanguage: 'es',
+  		defaultLanguage: 'es',
 		time_to_display_msg: 5000,
 		click: 'tap' // click event instead of tap
-	}
+	};
 }
 /*** open (iPad for open app) ***/
 else if(CURRENT_ENV == "open"){
@@ -75,13 +75,13 @@ else if(CURRENT_ENV == "open"){
 		protocol: 'ajax', // Options: jsonp, ajax
 		timeout: 8000,
 		pusherKey: 'ee7fdd527dabde0bd6b6',
-  	fullPath: null,
-  	relPath: '/cli/c/',
+  		fullPath: null,
+  		relPath: '/cli/c/',
 		currentTable: 1,
-  	defaultLanguage: 'es',
+  		defaultLanguage: 'es',
 		time_to_display_msg: 5000,
 		click: 'tap' // click event instead of tap
-	}
+	};
 }
 /*** production (iPad ready app) ***/
 else if(CURRENT_ENV == "prod"){
@@ -94,13 +94,13 @@ else if(CURRENT_ENV == "prod"){
 		protocol: 'ajax', // Options: jsonp, ajax
 		timeout: 8000,
 		pusherKey: 'd20cf40b86a0639e33cc',
-  	fullPath: null,
-  	relPath: '/cli/c/',
+	  	fullPath: null,
+	  	relPath: '/cli/c/',
 		currentTable: 1,
-  	defaultLanguage: 'es',
+  		defaultLanguage: 'es',
 		time_to_display_msg: 5000,
 		click: 'tap' // click event instead of tap
-	}
+	};
 	// overwrite console.log
 	// console.log = function(){};
 	// log errors to proxy server
@@ -133,7 +133,7 @@ $j.extend($tc,{
 
 $tc.url = function(method_name){
 	return this.server + this.relPath + this[method_name] + '.json';
-}
+};
 
 $tc.logme = function(info){
 	setTimeout(function(){
@@ -144,7 +144,7 @@ $tc.logme = function(info){
 			device_id: TC.Setting.get('key')
 		}).log();
 	},200);
-}
+};
 
 $tc.logError = function(msg,url,line){
 	try {
@@ -171,7 +171,7 @@ $tc.logError = function(msg,url,line){
 
 $tc.getUri = function(){
 	var me = $tc;
-	if(Ext.os.is.Desktop){
+	if(Ext.os.is.Desktop || Ext.browser.is.Safari){
 		if(me.testing){
 			return me.server + me.images_path;
 		}
@@ -189,30 +189,30 @@ $tc.getUri = function(){
 		}
 		return filepath + $tc.fullPath;
 	}
-}
+};
 
 $tc.formatNumber = function(num){
 	var f = parseFloat(num).toFixed(2);
 	return f.replace(".",",");
-}
+};
 
 $tc.confirmMsg = function(msg,callback){
 	Ext.Msg.confirm('',msg,callback);
-}
+};
 
 $tc.checkImgUrl = function(relPath){
 	if(relPath)
 		return $tc.getUri() + relPath;
 	else
 		return "//:0";
-}
+};
 
 $tc.translateSTButtons = function(){
 	Ext.MessageBox.YESNO[0].text = $T.no_button;
 	Ext.MessageBox.YESNO[1].text = $T.yes_button;
 	// fix animations in messages
 	Ext.Msg.setShowAnimation(null);
-}
+};
 
 $tc.alertMsg = function(msg,callback,cls){
 	Ext.Msg.alert('',msg,callback);
@@ -222,14 +222,14 @@ $tc.alertMsg = function(msg,callback,cls){
 	else {
 		Ext.Msg.setCls('');
 	}
-}
+};
 
 $tc.loadScript = function(filename){
 	var fileref = document.createElement('script');
   fileref.setAttribute("type","text/javascript");
   fileref.setAttribute("src", filename);
 	document.getElementsByTagName("head")[0].appendChild(fileref);
-}
+};
 
 $tc.loadStylesheet = function(filename){
 	var fileref = document.createElement('link');
@@ -237,7 +237,7 @@ $tc.loadStylesheet = function(filename){
   fileref.setAttribute("type","text/css");
   fileref.setAttribute("href", filename);
 	document.getElementsByTagName("head")[0].appendChild(fileref);
-}
+};
 
 $tc.getParameterByName = function(name){
   name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -248,7 +248,7 @@ $tc.getParameterByName = function(name){
     return "";
   else
     return decodeURIComponent(results[1].replace(/\+/g, " "));
-}
+};
 
 $tc.checkConnection = function(showMsg){
 	if(navigator && navigator.connection && navigator.connection.type){
@@ -264,7 +264,7 @@ $tc.checkConnection = function(showMsg){
 		}
 	}
 	return true;
-}
+};
 
 $j(document).ready(function(){
 	if(CURRENT_ENV != 'prod' && CURRENT_ENV != 'open'){

@@ -34,7 +34,7 @@
 					$j.getScript(i18Script, function(){
 						$j.getScript('config.js', function(){
 							$j.getScript('app.js', function(){
-								if(!Ext.os.is.Desktop)
+								if(!Ext.os.is.Desktop && !Ext.browser.is.Safari)
 									document.addEventListener("deviceready", TC.app.mainLaunch, false);
 							});
 						});
@@ -44,7 +44,7 @@
 					// ignore since there is no language set in localstorage
 					$j.getScript('config.js', function(){
 						$j.getScript('app.js', function(){
-							if(!Ext.os.is.Desktop)
+							if(!Ext.os.is.Desktop && !Ext.browser.is.Safari)
 								document.addEventListener("deviceready", TC.app.mainLaunch, false);
 						});
 					});
@@ -54,6 +54,7 @@
 	</head>
 	<body>
 		<div id="superloader">Loading...</div>
-		<div style="position: absolute;top: 10px;left: 300px;z-index: 1000;background-color: yellow;padding: 0;margin: 0;" id="tcEnvironmentId"></div>
+		<div style="position: absolute;top: 10px;left: 300px;z-index: 1000;background-color: yellow;padding: 0;margin: 0;" id="tcEnvironmentId">
+		</div>
 	</body>
 </html>

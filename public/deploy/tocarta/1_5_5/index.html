@@ -43,7 +43,7 @@
 				var i18Script = 'resources/js/'+lang+'_user.js';
 				$j.getScript(i18Script, function(){
 					$j.getScript('app-all.js', function(){
-						if(!Ext.os.is.Desktop)
+						if(!Ext.os.is.Desktop && !Ext.browser.is.Safari)
 							document.addEventListener("deviceready", TC.app.mainLaunch, false);
 					});
 				});
