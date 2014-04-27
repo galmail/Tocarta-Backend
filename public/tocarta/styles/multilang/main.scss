@@ -26,6 +26,9 @@
     }
     &.cat {
       background-image: url('../img/flags/bt-cat.png');
+      &:active {
+        background-image: url('../img/flags/bt-cat.png');
+      }
     }
     &.fr {
       background-image: url('../img/flags/bt-fr.png');
@@ -33,10 +36,10 @@
         background-image: url('../img/flags/bt-fr-active.png');
       }
     }
-    &.gr {
-      background-image: url('../img/flags/bt-gr.png');
+    &.de {
+      background-image: url('../img/flags/bt-de.png');
       &:active {
-        background-image: url('../img/flags/bt-gr-active.png');
+        background-image: url('../img/flags/bt-de-active.png');
       }
     }
     &.ru {

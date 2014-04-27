@@ -1,0 +1,38 @@
+/**
+ * Survey questions stylesheet
+ **/
+/* line 5, ../../../../styles/survey/basic/questions.scss */
+.tcSurveyQuestions {
+  padding: 5px 10px;
+  height: 169px;
+  background: #F1E5D2;
+}
+/* line 9, ../../../../styles/survey/basic/questions.scss */
+.tcSurveyQuestions .survey_question {
+  clear: both;
+  line-height: 35px;
+  overflow: hidden;
+  padding-bottom: 5px;
+}
+/* line 14, ../../../../styles/survey/basic/questions.scss */
+.tcSurveyQuestions .survey_question .question_title {
+  float: left;
+  font-size: 20px;
+  margin-top: 10px;
+}
+/* line 19, ../../../../styles/survey/basic/questions.scss */
+.tcSurveyQuestions .survey_question .rating {
+  float: right;
+}
+/* line 21, ../../../../styles/survey/basic/questions.scss */
+.tcSurveyQuestions .survey_question .rating .star {
+  float: left;
+  background: url("../img/common/icons/star_med_white.png") no-repeat;
+  width: 48px;
+  height: 48px;
+  margin-left: 4px;
+}
+/* line 27, ../../../../styles/survey/basic/questions.scss */
+.tcSurveyQuestions .survey_question .rating .star.selected {
+  background: url("../img/common/icons/star_med_gold.png") no-repeat;
+}

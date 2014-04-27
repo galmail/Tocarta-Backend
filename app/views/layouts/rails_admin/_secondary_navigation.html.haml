@@ -3,7 +3,7 @@
 
     -# %li= link_to wording_for(:menu, action), { :action => action.action_name, :controller => 'rails_admin/main' }, :class => 'pjax'
     
-    %li= select("locale","", [["Español","es"],["English","en"],["Catalan","cat"],["Français","fr"],["Russian","ru"]], {:selected => params[:locale]},
+    %li= select("locale","", [["Spanish","es"],["English","en"],["Catalan","cat"],["French","fr"],["Russian","ru"],["German","de"]], {:selected => params[:locale]},
       { :index => nil, :onchange => "_bl=window.location.href;_clocale=window.location.href.replace(/(locale=)\\w+/,'locale='+this.value);if(_bl==_clocale) window.location.href+='?locale='+this.value;else window.location.href=_clocale;" })
     
     %li= link_to t('admin.home.help').capitalize, 'http://bit.ly/ManualTocartaAdmin', {:target => '_blank'}

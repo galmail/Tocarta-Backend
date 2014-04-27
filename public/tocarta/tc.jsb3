@@ -1,5 +1,5 @@
 {
-    "projectName": "Tocarta Mobile 1.6",
+    "projectName": "Tocarta Mobile 1.6.1",
     "licenseText": "Copyright(c) 2014 Tocarta International SL",
     "builds": [
         {
@@ -1841,7 +1841,7 @@
 	                  "name": "config.js"
 	              },
 	              {
-	                  "path": "../deploy/tocarta/1_6/",
+	                  "path": "../deploy/tocarta/1_6_1/",
 	                  "name": "all-classes.js"
 	              },
 	              {

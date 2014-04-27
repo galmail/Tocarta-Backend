@@ -31,7 +31,7 @@ class RestaurantSetting < ActiveRecord::Base
 	attr_accessible :restaurant_id
 	
 	def supported_lang_enum
-    [ [ 'English', "en" ], [ 'French', "fr" ], [ 'Spanish', "es" ], [ 'Catalan', "cat" ], [ 'Russian', "ru" ] ]
+    [ [ 'English', "en" ], [ 'French', "fr" ], [ 'Spanish', "es" ], [ 'Catalan', "cat" ], [ 'Russian', "ru" ], [ 'German', "de" ] ]
   end
 	
 	### Validations ###

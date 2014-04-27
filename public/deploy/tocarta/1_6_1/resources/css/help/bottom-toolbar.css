@@ -1,0 +1,20 @@
+/**
+ * Bottom Toolbar stylesheet
+ **/
+/* line 8, ../../../styles/help/bottom-toolbar.scss */
+.x-toolbar.tcBottomToolbar {
+  height: 70px;
+  border-top: none;
+  background: transparent;
+  padding-top: 10px;
+}
+/* line 15, ../../../styles/help/bottom-toolbar.scss */
+.x-toolbar.tcBottomToolbar #tcSwitchTableBtnId .x-button-icon.x-icon-mask {
+  width: 55px;
+  height: 26px;
+  background: transparent no-repeat;
+}
+/* line 21, ../../../styles/help/bottom-toolbar.scss */
+.x-toolbar.tcBottomToolbar #tcHelpBtnId .x-button-icon.x-icon-mask {
+  background-image: -webkit-linear-gradient(black, black 2%, #f4efe6);
+}

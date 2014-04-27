@@ -1,0 +1,66 @@
+/**
+ * Minidishes Stylesheet
+ **/
+/* line 5, ../../../styles/dish/minidishes.scss */
+.tcMiniDishesContainer {
+  background: transparent;
+}
+/* line 7, ../../../styles/dish/minidishes.scss */
+.tcMiniDishesContainer .tcDishTitle {
+  background: transparent;
+  border: none;
+}
+/* line 10, ../../../styles/dish/minidishes.scss */
+.tcMiniDishesContainer .tcDishTitle .x-title {
+  color: #000;
+}
+/* line 14, ../../../styles/dish/minidishes.scss */
+.tcMiniDishesContainer .x-dataview-item {
+  display: inline-block;
+  width: 50%;
+  padding: 0 5px;
+  margin-top: 4px;
+}
+/* line 20, ../../../styles/dish/minidishes.scss */
+.tcMiniDishesContainer .minidish {
+  display: block;
+  text-decoration: none;
+  background-color: black;
+  font-size: 14px;
+  color: white;
+  border-radius: 5px;
+  height: 53px;
+  overflow: hidden;
+  clear: both;
+}
+/* line 30, ../../../styles/dish/minidishes.scss */
+.tcMiniDishesContainer .minidish:active {
+  background-color: red;
+}
+/* line 33, ../../../styles/dish/minidishes.scss */
+.tcMiniDishesContainer .minidish img {
+  display: block;
+  float: left;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+/* line 39, ../../../styles/dish/minidishes.scss */
+.tcMiniDishesContainer .minidish .minidish_title {
+  display: block;
+  float: left;
+  width: 193px;
+  text-align: left;
+  padding-top: 7px;
+  padding-left: 5px;
+  line-height: 19px;
+  font-weight: bold;
+}
+/* line 49, ../../../styles/dish/minidishes.scss */
+.tcMiniDishesContainer .minidish .minidish_price {
+  float: right;
+  clear: right;
+  padding-top: 28px;
+  padding-right: 5px;
+  color: #C4B590;
+  font-weight: bold;
+}
