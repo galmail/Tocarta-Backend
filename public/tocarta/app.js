@@ -42,19 +42,23 @@ Ext.require([
 				return;
 			}
 			// For Device Version
-    	if(device && this.launched){
-    		console.log('Phonegap is ready');
-    		// load application path
-	    	if(window.requestFileSystem){
-	    		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs){
-						$tc.fullPath = fs.root.fullPath;
-						// launch app
-    				Ext.create('TC.view.Viewport');
-					});
+	    	if(device && this.launched){
+	    		console.log('Phonegap is ready');
+	    		// load application path
+		    	//$tc.fullPath = "cdvfile://localhost/persistent";
+		    	Ext.create('TC.view.Viewport');
+		    	return;
+		    	/*
+		    	if(window.requestFileSystem){
+		    		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs){
+							$tc.fullPath = fs.root.fullPath;
+							// launch app
+	    				Ext.create('TC.view.Viewport');
+						});
+		    	}
+		    	*/
 	    	}
-    	}
-    	console.log('TC.app.mainLaunch: done');
-	  },
+	  	},
 
 		launch: function(){
 			console.log('TC.app.launch');

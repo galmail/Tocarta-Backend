@@ -1,0 +1,62 @@
+/**
+ * Settings main stylesheet
+ **/
+/**
+ * Waiter login stylesheet
+ **/
+/* line 6, ../../../styles/settings/waiter-login.scss */
+.tcWaiterLogin .tcWaiterCode {
+  width: 100%;
+  padding: 5px;
+}
+/* line 9, ../../../styles/settings/waiter-login.scss */
+.tcWaiterLogin .tcWaiterCode .x-inner.x-layout-hbox {
+  padding-left: 18px;
+}
+/* line 12, ../../../styles/settings/waiter-login.scss */
+.tcWaiterLogin .tcWaiterCode .box {
+  width: 50px;
+  height: 40px;
+  margin: 5px;
+  text-align: center;
+  font-size: 30px;
+}
+/* line 20, ../../../styles/settings/waiter-login.scss */
+.tcWaiterLogin .tcWaiterPad {
+  width: 100%;
+}
+/* line 22, ../../../styles/settings/waiter-login.scss */
+.tcWaiterLogin .tcWaiterPad .tcWaiterPadLine {
+  padding: 5px;
+}
+/* line 24, ../../../styles/settings/waiter-login.scss */
+.tcWaiterLogin .tcWaiterPad .tcWaiterPadLine .tcWaiterPadButton {
+  margin: 5px;
+  padding: 29px;
+}
+/* line 27, ../../../styles/settings/waiter-login.scss */
+.tcWaiterLogin .tcWaiterPad .tcWaiterPadLine .tcWaiterPadButton .x-button-label {
+  font-size: 24px;
+}
+
+/**
+ * Switch table stylesheet
+ **/
+/* line 6, ../../../styles/settings/switch-table.scss */
+.tcSwitchTable .x-button {
+  margin: 10px;
+}
+/* line 9, ../../../styles/settings/switch-table.scss */
+.tcSwitchTable .x-form-fieldset {
+  margin: 0 0 0.5em;
+}
+
+/* line 10, ../../../styles/settings/main.scss */
+.tcSettingsView {
+  width: 300px;
+  height: 500px;
+}
+/* line 13, ../../../styles/settings/main.scss */
+.tcSettingsView .tcSettingsContainer {
+  height: 441px;
+}

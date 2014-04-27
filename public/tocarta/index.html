@@ -12,49 +12,54 @@
 		<script type="text/javascript" src="resources/i18n/operator/es_operator.js"></script>
 		
 		<script type="text/javascript" src="lib/socket-io/socket.io.js"></script>
-		<script type="text/javascript" src="lib/phonegap/cordova-2.5.0.js"></script>
+		<!-- <script type="text/javascript" src="lib/phonegap/cordova-2.5.0.js"></script> -->
 		<script type="text/javascript" src="lib/pusher/pusher.min.js"></script>
 		<script type="text/javascript" src="lib/jquery/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="lib/jquery/jquery.watermark.min.js"></script>
 		<script type="text/javascript" src="lib/zepto/zepto.min.js"></script>
 		<script type="text/javascript" src="lib/touch/sencha-touch-debug.js"></script>
-		
-		
-		<script type="text/javascript">
-			$z = Zepto;
-			$j = jQuery.noConflict();
-		</script>
-		<!-- <script type="text/javascript" src="config.js"></script> -->
-		<!-- <script type="text/javascript" src="app.js"></script> -->
-		<script type="text/javascript">
-			$j(document).ready(function(){	
-		    try {
-					var lang = JSON.parse(localStorage['setting-1']).language;
-					var i18Script = 'resources/i18n/user/'+lang+'_user.js';
-					$j.getScript(i18Script, function(){
-						$j.getScript('config.js', function(){
-							$j.getScript('app.js', function(){
-								if(!Ext.os.is.Desktop && !Ext.browser.is.Safari)
-									document.addEventListener("deviceready", TC.app.mainLaunch, false);
-							});
-						});
-					});
-				}
-				catch(ex){
-					// ignore since there is no language set in localstorage
-					$j.getScript('config.js', function(){
-						$j.getScript('app.js', function(){
-							if(!Ext.os.is.Desktop && !Ext.browser.is.Safari)
-								document.addEventListener("deviceready", TC.app.mainLaunch, false);
-						});
-					});
-				}
-			});
-		</script>
 	</head>
 	<body>
 		<div id="superloader">Loading...</div>
 		<div style="position: absolute;top: 10px;left: 300px;z-index: 1000;background-color: yellow;padding: 0;margin: 0;" id="tcEnvironmentId">
 		</div>
+		<script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript">
+        	console.log("getting started...");
+        	var _app = {
+        		init: function(){
+        			document.addEventListener('deviceready', this.onDeviceReady, false);
+        		},
+            	onDeviceReady: function(){
+            		console.log("onDeviceReady function...");
+			        $z = Zepto;
+			        $j = jQuery.noConflict();
+			        $j(document).ready(function(){
+				        try {
+				            var lang = JSON.parse(localStorage['setting-1']).language;
+				            var i18Script = 'resources/i18n/user/'+lang+'_user.js';
+				            $j.getScript(i18Script, function(){
+				                $j.getScript('config.js', function(){
+				                    $j.getScript('app.js', function(){
+				                        if(!Ext.os.is.Desktop && !Ext.browser.is.Safari)
+				                            TC.app.mainLaunch();
+				                    });
+				                });
+				            });
+				        }
+				        catch(ex){
+				            // ignore since there is no language set in localstorage
+				            $j.getScript('config.js', function(){
+				                $j.getScript('app.js', function(){
+				                    if(!Ext.os.is.Desktop && !Ext.browser.is.Safari)
+				                        TC.app.mainLaunch();
+				                });
+				            });
+				        }
+			        });
+			    }
+          	};
+          	_app.init();
+        </script>
 	</body>
 </html>

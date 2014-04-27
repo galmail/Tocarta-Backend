@@ -15,7 +15,8 @@ Ext.define('TC.model.Image', {
 	fetch: function(options){
 		var me = this;
 		var fileTransfer = new FileTransfer();
-		var imgDirectory = $tc.fullPath + me.get('dest');
+		var imgDirectory = $tc.getUri() + me.get('dest');
+		console.log("target image to fetch is: " + imgDirectory);
 		fileTransfer.download(
 		    me.get('source'),
 		    imgDirectory,

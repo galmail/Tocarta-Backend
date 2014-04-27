@@ -1,0 +1,71 @@
+/**
+ * Dish comments stylesheet
+ **/
+/* line 5, ../../../styles/dish/comments.scss */
+.tcDishComments {
+  padding: 10px;
+  background: white;
+}
+/* line 8, ../../../styles/dish/comments.scss */
+.tcDishComments h2 {
+  font-size: 18px;
+  margin-right: 20px;
+  margin-top: 2px;
+  float: left;
+  font-style: italic;
+}
+/* line 15, ../../../styles/dish/comments.scss */
+.tcDishComments .rating.ministars {
+  overflow: hidden;
+  float: left;
+}
+/* line 18, ../../../styles/dish/comments.scss */
+.tcDishComments .rating.ministars li {
+  background-image: url("../img/common/icons/star_mini_white.png");
+  margin-right: 2px;
+  float: left;
+}
+/* line 22, ../../../styles/dish/comments.scss */
+.tcDishComments .rating.ministars li a {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+/* line 27, ../../../styles/dish/comments.scss */
+.tcDishComments .rating.ministars li.current {
+  background-image: url("../img/common/icons/star_mini_gold.png");
+}
+/* line 32, ../../../styles/dish/comments.scss */
+.tcDishComments .tlt-comment {
+  font-size: 19px;
+  font-weight: bold;
+  color: #ACA38B;
+  margin-top: 15px;
+  float: left;
+}
+/* line 39, ../../../styles/dish/comments.scss */
+.tcDishComments .tcDishCommentsDataItems {
+  padding-top: 0px;
+  height: 390px;
+}
+/* line 42, ../../../styles/dish/comments.scss */
+.tcDishComments .tcDishCommentsDataItems .dish_comment {
+  padding-top: 12px;
+  padding-bottom: 5px;
+}
+/* line 45, ../../../styles/dish/comments.scss */
+.tcDishComments .tcDishCommentsDataItems .dish_comment .dish_comment_author {
+  font-size: 14px;
+  float: left;
+  margin-left: 10px;
+  padding-top: 4px;
+  font-weight: bold;
+}
+/* line 52, ../../../styles/dish/comments.scss */
+.tcDishComments .tcDishCommentsDataItems .dish_comment .dish_comment_text {
+  font-size: 15px;
+  margin-top: 7px;
+  line-height: 23px;
+  padding-left: 4px;
+  padding-top: 1px;
+}

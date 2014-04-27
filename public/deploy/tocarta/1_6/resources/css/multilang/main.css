@@ -1,0 +1,55 @@
+/**
+ * Multi Language main stylesheet
+ **/
+/* line 9, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag {
+  display: block;
+  width: 72px;
+  height: 72px;
+  float: left;
+  margin: 20px;
+}
+/* line 15, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.en {
+  background-image: url("../img/flags/bt-en.png");
+}
+/* line 17, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.en:active {
+  background-image: url("../img/flags/bt-en-active.png");
+}
+/* line 21, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.es {
+  background-image: url("../img/flags/bt-es.png");
+}
+/* line 23, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.es:active {
+  background-image: url("../img/flags/bt-es-active.png");
+}
+/* line 27, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.cat {
+  background-image: url("../img/flags/bt-cat.png");
+}
+/* line 30, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.fr {
+  background-image: url("../img/flags/bt-fr.png");
+}
+/* line 32, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.fr:active {
+  background-image: url("../img/flags/bt-fr-active.png");
+}
+/* line 36, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.gr {
+  background-image: url("../img/flags/bt-gr.png");
+}
+/* line 38, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.gr:active {
+  background-image: url("../img/flags/bt-gr-active.png");
+}
+/* line 42, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.ru {
+  background-image: url("../img/flags/bt-ru.png");
+}
+/* line 44, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.ru:active {
+  background-image: url("../img/flags/bt-ru-active.png");
+}

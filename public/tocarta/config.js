@@ -185,9 +185,18 @@ $tc.getUri = function(){
 			filepath = "";
 		}
 		else {
-			filepath = "file://localhost";
+			if(Ext.os.is.iOS){
+				filepath = "file://localhost";
+			}
+			if(Ext.os.is.iOS7){
+				filepath = "cdvfile://localhost/persistent";
+			}
 		}
-		return filepath + $tc.fullPath;
+		if($tc.fullPath!=null)
+			return filepath + $tc.fullPath;
+		else {
+			return filepath;
+		}
 	}
 };
 

@@ -8,10 +8,11 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'jquery-rails'
 
+gem 'rails-erd' # so it wont crash in production
+
 #### Database Setup ####
 group :development do
   gem 'taps'              # for heroku db:pull
-  gem 'rails-erd'         # create DB diagram
   gem 'yaml_db'
   gem 'sqlite3'
   gem 'meta_request'      # for rails_panel
@@ -19,8 +20,6 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller" # for better_errors
   gem 'quiet_assets'
-  gem 'rails-erd'         # create DB diagram
-  gem 'annotate'
   # FIXME: estas 3 gemas no parecen adecuadas para este grupo
   gem 'compass'
   gem 'mongo'
@@ -29,7 +28,6 @@ group :development do
 end
 
 group :production do
-  gem 'rails-erd' # so it wont crash in production
   gem 'thin'
   gem 'newrelic_rpm'
 end
