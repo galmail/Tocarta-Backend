@@ -1,0 +1,68 @@
+/**
+ * Sidebar items view stylesheet
+ **/
+/* line 10, ../../../styles/mainmenu/items-view.scss */
+.tcMenuPanelItemsView {
+  font-size: 12px;
+  color: white;
+}
+/* line 14, ../../../styles/mainmenu/items-view.scss */
+.tcMenuPanelItemsView .item {
+  float: left;
+  width: 50%;
+  text-align: center;
+  padding: 5px;
+}
+/* line 20, ../../../styles/mainmenu/items-view.scss */
+.tcMenuPanelItemsView .item .item-border .item-badge {
+  position: absolute;
+  border-width: 0 20px 20px;
+  border-color: transparent transparent #EDEDED;
+  border-style: solid;
+  height: 0;
+  line-height: 18px;
+  color: black;
+  text-transform: lowercase;
+  -webkit-transform: rotate(-45deg);
+  margin-left: -18px;
+  margin-top: 8px;
+  width: 73px;
+}
+/* line 34, ../../../styles/mainmenu/items-view.scss */
+.tcMenuPanelItemsView .item .item-border .item-badge.long-badge {
+  width: 113px;
+  margin-left: -24px;
+  margin-top: 23px;
+}
+/* line 40, ../../../styles/mainmenu/items-view.scss */
+.tcMenuPanelItemsView .item .item-border .item-thumbnail {
+  width: 100%;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+/* line 45, ../../../styles/mainmenu/items-view.scss */
+.tcMenuPanelItemsView .item .item-border .item-text {
+  background-color: black;
+  text-align: left;
+  height: 30px;
+  padding: 1px 3px;
+  margin-top: -3px;
+}
+/* line 54, ../../../styles/mainmenu/items-view.scss */
+.tcMenuPanelItemsView .item .item-border .item-text .item-icons {
+  float: left;
+}
+/* line 58, ../../../styles/mainmenu/items-view.scss */
+.tcMenuPanelItemsView .item .item-border .item-price {
+  position: relative;
+  margin-top: -14px;
+  margin-left: 95px;
+}
+/* line 66, ../../../styles/mainmenu/items-view.scss */
+.tcMenuPanelItemsView .x-dataview-item.x-item-pressed .item .item-text {
+  background-color: #ff6666;
+}
+/* line 70, ../../../styles/mainmenu/items-view.scss */
+.tcMenuPanelItemsView .x-dataview-item.x-item-selected .item .item-text {
+  background-color: red;
+}

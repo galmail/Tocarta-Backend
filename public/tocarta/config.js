@@ -235,17 +235,30 @@ $tc.alertMsg = function(msg,callback,cls){
 
 $tc.loadScript = function(filename){
 	var fileref = document.createElement('script');
-  fileref.setAttribute("type","text/javascript");
-  fileref.setAttribute("src", filename);
+  	fileref.setAttribute("type","text/javascript");
+  	fileref.setAttribute("src", filename);
 	document.getElementsByTagName("head")[0].appendChild(fileref);
 };
 
 $tc.loadStylesheet = function(filename){
+	if(filename.indexOf("cdvfile")>=0){
+		$j.get(filename,function(cssData){
+			$tc.loadStylesheetScript(cssData);
+		});
+		return;
+	}
 	var fileref = document.createElement('link');
-  fileref.setAttribute("rel","stylesheet");
-  fileref.setAttribute("type","text/css");
-  fileref.setAttribute("href", filename);
+  	fileref.setAttribute("rel","stylesheet");
+  	fileref.setAttribute("type","text/css");
+  	fileref.setAttribute("href", filename);
 	document.getElementsByTagName("head")[0].appendChild(fileref);
+};
+
+$tc.loadStylesheetScript = function(thecss){
+	var styleElement = document.createElement('style');
+  	styleElement.setAttribute("type","text/css");
+	styleElement.appendChild(document.createTextNode(thecss));
+	document.getElementsByTagName("head")[0].appendChild(styleElement);
 };
 
 $tc.getParameterByName = function(name){
