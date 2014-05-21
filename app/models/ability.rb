@@ -27,8 +27,8 @@ class Ability
       can :read, Restaurant, :chain => { :user_id => user.id }
       can [:read, :update], RestaurantSetting, :restaurant => { :chain_id => user.chain_ids  }
       can :manage, RestaurantBanner, :restaurant => { :chain_id => user.chain_ids  }
-      can :read, Menu, :restaurant => { :chain_id => user.chain_ids  }
-      can [:read, :update], MenuSetting, :menu => { :restaurant_id => user.chains.collect{ |c| c.restaurants.collect{ |res| res.id }}.flatten }
+      can [:read, :update, :create], Menu, :restaurant => { :chain_id => user.chain_ids  }
+      can [:read, :update, :create], MenuSetting, :menu => { :restaurant_id => user.chains.collect{ |c| c.restaurants.collect{ |res| res.id }}.flatten }
       can [:read, :update, :create], Section, :menu => { :restaurant_id => user.chains.collect{ |c| c.restaurants.collect{ |res| res.id }}.flatten }
       can [:read, :update, :create], Subsection, :section => { :menu_id => user.chains.collect{ |c| c.restaurants.collect{ |res| res.menus.collect{ |menu| menu.id }}}.flatten }
       can [:read, :update, :create], Dish, :chain => { :user_id => user.id }
