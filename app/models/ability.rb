@@ -21,8 +21,8 @@ class Ability
       can :read, User, :id => user.id
       can [:read,:create], Ingredient
       can :read, DishType
-      can :read, Theme
-      can [:read, :update], Skin
+      can [:read, :update, :create], Theme
+      can [:read, :update, :create], Skin
       can :read, Chain, :user_id => user.id
       can :read, Restaurant, :chain => { :user_id => user.id }
       can [:read, :update], RestaurantSetting, :restaurant => { :chain_id => user.chain_ids  }
