@@ -175,14 +175,20 @@ Ext.define('TC.controller.Main', {
 	    	// segmented buttons
 	    	var allMenusButtons = this.getTopToolbar().down('#tcAllMenuButtonsId');
 	    	allMenusButtons.removeAll();
+	    	var mainMenuPos = 0;
+	    	var _mCounter = 0;
 	    	TC.Restaurant.menus().each(function(menu){
 	    		allMenusButtons.add({
 		    		itemId: 'tc'+ menu.mapType() +'BtnId',
 					hidden: false,
 					text: menu.get('name')
 		    	});
+		    	if(menu.mapType()=='MainMenu'){
+		    		mainMenuPos = _mCounter;
+		    	}
+		    	_mCounter++;
 	    	});
-	    	allMenusButtons.setPressedButtons(0);
+	    	allMenusButtons.setPressedButtons(mainMenuPos);
 	    	
 	    	// bottom toolbar
 	    	this.getBottomToolbar().down('#tcFilterDishesBtnId').setHidden(!TC.Restaurant.data.setting.show_filters);
