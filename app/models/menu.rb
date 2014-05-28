@@ -29,6 +29,8 @@ class Menu < ActiveRecord::Base
   ### Validations ###
   
   validates :menu_type, :restaurant_id, :presence => true
+  validates :menu_type, uniqueness: { scope: :restaurant_id, message: "already assigned to another menu." }
+  
 	
 	def activated
 	  settings = self.menu_setting
