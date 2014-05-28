@@ -86,50 +86,9 @@ Ext.define('TC.view.toolbars.TopToolbar', {
 			},
 			{
 				xtype: 'segmentedbutton',
+				itemId: 'tcAllMenuButtonsId',
 				allowDepress: false,
-				items: [
-					{
-						itemId: 'tcMainMenuBtnId',
-						hidden: true,
-						text: $T.main_menu,
-						pressed: true
-					},
-					{
-						itemId: 'tcSpecialMenuBtnId',
-						hidden: true,
-						text: $T.special_menu
-					},
-					{
-						itemId: 'tcSamplingMenuBtnId',
-						hidden: true,
-						text: $T.sampling_menu
-					},
-					{
-						itemId: 'tcKidsMenuBtnId',
-						hidden: true,
-						text: $T.kids_menu
-					},
-					{
-						itemId: 'tcDailyMenuBtnId',
-						hidden: true,
-						text: $T.daily_menu
-					},
-					{
-						itemId: 'tcBeveragesBtnId',
-						hidden: true,
-						text: $T.beverages
-					},
-					{
-						itemId: 'tcWinesBtnId',
-						hidden: true,
-						text: $T.wines
-					},
-					{
-						itemId: 'tcDessertsBtnId',
-						hidden: true,
-						text: $T.desserts
-					}
-				]
+				items: []
 			}
 		]
 	}

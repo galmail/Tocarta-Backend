@@ -49,6 +49,7 @@ Ext.define('TC.controller.Main', {
 	    	dessertsButton: 'top-toolbar segmentedbutton #tcDessertsBtnId',
 	    	
 	    	winesButton: 'top-toolbar segmentedbutton #tcWinesBtnId',
+	    	cocktailsButton: 'top-toolbar segmentedbutton #tcCocktailsBtnId',
 	    	specialmenuButton: 'top-toolbar segmentedbutton #tcSpecialMenuBtnId',
 	    	samplingmenuButton: 'top-toolbar segmentedbutton #tcSamplingMenuBtnId',
 	    	kidsmenuButton: 'top-toolbar segmentedbutton #tcKidsMenuBtnId',
@@ -81,6 +82,7 @@ Ext.define('TC.controller.Main', {
 	      dessertsButton: { tap: 'showDessertsMenu' },
 	      
 	      winesButton: { tap: 'showWinesMenu' },
+	      cocktailsButton: { tap: 'showCocktailsMenu' },
 	      specialmenuButton: { tap: 'showSpecialMenu' },
 	      samplingmenuButton: { tap: 'showSamplingMenu' },
 	      kidsmenuButton: { tap: 'showKidsMenu' },
@@ -171,43 +173,20 @@ Ext.define('TC.controller.Main', {
 	    	
 	    	
 	    	// segmented buttons
-	    	if(TC.Restaurant.getMainMenu()){
-	    		this.getTopToolbar().down('#tcMainMenuBtnId').setHidden(false);
-	    		this.getTopToolbar().down('#tcMainMenuBtnId').setText(TC.Restaurant.getMainMenu().get('name'));
-	    	}
-	    	if(TC.Restaurant.getSpecialMenu()){
-	    		this.getTopToolbar().down('#tcSpecialMenuBtnId').setHidden(false);
-	    		this.getTopToolbar().down('#tcSpecialMenuBtnId').setText(TC.Restaurant.getSpecialMenu().get('name'));
-	    	}
-	    	if(TC.Restaurant.getSamplingMenu()){
-	    		this.getTopToolbar().down('#tcSamplingMenuBtnId').setHidden(false);
-	    		this.getTopToolbar().down('#tcSamplingMenuBtnId').setText(TC.Restaurant.getSamplingMenu().get('name'));
-	    	}
-	    	if(TC.Restaurant.getKidsMenu()){
-	    		this.getTopToolbar().down('#tcKidsMenuBtnId').setHidden(false);
-	    		this.getTopToolbar().down('#tcKidsMenuBtnId').setText(TC.Restaurant.getKidsMenu().get('name'));
-	    	}
-	    	if(TC.Restaurant.getDailyMenu()){
-	    		this.getTopToolbar().down('#tcDailyMenuBtnId').setHidden(false);
-	    		this.getTopToolbar().down('#tcDailyMenuBtnId').setText(TC.Restaurant.getDailyMenu().get('name'));
-	    	}
-	    	if(TC.Restaurant.getBeveragesMenu()){
-	    		this.getTopToolbar().down('#tcBeveragesBtnId').setHidden(false);
-	    		this.getTopToolbar().down('#tcBeveragesBtnId').setText(TC.Restaurant.getBeveragesMenu().get('name'));
-	    	}
-	    	if(TC.Restaurant.getWinesMenu()){
-	    		this.getTopToolbar().down('#tcWinesBtnId').setHidden(false);
-	    		this.getTopToolbar().down('#tcWinesBtnId').setText(TC.Restaurant.getWinesMenu().get('name'));
-	    	}
-	    	if(TC.Restaurant.getDessertsMenu()){
-	    		this.getTopToolbar().down('#tcDessertsBtnId').setHidden(false);
-	    		this.getTopToolbar().down('#tcDessertsBtnId').setText(TC.Restaurant.getDessertsMenu().get('name'));
-	    	}
+	    	var allMenusButtons = this.getTopToolbar().down('#tcAllMenuButtonsId');
+	    	allMenusButtons.removeAll();
+	    	TC.Restaurant.menus().each(function(menu){
+	    		allMenusButtons.add({
+		    		itemId: 'tc'+ menu.mapType() +'BtnId',
+					hidden: false,
+					text: menu.get('name')
+		    	});
+	    	});
+	    	allMenusButtons.setPressedButtons(0);
 	    	
 	    	// bottom toolbar
 	    	this.getBottomToolbar().down('#tcFilterDishesBtnId').setHidden(!TC.Restaurant.data.setting.show_filters);
 	    	this.getBottomToolbar().down('#tcChangeLangBtnId').setHidden(TC.Restaurant.data.setting.supported_lang.length<3);
-	    	
 	    	
 	    	this.getBottomToolbar().down('#tcShowSurveyBtnId').setHidden(!(TC.Restaurant.data.setting.show_survey && !TC.Restaurant.data.setting.order_button));
 	    	
@@ -373,6 +352,11 @@ Ext.define('TC.controller.Main', {
     showDessertsMenu: function() {
       console.log('TC.controller.Main.showDessertsMenu');
       this.showMenu(TC.Restaurant.getDessertsMenu());
+    },
+    
+    showCocktailsMenu: function() {
+      console.log('TC.controller.Main.showCocktailsMenu');
+      this.showMenu(TC.Restaurant.getCocktailsMenu());
     },
     
     showWinesMenu: function() {

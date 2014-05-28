@@ -35,6 +35,7 @@ class Restaurant < ActiveRecord::Base
 	end
 	
 	def active_menus
+	  self.menus.sort_by! { |menu| menu.position }
 	  self.menus.select { |menu| menu.activated }
 	end
 	

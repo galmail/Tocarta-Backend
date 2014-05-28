@@ -40,7 +40,7 @@ end
 ### restaurant menus ###
 
 child @menus do
-  attributes :id, :name, :menu_type, :price
+  attributes :id, :name, :menu_type, :price, :position
   
   node(:theme, :unless => lambda {|m| m.theme.nil? }) do |menu|
     menu.theme.name

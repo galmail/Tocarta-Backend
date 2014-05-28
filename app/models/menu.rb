@@ -23,13 +23,13 @@ class Menu < ActiveRecord::Base
 	translates :name, :fallbacks_for_empty_translations => true
 	
 	def menu_type_enum
-    ['main','special','sampling','kids','daily','beverages','wines','desserts']
+    ['main','special','sampling','kids','daily','beverages','wines','cocktails','desserts']
   end
   
   ### Validations ###
   
   validates :menu_type, :restaurant_id, :presence => true
-  validates :menu_type, uniqueness: { scope: :restaurant_id, message: "already assigned to another menu." }
+  validates :menu_type, uniqueness: { scope: :restaurant_id, message: "already assigned to another menu." }, unless: "menu_type=='daily'"
   
 	
 	def activated
@@ -81,6 +81,14 @@ class Menu < ActiveRecord::Base
   def before_import_save(row, map)
     self.set_permalink
     self.import_nested_data(row, map)
+  end
+  
+  def position
+    if self.menu_setting.nil? or self.menu_setting.priority.nil?
+      return 99
+    else
+      return self.menu_setting.priority
+    end
   end
 	
 end

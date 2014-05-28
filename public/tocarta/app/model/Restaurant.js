@@ -49,73 +49,80 @@ Ext.define('TC.model.Restaurant', {
 	},
 	
 	getMainMenu: function(){
-  	var pos = this.menus().findBy(function(record,id){
-  		return (record.get('menu_type')=='main');
-  	});
-  	return this.menus().getAt(pos);
+	  	var pos = this.menus().findBy(function(record,id){
+	  		return (record.get('menu_type')=='main');
+	  	});
+	  	return this.menus().getAt(pos);
 	},
 	
 	getDailyMenu: function(){
-  	var pos = this.menus().findBy(function(record,id){
-  		return (record.get('menu_type')=='daily');
-  	});
-  	return this.menus().getAt(pos);
+	  	var pos = this.menus().findBy(function(record,id){
+	  		return (record.get('menu_type')=='daily');
+	  	});
+	  	return this.menus().getAt(pos);
 	},
 	
 	getDessertsMenu: function(){
-  	var pos = this.menus().findBy(function(record,id){
-  		return (record.get('menu_type')=='desserts');
-  	});
-  	return this.menus().getAt(pos);
+	  	var pos = this.menus().findBy(function(record,id){
+	  		return (record.get('menu_type')=='desserts');
+	  	});
+	  	return this.menus().getAt(pos);
 	},
 	
 	getBeveragesMenu: function(){
-  	var pos = this.menus().findBy(function(record,id){
-  		return (record.get('menu_type')=='beverages');
-  	});
-  	return this.menus().getAt(pos);
+	  	var pos = this.menus().findBy(function(record,id){
+	  		return (record.get('menu_type')=='beverages');
+	  	});
+	  	return this.menus().getAt(pos);
+	},
+	
+	getCocktailsMenu: function(){
+	  	var pos = this.menus().findBy(function(record,id){
+	  		return (record.get('menu_type')=='cocktails');
+	  	});
+	  	return this.menus().getAt(pos);
 	},
 	
 	getWinesMenu: function(){
-  	var pos = this.menus().findBy(function(record,id){
-  		return (record.get('menu_type')=='wines');
-  	});
-  	return this.menus().getAt(pos);
+	  	var pos = this.menus().findBy(function(record,id){
+	  		return (record.get('menu_type')=='wines');
+	  	});
+	  	return this.menus().getAt(pos);
 	},
 	
 	getSpecialMenu: function(){
-  	var pos = this.menus().findBy(function(record,id){
-  		return (record.get('menu_type')=='special');
-  	});
-  	return this.menus().getAt(pos);
+	  	var pos = this.menus().findBy(function(record,id){
+	  		return (record.get('menu_type')=='special');
+	  	});
+	  	return this.menus().getAt(pos);
 	},
 	
 	getSamplingMenu: function(){
-  	var pos = this.menus().findBy(function(record,id){
-  		return (record.get('menu_type')=='sampling');
-  	});
-  	return this.menus().getAt(pos);
+	  	var pos = this.menus().findBy(function(record,id){
+	  		return (record.get('menu_type')=='sampling');
+	  	});
+	  	return this.menus().getAt(pos);
 	},
 	
 	getKidsMenu: function(){
-  	var pos = this.menus().findBy(function(record,id){
-  		return (record.get('menu_type')=='kids');
-  	});
-  	return this.menus().getAt(pos);
+	  	var pos = this.menus().findBy(function(record,id){
+	  		return (record.get('menu_type')=='kids');
+	  	});
+	  	return this.menus().getAt(pos);
 	},
 	
 	getOpinateAgreement: function(){
 		var pos = this.agreements().findBy(function(record,id){
-  		return (record.get('legal_type')=='opinate_policy' && record.get('locale')==TC.Setting.get('language'));
-  	});
-  	return this.agreements().getAt(pos);
+  			return (record.get('legal_type')=='opinate_policy' && record.get('locale')==TC.Setting.get('language'));
+  		});
+  		return this.agreements().getAt(pos);
 	},
 	
 	getShareAgreement: function(){
 		var pos = this.agreements().findBy(function(record,id){
-  		return (record.get('legal_type')=='share_policy' && record.get('locale')==TC.Setting.get('language'));
-  	});
-  	return this.agreements().getAt(pos);
+  			return (record.get('legal_type')=='share_policy' && record.get('locale')==TC.Setting.get('language'));
+  		});
+  		return this.agreements().getAt(pos);
 	}
 	
 	

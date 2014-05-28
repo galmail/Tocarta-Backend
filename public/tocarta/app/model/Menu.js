@@ -12,6 +12,7 @@ Ext.define('TC.model.Menu', {
 	    {name: "lang", type: "string"},
 	    {name: "sections", persist: true},
 	    {name: "name", type: "string"},
+	    {name: "position", type: "int"},
 	    {name: "stylesheet", type: "string"},
 	    {name: "stylesheet_url", type: "string",
 	    	convert: function(value, record){
@@ -49,6 +50,11 @@ Ext.define('TC.model.Menu', {
 			});
 		});
 		return me.all_dishes;
+	},
+	
+	mapType: function(){
+		var mType = this.get('menu_type');
+		return mType.charAt(0).toUpperCase() + mType.slice(1) + "Menu";
 	}
 	
 });
