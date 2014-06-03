@@ -74,6 +74,21 @@ class Menu < ActiveRecord::Base
           dishtypes.push(dt)
         }
       }
+      
+=begin
+      
+      if !section.subsections.nil?
+        section.subsections.each { |subsection|
+          subsection.dishes.each { |dish|
+            dish.dish_types.each { |dt|
+              dishtypes.push(dt)
+            }
+          }
+        }
+      end
+      
+=end
+      
     }
     return dishtypes.uniq
   end
