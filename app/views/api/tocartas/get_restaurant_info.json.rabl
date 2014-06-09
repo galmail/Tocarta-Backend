@@ -50,12 +50,12 @@ child @menus do
     menu.skin.stylesheet.url.split(ENV['S3_BUCKET']).last
   end
   
-  # child :dishtypes => :dishtypes do
-    # attributes :id, :name, :description
-    # node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
-      # dt.icon.url(:small_icon).split(ENV['S3_BUCKET']).last
-    # end
-  # end
+  child :dishtypes => :dishtypes do
+    attributes :id, :name, :description
+    node(:small_icon, :unless => lambda {|dt| dt.icon_file_name.nil? }) do |dt|
+      dt.icon.url(:small_icon).split(ENV['S3_BUCKET']).last
+    end
+  end
 
   child :sections do
     attributes :id, :name, :hasBigSubsections, :dishes_per_page
