@@ -1,0 +1,25 @@
+/**
+ * Restaurant Carousel Stylesheet
+ */
+/* line 5, ../../../styles/restaurantinfo/carousel.scss */
+.tcRestaurantCarousel {
+  background: transparent;
+}
+/* line 7, ../../../styles/restaurantinfo/carousel.scss */
+.tcRestaurantCarousel .x-toolbar {
+  background: transparent;
+  border: none;
+}
+/* line 10, ../../../styles/restaurantinfo/carousel.scss */
+.tcRestaurantCarousel .x-toolbar.x-docked-top {
+  height: 47px;
+}
+/* line 13, ../../../styles/restaurantinfo/carousel.scss */
+.tcRestaurantCarousel .x-toolbar.x-docked-bottom {
+  height: 54px;
+}
+/* line 17, ../../../styles/restaurantinfo/carousel.scss */
+.tcRestaurantCarousel .x-carousel-item .x-img {
+  border-radius: 7px;
+  background-size: 100% 100%;
+}

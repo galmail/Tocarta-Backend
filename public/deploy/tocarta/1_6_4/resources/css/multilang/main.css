@@ -1,0 +1,59 @@
+/**
+ * Multi Language main stylesheet
+ **/
+/* line 9, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag {
+  display: block;
+  width: 72px;
+  height: 72px;
+  float: left;
+  margin: 20px;
+}
+/* line 15, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.en {
+  background-image: url("../img/flags/bt-en.png");
+}
+/* line 17, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.en:active {
+  background-image: url("../img/flags/bt-en-active.png");
+}
+/* line 21, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.es {
+  background-image: url("../img/flags/bt-es.png");
+}
+/* line 23, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.es:active {
+  background-image: url("../img/flags/bt-es-active.png");
+}
+/* line 27, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.cat {
+  background-image: url("../img/flags/bt-cat.png");
+}
+/* line 29, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.cat:active {
+  background-image: url("../img/flags/bt-cat.png");
+}
+/* line 33, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.fr {
+  background-image: url("../img/flags/bt-fr.png");
+}
+/* line 35, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.fr:active {
+  background-image: url("../img/flags/bt-fr-active.png");
+}
+/* line 39, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.de {
+  background-image: url("../img/flags/bt-de.png");
+}
+/* line 41, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.de:active {
+  background-image: url("../img/flags/bt-de-active.png");
+}
+/* line 45, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.ru {
+  background-image: url("../img/flags/bt-ru.png");
+}
+/* line 47, ../../../styles/multilang/main.scss */
+.tcMultiLangPanel .x-button.flag.ru:active {
+  background-image: url("../img/flags/bt-ru-active.png");
+}

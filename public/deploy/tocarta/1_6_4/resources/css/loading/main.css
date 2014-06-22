@@ -1,0 +1,9 @@
+/**
+ * Loading main stylesheet
+ **/
+/* line 5, ../../../styles/loading/main.scss */
+.tcUpdateView {
+  background: transparent;
+  padding: 50px 20px;
+  text-align: center;
+}

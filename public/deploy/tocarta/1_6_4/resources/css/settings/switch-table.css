@@ -1,0 +1,11 @@
+/**
+ * Switch table stylesheet
+ **/
+/* line 6, ../../../styles/settings/switch-table.scss */
+.tcSwitchTable .x-button {
+  margin: 10px;
+}
+/* line 9, ../../../styles/settings/switch-table.scss */
+.tcSwitchTable .x-form-fieldset {
+  margin: 0 0 0.5em;
+}
