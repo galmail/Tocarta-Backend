@@ -36,7 +36,7 @@ Ext.define('TC.view.dish.DishPhoto', {
 	    		'</div>',
 	    		'<div class="right">',
 		    		'<div class="dish-price">',
-		    			'<span class="euro">€</span>',
+		    			'<span class="euro">&euro;</span>',
 		    			'<span class="price">{price:this.twoDecimals}</span>',
 		    		'</div>',
 	    		'</div>',

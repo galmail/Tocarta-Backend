@@ -64945,7 +64945,7 @@ Ext.define('TC.controller.Loader', {
 				loadRestaurant(arr[0],1,function(){
 					console.log('TC.controller.Loader.appUpdate: done loading.');
 					// sync images
-	      	if(TC.Restaurant && TC.Restaurant.get('setting') && TC.Restaurant.get('setting').sync_photos && !Ext.os.is.Desktop && !Ext.browser.is.Safari){
+	      	if(TC.Restaurant && TC.Restaurant.get('setting') && TC.Restaurant.get('setting').sync_photos && !Ext.os.is.Desktop && (!Ext.browser.is.Safari || Ext.os.is.Android)){
 	      		console.log('TC.controller.Loader.appUpdate: fetching images...');
 	      		me._fetchImages(fullUpdate,function(ok){
 	      			Ext.Viewport.unmask();
@@ -65284,7 +65284,7 @@ Ext.define('TC.view.order.OrderView', {
 	      			'<tpl if="combo_id"><div class="toggle-combo-icon">(mas)</div></tpl>',
 	      		'</div>',
 	      		'<div class="remove-dish-icon"></div>',
-	      		'<div class="dish-total"><span class="euro">€</span><span class="total-per-item">{total:this.twoDecimals}</span></div>',
+	      		'<div class="dish-total"><span class="euro">&euro;</span><span class="total-per-item">{total:this.twoDecimals}</span></div>',
 	      		'<tpl if="combo_id">',
 	      			'<div class="combo-dishes">',
 			    			'<tpl for="combo_dishes">',
@@ -65310,7 +65310,7 @@ Ext.define('TC.view.order.OrderView', {
 					'<div class="total-order">',
 						'<div class="text">Total</div>',
 						'<div class="order-total-euros">',
-							'<span class="euro">€</span>',
+							'<span class="euro">&euro;</span>',
 							'<span class="num">{total:this.twoDecimals}</span>',
 						'</div>',
 					'</div>',
@@ -65895,7 +65895,7 @@ Ext.define('TC.view.dish.DishPhoto', {
 	    		'</div>',
 	    		'<div class="right">',
 		    		'<div class="dish-price">',
-		    			'<span class="euro">€</span>',
+		    			'<span class="euro">&euro;</span>',
 		    			'<span class="price">{price:this.twoDecimals}</span>',
 		    		'</div>',
 	    		'</div>',
@@ -72907,7 +72907,7 @@ Ext.define('TC.view.sidebar.MenuPanelItemsView', {
 							'</tpl>',
 						'</div>',
 					'</div>',
-					'<tpl if="price"><div class="item-price">€ {price:this.twoDecimals}</div></tpl>',
+					'<tpl if="price"><div class="item-price">&euro; {price:this.twoDecimals}</div></tpl>',
 				'</div>',
 			'</div>',
 		{
@@ -73797,7 +73797,7 @@ Ext.define('TC.view.dish.MiniDishes', {
 			'<div id="minidish_{id}" class="minidish">',
       	'<img src="{mini_photo_url}" />',
       	'<div class="minidish_title">{name}</div>',
-      	'<div class="minidish_price">€ {price:this.twoDecimals}</div>',
+      	'<div class="minidish_price">&euro; {price:this.twoDecimals}</div>',
       '</div>',
 		{
 			twoDecimals: function(price) {
@@ -73973,7 +73973,7 @@ Ext.define('TC.view.dailymenu.DailyMenu', {
 						tpl: new Ext.XTemplate(
 							'<div class="tcDailyMenuTitleText">',
 								'<div>{name}</div>',
-								'<div> - € {price:this.twoDecimals}</div>',
+								'<div> - &euro; {price:this.twoDecimals}</div>',
 							'</div>',
 						{
 							twoDecimals: function(price) {

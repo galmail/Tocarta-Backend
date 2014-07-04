@@ -171,7 +171,7 @@ $tc.logError = function(msg,url,line){
 
 $tc.getUri = function(){
 	var me = $tc;
-	if(Ext.os.is.Desktop || Ext.browser.is.Safari){
+	if(Ext.os.is.Desktop || (Ext.browser.is.Safari && !Ext.os.is.Android)){
 		if(me.testing){
 			return me.server + me.images_path;
 		}
@@ -182,7 +182,7 @@ $tc.getUri = function(){
 	else {
 		var filepath;
 		if(Ext.os.is.Android){
-			filepath = "";
+			filepath = "cdvfile://localhost/persistent";
 		}
 		else {
 			if(Ext.os.is.iOS){

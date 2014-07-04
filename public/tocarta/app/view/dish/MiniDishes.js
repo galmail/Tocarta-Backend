@@ -15,7 +15,7 @@ Ext.define('TC.view.dish.MiniDishes', {
 			'<div id="minidish_{id}" class="minidish">',
       	'<img src="{mini_photo_url}" />',
       	'<div class="minidish_title">{name}</div>',
-      	'<div class="minidish_price">€ {price:this.twoDecimals}</div>',
+      	'<div class="minidish_price">&euro; {price:this.twoDecimals}</div>',
       '</div>',
 		{
 			twoDecimals: function(price) {

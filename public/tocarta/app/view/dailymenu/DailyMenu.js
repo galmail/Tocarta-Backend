@@ -27,7 +27,7 @@ Ext.define('TC.view.dailymenu.DailyMenu', {
 						tpl: new Ext.XTemplate(
 							'<div class="tcDailyMenuTitleText">',
 								'<div>{name}</div>',
-								'<div> - € {price:this.twoDecimals}</div>',
+								'<div> - &euro; {price:this.twoDecimals}</div>',
 							'</div>',
 						{
 							twoDecimals: function(price) {

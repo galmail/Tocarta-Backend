@@ -16,28 +16,31 @@ class Ability
       cannot :import, :all
       can :import, [Dish]
     elsif user.has_role? :restaurant
+      # get this user's chain
+      mega_chain = user.restaurants.first.chain
+      
       can :update_tablet, :all
-      can [:read, :update, :create], Agreement, :chain => { :user_id => user.id  }
+      can [:read, :update, :create], Agreement, :chain => { :id => mega_chain.id  }
       can :read, User, :id => user.id
       can [:read,:create], Ingredient
       can :read, DishType
       can [:read, :update, :create], Theme
       can [:read, :update, :create], Skin
-      can :read, Chain, :user_id => user.id
-      can :read, Restaurant, :chain => { :user_id => user.id }
-      can [:read, :update], RestaurantSetting, :restaurant => { :chain_id => user.chain_ids  }
-      can :manage, RestaurantBanner, :restaurant => { :chain_id => user.chain_ids  }
-      can [:read, :update, :create], Menu, :restaurant => { :chain_id => user.chain_ids  }
-      can [:read, :update, :create], MenuSetting, :menu => { :restaurant_id => user.chains.collect{ |c| c.restaurants.collect{ |res| res.id }}.flatten }
-      can [:read, :update, :create], Section, :menu => { :restaurant_id => user.chains.collect{ |c| c.restaurants.collect{ |res| res.id }}.flatten }
-      can [:read, :update, :create], Subsection, :section => { :menu_id => user.chains.collect{ |c| c.restaurants.collect{ |res| res.menus.collect{ |menu| menu.id }}}.flatten }
-      can [:read, :update, :create], Dish, :chain => { :user_id => user.id }
-      can :manage, NutritionFact, :dish => { :chain_id => user.chain_ids }
-      can [:read, :update], Comment, :restaurant => { :chain_id => user.chain_ids  }
-      can [:read, :create], Table, :restaurant => { :chain_id => user.chain_ids  }
-      can :read, Tablet, :table => { :restaurant_id => user.chains.collect{ |c| c.restaurants.collect{ |res| res.id }}.flatten }
-      can [:read,:update], SurveyQuestion, :chain => { :user_id => user.id }
-      can :read, Order, :table => { :restaurant_id => user.chains.collect{ |c| c.restaurants.collect{ |res| res.id }}.flatten }
+      can :read, Chain, :id => mega_chain.id
+      can :read, Restaurant, :chain_id => mega_chain.id
+      can [:read, :update], RestaurantSetting, :restaurant => { :chain_id => mega_chain.id  }
+      can :manage, RestaurantBanner, :restaurant => { :chain_id => mega_chain.id  }
+      can [:read, :update, :create], Menu, :restaurant => { :chain_id => mega_chain.id  }
+      can [:read, :update, :create], MenuSetting, :menu => { :restaurant_id => user.restaurants.collect{ |res| res.id } }
+      can [:read, :update, :create], Section, :menu => { :restaurant_id => user.restaurants.collect{ |res| res.id } }
+      can [:read, :update, :create], Subsection, :section => { :menu_id => user.restaurants.collect{ |res| res.menus.collect{ |menu| menu.id }}.flatten }
+      can [:read, :update, :create], Dish, :chain_id => mega_chain.id
+      can :manage, NutritionFact, :dish => { :chain_id => mega_chain.id }
+      can [:read, :update], Comment, :restaurant => { :chain_id => mega_chain.id  }
+      can [:read, :create], Table, :restaurant => { :chain_id => mega_chain.id  }
+      can :read, Tablet, :table => { :restaurant_id => user.restaurants.collect{ |res| res.id } }
+      can [:read,:update], SurveyQuestion, :chain_id => mega_chain.id
+      can :read, Order, :table => { :restaurant_id => user.restaurants.collect{ |res| res.id } }
       cannot :import, :all
     elsif user.has_role? :distributor
       can :update_tablet, :all

@@ -30,7 +30,7 @@ Ext.define('TC.view.sidebar.MenuPanelItemsView', {
 							'</tpl>',
 						'</div>',
 					'</div>',
-					'<tpl if="price"><div class="item-price">€ {price:this.twoDecimals}</div></tpl>',
+					'<tpl if="price"><div class="item-price">&euro; {price:this.twoDecimals}</div></tpl>',
 				'</div>',
 			'</div>',
 		{
