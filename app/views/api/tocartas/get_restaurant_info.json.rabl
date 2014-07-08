@@ -93,10 +93,9 @@ child @menus do
       end
       node :description do |dish|
         if dish.description.nil?
-          dish.name
-        else
-          dish.description
+          dish.description=""
         end
+        dish.description
       end
       # node(:rating, :unless => lambda {|d| d.rating.nil? }) do |dish| dish.rating.round end
       node(:mini, :unless => lambda {|d| d.photo.nil? }) do |dish|
@@ -153,10 +152,9 @@ child @menus do
         end
         node :description do |dish|
           if dish.description.nil?
-            dish.name
-          else
-            dish.description
+            dish.description=""
           end
+          dish.description
         end
         # node(:rating, :unless => lambda {|d| d.rating.nil? }) do |dish| dish.rating.round end
         node(:mini, :unless => lambda {|d| d.photo_file_name.nil? }) do |dish|
